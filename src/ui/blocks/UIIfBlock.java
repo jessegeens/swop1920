@@ -1,6 +1,6 @@
 package ui.blocks;
 
-class UIIfBlock implements UIBlock {
+class UIIfBlock extends UIBlock {
 
     @Override
     public void render() {

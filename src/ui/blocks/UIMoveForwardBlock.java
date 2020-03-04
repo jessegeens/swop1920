@@ -1,6 +1,6 @@
 package ui.blocks;
 
-class UIMoveForwardBlock implements UIBlock {
+class UIMoveForwardBlock extends UIBlock {
 
     @Override
     public void render() {

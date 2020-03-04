@@ -1,6 +1,6 @@
 package ui.blocks;
 
-class UINotBlock implements UIBlock {
+class UINotBlock extends UIBlock {
 
     @Override
     public void render() {

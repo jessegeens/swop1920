@@ -151,7 +151,7 @@ class CanvasWindowRecording {
 		try (PrintWriter writer = new PrintWriter(new BufferedOutputStream(new FileOutputStream(path)))) {
 			save(path, writer);
 		}
-	}
+	}paint
 	
 	void save(String basePath, PrintWriter writer) throws IOException {
 		int itemIndex = 0;

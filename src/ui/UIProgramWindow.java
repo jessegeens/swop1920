@@ -1,5 +1,5 @@
 package ui;
 
-class UIProgramWindow {
+class UIProgramWindow implements Window {
     
 }

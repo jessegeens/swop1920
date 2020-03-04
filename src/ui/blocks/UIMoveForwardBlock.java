@@ -1,9 +1,10 @@
 package ui.blocks;
+import java.awt.*;
 
-class UIMoveForwardBlock implements UIBlock {
+class UIMoveForwardBlock extends UIBlock {
 
     @Override
-    public void render() {
+    public void render(Graphics g) {
         // TODO Auto-generated method stub
 
     }

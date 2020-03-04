@@ -1,11 +1,14 @@
 package ui.blocks;
 
-class UINotBlock implements UIBlock {
+import java.awt.Graphics;
+
+class UINotBlock extends UIBlock {
 
     @Override
-    public void render() {
+    public void render(Graphics g) {
         // TODO Auto-generated method stub
 
     }
+
     
 }

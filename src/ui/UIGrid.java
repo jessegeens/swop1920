@@ -1,9 +1,10 @@
 package ui;
 
 import java.util.ArrayList;
+import utilities.*;
 
-class UIGrid {
-    private Pair<Integer,Integer> goalCell;
+class UIGrid implements Window{
+    private Location goalCell;
     private int cellHeight;
     private int cellWidth;
     private UIRobot robot;

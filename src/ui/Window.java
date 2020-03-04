@@ -1,5 +1,5 @@
 package ui;
 
 interface Window {
-
+    
 }

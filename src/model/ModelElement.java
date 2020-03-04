@@ -2,7 +2,8 @@ package model;
 
 import utilities.*;
 
-class ModelElement{
+public class ModelElement{
+
     private Location pos;
 
     public Location getPos() {

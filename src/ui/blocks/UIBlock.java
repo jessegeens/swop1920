@@ -1,6 +1,6 @@
 package ui.blocks;
 import ui.*;
 
-interface UIBlock extends UIElement {
-    public void render();    
+abstract class UIBlock extends UIElement {
+    public abstract void render();    
 }

@@ -1,5 +1,11 @@
 package ui.blocks;
 
-class UINotBlock extends UIBlock {
+class UINotBlock implements UIBlock {
+
+    @Override
+    public void render() {
+        // TODO Auto-generated method stub
+
+    }
     
 }

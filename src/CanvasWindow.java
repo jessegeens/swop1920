@@ -1,5 +1,3 @@
-package canvaswindow;
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -46,6 +44,7 @@ abstract class RecordingItem {
 	abstract void save(String path, int itemIndex, PrintWriter writer) throws IOException;
 	abstract void replay(int itemIndex, CanvasWindow window);
 }
+
 class MouseEventItem extends RecordingItem {
 	int id;
 	int x;

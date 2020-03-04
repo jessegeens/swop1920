@@ -1,16 +1,18 @@
 package ui;
 
-import 
+import utilities.*;
 
-class UIElement{
-    private Location Pos;
+public abstract class UIElement {
+	private Location pos;
 
-	public Location getPos() {
-		return this.Pos;
+    public abstract void render();
+
+	public Location getPos(){
+		return this.pos;
 	}
 
 	public void setPos(Location Pos) {
-		this.Pos = Pos;
+		this.pos = Pos;
 	}
 
 }

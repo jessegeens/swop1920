@@ -1,25 +1,16 @@
 package ui;
 
+import 
 
 class UIElement{
-    private int xPos;
-    private int yPos;
+    private Location Pos;
 
-	public int getXPos() {
-		return this.xPos;
+	public Location getPos() {
+		return this.Pos;
 	}
 
-	public void setXPos(int xPos) {
-		this.xPos = xPos;
+	public void setPos(Location Pos) {
+		this.Pos = Pos;
 	}
 
-	public int getYPos() {
-		return this.yPos;
-	}
-
-	public void setYPos(int yPos) {
-		this.yPos = yPos;
-	}
-
-    
 }

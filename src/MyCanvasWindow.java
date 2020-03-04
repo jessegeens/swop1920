@@ -1,9 +1,12 @@
 import java.awt.Graphics;
+import ui.*;
+import model.*;
 
 class MyCanvasWindow extends CanvasWindow {
 
     protected MyCanvasWindow(String title) {
         super(title);
+        
         // TODO Auto-generated constructor stub
     }
 
@@ -24,5 +27,5 @@ class MyCanvasWindow extends CanvasWindow {
         // TODO Auto-generated method stub
         super.handleKeyEvent(id, keyCode, keyChar);
     }
-    
+
 }

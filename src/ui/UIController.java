@@ -6,11 +6,12 @@ import ui.blocks.*;
 
 public class UIController {
 
-    private ArrayList<UIElement> uiElements;
+    private ArrayList<UIElement> uiElements = new ArrayList<UIElement>();
 
     
 
     public UIController(){
+        
     }
 
     public void renderUIElements(Graphics g, Rectangle uiBounds){
@@ -23,6 +24,7 @@ public class UIController {
         System.out.println("mouse");
         UIElement block = new UIMoveBlock();
         uiElements.add(block);
+        
 
 
     }

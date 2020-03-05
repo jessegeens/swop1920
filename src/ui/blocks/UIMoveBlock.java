@@ -2,12 +2,18 @@ package ui.blocks;
 
 import java.awt.Graphics;
 
-class UIMoveBlock extends UIBlock {
+public class UIMoveBlock extends UIBlock {
 
     @Override
     public void render(Graphics g) {
-        // TODO Auto-generated method stub
+        g.drawRect(200,200,100,100);
+        g.setClip(240,200,20,20);
+        g.clipRect(200,200,100,100);
 
+    }
+
+    public UIMoveBlock() {
+        super();
     }
 
 }

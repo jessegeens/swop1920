@@ -6,7 +6,11 @@ import java.awt.*;
 public abstract class UIElement {
 	private Location pos;
 
-    public abstract void render(Graphics g);
+	public abstract void render(Graphics g);
+	
+	public UIElement() {
+		pos = new Location(0,0);
+	}
 
 	public Location getPos(){
 		return this.pos;
@@ -16,4 +20,5 @@ public abstract class UIElement {
 		this.pos = Pos;
 	}
 
+	
 }

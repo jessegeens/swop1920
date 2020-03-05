@@ -20,12 +20,16 @@ class MyCanvasWindow extends CanvasWindow {
     protected void handleMouseEvent(int id, int x, int y, int clickCount) {
         // TODO Auto-generated method stub
         super.handleMouseEvent(id, x, y, clickCount);
+
+        //super.repaint();
     }
     
     @Override
     protected void handleKeyEvent(int id, int keyCode, char keyChar) {
         // TODO Auto-generated method stub
         super.handleKeyEvent(id, keyCode, keyChar);
+
+        //super.repaint();
     }
 
 }

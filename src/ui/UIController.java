@@ -8,13 +8,17 @@ public class UIController {
 
     private ArrayList<UIElement> uiElements;
 
+    private Graphics g;
+    private Rectangle uiBounds;
+
     
 
-    public UIController(){
-        
+    public UIController(Graphics g, Rectangle uiBounds){
+        this.g = g;
+        this.uiBounds = uiBounds;
     }
 
-    public void renderUIlements(Graphics g, Rectangle uiBounds){
+    public void renderUIElements(Graphics g, Rectangle uiBounds){
         System.out.println("renderUI");
         uiElements.forEach((UIElement) -> (UIElement).render(g));
 
@@ -24,7 +28,7 @@ public class UIController {
         System.out.println("mouse");
         UIElement block = new UIMoveBlock();
         uiElements.add(block);
-        
+        this.renderUIElements(this.g, this.uiBounds);
 
 
     }

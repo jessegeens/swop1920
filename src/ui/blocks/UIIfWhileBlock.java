@@ -2,14 +2,12 @@ package ui.blocks;
 
 import java.awt.Graphics;
 
-class UITurnLeftBlock extends UIMoveBlock {
+class UIIfWhileBlock extends UIBlock {
 
     @Override
     public void render(Graphics g) {
-        super.render(g);
         // TODO Auto-generated method stub
 
     }
-
     
 }

@@ -1,5 +1,5 @@
 package ui;
 
-class UIPalette implements Window {
+class UIPalette implements UIWindow {
 
 }

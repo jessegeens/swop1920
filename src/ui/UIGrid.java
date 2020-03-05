@@ -3,7 +3,7 @@ package ui;
 import java.util.ArrayList;
 import utilities.*;
 
-class UIGrid implements Window {
+class UIGrid implements UIWindow {
     private Location goalCell;
     private int cellHeight;
     private int cellWidth;

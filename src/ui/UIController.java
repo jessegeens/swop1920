@@ -3,6 +3,7 @@ package ui;
 import java.awt.*;
 import java.util.ArrayList;
 import ui.blocks.*;
+import utilities.Location;
 
 public class UIController {
 
@@ -22,10 +23,9 @@ public class UIController {
 
     public void handleMouseEvent(int id, int x, int y, int clickCount){
         System.out.println("mouse");
-        UIElement block = new UIMoveBlock();
+        Location clickLocation = new Location(x, y);
+        UIElement block = new UIMoveForwardBlock(clickLocation);
         uiElements.add(block);
-        
-
 
     }
 

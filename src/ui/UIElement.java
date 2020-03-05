@@ -8,8 +8,8 @@ public abstract class UIElement {
 
 	public abstract void render(Graphics g);
 	
-	public UIElement() {
-		pos = new Location(0,0);
+	public UIElement(Location location) {
+		pos = location;
 	}
 
 	public Location getPos(){

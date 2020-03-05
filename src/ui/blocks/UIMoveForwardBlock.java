@@ -1,4 +1,5 @@
 package ui.blocks;
+
 import java.awt.*;
 
 class UIMoveForwardBlock extends UIBlock {

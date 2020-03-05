@@ -1,10 +1,10 @@
 package ui.blocks;
 
-import java.awt.Graphics;
+import java.awt.*;
 
 import utilities.Location;
 
-class UINotBlock extends UIBlock {
+public class UINotBlock extends UIBlock {
 
     public UINotBlock(Location location) {
         super(location);
@@ -13,8 +13,17 @@ class UINotBlock extends UIBlock {
 
     @Override
     public void render(Graphics g) {
-        // TODO Auto-generated method stub
+        g.setColor(Color.GRAY);
+        g.fillRect(this.getPos().getX(),this.getPos().getY(), this.height, (this.width / 3));
+        g.fillRect(this.getPos().getX() - (width/4),this.getPos().getY()+(height/3), height, (width/3));
+        g.fillRect(this.getPos().getX(),this.getPos().getY() +(2*height/3),width, (height/3));
+        g.setColor(Color.WHITE);
+        g.drawString(getTitle(), this.getPos().getX() + 10, this.getPos().getY() + (height/2));
+        
+    }
 
+    private String getTitle() {
+        return "NotBlock";
     }
 
     

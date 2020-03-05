@@ -24,7 +24,7 @@ public class UIController {
     public void handleMouseEvent(int id, int x, int y, int clickCount){
         System.out.println("mouse");
         Location clickLocation = new Location(x, y);
-        UIElement block = new UIMoveForwardBlock(clickLocation);
+        UIElement block = new UIWhileBlock(clickLocation);
         uiElements.add(block);
 
     }

@@ -3,7 +3,10 @@ import ui.*;
 import java.awt.*;
 import utilities.*;
 
-abstract class UIBlock extends UIElement {
+public abstract class UIBlock extends UIElement {
+
+    final int width = 120;
+    final int height = 120;
 
     public UIBlock(Location location) {
         super(location);

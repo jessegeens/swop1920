@@ -28,7 +28,9 @@ class MyCanvasWindow extends CanvasWindow {
         Rectangle uiBounds = g.getClipBounds();
         //System.out.println(uiBounds);
 
-
+        UIPalette palette = new UIPalette(g);
+        UIProgramWindow programArea = new UIProgramWindow(g);
+        UIGrid grid = new UIGrid(g);
         uiController.renderUIElements(g, uiBounds);
 
 

@@ -4,18 +4,20 @@ import java.awt.Graphics;
 
 import utilities.Location;
 
-class UIWhileBlock extends UIIfWhileBlock {
+public class UIWhileBlock extends UIConditionalBlock {
 
     public UIWhileBlock(Location location) {
         super(location);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     public void render(Graphics g) {
         super.render(g);
-        // TODO Auto-generated method stub
+    }
 
+    @Override
+    protected String getTitle() {
+        return "While Block";
     }
 
 }

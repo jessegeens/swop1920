@@ -1,20 +1,21 @@
 package ui;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 import utilities.*;
 
-class UIGrid implements UIWindow {
+public class UIGrid implements UIWindow {
     private Location goalCell;
     private int cellHeight;
     private int cellWidth;
     private UIRobot robot;
     private ArrayList<UIWall> walls;
-
-
-
     
 
-    public Location getGoalCell() {
+    public UIGrid(Graphics g) {
+	}
+
+	public Location getGoalCell() {
         return this.goalCell;
     }
 
@@ -52,6 +53,12 @@ class UIGrid implements UIWindow {
 
     public void setWalls(ArrayList<UIWall> walls) {
         this.walls = walls;
+    }
+
+    @Override
+    public void render() {
+        // TODO Auto-generated method stub
+
     }
 
 }

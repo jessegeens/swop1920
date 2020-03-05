@@ -7,14 +7,14 @@ class MyCanvasWindow extends CanvasWindow {
 
 
 
-    private UIController controller;
+    private UIController uiController;
 
     
 
 
     protected MyCanvasWindow(String title) {
         super(title);
-        controller = new UIController();
+        uiController = new UIController();
         
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +29,7 @@ class MyCanvasWindow extends CanvasWindow {
         //System.out.println(uiBounds);
 
 
-        controller.renderUIlements(g, uiBounds);
+        uiController.renderUIElements(g, uiBounds);
 
 
     }
@@ -38,7 +38,7 @@ class MyCanvasWindow extends CanvasWindow {
     protected void handleMouseEvent(int id, int x, int y, int clickCount) {
         
         super.handleMouseEvent(id, x, y, clickCount);
-        controller.handleMouseEvent(id, x, y, clickCount);
+        uiController.handleMouseEvent(id, x, y, clickCount);
         
         this.repaint();
     }
@@ -47,7 +47,7 @@ class MyCanvasWindow extends CanvasWindow {
     protected void handleKeyEvent(int id, int keyCode, char keyChar) {
         
         super.handleKeyEvent(id, keyCode, keyChar);
-        controller.handleKeyEvent(id, keyCode, keyChar);
+        uiController.handleKeyEvent(id, keyCode, keyChar);
 
         this.repaint();
     }

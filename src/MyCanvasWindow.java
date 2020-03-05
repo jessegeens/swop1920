@@ -4,6 +4,9 @@ import model.*;
 
 class MyCanvasWindow extends CanvasWindow {
 
+    private UIController controller;
+
+
     protected MyCanvasWindow(String title) {
         super(title);
         
@@ -14,6 +17,11 @@ class MyCanvasWindow extends CanvasWindow {
     protected void paint(Graphics g) {
         // TODO Auto-generated method stub
         super.paint(g);
+        //TODO UIcontroller rectangle bounds
+
+        controller.renderUIlements(g);
+
+
     }
 
     @Override
@@ -21,7 +29,10 @@ class MyCanvasWindow extends CanvasWindow {
         // TODO Auto-generated method stub
         super.handleMouseEvent(id, x, y, clickCount);
 
-        //super.repaint();
+        controller.handleMouseEvent(id, x, y, clickCount);
+
+        //TODO issues with repaint method
+        //this.repaint();
     }
     
     @Override
@@ -29,7 +40,9 @@ class MyCanvasWindow extends CanvasWindow {
         // TODO Auto-generated method stub
         super.handleKeyEvent(id, keyCode, keyChar);
 
-        //super.repaint();
+        controller.handleKeyEvent(id, keyCode, keyChar);
+
+        //this.repaint();
     }
 
 }

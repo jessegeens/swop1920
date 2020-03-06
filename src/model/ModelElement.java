@@ -2,9 +2,15 @@ package model;
 
 import utilities.*;
 
-public class ModelElement{
+public abstract class ModelElement{
 
     private Location pos;
+
+
+
+    public void move(Location newPos){
+        this.setPos(newPos);
+    }
 
     public Location getPos() {
         return this.pos;

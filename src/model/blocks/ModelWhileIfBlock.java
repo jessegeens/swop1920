@@ -10,6 +10,17 @@ class ModelWhileIfBlock extends ModelBlock{
 
     
 
+    @Override
+    public void disconnect() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void connect(ModelBlock block) {
+        // TODO Auto-generated method stub
+
+    }
 
 
 
@@ -44,6 +55,8 @@ class ModelWhileIfBlock extends ModelBlock{
     public void setBlocks(ArrayList<ModelBlock> blocks) {
         this.blocks = blocks;
     }
+
+    
 
 
 }

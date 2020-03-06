@@ -6,6 +6,17 @@ class ModelMoveBlock extends ModelBlock{
 
 
 
+    @Override
+    public void disconnect() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void connect(ModelBlock block) {
+        // TODO Auto-generated method stub
+
+    }
 
     public ModelBlock getTopSocket() {
         return this.topSocket;
@@ -22,5 +33,7 @@ class ModelMoveBlock extends ModelBlock{
     public void setBottomPlug(ModelBlock bottomPlug) {
         this.bottomPlug = bottomPlug;
     }
+
+    
 
 }

@@ -6,6 +6,17 @@ class ModelNotBlock extends ModelBlock{
 
 
 
+    @Override
+    public void disconnect() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void connect(ModelBlock block) {
+        // TODO Auto-generated method stub
+
+    }
     
 
     public ModelBlock getRightSocket() {
@@ -23,6 +34,8 @@ class ModelNotBlock extends ModelBlock{
     public void setLeftPlug(ModelBlock leftPlug) {
         this.leftPlug = leftPlug;
     }
+
+    
 
 
 }

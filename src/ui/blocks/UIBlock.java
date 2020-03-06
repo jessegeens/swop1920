@@ -11,13 +11,7 @@ public class UIBlock extends UIElement {
     final Blocktype blockType;
 
 
-    //temporary method to prevent errors with other classes
-    public UIBlock(Location location){
-        super(location);
-        Blocktype tempType = new Blocktype(Blocktype.WHILE);
-        this.blockType = tempType;
 
-    }
 
     public UIBlock(Location location, Blocktype blockType) {
         super(location);
@@ -83,6 +77,7 @@ public class UIBlock extends UIElement {
                 g.fillRect(this.getPos().getX(),this.getPos().getY() +(2*height/3),width, (height/3));
                 g.setColor(Color.WHITE);
                 g.drawString(blockType.getTitle(), this.getPos().getX() + 10, this.getPos().getY() + (height/2));
+                break;
             default:
                 throw new IllegalArgumentException("Invalid block type in case statement");
             

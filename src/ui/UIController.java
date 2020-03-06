@@ -3,6 +3,7 @@ package ui;
 import java.awt.*;
 import java.util.ArrayList;
 import ui.blocks.*;
+import utilities.Blocktype;
 import utilities.Location;
 
 public class UIController {
@@ -24,7 +25,8 @@ public class UIController {
     public void handleMouseEvent(int id, int x, int y, int clickCount){
         System.out.println("mouse");
         Location clickLocation = new Location(x, y);
-        UIElement block = new UIWhileBlock(clickLocation);
+        Blocktype block_ = new Blocktype(Blocktype.IF);
+        UIElement block = new UIBlock(clickLocation, block_);
         uiElements.add(block);
 
     }

@@ -11,7 +11,7 @@ public class UIPalette implements UIWindow {
 
     public UIPalette(Graphics g){
         this.g = g;
-        blocks.add(new UIIfBlock(new Location(10, 10)));
+        
     }
 
     @Override

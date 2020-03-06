@@ -29,6 +29,11 @@ public final class Blocktype{
     public int getType(){
         return this.type;
     }
+
+    public String getTitle(){
+        return("TODO");
+
+    }
     
 
 

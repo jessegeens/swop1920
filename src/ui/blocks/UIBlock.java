@@ -3,18 +3,78 @@ import ui.*;
 import java.awt.*;
 import utilities.*;
 
-public abstract class UIBlock extends UIElement {
+public class UIBlock extends UIElement {
 
     final int width = 120;
     final int height = 120;
 
-    
+    final Blocktype blockType;
 
-    public UIBlock(Location location) {
+
+    //temporary method to prevent errors with other classes
+    public UIBlock(Location location){
         super(location);
+        Blocktype tempType = new Blocktype(Blocktype.WHILE);
+        this.blockType = tempType;
+
     }
 
-    public abstract void render(Graphics g);
+    public UIBlock(Location location, Blocktype blockType) {
+        super(location);
+        this.blockType = blockType;
+        
+    }
+
+    public void render(Graphics g){
+        switch (blockType.getType()){
+            case Blocktype.IF:
+                g.setColor(Color.GRAY);
+                g.fillRect(this.getPos().getX(),this.getPos().getY(), (this.width / 3), this.height);
+                g.fillRect(this.getPos().getX() + (width/3),this.getPos().getY()+(height/4), (width/3), height);
+                g.fillRect(this.getPos().getX() + (2*width/3),this.getPos().getY(),(width/3), (height/2));
+                g.fillRect(this.getPos().getX() + (2*width/3),this.getPos().getY() + (3*height/4),(width/3), (height/4));
+                g.setColor(Color.WHITE);
+                g.drawString(blockType.getTitle(), this.getPos().getX() + 10, this.getPos().getY() + (height/2));
+            case Blocktype.WHILE:
+                g.setColor(Color.GRAY);
+                g.fillRect(this.getPos().getX(),this.getPos().getY(), (this.width / 3), this.height);
+                g.fillRect(this.getPos().getX() + (width/3),this.getPos().getY()+(height/4), (width/3), height);
+                g.fillRect(this.getPos().getX() + (2*width/3),this.getPos().getY(),(width/3), (height/2));
+                g.fillRect(this.getPos().getX() + (2*width/3),this.getPos().getY() + (3*height/4),(width/3), (height/4));
+                g.setColor(Color.WHITE);
+                g.drawString(blockType.getTitle(), this.getPos().getX() + 10, this.getPos().getY() + (height/2));
+            
+
+
+
+
+
+        }
+
+    }
+
+
+    /**
+     * public static final int IF = 0;
+
+    public static final int WHILE = 1;
+  
+    public static final int MOVEFORWARD = 2;
+    
+    public static final int TURNLEFT = 3;
+    
+    public static final int TURNRIGHT = 4;
+    
+    public static final int WALLINFRONT = 5;
+     */
+
+
+
+
+
+    
+
+    
 
     
     

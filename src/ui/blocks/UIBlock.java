@@ -8,6 +8,8 @@ public abstract class UIBlock extends UIElement {
     final int width = 120;
     final int height = 120;
 
+    
+
     public UIBlock(Location location) {
         super(location);
     }

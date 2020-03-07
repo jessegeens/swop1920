@@ -14,6 +14,7 @@ public class UIController {
 
     public UIController(){
         
+        
     }
 
     public void renderUIElements(Graphics g, Rectangle uiBounds){

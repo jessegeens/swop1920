@@ -5,15 +5,38 @@ import java.util.ArrayList;
 import utilities.*;
 
 public class UIGrid implements UIWindow {
+
+
+
+
     private Location goalCell;
     private int cellHeight;
     private int cellWidth;
-    private UIRobot robot;
-    private ArrayList<UIWall> walls;
+    private Location robotLocation;
+    //TODO robotDriection
+
+    private ArrayList<Location> walls;
     
 
     public UIGrid(Graphics g) {
-	}
+    }
+
+    public UIGrid(int cellHeight, int cellWidth, ArrayList<Location> walls, Location robotLocation) {
+    }
+    
+    public void updateRobot(Location newRobotLocation){
+
+    }
+
+
+    //TODO add graphics Graphics g
+    @Override
+    public void render() {
+        // TODO Auto-generated method stub
+
+    }
+
+    /*
 
 	public Location getGoalCell() {
         return this.goalCell;
@@ -55,10 +78,8 @@ public class UIGrid implements UIWindow {
         this.walls = walls;
     }
 
-    @Override
-    public void render() {
-        // TODO Auto-generated method stub
+    */
 
-    }
+    
 
 }

@@ -19,6 +19,8 @@ public class UIController {
 
     public void renderUIElements(Graphics g, Rectangle uiBounds){
 
+        //TODO why is the UIgrid not a UIElement?
+
         Location wall1 = new Location(2,2);
         Location wall2 = new Location(1, 2);
 

@@ -32,7 +32,6 @@ class MyCanvasWindow extends CanvasWindow {
 
         UIPalette palette = new UIPalette(g);
         UIProgramWindow programArea = new UIProgramWindow(g);
-        UIGrid grid = new UIGrid(g);
         uiController.renderUIElements(g, uiBounds);
 
 

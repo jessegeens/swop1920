@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import ui.blocks.*;
 
+
 public class UIProgramWindow implements UIWindow {
 
     ArrayList<UIBlock> blocks = new ArrayList<UIBlock>();
@@ -14,7 +15,7 @@ public class UIProgramWindow implements UIWindow {
 	}
 
 	@Override
-    public void render() {
+    public void render(Graphics g) {
         blocks.forEach((UIBlock block) -> block.render(g));
     }
     

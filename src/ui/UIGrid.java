@@ -94,22 +94,31 @@ public class UIGrid implements UIWindow {
 
         if (this.robotDirection.getDirection() == Direction.UP || this.robotDirection.getDirection() == Direction.DOWN){
             //draw vertical line
+            g.drawLine(robotLocation.getX()*cellSize + cellSize / 2, robotLocation.getY()*cellSize , robotLocation.getX()*cellSize + cellSize / 2,robotLocation.getY()*cellSize + cellSize);
             if(this.robotDirection.getDirection() == Direction.UP){
-                //draw arrows
+                g.drawLine(robotLocation.getX()*cellSize + cellSize / 2, robotLocation.getY()*cellSize, robotLocation.getX()*cellSize + cellSize / 4, robotLocation.getY()*cellSize + cellSize / 4);
+                g.drawLine(robotLocation.getX()*cellSize + cellSize / 2, robotLocation.getY()*cellSize, robotLocation.getX()*cellSize + 3 * cellSize / 4, robotLocation.getY()*cellSize + cellSize / 4);
             }
             else if(this.robotDirection.getDirection() == Direction.DOWN){
                 //draw arrows
+                g.drawLine(robotLocation.getX()*cellSize + cellSize / 2, robotLocation.getY()*cellSize + cellSize, robotLocation.getX()*cellSize + cellSize / 4, robotLocation.getY()*cellSize + 3 * cellSize / 4);
+                g.drawLine(robotLocation.getX()*cellSize + cellSize / 2, robotLocation.getY()*cellSize + cellSize, robotLocation.getX()*cellSize + 3 * cellSize / 4, robotLocation.getY()*cellSize + 3 * cellSize / 4);
+            
             }
 
 
         }
         else if (this.robotDirection.getDirection() == Direction.LEFT || this.robotDirection.getDirection() == Direction.RIGHT){
             //draw horizontal line
+            g.drawLine(robotLocation.getX()*cellSize , robotLocation.getY()*cellSize + cellSize / 2, robotLocation.getX()*cellSize + cellSize,robotLocation.getY()*cellSize  + cellSize / 2);
             if(this.robotDirection.getDirection() == Direction.LEFT){
-                //draw arrows
+                //draw 
+                g.drawLine(robotLocation.getX()*cellSize , robotLocation.getY()*cellSize + cellSize / 2,robotLocation.getX()*cellSize + cellSize / 4, robotLocation.getY()*cellSize + 1 * cellSize / 4);
+                g.drawLine(robotLocation.getX()*cellSize , robotLocation.getY()*cellSize + cellSize / 2,robotLocation.getX()*cellSize + cellSize / 4, robotLocation.getY()*cellSize + 3 * cellSize / 4);
             }
             else if(this.robotDirection.getDirection() == Direction.RIGHT){
-                //draw arrows
+                g.drawLine(robotLocation.getX()*cellSize + cellSize, robotLocation.getY()*cellSize + cellSize / 2,robotLocation.getX()*cellSize + 3 * cellSize / 4, robotLocation.getY()*cellSize + 1 * cellSize / 4);
+                g.drawLine(robotLocation.getX()*cellSize + cellSize, robotLocation.getY()*cellSize + cellSize / 2,robotLocation.getX()*cellSize + 3 * cellSize / 4, robotLocation.getY()*cellSize + 3 * cellSize / 4);
             }
 
 

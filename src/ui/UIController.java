@@ -28,7 +28,7 @@ public class UIController {
         walls.add(wall2);
 
         Location robot = new Location(0, 0);
-        Direction robotDirection = new Direction(Direction.UP);
+        Direction robotDirection = new Direction(Direction.LEFT);
 
         Location goal = new Location(3,3);
 

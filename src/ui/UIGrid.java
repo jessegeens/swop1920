@@ -13,6 +13,7 @@ public class UIGrid implements UIWindow {
     private int cellHeight;
     private int cellWidth;
     private Location robotLocation;
+    private Direction robotDirection;
     //TODO robotDriection
 
     private ArrayList<Location> walls;
@@ -21,10 +22,21 @@ public class UIGrid implements UIWindow {
     public UIGrid(Graphics g) {
     }
 
-    public UIGrid(int cellHeight, int cellWidth, ArrayList<Location> walls, Location robotLocation) {
+    public UIGrid(int cellHeight, int cellWidth, ArrayList<Location> walls, Location robotLocation, Direction roboDirection) {
+        this.cellHeight = cellHeight;
+        this.cellWidth = cellWidth;
+        this.walls = walls;
+        this.robotLocation = robotLocation;
+        this.robotDirection = roboDirection;
     }
     
-    public void updateRobot(Location newRobotLocation){
+    public void updateRobotLocation(Location newRobotLocation){
+        this.robotLocation = newRobotLocation;
+
+    }
+
+    public void updateRobotDirection(Direction newRobotDirection){
+        this.robotDirection = newRobotDirection;
 
     }
 

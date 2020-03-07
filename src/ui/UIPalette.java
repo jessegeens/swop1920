@@ -15,7 +15,7 @@ public class UIPalette implements UIWindow {
     }
 
     @Override
-    public void render() {
+    public void render(Graphics g) {
         blocks.forEach((UIBlock block) -> block.render(g));
     }
 }

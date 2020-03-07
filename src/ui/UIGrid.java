@@ -59,7 +59,7 @@ public class UIGrid implements UIWindow {
     public void renderGrid(Graphics g) {
         g.setColor(Color.GRAY);
         for(int x = 0; x < this.dimension; x++){
-            for(int y = 0; y < this.dimension; x++){
+            for(int y = 0; y < this.dimension; y++){
                 g.drawRect(xPosition + x * cellSize, yPosition + y*cellSize, cellSize, cellSize);
 
             }
@@ -73,7 +73,7 @@ public class UIGrid implements UIWindow {
     public void renderWalls(Graphics g) {
         g.setColor(Color.BLACK);
         for(Location wall : walls){
-            g.fillRect(wall.getX(),wall.getY(),cellSize, cellSize);
+            g.fillRect(wall.getX()*cellSize,wall.getY()*cellSize,cellSize, cellSize);
         }
         
 
@@ -81,14 +81,14 @@ public class UIGrid implements UIWindow {
 
     public void renderGoalCell(Graphics g) {
         g.setColor(Color.YELLOW);
-        g.fillRect(goalCell.getX(),goalCell.getY(),cellSize, cellSize);
+        g.fillRect(goalCell.getX()*cellSize,goalCell.getY()*cellSize,cellSize, cellSize);
     }
 
 
 
     public void renderRobot(Graphics g) {
         g.setColor(Color.RED);
-        g.fillRect(robotLocation.getX(),robotLocation.getY(),cellSize, cellSize);
+        g.fillRect(robotLocation.getX()*cellSize,robotLocation.getY()*cellSize,cellSize, cellSize);
 
         g.setColor(Color.WHITE);
 

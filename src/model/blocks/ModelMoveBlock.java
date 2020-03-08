@@ -8,14 +8,26 @@ class ModelMoveBlock extends ModelBlock{
 
     @Override
     public void disconnect() {
-        // TODO Auto-generated method stub
-
+        if (this.getTopSocket() != null){
+            this.getTopSocket().setBottomPlug(null);
+            this.setTopSocket(null);
+        }
+        if (this.getBottomPlug() != null){
+            this.getBottomPlug().setTopSocket(null);
+            this.setBottomPlug(null);
+        }
     }
 
     @Override
     public void connect(ModelBlock block) {
-        // TODO Auto-generated method stub
-
+        if ((block.getBottomPlug() == null) && (this.getTopSocketPos().getDistance(block.getBottomPlugPos()) < 50)){
+            this.setTopSocket(block);
+            block.setBottomPlug(this);    
+        }
+        if ((block.getTopSocket() == null) && (this.getBottomPlugPos().getDistance(block.getTopSocketPos()) < 50)){
+            this.setBottomPlug(block);
+            block.setTopSocket(this);    
+        }
     }
 
     @Override

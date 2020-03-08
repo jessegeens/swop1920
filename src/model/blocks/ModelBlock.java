@@ -105,7 +105,7 @@ public abstract class ModelBlock extends ModelElement{
 		return this.topSocketPos;
 	}
 
-    public Location getRigthSocketPos() {
+    public Location getRightSocketPos() {
 		return this.rightSocketPos;
 	}
 

@@ -15,20 +15,30 @@ class ModelWhileIfBlock extends ModelBlock{
 
     @Override
     public void disconnect() {
-        if (getTopSocket() != null){
-            getTopSocket().setBottomPlug(null);
+        if (this.getTopSocket() != null){
+            this.getTopSocket().setBottomPlug(null);
             this.setTopSocket(null);
         }
-        if (getBottomPlug() != null){
-            getBottomPlug().setTopSocket(null);
+        if (this.getBottomPlug() != null){
+            this.getBottomPlug().setTopSocket(null);
             this.setBottomPlug(null);
         }
     }
 
     @Override
     public void connect(ModelBlock block) {
-        
-
+        if ((block.getBottomPlug() == null) && (this.getTopSocketPos().getDistance(block.getBottomPlugPos()) < 50)){
+            this.setTopSocket(block);
+            block.setBottomPlug(this);    
+        }
+        if ((block.getTopSocket() == null) && (this.getBottomPlugPos().getDistance(block.getTopSocketPos()) < 50)){
+            this.setBottomPlug(block);
+            block.setTopSocket(this);    
+        }
+        if ((block.getLeftPlug() == null) && (this.getRightSocketPos().getDistance(block.getLeftPlugPos()) < 50)){
+            this.setRightSocket(block);
+            block.setLeftPlug(this);    
+        }
     }
 
 

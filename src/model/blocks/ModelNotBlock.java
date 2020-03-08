@@ -19,18 +19,22 @@ class ModelNotBlock extends ModelBlock{
     }
     
 
+    @Override
     public ModelBlock getRightSocket() {
         return this.rightSocket;
     }
 
+    @Override
     public void setRightSocket(ModelBlock rightSocket) {
         this.rightSocket = rightSocket;
     }
 
+    @Override
     public ModelBlock getLeftPlug() {
         return this.leftPlug;
     }
 
+    @Override
     public void setLeftPlug(ModelBlock leftPlug) {
         this.leftPlug = leftPlug;
     }

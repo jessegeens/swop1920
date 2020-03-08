@@ -18,18 +18,22 @@ class ModelMoveBlock extends ModelBlock{
 
     }
 
+    @Override
     public ModelBlock getTopSocket() {
         return this.topSocket;
     }
 
+    @Override
     public void setTopSocket(ModelBlock topSocket) {
         this.topSocket = topSocket;
     }
 
+    @Override
     public ModelBlock getBottomPlug() {
         return this.bottomPlug;
     }
 
+    @Override
     public void setBottomPlug(ModelBlock bottomPlug) {
         this.bottomPlug = bottomPlug;
     }

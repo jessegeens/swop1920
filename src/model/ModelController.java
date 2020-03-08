@@ -12,8 +12,11 @@ class ModelController{
     public void moveBlock(ModelBlock block, Location newPos){
         block.move(newPos, this.findClosestBlock(block));
     }
-
-
+    /**
+     * 
+     * @param block The block for which the closest neighbour needs to be found
+     * @return The closest neighbour of block
+     */
     public ModelBlock findClosestBlock(ModelBlock block){
         ModelBlock closest = getBlocks().get(0);
         for(ModelBlock blk : getBlocks()){

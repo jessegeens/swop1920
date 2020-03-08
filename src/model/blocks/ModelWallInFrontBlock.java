@@ -16,10 +16,12 @@ class ModelWallInFrontBlock extends ModelBlock{
 
     }
 
+    @Override
     public ModelBlock getLeftPlug() {
         return this.leftPlug;
     }
 
+    @Override
     public void setLeftPlug(ModelBlock leftPlug) {
         this.leftPlug = leftPlug;
     }

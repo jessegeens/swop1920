@@ -2,16 +2,31 @@ package model.blocks;
 
 import java.util.ArrayList;
 
-class ModelWhileIfBlock extends ModelBlock{
+import utilities.Location;
+
+public class ModelWhileIfBlock extends ModelBlock{
     private ModelBlock topSocket;
     private ModelBlock bottomPlug;
     private ModelBlock rightSocket;
-    private ModelBlock cavitySocket = this;
-    private ModelBlock cavityPlug = this;
+    private ModelBlock cavitySocket;
+    private ModelBlock cavityPlug;
     private int cavityHeight;
+    private boolean whileBlock;
     private ArrayList<ModelBlock> blocks;
 
     
+
+    public ModelWhileIfBlock(Location pos, boolean whileblk){
+        super.setPos(pos);
+        this.setTopSocket(null);
+        this.setBottomPlug(null);
+        this.setRightSocket(null);
+        this.setCavityPlug(this);
+        this.setCavitySocket(this);
+        this.setCavityHeight(0);
+        this.setWhileBlock(whileblk);
+        this.setBlocks(new ArrayList<ModelBlock>());
+    }
 
     @Override
     public void disconnect() {
@@ -101,6 +116,14 @@ class ModelWhileIfBlock extends ModelBlock{
     public void setCavityPlug(ModelBlock cavityPlug) {
         this.cavityPlug = cavityPlug;
     }
+
+    public boolean isWhileBlock() {
+        return this.whileBlock;
+    }
+
+    public void setWhileBlock(boolean whileBlock) {
+        this.whileBlock = whileBlock;
+    };
 
 
 }

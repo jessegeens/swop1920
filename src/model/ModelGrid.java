@@ -12,7 +12,13 @@ class ModelGrid{
 
 
 
-
+    public ModelGrid(Location goal, ModelRobot rbt){
+        this.setGoalCell(goal);
+        this.setCellHeight(30); //random waarde gekozen hier
+        this.setCellHeight(30); //idem hier
+        this.setRobot(rbt);
+        this.setWalls(new ArrayList<ModelWall>());
+    }
     
 
     public Location getGoalCell() {

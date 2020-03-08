@@ -6,7 +6,17 @@ import utilities.Location;
 
 class ModelController{
 
-    private ArrayList<ModelBlock> blocks = new ArrayList<ModelBlock>();
+    private ArrayList<ModelBlock> blocks;
+    private ModelPalette palette;
+    private ModelProgramWindow pWindow;
+    private ModelGrid grid;
+
+    public ModelController(){
+        this.setBlocks(new ArrayList<ModelBlock>());
+        this.setPalette(new ModelPalette());
+        this.setPWindow(new ModelProgramWindow());
+        this.setGrid(new ModelGrid(null, null)); //TODO Where is defined which cell is the goalcell, and where the robot starts?
+    }
 
 
     public void moveBlock(ModelBlock block, Location newPos){
@@ -92,6 +102,33 @@ class ModelController{
     public void setBlocks(ArrayList<ModelBlock> blocks) {
         this.blocks = blocks;
     }
+
+    public ModelPalette getPalette() {
+        return this.palette;
+    }
+
+    public void setPalette(ModelPalette palette) {
+        this.palette = palette;
+    }
+
+    public ModelProgramWindow getPWindow() {
+        return this.pWindow;
+    }
+
+    public void setPWindow(ModelProgramWindow pWindow) {
+        this.pWindow = pWindow;
+    }
+
+    public ModelGrid getGrid() {
+        return this.grid;
+    }
+
+    public void setGrid(ModelGrid grid) {
+        this.grid = grid;
+    }
+
+
+    
 
     
 }

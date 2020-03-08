@@ -5,6 +5,9 @@ import java.util.ArrayList;
 class ModelWhileIfBlock extends ModelBlock{
     private ModelBlock topSocket;
     private ModelBlock bottomPlug;
+    private ModelBlock rightSocket;
+    private ModelBlock cavitySocket = this;
+    private ModelBlock cavityPlug = this;
     private int cavityHeight;
     private ArrayList<ModelBlock> blocks;
 
@@ -13,14 +16,18 @@ class ModelWhileIfBlock extends ModelBlock{
     @Override
     public void disconnect() {
         if (getTopSocket() != null){
-            getTopSocket().se
+            getTopSocket().setBottomPlug(null);
+            this.setTopSocket(null);
         }
-
+        if (getBottomPlug() != null){
+            getBottomPlug().setTopSocket(null);
+            this.setBottomPlug(null);
+        }
     }
 
     @Override
     public void connect(ModelBlock block) {
-        // TODO Auto-generated method stub
+        
 
     }
 
@@ -61,7 +68,29 @@ class ModelWhileIfBlock extends ModelBlock{
         this.blocks = blocks;
     }
 
-    
+    public ModelBlock getRightSocket() {
+        return this.rightSocket;
+    }
+
+    public void setRightSocket(ModelBlock rightSocket) {
+        this.rightSocket = rightSocket;
+    }
+
+    public ModelBlock getCavitySocket() {
+        return this.cavitySocket;
+    }
+
+    public void setCavitySocket(ModelBlock cavitySocket) {
+        this.cavitySocket = cavitySocket;
+    }
+
+    public ModelBlock getCavityPlug() {
+        return this.cavityPlug;
+    }
+
+    public void setCavityPlug(ModelBlock cavityPlug) {
+        this.cavityPlug = cavityPlug;
+    }
 
 
 }

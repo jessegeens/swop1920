@@ -8,7 +8,9 @@ import utilities.Location;
 public class UIController {
 
     private ArrayList<UIElement> uiElements = new ArrayList<UIElement>();
-
+    private UIPalette palette;
+    private UIProgramWindow programArea;
+    private UIGrid grid;
     
 
     public UIController(){

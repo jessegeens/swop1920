@@ -9,6 +9,10 @@ public abstract class ModelBlock extends ModelElement{
 
     private final int width = 120;
     private final int height = 120;
+    private final Location topSocketPos = super.getPos().add(this.getWidth() / 2, 0);
+    private final Location bottomPlugPos = super.getPos().add(this.getWidth() / 2, -this.getHeight());
+    private final Location rightSocketPos = super.getPos().add(this.getWidth(), -this.getHeight() / 2);
+    private final Location leftPlugPos = super.getPos().add(0, -this.getHeight() / 2);
 
     
 
@@ -31,16 +35,16 @@ public abstract class ModelBlock extends ModelElement{
             this.connect(closest);
         }
         if (this.getTopSocket() == closest){
-            super.setPos(new Location(closest.getPos().getX(),closest.getPos().getY() - closest.getHeight()));
+            super.move(closest.getPos().add(0,this.getHeight()));
         }
         if (this.getBottomPlug() == closest){
-            super.setPos(new Location(closest.getPos().getX(),closest.getPos().getY() + this.getHeight()));
+            super.move(closest.getPos().add(0,-this.getHeight()));
         }
         if (this.getRightSocket() == closest){
-            super.setPos(new Location(closest.getPos().getX() + closest.getWidth(),closest.getPos().getY()));
+            super.move(closest.getPos().add(closest.getWidth(),0));
         }
         if (this.getLeftPlug() == closest){
-            super.setPos(new Location(closest.getPos().getX() - closest.getWidth(),closest.getPos().getY()));
+            super.move(closest.getPos().add(-closest.getWidth(),0));
         }
     }
 
@@ -91,7 +95,24 @@ public abstract class ModelBlock extends ModelElement{
 
     public int getWidth() {
 		return this.width;
+    }
+    
+    public Location getBottomPlugPos() {
+		return this.bottomPlugPos;
 	}
+
+    public Location getTopSocketPos() {
+		return this.topSocketPos;
+	}
+
+    public Location getRigthSocketPos() {
+		return this.rightSocketPos;
+	}
+
+    public Location getLeftPlugPos() {
+		return this.leftPlugPos;
+	}
+    
 
     
 }

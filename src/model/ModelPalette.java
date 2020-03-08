@@ -36,7 +36,7 @@ class ModelPalette extends ModelWindow{
     }
 
     public void BlockToProgramWindow(ModelBlock blk){
-
+        //TODO Blocks need to be dragged to the program window and a new block needs to be created.
     }
 
     public ModelMoveBlock getTurnLeftBlock() {

@@ -11,11 +11,11 @@ public class UIPalette implements UIWindow {
 
     public UIPalette(Graphics g){
         this.g = g;
-        blocks.add(new UIIfBlock(new Location(10, 10)));
+        
     }
 
     @Override
-    public void render() {
+    public void render(Graphics g) {
         blocks.forEach((UIBlock block) -> block.render(g));
     }
 }

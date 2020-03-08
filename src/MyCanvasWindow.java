@@ -9,6 +9,8 @@ class MyCanvasWindow extends CanvasWindow {
 
     private UIController uiController;
 
+    //default width and length are currently hardcoded in the CanvasWindow class
+
     
 
 
@@ -30,7 +32,6 @@ class MyCanvasWindow extends CanvasWindow {
 
         UIPalette palette = new UIPalette(g);
         UIProgramWindow programArea = new UIProgramWindow(g);
-        UIGrid grid = new UIGrid(g);
         uiController.renderUIElements(g, uiBounds);
 
 
@@ -42,7 +43,7 @@ class MyCanvasWindow extends CanvasWindow {
         super.handleMouseEvent(id, x, y, clickCount);
         uiController.handleMouseEvent(id, x, y, clickCount);
         
-        this.repaint();
+        super.repaint();
     }
     
     @Override
@@ -51,7 +52,7 @@ class MyCanvasWindow extends CanvasWindow {
         super.handleKeyEvent(id, keyCode, keyChar);
         uiController.handleKeyEvent(id, keyCode, keyChar);
 
-        this.repaint();
+        super.repaint();
     }
 
 }

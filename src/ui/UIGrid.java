@@ -44,6 +44,17 @@ public class UIGrid implements UIWindow {
 
 
     //TODO add graphics Graphics g
+
+    /**
+     * This function renders the complete grid:
+     *  * the grid itself
+     *  * the walls, stored in {@link UIGrid#walls}
+     *  * the goal cell, stored in {@link UIGrid#goalCell}
+     *  * the robot, with direction stored in {@link UIGrid#robotDirection}
+     *     and location stored in {@link UIGrid#robotLocation}
+     * 
+     * @param g The Graphics object on which the rendering happens
+     */
     @Override
     public void render(Graphics g) {
         renderGrid(g);
@@ -52,6 +63,12 @@ public class UIGrid implements UIWindow {
         renderRobot(g);
     }
 
+
+    /**
+     * This function renders the grid itself (e.g. the raster lines, given by {@link UIGrid#dimension})
+     * 
+     * @param g The Graphics object on which the rendering happens
+     */
     public void renderGrid(Graphics g) {
         g.setColor(Color.GRAY);
         for(int x = 0; x < this.dimension; x++){
@@ -62,6 +79,11 @@ public class UIGrid implements UIWindow {
         }
     }
 
+    /**
+     * This function renders all the walls (stored in {@link UIGrid#walls}) on the grid
+     * 
+     * @param g The Graphics object on which the rendering happens
+     */
     public void renderWalls(Graphics g) {
         g.setColor(Color.BLACK);
         for(Location wall : walls){
@@ -69,13 +91,23 @@ public class UIGrid implements UIWindow {
         }
     }
 
+    /**
+     * This function renders the goal cell (stored in {@link UIGrid#goalCell}) on the grid
+     * 
+     * @param g The Graphics object on which the rendering happens
+     */
     public void renderGoalCell(Graphics g) {
         g.setColor(Color.YELLOW);
         g.fillRect(goalCell.getX()*cellSize,goalCell.getY()*cellSize,cellSize, cellSize);
     }
 
 
-
+    /**
+     * This function renders the robot (with direction stored in {@link UIGrid#robotDirection}
+     * and location stored in {@link UIGrid#robotLocation}) on the grid
+     * 
+     * @param g The Graphics object on which the rendering happens
+     */
     public void renderRobot(Graphics g) {
         g.setColor(Color.RED);
         g.fillRect(robotLocation.getX()*cellSize,robotLocation.getY()*cellSize,cellSize, cellSize);

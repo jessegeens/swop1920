@@ -14,6 +14,11 @@ public class UIProgramWindow implements UIWindow {
         this.g = g;
 	}
 
+    /**
+     * This function traverses the blocks in the Program Window and renders them.
+     * 
+     * @param g Graphics object on which the rendering needs to happen
+     */
 	@Override
     public void render(Graphics g) {
         blocks.forEach((UIBlock block) -> block.render(g));

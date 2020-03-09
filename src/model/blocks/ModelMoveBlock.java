@@ -3,12 +3,13 @@ package model.blocks;
 import utilities.Location;
 
 public class ModelMoveBlock extends ModelBlock {
+
+    public static final int FORWARD = 0;
+    public static final int LEFT = 1;
+    public static final int RIGHT = 2;
+
     private ModelBlock topSocket;
     private ModelBlock bottomPlug;
-
-    static final int FORWARD = 0;
-    static final int LEFT = 1;
-    static final int RIGHT = 2;
 
 
     private int type;    //0 voor forward, 1 naar left, 2 naar right

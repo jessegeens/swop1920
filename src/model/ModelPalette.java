@@ -26,9 +26,9 @@ class ModelPalette extends ModelWindow{
 
 
     public ModelPalette(){
-        this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftLocation(), 1));
-        this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightLocation(),2));
-        this.setForwardBlock(new ModelMoveBlock(this.getForwardLocation(),0));
+        this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftLocation(), ModelMoveBlock.LEFT));
+        this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightLocation(),ModelMoveBlock.RIGHT));
+        this.setForwardBlock(new ModelMoveBlock(this.getForwardLocation(),ModelMoveBlock.FORWARD));
         this.setNotBlock(new ModelNotBlock(this.getNotLocation()));
         this.setWallInFrontBlock(new ModelWallInFrontBlock(this.getWallInFrontLocation()));
         this.setWhileBlock(new ModelWhileIfBlock(this.getWhileLocation(),true));
@@ -48,13 +48,13 @@ class ModelPalette extends ModelWindow{
         else{
             if (blk instanceof ModelMoveBlock){
                 if (((ModelMoveBlock) blk).getType() == 1){
-                    this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftLocation(),1));
+                    this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftLocation(),ModelMoveBlock.LEFT));
                 }
                 if (((ModelMoveBlock) blk).getType() == 2){
-                    this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightLocation(),2));
+                    this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightLocation(),ModelMoveBlock.RIGHT));
                 }
                 if (((ModelMoveBlock) blk).getType() == 0){
-                    this.setForwardBlock(new ModelMoveBlock(this.getForwardLocation(),0));
+                    this.setForwardBlock(new ModelMoveBlock(this.getForwardLocation(),ModelMoveBlock.FORWARD));
                 }
             }
             else if (blk instanceof ModelNotBlock){

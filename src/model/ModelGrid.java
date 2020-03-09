@@ -8,7 +8,7 @@ class ModelGrid{
     private int cellHeight;
     private int cellWidth;
     private ModelRobot robot;
-    private ArrayList<ModelWall> walls;
+    private ArrayList<Location> walls;
 
 
 
@@ -17,7 +17,7 @@ class ModelGrid{
         this.setCellHeight(30); //random waarde gekozen hier
         this.setCellHeight(30); //idem hier
         this.setRobot(rbt);
-        this.setWalls(new ArrayList<ModelWall>());
+        this.setWalls(new ArrayList<Location>());
     }
     
 
@@ -53,11 +53,11 @@ class ModelGrid{
         this.robot = robot;
     }
 
-    public ArrayList<ModelWall> getWalls() {
+    public ArrayList<Location> getWalls() {
         return this.walls;
     }
 
-    public void setWalls(ArrayList<ModelWall> walls) {
+    public void setWalls(ArrayList<Location> walls) {
         this.walls = walls;
     }
 

@@ -7,6 +7,9 @@ import utilities.Location;
 class ModelController{
 
     private ArrayList<ModelBlock> blocks;
+
+    
+
     private ModelPalette palette;
     private ModelProgramWindow pWindow;
     private ModelGrid grid;
@@ -127,9 +130,6 @@ class ModelController{
     public void setGrid(ModelGrid grid) {
         this.grid = grid;
     }
-
-
-    
 
     
 }

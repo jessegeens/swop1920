@@ -24,7 +24,7 @@ public class ModelWhileIfBlock extends ModelBlock{
         this.setCavityPlug(this);
         this.setCavitySocket(this);
         this.setCavityHeight(0);
-        this.setWhileBlock(whileblk);
+        this.setWhile(whileblk);
         this.setBlocks(new ArrayList<ModelBlock>());
     }
 

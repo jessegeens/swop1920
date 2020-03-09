@@ -19,6 +19,19 @@ public abstract class ModelBlock extends ModelElement{
     @Override
     public void move(Location newPos){
         super.move(newPos);
+
+    }
+
+    //For now a block is considered to be a square
+    @Override
+    public boolean inBounds(Location coordinate){
+        if(this.getPos().getX() < coordinate.getX() && this.getPos().getX() + width > coordinate.getX() && this.getPos().getY() < coordinate.getY() && this.getPos().getY() + width > coordinate.getY() ){
+            System.out.println("inbounds");
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     /**

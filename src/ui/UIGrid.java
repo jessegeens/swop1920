@@ -21,12 +21,7 @@ public class UIGrid implements UIWindow {
     private Direction robotDirection;
     private ArrayList<Location> walls;
     
-    //TODO This old constructor is still being used in a class somewhere
-
-    /*
-    public UIGrid(Graphics g) {
-    }
-    */
+    
 
     public UIGrid(int cellSize, int dimension, ArrayList<Location> walls, Location robotLocation, Direction roboDirection, Location goalCell) {
         this.cellSize = cellSize;

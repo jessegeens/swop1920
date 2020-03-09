@@ -11,7 +11,7 @@ public class ModelWhileIfBlock extends ModelBlock{
     private ModelBlock cavitySocket;
     private ModelBlock cavityPlug;
     private int cavityHeight;
-    private boolean whileBlock;
+    private boolean isWhile;
     private ArrayList<ModelBlock> blocks;
 
     
@@ -117,12 +117,12 @@ public class ModelWhileIfBlock extends ModelBlock{
         this.cavityPlug = cavityPlug;
     }
 
-    public boolean isWhileBlock() {
-        return this.whileBlock;
+    public boolean isWhile() {
+        return this.isWhile;
     }
 
-    public void setWhileBlock(boolean whileBlock) {
-        this.whileBlock = whileBlock;
+    public void setWhile(boolean whileBlock) {
+        this.isWhile = whileBlock;
     };
 
 

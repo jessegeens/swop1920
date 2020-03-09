@@ -35,8 +35,43 @@ class ModelPalette extends ModelWindow{
         this.setIfBlock(new ModelWhileIfBlock(this.getIfLocation(),false));
     }
 
-    public void BlockToProgramWindow(ModelBlock blk){
-        //TODO Blocks need to be dragged to the program window and a new block needs to be created.
+    public void BlockToProgramWindow(ModelBlock blk, Boolean limitReached){
+        if (limitReached){
+            setTurnLeftBlock(null);
+            setTurnRightBlock(null);
+            setForwardBlock(null);
+            setNotBlock(null);
+            setWallInFrontBlock(null);
+            setWhileBlock(null);
+            setIfBlock(null);
+        }
+        else{
+            if (blk instanceof ModelMoveBlock){
+                if (((ModelMoveBlock) blk).getType() == 1){
+                    this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftLocation(),1));
+                }
+                if (((ModelMoveBlock) blk).getType() == 2){
+                    this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightLocation(),2));
+                }
+                if (((ModelMoveBlock) blk).getType() == 0){
+                    this.setForwardBlock(new ModelMoveBlock(this.getForwardLocation(),0));
+                }
+            }
+            else if (blk instanceof ModelNotBlock){
+                this.setNotBlock(new ModelNotBlock(this.getNotLocation()));
+            }
+            else if (blk instanceof ModelWallInFrontBlock){
+                this.setWallInFrontBlock(new ModelWallInFrontBlock(this.getWallInFrontLocation()));
+            }
+            else if (blk instanceof ModelWhileIfBlock){
+                if (((ModelWhileIfBlock) blk).isWhile()){
+                    this.setWhileBlock(new ModelWhileIfBlock(this.getWhileLocation(), true));
+                }
+                else {
+                    this.setIfBlock(new ModelWhileIfBlock(this.getIfLocation(), false));
+                }
+            }
+        }
     }
 
     public ModelMoveBlock getTurnLeftBlock() {

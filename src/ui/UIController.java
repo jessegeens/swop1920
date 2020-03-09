@@ -1,17 +1,20 @@
 package ui;
 
-import java.awt.*;
+
 import java.util.ArrayList;
+import java.awt.*;
+
+
+
 import ui.blocks.*;
 import utilities.*;
+import model.*;
 
 
 public class UIController {
 
     private ArrayList<UIElement> uiElements = new ArrayList<UIElement>();
-    private UIPalette palette;
-    private UIProgramWindow programArea;
-    private UIGrid grid;
+    private ArrayList<ModelElement> modelElements = new ArrayList<ModelElement>();
     
 
     public UIController(){
@@ -42,6 +45,17 @@ public class UIController {
 
         grid.render(g);
 
+        Location randomLocation = new Location(300, 300);
+
+        Blocktype block_ = new Blocktype(Blocktype.IF);
+
+
+
+        UIElement block = new UIBlock(randomLocation, block_);
+        uiElements.add(block);
+
+        
+
         
 
         System.out.println("renderUI");
@@ -49,12 +63,60 @@ public class UIController {
 
     }
 
+    //traverse uielements in opposite direction to have top rendering order
+
+    ModelElement active = null;
+
     public void handleMouseEvent(int id, int x, int y, int clickCount){
+        Location eventLocation = new Location(x,y);
         System.out.println("mouse");
-        Location clickLocation = new Location(x, y);
-        Blocktype block_ = new Blocktype(Blocktype.IF);
-        UIElement block = new UIBlock(clickLocation, block_);
-        uiElements.add(block);
+
+        //TODO for some reason I can't use the static fields MouseEvent.MOUSE_PRESSED etc
+        //TODO explaining why the list should be traversed in reversed due to render order
+        if(id == 501){
+            
+            for (int i = modelElements.size() - 1; i >= 0; i--) {
+                if(modelElements.get(i).inBounds(eventLocation)){
+                    active = modelElements.get(i);
+                }
+            }            
+        }
+        else if(id == 502){
+            this.active = null;
+
+        }
+        else if(id == 506){
+            
+            this.active.move(eventLocation);
+            
+            //update pos of activelement
+        }
+
+
+
+
+        
+
+        //left window
+        //mousedown
+
+        //mouseup
+
+
+
+        //mousedown
+
+        
+
+        
+        //MOUSE_PRESSED where you start holding the button down 501
+        //MOUSE_RELEASED where you release the button      502  
+        //MOUSE_CLICKED => press + release (comes after released + pressed) only comes if no dragging happended 500
+        //MOUSE_DRAGGED => Holding down, gets triggerd after each small move 506
+        //interesting to know: there is no difference detected between left and right button in the current handlemouseevent function
+
+
+        
 
     }
 

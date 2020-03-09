@@ -16,6 +16,7 @@ class ModelController{
         this.setPalette(new ModelPalette());
         this.setPWindow(new ModelProgramWindow());
         this.setGrid(new ModelGrid(null, null)); //TODO Where is defined which cell is the goalcell, and where the robot starts?
+                                                // => I think for now we can assume a random grid we generated ourselves
     }
 
 

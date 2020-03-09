@@ -25,5 +25,15 @@ public final class Direction{
         return this.direction;
     }
 
+    public void turnLeft(){
+        this.direction = (this.direction - 1) % 4;
+
+    }
+
+    public void turnRight(){
+        this.direction = (this.direction + 1) % 4;
+        
+    }
+
     
 }

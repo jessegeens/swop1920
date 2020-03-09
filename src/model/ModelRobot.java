@@ -1,7 +1,9 @@
 package model;
 
-class ModelRobot extends ModelElement{
-    private int direction; //0 = right, 1 = down, 2 = left, 3 = up
+import utilities.*;
+
+class ModelRobot extends ModelElement {
+    private Direction direction;
 
     public ModelRobot(int dir){
         this.setDirection(dir);
@@ -9,18 +11,18 @@ class ModelRobot extends ModelElement{
 
 
     public void turnLeft(){//turn to the left according to which is the initial direction
-        setDirection((getDirection() + 1) % 4);
+        this.direction.turnLeft();
     }
     public void turnRight(){//turn to the right according to which is the initial direction
-        setDirection((getDirection() - 1) % 4);
+        this.direction.turnRight();
     }
 
-    public int getDirection() {
+    public Direction getDirection() {
         return this.direction;
     }
 
     public void setDirection(int direction) {
-        this.direction = direction;
+        this.direction = new Direction(direction);
     }
 
 }

@@ -5,6 +5,12 @@ import utilities.Location;
 public class ModelMoveBlock extends ModelBlock {
     private ModelBlock topSocket;
     private ModelBlock bottomPlug;
+
+    static final int FORWARD = 0;
+    static final int LEFT = 1;
+    static final int RIGHT = 2;
+
+
     private int type;    //0 voor forward, 1 naar left, 2 naar right
 
     
@@ -66,7 +72,13 @@ public class ModelMoveBlock extends ModelBlock {
     }
 
     public void setType(int type) {
-        this.type = type;
+        if(type >-1 && type <4){
+            this.type = type;
+        }
+        else{
+            throw new IllegalArgumentException("Invalid model block type given");
+        }
+        
     }
 
     

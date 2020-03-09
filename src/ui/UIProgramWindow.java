@@ -17,7 +17,7 @@ public class UIProgramWindow implements UIWindow {
     /**
      * This function traverses the blocks in the Program Window and renders them.
      * 
-     * @param g Graphics object on which the rendering needs to happen
+     * @param {Graphics} g The Graphics object on which the rendering needs to happen
      */
 	@Override
     public void render(Graphics g) {

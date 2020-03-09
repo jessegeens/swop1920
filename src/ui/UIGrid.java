@@ -12,7 +12,7 @@ public class UIGrid implements UIWindow {
 
     
 
-    //both cells and the grid are square so only one dimension is needed
+    ///Both cells and the grid are square so only one dimension is needed
     private int cellSize;
     private int dimension;
 
@@ -32,11 +32,22 @@ public class UIGrid implements UIWindow {
         this.goalCell = goalCell;
     }
     
+
+    /**
+     * Sets the robot's new location {@link #robotLocation}
+     * 
+     * @param {Location} newRobotLocation Location the robot should now have
+     */
     public void updateRobotLocation(Location newRobotLocation){
         this.robotLocation = newRobotLocation;
 
     }
 
+    /**
+     * Sets the robot's new direction {@link #robotDirection}
+     * 
+     * @param {Direction} newRobotDirection Direction the robot should now have
+     */
     public void updateRobotDirection(Direction newRobotDirection){
         this.robotDirection = newRobotDirection;
 
@@ -65,9 +76,9 @@ public class UIGrid implements UIWindow {
 
 
     /**
-     * This function renders the grid itself (e.g. the raster lines, given by {@link UIGrid#dimension})
+     * This function renders the grid itself (e.g. the raster lines, given by {@link #dimension})
      * 
-     * @param g The Graphics object on which the rendering happens
+     * @param {Graphics} g The Graphics object on which the rendering happens
      */
     public void renderGrid(Graphics g) {
         g.setColor(Color.GRAY);
@@ -80,9 +91,9 @@ public class UIGrid implements UIWindow {
     }
 
     /**
-     * This function renders all the walls (stored in {@link UIGrid#walls}) on the grid
+     * This function renders all the walls (stored in {@link #walls}) on the grid
      * 
-     * @param g The Graphics object on which the rendering happens
+     * @param {Graphics} g The Graphics object on which the rendering happens
      */
     public void renderWalls(Graphics g) {
         g.setColor(Color.BLACK);
@@ -92,9 +103,9 @@ public class UIGrid implements UIWindow {
     }
 
     /**
-     * This function renders the goal cell (stored in {@link UIGrid#goalCell}) on the grid
+     * This function renders the goal cell (stored in {@link #goalCell}) on the grid
      * 
-     * @param g The Graphics object on which the rendering happens
+     * @param {Graphics} g The Graphics object on which the rendering happens
      */
     public void renderGoalCell(Graphics g) {
         g.setColor(Color.YELLOW);
@@ -103,10 +114,10 @@ public class UIGrid implements UIWindow {
 
 
     /**
-     * This function renders the robot (with direction stored in {@link UIGrid#robotDirection}
-     * and location stored in {@link UIGrid#robotLocation}) on the grid
+     * This function renders the robot (with direction stored in {@link #robotDirection}
+     * and location stored in {@link #robotLocation}) on the grid
      * 
-     * @param g The Graphics object on which the rendering happens
+     * @param {Graphics} g The Graphics object on which the rendering happens
      */
     public void renderRobot(Graphics g) {
         g.setColor(Color.RED);

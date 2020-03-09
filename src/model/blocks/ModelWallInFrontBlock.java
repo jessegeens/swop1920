@@ -1,8 +1,15 @@
 package model.blocks;
 
-class ModelWallInFrontBlock extends ModelBlock{
+import utilities.Location;
+
+public class ModelWallInFrontBlock extends ModelBlock {
     private ModelBlock leftPlug;
 
+
+    public ModelWallInFrontBlock(Location pos){
+        super.setPos(pos);
+        this.setLeftPlug(null);
+    }
 
     @Override
     public void disconnect() {

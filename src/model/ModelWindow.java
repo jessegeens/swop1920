@@ -7,7 +7,6 @@ abstract class ModelWindow{
     private ArrayList<ModelBlock> blocks;
 
 
-
     
 
     public ArrayList<ModelBlock> getBlocks() {

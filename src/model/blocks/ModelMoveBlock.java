@@ -1,8 +1,19 @@
 package model.blocks;
 
-class ModelMoveBlock extends ModelBlock{
+import utilities.Location;
+
+public class ModelMoveBlock extends ModelBlock {
     private ModelBlock topSocket;
     private ModelBlock bottomPlug;
+    private int type;    //0 voor forward, 1 naar left, 2 naar right
+
+    
+    public ModelMoveBlock(Location pos, int type) {
+        super.setPos(pos);
+        this.setType(type);
+        this.setTopSocket(null);
+        this.setBottomPlug(null);
+    }
 
 
 
@@ -50,6 +61,15 @@ class ModelMoveBlock extends ModelBlock{
         this.bottomPlug = bottomPlug;
     }
 
+    public int getType() {
+        return this.type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    
     
 
 }

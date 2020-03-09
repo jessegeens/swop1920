@@ -1,10 +1,17 @@
 package model.blocks;
 
-class ModelNotBlock extends ModelBlock{
+import utilities.Location;
+
+public class ModelNotBlock extends ModelBlock {
     private ModelBlock rightSocket;
     private ModelBlock leftPlug;
 
 
+    public ModelNotBlock(Location pos){
+        super.setPos(pos);
+        this.setRightSocket(null);
+        this.setLeftPlug(null);
+    }
 
     @Override
     public void disconnect() {

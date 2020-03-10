@@ -49,6 +49,7 @@ public class UIController {
         Location randomLocation = new Location(300, 300);
 
         Blocktype block_ = new Blocktype(Blocktype.IF);
+        //modelElements.add(block_);
 
 
 
@@ -73,7 +74,7 @@ public class UIController {
         System.out.println("mouse");
 
         //TODO for some reason I can't use the static fields MouseEvent.MOUSE_PRESSED etc
-        //TODO explaining why the list should be traversed in reversed due to render order
+        //TODO provide an explanation why the list should be traversed in reversed due to render order
         if(id == 501){
             
             for (int i = modelElements.size() - 1; i >= 0; i--) {

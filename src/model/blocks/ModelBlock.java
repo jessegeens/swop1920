@@ -16,6 +16,8 @@ public abstract class ModelBlock extends ModelElement{
 
     
 
+    
+
     @Override
     public void move(Location newPos){
         super.move(newPos);

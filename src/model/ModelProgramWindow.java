@@ -6,11 +6,6 @@ package model;
  */
 class ModelProgramWindow extends ModelWindow{
 
-
-    private int width;
-    private int height;
-
-    
     public ModelProgramWindow(int width, int height){
         super(width, height);
     }

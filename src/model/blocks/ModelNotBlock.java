@@ -1,5 +1,6 @@
 package model.blocks;
 
+import utilities.Blocktype;
 import utilities.Location;
 
 /**
@@ -10,8 +11,8 @@ public class ModelNotBlock extends ModelBlock {
     private ModelBlock leftPlug;
 
 
-    public ModelNotBlock(Location pos){
-        super.setPos(pos);
+    public ModelNotBlock(Location pos, Blocktype type){
+        super(pos,type);
         this.setRightSocket(null);
         this.setLeftPlug(null);
     }

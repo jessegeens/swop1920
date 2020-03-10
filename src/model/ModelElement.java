@@ -9,6 +9,11 @@ public abstract class ModelElement{
 
     private Location pos;
 
+
+    public ModelElement(Location pos){
+        this.pos = pos;
+    }
+
     
     //Location of an element is the topmost left border (where left is more important than top)
     /**

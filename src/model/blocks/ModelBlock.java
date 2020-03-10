@@ -2,6 +2,7 @@ package model.blocks;
 
 import java.util.ArrayList;
 
+import utilities.Blocktype;
 import model.*;
 import utilities.*;
 /**
@@ -11,11 +12,17 @@ public abstract class ModelBlock extends ModelElement{
 
     private final int width = 120;
     private final int height = 120;
+    private final Blocktype type;
     private final Location topSocketPos = super.getPos().add(this.getWidth() / 2, 0);
     private final Location bottomPlugPos = super.getPos().add(this.getWidth() / 2, -this.getHeight());
     private final Location rightSocketPos = super.getPos().add(this.getWidth(), -this.getHeight() / 2);
     private final Location leftPlugPos = super.getPos().add(0, -this.getHeight() / 2);
 
+
+    public ModelBlock(Location pos, Blocktype type){
+        super(pos);
+        this.type = type;
+    }
     
     /**
      * {@inheritDoc}
@@ -214,5 +221,9 @@ public abstract class ModelBlock extends ModelElement{
      */
     public Location getLeftPlugPos() {
 		return this.leftPlugPos;
+    }
+    
+    public Blocktype getBlockType() {
+		return this.type;
 	}
 }

@@ -1,5 +1,6 @@
 package model.blocks;
 
+import utilities.Blocktype;
 import utilities.Location;
 
 /**
@@ -9,8 +10,8 @@ public class ModelWallInFrontBlock extends ModelBlock {
     private ModelBlock leftPlug;
 
 
-    public ModelWallInFrontBlock(Location pos){
-        super.setPos(pos);
+    public ModelWallInFrontBlock(Location pos, Blocktype type){
+        super(pos,type);
         this.setLeftPlug(null);
     }
 

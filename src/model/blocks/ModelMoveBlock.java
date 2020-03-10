@@ -1,5 +1,6 @@
 package model.blocks;
 
+import utilities.Blocktype;
 import utilities.Location;
 
 /**
@@ -7,20 +8,11 @@ import utilities.Location;
  */
 public class ModelMoveBlock extends ModelBlock {
 
-    public static final int FORWARD = 0;
-    public static final int LEFT = 1;
-    public static final int RIGHT = 2;
-
     private ModelBlock topSocket;
     private ModelBlock bottomPlug;
-
-
-    private int type;    //0 voor forward, 1 naar left, 2 naar right
-
     
-    public ModelMoveBlock(Location pos, int type) {
-        super.setPos(pos);
-        this.setType(type);
+    public ModelMoveBlock(Location pos, Blocktype type) {
+        super(pos,type);
         this.setTopSocket(null);
         this.setBottomPlug(null);
     }
@@ -86,27 +78,5 @@ public class ModelMoveBlock extends ModelBlock {
     @Override
     public void setBottomPlug(ModelBlock bottomPlug) {
         this.bottomPlug = bottomPlug;
-    }
-
-    /**
-     * The type of a block is given by an int. 0 means a forward block, 1 means a left block, 2 means a right block.
-     * @return the type of the given block.
-     */
-    public int getType() {
-        return this.type;
-    }
-
-    /**
-     * Sets the type of a block.
-     * @param type: the type of the block (forward, left or right)
-     */
-    public void setType(int type) {
-        if(type >-1 && type <4){
-            this.type = type;
-        }
-        else{
-            throw new IllegalArgumentException("Invalid model block type given");
-        }
-        
     }
 }

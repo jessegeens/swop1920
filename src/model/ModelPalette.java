@@ -1,6 +1,7 @@
 package model;
 
 import model.blocks.*;
+import utilities.Blocktype;
 import utilities.Location;
 
 /**
@@ -29,13 +30,13 @@ class ModelPalette extends ModelWindow{
 
 
     public ModelPalette(){
-        this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftLocation(), ModelMoveBlock.LEFT));
-        this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightLocation(),ModelMoveBlock.RIGHT));
-        this.setForwardBlock(new ModelMoveBlock(this.getForwardLocation(),ModelMoveBlock.FORWARD));
-        this.setNotBlock(new ModelNotBlock(this.getNotLocation()));
-        this.setWallInFrontBlock(new ModelWallInFrontBlock(this.getWallInFrontLocation()));
-        this.setWhileBlock(new ModelWhileIfBlock(this.getWhileLocation(),true));
-        this.setIfBlock(new ModelWhileIfBlock(this.getIfLocation(),false));
+        this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftLocation(), new Blocktype(Blocktype.TURNLEFT)));
+        this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightLocation(), new Blocktype(Blocktype.TURNRIGHT)));
+        this.setForwardBlock(new ModelMoveBlock(this.getForwardLocation(), new Blocktype(Blocktype.MOVEFORWARD)));
+        this.setNotBlock(new ModelNotBlock(this.getNotLocation(),new Blocktype(Blocktype.NOT)));
+        this.setWallInFrontBlock(new ModelWallInFrontBlock(this.getWallInFrontLocation(),new Blocktype(Blocktype.WALLINFRONT)));
+        this.setWhileBlock(new ModelWhileIfBlock(this.getWhileLocation(),new Blocktype(Blocktype.WHILE)));
+        this.setIfBlock(new ModelWhileIfBlock(this.getIfLocation(),new Blocktype(Blocktype.IF)));
     }
 
     /**
@@ -54,32 +55,24 @@ class ModelPalette extends ModelWindow{
             setIfBlock(null);
         }
         else{
-            if (blk instanceof ModelMoveBlock){
-                if (((ModelMoveBlock) blk).getType() == 1){
-                    this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftLocation(),ModelMoveBlock.LEFT));
-                }
-                if (((ModelMoveBlock) blk).getType() == 2){
-                    this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightLocation(),ModelMoveBlock.RIGHT));
-                }
-                if (((ModelMoveBlock) blk).getType() == 0){
-                    this.setForwardBlock(new ModelMoveBlock(this.getForwardLocation(),ModelMoveBlock.FORWARD));
-                }
+            switch(blk.getBlockType().getType()){
+                case Blocktype.IF:
+                    this.setIfBlock(new ModelWhileIfBlock(this.getIfLocation(),new Blocktype(Blocktype.IF)));
+                case Blocktype.WHILE:
+                    this.setWhileBlock(new ModelWhileIfBlock(this.getWhileLocation(),new Blocktype(Blocktype.WHILE)));
+                case Blocktype.MOVEFORWARD:
+                    this.setForwardBlock(new ModelMoveBlock(this.getForwardLocation(), new Blocktype(Blocktype.MOVEFORWARD)));
+                case Blocktype.TURNLEFT:
+                    this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftLocation(), new Blocktype(Blocktype.TURNLEFT)));
+                case Blocktype.TURNRIGHT:
+                    this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightLocation(), new Blocktype(Blocktype.TURNRIGHT)));
+                case Blocktype.WALLINFRONT:
+                    this.setWallInFrontBlock(new ModelWallInFrontBlock(this.getWallInFrontLocation(),new Blocktype(Blocktype.WALLINFRONT)));
+                case Blocktype.NOT:
+                    this.setNotBlock(new ModelNotBlock(this.getNotLocation(),new Blocktype(Blocktype.NOT)));
+                default:
             }
-            else if (blk instanceof ModelNotBlock){
-                this.setNotBlock(new ModelNotBlock(this.getNotLocation()));
-            }
-            else if (blk instanceof ModelWallInFrontBlock){
-                this.setWallInFrontBlock(new ModelWallInFrontBlock(this.getWallInFrontLocation()));
-            }
-            else if (blk instanceof ModelWhileIfBlock){
-                if (((ModelWhileIfBlock) blk).isWhile()){
-                    this.setWhileBlock(new ModelWhileIfBlock(this.getWhileLocation(), true));
-                }
-                else {
-                    this.setIfBlock(new ModelWhileIfBlock(this.getIfLocation(), false));
-                }
-            }
-        }
+        }    
     }
 
     /**

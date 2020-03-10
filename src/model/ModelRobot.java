@@ -8,7 +8,8 @@ import utilities.*;
 class ModelRobot extends ModelElement {
     private Direction direction;
 
-    public ModelRobot(int dir){
+    public ModelRobot(Location pos, Direction dir){
+        super(pos);
         this.setDirection(dir);
     }
 
@@ -38,8 +39,8 @@ class ModelRobot extends ModelElement {
      * 
      * @param direction the direction that the robot will be set to.
      */
-    public void setDirection(int direction) {
-        this.direction = new Direction(direction);
+    public void setDirection(Direction dir) {
+        this.direction = dir;
     }
 
 }

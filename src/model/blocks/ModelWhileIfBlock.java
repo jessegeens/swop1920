@@ -2,6 +2,7 @@ package model.blocks;
 
 import java.util.ArrayList;
 
+import utilities.Blocktype;
 import utilities.Location;
 
 /**
@@ -15,18 +16,16 @@ public class ModelWhileIfBlock extends ModelBlock{
     private ModelBlock cavitySocket;
     private ModelBlock cavityPlug;
     private int cavityHeight;
-    private boolean isWhile;
     private ArrayList<ModelBlock> blocks;
 
-    public ModelWhileIfBlock(Location pos, boolean whileblk){
-        super.setPos(pos);
+    public ModelWhileIfBlock(Location pos, Blocktype type){
+        super(pos,type);
         this.setTopSocket(null);
         this.setBottomPlug(null);
         this.setRightSocket(null);
         this.setCavityPlug(this);
         this.setCavitySocket(this);
         this.setCavityHeight(0);
-        this.setWhile(whileblk);
         this.setBlocks(new ArrayList<ModelBlock>());
     }
 
@@ -174,19 +173,5 @@ public class ModelWhileIfBlock extends ModelBlock{
         this.cavityPlug = cavityPlug;
     }
 
-    /**
-     * 
-     * @return true if this is a while block.
-     */
-    public boolean isWhile() {
-        return this.isWhile;
-    }
-
-    /**
-     * 
-     * @param whileBlock sets this block to a while block.
-     */
-    public void setWhile(boolean whileBlock) {
-        this.isWhile = whileBlock;
-    } //TODO: hier stond een louche puntkomma, ik heb die weggedaan
+    
 }

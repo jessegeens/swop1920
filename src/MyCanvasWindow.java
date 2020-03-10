@@ -6,13 +6,13 @@ import model.*;
 
 class MyCanvasWindow extends CanvasWindow {
 
-    static int WIDTH = 900;
-    static int HEIGHT = 900;
+    static final int WIDTH = 900;
+    static final int HEIGHT = 900;
 
 
     private UIController uiController;
 
-    //default width and length are currently hardcoded in the CanvasWindow class
+    
 
     
 
@@ -28,11 +28,13 @@ class MyCanvasWindow extends CanvasWindow {
     protected void paint(Graphics g) {
         this.setSize(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT);
 
+
+        //TODO create a separate ui generation method for this later
         g.setColor(Color.BLACK);
         g.drawLine(MyCanvasWindow.WIDTH/3, 0, MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT);
         g.drawLine(2*MyCanvasWindow.WIDTH/3, 0, 2*MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT);
 
-        // TODO Auto-generated method stub
+
         super.paint(g);
         //TODO UIcontroller rectangle bounds
         

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import model.blocks.ModelBlock;
 import utilities.Location;
 
+
+
 /**
  * A controller that controls the changes in the logic of the Blockr system and propagates it to the view.
  */
@@ -132,6 +134,67 @@ public class ModelController{
 
     public void setGrid(ModelGrid grid) {
         this.grid = grid;
+    }
+
+    //TODO best way to handle the concept of an active/selected block?
+    ModelBlock active = null;
+
+    public void handleMouseEvent(int id, Location eventLocation, int clickCount){
+        if(eventLocation.getX() > 0 && eventLocation.getX() < 0)//MyCanvasWindow.WIDTH/3
+
+
+
+        System.out.println("mouse");
+
+        
+
+        //TODO for some reason I can't use the static fields MouseEvent.MOUSE_PRESSED etc
+        //TODO provide an explanation why the list should be traversed in reversed due to render order
+
+        //MOUSE_PRESSED where you start holding the button down 501
+        //MOUSE_RELEASED where you release the button      502  
+        //MOUSE_CLICKED => press + release (comes after released + pressed) only comes if no dragging happended 500
+        //MOUSE_DRAGGED => Holding down, gets triggerd after each small move 506
+        //interesting to know: there is no difference detected between left and right button in the current handlemouseevent function
+
+        /*
+        if(id == 501){
+            
+            for (int i = modelElements.size() - 1; i >= 0; i--) {
+                if(modelElements.get(i).inBounds(eventLocation)){
+                    active = modelElements.get(i);
+                }
+            }            
+        }
+        else if(id == 502){
+            this.active = null;
+
+        }
+        else if(id == 506){
+            
+            this.active.move(eventLocation);
+            
+            //update pos of activelement
+        }
+
+
+
+
+        
+
+        //left window
+        //mousedown
+
+        //mouseup
+
+
+
+        //mousedown
+
+        */
+
+        
+
     }
 
     

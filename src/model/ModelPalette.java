@@ -243,5 +243,8 @@ class ModelPalette extends ModelWindow{
         return this.whileLocation;
     }
 
+    public void handleMouseEvent(int id, Location eventLocation, int clickCount){
+    }
+
     
 }

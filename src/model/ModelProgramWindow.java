@@ -12,25 +12,8 @@ class ModelProgramWindow extends ModelWindow{
 
     
     public ModelProgramWindow(int width, int height){
-        this.setWidth(width);
-        this.setHeight(height);
+        super(width, height);
     }
 
-    public int getWidth() {
-        return this.width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return this.height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-
+   
 }

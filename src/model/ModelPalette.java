@@ -9,8 +9,7 @@ import utilities.Location;
  */
 class ModelPalette extends ModelWindow{
 
-    private int width; // Should be at least 300
-    private int height; // Should be at least 600
+    
 
     private final Location turnLeftLocation = new Location(20, 20);
     private final Location turnRightLocation = new Location(160, 20);
@@ -30,8 +29,7 @@ class ModelPalette extends ModelWindow{
 
 
     public ModelPalette(int width, int height){
-        this.setWidth(width);
-        this.setHeight(height);
+        super(width,height);
         this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftLocation(), new Blocktype(Blocktype.TURNLEFT)));
         this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightLocation(), new Blocktype(Blocktype.TURNRIGHT)));
         this.setForwardBlock(new ModelMoveBlock(this.getForwardLocation(), new Blocktype(Blocktype.MOVEFORWARD)));
@@ -187,38 +185,6 @@ class ModelPalette extends ModelWindow{
      */
     public void setIfBlock(ModelWhileIfBlock ifBlock) {
         this.ifBlock = ifBlock;
-    }
-
-    /**
-     * 
-     * @return the width of the palette.
-     */
-    public int getWidth() {
-        return this.width;
-    }
-
-    /**
-     * 
-     * @param width the width to be set to the palette.
-     */
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    /**
-     * 
-     * @return the height of the palette.
-     */
-    public int getHeight() {
-        return this.height;
-    }
-
-    /**
-     * 
-     * @param height the height to be set to the palette.
-     */
-    public void setHeight(int height) {
-        this.height = height;
     }
 
     /**

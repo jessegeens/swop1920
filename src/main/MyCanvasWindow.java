@@ -1,4 +1,6 @@
 
+package main;
+
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -6,10 +8,10 @@ import java.awt.Rectangle;
 import ui.*;
 import model.*;
 
-class MyCanvasWindow extends CanvasWindow {
+public class MyCanvasWindow extends CanvasWindow {
 
-    static final int WIDTH = 900;
-    static final int HEIGHT = 900;
+    public static final int WIDTH = 900;
+    public static final int HEIGHT = 900;
 
 
     private GlobalController globalController;

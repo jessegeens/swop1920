@@ -1,5 +1,7 @@
 package model;
 
+import org.w3c.dom.events.MouseEvent;
+
 import model.blocks.*;
 import utilities.Blocktype;
 import utilities.Location;
@@ -44,7 +46,10 @@ class ModelPalette extends ModelWindow{
      * @param blk the block to be added from the palette into the program window. 
      * @param limitReached true than it won't be possible to place a block of some specific type into the program window.
      */
-    public void BlockToProgramWindow(ModelBlock blk, Boolean limitReached){
+
+    //TODO limitreached is better of being a global var in modelpalette than a method parameter
+    //or maybe have a static int called maxamountofelements somewhere?
+    public void blockToProgramWindow(ModelBlock blk, Boolean limitReached){
         if (limitReached){
             setTurnLeftBlock(null);
             setTurnRightBlock(null);
@@ -244,6 +249,75 @@ class ModelPalette extends ModelWindow{
     }
 
     public void handleMouseEvent(int id, Location eventLocation, int clickCount){
+
+        //MOUSE_PRESSED where you start holding the button down 501
+        //MOUSE_RELEASED where you release the button      502  
+        //MOUSE_CLICKED => press + release (comes after released + pressed) only comes if no dragging happended 500
+        //MOUSE_DRAGGED => Holding down, gets triggerd after each small move 506
+        //interesting to know: there is no difference detected between left and right button in the current handlemouseevent function
+
+        //TODO cannot acces static MouseEvent.MOUSE_PRESSED etc
+
+        //mouse pressed: make a new block if in bounds of a specific block
+        if(id == 501){
+            ModelBlock selected = null;
+            if(this.turnLeftBlock.inBounds(eventLocation)){
+                this.blockToProgramWindow(this.turnLeftBlock, false);
+            }
+            else if(this.turnRightBlock.inBounds(eventLocation)){
+                this.blockToProgramWindow(this.turnRightBlock, false);
+            }
+            else if(this.forwardBlock.inBounds(eventLocation)){
+                this.blockToProgramWindow(this.forwardBlock, false);
+            }
+            else if(this.notBlock.inBounds(eventLocation)){
+                this.blockToProgramWindow(this.notBlock, false);
+            }
+            else if(this.wallInFrontBlock.inBounds(eventLocation)){
+                this.blockToProgramWindow(this.wallInFrontBlock, false);
+            }
+            else if(this.whileBlock.inBounds(eventLocation)){
+                this.blockToProgramWindow(this.whileBlock, false);
+            }
+            else if(this.ifBlock.inBounds(eventLocation)){
+                this.blockToProgramWindow(this.ifBlock, false);
+            }
+        }
+
+        //MOUSE RELEASED, delete the currently held item (if there is one)
+        else if(id == 502){
+            
+
+        }
+
+        //MOUSE MOVED, if there is a currently held block, move it
+        else if(id == 506){
+            
+            
+            
+            //update pos of activelement
+        }
+        
+
+        //if mouse down on 
+        //if mouse move
+        //if mouse up, remove active element super.deleteelement
+
+
+
+
+
+        /*
+
+         private ModelMoveBlock turnLeftBlock;
+    private ModelMoveBlock turnRightBlock;
+    private ModelMoveBlock forwardBlock;
+    private ModelNotBlock notBlock;
+    private ModelWallInFrontBlock wallInFrontBlock;
+    private ModelWhileIfBlock whileBlock;
+    private ModelWhileIfBlock ifBlock;
+    */
+
     }
 
     

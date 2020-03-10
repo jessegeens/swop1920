@@ -154,7 +154,7 @@ public class ModelController{
             this.palette.handleMouseEvent(id, eventLocation, clickCount);
             //TODO get activeblock?
         }
-        if(eventLocation.getX() > MyCanvasWindow.WIDTH/3 && eventLocation.getX() <  2*MyCanvasWindow.WIDTH/3){
+        if(eventLocation.getX() > MyCanvasWindow.WIDTH/3 && eventLocation.getX() <  2 * MyCanvasWindow.WIDTH/3){
             this.pWindow.handleMouseEvent(id, eventLocation, clickCount);
         }
 

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import model.*;
 import utilities.*;
-
+/**
+ * Abstract representation of a block that can be placed from the palette onto the program area.
+ */
 public abstract class ModelBlock extends ModelElement{
 
     private final int width = 120;
@@ -15,7 +17,9 @@ public abstract class ModelBlock extends ModelElement{
     private final Location leftPlugPos = super.getPos().add(0, -this.getHeight() / 2);
 
     
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void move(Location newPos){
         super.move(newPos);
@@ -23,6 +27,9 @@ public abstract class ModelBlock extends ModelElement{
     }
 
     //For now a block is considered to be a square
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean inBounds(Location coordinate){
         if(this.getPos().getX() < coordinate.getX() && this.getPos().getX() + width > coordinate.getX() && this.getPos().getY() < coordinate.getY() && this.getPos().getY() + width > coordinate.getY() ){
@@ -61,38 +68,99 @@ public abstract class ModelBlock extends ModelElement{
         }
     }
 
+    /**
+     * abstract method describing how a block will disconnect from another block in the program area.
+     */
     public abstract void disconnect();
-    public abstract void connect(ModelBlock block);
 
     /**
-     * These getters and setters will be overwritten in the specific blocktype classes so that when they do support the socket or plug it will
-     * execute as expected.
-     * @return IllegalStateException when the socket or plug is not supported, iow when the function is not overwritten in the subclass.
+     * abstract method describing how a block will connect to another block
+     * @param block the other block to connect to. 
+     */
+    public abstract void connect(ModelBlock block);
+
+    
+    //These getters and setters will be overwritten in the specific blocktype classes so that when they do support the socket or plug it will
+    //execute as expected.
+    //@return IllegalStateException when the socket or plug is not supported, iow when the function is not overwritten in the subclass.
+     
+
+    /**
+     * 
+     * @return the top socket
+     * @throws IllegalStateException if the socket is not supported on this type.
      */
     public ModelBlock getTopSocket(){
         throw new IllegalStateException("This blocktype doesn't support this socket.");
     }
+
+    /**
+     * 
+     * @param blk the block that this block connects to.
+     * @throws IllegalStateException if the socket is not supported on this type.
+     */
     public void setTopSocket(ModelBlock blk){
         throw new IllegalStateException("This blocktype doesn't support this socket.");
     }
+
+    /**
+     * 
+     * @return the bottom plug
+     * @throws IllegalStateException if the plug is not supported on this type.
+     */
     public ModelBlock getBottomPlug(){
         throw new IllegalStateException("This blocktype doesn't support this plug.");
     }
+
+    /**
+     * 
+     * @param blk the block that this block connects to.
+     * @throws IllegalStateException if the plug is not supported on this type.
+     */
     public void setBottomPlug(ModelBlock blk){
         throw new IllegalStateException("This blocktype doesn't support this plug.");
     }
+    
+    /**
+     * 
+     * @return the left plug
+     * @throws IllegalStateException if the plug is not supported on this type.
+     */
     public ModelBlock getLeftPlug(){
         throw new IllegalStateException("This blocktype doesn't support this plug.");
     }
+
+    /**
+     * 
+     * @param blk the block that this block connects to.
+     * @throws IllegalStateException if the plug is not supported on this type.
+     */
     public void setLeftPlug(ModelBlock blk){
         throw new IllegalStateException("This blocktype doesn't support this plug.");
     }
+
+    /**
+     * 
+     * @return the right socket
+     * @throws IllegalStateException if the socket is not supported on this type.
+     */
     public ModelBlock getRightSocket(){
         throw new IllegalStateException("This blocktype doesn't support this socket.");
     }
+
+    /**
+     * 
+     * @param blk: the block that this block connects
+     * @throws IllegalStateException if the socket is not supported on this type.
+     */
     public void setRightSocket(ModelBlock blk){
         throw new IllegalStateException("This blocktype doesn't support this socket.");
     }
+
+    /**
+     * A method that gives the connection from a block with all its neighbours.
+     * @return the list with all the connection of a block.
+     */
     public ArrayList<ModelBlock> getConnections(){
         ArrayList<ModelBlock> connections = new ArrayList<ModelBlock>();
         connections.add(getBottomPlug());
@@ -102,30 +170,49 @@ public abstract class ModelBlock extends ModelElement{
         return connections; 
     }
 
+    /**
+     * @return the height of the block.
+     */
     public int getHeight() {
 		return this.height;
 	}
 
+    /**
+     * @return the width of the block.
+     */
     public int getWidth() {
 		return this.width;
     }
     
+    /**
+     * 
+     * @return the position of the bottom plug.
+     */
     public Location getBottomPlugPos() {
 		return this.bottomPlugPos;
 	}
 
+    /**
+     * 
+     * @return the position of the top socket.
+     */
     public Location getTopSocketPos() {
 		return this.topSocketPos;
 	}
 
+    /**
+     * 
+     * @return the position of the right socket.
+     */
     public Location getRightSocketPos() {
 		return this.rightSocketPos;
 	}
 
+    /**
+     * 
+     * @return the position of the lefts socket.
+     */
     public Location getLeftPlugPos() {
 		return this.leftPlugPos;
 	}
-    
-
-    
 }

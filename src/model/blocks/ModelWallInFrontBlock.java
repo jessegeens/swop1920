@@ -2,6 +2,9 @@ package model.blocks;
 
 import utilities.Location;
 
+/**
+ * Class representing the 'wall in front' block with one plug to their left.
+ */
 public class ModelWallInFrontBlock extends ModelBlock {
     private ModelBlock leftPlug;
 
@@ -11,6 +14,9 @@ public class ModelWallInFrontBlock extends ModelBlock {
         this.setLeftPlug(null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void disconnect() {
         if (this.getLeftPlug() != null){
@@ -20,6 +26,9 @@ public class ModelWallInFrontBlock extends ModelBlock {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void connect(ModelBlock block) {
         if ((block.getRightSocket() == null) && (this.getLeftPlugPos().getDistance(block.getRightSocketPos()) < 50)){
@@ -29,11 +38,17 @@ public class ModelWallInFrontBlock extends ModelBlock {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ModelBlock getLeftPlug() {
         return this.leftPlug;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setLeftPlug(ModelBlock leftPlug) {
         this.leftPlug = leftPlug;

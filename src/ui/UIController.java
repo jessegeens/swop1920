@@ -15,7 +15,6 @@ public class UIController {
 
     private ArrayList<UIElement> uiElements = new ArrayList<UIElement>();
     private ArrayList<ModelElement> modelElements = new ArrayList<ModelElement>();
-
     
 
     public UIController(){

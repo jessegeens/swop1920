@@ -1,5 +1,8 @@
 package utilities;
 
+/**
+ * Class representing a mapping between the blocktypes and a subset of integers.
+ */
 public final class Blocktype{
 
     public static final int IF = 0;
@@ -28,11 +31,18 @@ public final class Blocktype{
 
     }
 
+    /**
+     * 
+     * @return the type of the block.
+     */
     public int getType(){
         return this.type;
     }
 
-    
+    /**
+     * 
+     * @return the name of the block.
+     */
     public String getTitle(){
         switch(this.type){
             case Blocktype.IF:
@@ -52,10 +62,5 @@ public final class Blocktype{
             default:
                 return "error";
         }
-
     }
-    
-
-
-
 }

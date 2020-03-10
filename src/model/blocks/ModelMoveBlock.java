@@ -1,28 +1,26 @@
 package model.blocks;
 
+import utilities.Blocktype;
 import utilities.Location;
 
+/**
+ * Class representing the move forward, turn left and turn right blocks with one socket at the top and one plug at the bottom.
+ */
 public class ModelMoveBlock extends ModelBlock {
+
     private ModelBlock topSocket;
     private ModelBlock bottomPlug;
-
-    static final int FORWARD = 0;
-    static final int LEFT = 1;
-    static final int RIGHT = 2;
-
-
-    private int type;    //0 voor forward, 1 naar left, 2 naar right
-
     
-    public ModelMoveBlock(Location pos, int type) {
-        super.setPos(pos);
-        this.setType(type);
+    public ModelMoveBlock(Location pos, Blocktype type) {
+        super(pos,type);
         this.setTopSocket(null);
         this.setBottomPlug(null);
     }
 
 
-
+    /**
+     * Method describing how a block will disconnect from another block in the program area.
+     */
     @Override
     public void disconnect() {
         if (this.getTopSocket() != null){
@@ -35,6 +33,9 @@ public class ModelMoveBlock extends ModelBlock {
         }
     }
 
+    /**
+     * Method describing how a block will connect to another block.
+     */
     @Override
     public void connect(ModelBlock block) {
         if ((block.getBottomPlug() == null) && (this.getTopSocketPos().getDistance(block.getBottomPlugPos()) < 50)){
@@ -47,41 +48,35 @@ public class ModelMoveBlock extends ModelBlock {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ModelBlock getTopSocket() {
         return this.topSocket;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setTopSocket(ModelBlock topSocket) {
         this.topSocket = topSocket;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ModelBlock getBottomPlug() {
         return this.bottomPlug;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBottomPlug(ModelBlock bottomPlug) {
         this.bottomPlug = bottomPlug;
     }
-
-    public int getType() {
-        return this.type;
-    }
-
-    public void setType(int type) {
-        if(type >-1 && type <4){
-            this.type = type;
-        }
-        else{
-            throw new IllegalArgumentException("Invalid model block type given");
-        }
-        
-    }
-
-    
-    
-
 }

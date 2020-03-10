@@ -2,7 +2,6 @@ package ui;
 
 import java.util.ArrayList;
 import java.awt.*;
-import utilities.*;
 import ui.blocks.*;
 
 public class UIPalette implements UIWindow {

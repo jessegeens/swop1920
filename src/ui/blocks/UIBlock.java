@@ -12,13 +12,18 @@ public class UIBlock extends UIElement {
 
 
 
-
+    // Constructor
     public UIBlock(Location location, Blocktype blockType) {
         super(location);
         this.blockType = blockType;
         
     }
 
+    /**
+     * This function renders the block
+     * 
+     * @param {Graphics} g The Graphics object on which the block is rendered
+     */
     public void render(Graphics g){
         switch (blockType.getType()){
             case Blocktype.IF:

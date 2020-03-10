@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import model.blocks.ModelBlock;
 import utilities.Location;
 
+/**
+ * A controller that controls the changes in the logic of the Blockr system and propagates it to the view.
+ */
 class ModelController{
 
     private ArrayList<ModelBlock> blocks;
+
+    
+
     private ModelPalette palette;
     private ModelProgramWindow pWindow;
     private ModelGrid grid;
@@ -127,9 +133,6 @@ class ModelController{
     public void setGrid(ModelGrid grid) {
         this.grid = grid;
     }
-
-
-    
 
     
 }

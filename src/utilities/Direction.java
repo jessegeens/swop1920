@@ -1,5 +1,8 @@
 package utilities;
 
+/**
+ * Class representing the direction of an element in Blockr.
+ */
 public final class Direction{
 
     public static final int UP = 0;
@@ -21,15 +24,25 @@ public final class Direction{
         }
     }
     
+    /**
+     * 
+     * @return the direction of the element.
+     */
     public int getDirection() {
         return this.direction;
     }
 
+    /**
+     * Method to turn left.
+     */
     public void turnLeft(){
         this.direction = (this.direction - 1) % 4;
 
     }
 
+    /**
+     * Method to turn right.
+     */
     public void turnRight(){
         this.direction = (this.direction + 1) % 4;
         

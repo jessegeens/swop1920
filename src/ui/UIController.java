@@ -15,11 +15,30 @@ public class UIController {
 
     private ArrayList<UIElement> uiElements = new ArrayList<UIElement>();
     private ArrayList<ModelElement> modelElements = new ArrayList<ModelElement>();
+
+    //lijst met blocks
+    //grid variabele (apart element)
     
 
     public UIController(){
 
         
+    }
+
+    public void seetUiElements(ArrayList<ModelElement> modelElements){
+
+
+
+
+    }
+
+    public void updateUIElements(ArrayList<ModelElement> modelElements){
+
+        
+    }
+
+    public void updateUIElement(){
+
     }
 
     public void renderUIElements(Graphics g, Rectangle uiBounds){
@@ -74,6 +93,12 @@ public class UIController {
 
         //TODO for some reason I can't use the static fields MouseEvent.MOUSE_PRESSED etc
         //TODO provide an explanation why the list should be traversed in reversed due to render order
+
+        //MOUSE_PRESSED where you start holding the button down 501
+        //MOUSE_RELEASED where you release the button      502  
+        //MOUSE_CLICKED => press + release (comes after released + pressed) only comes if no dragging happended 500
+        //MOUSE_DRAGGED => Holding down, gets triggerd after each small move 506
+        //interesting to know: there is no difference detected between left and right button in the current handlemouseevent function
         if(id == 501){
             
             for (int i = modelElements.size() - 1; i >= 0; i--) {
@@ -110,11 +135,7 @@ public class UIController {
         
 
         
-        //MOUSE_PRESSED where you start holding the button down 501
-        //MOUSE_RELEASED where you release the button      502  
-        //MOUSE_CLICKED => press + release (comes after released + pressed) only comes if no dragging happended 500
-        //MOUSE_DRAGGED => Holding down, gets triggerd after each small move 506
-        //interesting to know: there is no difference detected between left and right button in the current handlemouseevent function
+        
 
 
         

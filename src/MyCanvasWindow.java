@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import ui.*;
@@ -5,6 +6,8 @@ import model.*;
 
 class MyCanvasWindow extends CanvasWindow {
 
+    static int WIDTH = 900;
+    static int HEIGHT = 900;
 
 
     private UIController uiController;
@@ -23,6 +26,12 @@ class MyCanvasWindow extends CanvasWindow {
 
     @Override
     protected void paint(Graphics g) {
+        this.setSize(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT);
+
+        g.setColor(Color.BLACK);
+        g.drawLine(MyCanvasWindow.WIDTH/3, 0, MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT);
+        g.drawLine(2*MyCanvasWindow.WIDTH/3, 0, 2*MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT);
+
         // TODO Auto-generated method stub
         super.paint(g);
         //TODO UIcontroller rectangle bounds
@@ -32,9 +41,18 @@ class MyCanvasWindow extends CanvasWindow {
 
         UIPalette palette = new UIPalette(g);
         UIProgramWindow programArea = new UIProgramWindow(g);
+
+
         uiController.renderUIElements(g, uiBounds);
 
 
+
+
+    }
+
+    protected void setSize(int width, int height){
+        super.width = width;
+        super.height = height;
     }
 
     @Override

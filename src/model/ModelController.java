@@ -9,7 +9,7 @@ import utilities.Location;
 /**
  * A controller that controls the changes in the logic of the Blockr system and propagates it to the view.
  */
-class ModelController{
+public class ModelController{
 
     private ArrayList<ModelBlock> blocks;
 

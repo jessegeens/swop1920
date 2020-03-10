@@ -12,7 +12,7 @@ public class MyCanvasWindow extends CanvasWindow {
     public static final int HEIGHT = 900;
 
 
-    private UIController uiController;
+    private GlobalController globalController;
 
     
 
@@ -21,7 +21,7 @@ public class MyCanvasWindow extends CanvasWindow {
 
     protected MyCanvasWindow(String title) {
         super(title);
-        uiController = new UIController();
+        globalController = new GlobalController();
         
         // TODO Auto-generated constructor stub
     }
@@ -43,11 +43,13 @@ public class MyCanvasWindow extends CanvasWindow {
         Rectangle uiBounds = g.getClipBounds();
         //System.out.println(uiBounds);
 
+
+
         UIPalette palette = new UIPalette(g);
         UIProgramWindow programArea = new UIProgramWindow(g);
 
 
-        uiController.renderUIElements(g, uiBounds);
+        globalController.renderUIElements(g, uiBounds);
 
 
 
@@ -63,7 +65,7 @@ public class MyCanvasWindow extends CanvasWindow {
     protected void handleMouseEvent(int id, int x, int y, int clickCount) {
         
         super.handleMouseEvent(id, x, y, clickCount);
-        uiController.handleMouseEvent(id, x, y, clickCount);
+        globalController.handleMouseEvent(id, x, y, clickCount);
         
         super.repaint();
     }
@@ -72,7 +74,7 @@ public class MyCanvasWindow extends CanvasWindow {
     protected void handleKeyEvent(int id, int keyCode, char keyChar) {
         
         super.handleKeyEvent(id, keyCode, keyChar);
-        uiController.handleKeyEvent(id, keyCode, keyChar);
+        globalController.handleKeyEvent(id, keyCode, keyChar);
 
         super.repaint();
     }

@@ -25,7 +25,7 @@ class GlobalController {
     
 
     public GlobalController(){
-        this.modelController = new ModelController();
+        this.modelController = new ModelController(1,2,3,4);
         this.uiController = new UIController();      
              
     }

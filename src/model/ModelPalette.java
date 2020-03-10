@@ -29,7 +29,9 @@ class ModelPalette extends ModelWindow{
     private ModelWhileIfBlock ifBlock;
 
 
-    public ModelPalette(){
+    public ModelPalette(int width, int height){
+        this.setWidth(width);
+        this.setHeight(height);
         this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftLocation(), new Blocktype(Blocktype.TURNLEFT)));
         this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightLocation(), new Blocktype(Blocktype.TURNRIGHT)));
         this.setForwardBlock(new ModelMoveBlock(this.getForwardLocation(), new Blocktype(Blocktype.MOVEFORWARD)));

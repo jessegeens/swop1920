@@ -47,6 +47,4 @@ public final class Direction{
         this.direction = (this.direction + 1) % 4;
         
     }
-
-    
 }

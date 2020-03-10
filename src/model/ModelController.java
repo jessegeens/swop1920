@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+
+import main.MyCanvasWindow;
 import model.blocks.ModelBlock;
 import utilities.Location;
 
@@ -17,17 +19,21 @@ class ModelController{
     private ModelProgramWindow pWindow;
     private ModelGrid grid;
 
-    public ModelController(int paletteWidth, int paletteHeight, int programWidth, int programHeight){
+    public ModelController(){
         this.setBlocks(new ArrayList<ModelBlock>());
-        this.setPalette(new ModelPalette(paletteWidth, paletteHeight));
-        this.setPWindow(new ModelProgramWindow(programWidth, programHeight));
-        this.setGrid(new ModelGrid(null, null)); //TODO Where is defined which cell is the goalcell, and where the robot starts?
+        this.setPalette(new ModelPalette(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
+        this.setPWindow(new ModelProgramWindow(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
+        this.setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, null, null)); //TODO Where is defined which cell is the goalcell, and where the robot starts?
                                                 // => I think for now we can assume a random grid we generated ourselves
     }
 
 
     public void moveBlock(ModelBlock block, Location newPos){
         block.move(newPos, this.findClosestBlock(block));
+    }
+
+    public boolean blockInBounds(ModelBlock blk, ModelWindow win){
+        //TODO implementatie (Oberon)
     }
 
     /**

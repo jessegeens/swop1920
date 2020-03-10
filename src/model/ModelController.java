@@ -134,6 +134,10 @@ public class ModelController{
         this.blocks = blocks;
     }
 
+    public void addBlock(ModelBlock block) {
+        this.blocks.add(block);
+    }
+
     public ModelPalette getPalette() {
         return this.palette;
     }
@@ -165,6 +169,7 @@ public class ModelController{
         if(eventLocation.getX() > 0 && eventLocation.getX() < MyCanvasWindow.WIDTH/3 ){
             this.palette.handleMouseEvent(id, eventLocation, clickCount);
             //TODO get activeblock?
+            //TODO check if a new block has been created
         }
         if(eventLocation.getX() > MyCanvasWindow.WIDTH/3 && eventLocation.getX() <  2 * MyCanvasWindow.WIDTH/3){
             this.pWindow.handleMouseEvent(id, eventLocation, clickCount);

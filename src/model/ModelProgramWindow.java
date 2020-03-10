@@ -1,4 +1,5 @@
 package model;
+import utilities.Location;
 
 
 /**
@@ -13,6 +14,9 @@ class ModelProgramWindow extends ModelWindow{
     
     public ModelProgramWindow(int width, int height){
         super(width, height);
+    }
+
+    public void handleMouseEvent(int id, Location eventLocation, int clickCount){
     }
 
    

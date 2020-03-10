@@ -21,8 +21,11 @@ public class ModelController{
     private ModelProgramWindow pWindow;
     private ModelGrid grid;
 
+
+    
     public ModelController(){
         this.setBlocks(new ArrayList<ModelBlock>());
+        //palette left, program middle, grid right
         this.setPalette(new ModelPalette(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
         this.setPWindow(new ModelProgramWindow(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
         this.setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, null, null)); //TODO Where is defined which cell is the goalcell, and where the robot starts?
@@ -37,7 +40,16 @@ public class ModelController{
     /*
 
     public boolean blockInBounds(ModelBlock blk, ModelWindow win){
-        //TODO implementatie (Oberon)
+        if(win instanceof ModelPalette && blk.getPos().getX() < win.getWidth()){
+            return true;
+        }
+        else if(win instanceof ModelProgramWindow && blk.getPos().getX() > getPalette().getWidth() && blk.getPos().getX() < (win.getWidth() + getPalette().getWidth())){
+            return true;
+        }
+        else if(win instanceof ModelGrid && blk.getPos().getX() > (getPalette().getWidth() + getPWindow().getWidth())){
+            return true;
+        }
+        else return false;
     }
 
     */

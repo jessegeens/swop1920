@@ -262,6 +262,8 @@ class ModelPalette extends ModelWindow{
         if(id == 501){
             ModelBlock selected = null;
             if(this.turnLeftBlock.inBounds(eventLocation)){
+                //super.addBlock(this.turnLeftBlock);
+                //TODO between these steps you need to reassign the old block
                 this.blockToProgramWindow(this.turnLeftBlock, false);
             }
             else if(this.turnRightBlock.inBounds(eventLocation)){

@@ -193,10 +193,10 @@ public abstract class ModelBlock extends ModelElement{
      */
     public ArrayList<ModelBlock> getConnections(){
         ArrayList<ModelBlock> connections = new ArrayList<ModelBlock>();
-        if (this.hasBottomPlug()) connections.add(((BottomPlug)this).getBottomPlug());
-        if (this.hasLeftPlug()) connections.add(((LeftPlug)this).getLeftPlug());
-        if (this.hasTopSocket()) connections.add(((TopSocket)this).getTopSocket());
-        if (this.hasRightSocket()) connections.add(((RightSocket)this).getRightSocket());
+        if (this.hasBottomPlug() && ((BottomPlug)this).getBottomPlug() != null) connections.add(((BottomPlug)this).getBottomPlug());
+        if (this.hasLeftPlug() && ((LeftPlug)this).getLeftPlug() != null) connections.add(((LeftPlug)this).getLeftPlug());
+        if (this.hasTopSocket() && ((TopSocket)this).getTopSocket() != null) connections.add(((TopSocket)this).getTopSocket());
+        if (this.hasRightSocket() && ((RightSocket)this).getRightSocket() != null) connections.add(((RightSocket)this).getRightSocket());
         return connections; 
     }
 

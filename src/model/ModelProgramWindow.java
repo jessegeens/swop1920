@@ -1,6 +1,10 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 import model.blocks.ModelBlock;
 import utilities.Location;
@@ -26,7 +30,23 @@ class ModelProgramWindow extends ModelWindow{
         }
     }
 
-    
+    public ArrayList<ModelBlock> getConnectedBlocks(ModelBlock blk){
+        ArrayList<ModelBlock> connectedBlocks = new ArrayList<ModelBlock>();
+        connectedBlocks.add(blk);
+        Set<ModelBlock> nextConnection = new TreeSet<ModelBlock>();
+        nextConnection.addAll(blk.getConnections());
+        while(!(nextConnection.isEmpty())){
+            nextConnection.addAll(nextConnection.get(0).getConnections())
+        }
+        
+    }
+
+    public void handleMouseEvent(int id, Location eventLocation, int clickCount){
+        //MOUSE_PRESSED where you start holding the button down 501
+        //MOUSE_RELEASED where you release the button      502  
+        //MOUSE_CLICKED => press + release (comes after released + pressed) only comes if no dragging happended 500
+        //MOUSE_DRAGGED => Holding down, gets triggerd after each small move 506
+        //interesting to know: there is no difference detected between left and right button in the current handlemouseevent function
 
     /**
      * 

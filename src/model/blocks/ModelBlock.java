@@ -10,8 +10,11 @@ import utilities.*;
  */
 public abstract class ModelBlock extends ModelElement{
 
-    private int width = 120;
-    private int height = 120;
+    //TODO socket and plug positions just getfunction, no variable.
+    //TODO cleaner solution for the getPlug and getSocket functions
+
+    private int width = 120; //variable can change
+    private int height = 120; //variable can change
 
     private final int plugSize = 40;
     private final Blocktype type;
@@ -20,8 +23,8 @@ public abstract class ModelBlock extends ModelElement{
     private final Location rightSocketPos = super.getPos().add(this.getWidth() + this.getPlugSize()/2, + this.getHeight() / 2);
     private final Location leftPlugPos = super.getPos().add(- this.getPlugSize() / 2, + this.getHeight() / 2);
     
-    public static final int WIDTH = 120;
-    public static final int HEIGHT = 120;
+    public static final int WIDTH = 120; //final standard width of blocks
+    public static final int HEIGHT = 120; //final standard height of blocks
 
 
     

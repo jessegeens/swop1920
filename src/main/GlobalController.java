@@ -30,7 +30,7 @@ class GlobalController {
     public GlobalController(){
         GridInfo gridInfo = new GridInfo(GOAL_CELL, new ArrayList<Location>(), new ModelRobot(ROBOT_START_LOCATION, ROBOT_START_DIRECTION), CELL_SIZE);
         this.modelController = new ModelController(gridInfo);
-        this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT, new ArrayList<ModelBlock>(), gridInfo);      
+        this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT, modelController.getModelBlocks(), gridInfo);      
     }
 
     private ArrayList<UIElement> uiElements = new ArrayList<UIElement>();

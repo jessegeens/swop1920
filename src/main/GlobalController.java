@@ -14,31 +14,30 @@ class GlobalController {
 //modelcontroller makes the three windows and manages them
 
 //create ui representation and handle it
-
+//traverse uielements in opposite direction to have top rendering order
 //all event handling starts here
 
     private final int CELL_SIZE = 50;
+    private final Location GOAL_CELL = new Location(5, 5);
+    private final Location ROBOT_START_LOCATION = new Location(0, 0);
+    private final Direction ROBOT_START_DIRECTION = new Direction(Direction.RIGHT);
 
     private ModelController modelController;
     private UIController uiController;
 
     
 
-    public GlobalController(Graphics g){
-        this.modelController = new ModelController();
-        GridInfo gridInfo = new GridInfo(modelController.getGrid(), CELL_SIZE);
-        this.uiController = new UIController(g, MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT, new ArrayList<ModelBlock>(), gridInfo);      
+    public GlobalController(){
+        GridInfo gridInfo = new GridInfo(GOAL_CELL, new ArrayList<Location>(), new ModelRobot(ROBOT_START_LOCATION, ROBOT_START_DIRECTION), CELL_SIZE);
+        this.modelController = new ModelController(gridInfo);
+        this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT, modelController.getModelBlocks(), gridInfo);      
     }
 
     private ArrayList<UIElement> uiElements = new ArrayList<UIElement>();
     private ArrayList<ModelElement> modelElements = new ArrayList<ModelElement>();
 
 
-    //traverse uielements in opposite direction to have top rendering order
     
-    public ModelGrid getModelGrid(){
-        return modelController.getGrid();
-    }
 
     public void handleMouseEvent(int id, int x, int y, int clickCount){
         Location eventLocation = new Location(x,y);
@@ -58,6 +57,9 @@ class GlobalController {
         //TODO create function in modelcontroller
     }
 
+    public void render(Graphics g){
+        uiController.render(g);
+    }
 
     /*
     public void renderUIElements(Graphics g, Rectangle uiBounds){

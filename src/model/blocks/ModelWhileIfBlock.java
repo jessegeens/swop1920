@@ -15,22 +15,28 @@ public class ModelWhileIfBlock extends ModelBlock{
     private ModelBlock rightSocket;
     private ModelBlock cavitySocket;
     private ModelBlock cavityPlug;
+
     private Location cavitySocketPos;
     private Location cavityPlugPos;
+
     private int cavityHeight;
     private int cavityWidth;
 
 
     public ModelWhileIfBlock(Location pos, Blocktype type){
         super(pos,type);
+
         this.setTopSocket(null);
         this.setBottomPlug(null);
         this.setRightSocket(null);
         this.setCavityPlug(this);
         this.setCavitySocket(this);
+
         this.setCavityPlugPos(getPos().add(new Location(getWidth()/2,getHeight()/2)));
         this.setCavitySocketPos(getCavityPlugPos());
+
         this.updateCavityHeight();
+        this.updateCavityWidth();
     }
 
     /**
@@ -55,15 +61,18 @@ public class ModelWhileIfBlock extends ModelBlock{
     public void connect(ModelBlock block) {
         if ((block.getBottomPlug() == null) && (this.getTopSocketPos().getDistance(block.getBottomPlugPos()) < 50)){
             this.setTopSocket(block);
-            block.setBottomPlug(this);    
+            block.setBottomPlug(this); 
+            this.setPos(block.getPos().add(new Location(0,-block.getHeight())));  
         }
         if ((block.getTopSocket() == null) && (this.getBottomPlugPos().getDistance(block.getTopSocketPos()) < 50)){
             this.setBottomPlug(block);
-            block.setTopSocket(this);    
+            block.setTopSocket(this);  
+            this.setPos(block.getPos().add(new Location(0, this.getHeight())));  
         }
-        if ((block.getLeftPlug() == null) && (this.getRightSocketPos().getDistance(block.getLeftPlugPos()) < 50)){
-            this.setRightSocket(block);
-            block.setLeftPlug(this);    
+        if ((block.getRightSocket() == null) && (this.getLeftPlugPos().getDistance(block.getRightSocketPos()) < 50)){
+            this.setLeftPlug(block);
+            block.setRightSocket(this); 
+            this.setPos(block.getPos().add(new Location(block.getWidth(),0)));   
         }
         if ((block.getBottomPlug() == null) && (this.getCavitySocketPos().getDistance(block.getBottomPlugPos()) < 50)){
             this.setCavitySocket(block);
@@ -207,6 +216,17 @@ public class ModelWhileIfBlock extends ModelBlock{
         this.cavityPlugPos = cavityPlugPos;
     }
 
+    public Location getTopSocketPos() {
+        return super.getPos().add(this.getWidth() / 2, +this.getPlugSize() / 2);
+    }
+
+    public Location getBottomPlugPos() {
+        return super.getPos().add(this.getWidth() / 2,+this.getHeight() + this.getPlugSize() / 2);
+    }
+
+    public Location getRightSocketPos() {
+        return super.getPos().add(this.getWidth() + this.getPlugSize() / 2,+this.getHeight() / 2);
+    }
 
 
     

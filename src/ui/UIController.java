@@ -14,24 +14,23 @@ public class UIController {
     
     private final int wWidth;  //window width
     private final int wHeight; //window height
-    private final Graphics g;
 
     private ArrayList<UIBlock> blocks;
 
-    public UIController(Graphics g, int windowWidth, int windowHeight, ArrayList<ModelBlock> mBlocks, GridInfo gridInfo){
+    public UIController(int windowWidth, int windowHeight, ArrayList<ModelBlock> mBlocks, GridInfo gridInfo){
         this.wWidth = windowWidth;
         this.wHeight = windowHeight;
-        this.g = g;
         updateBlocks(mBlocks);
         updateGrid(gridInfo);
     }
 
-    public void render(){
-        this.renderUI();
+    public void render(Graphics g){
+        this.renderUI(g);
         blocks.forEach((UIBlock block) -> block.render(g));
+        this.grid.render(g);
     }
 
-    public void renderUI(){
+    public void renderUI(Graphics g){
         g.setColor(Color.BLACK);
         g.drawLine(this.wWidth/3, 0, this.wWidth/3, this.wHeight);
         g.drawLine(2*this.wWidth/3, 0, 2*this.wWidth/3, this.wHeight);
@@ -43,7 +42,7 @@ public class UIController {
     }
 
     public void updateGrid(GridInfo gridInfo){
-        this.grid = new UIGrid(new Location(this.wWidth/3, 0), this.wWidth/ 3, this.wHeight, gridInfo.getCellSize(), gridInfo.getWalls(), gridInfo.getRobotLocation(), gridInfo.getRobotDirection(), gridInfo.getGoalCell());
+        this.grid = new UIGrid(new Location(2*this.wWidth/3, 0), this.wWidth/ 3, this.wHeight, gridInfo.getCellSize(), gridInfo.getWalls(), gridInfo.getRobotLocation(), gridInfo.getRobotDirection(), gridInfo.getGoalCell());
     }
 
 

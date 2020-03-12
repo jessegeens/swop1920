@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import main.MyCanvasWindow;
 import model.blocks.ModelBlock;
+import utilities.GridInfo;
 import utilities.Location;
 
 
@@ -13,7 +14,7 @@ import utilities.Location;
  */
 public class ModelController{
 
-    private ArrayList<ModelBlock> blocks;
+    
 
     
 
@@ -25,8 +26,8 @@ public class ModelController{
 
 
     
-    public ModelController(){
-        this.setBlocks(new ArrayList<ModelBlock>());
+    public ModelController(GridInfo gridInfo){
+        
         //palette left, program middle, grid right
         this.setPalette(new ModelPalette(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
         this.setPWindow(new ModelProgramWindow(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
@@ -132,18 +133,6 @@ public class ModelController{
         return down;
     }
 
-    public ArrayList<ModelBlock> getBlocks() {
-        return this.blocks;
-    }
-
-    public void setBlocks(ArrayList<ModelBlock> blocks) {
-        this.blocks = blocks;
-    }
-
-    public void addBlock(ModelBlock block) {
-        this.blocks.add(block);
-    }
-
     public ModelPalette getPalette() {
         return this.palette;
     }
@@ -166,6 +155,10 @@ public class ModelController{
 
     public void setGrid(ModelGrid grid) {
         this.grid = grid;
+    }
+
+    public ArrayList<ModelBlock> getBlocks() {
+        return pWindow.getBlocks();
     }
 
 
@@ -275,11 +268,14 @@ public class ModelController{
 
     }
 
-    protected ArrayList<ModelBlock> getModelBlocks(){
+    public ArrayList<ModelBlock> getModelBlocks(){
         ArrayList<ModelBlock> blocks = new ArrayList<ModelBlock>();
-        blocks.addAll(this.getModelBlocks());
+        blocks.addAll(this.getProgramAreaBlocks());
         blocks.addAll(this.getPaletteBlocks());
-        blocks.add(this.getActiveBlock());
+        if(this.getActiveBlock()!=null){
+            blocks.add(this.getActiveBlock());
+        }
+        
 
         return blocks;
     }

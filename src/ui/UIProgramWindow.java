@@ -34,7 +34,9 @@ public class UIProgramWindow implements UIWindow {
 
         blocks.forEach((UIBlock block) -> {
             if(block.getPos().getX() > xPosition && block.getPos().getX() < xPosition + width && block.getPos().getY() < height)
-                block.render(g);});
+                block.render(g);
+            else
+                throw new IllegalStateException("Block at illegal position");});
     }
     
 }

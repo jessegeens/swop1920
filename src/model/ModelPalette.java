@@ -39,8 +39,8 @@ class ModelPalette extends ModelWindow{
         this.setForwardBlock(new ModelMoveBlock(this.getForwardLocation(), new Blocktype(Blocktype.MOVEFORWARD)));
         this.setNotBlock(new ModelNotBlock(this.getNotLocation(),new Blocktype(Blocktype.NOT)));
         this.setWallInFrontBlock(new ModelWallInFrontBlock(this.getWallInFrontLocation(),new Blocktype(Blocktype.WALLINFRONT)));
-        this.setWhileBlock(new ModelWhileIfBlock(this.getWhileLocation(),new Blocktype(Blocktype.WHILE)));
-        this.setIfBlock(new ModelWhileIfBlock(this.getIfLocation(),new Blocktype(Blocktype.IF)));
+        //this.setWhileBlock(new ModelWhileIfBlock(this.getWhileLocation(),new Blocktype(Blocktype.WHILE)));
+        //this.setIfBlock(new ModelWhileIfBlock(this.getIfLocation(),new Blocktype(Blocktype.IF)));
     }
 
     /**
@@ -306,8 +306,8 @@ class ModelPalette extends ModelWindow{
         blocks.add(this.forwardBlock);
         blocks.add(this.notBlock);
         blocks.add(this.wallInFrontBlock);
-        blocks.add(this.whileBlock);
-        blocks.add(this.ifBlock);
+        //blocks.add(this.whileBlock);
+        //blocks.add(this.ifBlock);
 
 
 
@@ -318,7 +318,7 @@ class ModelPalette extends ModelWindow{
         
     }
 
-    
+
 
     
 

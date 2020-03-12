@@ -47,9 +47,7 @@ public class ModelController{
             else{
                 block.setPos(newPos);
             }
-            
         }
-        
     }
 
     
@@ -247,7 +245,7 @@ public class ModelController{
         //MOUSE RELEASED 502
         else if(id==502){
             System.out.println("MOUSE RELEASED start");
-            pWindow.addBlock(active);
+            pWindow.handleMouseUp(eventLocation, this.active);
             this.active = null;
 
         }

@@ -70,9 +70,17 @@ class GlobalController {
     public void renderUIElements(Graphics g, Rectangle uiBounds){
 
         //TODO create a separate ui generation method for this later
-        g.setColor(Color.BLACK);
-        g.drawLine(MyCanvasWindow.WIDTH/3, 0, MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT);
-        g.drawLine(2*MyCanvasWindow.WIDTH/3, 0, 2*MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT);
+        
+        //TODO why is the UIgrid not a UIElement?this.renderUI(g);
+        this.renderUI(g);
+        this.renderBlocks(g);
+        this.renderGrid(g);
+
+        
+
+
+
+
 
         //TODO why is the UIgrid not a UIElement?
 
@@ -100,10 +108,11 @@ class GlobalController {
         Blocktype block_ = new Blocktype(Blocktype.IF);
         //modelElements.add(block_);
 
+        /*
 
-
-        //UIElement block = new UIBlock(randomLocation, block_);
-        //uiElements.add(block);
+        UIElement block = new UIBlock(randomLocation, block_);
+        uiElements.add(block);
+        */
 
         
 
@@ -111,6 +120,30 @@ class GlobalController {
 
         System.out.println("renderUI");
         uiElements.forEach((UIElement) -> (UIElement).render(g));
+
+
+    }
+
+    public void renderUI(Graphics g){
+
+        g.setColor(Color.BLACK);
+        g.drawLine(MyCanvasWindow.WIDTH/3, 0, MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT);
+        g.drawLine(2*MyCanvasWindow.WIDTH/3, 0, 2*MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT);
+
+        
+
+        g.drawLine(0,0,500,500);
+
+        System.out.println("renderUI");
+        
+
+    }
+
+    public void renderBlocks(Graphics g){
+
+    }
+
+    public void renderGrid(Graphics g){
 
     }
 

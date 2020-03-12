@@ -19,7 +19,7 @@ public class BlocktypeTests {
     @Test
     public void getRightTitle() {
         Blocktype blkt = new Blocktype(5);
-        assertEquals("Wall in front", blkt.getType());
+        assertEquals("Wall in front", blkt.getTitle());
     }
 
     @Test(expected = IllegalArgumentException.class)

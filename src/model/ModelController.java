@@ -264,6 +264,27 @@ public class ModelController{
 
     }
 
+    protected ArrayList<ModelBlock> getModelBlocks(){
+        ArrayList<ModelBlock> blocks = new ArrayList<ModelBlock>();
+        blocks.addAll(this.getModelBlocks());
+        blocks.addAll(this.getPaletteBlocks());
+        blocks.add(this.getActiveBlock());
+
+        return blocks;
+    }
+
+    protected ArrayList<ModelBlock> getPaletteBlocks(){
+        return palette.getBlocks();
+
+    }
+
+    protected ArrayList<ModelBlock> getProgramAreaBlocks(){
+        return pWindow.getBlocks();
+    }
+
+    protected ModelBlock getActiveBlock(){
+        return this.active;
+    }
     
 }
 

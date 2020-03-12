@@ -39,11 +39,13 @@ public class ModelNotBlock extends ModelBlock {
     public void connect(ModelBlock block) {
         if ((block.getLeftPlug() == null) && (this.getRightSocketPos().getDistance(block.getLeftPlugPos()) < 50)){
             this.setRightSocket(block);
-            block.setLeftPlug(this);    
+            block.setLeftPlug(this);
+            this.setPos(block.getPos().add(new Location(-this.getWidth(),0)));   
         }
         if ((block.getRightSocket() == null) && (this.getLeftPlugPos().getDistance(block.getRightSocketPos()) < 50)){
             this.setLeftPlug(block);
-            block.setRightSocket(this);    
+            block.setRightSocket(this); 
+            this.setPos(block.getPos().add(new Location(block.getWidth(),0)));   
         }
     }
     

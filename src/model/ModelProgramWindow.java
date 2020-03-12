@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 
 import model.blocks.ModelBlock;
+import utilities.Blocktype;
 import utilities.Location;
 
 
@@ -19,9 +20,59 @@ class ModelProgramWindow extends ModelWindow{
     }
 
     public void updateLocationBlocks(){
-        if (this.getBlocks().get(0) != null){
-            for (ModelBlock blk : this.getBlocks().get(0).getConnections()){
-                //blk.setPos(new Location());
+        ArrayList<ModelBlock> thisBlocks = this.getBlocks();
+        ArrayList<ModelBlock> updated = new ArrayList<ModelBlock>();
+        while (!(thisBlocks.isEmpty())){
+            ModelBlock blk = thisBlocks.get(0);
+            ArrayList<ModelBlock> connectedBlocks = this.getConnectedBlocks(blk);
+            thisBlocks.removeAll(connectedBlocks);
+            updated.add(blk);
+            while(!(connectedBlocks.isEmpty())){
+                forloop:
+                for(ModelBlock blk1 : connectedBlocks){
+                    for(ModelBlock upd : updated){
+                        switch(blk1.getBlockType().getType()){
+                            case Blocktype.IF:
+                            case Blocktype.WHILE:
+                                if (blk1.getTopSocket() == upd){
+                                    blk1.setPos(upd.getPos().add(new Location(0, upd.getHeight())));
+                                }
+                                else if (blk1.getBottomPlug() == upd){
+                                    blk1.setPos(upd.getPos().add(new Location(0, -blk1.getHeight())));
+                                }
+                                else if (blk1.getRightSocket() == upd){
+                                    blk1.setPos(upd.getPos().add(new Location(-blk1.getWidth(),0)));
+                                }
+                                break;
+                            case Blocktype.MOVEFORWARD:
+                            case Blocktype.TURNLEFT:
+                            case Blocktype.TURNRIGHT:
+                                if (blk1.getTopSocket() == upd){
+                                    blk1.setPos(upd.getPos().add(new Location(0, upd.getHeight())));
+                                }
+                                else if (blk1.getBottomPlug() == upd){
+                                    blk1.setPos(upd.getPos().add(new Location(0, -blk1.getHeight())));
+                                }
+                                break;
+                            case Blocktype.WALLINFRONT:
+                                if (blk1.getLeftPlug() == upd){
+                                    blk1.setPos(upd.getPos().add(new Location(upd.getWidth(),0)));
+                                }
+                                break;
+                            case Blocktype.NOT:
+                                if (blk1.getLeftPlug() == upd){
+                                    blk1.setPos(upd.getPos().add(new Location(upd.getWidth(),0)));
+                                }
+                                else if (blk1.getRightSocket() == upd){
+                                    blk1.setPos(upd.getPos().add(new Location(-blk1.getWidth(),0)));
+                                }
+                                break;
+                        }
+                        updated.add(blk1);
+                        connectedBlocks.removeAll(updated);
+                        break forloop;
+                    }
+                }
             }
         }
     }
@@ -37,6 +88,15 @@ class ModelProgramWindow extends ModelWindow{
             nextConnection.removeAll(connectedBlocks);
         }
         return connectedBlocks;
+    }
+
+    public Boolean allBlocksConnected(){
+        if (this.getBlocks().isEmpty()) return true;
+        ArrayList<ModelBlock> connectedB = getConnectedBlocks(this.getBlocks().get(0));
+        for (ModelBlock blk : getBlocks()){
+            if (!(connectedB.contains(blk))) return false;
+        }
+        return true;
     }
 
     public void handleMouseEvent(int id, Location eventLocation, int clickCount){

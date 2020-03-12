@@ -2,9 +2,9 @@ package model;
 
 import java.util.ArrayList;
 
-import model.blocks.ModelBlock;
 import utilities.Blocktype;
 import utilities.Location;
+import model.blocks.*;
 
 
 /**
@@ -34,36 +34,36 @@ public class ModelProgramWindow extends ModelWindow{
                         switch(blk1.getBlockType().getType()){
                             case Blocktype.IF:
                             case Blocktype.WHILE:
-                                if (blk1.getTopSocket() == upd){
+                                if (((ModelWhileIfBlock)blk1).getTopSocket() == upd){
                                     blk1.setPos(upd.getPos().add(new Location(0, upd.getHeight())));
                                 }
-                                else if (blk1.getBottomPlug() == upd){
+                                else if (((ModelWhileIfBlock)blk1).getBottomPlug() == upd){
                                     blk1.setPos(upd.getPos().add(new Location(0, -blk1.getHeight())));
                                 }
-                                else if (blk1.getRightSocket() == upd){
+                                else if (((ModelWhileIfBlock)blk1).getRightSocket() == upd){
                                     blk1.setPos(upd.getPos().add(new Location(-blk1.getWidth(),0)));
                                 }
                                 break;
                             case Blocktype.MOVEFORWARD:
                             case Blocktype.TURNLEFT:
                             case Blocktype.TURNRIGHT:
-                                if (blk1.getTopSocket() == upd){
+                                if (((ModelMoveBlock)blk1).getTopSocket() == upd){
                                     blk1.setPos(upd.getPos().add(new Location(0, upd.getHeight())));
                                 }
-                                else if (blk1.getBottomPlug() == upd){
+                                else if (((ModelMoveBlock)blk1).getBottomPlug() == upd){
                                     blk1.setPos(upd.getPos().add(new Location(0, -blk1.getHeight())));
                                 }
                                 break;
                             case Blocktype.WALLINFRONT:
-                                if (blk1.getLeftPlug() == upd){
+                                if (((ModelWallInFrontBlock)blk1).getLeftPlug() == upd){
                                     blk1.setPos(upd.getPos().add(new Location(upd.getWidth(),0)));
                                 }
                                 break;
                             case Blocktype.NOT:
-                                if (blk1.getLeftPlug() == upd){
+                                if (((ModelNotBlock)blk1).getLeftPlug() == upd){
                                     blk1.setPos(upd.getPos().add(new Location(upd.getWidth(),0)));
                                 }
-                                else if (blk1.getRightSocket() == upd){
+                                else if (((ModelNotBlock)blk1).getRightSocket() == upd){
                                     blk1.setPos(upd.getPos().add(new Location(-blk1.getWidth(),0)));
                                 }
                                 break;
@@ -99,14 +99,14 @@ public class ModelProgramWindow extends ModelWindow{
                 return blk.isFullyConnected();
             }
             else if(blk.equals(this.getFinishBlock())) {
-                if(blk.hasTopSocket() && blk.getTopSocket() == null) return false;
-                if(blk.hasRightSocket() && blk.getRightSocket() == null) return false;
-                if(blk.hasLeftPlug() && blk.getLeftPlug() == null) return false;
+                if(blk.hasTopSocket() && ((TopSocket)blk).getTopSocket() == null) return false;
+                if(blk.hasRightSocket() && ((RightSocket)blk).getRightSocket() == null) return false;
+                if(blk.hasLeftPlug() && ((LeftPlug)blk).getLeftPlug() == null) return false;
             }
             else if(blk.equals(this.getStartBlock())){
-                if(blk.hasBottomPlug() && blk.getBottomPlug() == null) return false;
-                if(blk.hasRightSocket() && blk.getRightSocket() == null) return false;
-                if(blk.hasLeftPlug() && blk.getLeftPlug() == null) return false;
+                if(blk.hasBottomPlug() && ((BottomPlug)blk).getBottomPlug() == null) return false;
+                if(blk.hasRightSocket() && ((RightSocket)blk).getRightSocket() == null) return false;
+                if(blk.hasLeftPlug() && ((LeftPlug)blk).getLeftPlug() == null) return false;
             }
         }
         return true;
@@ -118,7 +118,7 @@ public class ModelProgramWindow extends ModelWindow{
      */
     public ModelBlock getStartBlock(){
         for(ModelBlock blk : getPABlocks()){
-            if(blk.getTopSocket() == null) return blk;
+            if(blk.hasTopSocket() && ((TopSocket)blk).getTopSocket() == null) return blk;
         }
         return null;
     }
@@ -129,7 +129,7 @@ public class ModelProgramWindow extends ModelWindow{
      */
     public ModelBlock getFinishBlock(){
         for(ModelBlock blk : getPABlocks()){
-            if(blk.getBottomPlug() == null) return blk;
+            if(blk.hasBottomPlug() && ((BottomPlug)blk).getBottomPlug() == null) return blk;
         }
         return null;
     }

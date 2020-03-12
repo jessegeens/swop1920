@@ -68,7 +68,7 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
 
     @Override
     public void setTopSocket(ModelBlock blk) {
-        this.setTopSocket(blk);
+        this.topSocket = blk;
     }
 
     @Override
@@ -81,6 +81,15 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
         return super.getPos().add(this.getWidth() / 2, + ModelBlock.PLUGSIZE/2);
     }
 
+    @Override
+    public boolean hasTopSocket(){
+        return true;
+    }
+
+    @Override
+    public boolean hasBottomPlug(){
+        return true;
+    }
 
 
     

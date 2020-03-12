@@ -40,6 +40,7 @@ class GlobalController {
     public void handleMouseEvent(int id, int x, int y, int clickCount){
         Location eventLocation = new Location(x,y);
         modelController.handleMouseEvent(id, eventLocation, clickCount);
+        this.uiController.updateBlocks(this.modelController.getModelBlocks());
 
     }
 

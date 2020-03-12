@@ -215,6 +215,7 @@ public class ModelController{
             System.out.println("MOUSE PRESSED start");
             this.active = palette.handleMouseDown(eventLocation);
             
+            
 
         }
         //MOUSE RELEASED 502

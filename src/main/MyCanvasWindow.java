@@ -24,22 +24,19 @@ public class MyCanvasWindow extends CanvasWindow {
     protected MyCanvasWindow(String title) {
         super(title);
         globalController = new GlobalController();
-        
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     protected void paint(Graphics g) {
         this.setSize(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT);
+        
 
 
-        //TODO create a separate ui generation method for this later
-        g.setColor(Color.BLACK);
-        g.drawLine(MyCanvasWindow.WIDTH/3, 0, MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT);
-        g.drawLine(2*MyCanvasWindow.WIDTH/3, 0, 2*MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT);
+        
+        
 
 
-        super.paint(g);
+        
         //TODO UIcontroller rectangle bounds
         
         Rectangle uiBounds = g.getClipBounds();
@@ -52,6 +49,9 @@ public class MyCanvasWindow extends CanvasWindow {
 
 
         globalController.renderUIElements(g, uiBounds);
+        super.paint(g);
+
+        
 
 
 

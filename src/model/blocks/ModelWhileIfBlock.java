@@ -106,7 +106,8 @@ public class ModelWhileIfBlock extends ModelBlock{
      * @param cavityHeight
      */
     public void setCavityHeight(int cavityHeight) {
-        this.cavityHeight = cavityHeight;
+        this.cavityHeight = getCavityBlocks().size() * 120;
+        this.setHeight(120+getCavityHeight());
     }
 
     /**
@@ -168,6 +169,8 @@ public class ModelWhileIfBlock extends ModelBlock{
     public void setCavityPlug(ModelBlock cavityPlug) {
         this.cavityPlug = cavityPlug;
     }
+
+
 
     
 }

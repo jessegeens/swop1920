@@ -11,7 +11,7 @@ import utilities.*;
 public abstract class ModelBlock extends ModelElement{
 
     private final int width = 120;
-    private final int height = 120;
+    private int height = 120;
     private final Blocktype type;
     private final Location topSocketPos = super.getPos().add(this.getWidth() / 2, 0);
     private final Location bottomPlugPos = super.getPos().add(this.getWidth() / 2, -this.getHeight());
@@ -184,7 +184,11 @@ public abstract class ModelBlock extends ModelElement{
      */
     public int getHeight() {
 		return this.height;
-	}
+    }
+    
+    public void setHeight(int height) {
+        this.height = height;
+    }
 
     /**
      * @return the width of the block.

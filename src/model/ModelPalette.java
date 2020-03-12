@@ -292,7 +292,6 @@ class ModelPalette extends ModelWindow{
             selected = this.ifBlock;
             this.blockToProgramWindow(this.ifBlock, false);
         }
-        
 
         return selected;
 

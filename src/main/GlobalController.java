@@ -7,10 +7,7 @@ import ui.*;
 import ui.blocks.*;
 import utilities.*;
 import model.*;
-import model.blocks.ModelBlock;
-import model.blocks.ModelNotBlock;
-import model.blocks.ModelWallInFrontBlock;
-import model.blocks.ModelWhileIfBlock;
+import model.blocks.*;
 
 public class GlobalController {
 //on creation provide instructions to modelcontroller
@@ -58,6 +55,7 @@ public class GlobalController {
                 break;
             
             case 27: //Esc
+                this.stopRunning();
                 break;
         }
         //TODO create function in modelcontroller
@@ -102,6 +100,7 @@ public class GlobalController {
 
     public void stopRunning(){
         this.running = false;
+        findNextBlock().setUnHighlight();
     }
 
     public ModelBlock getCurrent(){
@@ -125,21 +124,23 @@ public class GlobalController {
                 return ((ModelWhileIfBlock)getCurrent()).getCavitySocket();
             }
         }
-        return getCurrent().getBottomPlug();
+        return ((BottomPlug)getCurrent()).getBottomPlug();
     }
 
     public boolean evaluateCurrentCondition(){
         boolean negate = false;
-        ModelBlock cond = getCurrent().getRightSocket();
-        while (cond.hasRightSocket()){
-            if(cond instanceof ModelNotBlock){
-                negate = !negate;
-                cond = cond.getRightSocket();
+        if (getCurrent().hasRightSocket()){
+            ModelBlock cond = ((RightSocket)getCurrent()).getRightSocket();
+            while (cond.hasRightSocket()){
+                if(cond instanceof ModelNotBlock){
+                    negate = !negate;
+                    cond = ((ModelNotBlock)cond).getRightSocket();
+                }
+                else if((cond instanceof ModelWallInFrontBlock) && this.modelController.getGrid().wallInFrontOfRobot()){
+                    return !negate;
+                }
             }
-            else if((cond instanceof ModelWallInFrontBlock) && this.modelController.getGrid().wallInFrontOfRobot()){
-                return !negate;
-            }
-        }
+        } 
         return negate;
     }
 

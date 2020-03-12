@@ -39,9 +39,15 @@ public class ModelController{
     }
 
 
-    public void moveBlock(ModelBlock block, Location newPos){
+    public void moveBlock(ModelBlock block, Location newPos, boolean inProgramArea){
         if (block != null){
-            block.setPos(newPos);
+            if(inProgramArea){
+                block.move(newPos);
+            }
+            else{
+                block.setPos(newPos);
+            }
+            
         }
         
     }
@@ -69,15 +75,23 @@ public class ModelController{
      * 
      * @param block The block for which the closest neighbour needs to be found
      * @return The closest neighbour of block
+     * return null if no closest block
      */
     public ModelBlock findClosestBlock(ModelBlock block){
-        ModelBlock closest = getBlocks().get(0);
-        for(ModelBlock blk : getBlocks()){
-            if (blk.getPos().getDistance(block.getPos()) < closest.getPos().getDistance(block.getPos())){
-                closest = blk;
+        ModelBlock closest = getProgramAreaBlocks().get(0);
+        boolean updateValue = false;
+
+        for(int i = 0; i < this.getProgramAreaBlocks().size(); i++){
+            ModelBlock current = getProgramAreaBlocks().get(i);
+            if(current.getPos().getDistance(block.getPos()) < closest.getPos().getDistance(block.getPos())  && closest != current){
+                updateValue = true;
+
             }
         }
-        return closest;
+        if(updateValue){
+            return closest;
+        }
+        return null;          
     }
 
     /**
@@ -88,7 +102,7 @@ public class ModelController{
     public ModelBlock findLeftNeighbour(ModelBlock block){
         ModelBlock left = null;
         forloop:
-        for(ModelBlock blk : getBlocks()){
+        for(ModelBlock blk : getProgramAreaBlocks()){
             if ((blk.getPos().getX() == block.getPos().getX() - block.getWidth()) &&
             blk.getPos().getY() == block.getPos().getY()){
                 left = blk;
@@ -101,7 +115,7 @@ public class ModelController{
     public ModelBlock findRightNeighbour(ModelBlock block){
         ModelBlock right = null;
         forloop:
-        for(ModelBlock blk : getBlocks()){
+        for(ModelBlock blk : getProgramAreaBlocks()){
             if ((blk.getPos().getX() == block.getPos().getX() + block.getWidth()) &&
             blk.getPos().getY() == block.getPos().getY()){
                 right = blk;
@@ -114,7 +128,7 @@ public class ModelController{
     public ModelBlock findUpperNeighbour(ModelBlock block){
         ModelBlock up = null;
         forloop:
-        for(ModelBlock blk : getBlocks()){
+        for(ModelBlock blk : getProgramAreaBlocks()){
             if ((blk.getPos().getX() == block.getPos().getX()) &&
             blk.getPos().getY() == block.getPos().getY() - block.getHeight()){
                 up = blk;
@@ -127,7 +141,7 @@ public class ModelController{
     public ModelBlock findBottomNeighbour(ModelBlock block){
         ModelBlock down = null;
         forloop:
-        for(ModelBlock blk : getBlocks()){
+        for(ModelBlock blk : getProgramAreaBlocks()){
             if ((blk.getPos().getX() == block.getPos().getX() - block.getWidth()) &&
             blk.getPos().getY() == block.getPos().getY()){
                 down = blk;
@@ -161,9 +175,7 @@ public class ModelController{
         this.grid = grid;
     }
 
-    public ArrayList<ModelBlock> getBlocks() {
-        return pWindow.getBlocks();
-    }
+    
 
 
             
@@ -240,7 +252,7 @@ public class ModelController{
         else if(id==506){
             //MOUSE MOVED, if there is a currently held block, move it
             System.out.println("MOUSE MOVED start");
-            this.moveBlock(active, eventLocation);
+            this.moveBlock(active, eventLocation, false);
         }
 
     }
@@ -263,7 +275,7 @@ public class ModelController{
         //MOUSE MOVED 506
         else if(id==506){
             System.out.println("MOUSE MOVED start");
-            this.moveBlock(active, eventLocation);
+            this.moveBlock(active, eventLocation, true);
 
         }
 
@@ -282,12 +294,12 @@ public class ModelController{
     }
 
     protected ArrayList<ModelBlock> getPaletteBlocks(){
-        return palette.getBlocks();
+        return palette.getPaletteBlocks();
 
     }
 
     protected ArrayList<ModelBlock> getProgramAreaBlocks(){
-        return pWindow.getBlocks();
+        return pWindow.getPABlocks();
     }
 
     protected ModelBlock getActiveBlock(){

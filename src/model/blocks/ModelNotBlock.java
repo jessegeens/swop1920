@@ -6,7 +6,7 @@ import utilities.Location;
 /**
  * Class representing the not block with one plug to their left and one socket to their right.
  */
-public class ModelNotBlock extends ModelBlock {
+public class ModelNotBlock extends ModelBlock implements RightSocket,LeftPlug{
     private ModelBlock rightSocket;
     private ModelBlock leftPlug;
 
@@ -23,11 +23,11 @@ public class ModelNotBlock extends ModelBlock {
     @Override
     public void disconnect() {
         if (this.getRightSocket() != null){
-            this.getRightSocket().setLeftPlug(null);
+            ((LeftPlug)this.getRightSocket()).setLeftPlug(null);
             this.setRightSocket(null);
         }
         if (this.getLeftPlug() != null){
-            this.getLeftPlug().setRightSocket(null);
+            ((RightSocket)this.getLeftPlug()).setRightSocket(null);
             this.setLeftPlug(null);
         }
     }
@@ -37,14 +37,14 @@ public class ModelNotBlock extends ModelBlock {
      */
     @Override
     public void connect(ModelBlock block) {
-        if ((block.getLeftPlug() == null) && (this.getRightSocketPos().getDistance(block.getLeftPlugPos()) < 50)){
+        if ((block.hasLeftPlug() && (this.getRightSocketPos().getDistance(((LeftPlug)block).getLeftPlugPos()) < 50))){
             this.setRightSocket(block);
-            block.setLeftPlug(this);
+            ((LeftPlug)block).setLeftPlug(this);
             this.setPos(block.getPos().add(new Location(-this.getWidth(),0)));   
         }
-        if ((block.getRightSocket() == null) && (this.getLeftPlugPos().getDistance(block.getRightSocketPos()) < 50)){
+        if ((block.hasRightSocket()) && (this.getLeftPlugPos().getDistance(((RightSocket)block).getRightSocketPos()) < 50)){
             this.setLeftPlug(block);
-            block.setRightSocket(this); 
+            ((RightSocket)block).setRightSocket(this); 
             this.setPos(block.getPos().add(new Location(block.getWidth(),0)));   
         }
     }
@@ -79,5 +79,25 @@ public class ModelNotBlock extends ModelBlock {
     @Override
     public void setLeftPlug(ModelBlock leftPlug) {
         this.leftPlug = leftPlug;
+    }
+
+    @Override
+    public Location getLeftPlugPos() {
+        return super.getPos().add(- ModelBlock.PLUGSIZE / 2, + this.getHeight() / 2);
+    }
+
+    @Override
+    public Location getRightSocketPos() {
+        return super.getPos().add(this.getWidth() + ModelBlock.PLUGSIZE/2, + this.getHeight() / 2);
+    }
+    
+    @Override
+    public boolean hasRightSocket(){
+        return true;
+    }
+
+    @Override
+    public boolean hasLeftPlug(){
+        return true;
     }
 }

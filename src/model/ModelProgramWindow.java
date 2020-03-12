@@ -2,9 +2,9 @@ package model;
 
 import java.util.ArrayList;
 
-import model.blocks.ModelBlock;
 import utilities.Blocktype;
 import utilities.Location;
+import model.blocks.*;
 
 
 /**
@@ -19,8 +19,9 @@ public class ModelProgramWindow extends ModelWindow{
         this.setBlocks(new ArrayList<ModelBlock>());
     }
 
+    //TODO Oberon gaat dit mooier schrijven
     public void updateLocationBlocks(){
-        ArrayList<ModelBlock> thisBlocks = this.getBlocks();
+        ArrayList<ModelBlock> thisBlocks = this.getPABlocks();
         ArrayList<ModelBlock> updated = new ArrayList<ModelBlock>();
         while (!(thisBlocks.isEmpty())){
             ModelBlock blk = thisBlocks.get(0);
@@ -34,36 +35,36 @@ public class ModelProgramWindow extends ModelWindow{
                         switch(blk1.getBlockType().getType()){
                             case Blocktype.IF:
                             case Blocktype.WHILE:
-                                if (blk1.getTopSocket() == upd){
+                                if (((ModelWhileIfBlock)blk1).getTopSocket() == upd){
                                     blk1.setPos(upd.getPos().add(new Location(0, upd.getHeight())));
                                 }
-                                else if (blk1.getBottomPlug() == upd){
+                                else if (((ModelWhileIfBlock)blk1).getBottomPlug() == upd){
                                     blk1.setPos(upd.getPos().add(new Location(0, -blk1.getHeight())));
                                 }
-                                else if (blk1.getRightSocket() == upd){
+                                else if (((ModelWhileIfBlock)blk1).getRightSocket() == upd){
                                     blk1.setPos(upd.getPos().add(new Location(-blk1.getWidth(),0)));
                                 }
                                 break;
                             case Blocktype.MOVEFORWARD:
                             case Blocktype.TURNLEFT:
                             case Blocktype.TURNRIGHT:
-                                if (blk1.getTopSocket() == upd){
+                                if (((ModelMoveBlock)blk1).getTopSocket() == upd){
                                     blk1.setPos(upd.getPos().add(new Location(0, upd.getHeight())));
                                 }
-                                else if (blk1.getBottomPlug() == upd){
+                                else if (((ModelMoveBlock)blk1).getBottomPlug() == upd){
                                     blk1.setPos(upd.getPos().add(new Location(0, -blk1.getHeight())));
                                 }
                                 break;
                             case Blocktype.WALLINFRONT:
-                                if (blk1.getLeftPlug() == upd){
+                                if (((ModelWallInFrontBlock)blk1).getLeftPlug() == upd){
                                     blk1.setPos(upd.getPos().add(new Location(upd.getWidth(),0)));
                                 }
                                 break;
                             case Blocktype.NOT:
-                                if (blk1.getLeftPlug() == upd){
+                                if (((ModelNotBlock)blk1).getLeftPlug() == upd){
                                     blk1.setPos(upd.getPos().add(new Location(upd.getWidth(),0)));
                                 }
-                                else if (blk1.getRightSocket() == upd){
+                                else if (((ModelNotBlock)blk1).getRightSocket() == upd){
                                     blk1.setPos(upd.getPos().add(new Location(-blk1.getWidth(),0)));
                                 }
                                 break;
@@ -91,22 +92,22 @@ public class ModelProgramWindow extends ModelWindow{
     }
 
     public Boolean allBlocksConnected(){
-        if (this.getBlocks().isEmpty()) return true;
-        ArrayList<ModelBlock> connectedB = getConnectedBlocks(this.getBlocks().get(0));
-        for (ModelBlock blk : getBlocks()){
+        if (this.getPABlocks().isEmpty()) return true;
+        ArrayList<ModelBlock> connectedB = getConnectedBlocks(this.getPABlocks().get(0));
+        for (ModelBlock blk : getPABlocks()){
             if (!(connectedB.contains(blk))) return false;
             if (!(blk.equals(this.getFinishBlock())||(blk.equals(this.getStartBlock())))){
                 return blk.isFullyConnected();
             }
             else if(blk.equals(this.getFinishBlock())) {
-                if(blk.hasTopSocket() && blk.getTopSocket() == null) return false;
-                if(blk.hasRightSocket() && blk.getRightSocket() == null) return false;
-                if(blk.hasLeftPlug() && blk.getLeftPlug() == null) return false;
+                if(blk.hasTopSocket() && ((TopSocket)blk).getTopSocket() == null) return false;
+                if(blk.hasRightSocket() && ((RightSocket)blk).getRightSocket() == null) return false;
+                if(blk.hasLeftPlug() && ((LeftPlug)blk).getLeftPlug() == null) return false;
             }
             else if(blk.equals(this.getStartBlock())){
-                if(blk.hasBottomPlug() && blk.getBottomPlug() == null) return false;
-                if(blk.hasRightSocket() && blk.getRightSocket() == null) return false;
-                if(blk.hasLeftPlug() && blk.getLeftPlug() == null) return false;
+                if(blk.hasBottomPlug() && ((BottomPlug)blk).getBottomPlug() == null) return false;
+                if(blk.hasRightSocket() && ((RightSocket)blk).getRightSocket() == null) return false;
+                if(blk.hasLeftPlug() && ((LeftPlug)blk).getLeftPlug() == null) return false;
             }
         }
         return true;
@@ -117,8 +118,8 @@ public class ModelProgramWindow extends ModelWindow{
      * @return the starting block of the program if all blocks are connected.
      */
     public ModelBlock getStartBlock(){
-        for(ModelBlock blk : getBlocks()){
-            if(blk.getTopSocket() == null) return blk;
+        for(ModelBlock blk : getPABlocks()){
+            if(blk.hasTopSocket() && ((TopSocket)blk).getTopSocket() == null) return blk;
         }
         return null;
     }
@@ -128,8 +129,8 @@ public class ModelProgramWindow extends ModelWindow{
      * @return the finishing block of the program if all blocks are connected.
      */
     public ModelBlock getFinishBlock(){
-        for(ModelBlock blk : getBlocks()){
-            if(blk.getBottomPlug() == null) return blk;
+        for(ModelBlock blk : getPABlocks()){
+            if(blk.hasBottomPlug() && ((BottomPlug)blk).getBottomPlug() == null) return blk;
         }
         return null;
     }
@@ -145,7 +146,7 @@ public class ModelProgramWindow extends ModelWindow{
      * 
      * @return a list of blocks in the window.
      */
-    public ArrayList<ModelBlock> getBlocks() {
+    public ArrayList<ModelBlock> getPABlocks() {
         return this.blocks;
     }
 
@@ -171,23 +172,40 @@ public class ModelProgramWindow extends ModelWindow{
         
     }
 
+    /**
+     * 
+     * @param block The block for which the closest neighbour needs to be found
+     * @return The closest neighbour of block
+     * return null if no closest block
+     */
+    public ModelBlock findClosestBlock(ModelBlock block){
+        ModelBlock closest = this.getPABlocks().get(0);
+        boolean updateValue = false;
+
+        for(int i = 0; i < this.getPABlocks().size(); i++){
+            ModelBlock current = this.getPABlocks().get(i);
+            if(current.getPos().getDistance(block.getPos()) < closest.getPos().getDistance(block.getPos())  && closest != current){
+                updateValue = true;
+
+            }
+        }
+        if(updateValue){
+            return closest;
+        }
+        return null;          
+    }
+
     public ModelBlock handleMouseDown(Location eventLocation){
         //has to be done in reverse order due to rendering (ask Bert if unclear)
 
         
-        for(int i = this.getBlocks().size() - 1; i >= 0; i--){
-            if(this.getBlocks().get(i).inBounds(eventLocation)){
-                ModelBlock toBeReturned = this.getBlocks().get(i);
+        for(int i = this.getPABlocks().size() - 1; i >= 0; i--){
+            if(this.getPABlocks().get(i).inBounds(eventLocation)){
+                ModelBlock toBeReturned = this.getPABlocks().get(i);
                 this.removeBlock(toBeReturned);
-                
                 return toBeReturned;
             }
         }
-        
-
-
-
-
         return null;
     }
 

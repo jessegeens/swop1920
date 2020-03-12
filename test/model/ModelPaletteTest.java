@@ -22,7 +22,6 @@ public class ModelPaletteTest {
     @Test
     public void testModelPalette2() {
         ModelPalette mP = new ModelPalette(200, 200);
-        assertNotNull(mP.handleMouseDown(mP.getForwardLocation().add(5,5)));
+        assertNotNull(mP.handleMouseDown(mP.getForwardLocation().add(5,5), false));
     }
-
 }

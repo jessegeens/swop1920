@@ -9,7 +9,7 @@ import utilities.Location;
  * Class representing the while and if blocks with one socket on the top and one plug at the bottom. They also have one socket on their 
  * right side for a condition block.
  */
-public class ModelWhileIfBlock extends ModelBlock{
+public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlug,RightSocket{ 
     private ModelBlock topSocket;
     private ModelBlock bottomPlug;
     private ModelBlock rightSocket;
@@ -45,11 +45,11 @@ public class ModelWhileIfBlock extends ModelBlock{
     @Override
     public void disconnect() {
         if (this.getTopSocket() != null){
-            this.getTopSocket().setBottomPlug(null);
+            ((BottomPlug)this.getTopSocket()).setBottomPlug(null);
             this.setTopSocket(null);
         }
         if (this.getBottomPlug() != null){
-            this.getBottomPlug().setTopSocket(null);
+            ((TopSocket)this.getBottomPlug()).setTopSocket(null);
             this.setBottomPlug(null);
         }
     }
@@ -59,28 +59,28 @@ public class ModelWhileIfBlock extends ModelBlock{
      */
     @Override
     public void connect(ModelBlock block) {
-        if ((block.getBottomPlug() == null) && (this.getTopSocketPos().getDistance(block.getBottomPlugPos()) < 50)){
+        if ((block.hasBottomPlug() && (this.getTopSocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < 50))){
             this.setTopSocket(block);
-            block.setBottomPlug(this); 
+            ((BottomPlug)block).setBottomPlug(this); 
             this.setPos(block.getPos().add(new Location(0,-block.getHeight())));  
         }
-        if ((block.getTopSocket() == null) && (this.getBottomPlugPos().getDistance(block.getTopSocketPos()) < 50)){
+        if ((block.hasTopSocket() && (this.getBottomPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < 50))){
             this.setBottomPlug(block);
-            block.setTopSocket(this);  
+            ((TopSocket)block).setTopSocket(this);  
             this.setPos(block.getPos().add(new Location(0, this.getHeight())));  
         }
-        if ((block.getRightSocket() == null) && (this.getLeftPlugPos().getDistance(block.getRightSocketPos()) < 50)){
-            this.setLeftPlug(block);
-            block.setRightSocket(this); 
-            this.setPos(block.getPos().add(new Location(block.getWidth(),0)));   
+        if ((block.hasLeftPlug() && (this.getRightSocketPos().getDistance(((LeftPlug)block).getLeftPlugPos()) < 50))){
+            this.setRightSocket(block);
+            ((LeftPlug)block).setLeftPlug(this); 
+            this.setPos(block.getPos().add(new Location(-this.getWidth(),0)));   
         }
-        if ((block.getBottomPlug() == null) && (this.getCavitySocketPos().getDistance(block.getBottomPlugPos()) < 50)){
+        if ((block.hasLeftPlug() && (this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < 50))){
             this.setCavitySocket(block);
-            block.setBottomPlug(this);
+            ((BottomPlug)block).setBottomPlug(this);
         }
-        if ((block.getTopSocket() == null) && (this.getCavityPlugPos().getDistance(block.getTopSocketPos()) < 50)){
+        if ((block.hasTopSocket() && (this.getCavityPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < 50))){
             this.setCavityPlug(block);
-            block.setTopSocket(this);
+            ((TopSocket)block).setTopSocket(this);
         }
     }
 
@@ -152,7 +152,9 @@ public class ModelWhileIfBlock extends ModelBlock{
         ModelBlock blk = this.getCavityPlug();
         while(blk != this){
             cav.add(blk);
-            blk = blk.getBottomPlug();
+            if(blk.hasBottomPlug()){
+                blk = ((BottomPlug)blk).getBottomPlug();
+            }
         }
         return cav;
     }
@@ -220,17 +222,31 @@ public class ModelWhileIfBlock extends ModelBlock{
     }
 
     public Location getTopSocketPos() {
-        return super.getPos().add(this.getWidth() / 2, +this.getPlugSize() / 2);
+        return super.getPos().add(this.getWidth() / 2, + ModelBlock.PLUGSIZE / 2);
     }
 
     public Location getBottomPlugPos() {
-        return super.getPos().add(this.getWidth() / 2,+this.getHeight() + this.getPlugSize() / 2);
+        return super.getPos().add(this.getWidth() / 2,+this.getHeight() + ModelBlock.PLUGSIZE / 2);
     }
 
     public Location getRightSocketPos() {
-        return super.getPos().add(this.getWidth() + this.getPlugSize() / 2,+this.getHeight() / 2);
+        return super.getPos().add(this.getWidth() + ModelBlock.PLUGSIZE / 2, this.getHeight() / 2);
     }
 
+    @Override
+    public boolean hasTopSocket(){
+        return true;
+    }
+
+    @Override
+    public boolean hasBottomPlug(){
+        return true;
+    }
+
+    @Override
+    public boolean hasRightSocket(){
+        return true;
+    }
 
     
 }

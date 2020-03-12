@@ -1,6 +1,10 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 import model.blocks.ModelBlock;
 import utilities.Location;
@@ -22,6 +26,17 @@ class ModelProgramWindow extends ModelWindow{
                 blk.setPos(new Location());
             }
         }
+    }
+
+    public ArrayList<ModelBlock> getConnectedBlocks(ModelBlock blk){
+        ArrayList<ModelBlock> connectedBlocks = new ArrayList<ModelBlock>();
+        connectedBlocks.add(blk);
+        Set<ModelBlock> nextConnection = new TreeSet<ModelBlock>();
+        nextConnection.addAll(blk.getConnections());
+        while(!(nextConnection.isEmpty())){
+            nextConnection.addAll(nextConnection.get(0).getConnections())
+        }
+        
     }
 
     public void handleMouseEvent(int id, Location eventLocation, int clickCount){

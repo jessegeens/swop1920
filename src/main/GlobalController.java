@@ -25,7 +25,8 @@ class GlobalController {
     private ModelController modelController;
     private UIController uiController;
 
-    
+    private boolean running;
+    private ModelBlock current;
 
     public GlobalController(){
         GridInfo gridInfo = new GridInfo(GOAL_CELL, new ArrayList<Location>(), new ModelRobot(ROBOT_START_LOCATION, ROBOT_START_DIRECTION), CELL_SIZE);
@@ -58,12 +59,36 @@ class GlobalController {
     }
 
     public void execute(){
-        //TODO execute
+        if(!(isRunning())){
+            startRunning();
+            setCurrent(this.modelController.getPWindow().getStartBlock());
+        }
+        
     }
 
 
     public void render(Graphics g){
         uiController.render(g);
+    }
+
+    public boolean isRunning(){
+        return this.running;
+    }
+
+    public void startRunning(){
+        this.running = true;
+    }
+
+    public void stopRunning(){
+        this.running = false;
+    }
+
+    public ModelBlock getCurrent(){
+        return this.current;
+    }
+
+    public void setCurrent(ModelBlock blk){
+        this.current = blk;
     }
 
     /*

@@ -16,9 +16,6 @@ public class ModelWhileIfBlock extends ModelBlock{
     private ModelBlock cavitySocket;
     private ModelBlock cavityPlug;
 
-    private Location topSocketPos = super.getPos().add(this.getWidth() / 2, + this.getPlugSize()/2);
-    private Location bottomPlugPos = super.getPos().add(this.getWidth() / 2, + this.getHeight() + this.getPlugSize()/2);
-    private Location rightSocketPos = super.getPos().add(this.getWidth() + this.getPlugSize()/2, + this.getHeight() / 2);
     private Location cavitySocketPos;
     private Location cavityPlugPos;
 
@@ -219,6 +216,17 @@ public class ModelWhileIfBlock extends ModelBlock{
         this.cavityPlugPos = cavityPlugPos;
     }
 
+    public Location getTopSocketPos() {
+        return super.getPos().add(this.getWidth() / 2, +this.getPlugSize() / 2);
+    }
+
+    public Location getBottomPlugPos() {
+        return super.getPos().add(this.getWidth() / 2,+this.getHeight() + this.getPlugSize() / 2);
+    }
+
+    public Location getRightSocketPos() {
+        return super.getPos().add(this.getWidth() + this.getPlugSize() / 2,+this.getHeight() / 2);
+    }
 
 
     

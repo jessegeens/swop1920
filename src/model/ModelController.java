@@ -14,7 +14,7 @@ import utilities.Location;
  */
 public class ModelController{
 
-    private ArrayList<ModelBlock> blocks;
+    
 
     
 
@@ -27,7 +27,7 @@ public class ModelController{
 
     
     public ModelController(GridInfo gridInfo){
-        this.setBlocks(new ArrayList<ModelBlock>());
+        
         //palette left, program middle, grid right
         this.setPalette(new ModelPalette(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
         this.setPWindow(new ModelProgramWindow(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
@@ -133,18 +133,6 @@ public class ModelController{
         return down;
     }
 
-    public ArrayList<ModelBlock> getBlocks() {
-        return this.blocks;
-    }
-
-    public void setBlocks(ArrayList<ModelBlock> blocks) {
-        this.blocks = blocks;
-    }
-
-    public void addBlock(ModelBlock block) {
-        this.blocks.add(block);
-    }
-
     public ModelPalette getPalette() {
         return this.palette;
     }
@@ -167,6 +155,10 @@ public class ModelController{
 
     public void setGrid(ModelGrid grid) {
         this.grid = grid;
+    }
+
+    public ArrayList<ModelBlock> getBlocks() {
+        return pWindow.getBlocks();
     }
 
 

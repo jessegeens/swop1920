@@ -43,8 +43,12 @@ public abstract class ModelBlock extends ModelElement{
 
     }
 
-    public void switchHighlight(){
-        this.highlighted = !(this.highlighted);
+    public void setHighlight(){
+        this.highlighted = true;
+    }
+
+    public void setUnHighlight(){
+        this.highlighted = false;
     }
 
     public boolean isHighlighted(){

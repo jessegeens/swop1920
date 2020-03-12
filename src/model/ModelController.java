@@ -6,6 +6,7 @@ import main.MyCanvasWindow;
 import model.blocks.ModelBlock;
 import utilities.GridInfo;
 import utilities.Location;
+import main.*;
 
 
 
@@ -31,9 +32,7 @@ public class ModelController{
         //palette left, program middle, grid right
         this.setPalette(new ModelPalette(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
         this.setPWindow(new ModelProgramWindow(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
-        this.setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, null, null)); 
-        //TODO Where is defined which cell is the goalcell, and where the robot starts?
-        // => I think for now we can assume a random grid we generated ourselves
+        this.setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, gridInfo.getGoalCell(), gridInfo.getRobotLocation(), gridInfo.getRobotDirection())); 
     }
 
 

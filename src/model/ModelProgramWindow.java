@@ -172,6 +172,29 @@ public class ModelProgramWindow extends ModelWindow{
         
     }
 
+    /**
+     * 
+     * @param block The block for which the closest neighbour needs to be found
+     * @return The closest neighbour of block
+     * return null if no closest block
+     */
+    public ModelBlock findClosestBlock(ModelBlock block){
+        ModelBlock closest = this.getPABlocks().get(0);
+        boolean updateValue = false;
+
+        for(int i = 0; i < this.getPABlocks().size(); i++){
+            ModelBlock current = this.getPABlocks().get(i);
+            if(current.getPos().getDistance(block.getPos()) < closest.getPos().getDistance(block.getPos())  && closest != current){
+                updateValue = true;
+
+            }
+        }
+        if(updateValue){
+            return closest;
+        }
+        return null;          
+    }
+
     public ModelBlock handleMouseDown(Location eventLocation){
         //has to be done in reverse order due to rendering (ask Bert if unclear)
 
@@ -180,15 +203,9 @@ public class ModelProgramWindow extends ModelWindow{
             if(this.getPABlocks().get(i).inBounds(eventLocation)){
                 ModelBlock toBeReturned = this.getPABlocks().get(i);
                 this.removeBlock(toBeReturned);
-                
                 return toBeReturned;
             }
         }
-        
-
-
-
-
         return null;
     }
 

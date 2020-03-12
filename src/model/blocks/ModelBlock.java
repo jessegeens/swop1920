@@ -246,4 +246,28 @@ public abstract class ModelBlock extends ModelElement{
         return this.plugSize;
     }
 
+    public boolean hasTopSocket(){
+        return false;
+    }
+
+    public boolean hasBottomPlug(){
+        return false;
+    }
+
+    public boolean hasRightSocket(){
+        return false;
+    }
+
+    public boolean hasLeftPlug(){
+        return false;
+    }
+
+	public boolean isFullyConnected() {
+        if(this.hasTopSocket() && this.getTopSocket() == null) return false;
+        if(this.hasBottomPlug() && this.getBottomPlug() == null) return false;
+        if(this.hasRightSocket() && this.getRightSocket() == null) return false;
+        if(this.hasLeftPlug() && this.getLeftPlug() == null) return false;
+        return true;
+	}
+
 }

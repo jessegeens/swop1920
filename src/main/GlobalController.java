@@ -48,6 +48,7 @@ class GlobalController {
         System.out.println("key");
         switch(keyCode){
             case 116: //F5;
+                if (this.modelController.getPWindow().allBlocksConnected()) execute();//Check if all blocks are connected, and if so execute.
                 break;
             
             case 27: //Esc
@@ -55,6 +56,11 @@ class GlobalController {
         }
         //TODO create function in modelcontroller
     }
+
+    public void execute(){
+        //TODO execute
+    }
+
 
     public void render(Graphics g){
         uiController.render(g);

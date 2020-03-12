@@ -15,7 +15,11 @@ public class ModelWhileIfBlock extends ModelBlock{
     private ModelBlock rightSocket;
     private ModelBlock cavitySocket;
     private ModelBlock cavityPlug;
+    private Location cavitySocketPos;
+    private Location cavityPlugPos;
     private int cavityHeight;
+    private int cavityWidth;
+
 
     public ModelWhileIfBlock(Location pos, Blocktype type){
         super(pos,type);
@@ -24,6 +28,8 @@ public class ModelWhileIfBlock extends ModelBlock{
         this.setRightSocket(null);
         this.setCavityPlug(this);
         this.setCavitySocket(this);
+        this.setCavityPlugPos(getPos().add(new Location(getWidth()/2,getHeight()/2)));
+        this.setCavitySocketPos(getCavityPlugPos());
         this.updateCavityHeight();
     }
 
@@ -58,6 +64,14 @@ public class ModelWhileIfBlock extends ModelBlock{
         if ((block.getLeftPlug() == null) && (this.getRightSocketPos().getDistance(block.getLeftPlugPos()) < 50)){
             this.setRightSocket(block);
             block.setLeftPlug(this);    
+        }
+        if ((block.getBottomPlug() == null) && (this.getCavitySocketPos().getDistance(block.getBottomPlugPos()) < 50)){
+            this.setCavitySocket(block);
+            block.setBottomPlug(this);
+        }
+        if ((block.getTopSocket() == null) && (this.getCavityPlugPos().getDistance(block.getTopSocketPos()) < 50)){
+            this.setCavityPlug(block);
+            block.setTopSocket(this);
         }
     }
 
@@ -107,6 +121,14 @@ public class ModelWhileIfBlock extends ModelBlock{
     public void updateCavityHeight() {
         this.cavityHeight = getCavityBlocks().size() * 120;
         this.setHeight(120+getCavityHeight());
+    }
+
+    public int getCavityWidth() {
+        return this.cavityWidth;
+    }
+
+    public void updateCavityWidth() {
+        this.cavityWidth = getCavityBlocks().get(0).getWidth() + ModelBlock.WIDTH;
     }
 
     /**
@@ -167,6 +189,22 @@ public class ModelWhileIfBlock extends ModelBlock{
      */
     public void setCavityPlug(ModelBlock cavityPlug) {
         this.cavityPlug = cavityPlug;
+    }
+
+    public Location getCavitySocketPos() {
+        return this.cavitySocketPos;
+    }
+
+    public void setCavitySocketPos(Location cavitySocketPos) {
+        this.cavitySocketPos = cavitySocketPos;
+    }
+
+    public Location getCavityPlugPos() {
+        return this.cavityPlugPos;
+    }
+
+    public void setCavityPlugPos(Location cavityPlugPos) {
+        this.cavityPlugPos = cavityPlugPos;
     }
 
 

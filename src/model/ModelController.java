@@ -39,9 +39,15 @@ public class ModelController{
     }
 
 
-    public void moveBlock(ModelBlock block, Location newPos){
+    public void moveBlock(ModelBlock block, Location newPos, boolean inProgramArea){
         if (block != null){
-            block.setPos(newPos);
+            if(inProgramArea){
+                block.move(newPos);
+            }
+            else{
+                block.setPos(newPos);
+            }
+            
         }
         
     }
@@ -238,7 +244,7 @@ public class ModelController{
         else if(id==506){
             //MOUSE MOVED, if there is a currently held block, move it
             System.out.println("MOUSE MOVED start");
-            this.moveBlock(active, eventLocation);
+            this.moveBlock(active, eventLocation, false);
         }
 
     }
@@ -261,7 +267,7 @@ public class ModelController{
         //MOUSE MOVED 506
         else if(id==506){
             System.out.println("MOUSE MOVED start");
-            this.moveBlock(active, eventLocation);
+            this.moveBlock(active, eventLocation, true);
 
         }
 

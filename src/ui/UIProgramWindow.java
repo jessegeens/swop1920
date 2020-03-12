@@ -15,6 +15,7 @@ public class UIProgramWindow implements UIWindow {
     private int width;
     private int height;
 
+    // Constructor
     public UIProgramWindow(Location position, int width, int height, Graphics g) {
         this.g = g;
         this.xPosition = position.getX();

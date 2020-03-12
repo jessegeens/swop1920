@@ -278,7 +278,7 @@ public class ModelController{
 
     public ArrayList<ModelBlock> getModelBlocks(){
         ArrayList<ModelBlock> blocks = new ArrayList<ModelBlock>();
-        blocks.addAll(this.getModelBlocks());
+        blocks.addAll(this.getProgramAreaBlocks());
         blocks.addAll(this.getPaletteBlocks());
         blocks.add(this.getActiveBlock());
 

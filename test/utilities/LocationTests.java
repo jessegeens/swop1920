@@ -25,10 +25,10 @@ public class LocationTests {
         assertEquals(loc1.getY(), loc1.add(loc2).getY());
     }
 
-    @Test void getComponentSum() {
+    @Test
+    public void getComponentSum() {
         Location loc1 = new Location(2, 3);
-        loc1.add(2, 0);
-        assertEquals(4, loc1.getX());
-        assertEquals(3, loc1.getY());
+        assertEquals(4, loc1.add(2, 0).getX());
+        assertEquals(3, loc1.add(2, 0).getY());
     }
 }

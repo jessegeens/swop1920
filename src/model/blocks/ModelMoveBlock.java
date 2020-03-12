@@ -38,7 +38,7 @@ public class ModelMoveBlock extends ModelBlock {
      */
     @Override
     public void connect(ModelBlock block) {
-        if ((block.getBottomPlug() == null) && (this.getTopSocketPos().getDistance(block.getBottomPlugPos()) < 50)){
+        if ((block.getBottomPlug() == null) && (this.getTopSocketPos().getDistance(block.getBottomPlugPos()) < 50)) {
             this.setTopSocket(block);
             block.setBottomPlug(this);    
         }

@@ -21,7 +21,7 @@ public class DirectionTests {
         Direction dir1 = new Direction(3);
         dir1.turnLeft();
         assertEquals(2, dir1.getDirection());
-        Direction dir2 = new Direction(1);
+        Direction dir2 = new Direction(3);
         dir2.turnRight();
         assertEquals(0, dir2.getDirection());
     }

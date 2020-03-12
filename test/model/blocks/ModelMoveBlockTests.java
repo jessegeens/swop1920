@@ -1,34 +1,34 @@
 package model.blocks;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
-import org.junit.internal.runners.statements.ExpectException;
 
 import utilities.*;
 
 public class ModelMoveBlockTests {
 
     @Test
-    public void connectTest() {
-        Location loc1 = new Location(1, 1);
+    public void connectAndDisconnectTest() {
+        Location loc1 = new Location(0, 0);
         ModelMoveBlock mmb1 = new ModelMoveBlock(loc1, new Blocktype(Blocktype.MOVEFORWARD));
-
-        Location loc2 = new Location(110, 10);
+        Location loc2 = new Location(10, 110);
         ModelMoveBlock mmb2 = new ModelMoveBlock(loc2, new Blocktype(Blocktype.MOVEFORWARD));
-
         mmb1.connect(mmb2);
-
         assertEquals(mmb1.getBottomPlug(), mmb2);
-        assertEquals(mmb2.getTopSocket(), mmb1);
+        mmb1.disconnect();
+        assertNull(mmb1.getBottomPlug());
+        assertNull(mmb2.getTopSocket());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void illegalConnectionTest(){
-        Location loc1 = new Location(1,1);
-        
+        Location loc1 = new Location(0,0);
+        Location loc2 = new Location(150, 150);
+        ModelMoveBlock mmb1 = new ModelMoveBlock(loc1, new Blocktype(Blocktype.TURNLEFT));
+        ModelMoveBlock mmb2 = new ModelMoveBlock(loc2, new Blocktype(Blocktype.MOVEFORWARD));
+        mmb1.connect(mmb2);
+        assertNull(mmb1.getBottomPlug());
     }
-
-
-
 }

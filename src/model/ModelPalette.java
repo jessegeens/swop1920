@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import org.w3c.dom.events.MouseEvent;
 
 import model.blocks.*;
@@ -293,6 +295,27 @@ class ModelPalette extends ModelWindow{
 
         return selected;
 
+    }
+
+    //TODO what when max happens
+    //TODO refactoring to global arraylist
+    protected ArrayList<ModelBlock> getBlocks(){
+        ArrayList<ModelBlock> blocks = new ArrayList<ModelBlock>();
+        blocks.add(this.turnLeftBlock);
+        blocks.add(this.turnRightBlock);
+        blocks.add(this.forwardBlock);
+        blocks.add(this.notBlock);
+        blocks.add(this.wallInFrontBlock);
+        blocks.add(this.whileBlock);
+        blocks.add(this.ifBlock);
+
+
+
+        return blocks;
+
+
+
+        
     }
 
     

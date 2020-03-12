@@ -19,6 +19,7 @@ public class ModelProgramWindow extends ModelWindow{
         this.setBlocks(new ArrayList<ModelBlock>());
     }
 
+    //TODO Oberon gaat dit mooier schrijven
     public void updateLocationBlocks(){
         ArrayList<ModelBlock> thisBlocks = this.getPABlocks();
         ArrayList<ModelBlock> updated = new ArrayList<ModelBlock>();

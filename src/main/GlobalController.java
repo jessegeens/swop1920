@@ -55,6 +55,7 @@ public class GlobalController {
                 break;
             
             case 27: //Esc
+                this.stopRunning();
                 break;
         }
         //TODO create function in modelcontroller
@@ -99,6 +100,7 @@ public class GlobalController {
 
     public void stopRunning(){
         this.running = false;
+        findNextBlock().setUnHighlight();
     }
 
     public ModelBlock getCurrent(){

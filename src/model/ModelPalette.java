@@ -250,7 +250,8 @@ class ModelPalette extends ModelWindow{
         return this.whileLocation;
     }
 
-        //on mousedown checks if a block is selected
+    
+    //on mousedown checks if a block is selected
     //if in bounds of a block it calls a function to create a new block
     //the clicked block is returned
     protected ModelBlock handleMouseDown(Location eventLocation){
@@ -288,8 +289,7 @@ class ModelPalette extends ModelWindow{
 
     }
 
-    //MOUSE RELEASED, delete the currently held item (if there is one)
-    //MOUSE MOVED, if there is a currently held block, move it
+    
 
     
 }

@@ -71,28 +71,7 @@ public class ModelController{
 
     */
 
-    /**
-     * 
-     * @param block The block for which the closest neighbour needs to be found
-     * @return The closest neighbour of block
-     * return null if no closest block
-     */
-    public ModelBlock findClosestBlock(ModelBlock block){
-        ModelBlock closest = getProgramAreaBlocks().get(0);
-        boolean updateValue = false;
-
-        for(int i = 0; i < this.getProgramAreaBlocks().size(); i++){
-            ModelBlock current = getProgramAreaBlocks().get(i);
-            if(current.getPos().getDistance(block.getPos()) < closest.getPos().getDistance(block.getPos())  && closest != current){
-                updateValue = true;
-
-            }
-        }
-        if(updateValue){
-            return closest;
-        }
-        return null;          
-    }
+    
 
     /**
      * 

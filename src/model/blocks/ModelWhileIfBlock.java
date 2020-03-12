@@ -24,7 +24,7 @@ public class ModelWhileIfBlock extends ModelBlock{
         this.setRightSocket(null);
         this.setCavityPlug(this);
         this.setCavitySocket(this);
-        this.setCavityHeight(0);
+        this.updateCavityHeight();
     }
 
     /**
@@ -102,10 +102,9 @@ public class ModelWhileIfBlock extends ModelBlock{
     }
 
     /**
-     * Setter for the height of the cavity of the while and if block.
-     * @param cavityHeight
+     * Updater for the height of the cavity of the while and if block.
      */
-    public void setCavityHeight(int cavityHeight) {
+    public void updateCavityHeight() {
         this.cavityHeight = getCavityBlocks().size() * 120;
         this.setHeight(120+getCavityHeight());
     }

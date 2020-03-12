@@ -1,4 +1,8 @@
 package model;
+
+import java.util.ArrayList;
+
+import model.blocks.ModelBlock;
 import utilities.Location;
 
 
@@ -9,6 +13,15 @@ class ModelProgramWindow extends ModelWindow{
 
     public ModelProgramWindow(int width, int height){
         super(width, height);
+        super.setBlocks(new ArrayList<ModelBlock>());
+    }
+
+    public void updateLocationBlocks(){
+        if (this.getBlocks().get(0) != null){
+            for (ModelBlock blk : this.getBlocks().get(0).getConnections()){
+                blk.setPos(new Location());
+            }
+        }
     }
 
     public void handleMouseEvent(int id, Location eventLocation, int clickCount){

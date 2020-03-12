@@ -36,12 +36,12 @@ class ModelProgramWindow extends ModelWindow{
         Set<ModelBlock> nextConnection = new TreeSet<ModelBlock>();
         nextConnection.addAll(blk.getConnections());
         while(!(nextConnection.isEmpty())){
-            nextConnection.addAll(nextConnection.get(0).getConnections())
+            nextConnection.addAll(nextConnection.get(0).getConnections());
         }
         
     }
 
-    public void handleMouseEvent(int id, Location eventLocation, int clickCount){
+    public void handleMouseEvent(int id, Location eventLocation, int clickCount){}
         //MOUSE_PRESSED where you start holding the button down 501
         //MOUSE_RELEASED where you release the button      502  
         //MOUSE_CLICKED => press + release (comes after released + pressed) only comes if no dragging happended 500

@@ -37,9 +37,6 @@ class GlobalController {
     private ArrayList<UIElement> uiElements = new ArrayList<UIElement>();
     private ArrayList<ModelElement> modelElements = new ArrayList<ModelElement>();
 
-
-    
-
     public void handleMouseEvent(int id, int x, int y, int clickCount){
         Location eventLocation = new Location(x,y);
         modelController.handleMouseEvent(id, eventLocation, clickCount);

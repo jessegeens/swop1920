@@ -284,8 +284,6 @@ class ModelPalette extends ModelWindow{
             selected = this.wallInFrontBlock;
             this.blockToProgramWindow(this.wallInFrontBlock, false);
         }
-
-        /*
         else if(this.whileBlock.inBounds(eventLocation)){
             selected = this.whileBlock;
             this.blockToProgramWindow(this.whileBlock, false);
@@ -294,7 +292,7 @@ class ModelPalette extends ModelWindow{
             selected = this.ifBlock;
             this.blockToProgramWindow(this.ifBlock, false);
         }
-        */
+        
 
         return selected;
 

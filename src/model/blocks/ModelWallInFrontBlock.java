@@ -34,7 +34,8 @@ public class ModelWallInFrontBlock extends ModelBlock {
     public void connect(ModelBlock block) {
         if ((block.getRightSocket() == null) && (this.getLeftPlugPos().getDistance(block.getRightSocketPos()) < 50)){
             this.setLeftPlug(block);
-            block.setRightSocket(this);    
+            block.setRightSocket(this); 
+            this.setPos(block.getPos().add(new Location(block.getWidth(),0)));   
         }
 
     }

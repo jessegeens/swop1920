@@ -41,8 +41,8 @@ public class MyCanvasWindow extends CanvasWindow {
 
 
 
-        UIPalette palette = new UIPalette(g);
-        UIProgramWindow programArea = new UIProgramWindow(g);
+        //UIPalette palette = new UIPalette(g);
+        //UIProgramWindow programArea = new UIProgramWindow(g);
 
 
         globalController.renderUIElements(g, uiBounds);

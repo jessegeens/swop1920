@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Class representing a two-dimensional grid for Blockr. The grid contains walls, a robot and a goal cell.
  */
-class ModelGrid extends ModelWindow {
+public class ModelGrid extends ModelWindow {
     private final int cellSize = 30;
     private Location goalCell;
     private int cellHeight;

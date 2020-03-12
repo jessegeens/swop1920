@@ -120,6 +120,8 @@ public class UIGrid implements UIWindow {
      * @param {Graphics} g The Graphics object on which the rendering happens
      */
     public void renderRobot(Graphics g) {
+        int x = xPosition + robotLocation.getX();
+        int y = yPosition + robotLocation.getY();
         g.setColor(Color.RED);
         g.fillRect(xPosition + robotLocation.getX()*cellSize, yPosition + robotLocation.getY()*cellSize,cellSize, cellSize);
 
@@ -129,9 +131,9 @@ public class UIGrid implements UIWindow {
 
         if (this.robotDirection.getDirection() == Direction.UP || this.robotDirection.getDirection() == Direction.DOWN){
 
-            g.drawLine(robotLocation.getX()*cellSize + cellSize / 2, robotLocation.getY()*cellSize , robotLocation.getX()*cellSize + cellSize / 2,robotLocation.getY()*cellSize + cellSize);
+            g.drawLine(xPosition + robotLocation.getX()*cellSize + cellSize / 2, yPosition + robotLocation.getY()*cellSize , robotLocation.getX()*cellSize + cellSize / 2,robotLocation.getY()*cellSize + cellSize);
             if(this.robotDirection.getDirection() == Direction.UP){
-                g.drawLine(robotLocation.getX()*cellSize + cellSize / 2, robotLocation.getY()*cellSize, robotLocation.getX()*cellSize + cellSize / 4, robotLocation.getY()*cellSize + cellSize / 4);
+                g.drawLine(xPosition + robotLocation.getX()*cellSize + cellSize / 2, yPosition + robotLocation.getY()*cellSize, xPosition + robotLocation.getX()*cellSize + cellSize / 4, yPosition + robotLocation.getY()*cellSize + cellSize / 4);
                 g.drawLine(robotLocation.getX()*cellSize + cellSize / 2, robotLocation.getY()*cellSize, robotLocation.getX()*cellSize + 3 * cellSize / 4, robotLocation.getY()*cellSize + cellSize / 4);
             }
             else if(this.robotDirection.getDirection() == Direction.DOWN){
@@ -144,14 +146,14 @@ public class UIGrid implements UIWindow {
 
         else if (this.robotDirection.getDirection() == Direction.LEFT || this.robotDirection.getDirection() == Direction.RIGHT){
 
-            g.drawLine(robotLocation.getX()*cellSize , robotLocation.getY()*cellSize + cellSize / 2, robotLocation.getX()*cellSize + cellSize,robotLocation.getY()*cellSize  + cellSize / 2);
+            g.drawLine(xPosition + robotLocation.getX()*cellSize , yPosition + robotLocation.getY()*cellSize + cellSize / 2, xPosition + robotLocation.getX()*cellSize + cellSize, yPosition + robotLocation.getY()*cellSize  + cellSize / 2);
             if(this.robotDirection.getDirection() == Direction.LEFT){
 
                 g.drawLine(robotLocation.getX()*cellSize , robotLocation.getY()*cellSize + cellSize / 2,robotLocation.getX()*cellSize + cellSize / 4, robotLocation.getY()*cellSize + 1 * cellSize / 4);
                 g.drawLine(robotLocation.getX()*cellSize , robotLocation.getY()*cellSize + cellSize / 2,robotLocation.getX()*cellSize + cellSize / 4, robotLocation.getY()*cellSize + 3 * cellSize / 4);
             }
             else if(this.robotDirection.getDirection() == Direction.RIGHT){
-                g.drawLine(robotLocation.getX()*cellSize + cellSize, robotLocation.getY()*cellSize + cellSize / 2,robotLocation.getX()*cellSize + 3 * cellSize / 4, robotLocation.getY()*cellSize + 1 * cellSize / 4);
+                g.drawLine(xPosition + robotLocation.getX()*cellSize + cellSize, robotLocation.getY()*cellSize + cellSize / 2,robotLocation.getX()*cellSize + 3 * cellSize / 4, robotLocation.getY()*cellSize + 1 * cellSize / 4);
                 g.drawLine(robotLocation.getX()*cellSize + cellSize, robotLocation.getY()*cellSize + cellSize / 2,robotLocation.getX()*cellSize + 3 * cellSize / 4, robotLocation.getY()*cellSize + 3 * cellSize / 4);
             }
         }  

@@ -316,7 +316,7 @@ class ModelPalette extends ModelWindow{
 
     //TODO what when max happens
     //TODO refactoring to global arraylist
-    protected ArrayList<ModelBlock> getBlocks(){
+    protected ArrayList<ModelBlock> getPaletteBlocks(){
         ArrayList<ModelBlock> blocks = new ArrayList<ModelBlock>();
         //if one of them is null, they all are
         if (this.turnLeftBlock != null){

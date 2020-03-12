@@ -20,7 +20,7 @@ public class ModelProgramWindow extends ModelWindow{
     }
 
     public void updateLocationBlocks(){
-        ArrayList<ModelBlock> thisBlocks = this.getBlocks();
+        ArrayList<ModelBlock> thisBlocks = this.getPABlocks();
         ArrayList<ModelBlock> updated = new ArrayList<ModelBlock>();
         while (!(thisBlocks.isEmpty())){
             ModelBlock blk = thisBlocks.get(0);
@@ -91,9 +91,9 @@ public class ModelProgramWindow extends ModelWindow{
     }
 
     public Boolean allBlocksConnected(){
-        if (this.getBlocks().isEmpty()) return true;
-        ArrayList<ModelBlock> connectedB = getConnectedBlocks(this.getBlocks().get(0));
-        for (ModelBlock blk : getBlocks()){
+        if (this.getPABlocks().isEmpty()) return true;
+        ArrayList<ModelBlock> connectedB = getConnectedBlocks(this.getPABlocks().get(0));
+        for (ModelBlock blk : getPABlocks()){
             if (!(connectedB.contains(blk))) return false;
             if (!(blk.equals(this.getFinishBlock())||(blk.equals(this.getStartBlock())))){
                 return blk.isFullyConnected();
@@ -117,7 +117,7 @@ public class ModelProgramWindow extends ModelWindow{
      * @return the starting block of the program if all blocks are connected.
      */
     public ModelBlock getStartBlock(){
-        for(ModelBlock blk : getBlocks()){
+        for(ModelBlock blk : getPABlocks()){
             if(blk.getTopSocket() == null) return blk;
         }
         return null;
@@ -128,7 +128,7 @@ public class ModelProgramWindow extends ModelWindow{
      * @return the finishing block of the program if all blocks are connected.
      */
     public ModelBlock getFinishBlock(){
-        for(ModelBlock blk : getBlocks()){
+        for(ModelBlock blk : getPABlocks()){
             if(blk.getBottomPlug() == null) return blk;
         }
         return null;
@@ -145,7 +145,7 @@ public class ModelProgramWindow extends ModelWindow{
      * 
      * @return a list of blocks in the window.
      */
-    public ArrayList<ModelBlock> getBlocks() {
+    public ArrayList<ModelBlock> getPABlocks() {
         return this.blocks;
     }
 
@@ -175,9 +175,9 @@ public class ModelProgramWindow extends ModelWindow{
         //has to be done in reverse order due to rendering (ask Bert if unclear)
 
         
-        for(int i = this.getBlocks().size() - 1; i >= 0; i--){
-            if(this.getBlocks().get(i).inBounds(eventLocation)){
-                ModelBlock toBeReturned = this.getBlocks().get(i);
+        for(int i = this.getPABlocks().size() - 1; i >= 0; i--){
+            if(this.getPABlocks().get(i).inBounds(eventLocation)){
+                ModelBlock toBeReturned = this.getPABlocks().get(i);
                 this.removeBlock(toBeReturned);
                 
                 return toBeReturned;

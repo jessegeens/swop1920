@@ -28,7 +28,7 @@ public class ModelController{
     private ModelBlock active = null;
 
 
-    
+    // Constructor
     public ModelController(GridInfo gridInfo, int max){
         this.MAX_BLOCKS = max;
         

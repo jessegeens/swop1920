@@ -14,7 +14,7 @@ public abstract class ModelElement{
         this.pos = pos;
     }
 
-    
+    //TODO: wat is het verschil tussen move en setPos()?
     //Location of an element is the topmost left border (where left is more important than top)
     /**
      * Function that moves an element to the new position

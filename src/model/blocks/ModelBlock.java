@@ -57,6 +57,23 @@ public abstract class ModelBlock extends ModelElement{
         return this.highlighted;
     }
 
+    /**
+     * Removes duplicate modelblocks from the list
+     * 
+     * @param {ArrayList<ModelBlock>} list List with duplicates to remove
+     * @return {ArrayList<ModelBlock>} list without duplicates
+     */
+    public static ArrayList<ModelBlock> removeDuplicates(ArrayList<ModelBlock> list) 
+    { 
+        ArrayList<ModelBlock> newL = new ArrayList<ModelBlock>(); 
+        for (ModelBlock blk : list) { 
+            if (!newL.contains(blk)) { 
+                newL.add(blk); 
+            } 
+        }
+        return newL; 
+    } 
+
     //For now a block is considered to be a square
     /**
      * {@inheritDoc}

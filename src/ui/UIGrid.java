@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import utilities.*;
 
-public class UIGrid implements UIWindow {
+public class UIGrid {
 
     private int xPosition;
     private int yPosition;
@@ -66,7 +66,6 @@ public class UIGrid implements UIWindow {
      * 
      * @param g The Graphics object on which the rendering happens
      */
-    @Override
     public void render(Graphics g) {
         renderGrid(g);
         renderWalls(g);

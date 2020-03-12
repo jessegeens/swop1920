@@ -214,16 +214,6 @@ public class ModelController{
             this.handleProgramAreaMouseEvent(id, eventLocation, clickCount);
             
         }
-
-
-
-
-        
-
-
-
-        
-
     }
 
     protected void handlePaletteMouseEvent(int id, Location eventLocation, int clickCount){

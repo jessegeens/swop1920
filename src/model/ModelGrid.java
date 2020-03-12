@@ -7,6 +7,7 @@ import java.util.ArrayList;
  * Class representing a two-dimensional grid for Blockr. The grid contains walls, a robot and a goal cell.
  */
 class ModelGrid extends ModelWindow {
+    private final int cellSize = 30;
     private Location goalCell;
     private int cellHeight;
     private int cellWidth;
@@ -18,8 +19,8 @@ class ModelGrid extends ModelWindow {
     public ModelGrid(int width, int height, Location goal, ModelRobot rbt){
         super(width,height);
         this.setGoalCell(goal);
-        this.setCellHeight(30); //random waarde gekozen hier
-        this.setCellHeight(30); //idem hier
+        this.setCellHeight(cellSize); //random waarde gekozen hier
+        this.setCellHeight(cellSize); //idem hier
         this.setRobot(rbt);
         this.setWalls(new ArrayList<Location>());
     }

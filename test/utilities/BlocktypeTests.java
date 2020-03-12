@@ -1,8 +1,7 @@
-package tests.utilities;
+package utilities;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.*;
-import utilities.Blocktype;
 
 public class BlocktypeTests {
 

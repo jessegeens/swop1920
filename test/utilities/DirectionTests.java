@@ -1,8 +1,7 @@
-package tests.utilities;
+package utilities;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.*;
-import utilities.Direction;
 
 public class DirectionTests {
 
@@ -12,7 +11,7 @@ public class DirectionTests {
         assertEquals(2, dir.getDirection());
     }
 
-    @Test(expected = IllegalArgumentException)
+    @Test(expected = IllegalArgumentException.class)
     public void getWrongDirection() {
         Direction dir = new Direction(4);
     }
@@ -20,7 +19,7 @@ public class DirectionTests {
     @Test
     public void turn() {
         Direction dir1 = new Direction(3);
-        dir.turnLeft();
+        dir1.turnLeft();
         assertEquals(2, dir1.getDirection());
         Direction dir2 = new Direction(1);
         dir2.turnRight();

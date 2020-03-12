@@ -48,6 +48,15 @@ class GlobalController {
 
     public void handleKeyEvent(int id, int keyCode, char keyChar){
         System.out.println("key");
+        switch(keyCode){
+            case 116: //F5;
+                break;
+            
+            case 27: //Esc
+                break;
+
+
+        }
         //TODO create function in modelcontroller
 
         

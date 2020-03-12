@@ -22,8 +22,8 @@ public class GridInfo {
 
     public GridInfo(ModelGrid grid, int cellSize){
         this.goalCell = grid.getGoalCell();
-        this.robotDirection = grid.getRobot().getDirection();
-        this.robotLocation = grid.getRobot().getPos();
+        this.robotDirection = grid.getRobotDir();
+        this.robotLocation = grid.getRobotPos();
         this.walls = grid.getWalls();
         this.cellSize = cellSize;
     }

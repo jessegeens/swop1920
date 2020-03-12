@@ -2,10 +2,14 @@ package model;
 
 import java.util.ArrayList;
 
+
 import main.MyCanvasWindow;
 import model.blocks.ModelBlock;
+import model.blocks.ModelMoveBlock;
 import utilities.GridInfo;
 import utilities.Location;
+import utilities.Blocktype;
+import main.*;
 
 
 
@@ -14,9 +18,8 @@ import utilities.Location;
  */
 public class ModelController{
 
-    
-
-    
+    private final int MAX_BLOCKS;
+    private boolean maxReached = false;
 
     private ModelPalette palette;
     private ModelProgramWindow pWindow;
@@ -26,14 +29,13 @@ public class ModelController{
 
 
     
-    public ModelController(GridInfo gridInfo){
+    public ModelController(GridInfo gridInfo, int max){
+        this.MAX_BLOCKS = max;
         
         //palette left, program middle, grid right
         this.setPalette(new ModelPalette(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
         this.setPWindow(new ModelProgramWindow(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
-        this.setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, null, null)); 
-        //TODO Where is defined which cell is the goalcell, and where the robot starts?
-        // => I think for now we can assume a random grid we generated ourselves
+        this.setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, gridInfo.getGoalCell(), gridInfo.getRobotLocation(), gridInfo.getRobotDirection())); 
     }
 
 
@@ -213,7 +215,10 @@ public class ModelController{
         if(id == 501){
             //return the selected block if one is clicked
             System.out.println("MOUSE PRESSED start");
-            this.active = palette.handleMouseDown(eventLocation);
+            if(this.MAX_BLOCKS <= this.getProgramAreaBlocks().size()+1){
+                this.maxReached = true;
+            }
+            this.active = palette.handleMouseDown(eventLocation, maxReached);
             
             
 
@@ -222,8 +227,11 @@ public class ModelController{
         else if(id==502){
             //MOUSE RELEASED, delete the currently held item (if there is one)
             System.out.println("MOUSE RELEASED start");
-            this.active = null;
-    
+            if(this.active != null){
+                this.maxReached = false;
+                this.palette.resetBlocks();
+            }
+            this.active = null;    
 
         }
         //MOUSE MOVED 506

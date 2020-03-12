@@ -23,6 +23,8 @@ class ModelPalette extends ModelWindow{
     private final Location whileLocation = new Location(180, 340);
     private final Location ifLocation = new Location(20, 600);
 
+    
+
     private ModelMoveBlock turnLeftBlock;
     private ModelMoveBlock turnRightBlock;
     private ModelMoveBlock forwardBlock;
@@ -88,6 +90,20 @@ class ModelPalette extends ModelWindow{
                     break;
             }
         }    
+    }
+
+    //resets all blocks after the total amount of blocks is lower than max
+    public void resetBlocks(){
+        this.setIfBlock(new ModelWhileIfBlock(this.getIfLocation(),new Blocktype(Blocktype.IF)));
+        this.setWhileBlock(new ModelWhileIfBlock(this.getWhileLocation(),new Blocktype(Blocktype.WHILE)));
+        this.setForwardBlock(new ModelMoveBlock(this.getForwardLocation(), new Blocktype(Blocktype.MOVEFORWARD)));
+        this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftLocation(), new Blocktype(Blocktype.TURNLEFT)));
+        this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightLocation(), new Blocktype(Blocktype.TURNRIGHT)));
+        this.setWallInFrontBlock(new ModelWallInFrontBlock(this.getWallInFrontLocation(),new Blocktype(Blocktype.WALLINFRONT)));
+        this.setNotBlock(new ModelNotBlock(this.getNotLocation(),new Blocktype(Blocktype.NOT)));
+
+
+
     }
 
     /**
@@ -262,36 +278,37 @@ class ModelPalette extends ModelWindow{
     //on mousedown checks if a block is selected
     //if in bounds of a block it calls a function to create a new block
     //the clicked block is returned
-    protected ModelBlock handleMouseDown(Location eventLocation){
+    protected ModelBlock handleMouseDown(Location eventLocation, boolean maxReached){
         ModelBlock selected = null;
         if(this.turnLeftBlock.inBounds(eventLocation)){
             selected = this.turnLeftBlock;
-            this.blockToProgramWindow(this.turnLeftBlock, false);
+            this.blockToProgramWindow(this.turnLeftBlock, maxReached);
         }
         else if(this.turnRightBlock.inBounds(eventLocation)){
             selected = this.turnRightBlock;
-            this.blockToProgramWindow(this.turnRightBlock, false);
+            this.blockToProgramWindow(this.turnRightBlock, maxReached);
         }
         else if(this.forwardBlock.inBounds(eventLocation)){
             selected = this.forwardBlock;
-            this.blockToProgramWindow(this.forwardBlock, false);
+            this.blockToProgramWindow(this.forwardBlock, maxReached);
         }
         else if(this.notBlock.inBounds(eventLocation)){
             selected = this.notBlock;
-            this.blockToProgramWindow(this.notBlock, false);
+            this.blockToProgramWindow(this.notBlock, maxReached);
         }
         else if(this.wallInFrontBlock.inBounds(eventLocation)){
             selected = this.wallInFrontBlock;
-            this.blockToProgramWindow(this.wallInFrontBlock, false);
+            this.blockToProgramWindow(this.wallInFrontBlock, maxReached);
         }
         else if(this.whileBlock.inBounds(eventLocation)){
             selected = this.whileBlock;
-            this.blockToProgramWindow(this.whileBlock, false);
+            this.blockToProgramWindow(this.whileBlock, maxReached);
         }
         else if(this.ifBlock.inBounds(eventLocation)){
             selected = this.ifBlock;
-            this.blockToProgramWindow(this.ifBlock, false);
+            this.blockToProgramWindow(this.ifBlock, maxReached);
         }
+
 
         return selected;
 
@@ -301,20 +318,17 @@ class ModelPalette extends ModelWindow{
     //TODO refactoring to global arraylist
     protected ArrayList<ModelBlock> getBlocks(){
         ArrayList<ModelBlock> blocks = new ArrayList<ModelBlock>();
-        blocks.add(this.turnLeftBlock);
-        blocks.add(this.turnRightBlock);
-        blocks.add(this.forwardBlock);
-        blocks.add(this.notBlock);
-        blocks.add(this.wallInFrontBlock);
-        blocks.add(this.whileBlock);
-        blocks.add(this.ifBlock);
-
-
-
+        //if one of them is null, they all are
+        if (this.turnLeftBlock != null){
+            blocks.add(this.turnLeftBlock);
+            blocks.add(this.turnRightBlock);
+            blocks.add(this.forwardBlock);
+            blocks.add(this.notBlock);
+            blocks.add(this.wallInFrontBlock);
+            blocks.add(this.whileBlock);
+            blocks.add(this.ifBlock);
+        }
         return blocks;
-
-
-
         
     }
 

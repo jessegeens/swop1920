@@ -50,6 +50,9 @@ public class GlobalController {
     public void handleKeyEvent(int id, int keyCode, char keyChar){
         System.out.println("key");
         switch(keyCode){
+            case 65: //A;
+                if (this.modelController.getPWindow().allBlocksConnected()) execute();//Check if all blocks are connected, and if so execute.
+                break;
             case 116: //F5;
                 if (this.modelController.getPWindow().allBlocksConnected()) execute();//Check if all blocks are connected, and if so execute.
                 break;

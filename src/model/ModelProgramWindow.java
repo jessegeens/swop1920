@@ -95,7 +95,19 @@ public class ModelProgramWindow extends ModelWindow{
         ArrayList<ModelBlock> connectedB = getConnectedBlocks(this.getBlocks().get(0));
         for (ModelBlock blk : getBlocks()){
             if (!(connectedB.contains(blk))) return false;
-            blk.isFullyConnected();
+            if (!(blk.equals(this.getFinishBlock())||(blk.equals(this.getStartBlock())))){
+                return blk.isFullyConnected();
+            }
+            else if(blk.equals(this.getFinishBlock())) {
+                if(blk.hasTopSocket() && blk.getTopSocket() == null) return false;
+                if(blk.hasRightSocket() && blk.getRightSocket() == null) return false;
+                if(blk.hasLeftPlug() && blk.getLeftPlug() == null) return false;
+            }
+            else if(blk.equals(this.getStartBlock())){
+                if(blk.hasBottomPlug() && blk.getBottomPlug() == null) return false;
+                if(blk.hasRightSocket() && blk.getRightSocket() == null) return false;
+                if(blk.hasLeftPlug() && blk.getLeftPlug() == null) return false;
+            }
         }
         return true;
     }

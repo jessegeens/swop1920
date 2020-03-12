@@ -11,9 +11,6 @@ public class ModelControllerTest {
 
     @Test
     public void testMoveBlock(){
-        ModelController modelController = new ModelController();
-        ArrayList<ModelBlock> blocks = new ArrayList<ModelBlock>();
-        modelController.setBlocks(blocks);
     }
 
     @Test

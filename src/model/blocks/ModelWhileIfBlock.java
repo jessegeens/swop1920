@@ -137,7 +137,10 @@ public class ModelWhileIfBlock extends ModelBlock{
     }
 
     public void updateCavityWidth() {
-        this.cavityWidth = getCavityBlocks().get(0).getWidth() + ModelBlock.WIDTH;
+        if(getCavityBlocks().size() > 0)
+            this.cavityWidth = getCavityBlocks().get(0).getWidth() + ModelBlock.WIDTH;
+        else
+            this.cavityWidth = ModelBlock.WIDTH;
     }
 
     /**

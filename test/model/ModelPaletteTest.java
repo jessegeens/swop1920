@@ -1,15 +1,9 @@
 package model;
 
-import model.blocks.ModelBlock;
 import model.blocks.ModelMoveBlock;
-import org.junit.Assert;
 import org.junit.Test;
 import utilities.Blocktype;
-import utilities.Direction;
 import utilities.Location;
-
-import java.util.ArrayList;
-
 import static org.junit.Assert.*;
 
 public class ModelPaletteTest {

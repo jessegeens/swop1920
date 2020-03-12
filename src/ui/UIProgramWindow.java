@@ -3,15 +3,24 @@ package ui;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import ui.blocks.*;
+import utilities.Location;
 
 
 public class UIProgramWindow implements UIWindow {
 
     ArrayList<UIBlock> blocks = new ArrayList<UIBlock>();
     Graphics g;
+    private int xPosition;
+    private int yPosition;
+    private int width;
+    private int height;
 
-    public UIProgramWindow(Graphics g) {
+    public UIProgramWindow(Location position, int width, int height, Graphics g) {
         this.g = g;
+        this.xPosition = position.getX();
+        this.yPosition = position.getY();
+        this.width = width;
+        this.height = height;
 	}
 
     /**
@@ -21,7 +30,10 @@ public class UIProgramWindow implements UIWindow {
      */
 	@Override
     public void render(Graphics g) {
-        blocks.forEach((UIBlock block) -> block.render(g));
+
+        blocks.forEach((UIBlock block) -> {
+            if(block.getPos().getX() > xPosition && block.getPos().getX() < xPosition + width && block.getPos().getY() < height)
+                block.render(g);});
     }
     
 }

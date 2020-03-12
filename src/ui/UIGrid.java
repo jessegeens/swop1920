@@ -7,29 +7,29 @@ import utilities.*;
 
 public class UIGrid implements UIWindow {
 
-    private int xPosition = 0;
-    private int yPosition = 0;
+    private int xPosition;
+    private int yPosition;
+    private int width;
+    private int height;
 
-    
-
-    ///Both cells and the grid are square so only one dimension is needed
     private int cellSize;
-    private int dimension;
-
     private Location goalCell;
     private Location robotLocation;
     private Direction robotDirection;
     private ArrayList<Location> walls;
     
     
-
-    public UIGrid(int cellSize, int dimension, ArrayList<Location> walls, Location robotLocation, Direction roboDirection, Location goalCell) {
+    // Constructor
+    public UIGrid(Location position, int width, int height, int cellSize, ArrayList<Location> walls, Location robotLocation, Direction roboDirection, Location goalCell) {
         this.cellSize = cellSize;
-        this.dimension = dimension;
         this.walls = walls;
         this.robotLocation = robotLocation;
         this.robotDirection = roboDirection;
         this.goalCell = goalCell;
+        this.xPosition = position.getX();
+        this.yPosition = position.getY();
+        this.width = width;
+        this.height = height;
     }
     
 
@@ -82,8 +82,8 @@ public class UIGrid implements UIWindow {
      */
     public void renderGrid(Graphics g) {
         g.setColor(Color.GRAY);
-        for(int x = 0; x < this.dimension; x++){
-            for(int y = 0; y < this.dimension; y++){
+        for(int x = 0; x < this.width; x++){
+            for(int y = 0; y < this.height; y++){
                 g.drawRect(xPosition + x * cellSize, yPosition + y*cellSize, cellSize, cellSize);
 
             }
@@ -98,7 +98,7 @@ public class UIGrid implements UIWindow {
     public void renderWalls(Graphics g) {
         g.setColor(Color.BLACK);
         for(Location wall : walls){
-            g.fillRect(wall.getX()*cellSize,wall.getY()*cellSize,cellSize, cellSize);
+            g.fillRect(xPosition + wall.getX()*cellSize, yPosition + wall.getY()*cellSize,cellSize, cellSize);
         }
     }
 
@@ -109,7 +109,7 @@ public class UIGrid implements UIWindow {
      */
     public void renderGoalCell(Graphics g) {
         g.setColor(Color.YELLOW);
-        g.fillRect(goalCell.getX()*cellSize,goalCell.getY()*cellSize,cellSize, cellSize);
+        g.fillRect(xPosition + goalCell.getX()*cellSize, yPosition + goalCell.getY()*cellSize,cellSize, cellSize);
     }
 
 
@@ -121,9 +121,11 @@ public class UIGrid implements UIWindow {
      */
     public void renderRobot(Graphics g) {
         g.setColor(Color.RED);
-        g.fillRect(robotLocation.getX()*cellSize,robotLocation.getY()*cellSize,cellSize, cellSize);
+        g.fillRect(xPosition + robotLocation.getX()*cellSize, yPosition + robotLocation.getY()*cellSize,cellSize, cellSize);
 
         g.setColor(Color.WHITE);
+
+        //TODO: draw arrow at correct place
 
         if (this.robotDirection.getDirection() == Direction.UP || this.robotDirection.getDirection() == Direction.DOWN){
 

@@ -98,8 +98,8 @@ class GlobalController {
         Location goal = new Location(3,3);
 
 
-
-        UIGrid grid = new UIGrid(50, 5, walls, robot, robotDirection, goal);
+        //w, h, cellSize
+        UIGrid grid = new UIGrid(new Location(2*MyCanvasWindow.WIDTH/3, 0), MyCanvasWindow.WIDTH / 3, MyCanvasWindow.HEIGHT, 50, walls, robot, robotDirection, goal);
 
         grid.render(g);
 
@@ -131,9 +131,6 @@ class GlobalController {
         g.drawLine(2*MyCanvasWindow.WIDTH/3, 0, 2*MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT);
 
         
-
-        g.drawLine(0,0,500,500);
-
         System.out.println("renderUI");
         
 

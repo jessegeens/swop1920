@@ -49,6 +49,8 @@ class ModelPalette extends ModelWindow{
 
     //TODO limitreached is better of being a global var in modelpalette than a method parameter
     //or maybe have a static int called maxamountofelements somewhere?
+
+    //creates a new block and assigns the global var of this specific blocktype to it
     public void blockToProgramWindow(ModelBlock blk, Boolean limitReached){
         if (limitReached){
             setTurnLeftBlock(null);
@@ -248,79 +250,46 @@ class ModelPalette extends ModelWindow{
         return this.whileLocation;
     }
 
-    public void handleMouseEvent(int id, Location eventLocation, int clickCount){
-
-        //MOUSE_PRESSED where you start holding the button down 501
-        //MOUSE_RELEASED where you release the button      502  
-        //MOUSE_CLICKED => press + release (comes after released + pressed) only comes if no dragging happended 500
-        //MOUSE_DRAGGED => Holding down, gets triggerd after each small move 506
-        //interesting to know: there is no difference detected between left and right button in the current handlemouseevent function
-
-        //TODO cannot acces static MouseEvent.MOUSE_PRESSED etc
-
-        //mouse pressed: make a new block if in bounds of a specific block
-        if(id == 501){
-            ModelBlock selected = null;
-            if(this.turnLeftBlock.inBounds(eventLocation)){
-                //super.addBlock(this.turnLeftBlock);
-                //TODO between these steps you need to reassign the old block
-                this.blockToProgramWindow(this.turnLeftBlock, false);
-            }
-            else if(this.turnRightBlock.inBounds(eventLocation)){
-                this.blockToProgramWindow(this.turnRightBlock, false);
-            }
-            else if(this.forwardBlock.inBounds(eventLocation)){
-                this.blockToProgramWindow(this.forwardBlock, false);
-            }
-            else if(this.notBlock.inBounds(eventLocation)){
-                this.blockToProgramWindow(this.notBlock, false);
-            }
-            else if(this.wallInFrontBlock.inBounds(eventLocation)){
-                this.blockToProgramWindow(this.wallInFrontBlock, false);
-            }
-            else if(this.whileBlock.inBounds(eventLocation)){
-                this.blockToProgramWindow(this.whileBlock, false);
-            }
-            else if(this.ifBlock.inBounds(eventLocation)){
-                this.blockToProgramWindow(this.ifBlock, false);
-            }
+    
+    //on mousedown checks if a block is selected
+    //if in bounds of a block it calls a function to create a new block
+    //the clicked block is returned
+    protected ModelBlock handleMouseDown(Location eventLocation){
+        ModelBlock selected = null;
+        if(this.turnLeftBlock.inBounds(eventLocation)){
+            selected = this.turnLeftBlock;
+            this.blockToProgramWindow(this.turnLeftBlock, false);
+        }
+        else if(this.turnRightBlock.inBounds(eventLocation)){
+            selected = this.turnRightBlock;
+            this.blockToProgramWindow(this.turnRightBlock, false);
+        }
+        else if(this.forwardBlock.inBounds(eventLocation)){
+            selected = this.forwardBlock;
+            this.blockToProgramWindow(this.forwardBlock, false);
+        }
+        else if(this.notBlock.inBounds(eventLocation)){
+            selected = this.notBlock;
+            this.blockToProgramWindow(this.notBlock, false);
+        }
+        else if(this.wallInFrontBlock.inBounds(eventLocation)){
+            selected = this.wallInFrontBlock;
+            this.blockToProgramWindow(this.wallInFrontBlock, false);
+        }
+        else if(this.whileBlock.inBounds(eventLocation)){
+            selected = this.whileBlock;
+            this.blockToProgramWindow(this.whileBlock, false);
+        }
+        else if(this.ifBlock.inBounds(eventLocation)){
+            selected = this.ifBlock;
+            this.blockToProgramWindow(this.ifBlock, false);
         }
 
-        //MOUSE RELEASED, delete the currently held item (if there is one)
-        else if(id == 502){
-            
-
-        }
-
-        //MOUSE MOVED, if there is a currently held block, move it
-        else if(id == 506){
-            
-            
-            
-            //update pos of activelement
-        }
-        
-
-        //if mouse down on 
-        //if mouse move
-        //if mouse up, remove active element super.deleteelement
-
-
-
-
-
-        /*
-
-         private ModelMoveBlock turnLeftBlock;
-    private ModelMoveBlock turnRightBlock;
-    private ModelMoveBlock forwardBlock;
-    private ModelNotBlock notBlock;
-    private ModelWallInFrontBlock wallInFrontBlock;
-    private ModelWhileIfBlock whileBlock;
-    private ModelWhileIfBlock ifBlock;
-    */
+        return selected;
 
     }
+
+    
 
     
 }

@@ -21,6 +21,8 @@ public class ModelController{
     private ModelProgramWindow pWindow;
     private ModelGrid grid;
 
+    private ModelBlock active = null;
+
 
     
     public ModelController(){
@@ -28,13 +30,17 @@ public class ModelController{
         //palette left, program middle, grid right
         this.setPalette(new ModelPalette(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
         this.setPWindow(new ModelProgramWindow(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
-        this.setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, null, null)); //TODO Where is defined which cell is the goalcell, and where the robot starts?
-                                                // => I think for now we can assume a random grid we generated ourselves
+        this.setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, null, null)); 
+        //TODO Where is defined which cell is the goalcell, and where the robot starts?
+        // => I think for now we can assume a random grid we generated ourselves
     }
 
 
     public void moveBlock(ModelBlock block, Location newPos){
-        block.move(newPos, this.findClosestBlock(block));
+        if (!block.equals(null)){
+            block.move(newPos, this.findClosestBlock(block));
+        }
+        
     }
 
     /*
@@ -162,27 +168,10 @@ public class ModelController{
         this.grid = grid;
     }
 
-    //TODO best way to handle the concept of an active/selected block?
-    ModelBlock active = null;
 
-    public void handleMouseEvent(int id, Location eventLocation, int clickCount){
-        if(eventLocation.getX() > 0 && eventLocation.getX() < MyCanvasWindow.WIDTH/3 ){
-            this.palette.handleMouseEvent(id, eventLocation, clickCount);
-            //TODO get activeblock?
-            //TODO check if a new block has been created
-        }
-        if(eventLocation.getX() > MyCanvasWindow.WIDTH/3 && eventLocation.getX() <  2 * MyCanvasWindow.WIDTH/3){
-            this.pWindow.handleMouseEvent(id, eventLocation, clickCount);
-        }
-
-
-
-
-        System.out.println("mouse");
+            
 
         
-
-        //TODO for some reason I can't use the static fields MouseEvent.MOUSE_PRESSED etc
         //TODO provide an explanation why the list should be traversed in reversed due to render order
 
         //MOUSE_PRESSED where you start holding the button down 501
@@ -200,36 +189,97 @@ public class ModelController{
                 }
             }            
         }
-        else if(id == 502){
-            this.active = null;
-
-        }
-        else if(id == 506){
-            
-            this.active.move(eventLocation);
-            
-            //update pos of activelement
-        }
-
-
-
-
-        
-
-        //left window
-        //mousedown
-
-        //mouseup
-
-
-
-        //mousedown
 
         */
+
+
+    
+
+    //TODO for some reason I can't use the static fields MouseEvent.MOUSE_PRESSED etc
+
+    public void handleMouseEvent(int id, Location eventLocation, int clickCount){
+        if(eventLocation.getX() > 0 && eventLocation.getX() < MyCanvasWindow.WIDTH/3 ){
+
+
+
+            this.handlePaletteMouseEvent(id, eventLocation, clickCount);
+            //TODO get activeblock?
+            //TODO check if a new block has been created
+        }
+        if(eventLocation.getX() > MyCanvasWindow.WIDTH/3 && eventLocation.getX() <  2 * MyCanvasWindow.WIDTH/3){
+            this.handleProgramAreaMouseEvent(id, eventLocation, clickCount);
+        }
+
+
+
+
+        System.out.println("mouse");
+
+
 
         
 
     }
 
+    protected void handlePaletteMouseEvent(int id, Location eventLocation, int clickCount){
+        //MOUSE_PRESSED 501
+        if(id == 501){
+            //return the selected block if one is clicked
+            this.active = palette.handleMouseDown(eventLocation);
+
+        }
+        //MOUSE RELEASED 502
+        else if(id==502){
+            //MOUSE RELEASED, delete the currently held item (if there is one)
+            this.active = null;
+    
+
+        }
+        //MOUSE MOVED 506
+        else if(id==506){
+            //MOUSE MOVED, if there is a currently held block, move it
+            this.moveBlock(active, eventLocation);
+        }
+
+    }
+
+    protected void handleProgramAreaMouseEvent(int id, Location eventLocation, int clickCount){
+        //MOUSE_PRESSED 501
+        if(id == 501){
+            //return the topmost active block if one is in the click location
+            //if you remove it from the local list in pWindow until mousedown all headaches go away
+            //also if you render the active element last this is more beneficial as well
+            //this.active = pWindow.handleMouseDown(eventLocation);
+
+
+        }
+        //MOUSE RELEASED 502
+        else if(id==502){
+            //pWindow.addBlock(active);
+            this.active = null;
+
+        }
+        //MOUSE MOVED 506
+        else if(id==506){
+            this.moveBlock(active, eventLocation);
+
+        }
+
+    }
+
     
 }
+
+/*abstract
+//MOUSE_PRESSED 501
+        if(id == 501){
+
+        }
+        //MOUSE RELEASED 502
+        else if(id==502){
+
+        }
+        //MOUSE MOVED 506
+        else if(id==506){
+
+        }*/

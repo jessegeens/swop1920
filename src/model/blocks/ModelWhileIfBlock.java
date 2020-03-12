@@ -16,7 +16,6 @@ public class ModelWhileIfBlock extends ModelBlock{
     private ModelBlock cavitySocket;
     private ModelBlock cavityPlug;
     private int cavityHeight;
-    private ArrayList<ModelBlock> blocks;
 
     public ModelWhileIfBlock(Location pos, Blocktype type){
         super(pos,type);
@@ -26,7 +25,6 @@ public class ModelWhileIfBlock extends ModelBlock{
         this.setCavityPlug(this);
         this.setCavitySocket(this);
         this.setCavityHeight(0);
-        this.setBlocks(new ArrayList<ModelBlock>());
     }
 
     /**
@@ -108,23 +106,22 @@ public class ModelWhileIfBlock extends ModelBlock{
      * @param cavityHeight
      */
     public void setCavityHeight(int cavityHeight) {
-        this.cavityHeight = cavityHeight;
+        this.cavityHeight = getCavityBlocks().size() * 120;
+        this.setHeight(120+getCavityHeight());
     }
 
     /**
-     * Getter for a list of blocks this block is connected to //TODO: via rechts?
+     * Getter for a list of blocks this block has in its cavity.
      * @return the list of blocks.
      */
-    public ArrayList<ModelBlock> getBlocks() {
-        return this.blocks;
-    }
-
-    /**
-     * Setter for a list of blocks this block is connected to.
-     * @param blocks the list of blocks this block is connected to.
-     */
-    public void setBlocks(ArrayList<ModelBlock> blocks) {
-        this.blocks = blocks;
+    public ArrayList<ModelBlock> getCavityBlocks() {
+        ArrayList<ModelBlock> cav = new ArrayList<ModelBlock>();
+        ModelBlock blk = this.getCavityPlug();
+        while(blk != this){
+            cav.add(blk);
+            blk = blk.getBottomPlug();
+        }
+        return cav;
     }
 
     /**
@@ -172,6 +169,8 @@ public class ModelWhileIfBlock extends ModelBlock{
     public void setCavityPlug(ModelBlock cavityPlug) {
         this.cavityPlug = cavityPlug;
     }
+
+
 
     
 }

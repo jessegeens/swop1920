@@ -308,6 +308,8 @@ class ModelPalette extends ModelWindow{
             selected = this.ifBlock;
             this.blockToProgramWindow(this.ifBlock, maxReached);
         }
+
+
         return selected;
 
     }

@@ -26,7 +26,7 @@ public abstract class ModelBlock extends ModelElement{
     public static final int WIDTH = 120; //final standard width of blocks
     public static final int HEIGHT = 120; //final standard height of blocks
 
-
+    private boolean highlighted = false;
     
 
     public ModelBlock(Location pos, Blocktype type){
@@ -41,6 +41,18 @@ public abstract class ModelBlock extends ModelElement{
     public void move(Location newPos){
         super.move(newPos);
 
+    }
+
+    public void setHighlight(){
+        this.highlighted = true;
+    }
+
+    public void setUnHighlight(){
+        this.highlighted = false;
+    }
+
+    public boolean isHighlighted(){
+        return this.highlighted;
     }
 
     //For now a block is considered to be a square

@@ -11,18 +11,20 @@ public class ModelGrid extends ModelWindow {
     private Location goalCell;
     private int cellHeight;
     private int cellWidth;
-    private ModelRobot robot;
+    private Location robotPos;
+    private Direction robotDir;
     private ArrayList<Location> walls;
 
 
 
-    public ModelGrid(int width, int height, Location goal, ModelRobot rbt){
+    public ModelGrid(int width, int height, Location goal, Location robotPos, Direction robotDir){
         super(width,height);
         this.setGoalCell(goal);
         this.setCellHeight(cellSize); //random waarde gekozen hier
         this.setCellWidth(cellSize); //idem hier
-        this.setRobot(rbt);
         this.setWalls(new ArrayList<Location>());
+        this.setRobotDir(robotDir);
+        this.setRobotPos(robotPos);        
     }
     
 
@@ -76,22 +78,6 @@ public class ModelGrid extends ModelWindow {
 
     /**
      * 
-     * @return the robot in the grid.
-     */
-    public ModelRobot getRobot() {
-        return this.robot;
-    }
-
-    /**
-     * 
-     * @param robot the robot in the grid.
-     */
-    public void setRobot(ModelRobot robot) {
-        this.robot = robot;
-    }
-
-    /**
-     * 
      * @return a list of locations where a wall stands.
      */
     public ArrayList<Location> getWalls() {
@@ -104,5 +90,21 @@ public class ModelGrid extends ModelWindow {
      */
     public void setWalls(ArrayList<Location> walls) {
         this.walls = walls;
+    }
+
+    public Location getRobotPos() {
+        return this.robotPos;
+    }
+
+    public void setRobotPos(Location robotPos) {
+        this.robotPos = robotPos;
+    }
+
+    public Direction getRobotDir() {
+        return this.robotDir;
+    }
+
+    public void setRobotDir(Direction robotDir) {
+        this.robotDir = robotDir;
     }
 }

@@ -9,7 +9,7 @@ import utilities.*;
 import model.*;
 import model.blocks.ModelBlock;
 
-class GlobalController {
+public class GlobalController {
 //on creation provide instructions to modelcontroller
 //modelcontroller makes the three windows and manages them
 
@@ -91,6 +91,15 @@ class GlobalController {
 
     public void setCurrent(ModelBlock blk){
         this.current = blk;
+    }
+
+    public void highlightNext(){
+        getCurrent().setUnHighlight();
+        findNextBlock().setHighlight();
+    }
+
+    public ModelBlock findNextBlock(){
+        return null; //TODO next block in execution
     }
 
     /*

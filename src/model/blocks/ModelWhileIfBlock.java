@@ -16,9 +16,6 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     private ModelBlock cavitySocket;
     private ModelBlock cavityPlug;
 
-    private Location cavitySocketPos;
-    private Location cavityPlugPos;
-
     private int cavityHeight;
     private int cavityWidth;
 
@@ -31,9 +28,6 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         this.setRightSocket(null);
         this.setCavityPlug(this);
         this.setCavitySocket(this);
-
-        this.setCavityPlugPos(getPos().add(new Location(getWidth()/2,getHeight()/2)));
-        this.setCavitySocketPos(getCavityPlugPos());
 
         this.updateCavityHeight();
         this.updateCavityWidth();
@@ -138,9 +132,9 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
 
     public void updateCavityWidth() {
         if(getCavityBlocks().size() > 0)
-            this.cavityWidth = getCavityBlocks().get(0).getWidth() + ModelBlock.WIDTH;
+            this.cavityWidth = getCavityBlocks().get(0).getWidth() + ModelBlock.WIDTHSTD;
         else
-            this.cavityWidth = ModelBlock.WIDTH;
+            this.cavityWidth = ModelBlock.WIDTHSTD;
     }
 
     /**
@@ -206,19 +200,11 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     }
 
     public Location getCavitySocketPos() {
-        return this.cavitySocketPos;
-    }
-
-    public void setCavitySocketPos(Location cavitySocketPos) {
-        this.cavitySocketPos = cavitySocketPos;
+        return this.getPos().add(new Location(this.getWidth()/2,ModelBlock.HEIGHTSTD/2));
     }
 
     public Location getCavityPlugPos() {
-        return this.cavityPlugPos;
-    }
-
-    public void setCavityPlugPos(Location cavityPlugPos) {
-        this.cavityPlugPos = cavityPlugPos;
+        return this.getPos().add(new Location(this.getWidth()/2,this.getHeight() - ModelBlock.HEIGHTSTD/2));
     }
 
     public Location getTopSocketPos() {

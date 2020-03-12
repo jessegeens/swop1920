@@ -16,12 +16,12 @@ class ModelPalette extends ModelWindow{
     
 
     private final Location turnLeftLocation = new Location(20, 20);
-    private final Location turnRightLocation = new Location(160, 20);
-    private final Location forwardLocation = new Location(300, 20);
-    private final Location notLocation = new Location(440, 20);
-    private final Location wallInFrontLocation = new Location(20, 160);
-    private final Location whileLocation = new Location(160, 160);
-    private final Location ifLocation = new Location(300, 160);
+    private final Location turnRightLocation = new Location(180, 20);
+    private final Location forwardLocation = new Location(20, 180);
+    private final Location notLocation = new Location(180, 180);
+    private final Location wallInFrontLocation = new Location(20, 340);
+    private final Location whileLocation = new Location(180, 340);
+    private final Location ifLocation = new Location(20, 600);
 
     private ModelMoveBlock turnLeftBlock;
     private ModelMoveBlock turnRightBlock;
@@ -284,6 +284,8 @@ class ModelPalette extends ModelWindow{
             selected = this.wallInFrontBlock;
             this.blockToProgramWindow(this.wallInFrontBlock, false);
         }
+
+        /*
         else if(this.whileBlock.inBounds(eventLocation)){
             selected = this.whileBlock;
             this.blockToProgramWindow(this.whileBlock, false);
@@ -292,6 +294,7 @@ class ModelPalette extends ModelWindow{
             selected = this.ifBlock;
             this.blockToProgramWindow(this.ifBlock, false);
         }
+        */
 
         return selected;
 

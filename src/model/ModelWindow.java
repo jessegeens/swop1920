@@ -18,7 +18,16 @@ abstract class ModelWindow{
         this.setHeight(height);
     }
 
-
+    public static ArrayList<ModelBlock> removeDuplicates(ArrayList<ModelBlock> list) 
+    { 
+        ArrayList<ModelBlock> newL = new ArrayList<ModelBlock>(); 
+        for (ModelBlock blk : list) { 
+            if (!newL.contains(blk)) { 
+                newL.add(blk); 
+            } 
+        }
+        return newL; 
+    } 
     
 
 

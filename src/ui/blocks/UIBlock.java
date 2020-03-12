@@ -14,8 +14,8 @@ public class UIBlock extends UIElement {
 
 
     // Constructor
-    public UIBlock(Location location, ModelBlock mBlock) {
-        super(location);
+    public UIBlock(ModelBlock mBlock) {
+        super(mBlock.getPos());
         this.width = mBlock.getWidth();
         this.height = mBlock.getHeight();    
         this.mBlock = mBlock;

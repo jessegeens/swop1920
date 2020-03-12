@@ -1,15 +1,13 @@
 package main;
 
-
 import java.util.ArrayList;
 import java.awt.*;
-
-
 
 import ui.*;
 import ui.blocks.*;
 import utilities.*;
 import model.*;
+import model.blocks.ModelBlock;
 
 class GlobalController {
 //on creation provide instructions to modelcontroller
@@ -19,26 +17,28 @@ class GlobalController {
 
 //all event handling starts here
 
+    private final int CELL_SIZE = 50;
+
     private ModelController modelController;
     private UIController uiController;
 
     
 
-    public GlobalController(){
+    public GlobalController(Graphics g){
         this.modelController = new ModelController();
-        this.uiController = new UIController();      
-             
+        GridInfo gridInfo = new GridInfo(modelController.getGrid(), CELL_SIZE);
+        this.uiController = new UIController(g, MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT, new ArrayList<ModelBlock>(), gridInfo);      
     }
-
-
 
     private ArrayList<UIElement> uiElements = new ArrayList<UIElement>();
     private ArrayList<ModelElement> modelElements = new ArrayList<ModelElement>();
 
 
     //traverse uielements in opposite direction to have top rendering order
-
     
+    public ModelGrid getModelGrid(){
+        return modelController.getGrid();
+    }
 
     public void handleMouseEvent(int id, int x, int y, int clickCount){
         Location eventLocation = new Location(x,y);
@@ -54,19 +54,12 @@ class GlobalController {
             
             case 27: //Esc
                 break;
-
-
         }
         //TODO create function in modelcontroller
-
-        
-
-        
-
-        //uiElements.add(grid);
-
     }
 
+
+    /*
     public void renderUIElements(Graphics g, Rectangle uiBounds){
 
         //TODO create a separate ui generation method for this later
@@ -75,12 +68,6 @@ class GlobalController {
         this.renderUI(g);
         this.renderBlocks(g);
         this.renderGrid(g);
-
-        
-
-
-
-
 
         //TODO why is the UIgrid not a UIElement?
 
@@ -98,54 +85,22 @@ class GlobalController {
         Location goal = new Location(3,3);
 
 
-
-        UIGrid grid = new UIGrid(50, 5, walls, robot, robotDirection, goal);
+        //w, h, cellSize
+        UIGrid grid = new UIGrid(new Location(2*MyCanvasWindow.WIDTH/3, 0), MyCanvasWindow.WIDTH / 3, MyCanvasWindow.HEIGHT, 50, walls, robot, robotDirection, goal);
 
         grid.render(g);
 
         Location randomLocation = new Location(300, 300);
 
         Blocktype block_ = new Blocktype(Blocktype.IF);
-        //modelElements.add(block_);
 
-        /*
-
-        UIElement block = new UIBlock(randomLocation, block_);
-        uiElements.add(block);
-        */
-
-        
-
-        
-
-        System.out.println("renderUI");
+        System.out.println("rendering UI Elements");
         uiElements.forEach((UIElement) -> (UIElement).render(g));
 
 
     }
+    */
 
-    public void renderUI(Graphics g){
-
-        g.setColor(Color.BLACK);
-        g.drawLine(MyCanvasWindow.WIDTH/3, 0, MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT);
-        g.drawLine(2*MyCanvasWindow.WIDTH/3, 0, 2*MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT);
-
-        
-
-        g.drawLine(0,0,500,500);
-
-        System.out.println("renderUI");
-        
-
-    }
-
-    public void renderBlocks(Graphics g){
-
-    }
-
-    public void renderGrid(Graphics g){
-
-    }
 
     
 

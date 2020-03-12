@@ -5,7 +5,7 @@ import utilities.*;
 /**
  * Class representing the robot. The robot has an orientiation and lives in the Game World.
  */
-class ModelRobot extends ModelElement {
+public class ModelRobot extends ModelElement {
     private Direction direction;
 
     public ModelRobot(Location pos, Direction dir){

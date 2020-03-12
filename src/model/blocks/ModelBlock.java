@@ -26,7 +26,7 @@ public abstract class ModelBlock extends ModelElement{
     public static final int WIDTH = 120; //final standard width of blocks
     public static final int HEIGHT = 120; //final standard height of blocks
 
-
+    private boolean highlighted = false;
     
 
     public ModelBlock(Location pos, Blocktype type){
@@ -41,6 +41,14 @@ public abstract class ModelBlock extends ModelElement{
     public void move(Location newPos){
         super.move(newPos);
 
+    }
+
+    public void switchHighlight(){
+        this.highlighted = !(this.highlighted);
+    }
+
+    public boolean isHighlighted(){
+        return this.highlighted;
     }
 
     //For now a block is considered to be a square
@@ -245,5 +253,29 @@ public abstract class ModelBlock extends ModelElement{
     public int getPlugSize() {
         return this.plugSize;
     }
+
+    public boolean hasTopSocket(){
+        return false;
+    }
+
+    public boolean hasBottomPlug(){
+        return false;
+    }
+
+    public boolean hasRightSocket(){
+        return false;
+    }
+
+    public boolean hasLeftPlug(){
+        return false;
+    }
+
+	public boolean isFullyConnected() {
+        if(this.hasTopSocket() && this.getTopSocket() == null) return false;
+        if(this.hasBottomPlug() && this.getBottomPlug() == null) return false;
+        if(this.hasRightSocket() && this.getRightSocket() == null) return false;
+        if(this.hasLeftPlug() && this.getLeftPlug() == null) return false;
+        return true;
+	}
 
 }

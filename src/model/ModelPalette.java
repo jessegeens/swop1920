@@ -16,12 +16,12 @@ class ModelPalette extends ModelWindow{
     
 
     private final Location turnLeftLocation = new Location(20, 20);
-    private final Location turnRightLocation = new Location(160, 20);
-    private final Location forwardLocation = new Location(300, 20);
-    private final Location notLocation = new Location(440, 20);
-    private final Location wallInFrontLocation = new Location(20, 160);
-    private final Location whileLocation = new Location(160, 160);
-    private final Location ifLocation = new Location(300, 160);
+    private final Location turnRightLocation = new Location(180, 20);
+    private final Location forwardLocation = new Location(20, 180);
+    private final Location notLocation = new Location(180, 180);
+    private final Location wallInFrontLocation = new Location(20, 340);
+    private final Location whileLocation = new Location(180, 340);
+    private final Location ifLocation = new Location(20, 600);
 
     private ModelMoveBlock turnLeftBlock;
     private ModelMoveBlock turnRightBlock;
@@ -39,8 +39,8 @@ class ModelPalette extends ModelWindow{
         this.setForwardBlock(new ModelMoveBlock(this.getForwardLocation(), new Blocktype(Blocktype.MOVEFORWARD)));
         this.setNotBlock(new ModelNotBlock(this.getNotLocation(),new Blocktype(Blocktype.NOT)));
         this.setWallInFrontBlock(new ModelWallInFrontBlock(this.getWallInFrontLocation(),new Blocktype(Blocktype.WALLINFRONT)));
-        //this.setWhileBlock(new ModelWhileIfBlock(this.getWhileLocation(),new Blocktype(Blocktype.WHILE)));
-        //this.setIfBlock(new ModelWhileIfBlock(this.getIfLocation(),new Blocktype(Blocktype.IF)));
+        this.setWhileBlock(new ModelWhileIfBlock(this.getWhileLocation(),new Blocktype(Blocktype.WHILE)));
+        this.setIfBlock(new ModelWhileIfBlock(this.getIfLocation(),new Blocktype(Blocktype.IF)));
     }
 
     /**
@@ -306,8 +306,8 @@ class ModelPalette extends ModelWindow{
         blocks.add(this.forwardBlock);
         blocks.add(this.notBlock);
         blocks.add(this.wallInFrontBlock);
-        //blocks.add(this.whileBlock);
-        //blocks.add(this.ifBlock);
+        blocks.add(this.whileBlock);
+        blocks.add(this.ifBlock);
 
 
 

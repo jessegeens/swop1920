@@ -206,16 +206,6 @@ public class ModelController{
             this.handleProgramAreaMouseEvent(id, eventLocation, clickCount);
             
         }
-
-
-
-
-        
-
-
-
-        
-
     }
 
     protected void handlePaletteMouseEvent(int id, Location eventLocation, int clickCount){
@@ -224,6 +214,7 @@ public class ModelController{
             //return the selected block if one is clicked
             System.out.println("MOUSE PRESSED start");
             this.active = palette.handleMouseDown(eventLocation);
+            
             
 
         }

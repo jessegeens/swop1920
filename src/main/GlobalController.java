@@ -25,23 +25,23 @@ class GlobalController {
     private ModelController modelController;
     private UIController uiController;
 
-    
+    private boolean running;
+    private ModelBlock current;
 
     public GlobalController(){
         GridInfo gridInfo = new GridInfo(GOAL_CELL, new ArrayList<Location>(), new ModelRobot(ROBOT_START_LOCATION, ROBOT_START_DIRECTION), CELL_SIZE);
         this.modelController = new ModelController(gridInfo);
+        System.out.println(modelController.getModelBlocks());
         this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT, modelController.getModelBlocks(), gridInfo);      
     }
 
     private ArrayList<UIElement> uiElements = new ArrayList<UIElement>();
     private ArrayList<ModelElement> modelElements = new ArrayList<ModelElement>();
 
-
-    
-
     public void handleMouseEvent(int id, int x, int y, int clickCount){
         Location eventLocation = new Location(x,y);
         modelController.handleMouseEvent(id, eventLocation, clickCount);
+        this.uiController.updateBlocks(this.modelController.getModelBlocks());
 
     }
 
@@ -49,6 +49,7 @@ class GlobalController {
         System.out.println("key");
         switch(keyCode){
             case 116: //F5;
+                if (this.modelController.getPWindow().allBlocksConnected()) execute();//Check if all blocks are connected, and if so execute.
                 break;
             
             case 27: //Esc
@@ -57,8 +58,37 @@ class GlobalController {
         //TODO create function in modelcontroller
     }
 
+    public void execute(){
+        if(!(isRunning())){
+            startRunning();
+            setCurrent(this.modelController.getPWindow().getStartBlock());
+        }
+        
+    }
+
+
     public void render(Graphics g){
         uiController.render(g);
+    }
+
+    public boolean isRunning(){
+        return this.running;
+    }
+
+    public void startRunning(){
+        this.running = true;
+    }
+
+    public void stopRunning(){
+        this.running = false;
+    }
+
+    public ModelBlock getCurrent(){
+        return this.current;
+    }
+
+    public void setCurrent(ModelBlock blk){
+        this.current = blk;
     }
 
     /*

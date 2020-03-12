@@ -10,7 +10,7 @@ import utilities.Location;
 /**
  * Class representing the Program Window where the blocks will be set.
  */
-class ModelProgramWindow extends ModelWindow{
+public class ModelProgramWindow extends ModelWindow{
 
     private ArrayList<ModelBlock> blocks;
 
@@ -95,8 +95,43 @@ class ModelProgramWindow extends ModelWindow{
         ArrayList<ModelBlock> connectedB = getConnectedBlocks(this.getBlocks().get(0));
         for (ModelBlock blk : getBlocks()){
             if (!(connectedB.contains(blk))) return false;
+            if (!(blk.equals(this.getFinishBlock())||(blk.equals(this.getStartBlock())))){
+                return blk.isFullyConnected();
+            }
+            else if(blk.equals(this.getFinishBlock())) {
+                if(blk.hasTopSocket() && blk.getTopSocket() == null) return false;
+                if(blk.hasRightSocket() && blk.getRightSocket() == null) return false;
+                if(blk.hasLeftPlug() && blk.getLeftPlug() == null) return false;
+            }
+            else if(blk.equals(this.getStartBlock())){
+                if(blk.hasBottomPlug() && blk.getBottomPlug() == null) return false;
+                if(blk.hasRightSocket() && blk.getRightSocket() == null) return false;
+                if(blk.hasLeftPlug() && blk.getLeftPlug() == null) return false;
+            }
         }
         return true;
+    }
+
+    /**
+     * 
+     * @return the starting block of the program if all blocks are connected.
+     */
+    public ModelBlock getStartBlock(){
+        for(ModelBlock blk : getBlocks()){
+            if(blk.getTopSocket() == null) return blk;
+        }
+        return null;
+    }
+
+    /**
+     * 
+     * @return the finishing block of the program if all blocks are connected.
+     */
+    public ModelBlock getFinishBlock(){
+        for(ModelBlock blk : getBlocks()){
+            if(blk.getBottomPlug() == null) return blk;
+        }
+        return null;
     }
 
     public void handleMouseEvent(int id, Location eventLocation, int clickCount){

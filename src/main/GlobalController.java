@@ -25,6 +25,8 @@ public class GlobalController {
     private final Location ROBOT_START_LOCATION = new Location(0, 0);
     private final Direction ROBOT_START_DIRECTION = new Direction(Direction.RIGHT);
 
+    private final int MAX_BLOCKS = 5;
+
     private ModelController modelController;
     private UIController uiController;
 
@@ -33,7 +35,7 @@ public class GlobalController {
 
     public GlobalController(){
         GridInfo gridInfo = new GridInfo(GOAL_CELL, new ArrayList<Location>(), new ModelRobot(ROBOT_START_LOCATION, ROBOT_START_DIRECTION), CELL_SIZE);
-        this.modelController = new ModelController(gridInfo);
+        this.modelController = new ModelController(gridInfo, this.MAX_BLOCKS);
         System.out.println(modelController.getModelBlocks());
         this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT, modelController.getModelBlocks(), gridInfo);      
     }

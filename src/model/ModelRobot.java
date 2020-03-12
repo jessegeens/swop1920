@@ -37,7 +37,7 @@ public class ModelRobot extends ModelElement {
 
     /**
      * 
-     * @param direction the direction that the robot will be set to.
+     * @param dir the direction that the robot will be set to.
      */
     public void setDirection(Direction dir) {
         this.direction = dir;

@@ -40,11 +40,13 @@ public class ModelMoveBlock extends ModelBlock {
     public void connect(ModelBlock block) {
         if ((block.getBottomPlug() == null) && (this.getTopSocketPos().getDistance(block.getBottomPlugPos()) < 50)) {
             this.setTopSocket(block);
-            block.setBottomPlug(this);    
+            block.setBottomPlug(this);  
+            this.setPos(block.getPos().add(new Location(0,block.getHeight())));  
         }
         if ((block.getTopSocket() == null) && (this.getBottomPlugPos().getDistance(block.getTopSocketPos()) < 50)){
             this.setBottomPlug(block);
-            block.setTopSocket(this);    
+            block.setTopSocket(this); 
+            this.setPos(block.getPos().add(new Location(0, -block.getHeight())));  
         }
     }
 

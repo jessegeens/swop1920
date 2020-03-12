@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import org.w3c.dom.events.MouseEvent;
 
 import model.blocks.*;
@@ -65,19 +67,25 @@ class ModelPalette extends ModelWindow{
             switch(blk.getBlockType().getType()){
                 case Blocktype.IF:
                     this.setIfBlock(new ModelWhileIfBlock(this.getIfLocation(),new Blocktype(Blocktype.IF)));
+                    break;
                 case Blocktype.WHILE:
                     this.setWhileBlock(new ModelWhileIfBlock(this.getWhileLocation(),new Blocktype(Blocktype.WHILE)));
+                    break;
                 case Blocktype.MOVEFORWARD:
                     this.setForwardBlock(new ModelMoveBlock(this.getForwardLocation(), new Blocktype(Blocktype.MOVEFORWARD)));
+                    break;
                 case Blocktype.TURNLEFT:
                     this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftLocation(), new Blocktype(Blocktype.TURNLEFT)));
+                    break;
                 case Blocktype.TURNRIGHT:
                     this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightLocation(), new Blocktype(Blocktype.TURNRIGHT)));
+                    break;
                 case Blocktype.WALLINFRONT:
                     this.setWallInFrontBlock(new ModelWallInFrontBlock(this.getWallInFrontLocation(),new Blocktype(Blocktype.WALLINFRONT)));
+                    break;
                 case Blocktype.NOT:
                     this.setNotBlock(new ModelNotBlock(this.getNotLocation(),new Blocktype(Blocktype.NOT)));
-                default:
+                    break;
             }
         }    
     }
@@ -287,6 +295,27 @@ class ModelPalette extends ModelWindow{
 
         return selected;
 
+    }
+
+    //TODO what when max happens
+    //TODO refactoring to global arraylist
+    protected ArrayList<ModelBlock> getBlocks(){
+        ArrayList<ModelBlock> blocks = new ArrayList<ModelBlock>();
+        blocks.add(this.turnLeftBlock);
+        blocks.add(this.turnRightBlock);
+        blocks.add(this.forwardBlock);
+        blocks.add(this.notBlock);
+        blocks.add(this.wallInFrontBlock);
+        blocks.add(this.whileBlock);
+        blocks.add(this.ifBlock);
+
+
+
+        return blocks;
+
+
+
+        
     }
 
     

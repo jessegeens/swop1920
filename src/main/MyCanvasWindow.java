@@ -1,13 +1,9 @@
 
 package main;
 
-
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.Dimension;
-import ui.*;
-import model.*;
+
 
 public class MyCanvasWindow extends CanvasWindow {
 
@@ -30,29 +26,8 @@ public class MyCanvasWindow extends CanvasWindow {
     @Override
     protected void paint(Graphics g) {
         this.setSize(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT);
-        
-
-
-
-        
-        //TODO UIcontroller rectangle bounds
-        
-        Rectangle uiBounds = g.getClipBounds();
-        //System.out.println(uiBounds);
-
-
-
-        //UIPalette palette = new UIPalette(g);
-        //UIProgramWindow programArea = new UIProgramWindow(g);
-
-
         globalController.render(g);
         super.paint(g);
-
-        
-
-
-
 
     }
 

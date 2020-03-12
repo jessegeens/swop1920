@@ -162,25 +162,8 @@ public class ModelController{
         this.grid = grid;
     }
 
-    //TODO best way to handle the concept of an active/selected block?
-    ModelBlock active = null;
 
-    public void handleMouseEvent(int id, Location eventLocation, int clickCount){
-        if(eventLocation.getX() > 0 && eventLocation.getX() < MyCanvasWindow.WIDTH/3 ){
-            this.palette.handleMouseEvent(id, eventLocation, clickCount);
-            //TODO get activeblock?
-            //TODO check if a new block has been created
-        }
-        if(eventLocation.getX() > MyCanvasWindow.WIDTH/3 && eventLocation.getX() <  2 * MyCanvasWindow.WIDTH/3){
-            this.pWindow.handleMouseEvent(id, eventLocation, clickCount);
-        }
-
-
-
-
-        System.out.println("mouse");
-
-        
+            
 
         //TODO for some reason I can't use the static fields MouseEvent.MOUSE_PRESSED etc
         //TODO provide an explanation why the list should be traversed in reversed due to render order
@@ -227,9 +210,79 @@ public class ModelController{
 
         */
 
+    //TODO best way to handle the concept of an active/selected block?
+    ModelBlock active = null;
+
+    public void handleMouseEvent(int id, Location eventLocation, int clickCount){
+        if(eventLocation.getX() > 0 && eventLocation.getX() < MyCanvasWindow.WIDTH/3 ){
+
+
+
+            this.handlePaletteMouseEvent(id, eventLocation, clickCount);
+            //TODO get activeblock?
+            //TODO check if a new block has been created
+        }
+        if(eventLocation.getX() > MyCanvasWindow.WIDTH/3 && eventLocation.getX() <  2 * MyCanvasWindow.WIDTH/3){
+            this.handleProgramAreaMouseEvent(id, eventLocation, clickCount);
+        }
+
+
+
+
+        System.out.println("mouse");
+
+
+
         
+
+    }
+
+    protected void handlePaletteMouseEvent(int id, Location eventLocation, int clickCount){
+        //MOUSE_PRESSED 501
+        if(id == 501){
+            this.active = palette.handleMouseDown(eventLocation);
+
+        }
+        //MOUSE RELEASED 502
+        else if(id==502){
+
+        }
+        //MOUSE MOVED 506
+        else if(id==506){
+
+        }
+
+    }
+
+    protected void handleProgramAreaMouseEvent(int id, Location eventLocation, int clickCount){
+        //MOUSE_PRESSED 501
+        if(id == 501){
+
+        }
+        //MOUSE RELEASED 502
+        else if(id==502){
+
+        }
+        //MOUSE MOVED 506
+        else if(id==506){
+
+        }
 
     }
 
     
 }
+
+/*abstract
+//MOUSE_PRESSED 501
+        if(id == 501){
+
+        }
+        //MOUSE RELEASED 502
+        else if(id==502){
+
+        }
+        //MOUSE MOVED 506
+        else if(id==506){
+
+        }*/

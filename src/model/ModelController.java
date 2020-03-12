@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import main.MyCanvasWindow;
 import model.blocks.ModelBlock;
+import utilities.GridInfo;
 import utilities.Location;
 
 
@@ -25,7 +26,7 @@ public class ModelController{
 
 
     
-    public ModelController(){
+    public ModelController(GridInfo gridInfo){
         this.setBlocks(new ArrayList<ModelBlock>());
         //palette left, program middle, grid right
         this.setPalette(new ModelPalette(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));

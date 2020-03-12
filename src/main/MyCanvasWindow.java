@@ -5,6 +5,7 @@ package main;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.Dimension;
 import ui.*;
 import model.*;
 
@@ -45,7 +46,7 @@ public class MyCanvasWindow extends CanvasWindow {
         //UIProgramWindow programArea = new UIProgramWindow(g);
 
 
-        globalController.renderUIElements(g, uiBounds);
+        globalController.render(g);
         super.paint(g);
 
         

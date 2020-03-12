@@ -272,7 +272,10 @@ public class ModelController{
         ArrayList<ModelBlock> blocks = new ArrayList<ModelBlock>();
         blocks.addAll(this.getProgramAreaBlocks());
         blocks.addAll(this.getPaletteBlocks());
-        blocks.add(this.getActiveBlock());
+        if(this.getActiveBlock()!=null){
+            blocks.add(this.getActiveBlock());
+        }
+        
 
         return blocks;
     }

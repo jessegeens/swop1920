@@ -12,11 +12,12 @@ public abstract class ModelBlock extends ModelElement{
 
     private final int width = 120;
     private int height = 120;
+    private final int plugSize = 40;
     private final Blocktype type;
-    private final Location topSocketPos = super.getPos().add(this.getWidth() / 2, 0);
-    private final Location bottomPlugPos = super.getPos().add(this.getWidth() / 2, -this.getHeight());
-    private final Location rightSocketPos = super.getPos().add(this.getWidth(), -this.getHeight() / 2);
-    private final Location leftPlugPos = super.getPos().add(0, -this.getHeight() / 2);
+    private final Location topSocketPos = super.getPos().add(this.getWidth() / 2, - this.getPlugSize()/2);
+    private final Location bottomPlugPos = super.getPos().add(this.getWidth() / 2, -this.getHeight() + this.getPlugSize()/2);
+    private final Location rightSocketPos = super.getPos().add(this.getWidth() - this.getPlugSize()/2, - this.getHeight() / 2);
+    private final Location leftPlugPos = super.getPos().add(0, - this.getHeight() / 2 - this.getPlugSize() / 2);
 
 
     
@@ -231,5 +232,11 @@ public abstract class ModelBlock extends ModelElement{
     
     public Blocktype getBlockType() {
 		return this.type;
-	}
+    }
+    
+
+    public int getPlugSize() {
+        return this.plugSize;
+    }
+
 }

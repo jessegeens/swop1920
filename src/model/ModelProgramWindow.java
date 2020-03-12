@@ -1,4 +1,8 @@
 package model;
+
+import java.util.ArrayList;
+
+import model.blocks.ModelBlock;
 import utilities.Location;
 
 
@@ -7,38 +11,61 @@ import utilities.Location;
  */
 class ModelProgramWindow extends ModelWindow{
 
+    private ArrayList<ModelBlock> blocks;
+
     public ModelProgramWindow(int width, int height){
         super(width, height);
+        this.setBlocks(new ArrayList<ModelBlock>());
     }
 
-    public void handleMouseEvent(int id, Location eventLocation, int clickCount){
-        //MOUSE_PRESSED where you start holding the button down 501
-        //MOUSE_RELEASED where you release the button      502  
-        //MOUSE_CLICKED => press + release (comes after released + pressed) only comes if no dragging happended 500
-        //MOUSE_DRAGGED => Holding down, gets triggerd after each small move 506
-        //interesting to know: there is no difference detected between left and right button in the current handlemouseevent function
+    public void updateLocationBlocks(){
+        if (this.getBlocks().get(0) != null){
+            for (ModelBlock blk : this.getBlocks().get(0).getConnections()){
+                //blk.setPos(new Location());
+            }
+        }
+    }
 
-        //TODO cannot acces static MouseEvent.MOUSE_PRESSED etc
+    
 
-        //mouse pressed: update the currently selected block
-        if(id == 501){
+    /**
+     * 
+     * @return a list of blocks in the window.
+     */
+    public ArrayList<ModelBlock> getBlocks() {
+        return this.blocks;
+    }
+
+    /**
+     * 
+     * @param blocks list of blocks to be set in a window.
+     */
+    public void setBlocks(ArrayList<ModelBlock> blocks) {
+        this.blocks = blocks;
+    }
+
+    public void removeBlock(ModelBlock toBeRemoved){
+        this.blocks.remove(toBeRemoved);
+    }
+
+    public void addBlock(ModelBlock toBeAdded){
+        this.blocks.add(toBeAdded);
+    }
+
+    public ModelBlock handleMouseDown(Location eventLocation){
+        //has to be done in reverse order due to rendering (ask Bert if unclear)
+        for(int i = this.getBlocks().size() - 1; i >= 0; i--){
+            if(this.getBlocks().get(i).inBounds(eventLocation)){
+                ModelBlock toBeReturned = this.getBlocks().get(i);
+                this.removeBlock(toBeReturned);
+                return toBeReturned;
+            }
         }
 
-        //MOUSE RELEASED, check if connections need to be made
-        //currently selected block is null
-        else if(id == 502){
-            
 
-        }
 
-        //MOUSE MOVED, if there is a currently held block, move it
-        else if(id == 506){
-            
-            
-            
-            //update pos of activelement
-        }
 
+        return null;
     }
 
    

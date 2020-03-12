@@ -11,28 +11,15 @@ abstract class ModelWindow{
     private int width; // Should be at least 300
     private int height; // Should be at least 600
 
-    private ArrayList<ModelBlock> blocks;
+    
 
     public ModelWindow(int width, int height){
         this.setWidth(width);
         this.setHeight(height);
     }
 
-    /**
-     * 
-     * @return a list of blocks in the window.
-     */
-    public ArrayList<ModelBlock> getBlocks() {
-        return this.blocks;
-    }
 
-    /**
-     * 
-     * @param blocks list of blocks to be set in a window.
-     */
-    public void setBlocks(ArrayList<ModelBlock> blocks) {
-        this.blocks = blocks;
-    }
+    
 
 
    /**

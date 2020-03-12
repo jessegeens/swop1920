@@ -43,7 +43,7 @@ class ModelProgramWindow extends ModelWindow{
         return connectedBlocks;
     }
 
-    public void handleMouseEvent(int id, Location eventLocation, int clickCount){}
+    public void handleMouseEvent(int id, Location eventLocation, int clickCount){
         //MOUSE_PRESSED where you start holding the button down 501
         //MOUSE_RELEASED where you release the button      502  
         //MOUSE_CLICKED => press + release (comes after released + pressed) only comes if no dragging happended 500

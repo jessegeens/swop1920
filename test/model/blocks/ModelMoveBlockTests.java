@@ -3,6 +3,7 @@ package model.blocks;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+import org.junit.internal.runners.statements.ExpectException;
 
 import utilities.*;
 
@@ -21,5 +22,13 @@ public class ModelMoveBlockTests {
         assertEquals(mmb1.getBottomPlug(), mmb2);
         assertEquals(mmb2.getTopSocket(), mmb1);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void illegalConnectionTest(){
+        Location loc1 = new Location(1,1);
+        
+    }
+
+
 
 }

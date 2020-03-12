@@ -69,6 +69,11 @@ class GlobalController {
 
     public void renderUIElements(Graphics g, Rectangle uiBounds){
 
+        //TODO create a separate ui generation method for this later
+        g.setColor(Color.BLACK);
+        g.drawLine(MyCanvasWindow.WIDTH/3, 0, MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT);
+        g.drawLine(2*MyCanvasWindow.WIDTH/3, 0, 2*MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT);
+
         //TODO why is the UIgrid not a UIElement?
 
         Location wall1 = new Location(2,2);

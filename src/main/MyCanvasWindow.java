@@ -33,11 +33,6 @@ public class MyCanvasWindow extends CanvasWindow {
         this.setSize(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT);
 
 
-        //TODO create a separate ui generation method for this later
-        g.setColor(Color.BLACK);
-        g.drawLine(MyCanvasWindow.WIDTH/3, 0, MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT);
-        g.drawLine(2*MyCanvasWindow.WIDTH/3, 0, 2*MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT);
-
 
         super.paint(g);
         //TODO UIcontroller rectangle bounds

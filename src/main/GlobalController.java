@@ -97,8 +97,8 @@ class GlobalController {
 
 
 
-        UIElement block = new UIBlock(randomLocation, block_);
-        uiElements.add(block);
+        //UIElement block = new UIBlock(randomLocation, block_);
+        //uiElements.add(block);
 
         
 

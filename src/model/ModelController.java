@@ -247,9 +247,7 @@ public class ModelController{
         //MOUSE_PRESSED 501
         if(id == 501){
             //return the topmost active block if one is in the click location
-            //if you remove it from the local list in pWindow until mousedown all headaches go away
-            //also if you render the active element last this is more beneficial as well
-            //this.active = pWindow.handleMouseDown(eventLocation);
+            //you remove it from the local list in pWindow until mouseup
             pWindow.handleMouseDown(eventLocation);
         }
         //MOUSE RELEASED 502

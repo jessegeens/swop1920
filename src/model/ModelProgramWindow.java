@@ -186,7 +186,6 @@ public class ModelProgramWindow extends ModelWindow{
             ModelBlock current = this.getPABlocks().get(i);
             if(current.getPos().getDistance(block.getPos()) < closest.getPos().getDistance(block.getPos())  && closest != current){
                 updateValue = true;
-
             }
         }
         if(updateValue){
@@ -207,6 +206,12 @@ public class ModelProgramWindow extends ModelWindow{
             }
         }
         return null;
+    }
+
+    public void handleMouseUp(Location eveLocation, ModelBlock activeB){
+        this.addBlock(activeB);
+        ModelBlock closest = this.findClosestBlock(activeB);
+        if (closest != null) activeB.connect(closest);
     }
 
    

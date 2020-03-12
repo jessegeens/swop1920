@@ -24,8 +24,8 @@ public abstract class ModelBlock extends ModelElement{
     private final Location rightSocketPos = super.getPos().add(this.getWidth() + this.getPlugSize()/2, + this.getHeight() / 2);
     private final Location leftPlugPos = super.getPos().add(- this.getPlugSize() / 2, + this.getHeight() / 2);
     */
-    public static final int WIDTH = 120; //final standard width of blocks
-    public static final int HEIGHT = 120; //final standard height of blocks
+    public static final int WIDTHSTD = 120; //final standard width of blocks
+    public static final int HEIGHTSTD = 120; //final standard height of blocks
 
     private boolean highlighted = false;
     

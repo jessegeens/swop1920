@@ -26,7 +26,37 @@ public class ModelGrid extends ModelWindow {
         this.setRobotDir(robotDir);
         this.setRobotPos(robotPos);        
     }
-    
+
+    public boolean wallInFrontOfRobot(){
+        if(this.getWalls().contains(this.robotStepPos())) return true;
+        return false;
+    }
+
+    public Location robotStepPos(){
+        switch(getRobotDir().getDirection()){
+            case(Direction.DOWN):
+            return getRobotPos().add(new Location(0,1));
+            case(Direction.UP):
+            return getRobotPos().add(new Location(0,-1));
+            case(Direction.LEFT):
+            return getRobotPos().add(new Location(-1,0));
+            case(Direction.RIGHT):
+            return getRobotPos().add(new Location(1,0));
+        }
+        return new Location(0,0);
+    }
+
+    public void robotTurnRight(){//TODO zal de robot direction op deze manier juist geset worden?
+        this.getRobotDir().turnRight();
+    }
+
+    public void robotTurnLeft(){//TODO idem als hierboven.
+        this.getRobotDir().turnLeft();
+    }
+
+    public void robotForward(){
+        this.setRobotPos(this.robotStepPos());
+    }
 
     /**
      * 

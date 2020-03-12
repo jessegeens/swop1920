@@ -8,6 +8,9 @@ import ui.blocks.*;
 import utilities.*;
 import model.*;
 import model.blocks.ModelBlock;
+import model.blocks.ModelNotBlock;
+import model.blocks.ModelWallInFrontBlock;
+import model.blocks.ModelWhileIfBlock;
 
 public class GlobalController {
 //on creation provide instructions to modelcontroller
@@ -65,7 +68,23 @@ public class GlobalController {
             startRunning();
             setCurrent(this.modelController.getPWindow().getStartBlock());
         }
-        
+        step();
+        this.setCurrent(findNextBlock());
+        this.highlightNext();
+    }
+
+    public void step(){
+        switch(getCurrent().getBlockType().getType()){
+            case(Blocktype.MOVEFORWARD):
+            this.modelController.getGrid().robotForward();
+            break;
+            case(Blocktype.TURNLEFT):
+            this.modelController.getGrid().robotTurnLeft();
+            break;
+            case(Blocktype.TURNRIGHT):
+            this.modelController.getGrid().robotTurnRight();
+            break;
+        }
     }
 
 
@@ -98,9 +117,32 @@ public class GlobalController {
         findNextBlock().setHighlight();
     }
 
-    public ModelBlock findNextBlock(){
-        return null; //TODO next block in execution
+    public ModelBlock findNextBlock(){//Gives the bottomplug if it is a normal block or if the condition of if or while block fails, if condition
+        //of while or if succeeds it gives the first cavity block of the if or while block.
+        //TODO next block in execution
+        if ((getCurrent().getBlockType().getType() == Blocktype.IF) || (getCurrent().getBlockType().getType() == Blocktype.WHILE)){
+            if (evaluateCurrentCondition()){
+                return ((ModelWhileIfBlock)getCurrent()).getCavitySocket();
+            }
+        }
+        return getCurrent().getBottomPlug();
     }
+
+    public boolean evaluateCurrentCondition(){
+        boolean negate = false;
+        ModelBlock cond = getCurrent().getRightSocket();
+        while (cond.hasRightSocket()){
+            if(cond instanceof ModelNotBlock){
+                negate = !negate;
+                cond = cond.getRightSocket();
+            }
+            else if((cond instanceof ModelWallInFrontBlock) && this.modelController.getGrid().wallInFrontOfRobot()){
+                return !negate;
+            }
+        }
+        return negate;
+    }
+
 
     /*
     public void renderUIElements(Graphics g, Rectangle uiBounds){

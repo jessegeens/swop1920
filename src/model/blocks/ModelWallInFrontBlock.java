@@ -6,7 +6,7 @@ import utilities.Location;
 /**
  * Class representing the 'wall in front' block with one plug to their left.
  */
-public class ModelWallInFrontBlock extends ModelBlock {
+public class ModelWallInFrontBlock extends ModelBlock implements LeftPlug{
     private ModelBlock leftPlug;
 
 
@@ -20,11 +20,10 @@ public class ModelWallInFrontBlock extends ModelBlock {
      */
     @Override
     public void disconnect() {
-        if (this.getLeftPlug() != null){
-            this.getLeftPlug().setRightSocket(null);
+        if (this.hasLeftPlug()){
+            ((RightSocket)this.getLeftPlug()).setRightSocket(null);
             this.setLeftPlug(null);
         }
-
     }
 
     /**
@@ -32,9 +31,9 @@ public class ModelWallInFrontBlock extends ModelBlock {
      */
     @Override
     public void connect(ModelBlock block) {
-        if ((block.getRightSocket() == null) && (this.getLeftPlugPos().getDistance(block.getRightSocketPos()) < 50)){
+        if (block.hasRightSocket() && (this.getLeftPlugPos().getDistance(((RightSocket)block).getRightSocketPos()) < 50)){
             this.setLeftPlug(block);
-            block.setRightSocket(this); 
+            ((RightSocket)block).setRightSocket(this); 
             this.setPos(block.getPos().add(new Location(block.getWidth(),0)));   
         }
 
@@ -54,6 +53,16 @@ public class ModelWallInFrontBlock extends ModelBlock {
     @Override
     public void setLeftPlug(ModelBlock leftPlug) {
         this.leftPlug = leftPlug;
+    }
+
+    @Override
+    public Location getLeftPlugPos() {
+        return super.getPos().add(- ModelBlock.PLUGSIZE / 2, + this.getHeight() / 2);
+    }
+
+    @Override
+    public boolean hasLeftPlug(){
+        return true;
     }
 
     

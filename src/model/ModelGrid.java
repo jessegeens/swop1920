@@ -20,7 +20,7 @@ public class ModelGrid extends ModelWindow {
         super(width,height);
         this.setGoalCell(goal);
         this.setCellHeight(cellSize); //random waarde gekozen hier
-        this.setCellHeight(cellSize); //idem hier
+        this.setCellWidth(cellSize); //idem hier
         this.setRobot(rbt);
         this.setWalls(new ArrayList<Location>());
     }

@@ -38,8 +38,8 @@ public class ModelController{
 
 
     public void moveBlock(ModelBlock block, Location newPos){
-        if (!block.equals(null)){
-            block.move(newPos, this.findClosestBlock(block));
+        if (block != null){
+            block.setPos(newPos);
         }
         
     }
@@ -200,21 +200,25 @@ public class ModelController{
 
     public void handleMouseEvent(int id, Location eventLocation, int clickCount){
         if(eventLocation.getX() > 0 && eventLocation.getX() < MyCanvasWindow.WIDTH/3 ){
+            System.out.println("Palette mouseEvent");
 
 
 
             this.handlePaletteMouseEvent(id, eventLocation, clickCount);
+
             //TODO get activeblock?
             //TODO check if a new block has been created
         }
         if(eventLocation.getX() > MyCanvasWindow.WIDTH/3 && eventLocation.getX() <  2 * MyCanvasWindow.WIDTH/3){
+            System.out.println("Programarea mouseEvent");
             this.handleProgramAreaMouseEvent(id, eventLocation, clickCount);
+            
         }
 
 
 
 
-        System.out.println("mouse");
+        
 
 
 
@@ -226,12 +230,15 @@ public class ModelController{
         //MOUSE_PRESSED 501
         if(id == 501){
             //return the selected block if one is clicked
+            System.out.println("MOUSE PRESSED start");
             this.active = palette.handleMouseDown(eventLocation);
+            
 
         }
         //MOUSE RELEASED 502
         else if(id==502){
             //MOUSE RELEASED, delete the currently held item (if there is one)
+            System.out.println("MOUSE RELEASED start");
             this.active = null;
     
 
@@ -239,6 +246,7 @@ public class ModelController{
         //MOUSE MOVED 506
         else if(id==506){
             //MOUSE MOVED, if there is a currently held block, move it
+            System.out.println("MOUSE MOVED start");
             this.moveBlock(active, eventLocation);
         }
 
@@ -249,16 +257,19 @@ public class ModelController{
         if(id == 501){
             //return the topmost active block if one is in the click location
             //you remove it from the local list in pWindow until mouseup
-            pWindow.handleMouseDown(eventLocation);
+            System.out.println("MOUSE PRESSED start");
+            this.active = pWindow.handleMouseDown(eventLocation);
         }
         //MOUSE RELEASED 502
         else if(id==502){
+            System.out.println("MOUSE RELEASED start");
             pWindow.addBlock(active);
             this.active = null;
 
         }
         //MOUSE MOVED 506
         else if(id==506){
+            System.out.println("MOUSE MOVED start");
             this.moveBlock(active, eventLocation);
 
         }
@@ -286,6 +297,8 @@ public class ModelController{
     protected ModelBlock getActiveBlock(){
         return this.active;
     }
+
+    
     
 }
 

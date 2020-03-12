@@ -127,18 +127,28 @@ class ModelProgramWindow extends ModelWindow{
     }
 
     public void addBlock(ModelBlock toBeAdded){
-        this.blocks.add(toBeAdded);
+        System.out.println("here");
+        if(toBeAdded != null){
+            this.blocks.add(toBeAdded);
+            System.out.println("adds");
+        }
+        System.out.println("notadds");
+        
     }
 
     public ModelBlock handleMouseDown(Location eventLocation){
         //has to be done in reverse order due to rendering (ask Bert if unclear)
+
+        
         for(int i = this.getBlocks().size() - 1; i >= 0; i--){
             if(this.getBlocks().get(i).inBounds(eventLocation)){
                 ModelBlock toBeReturned = this.getBlocks().get(i);
                 this.removeBlock(toBeReturned);
+                
                 return toBeReturned;
             }
         }
+        
 
 
 

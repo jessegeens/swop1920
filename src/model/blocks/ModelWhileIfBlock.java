@@ -25,9 +25,6 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         this.setRightSocket(null);
         this.setCavityPlug(this);
         this.setCavitySocket(this);
-
-        this.updateCavityHeight();
-        this.updateCavityWidth();
     }
 
     /**
@@ -50,6 +47,14 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      */
     @Override
     public void connect(ModelBlock block) {
+        if ((block.hasBottomPlug() && (this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < 50))){
+            this.setCavitySocket(block);
+            ((BottomPlug)block).setBottomPlug(this);
+        }
+        if ((block.hasTopSocket() && (this.getCavityPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < 50))){
+            this.setCavityPlug(block);
+            ((TopSocket)block).setTopSocket(this);
+        }
         if ((block.hasBottomPlug() && (this.getTopSocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < 50))){
             this.setTopSocket(block);
             ((BottomPlug)block).setBottomPlug(this); 
@@ -64,14 +69,6 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             this.setRightSocket(block);
             ((LeftPlug)block).setLeftPlug(this); 
             this.setPos(block.getPos().add(new Location(-this.getWidth(),0)));   
-        }
-        if ((block.hasLeftPlug() && (this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < 50))){
-            this.setCavitySocket(block);
-            ((BottomPlug)block).setBottomPlug(this);
-        }
-        if ((block.hasTopSocket() && (this.getCavityPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < 50))){
-            this.setCavityPlug(block);
-            ((TopSocket)block).setTopSocket(this);
         }
     }
 
@@ -109,20 +106,37 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
 
     /**
      * Getter for the height of the cavity of the while and if block.
-     * @return
+     * @return the height of the block
      */
     public int getCavityHeight() {
         if(!getCavityBlocks().isEmpty()){
             return getCavityBlocks().size() * HEIGHTSTD + HEIGHTSTD;
         }
-        else return HEIGHTSTD;
+        else return 0;
     }
 
+    /**
+     * 
+     * @return the width of the block
+     */
     public int getCavityWidth() {
         if(!getCavityBlocks().isEmpty())
-            return getCavityBlocks().get(0).getWidth() + ModelBlock.WIDTHSTD;
+            return getWidestBlockInCavity().getWidth() + WIDTHSTD;
         else
-            return ModelBlock.WIDTHSTD;
+            return 0;
+    }
+
+    /**
+     * 
+     * @return the widest block in the cavity of a if or while block
+     */
+    public ModelBlock getWidestBlockInCavity(){
+        ModelBlock widest = getCavityBlocks().get(0);
+        for(int i = 0; i < this.getCavityBlocks().size(); i++){
+            ModelBlock current = this.getCavityBlocks().get(i);
+            if(current.getWidth() > widest.getWidth()) widest = current;
+        }
+        return widest;
     }
 
     /**
@@ -188,11 +202,11 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     }
 
     public Location getCavitySocketPos() {
-        return this.getPos().add(new Location(this.getWidth()/2,ModelBlock.HEIGHTSTD/2));
+        return this.getPos().add(new Location(ModelBlock.WIDTHSTD/2 + getCavityWidth(), this.getHeight() - ModelBlock.HEIGHTSTD/3));
     }
 
     public Location getCavityPlugPos() {
-        return this.getPos().add(new Location(this.getWidth()/2,this.getHeight() - ModelBlock.HEIGHTSTD/2));
+        return this.getPos().add(new Location(ModelBlock.WIDTHSTD/2 + getCavityWidth(), 2*ModelBlock.HEIGHTSTD/3));
     }
 
     public Location getTopSocketPos() {
@@ -204,7 +218,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     }
 
     public Location getRightSocketPos() {
-        return super.getPos().add(this.getWidth() + ModelBlock.PLUGSIZE / 2, this.getHeight() / 2);
+        return super.getPos().add(this.getWidth() - ModelBlock.PLUGSIZE / 2, this.getHeight() / 2);
     }
 
     @Override

@@ -38,15 +38,18 @@ public class ModelNotBlock extends ModelBlock implements RightSocket,LeftPlug{
     @Override
     public void connect(ModelBlock block) {
         if ((block.hasLeftPlug() && (this.getRightSocketPos().getDistance(((LeftPlug)block).getLeftPlugPos()) < 50))){
+            System.out.println("NOT CONNECTS LEFT");
             this.setRightSocket(block);
             ((LeftPlug)block).setLeftPlug(this);
             this.setPos(block.getPos().add(new Location(-this.getWidth(),0)));   
         }
         if ((block.hasRightSocket()) && (this.getLeftPlugPos().getDistance(((RightSocket)block).getRightSocketPos()) < 50)){
+            System.out.println("NOT CONNECTS RIGHT");
             this.setLeftPlug(block);
             ((RightSocket)block).setRightSocket(this); 
             this.setPos(block.getPos().add(new Location(block.getWidth(),0)));   
         }
+        
     }
     
     /**
@@ -88,7 +91,7 @@ public class ModelNotBlock extends ModelBlock implements RightSocket,LeftPlug{
 
     @Override
     public Location getRightSocketPos() {
-        return super.getPos().add(this.getWidth() + ModelBlock.PLUGSIZE/2, + this.getHeight() / 2);
+        return super.getPos().add(this.getWidth() - ModelBlock.PLUGSIZE/2, + this.getHeight() / 2);
     }
     
     @Override

@@ -25,9 +25,6 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         this.setRightSocket(null);
         this.setCavityPlug(this);
         this.setCavitySocket(this);
-
-        this.getCavityHeight();
-        this.getCavityWidth();
     }
 
     /**
@@ -65,7 +62,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             ((LeftPlug)block).setLeftPlug(this); 
             this.setPos(block.getPos().add(new Location(-this.getWidth(),0)));   
         }
-        if ((block.hasLeftPlug() && (this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < 50))){
+        if ((block.hasBottomPlug() && (this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < 50))){
             this.setCavitySocket(block);
             ((BottomPlug)block).setBottomPlug(this);
         }
@@ -109,20 +106,37 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
 
     /**
      * Getter for the height of the cavity of the while and if block.
-     * @return
+     * @return the height of the block
      */
     public int getCavityHeight() {
         if(!getCavityBlocks().isEmpty()){
             return getCavityBlocks().size() * HEIGHTSTD + HEIGHTSTD;
         }
-        else return HEIGHTSTD;
+        else return 0;
     }
 
+    /**
+     * 
+     * @return the width of the block
+     */
     public int getCavityWidth() {
         if(!getCavityBlocks().isEmpty())
-            return getCavityBlocks().get(0).getWidth() + ModelBlock.WIDTHSTD;
+            return getWidestBlockInCavity().getWidth() + WIDTHSTD;
         else
-            return ModelBlock.WIDTHSTD;
+            return 0;
+    }
+
+    /**
+     * 
+     * @return the widest block in the cavity of a if or while block
+     */
+    public ModelBlock getWidestBlockInCavity(){
+        ModelBlock widest = getCavityBlocks().get(0);
+        for(int i = 0; i < this.getCavityBlocks().size(); i++){
+            ModelBlock current = this.getCavityBlocks().get(i);
+            if(current.getWidth() > widest.getWidth()) widest = current;
+        }
+        return widest;
     }
 
     /**

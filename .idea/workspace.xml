@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bdfc6573-f389-4d9a-9e2c-4612aa30b1a8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/model/ModelProgramWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ModelProgramWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelMoveBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelMoveBlock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/model/blocks/ModelBlockTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/blocks/ModelBlockTests.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,11 +31,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/model/blocks/ModelBlockTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="54" column="38" lean-forward="true" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
+            <state relative-caret-position="201">
+              <caret line="44" column="9" lean-forward="true" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -41,11 +43,21 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="283">
-              <caret line="67" column="22" selection-start-line="67" selection-start-column="22" selection-end-line="67" selection-end-column="22" />
+            <state relative-caret-position="232">
+              <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
+              <folding>
+                <element signature="e#2921#2922#0" expanded="true" />
+                <element signature="e#2958#2959#0" expanded="true" />
+                <element signature="e#3063#3064#0" expanded="true" />
+                <element signature="e#3105#3106#0" expanded="true" />
+                <element signature="e#3197#3198#0" expanded="true" />
+                <element signature="e#3235#3236#0" expanded="true" />
+                <element signature="e#3342#3343#0" expanded="true" />
+                <element signature="e#3386#3387#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -111,8 +123,8 @@
         <option value="$PROJECT_DIR$/test/utilities/DirectionTests.java" />
         <option value="$PROJECT_DIR$/test/utilities/BlocktypeTests.java" />
         <option value="$PROJECT_DIR$/test/utilities/UtilitiesTests.java" />
-        <option value="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" />
         <option value="$PROJECT_DIR$/test/model/blocks/ModelBlockTests.java" />
+        <option value="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" />
       </list>
     </option>
   </component>
@@ -296,7 +308,7 @@
       <updated>1584015779458</updated>
       <workItem from="1584015781005" duration="14666000" />
       <workItem from="1584041890631" duration="9456000" />
-      <workItem from="1584091824271" duration="3489000" />
+      <workItem from="1584091824271" duration="3587000" />
     </task>
     <servers />
   </component>
@@ -333,7 +345,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27611000" />
+    <option name="totallyTimeSpent" value="27709000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -380,7 +392,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java</url>
-          <line>67</line>
+          <line>64</line>
           <properties />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
@@ -809,19 +821,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java">
+    <entry file="file://$PROJECT_DIR$/test/model/blocks/ModelBlockTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="67" column="22" selection-start-line="67" selection-start-column="22" selection-end-line="67" selection-end-column="22" />
+        <state relative-caret-position="201">
+          <caret line="44" column="9" lean-forward="true" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/blocks/ModelBlockTests.java">
+    <entry file="file://$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="54" column="38" lean-forward="true" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
+        <state relative-caret-position="232">
+          <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#2921#2922#0" expanded="true" />
+            <element signature="e#2958#2959#0" expanded="true" />
+            <element signature="e#3063#3064#0" expanded="true" />
+            <element signature="e#3105#3106#0" expanded="true" />
+            <element signature="e#3197#3198#0" expanded="true" />
+            <element signature="e#3235#3236#0" expanded="true" />
+            <element signature="e#3342#3343#0" expanded="true" />
+            <element signature="e#3386#3387#0" expanded="true" />
           </folding>
         </state>
       </provider>

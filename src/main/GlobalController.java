@@ -31,7 +31,7 @@ public class GlobalController {
 
     // Constructor
     public GlobalController(){
-        GridInfo gridInfo = new GridInfo(GOAL_CELL, new ArrayList<Location>(), new ModelRobot(ROBOT_START_LOCATION, ROBOT_START_DIRECTION), CELL_SIZE);
+        GridInfo gridInfo = new GridInfo(GOAL_CELL, new ArrayList<Location>(), ROBOT_START_LOCATION, ROBOT_START_DIRECTION, CELL_SIZE);
         this.modelController = new ModelController(gridInfo, this.MAX_BLOCKS);
         System.out.println(modelController.getModelBlocks());
         this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT, modelController.getModelBlocks(), gridInfo);
@@ -108,6 +108,8 @@ public class GlobalController {
         switch(getCurrent().getBlockType().getType()){
             case(Blocktype.MOVEFORWARD):
             this.modelController.getGrid().robotForward();
+            
+            //TODO this.getUIController().;
             break;
             case(Blocktype.TURNLEFT):
             this.modelController.getGrid().robotTurnLeft();

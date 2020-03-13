@@ -17,7 +17,7 @@ public class ModelGrid extends ModelWindow {
 
 
 
-    public ModelGrid(int width, int height, Location goal, Location robotPos, Direction robotDir){
+    public ModelGrid(int width, int height, Location goal, Location robotPos, Direction robotDir, ArrayList<Location> walls){ 
         super(width,height);
         this.setGoalCell(goal);
         this.setCellHeight(cellSize); //random waarde gekozen hier

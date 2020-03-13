@@ -14,6 +14,7 @@ public abstract class UIElement {
 
 	public abstract void render(Graphics g);
 	
+	// Constructor
 	public UIElement(Location location) {
 		if(location == null)
 			throw new IllegalArgumentException("Invalid location given to UIElement init");

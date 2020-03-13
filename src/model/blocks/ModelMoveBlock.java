@@ -38,13 +38,13 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
      */
     @Override
     public void connect(ModelBlock block) {
-        if ((block.hasBottomPlug() && (this.getTopSocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < 50))) {
+        if ((block.hasBottomPlug() && (this.getTopSocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5))) {
             System.out.println("TOPSOCKET WORKS of active");
             this.setTopSocket(block);
             ((BottomPlug)block).setBottomPlug(this);  
             this.setPos(block.getPos().add(new Location(0,block.getHeight())));  
         }
-        if ((block.hasTopSocket() && (this.getBottomPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < 50))){
+        if ((block.hasTopSocket() && (this.getBottomPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5))){
             System.out.println("BOTTOMSOCKET WORKS of active");
             this.setBottomPlug(block);
             ((TopSocket)block).setTopSocket(this); 

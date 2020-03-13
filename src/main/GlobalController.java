@@ -73,8 +73,10 @@ public class GlobalController {
         }
         step();
         if(this.getCurrent().equals(this.getModelController().getPWindow().getFinishBlock())) stopRunning();
-        this.setCurrent(findNextBlock());
-        if(!this.getCurrent().equals(this.getModelController().getPWindow().getFinishBlock())) this.highlightNext();
+        else{
+            this.setCurrent(findNextBlock());
+            if(!this.getCurrent().equals(this.getModelController().getPWindow().getFinishBlock())) this.highlightNext();
+        }
     }
 
     public void step(){

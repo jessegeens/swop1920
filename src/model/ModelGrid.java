@@ -39,6 +39,7 @@ public class ModelGrid extends ModelWindow {
      * @return the new position of the robot after stepping
      */
     public Location robotStepPos(){
+        
         switch(getRobotDir().getDirection()){
             case(Direction.DOWN):
             return getRobotPos().add(new Location(0,1));
@@ -157,6 +158,11 @@ public class ModelGrid extends ModelWindow {
      */
     public void setRobotPos(Location robotPos) {
         this.robotPos = robotPos;
+        System.out.println("ROBOT POS UPDATE");
+        System.out.println(this.robotPos.getX());
+        System.out.println(this.robotPos.getY());
+
+
     }
 
     /**

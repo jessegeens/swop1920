@@ -87,7 +87,8 @@ public class UtilitiesTests {
         Location goal = new Location(10, 15);
         Location rPos = new Location(20, 25);
         Direction rDir = new Direction(Direction.RIGHT);
-        ModelGrid grid = new ModelGrid(10, 10, goal, rPos, rDir);
+        ArrayList<Location> walls = new ArrayList<>();
+        ModelGrid grid = new ModelGrid(10, 10, goal, rPos, rDir, walls);
         GridInfo gridInfo = new GridInfo(grid, cellSize);
         assertEquals(10, gridInfo.getGoalCell().getX());
         assertEquals(25, gridInfo.getRobotLocation().getY());

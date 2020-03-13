@@ -183,8 +183,6 @@ public class ModelController{
      * general handler for mouse events, checks where the mouse event should be handled
      * 
      * TODO: for some reason I can't use the static fields MouseEvent.MOUSE_PRESSED etc
-     * TODO: get activeblock?
-     * TODO: check if a new block has been created
      * 
      * @param {int} id id of the event: - 500 = MOUSE_CLICKED: Press + release (comes after released + pressed), only comes if no dragging happended
      *                                  - 501 = MOUSE_PRESSED: Where you start holding the button down

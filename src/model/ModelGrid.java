@@ -129,6 +129,11 @@ public class ModelGrid extends ModelWindow {
 
     public void setRobotPos(Location robotPos) {
         this.robotPos = robotPos;
+        System.out.println("ROBOT POS UPDATE");
+        System.out.println(this.robotPos.getX());
+        System.out.println(this.robotPos.getY());
+
+
     }
 
     public Direction getRobotDir() {

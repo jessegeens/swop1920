@@ -72,9 +72,12 @@ public class GlobalController {
             case 27: //Esc
                 this.stopRunning();
                 break;
+            default:
+                this.uiController.updateBlocks(this.modelController.getModelBlocks());
+                break;
         }
         //TODO create function in modelcontroller
-        this.uiController.updateBlocks(this.modelController.getModelBlocks());
+        
     }
 
     /**

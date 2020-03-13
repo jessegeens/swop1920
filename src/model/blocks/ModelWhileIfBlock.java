@@ -25,9 +25,6 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         this.setRightSocket(null);
         this.setCavityPlug(this);
         this.setCavitySocket(this);
-
-        this.updateCavityHeight();
-        this.updateCavityWidth();
     }
 
     /**
@@ -65,7 +62,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             ((LeftPlug)block).setLeftPlug(this); 
             this.setPos(block.getPos().add(new Location(-this.getWidth(),0)));   
         }
-        if ((block.hasLeftPlug() && (this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < 50))){
+        if ((block.hasBottomPlug() && (this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < 50))){
             this.setCavitySocket(block);
             ((BottomPlug)block).setBottomPlug(this);
         }
@@ -120,9 +117,22 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
 
     public int getCavityWidth() {
         if(!getCavityBlocks().isEmpty())
-            return getCavityBlocks().get(0).getWidth() + ModelBlock.WIDTHSTD;
+            return getWidestBlockInCavity().getWidth() + WIDTHSTD;
         else
-            return ModelBlock.WIDTHSTD;
+            return WIDTHSTD;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public ModelBlock getWidestBlockInCavity(){
+        ModelBlock widest = getCavityBlocks().get(0);
+        for(int i = 0; i < this.getCavityBlocks().size(); i++){
+            ModelBlock current = this.getCavityBlocks().get(i);
+            if(current.getWidth() > widest.getWidth()) widest = current;
+        }
+        return widest;
     }
 
     /**

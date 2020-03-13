@@ -212,18 +212,20 @@ public abstract class ModelBlock extends ModelElement{
      * @return the height of the block.
      */
     public int getHeight() {
-		return this.height;
+		if (this instanceof ModelWhileIfBlock){
+            return (((ModelWhileIfBlock)this).getCavityHeight() + HEIGHTSTD);
+        }
+        else return HEIGHTSTD;
     }
     
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
     /**
      * @return the width of the block.
      */
     public int getWidth() {
-		return this.width;
+		if (this instanceof ModelWhileIfBlock){
+            return (((ModelWhileIfBlock)this).getCavityWidth() + WIDTHSTD);
+        }
+        else return WIDTHSTD;
     }
     
     /**

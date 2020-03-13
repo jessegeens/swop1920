@@ -39,6 +39,7 @@ public class UIGrid {
      * @param {Location} newRobotLocation Location the robot should now have
      */
     public void updateRobotLocation(Location newRobotLocation){
+        System.out.println("moving robot in UI");
         this.robotLocation = newRobotLocation;
 
     }

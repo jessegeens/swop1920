@@ -107,14 +107,14 @@ public class GlobalController {
     public void step(){
         switch(getCurrent().getBlockType().getType()){
             case(Blocktype.MOVEFORWARD):
-            this.modelController.getGrid().robotForward();
-            break;
+                this.modelController.getGrid().robotForward();
+                break;
             case(Blocktype.TURNLEFT):
-            this.modelController.getGrid().robotTurnLeft();
-            break;
+                this.modelController.getGrid().robotTurnLeft();
+                break;
             case(Blocktype.TURNRIGHT):
-            this.modelController.getGrid().robotTurnRight();
-            break;
+                this.modelController.getGrid().robotTurnRight();
+                break;
         }
     }
 

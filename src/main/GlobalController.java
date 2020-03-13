@@ -32,11 +32,7 @@ public class GlobalController {
     // Constructor
     public GlobalController(){
         GridInfo gridInfo = new GridInfo(GOAL_CELL, new ArrayList<Location>(), ROBOT_START_LOCATION, ROBOT_START_DIRECTION, CELL_SIZE);
-<<<<<<< HEAD
-        this.modelController = new ModelController(gridInfo, this.MAX_BLOCKS);
-=======
         this.modelController = new ModelController(gridInfo, this.MAX_BLOCKS, this.CELL_SIZE);
->>>>>>> 3908de17d5043981911e0e7607fffcb4797ec440
         System.out.println(modelController.getModelBlocks());
         this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT, modelController.getModelBlocks(), gridInfo);
         this.running = false;
@@ -111,15 +107,10 @@ public class GlobalController {
     public void step(){
         switch(getCurrent().getBlockType().getType()){
             case(Blocktype.MOVEFORWARD):
-<<<<<<< HEAD
             this.modelController.getGrid().robotForward();
-            
-            //TODO this.getUIController().;
+            GridInfo gridInfo = this.getModelController().getGrid().getGridInfo();
+            this.getUIController().updateGrid(gridInfo);
             break;
-=======
-                this.modelController.getGrid().robotForward();
-                break;
->>>>>>> 3908de17d5043981911e0e7607fffcb4797ec440
             case(Blocktype.TURNLEFT):
                 this.modelController.getGrid().robotTurnLeft();
                 break;

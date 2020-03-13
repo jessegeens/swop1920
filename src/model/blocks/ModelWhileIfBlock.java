@@ -16,7 +16,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     private ModelBlock cavitySocket;
     private ModelBlock cavityPlug;
 
-
+    // Constructor
     public ModelWhileIfBlock(Location pos, Blocktype type){
         super(pos,type);
 
@@ -211,40 +211,67 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         this.cavityPlug = cavityPlug;
     }
 
+    /**
+     * 
+     * @return the position of the cavity socket
+     */
     public Location getCavitySocketPos() {
         return this.getPos().add(new Location(ModelBlock.STD_WIDTH/2 + getCavityWidth(), this.getHeight() - ModelBlock.STD_HEIGHT/3));
     }
 
+    /**
+     * 
+     * @return the position of the cavity plug
+     */
     public Location getCavityPlugPos() {
         return this.getPos().add(new Location(ModelBlock.STD_WIDTH/2 + getCavityWidth(), 2*ModelBlock.STD_HEIGHT/3));
     }
 
+    /**
+     * 
+     * @return the position of the top socket
+     */
     public Location getTopSocketPos() {
         return super.getPos().add(this.getWidth() / 2, + ModelBlock.PLUGSIZE / 2);
     }
 
+    /**
+     * 
+     * @return the position of the bottom plug
+     */
     public Location getBottomPlugPos() {
         return super.getPos().add(this.getWidth() / 2,+this.getHeight() + ModelBlock.PLUGSIZE / 2);
     }
 
+    /**
+     * 
+     * @return the position of the right socket
+     */
     public Location getRightSocketPos() {
         return super.getPos().add(this.getWidth() - ModelBlock.PLUGSIZE / 2, this.getHeight() / 2);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasTopSocket(){
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasBottomPlug(){
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasRightSocket(){
         return true;
     }
-
-    
 }

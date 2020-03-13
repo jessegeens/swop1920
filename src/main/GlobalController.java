@@ -31,8 +31,8 @@ public class GlobalController {
 
     // Constructor
     public GlobalController(){
-        GridInfo gridInfo = new GridInfo(GOAL_CELL, new ArrayList<Location>(), new ModelRobot(ROBOT_START_LOCATION, ROBOT_START_DIRECTION), CELL_SIZE);
-        this.modelController = new ModelController(gridInfo, this.MAX_BLOCKS);
+        GridInfo gridInfo = new GridInfo(GOAL_CELL, new ArrayList<Location>(), ROBOT_START_LOCATION, ROBOT_START_DIRECTION, CELL_SIZE);
+        this.modelController = new ModelController(gridInfo, this.MAX_BLOCKS, this.CELL_SIZE);
         System.out.println(modelController.getModelBlocks());
         this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT, modelController.getModelBlocks(), gridInfo);
         this.running = false;
@@ -107,14 +107,14 @@ public class GlobalController {
     public void step(){
         switch(getCurrent().getBlockType().getType()){
             case(Blocktype.MOVEFORWARD):
-            this.modelController.getGrid().robotForward();
-            break;
+                this.modelController.getGrid().robotForward();
+                break;
             case(Blocktype.TURNLEFT):
-            this.modelController.getGrid().robotTurnLeft();
-            break;
+                this.modelController.getGrid().robotTurnLeft();
+                break;
             case(Blocktype.TURNRIGHT):
-            this.modelController.getGrid().robotTurnRight();
-            break;
+                this.modelController.getGrid().robotTurnRight();
+                break;
         }
     }
 
@@ -150,7 +150,7 @@ public class GlobalController {
     public void stopRunning(){
         this.running = false;
         if(!this.getCurrent().equals(this.getModelController().getPWindow().getFinishBlock())) findNextBlock().setUnHighlight();
-        this.getModelController().setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, GOAL_CELL, ROBOT_START_LOCATION, ROBOT_START_DIRECTION, new ArrayList<Location>()));
+        this.getModelController().setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, GOAL_CELL, ROBOT_START_LOCATION, ROBOT_START_DIRECTION, new ArrayList<Location>(), CELL_SIZE));
     }
 
     /**

@@ -107,7 +107,7 @@ public class GlobalControllerTests {
         Location goal = new Location(4,4);
         Location rPos = new Location(0, 0);
         Direction rDir = new Direction(Direction.RIGHT);
-        ModelGrid grid = new ModelGrid(5, 5, goal, rPos, rDir, walls);
+        ModelGrid grid = new ModelGrid(5, 5, goal, rPos, rDir, walls, 100);
         gC.getModelController().setGrid(grid);
         gC.getModelController().getPWindow().setBlocks(mBlocks);
         gC.execute();

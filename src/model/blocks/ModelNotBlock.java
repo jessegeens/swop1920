@@ -10,7 +10,6 @@ public class ModelNotBlock extends ModelBlock implements RightSocket,LeftPlug{
     private ModelBlock rightSocket;
     private ModelBlock leftPlug;
 
-
     public ModelNotBlock(Location pos, Blocktype type){
         super(pos,type);
         this.setRightSocket(null);
@@ -84,21 +83,33 @@ public class ModelNotBlock extends ModelBlock implements RightSocket,LeftPlug{
         this.leftPlug = leftPlug;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Location getLeftPlugPos() {
         return super.getPos().add(- ModelBlock.PLUGSIZE / 2, + this.getHeight() / 2);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Location getRightSocketPos() {
         return super.getPos().add(this.getWidth() - ModelBlock.PLUGSIZE/2, + this.getHeight() / 2);
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasRightSocket(){
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasLeftPlug(){
         return true;

@@ -179,19 +179,43 @@ public class ModelProgramWindow extends ModelWindow{
      * return null if no closest block
      */
     public ModelBlock findClosestBlock(ModelBlock block){
-        ModelBlock closest = this.getPABlocks().get(0);
-        boolean updateValue = false;
+
+        System.out.println("list length");
+        System.out.println(this.getPABlocks().size());
+
+        ModelBlock closest_ = this.getPABlocks().get(0);
+        ModelBlock closest = null;
+
+
 
         for(int i = 0; i < this.getPABlocks().size(); i++){
             ModelBlock current = this.getPABlocks().get(i);
-            if(current.getPos().getDistance(block.getPos()) < closest.getPos().getDistance(block.getPos())  && closest != current){
-                updateValue = true;
+            System.out.println("INDEX IN LIST");
+            System.out.println(i);
+            System.out.println("CURRENT BLOCK ID");
+            System.out.println(this.getPABlocks().get(i).getBlockType().getType());
+            
+            if(closest == null){
+                if(current.getPos().getDistance(block.getPos()) > 0 ){
+                    if(current != block){
+                    closest = current;
+                    }
+                }
+
+            }
+            else if(current.getPos().getDistance(block.getPos()) < closest.getPos().getDistance(block.getPos()) ){
+                if(current != block){
+                    closest = current;
+                    System.out.println("CLOSEST CANDIDATE FOUND NO ID ISSUE");
+
+                }
+                System.out.println("CLOSEST CANDIDATE FOUND");
+                
             }
         }
-        if(updateValue){
-            return closest;
-        }
-        return null;          
+        return closest;
+        
+                  
     }
 
     public ModelBlock handleMouseDown(Location eventLocation){
@@ -211,7 +235,16 @@ public class ModelProgramWindow extends ModelWindow{
     public void handleMouseUp(Location eveLocation, ModelBlock activeB){
         this.addBlock(activeB);
         ModelBlock closest = this.findClosestBlock(activeB);
-        if (closest != null) activeB.connect(closest);
+        if (closest != null){
+            System.out.println("CLOSEST IS NOT NULL");
+            System.out.println(closest.getBlockType().getType());
+            System.out.println("list length");
+            
+            activeB.connect(closest);
+        } 
+        else{
+            System.out.println("CLOSEST IS NULL");
+        }
     }
 
    

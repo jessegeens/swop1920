@@ -45,6 +45,7 @@ public abstract class ModelBlock extends ModelElement{
     }
 
     public void setUnHighlight(){
+        System.out.println("UNHIGHLIGHT");
         this.highlighted = false;
     }
 

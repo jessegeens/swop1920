@@ -77,6 +77,7 @@ public class ModelGrid extends ModelWindow {
     public void robotForward(){
         System.out.println("moving robot forward");
         this.setRobotPos(this.robotStepPos());
+        
     }
 
     /**

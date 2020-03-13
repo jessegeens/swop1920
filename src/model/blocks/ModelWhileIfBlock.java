@@ -106,25 +106,29 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
 
     /**
      * Getter for the height of the cavity of the while and if block.
-     * @return
+     * @return the height of the block
      */
     public int getCavityHeight() {
         if(!getCavityBlocks().isEmpty()){
             return getCavityBlocks().size() * HEIGHTSTD + HEIGHTSTD;
         }
-        else return HEIGHTSTD;
-    }
-
-    public int getCavityWidth() {
-        if(!getCavityBlocks().isEmpty())
-            return getWidestBlockInCavity().getWidth() + WIDTHSTD;
-        else
-            return WIDTHSTD;
+        else return 0;
     }
 
     /**
      * 
-     * @return
+     * @return the width of the block
+     */
+    public int getCavityWidth() {
+        if(!getCavityBlocks().isEmpty())
+            return getWidestBlockInCavity().getWidth() + WIDTHSTD;
+        else
+            return 0;
+    }
+
+    /**
+     * 
+     * @return the widest block in the cavity of a if or while block
      */
     public ModelBlock getWidestBlockInCavity(){
         ModelBlock widest = getCavityBlocks().get(0);

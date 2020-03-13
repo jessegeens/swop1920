@@ -20,7 +20,8 @@ public class ModelTests {
         Location loc = new Location(40, 40);
         Location rPos = new Location(0, 0);
         Direction rDir = new Direction(0);
-        ModelGrid grid = new ModelGrid(200, 200, loc, rPos, rDir);
+        ArrayList<Location> walls = new ArrayList<>();
+        ModelGrid grid = new ModelGrid(200, 200, loc, rPos, rDir, walls);
         assertEquals(loc, grid.getGoalCell());
         Location wall1 = new Location(12, 15);
         Location wall2 = new Location(22, 24);

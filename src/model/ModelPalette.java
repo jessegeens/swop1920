@@ -2,8 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-import org.w3c.dom.events.MouseEvent;
-
 import model.blocks.*;
 import utilities.Blocktype;
 import utilities.Location;
@@ -13,8 +11,6 @@ import utilities.Location;
  */
 class ModelPalette extends ModelWindow{
 
-    
-
     private final Location turnLeftLocation = new Location(20, 20);
     private final Location turnRightLocation = new Location(180, 20);
     private final Location forwardLocation = new Location(20, 180);
@@ -22,8 +18,6 @@ class ModelPalette extends ModelWindow{
     private final Location wallInFrontLocation = new Location(20, 340);
     private final Location whileLocation = new Location(180, 340);
     private final Location ifLocation = new Location(20, 600);
-
-    
 
     private ModelMoveBlock turnLeftBlock;
     private ModelMoveBlock turnRightBlock;
@@ -33,7 +27,7 @@ class ModelPalette extends ModelWindow{
     private ModelWhileIfBlock whileBlock;
     private ModelWhileIfBlock ifBlock;
 
-
+    // Constructor
     public ModelPalette(int width, int height){
         super(width,height);
         this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftLocation(), new Blocktype(Blocktype.TURNLEFT)));
@@ -46,15 +40,14 @@ class ModelPalette extends ModelWindow{
     }
 
     /**
-     * Method to add a block to the program window.
-     * @param blk the block to be added from the palette into the program window. 
-     * @param limitReached true than it won't be possible to place a block of some specific type into the program window.
+     * This method creates a new block and assigns the global variable of this specific blocktype to it.
+     * 
+     * TODO: limitreached is better of being a global var in modelpalette than a method parameter
+     *       or maybe have a static int called maxAmountOfElements somewhere?
+     * 
+     * @param {ModelBlock} blk the block to be added from the palette into the program window. 
+     * @param {Boolean} limitReached true than it won't be possible to place a block of some specific type into the program window.
      */
-
-    //TODO limitreached is better of being a global var in modelpalette than a method parameter
-    //or maybe have a static int called maxamountofelements somewhere?
-
-    //creates a new block and assigns the global var of this specific blocktype to it
     public void blockToProgramWindow(ModelBlock blk, Boolean limitReached){
         if (limitReached){
             setTurnLeftBlock(null);
@@ -92,7 +85,9 @@ class ModelPalette extends ModelWindow{
         }    
     }
 
-    //resets all blocks after the total amount of blocks is lower than max
+    /**
+     * Reset all the blocks after the total amount of blocks is lower than the maximum
+     */
     public void resetBlocks(){
         this.setIfBlock(new ModelWhileIfBlock(this.getIfLocation(),new Blocktype(Blocktype.IF)));
         this.setWhileBlock(new ModelWhileIfBlock(this.getWhileLocation(),new Blocktype(Blocktype.WHILE)));
@@ -272,9 +267,18 @@ class ModelPalette extends ModelWindow{
     }
 
     
-    //on mousedown checks if a block is selected
-    //if in bounds of a block it calls a function to create a new block
-    //the clicked block is returned
+
+    /**
+     * This function handles the mouse down
+     * 
+     * 1. On mousedown, it checks whether a block is selected
+     * 2. If it is in bounds of a block it calls a function to create a new block
+     * 3. The clicked block is returned
+     * 
+     * @param {Location} eventLocation the location of the mouse
+     * @param {Boolean} maxReached signifies whether the max number of blocks has been reached
+     * @return the block to return when the mouse is held down
+     */
     protected ModelBlock handleMouseDown(Location eventLocation, boolean maxReached){
         ModelBlock selected = null;
         if(this.turnLeftBlock.inBounds(eventLocation)){
@@ -311,8 +315,13 @@ class ModelPalette extends ModelWindow{
 
     }
 
-    //TODO what when max happens
-    //TODO refactoring to global arraylist
+    /**
+     * Return all the blocks in the palette
+     * 
+     * TODO: what when max happens
+     * TODO: refactoring to global arraylist
+     * 
+     */
     protected ArrayList<ModelBlock> getPaletteBlocks(){
         ArrayList<ModelBlock> blocks = new ArrayList<ModelBlock>();
         //if one of them is null, they all are
@@ -328,10 +337,5 @@ class ModelPalette extends ModelWindow{
         return blocks;
         
     }
-
-
-
-    
-
     
 }

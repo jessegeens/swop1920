@@ -14,12 +14,17 @@ public class ModelProgramWindow extends ModelWindow{
 
     private ArrayList<ModelBlock> blocks;
 
+    // Constructor
     public ModelProgramWindow(int width, int height){
         super(width, height);
         this.setBlocks(new ArrayList<ModelBlock>());
     }
 
-    //TODO Oberon gaat dit mooier schrijven
+    /**
+     * This functionupdates the location of blocks
+     * 
+     * TODO: Oberon will clean up this code
+     */
     public void updateLocationBlocks(){
         ArrayList<ModelBlock> thisBlocks = this.getPABlocks();
         ArrayList<ModelBlock> updated = new ArrayList<ModelBlock>();
@@ -78,6 +83,10 @@ public class ModelProgramWindow extends ModelWindow{
         }
     }
 
+    /**
+     * 
+     * @return a list of all the blocks that are connected
+     */
     public ArrayList<ModelBlock> getConnectedBlocks(ModelBlock blk){
         ArrayList<ModelBlock> connectedBlocks = new ArrayList<ModelBlock>();
         connectedBlocks.add(blk);
@@ -91,6 +100,10 @@ public class ModelProgramWindow extends ModelWindow{
         return connectedBlocks;
     }
 
+    /**
+     * 
+     * @return true if all the blocks in the ProgramArea are connected
+     */
     public Boolean allBlocksConnected(){
         if (this.getPABlocks().isEmpty()) return true;
         ArrayList<ModelBlock> connectedB = getConnectedBlocks(this.getPABlocks().get(0));
@@ -135,13 +148,6 @@ public class ModelProgramWindow extends ModelWindow{
         return null;
     }
 
-    public void handleMouseEvent(int id, Location eventLocation, int clickCount){
-        //MOUSE_PRESSED where you start holding the button down 501
-        //MOUSE_RELEASED where you release the button      502  
-        //MOUSE_CLICKED => press + release (comes after released + pressed) only comes if no dragging happended 500
-        //MOUSE_DRAGGED => Holding down, gets triggerd after each small move 506
-        //interesting to know: there is no difference detected between left and right button in the current handlemouseevent function
-    }
     /**
      * 
      * @return a list of blocks in the window.
@@ -158,10 +164,22 @@ public class ModelProgramWindow extends ModelWindow{
         this.blocks = blocks;
     }
 
+    /**
+     * Remove a block from the Program Area
+     * 
+     * @param {ModelBlock} toBeRemoved block that should be removed
+     */
     public void removeBlock(ModelBlock toBeRemoved){
         this.blocks.remove(toBeRemoved);
     }
 
+    /**
+     * Add a block to the Program Area
+     * 
+     * TODO: remove debug print statements
+     * 
+     * @param {ModelBlock} toBeAdded the block which should be added
+     */
     public void addBlock(ModelBlock toBeAdded){
         System.out.println("here");
         if(toBeAdded != null){
@@ -173,24 +191,23 @@ public class ModelProgramWindow extends ModelWindow{
     }
 
     /**
+     * This function finds the block that is closest to the given block
+     * 
+     * TODO: remove debug print statements
      * 
      * @param block The block for which the closest neighbour needs to be found
-     * @return The closest neighbour of block
-     * return null if no closest block
+     * @return The closest neighbour of the block
+     *         null if there is no closest block
      */
     public ModelBlock findClosestBlock(ModelBlock block){
-
         System.out.println("list length");
         System.out.println(this.getPABlocks().size());
 
-        
         ModelBlock closest = null;
 
         if(block == null){
             return null;
         }
-
-
 
         for(int i = 0; i < this.getPABlocks().size(); i++){
             ModelBlock current = this.getPABlocks().get(i);
@@ -205,7 +222,6 @@ public class ModelProgramWindow extends ModelWindow{
                     closest = current;
                     }
                 }
-
             }
             else if(current.getPos().getDistance(block.getPos()) < closest.getPos().getDistance(block.getPos()) ){
                 if(current != block){
@@ -214,18 +230,20 @@ public class ModelProgramWindow extends ModelWindow{
 
                 }
                 System.out.println("CLOSEST CANDIDATE FOUND");
-                
             }
         }
-        return closest;
-        
-                  
+        return closest;             
     }
 
+    /**
+     * This function handles the mouseDown in the Program Area
+     * Note that the blocks list has to be traversed in reverse 
+     *  order due to rendering (ask Bert if unclear)
+     * 
+     * @param {Location} eventLocation location of the mouseDown event
+     * @return block to be returned 
+     */
     public ModelBlock handleMouseDown(Location eventLocation){
-        //has to be done in reverse order due to rendering (ask Bert if unclear)
-
-        
         for(int i = this.getPABlocks().size() - 1; i >= 0; i--){
             if(this.getPABlocks().get(i).inBounds(eventLocation)){
                 ModelBlock toBeReturned = this.getPABlocks().get(i);
@@ -236,6 +254,14 @@ public class ModelProgramWindow extends ModelWindow{
         return null;
     }
 
+    /**
+     * This function handles the mouse up in the Progra Area
+     * 
+     * TODO: remove debug print statements
+     * 
+     * @param {Location} the location of the mouseUp event 
+     * @param {ModelBlock} activeBlock the current active block
+     */
     public void handleMouseUp(Location eveLocation, ModelBlock activeB){
         this.addBlock(activeB);
         ModelBlock closest = this.findClosestBlock(activeB);

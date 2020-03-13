@@ -35,6 +35,8 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
 
     /**
      * Method describing how a block will connect to another block.
+     * 
+     * @param {ModelBlock} block Block 
      */
     @Override
     public void connect(ModelBlock block) {
@@ -52,47 +54,68 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
         }
     }
 
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBottomPlug(ModelBlock blk) {
         this.bottomPlug = blk;
-
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ModelBlock getBottomPlug() {
         return this.bottomPlug;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Location getBottomPlugPos() {
         return super.getPos().add(this.getWidth() / 2, + this.getHeight() + ModelBlock.PLUGSIZE/2);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setTopSocket(ModelBlock blk) {
         this.topSocket = blk;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ModelBlock getTopSocket() {
         return this.topSocket;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Location getTopSocketPos() {
         return super.getPos().add(this.getWidth() / 2, + ModelBlock.PLUGSIZE/2);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasTopSocket(){
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasBottomPlug(){
         return true;
     }
-
-
-    
 }

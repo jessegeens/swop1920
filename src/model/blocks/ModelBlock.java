@@ -28,7 +28,7 @@ public abstract class ModelBlock extends ModelElement{
 
     private boolean highlighted = false;
     
-
+    // Constructor
     public ModelBlock(Location pos, Blocktype type){
         super(pos);
         this.type = type;
@@ -216,14 +216,17 @@ public abstract class ModelBlock extends ModelElement{
         return connections; 
     }
 
+    /**
+     * @return whether this bluck is fully connected (at all ends)
+     */
     public boolean isFullyConnected() {
         if(this.hasTopSocket() && ((TopSocket)this).getTopSocket() == null) return false;
         if(this.hasBottomPlug() && ((BottomPlug)this).getBottomPlug() == null) return false;
         if(this.hasRightSocket() && ((RightSocket)this).getRightSocket() == null) return false;
         if(this.hasLeftPlug() && ((LeftPlug)this).getLeftPlug() == null) return false;
         return true;
-	}
-
+    }
+    
     /**
      * @return the height of the block.
      */

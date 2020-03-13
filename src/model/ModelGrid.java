@@ -7,7 +7,6 @@ import java.util.ArrayList;
  * Class representing a two-dimensional grid for Blockr. The grid contains walls, a robot and a goal cell.
  */
 public class ModelGrid extends ModelWindow {
-    private final int cellSize = 30; //TODO: waarom cellSize hier? die is gedefinieerd in de global controller
     private Location goalCell;
     private int cellHeight;
     private int cellWidth;
@@ -15,23 +14,30 @@ public class ModelGrid extends ModelWindow {
     private Direction robotDir;
     private ArrayList<Location> walls;
 
-
-
-    public ModelGrid(int width, int height, Location goal, Location robotPos, Direction robotDir, ArrayList<Location> walls){ 
+    // Constructor
+    public ModelGrid(int width, int height, Location goal, Location robotPos, Direction robotDir, ArrayList<Location> walls, int cellSize){ 
         super(width,height);
         this.setGoalCell(goal);
-        this.setCellHeight(cellSize); //random waarde gekozen hier
-        this.setCellWidth(cellSize); //idem hier
+        this.cellHeight = cellSize;
+        this.cellWidth = cellSize;
         this.setWalls(new ArrayList<Location>());
         this.setRobotDir(robotDir);
         this.setRobotPos(robotPos);        
     }
 
+    /**
+     * 
+     * @return whether there is a wall in front of the robot
+     */
     public boolean wallInFrontOfRobot(){
         if(this.getWalls().contains(this.robotStepPos())) return true;
         return false;
     }
 
+    /**
+     * 
+     * @return the new position of the robot after stepping
+     */
     public Location robotStepPos(){
         switch(getRobotDir().getDirection()){
             case(Direction.DOWN):
@@ -46,14 +52,27 @@ public class ModelGrid extends ModelWindow {
         return new Location(0,0);
     }
 
-    public void robotTurnRight(){//TODO zal de robot direction op deze manier juist geset worden?
+    /**
+     * Turn the robot 90° to the right
+     * 
+     * TODO: zal de robot direction op deze manier juist geset worden?
+     */
+    public void robotTurnRight(){//
         this.getRobotDir().turnRight();
     }
 
-    public void robotTurnLeft(){//TODO idem als hierboven.
+    /**
+     * Turn the robot 90° to the left
+     * 
+     * TODO: zal de robot direction op deze manier juist geset worden?
+     */
+    public void robotTurnLeft(){
         this.getRobotDir().turnLeft();
     }
 
+    /**
+     * Move the robot forward
+     */
     public void robotForward(){
         this.setRobotPos(this.robotStepPos());
     }
@@ -122,18 +141,38 @@ public class ModelGrid extends ModelWindow {
         this.walls = walls;
     }
 
+    /**
+     * Getter for the robot position
+     * 
+     * @return {Location} return the robot's current position
+     */
     public Location getRobotPos() {
         return this.robotPos;
     }
 
+    /**
+     * Setter for the robot position
+     * 
+     * @param {Location} robotPos the new position of the robot
+     */
     public void setRobotPos(Location robotPos) {
         this.robotPos = robotPos;
     }
 
+    /**
+     * Getter for the robot direction
+     * 
+     * @return {Direction} return the robot's current direction
+     */
     public Direction getRobotDir() {
         return this.robotDir;
     }
 
+    /**
+     * Setter for the robot direction
+     * 
+     * @param {Direction} robotDir the new direction of the robot
+     */
     public void setRobotDir(Direction robotDir) {
         this.robotDir = robotDir;
     }

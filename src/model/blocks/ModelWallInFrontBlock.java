@@ -9,7 +9,7 @@ import utilities.Location;
 public class ModelWallInFrontBlock extends ModelBlock implements LeftPlug{
     private ModelBlock leftPlug;
 
-
+    // Constructor
     public ModelWallInFrontBlock(Location pos, Blocktype type){
         super(pos,type);
         this.setLeftPlug(null);
@@ -39,12 +39,8 @@ public class ModelWallInFrontBlock extends ModelBlock implements LeftPlug{
                 this.setLeftPlug(block);
                 ((RightSocket)block).setRightSocket(this); 
                 this.setPos(block.getPos().add(new Location(block.getWidth(),0)));  
-
-            }
-             
-        }
-        
-
+            }  
+        }  
     }
 
     /**
@@ -63,11 +59,17 @@ public class ModelWallInFrontBlock extends ModelBlock implements LeftPlug{
         this.leftPlug = leftPlug;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Location getLeftPlugPos() {
         return super.getPos().add(- ModelBlock.PLUGSIZE / 2, + this.getHeight() / 2);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasLeftPlug(){
         return true;

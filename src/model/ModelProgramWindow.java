@@ -183,8 +183,12 @@ public class ModelProgramWindow extends ModelWindow{
         System.out.println("list length");
         System.out.println(this.getPABlocks().size());
 
-        ModelBlock closest_ = this.getPABlocks().get(0);
+        
         ModelBlock closest = null;
+
+        if(block == null){
+            return null;
+        }
 
 
 

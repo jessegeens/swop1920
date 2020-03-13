@@ -16,9 +16,6 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     private ModelBlock cavitySocket;
     private ModelBlock cavityPlug;
 
-    private int cavityHeight;
-    private int cavityWidth;
-
 
     public ModelWhileIfBlock(Location pos, Blocktype type){
         super(pos,type);
@@ -28,9 +25,6 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         this.setRightSocket(null);
         this.setCavityPlug(this);
         this.setCavitySocket(this);
-
-        this.updateCavityHeight();
-        this.updateCavityWidth();
     }
 
     /**
@@ -68,7 +62,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             ((LeftPlug)block).setLeftPlug(this); 
             this.setPos(block.getPos().add(new Location(-this.getWidth(),0)));   
         }
-        if ((block.hasLeftPlug() && (this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < 50))){
+        if ((block.hasBottomPlug() && (this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < 50))){
             this.setCavitySocket(block);
             ((BottomPlug)block).setBottomPlug(this);
         }
@@ -115,26 +109,30 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      * @return
      */
     public int getCavityHeight() {
-        return this.cavityHeight;
-    }
-
-    /**
-     * Updater for the height of the cavity of the while and if block.
-     */
-    public void updateCavityHeight() {
-        this.cavityHeight = getCavityBlocks().size() * 120;
-        this.setHeight(120+getCavityHeight());
+        if(!getCavityBlocks().isEmpty()){
+            return getCavityBlocks().size() * HEIGHTSTD + HEIGHTSTD;
+        }
+        else return HEIGHTSTD;
     }
 
     public int getCavityWidth() {
-        return this.cavityWidth;
+        if(!getCavityBlocks().isEmpty())
+            return getWidestBlockInCavity().getWidth() + WIDTHSTD;
+        else
+            return WIDTHSTD;
     }
 
-    public void updateCavityWidth() {
-        if(getCavityBlocks().size() > 0)
-            this.cavityWidth = getCavityBlocks().get(0).getWidth() + ModelBlock.WIDTHSTD;
-        else
-            this.cavityWidth = ModelBlock.WIDTHSTD;
+    /**
+     * 
+     * @return
+     */
+    public ModelBlock getWidestBlockInCavity(){
+        ModelBlock widest = getCavityBlocks().get(0);
+        for(int i = 0; i < this.getCavityBlocks().size(); i++){
+            ModelBlock current = this.getCavityBlocks().get(i);
+            if(current.getWidth() > widest.getWidth()) widest = current;
+        }
+        return widest;
     }
 
     /**

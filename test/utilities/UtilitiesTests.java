@@ -1,7 +1,13 @@
 package utilities;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import model.ModelGrid;
+import model.ModelRobot;
 import org.junit.*;
+
+import java.util.ArrayList;
 
 public class UtilitiesTests {
 
@@ -73,5 +79,32 @@ public class UtilitiesTests {
         Direction dir2 = new Direction(3);
         dir2.turnRight();
         assertEquals(0, dir2.getDirection());
+    }
+
+    @Test
+    public void gridInfoTest() {
+        int cellSize = 100;
+        Location goal = new Location(10, 15);
+        Location rPos = new Location(20, 25);
+        Direction rDir = new Direction(Direction.RIGHT);
+        ModelGrid grid = new ModelGrid(10, 10, goal, rPos, rDir);
+        GridInfo gridInfo = new GridInfo(grid, cellSize);
+        assertEquals(10, gridInfo.getGoalCell().getX());
+        assertEquals(25, gridInfo.getRobotLocation().getY());
+        assertNotNull(gridInfo.getRobotDirection());
+    }
+
+    @Test
+    public void gridInfoTest2() {
+        int cellSize = 100;
+        Location goal = new Location(10, 12);
+        ArrayList<Location> walls = new ArrayList<>();
+        Location rPos = new Location(20, 25);
+        Direction rDir = new Direction(Direction.RIGHT);
+        ModelRobot robot = new ModelRobot(rPos, rDir);
+        GridInfo gridInfo = new GridInfo(goal, walls, robot, cellSize);
+        Location wall1 = new Location(12, 30);
+        walls.add(wall1);
+        assertEquals(30, gridInfo.getWalls().get(0).getY());
     }
 }

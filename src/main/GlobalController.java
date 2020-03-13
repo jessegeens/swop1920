@@ -34,7 +34,9 @@ public class GlobalController {
         GridInfo gridInfo = new GridInfo(GOAL_CELL, new ArrayList<Location>(), new ModelRobot(ROBOT_START_LOCATION, ROBOT_START_DIRECTION), CELL_SIZE);
         this.modelController = new ModelController(gridInfo, this.MAX_BLOCKS);
         System.out.println(modelController.getModelBlocks());
-        this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT, modelController.getModelBlocks(), gridInfo);      
+        this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT, modelController.getModelBlocks(), gridInfo);
+        this.running = false;
+        this.current = null;
     }
 
     private ArrayList<UIElement> uiElements = new ArrayList<UIElement>();
@@ -70,8 +72,11 @@ public class GlobalController {
             setCurrent(this.modelController.getPWindow().getStartBlock());
         }
         step();
-        this.setCurrent(findNextBlock());
-        this.highlightNext();
+        if(this.getCurrent().equals(this.getModelController().getPWindow().getFinishBlock())) stopRunning();
+        else{
+            this.setCurrent(findNextBlock());
+            if(!this.getCurrent().equals(this.getModelController().getPWindow().getFinishBlock())) this.highlightNext();
+        }
     }
 
     public void step(){
@@ -103,7 +108,7 @@ public class GlobalController {
 
     public void stopRunning(){
         this.running = false;
-        findNextBlock().setUnHighlight();
+        if(!this.getCurrent().equals(this.getModelController().getPWindow().getFinishBlock())) findNextBlock().setUnHighlight();
     }
 
     public ModelBlock getCurrent(){
@@ -147,6 +152,9 @@ public class GlobalController {
         return negate;
     }
 
+    public ModelController getModelController() {
+        return modelController;
+    }
 
     /*
     public void renderUIElements(Graphics g, Rectangle uiBounds){

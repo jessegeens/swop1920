@@ -2,9 +2,8 @@ package model.blocks;
 
 import java.util.ArrayList;
 
-import utilities.Blocktype;
-import model.*;
 import utilities.*;
+import model.*;
 /**
  * Abstract representation of a block that can be placed from the palette onto the program area.
  */

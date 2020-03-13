@@ -21,7 +21,7 @@ public class ModelTests {
         Location rPos = new Location(0, 0);
         Direction rDir = new Direction(0);
         ArrayList<Location> walls = new ArrayList<>();
-        ModelGrid grid = new ModelGrid(200, 200, loc, rPos, rDir, walls);
+        ModelGrid grid = new ModelGrid(200, 200, loc, rPos, rDir, walls, 100);
         assertEquals(loc, grid.getGoalCell());
         Location wall1 = new Location(12, 15);
         Location wall2 = new Location(22, 24);
@@ -71,15 +71,5 @@ public class ModelTests {
         assertEquals(130, pw.getFinishBlock().getPos().getY());
         pw.removeBlock(block3);
         assertEquals(2, pw.getPABlocks().size());
-    }
-
-    @Test
-    public void testModelRobot() {
-        Location pos = new Location(2,2);
-        Direction dir = new Direction(Direction.RIGHT);
-        ModelRobot rb = new ModelRobot(pos, dir);
-        rb.turnLeft();
-        rb.turnRight();
-        assertNotNull(rb.getDirection());
     }
 }

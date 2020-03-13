@@ -15,11 +15,11 @@ public class GridInfo {
     private final int cellSize;
 
     // Constructor
-    public GridInfo(Location goalCell, ArrayList<Location> walls, Location roboLocation, Direction roboDirection, int cellSize){
+    public GridInfo(Location goalCell, ArrayList<Location> walls, Location robotPos, Direction robotDir, int cellSize){
         this.goalCell = goalCell;
         this.walls = walls;
-        this.robotLocation = roboLocation;
-        this.robotDirection = roboDirection;
+        this.robotLocation = robotPos;
+        this.robotDirection = robotDir;
         this.cellSize = cellSize;
     }
 

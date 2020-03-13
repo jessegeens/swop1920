@@ -184,4 +184,9 @@ public class ModelGrid extends ModelWindow {
     public void setRobotDir(Direction robotDir) {
         this.robotDir = robotDir;
     }
+
+    public GridInfo getGridInfo(){
+        GridInfo g = new GridInfo(getGoalCell(), getWalls(), getRobotPos(), getRobotDir(), getCellHeight());
+        return g;
+    }
 }

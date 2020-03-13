@@ -97,8 +97,8 @@ public class GlobalController {
         step();
         if(this.getCurrent().equals(this.getModelController().getPWindow().getFinishBlock())) stopRunning();
         else{
-            this.setCurrent(findNextBlock());
             if(!this.getCurrent().equals(this.getModelController().getPWindow().getFinishBlock())) this.highlightNext();
+            this.setCurrent(findNextBlock());
         }
     }
 
@@ -108,8 +108,10 @@ public class GlobalController {
     public void step(){
         switch(getCurrent().getBlockType().getType()){
             case(Blocktype.MOVEFORWARD):
-                this.modelController.getGrid().robotForward();
-                break;
+            this.modelController.getGrid().robotForward();
+            GridInfo gridInfo = this.getModelController().getGrid().getGridInfo();
+            this.getUIController().updateGrid(gridInfo);
+            break;
             case(Blocktype.TURNLEFT):
                 this.modelController.getGrid().robotTurnLeft();
                 break;
@@ -153,6 +155,7 @@ public class GlobalController {
         if(!this.getCurrent().equals(this.getModelController().getPWindow().getFinishBlock())) findNextBlock().setUnHighlight();
         else this.getCurrent().setUnHighlight();
         this.getModelController().setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, GOAL_CELL, ROBOT_START_LOCATION, ROBOT_START_DIRECTION, new ArrayList<Location>(), CELL_SIZE));
+        this.getCurrent().setUnHighlight();
     }
 
     /**

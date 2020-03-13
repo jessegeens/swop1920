@@ -47,6 +47,14 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      */
     @Override
     public void connect(ModelBlock block) {
+        if ((block.hasBottomPlug() && (this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < 50))){
+            this.setCavitySocket(block);
+            ((BottomPlug)block).setBottomPlug(this);
+        }
+        if ((block.hasTopSocket() && (this.getCavityPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < 50))){
+            this.setCavityPlug(block);
+            ((TopSocket)block).setTopSocket(this);
+        }
         if ((block.hasBottomPlug() && (this.getTopSocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < 50))){
             this.setTopSocket(block);
             ((BottomPlug)block).setBottomPlug(this); 
@@ -61,14 +69,6 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             this.setRightSocket(block);
             ((LeftPlug)block).setLeftPlug(this); 
             this.setPos(block.getPos().add(new Location(-this.getWidth(),0)));   
-        }
-        if ((block.hasBottomPlug() && (this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < 50))){
-            this.setCavitySocket(block);
-            ((BottomPlug)block).setBottomPlug(this);
-        }
-        if ((block.hasTopSocket() && (this.getCavityPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < 50))){
-            this.setCavityPlug(block);
-            ((TopSocket)block).setTopSocket(this);
         }
     }
 
@@ -202,11 +202,11 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     }
 
     public Location getCavitySocketPos() {
-        return this.getPos().add(new Location(this.getWidth()/2,ModelBlock.HEIGHTSTD/2));
+        return this.getPos().add(new Location(ModelBlock.WIDTHSTD/2 + getCavityWidth(), this.getHeight() - ModelBlock.HEIGHTSTD/3));
     }
 
     public Location getCavityPlugPos() {
-        return this.getPos().add(new Location(this.getWidth()/2,this.getHeight() - ModelBlock.HEIGHTSTD/2));
+        return this.getPos().add(new Location(ModelBlock.WIDTHSTD/2 + getCavityWidth(), 2*ModelBlock.HEIGHTSTD/3));
     }
 
     public Location getTopSocketPos() {

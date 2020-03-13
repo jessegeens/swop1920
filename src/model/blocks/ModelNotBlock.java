@@ -91,7 +91,7 @@ public class ModelNotBlock extends ModelBlock implements RightSocket,LeftPlug{
 
     @Override
     public Location getRightSocketPos() {
-        return super.getPos().add(this.getWidth() + ModelBlock.PLUGSIZE/2, + this.getHeight() / 2);
+        return super.getPos().add(this.getWidth() - ModelBlock.PLUGSIZE/2, + this.getHeight() / 2);
     }
     
     @Override

@@ -26,8 +26,8 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         this.setCavityPlug(this);
         this.setCavitySocket(this);
 
-        this.updateCavityHeight();
-        this.updateCavityWidth();
+        this.getCavityHeight();
+        this.getCavityWidth();
     }
 
     /**

@@ -1,3 +1,4 @@
-out/*
-.idea/*
+out/
+.idea/
+.vscode/
 diagrams/structural_overview/.SWOP_Structural_Overview.vpp.lck

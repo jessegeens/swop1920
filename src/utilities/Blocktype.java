@@ -46,19 +46,19 @@ public final class Blocktype{
     public String getTitle(){
         switch(this.type){
             case Blocktype.IF:
-                return "If Block";
+                return "IF";
             case Blocktype.WHILE:
-                return "While Block";
+                return "WHILE";
             case Blocktype.MOVEFORWARD:
-                return "Move Forward";
+                return "Move F";
             case Blocktype.TURNLEFT:
-                return "Turn Left";
+                return "Turn L";
             case Blocktype.TURNRIGHT:
-                return "Turn Right";
+                return "Turn R";
             case Blocktype.WALLINFRONT:
-                return "Wall in front";
+                return "Wall In F";
             case Blocktype.NOT:
-                return "NotBlock";
+                return "NOT";
             default:
                 return "error";
         }

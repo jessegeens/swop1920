@@ -12,10 +12,10 @@ public abstract class ModelBlock extends ModelElement{
 
     //TODO cleaner solution for the getPlug and getSocket functions
 
-    private int width = 120; //variable can change because of cavity
-    private int height = 120; //variable can change because of cavity
+    private int width = 75; //variable can change because of cavity
+    private int height = 75; //variable can change because of cavity
 
-    public static final int PLUGSIZE = 40;
+    public static final int PLUGSIZE = 20;
     private final Blocktype type;
     /*
     private final Location topSocketPos = super.getPos().add(this.getWidth() / 2, + this.getPlugSize()/2);
@@ -23,8 +23,8 @@ public abstract class ModelBlock extends ModelElement{
     private final Location rightSocketPos = super.getPos().add(this.getWidth() + this.getPlugSize()/2, + this.getHeight() / 2);
     private final Location leftPlugPos = super.getPos().add(- this.getPlugSize() / 2, + this.getHeight() / 2);
     */
-    public static final int STD_WIDTH = 120; //final standard width of blocks
-    public static final int STD_HEIGHT = 120; //final standard height of blocks
+    public static final int STD_WIDTH = 75; //final standard width of blocks
+    public static final int STD_HEIGHT = 75; //final standard height of blocks
 
     private boolean highlighted = false;
     

@@ -3,12 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="bdfc6573-f389-4d9a-9e2c-4612aa30b1a8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/main/GlobalController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/main/GlobalController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/ModelController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/ModelController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/ModelProgramWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/ModelProgramWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/UIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/UIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/blocks/UIBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/blocks/UIBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utilities/GridInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/GridInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/ModelGridTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/ModelTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/ModelPaletteTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/ModelProgramWindowTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/ModelRobotTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/blocks/ModelMoveBlockTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/blocks/ModelBlockTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/blocks/ModelNotBlockTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/blocks/ModelWallInFrontTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/blocks/ModelWhileIfBlockTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/utilities/BlocktypeTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/utilities/UtilitiesTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/utilities/DirectionTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/utilities/LocationTests.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,22 +39,46 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/utilities/GridInfo.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/model/blocks/ModelBlockTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="485">
-              <caret line="67" column="37" selection-start-line="67" selection-start-column="37" selection-end-line="67" selection-end-column="37" />
+            <state relative-caret-position="383">
+              <caret line="33" selection-start-line="33" selection-end-line="33" />
               <folding>
-                <element signature="e#927#928#0" expanded="true" />
-                <element signature="e#963#964#0" expanded="true" />
-                <element signature="e#1007#1008#0" expanded="true" />
-                <element signature="e#1040#1041#0" expanded="true" />
-                <element signature="e#1081#1082#0" expanded="true" />
-                <element signature="e#1122#1123#0" expanded="true" />
-                <element signature="e#1442#1443#0" expanded="true" />
-                <element signature="e#1484#1485#0" expanded="true" />
-                <element signature="e#1515#1516#0" expanded="true" />
-                <element signature="e#1551#1552#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/utilities/UtilitiesTests.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/model/ModelControllerTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/model/ModelTests.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1241">
+              <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -75,24 +104,27 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/test/utilities/BlocktypeTests.java" />
-        <option value="$PROJECT_DIR$/test/utilities/DirectionTests.java" />
-        <option value="$PROJECT_DIR$/test/utilities/LocationTests.java" />
-        <option value="$PROJECT_DIR$/test/model/blocks/ModelMoveBlockTests.java" />
-        <option value="$PROJECT_DIR$/test/model/blocks/ModelNotBlockTests.java" />
         <option value="$PROJECT_DIR$/src/model/ModelGrid.java" />
         <option value="$PROJECT_DIR$/src/main/MyCanvasWindow.java" />
         <option value="$PROJECT_DIR$/test/model/ModelControllerTest.java" />
         <option value="$PROJECT_DIR$/src/model/ModelPalette.java" />
         <option value="$PROJECT_DIR$/src/model/ModelRobot.java" />
-        <option value="$PROJECT_DIR$/test/model/ModelRobotTest.java" />
-        <option value="$PROJECT_DIR$/test/model/ModelGridTest.java" />
-        <option value="$PROJECT_DIR$/test/model/ModelPaletteTest.java" />
         <option value="$PROJECT_DIR$/src/model/blocks/ModelMoveBlock.java" />
-        <option value="$PROJECT_DIR$/test/model/ModelProgramWindowTest.java" />
         <option value="$PROJECT_DIR$/src/ui/blocks/UIBlock.java" />
         <option value="$PROJECT_DIR$/src/ui/UIController.java" />
         <option value="$PROJECT_DIR$/src/utilities/GridInfo.java" />
+        <option value="$PROJECT_DIR$/test/model/blocks/ModelNotBlockTests.java" />
+        <option value="$PROJECT_DIR$/test/model/blocks/ModelMoveBlockTests.java" />
+        <option value="$PROJECT_DIR$/test/model/blocks/ModelBlockTests.java" />
+        <option value="$PROJECT_DIR$/test/model/ModelPaletteTest.java" />
+        <option value="$PROJECT_DIR$/test/model/ModelProgramWindowTest.java" />
+        <option value="$PROJECT_DIR$/test/model/ModelGridTest.java" />
+        <option value="$PROJECT_DIR$/test/model/ModelRobotTest.java" />
+        <option value="$PROJECT_DIR$/test/model/ModelTests.java" />
+        <option value="$PROJECT_DIR$/test/utilities/LocationTests.java" />
+        <option value="$PROJECT_DIR$/test/utilities/DirectionTests.java" />
+        <option value="$PROJECT_DIR$/test/utilities/BlocktypeTests.java" />
+        <option value="$PROJECT_DIR$/test/utilities/UtilitiesTests.java" />
       </list>
     </option>
   </component>
@@ -129,6 +161,19 @@
               <item name="swop1920" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="swop1920" type="b2602c69:ProjectViewProjectNode" />
+              <item name="swop1920" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="blocks" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="swop1920" type="b2602c69:ProjectViewProjectNode" />
+              <item name="swop1920" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="utilities" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -171,7 +216,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelMoveBlockTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ModelBlockTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
         <pattern>
@@ -180,13 +225,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="model.blocks" />
-      <option name="MAIN_CLASS_NAME" value="model.blocks.ModelMoveBlockTests" />
+      <option name="MAIN_CLASS_NAME" value="model.blocks.ModelBlockTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelMoveBlockTests.connectAndDisconnectTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ModelBlockTests.connectAndDisconnectTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
         <pattern>
@@ -195,7 +240,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="model.blocks" />
-      <option name="MAIN_CLASS_NAME" value="model.blocks.ModelMoveBlockTests" />
+      <option name="MAIN_CLASS_NAME" value="model.blocks.ModelBlockTests" />
       <option name="METHOD_NAME" value="connectAndDisconnectTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -238,8 +283,8 @@
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.ModelProgramWindowTest.programWindowTest" />
         <item itemvalue="JUnit.ModelNotBlockTests" />
-        <item itemvalue="JUnit.ModelMoveBlockTests" />
-        <item itemvalue="JUnit.ModelMoveBlockTests.connectAndDisconnectTest" />
+        <item itemvalue="JUnit.ModelBlockTests" />
+        <item itemvalue="JUnit.ModelBlockTests.connectAndDisconnectTest" />
       </list>
     </recent_temporary>
   </component>
@@ -255,7 +300,7 @@
       <updated>1584015779458</updated>
       <workItem from="1584015781005" duration="14666000" />
       <workItem from="1584041890631" duration="9456000" />
-      <workItem from="1584091824271" duration="1666000" />
+      <workItem from="1584091824271" duration="2061000" />
     </task>
     <servers />
   </component>
@@ -292,7 +337,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25788000" />
+    <option name="totallyTimeSpent" value="26183000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -335,16 +380,6 @@
     <option name="version" value="1" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/test/utilities/BlocktypeTests.java</url>
-          <line>5</line>
-          <properties />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="blk" />
@@ -434,27 +469,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test/utilities/DirectionTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="23" column="40" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/utilities/LocationTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="8" column="37" lean-forward="true" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/utilities/BlocktypeTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="21" column="53" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/utilities/Location.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="217">
@@ -463,19 +477,6 @@
             <element signature="e#1181#1182#0" expanded="true" />
             <element signature="e#1250#1251#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/blocks/ModelWallInFrontTests.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/blocks/ModelWhileIfBlockTests.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/ModelController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-374">
-          <caret line="42" column="4" lean-forward="true" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
         </state>
       </provider>
     </entry>
@@ -489,26 +490,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/ModelControllerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/ModelRobotTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/ModelRobot.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -516,57 +497,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/ModelPaletteTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="25" column="5" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/ModelGridTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="16" column="43" lean-forward="true" selection-start-line="16" selection-start-column="43" selection-end-line="16" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/ModelPalette.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/ModelGrid.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/blocks/ModelNotBlockTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="1" lean-forward="true" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/blocks/ModelMoveBlockTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="17" column="3" lean-forward="true" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -612,16 +546,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="125">
           <caret line="76" selection-start-line="76" selection-end-line="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/model/ModelProgramWindowTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="32" column="26" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -756,16 +680,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/utilities/GridInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
+        <state relative-caret-position="468">
           <caret line="67" column="37" selection-start-line="67" selection-start-column="37" selection-end-line="67" selection-end-column="37" />
           <folding>
             <element signature="e#927#928#0" expanded="true" />
@@ -779,6 +696,124 @@
             <element signature="e#1515#1516#0" expanded="true" />
             <element signature="e#1551#1552#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/model/blocks/ModelWallInFrontTests.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/model/blocks/ModelWhileIfBlockTests.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/model/blocks/ModelNotBlockTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/ModelController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="42" column="4" lean-forward="true" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/ModelGrid.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/model/ModelRobotTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/model/ModelProgramWindowTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/model/ModelPaletteTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/model/ModelTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1241">
+          <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/model/ModelControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/utilities/LocationTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/model/blocks/ModelBlockTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/utilities/DirectionTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/utilities/UtilitiesTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
         </state>
       </provider>
     </entry>

@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import utilities.*;
 
-public class ModelMoveBlockTests {
+public class ModelBlockTests {
 
     @Test
     public void connectAndDisconnectTest() {
@@ -30,5 +30,15 @@ public class ModelMoveBlockTests {
         ModelMoveBlock mmb2 = new ModelMoveBlock(loc2, new Blocktype(Blocktype.MOVEFORWARD));
         mmb1.connect(mmb2);
         assertNull(mmb1.getBottomPlug());
+    }
+
+    @Test(expected = IllegalStateException.class) // has fault in itself, should not have an expected exception.
+    public void connectAndDisconnectTest2() {
+        Location loc1 = new Location(0, 0);
+        Location loc2 = new Location(60, 140);
+        ModelNotBlock mnb1 = new ModelNotBlock(loc1, new Blocktype(Blocktype.NOT));
+        ModelWhileIfBlock mwb = new ModelWhileIfBlock(loc2, new Blocktype(Blocktype.WHILE));
+        mwb.connect(mnb1);
+        assertEquals(mwb.getRightSocket(), mnb1);
     }
 }

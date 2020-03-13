@@ -16,9 +16,6 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     private ModelBlock cavitySocket;
     private ModelBlock cavityPlug;
 
-    private int cavityHeight;
-    private int cavityWidth;
-
 
     public ModelWhileIfBlock(Location pos, Blocktype type){
         super(pos,type);
@@ -115,26 +112,17 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      * @return
      */
     public int getCavityHeight() {
-        return this.cavityHeight;
-    }
-
-    /**
-     * Updater for the height of the cavity of the while and if block.
-     */
-    public void updateCavityHeight() {
-        this.cavityHeight = getCavityBlocks().size() * 120;
-        this.setHeight(120+getCavityHeight());
+        if(!getCavityBlocks().isEmpty()){
+            return getCavityBlocks().size() * HEIGHTSTD + HEIGHTSTD;
+        }
+        else return HEIGHTSTD;
     }
 
     public int getCavityWidth() {
-        return this.cavityWidth;
-    }
-
-    public void updateCavityWidth() {
-        if(getCavityBlocks().size() > 0)
-            this.cavityWidth = getCavityBlocks().get(0).getWidth() + ModelBlock.WIDTHSTD;
+        if(!getCavityBlocks().isEmpty())
+            return getCavityBlocks().get(0).getWidth() + ModelBlock.WIDTHSTD;
         else
-            this.cavityWidth = ModelBlock.WIDTHSTD;
+            return ModelBlock.WIDTHSTD;
     }
 
     /**

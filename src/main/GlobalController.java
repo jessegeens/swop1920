@@ -93,6 +93,7 @@ public class GlobalController {
             startRunning();
             setCurrent(this.modelController.getPWindow().getStartBlock());
         }
+        System.out.println("now executing: " + getCurrent().getBlockType().getType());
         step();
         if(this.getCurrent().equals(this.getModelController().getPWindow().getFinishBlock())) stopRunning();
         else{
@@ -150,6 +151,7 @@ public class GlobalController {
     public void stopRunning(){
         this.running = false;
         if(!this.getCurrent().equals(this.getModelController().getPWindow().getFinishBlock())) findNextBlock().setUnHighlight();
+        else this.getCurrent().setUnHighlight();
         this.getModelController().setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, GOAL_CELL, ROBOT_START_LOCATION, ROBOT_START_DIRECTION, new ArrayList<Location>(), CELL_SIZE));
     }
 

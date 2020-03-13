@@ -3,6 +3,9 @@ package utilities;
 import java.util.ArrayList;
 import model.*;
 
+/**
+ * Value class containing information about the grid.
+ */
 public class GridInfo {
 
     private final Location goalCell;
@@ -28,22 +31,42 @@ public class GridInfo {
         this.cellSize = cellSize;
     }
 
+    /**
+     *
+     * @return the goal cell.
+     */
     public Location getGoalCell(){
         return this.goalCell;
     }
 
+    /**
+     *
+     * @return a list of walls in the grid.
+     */
     public ArrayList<Location> getWalls(){
         return this.walls;
     }
 
+    /**
+     *
+     * @return the location of the robot.
+     */
     public Location getRobotLocation(){
         return this.robotLocation;
     }
 
+    /**
+     *
+     * @return the direction of the robot.
+     */
     public Direction getRobotDirection(){
         return this.robotDirection;
     }
 
+    /**
+     *
+     * @return the size of the cells.
+     */
     public int getCellSize(){
         return this.cellSize;
     }

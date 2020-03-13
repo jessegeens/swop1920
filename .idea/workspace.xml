@@ -3,10 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="bdfc6573-f389-4d9a-9e2c-4612aa30b1a8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelMoveBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelMoveBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelWhileIfBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelWhileIfBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/swop1920/model/ModelProgramWindowTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/swop1920/model/ModelProgramWindowTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/model/ModelProgramWindowTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/ModelProgramWindowTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/swop1920/main/GlobalController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/main/GlobalController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/ModelController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/ModelController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/ModelProgramWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/ModelProgramWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/UIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/UIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/blocks/UIBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/blocks/UIBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utilities/GridInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/GridInfo.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,11 +25,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="102">
+              <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/utilities/GridInfo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="485">
+              <caret line="67" column="37" selection-start-line="67" selection-start-column="37" selection-end-line="67" selection-end-column="37" />
+              <folding>
+                <element signature="e#927#928#0" expanded="true" />
+                <element signature="e#963#964#0" expanded="true" />
+                <element signature="e#1007#1008#0" expanded="true" />
+                <element signature="e#1040#1041#0" expanded="true" />
+                <element signature="e#1081#1082#0" expanded="true" />
+                <element signature="e#1122#1123#0" expanded="true" />
+                <element signature="e#1442#1443#0" expanded="true" />
+                <element signature="e#1484#1485#0" expanded="true" />
+                <element signature="e#1515#1516#0" expanded="true" />
+                <element signature="e#1551#1552#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -67,6 +90,9 @@
         <option value="$PROJECT_DIR$/test/model/ModelPaletteTest.java" />
         <option value="$PROJECT_DIR$/src/model/blocks/ModelMoveBlock.java" />
         <option value="$PROJECT_DIR$/test/model/ModelProgramWindowTest.java" />
+        <option value="$PROJECT_DIR$/src/ui/blocks/UIBlock.java" />
+        <option value="$PROJECT_DIR$/src/ui/UIController.java" />
+        <option value="$PROJECT_DIR$/src/utilities/GridInfo.java" />
       </list>
     </option>
   </component>
@@ -80,7 +106,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -97,12 +122,6 @@
             <path>
               <item name="swop1920" type="b2602c69:ProjectViewProjectNode" />
               <item name="swop1920" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="swop1920" type="b2602c69:ProjectViewProjectNode" />
-              <item name="swop1920" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -110,18 +129,12 @@
               <item name="swop1920" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="swop1920" type="b2602c69:ProjectViewProjectNode" />
-              <item name="swop1920" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="blocks" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -144,7 +157,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ModelProgramWindowTest.programWindowTest">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="swop1920" />
@@ -222,8 +235,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ModelProgramWindowTest.programWindowTest" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.ModelProgramWindowTest.programWindowTest" />
         <item itemvalue="JUnit.ModelNotBlockTests" />
         <item itemvalue="JUnit.ModelMoveBlockTests" />
         <item itemvalue="JUnit.ModelMoveBlockTests.connectAndDisconnectTest" />
@@ -241,14 +254,12 @@
       <option name="presentableId" value="Default" />
       <updated>1584015779458</updated>
       <workItem from="1584015781005" duration="14666000" />
-      <workItem from="1584041890631" duration="7891000" />
+      <workItem from="1584041890631" duration="9456000" />
+      <workItem from="1584091824271" duration="1666000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ModelProgramWindowTest_programWindowTest - 2020.03.12 at 22h 06m 57s.xml">
-      <configuration name="ModelProgramWindowTest.programWindowTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="ModelProgramWindowTest_programWindowTest - 2020.03.12 at 22h 07m 01s.xml">
       <configuration name="ModelProgramWindowTest.programWindowTest" configurationId="JUnit" />
     </history-entry>
@@ -276,9 +287,12 @@
     <history-entry file="ModelProgramWindowTest_programWindowTest - 2020.03.12 at 22h 44m 15s.xml">
       <configuration name="ModelProgramWindowTest.programWindowTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="ModelProgramWindowTest_programWindowTest - 2020.03.12 at 23h 08m 50s.xml">
+      <configuration name="ModelProgramWindowTest.programWindowTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22557000" />
+    <option name="totallyTimeSpent" value="25788000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -289,7 +303,7 @@
       <window_info id="UI Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Designer" order="4" />
-      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.25302014" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.25637585" />
       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
@@ -299,7 +313,7 @@
       <window_info anchor="bottom" id="Terminal" order="5" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="bottom" id="Find" order="7" />
-      <window_info anchor="bottom" id="Run" order="8" visible="true" weight="0.28186968" />
+      <window_info anchor="bottom" id="Run" order="8" weight="0.28186968" />
       <window_info anchor="bottom" id="Debug" order="9" weight="0.27478755" />
       <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
@@ -441,20 +455,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/blocks/ModelNotBlock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/blocks/ModelWallInFrontBlock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/utilities/Location.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="217">
@@ -462,50 +462,6 @@
           <folding>
             <element signature="e#1181#1182#0" expanded="true" />
             <element signature="e#1250#1251#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="55" column="114" selection-start-line="55" selection-start-column="114" selection-end-line="55" selection-end-column="114" />
-          <folding>
-            <element signature="e#2691#2692#0" expanded="true" />
-            <element signature="e#2728#2729#0" expanded="true" />
-            <element signature="e#2833#2834#0" expanded="true" />
-            <element signature="e#2875#2876#0" expanded="true" />
-            <element signature="e#2967#2968#0" expanded="true" />
-            <element signature="e#3005#3006#0" expanded="true" />
-            <element signature="e#3112#3113#0" expanded="true" />
-            <element signature="e#3156#3157#0" expanded="true" />
-            <element signature="e#3293#3294#0" expanded="true" />
-            <element signature="e#3333#3334#0" expanded="true" />
-            <element signature="e#3608#3609#0" expanded="true" />
-            <element signature="e#3647#3648#0" expanded="true" />
-            <element signature="e#3686#3687#0" expanded="true" />
-            <element signature="e#3775#3776#0" expanded="true" />
-            <element signature="e#3996#4008#0" expanded="true" />
-            <element signature="e#4265#4266#0" expanded="true" />
-            <element signature="e#4304#4305#0" expanded="true" />
-            <element signature="e#4399#4400#0" expanded="true" />
-            <element signature="e#4445#4446#0" expanded="true" />
-            <element signature="e#4553#4554#0" expanded="true" />
-            <element signature="e#4593#4594#0" expanded="true" />
-            <element signature="e#4735#4736#0" expanded="true" />
-            <element signature="e#4783#4784#0" expanded="true" />
-            <element signature="e#4887#4888#0" expanded="true" />
-            <element signature="e#4925#4926#0" expanded="true" />
-            <element signature="e#5059#5060#0" expanded="true" />
-            <element signature="e#5103#5104#0" expanded="true" />
-            <element signature="e#5147#5148#0" expanded="true" />
-            <element signature="e#5190#5191#0" expanded="true" />
-            <element signature="e#5254#5255#0" expanded="true" />
-            <element signature="e#5308#5309#0" expanded="true" />
-            <element signature="e#5350#5351#0" expanded="true" />
-            <element signature="e#5391#5392#0" expanded="true" />
-            <element signature="e#5451#5452#0" expanded="true" />
-            <element signature="e#5501#5502#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -553,13 +509,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ui/blocks/UIBlock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/ModelRobot.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -591,17 +540,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/blocks/ModelMoveBlock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-323">
-          <caret line="12" column="4" lean-forward="true" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
-          <folding>
-            <element signature="e#2180#2181#0" expanded="true" />
-            <element signature="e#2216#2217#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -677,18 +615,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/blocks/ModelBlock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="268" column="19" selection-start-line="268" selection-start-column="19" selection-end-line="268" selection-end-column="19" />
-          <folding>
-            <element signature="e#6949#6961#0" expanded="true" />
-            <element signature="e#9039#9040#0" expanded="true" />
-            <element signature="e#9067#9068#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/model/ModelProgramWindowTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
@@ -716,10 +642,143 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/model/blocks/TopSocket.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
+          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/blocks/RightSocket.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/blocks/LeftPlug.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/blocks/ModelMoveBlock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="12" column="4" lean-forward="true" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+          <folding>
+            <element signature="e#2180#2181#0" expanded="true" />
+            <element signature="e#2216#2217#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/blocks/ModelNotBlock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-722">
+          <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/blocks/ModelWallInFrontBlock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-365">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2099">
+          <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/blocks/ModelBlock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="268" column="19" selection-start-line="268" selection-start-column="19" selection-end-line="268" selection-end-column="19" />
+          <folding>
+            <element signature="e#6949#6961#0" expanded="true" />
+            <element signature="e#9039#9040#0" expanded="true" />
+            <element signature="e#9067#9068#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/blocks/BottomPlug.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/UIElement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/UIGrid.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="67" column="7" lean-forward="true" selection-start-line="67" selection-start-column="7" selection-end-line="67" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/UIWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/UIController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="51" column="7" lean-forward="true" selection-start-line="51" selection-start-column="7" selection-end-line="51" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ui/blocks/UIBlock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="8" column="67" selection-start-line="8" selection-start-column="67" selection-end-line="8" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/ModelElement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utilities/GridInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="485">
+          <caret line="67" column="37" selection-start-line="67" selection-start-column="37" selection-end-line="67" selection-end-column="37" />
+          <folding>
+            <element signature="e#927#928#0" expanded="true" />
+            <element signature="e#963#964#0" expanded="true" />
+            <element signature="e#1007#1008#0" expanded="true" />
+            <element signature="e#1040#1041#0" expanded="true" />
+            <element signature="e#1081#1082#0" expanded="true" />
+            <element signature="e#1122#1123#0" expanded="true" />
+            <element signature="e#1442#1443#0" expanded="true" />
+            <element signature="e#1484#1485#0" expanded="true" />
+            <element signature="e#1515#1516#0" expanded="true" />
+            <element signature="e#1551#1552#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

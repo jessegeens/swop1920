@@ -5,6 +5,9 @@ import java.awt.*;
 import model.blocks.ModelBlock;
 import utilities.*;
 
+/**
+ * Class representing the different blocks and their visualisation.
+ */
 public class UIBlock extends UIElement {
 
     int width;

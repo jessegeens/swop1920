@@ -90,7 +90,7 @@ public class UIBlock extends UIElement {
     /** 
      * This function renders the block
      * 
-     * @param {Graphics} g The Graphics object on which the block is rendered
+     * @param g The Graphics object on which the block is rendered
      */
     public void render(Graphics g){
 

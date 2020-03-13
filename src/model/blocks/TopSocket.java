@@ -11,7 +11,7 @@ public interface TopSocket {
 
     /**
      * 
-     * @param {ModelBlock} blk the block to attach to the top socket
+     * @param blk the block to attach to the top socket
      */
     public void setTopSocket(ModelBlock blk);
 

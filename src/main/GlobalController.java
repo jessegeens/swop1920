@@ -53,11 +53,11 @@ public class GlobalController {
      * This function handles key events by telling the model controller
      * to either step through the execution or stop running the program
      * 
-     * @param {int} id id of the event
-     * @param {int} keyCode keyCode of the pressed key: - 27  = ESC
+     * @param id id of the event
+     * @param keyCode keyCode of the pressed key: - 27  = ESC
      *              see: http://keycode.info            - 65  = A
      *                                                  - 116 = F5 
-     * @param {char} keyChar character of the pressed key
+     * @param keyChar character of the pressed key
      */
     public void handleKeyEvent(int id, int keyCode, char keyChar){
         System.out.println("key pressed");
@@ -124,7 +124,7 @@ public class GlobalController {
     /**
      * This function renders the UI
      * 
-     * @param {Graphics} g the graphics object which the rendering uses
+     * @param g the graphics object which the rendering uses
      */
     public void render(Graphics g){
         uiController.render(g);
@@ -167,7 +167,7 @@ public class GlobalController {
     /**
      * Updates the current active modelBlock
      * 
-     * @param {ModelBlock} blk the new active modelBlock
+     * @param blk the new active modelBlock
      */
     public void setCurrent(ModelBlock blk){
         this.current = blk;

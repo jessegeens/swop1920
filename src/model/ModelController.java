@@ -38,9 +38,9 @@ public class ModelController{
 
     /**
      * 
-     * @param {ModelBlock} block block to move
-     * @param {Location} newPos new position the block should be at
-     * @param {Boolean} inProgramArea signify whether the block is moved into the program area
+     * @param block block to move
+     * @param newPos new position the block should be at
+     * @param inProgramArea signify whether the block is moved into the program area
      */
     public void moveBlock(ModelBlock block, Location newPos, boolean inProgramArea){
         if (block != null){
@@ -55,7 +55,7 @@ public class ModelController{
 
     /**
      * 
-     * @param {ModelBlock} block The block of which the neighbour is searched.
+     * @param block The block of which the neighbour is searched.
      * @return the left neighbour of the block if there is one, otherwise null.
      */
     public ModelBlock findLeftNeighbour(ModelBlock block){
@@ -73,7 +73,7 @@ public class ModelController{
 
     /**
      * 
-     * @param {ModelBlock} block The block of which the neighbour is searched.
+     * @param block The block of which the neighbour is searched.
      * @return the right neighbour of the block if there is one, otherwise null.
      */
     public ModelBlock findRightNeighbour(ModelBlock block){
@@ -92,7 +92,7 @@ public class ModelController{
 
     /**
      * 
-     * @param {ModelBlock} block The block of which the neighbour is searched.
+     * @param block The block of which the neighbour is searched.
      * @return the upper neighbour of the block if there is one, otherwise null.
      */
     public ModelBlock findUpperNeighbour(ModelBlock block){
@@ -110,7 +110,7 @@ public class ModelController{
     
     /**
      * 
-     * @param {ModelBlock} block The block of which the neighbour is searched.
+     * @param block The block of which the neighbour is searched.
      * @return the bottom neighbour of the block if there is one, otherwise null.
      */
     public ModelBlock findBottomNeighbour(ModelBlock block){
@@ -137,7 +137,7 @@ public class ModelController{
     /**
      * Set the Model Palette of the controller
      * 
-     * @param {ModelPalette} the palette the controller controls
+     * @param palette the controller controls
      */
     public void setPalette(ModelPalette palette) {
         this.palette = palette;
@@ -154,7 +154,7 @@ public class ModelController{
     /**
      * Set the Model Program Window of the controller
      * 
-     * @param {ModelProgramWindow} the program window the controller controls
+     * @param pWindow program window the controller controls
      */
     public void setPWindow(ModelProgramWindow pWindow) {
         this.pWindow = pWindow;
@@ -172,7 +172,7 @@ public class ModelController{
     /**
      * Set the Model Grid of the controller
      * 
-     * @param {ModelGrid} the grid the controller controls
+     * @param grid the grid the controller controls
      */
     public void setGrid(ModelGrid grid) {
         this.grid = grid;
@@ -184,12 +184,12 @@ public class ModelController{
      * 
      * TODO: for some reason I can't use the static fields MouseEvent.MOUSE_PRESSED etc
      * 
-     * @param {int} id id of the event: - 500 = MOUSE_CLICKED: Press + release (comes after released + pressed), only comes if no dragging happended
+     * @param id id of the event: - 500 = MOUSE_CLICKED: Press + release (comes after released + pressed), only comes if no dragging happended
      *                                  - 501 = MOUSE_PRESSED: Where you start holding the button down
      *                                  - 502 = MOUSE_RELEASED: Where you release the button
      *                                  - 506 = MOUSE_DRAGGED: Holding down, gets triggerd after each small move
-     * @param {Location} eventLocation location where the event happened
-     * @param {int} clickCount number of clicks
+     * @param eventLocation location where the event happened
+     * @param clickCount number of clicks
      */
     public void handleMouseEvent(int id, Location eventLocation, int clickCount){
         if(eventLocation.getX() > 0 && eventLocation.getX() < MyCanvasWindow.WIDTH/3 ){
@@ -206,12 +206,12 @@ public class ModelController{
     /**
      * handle mouse events in the palette
      * 
-     * @param {int} id id of the event: - 500 = MOUSE_CLICKED: Press + release (comes after released + pressed), only comes if no dragging happended
+     * @param id id of the event: - 500 = MOUSE_CLICKED: Press + release (comes after released + pressed), only comes if no dragging happended
      *                                  - 501 = MOUSE_PRESSED: Where you start holding the button down
      *                                  - 502 = MOUSE_RELEASED: Where you release the button
      *                                  - 506 = MOUSE_DRAGGED: Holding down, gets triggerd after each small move
-     * @param {Location} eventLocation location where the event happened
-     * @param {int} clickCount number of clicks
+     * @param eventLocation location where the event happened
+     * @param clickCount number of clicks
      */
     protected void handlePaletteMouseEvent(int id, Location eventLocation, int clickCount){
         switch(id){
@@ -245,12 +245,12 @@ public class ModelController{
     /**
      * handle mouse events in the program area
      * 
-     * @param {int} id id of the event: - 500 = MOUSE_CLICKED: Press + release (comes after released + pressed), only comes if no dragging happended
+     * @param id id of the event: - 500 = MOUSE_CLICKED: Press + release (comes after released + pressed), only comes if no dragging happended
      *                                  - 501 = MOUSE_PRESSED: Where you start holding the button down
      *                                  - 502 = MOUSE_RELEASED: Where you release the button
      *                                  - 506 = MOUSE_DRAGGED: Holding down, gets triggerd after each small move
-     * @param {Location} eventLocation location where the event happened
-     * @param {int} clickCount number of clicks
+     * @param eventLocation location where the event happened
+     * @param clickCount number of clicks
      */
     protected void handleProgramAreaMouseEvent(int id, Location eventLocation, int clickCount){
         switch(id){

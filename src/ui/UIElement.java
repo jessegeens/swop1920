@@ -42,7 +42,7 @@ public abstract class UIElement {
 	 *  at the highest y-coordinate and then the leftmost
 	 *  x-coordinate
 	 * 
-	 * @param {Location} Pos the new position of the UI Element
+	 * @param Pos the new position of the UI Element
 	 */
 	public void setPos(Location Pos) {
 		this.pos = Pos;

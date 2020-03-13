@@ -2,8 +2,10 @@ package model.blocks;
 
 import java.util.ArrayList;
 
-import utilities.*;
 import model.*;
+import utilities.Blocktype;
+import utilities.Location;
+
 /**
  * Abstract representation of a block that can be placed from the palette onto the program area.
  */
@@ -55,8 +57,8 @@ public abstract class ModelBlock extends ModelElement{
     /**
      * Removes duplicate modelblocks from the list
      * 
-     * @param {ArrayList<ModelBlock>} list List with duplicates to remove
-     * @return {ArrayList<ModelBlock>} list without duplicates
+     * @param  list List with duplicates to remove
+     * @return list without duplicates
      */
     public static ArrayList<ModelBlock> removeDuplicates(ArrayList<ModelBlock> list) 
     { 

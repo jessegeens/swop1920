@@ -36,7 +36,7 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
     /**
      * Method describing how a block will connect to another block.
      * 
-     * @param {ModelBlock} block Block 
+     * @param block Block
      */
     @Override
     public void connect(ModelBlock block) {

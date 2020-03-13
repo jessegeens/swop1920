@@ -118,6 +118,9 @@ public class UIGrid {
     public void renderRobot(Graphics g) {
         g.setColor(Color.RED);
         g.fillRect(xPosition + robotLocation.getX()*cellSize, yPosition + robotLocation.getY()*cellSize,cellSize, cellSize);
+        System.out.println("RENDERING");
+        System.out.println(robotLocation.getX());
+        System.out.println(robotLocation.getY());
         g.setColor(Color.BLUE);
 
         if (this.robotDirection.getDirection() == Direction.UP || this.robotDirection.getDirection() == Direction.DOWN){

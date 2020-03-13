@@ -21,7 +21,7 @@ class ModelPalette extends ModelWindow{
     private final Location notLocation = new Location(180, 180);
     private final Location wallInFrontLocation = new Location(20, 340);
     private final Location whileLocation = new Location(180, 340);
-    private final Location ifLocation = new Location(20, 600);
+    private final Location ifLocation = new Location(20, 500);
 
     
 

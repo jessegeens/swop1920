@@ -243,8 +243,8 @@ public class ModelProgramWindow extends ModelWindow{
             System.out.println("CLOSEST IS NOT NULL");
             System.out.println(closest.getBlockType().getType());
             System.out.println("list length");
-            
-            activeB.connect(closest);
+            if(closest instanceof ModelWhileIfBlock) closest.connect(activeB);
+            else activeB.connect(closest);
         } 
         else{
             System.out.println("CLOSEST IS NULL");

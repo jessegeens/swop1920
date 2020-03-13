@@ -9,8 +9,6 @@ import model.*;
  */
 public abstract class ModelBlock extends ModelElement{
 
-    //TODO cleaner solution for the getPlug and getSocket functions
-
     private int width = 75; //variable can change because of cavity
     private int height = 75; //variable can change because of cavity
 
@@ -38,9 +36,7 @@ public abstract class ModelBlock extends ModelElement{
      */
     @Override
     public void move(Location newPos){
-        
         super.move(newPos);
-
     }
 
     public void setHighlight(){

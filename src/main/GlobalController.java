@@ -15,7 +15,7 @@ import model.blocks.*;
 public class GlobalController {
 
     //Program parameters
-    private final int MAX_BLOCKS = 5;
+    private final int MAX_BLOCKS = 15;
     private final int CELL_SIZE = 50;
     private final Location GOAL_CELL = new Location(5, 5);
     private final Location ROBOT_START_LOCATION = new Location(0, 0);
@@ -72,9 +72,12 @@ public class GlobalController {
             case 27: //Esc
                 this.stopRunning();
                 break;
+            default:
+                this.uiController.updateBlocks(this.modelController.getModelBlocks());
+                break;
         }
         //TODO create function in modelcontroller
-        this.uiController.updateBlocks(this.modelController.getModelBlocks());
+        
     }
 
     /**

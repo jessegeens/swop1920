@@ -66,12 +66,13 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         else if ((block.hasBottomPlug() && (this.getTopSocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5))){
             this.setTopSocket(block);
             ((BottomPlug)block).setBottomPlug(this); 
-            this.setPos(block.getPos().add(new Location(0,-block.getHeight())));  
+            this.setPos(block.getPos().add(new Location(0, this.getHeight()))); 
+             
         }
         else if ((block.hasTopSocket() && (this.getBottomPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5))){
             this.setBottomPlug(block);
             ((TopSocket)block).setTopSocket(this);  
-            this.setPos(block.getPos().add(new Location(0, this.getHeight())));  
+            this.setPos(block.getPos().add(new Location(0,-block.getHeight())));  
         }
         else if ((block.hasLeftPlug() && (this.getRightSocketPos().getDistance(((LeftPlug)block).getLeftPlugPos()) < ModelBlock.PLUGSIZE * 1.5))){
             this.setRightSocket(block);

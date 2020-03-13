@@ -12,7 +12,7 @@ public class UIBlock extends UIElement {
 
     int width;
     int height;
-    int socket;
+    int socketSize;
     boolean highlighted;
     Blocktype type;
 
@@ -23,81 +23,126 @@ public class UIBlock extends UIElement {
         super(mBlock.getPos());
         this.width = mBlock.getWidth();
         this.height = mBlock.getHeight(); 
-        this.socket = ModelBlock.PLUGSIZE;   
+        this.socketSize = ModelBlock.PLUGSIZE;   
         this.highlighted = mBlock.isHighlighted();
         this.type = mBlock.getBlockType();
     }
 
-    public void renderTopSocket(Graphics g){
-        g.fillRect(this.getPos().getX(), this.getPos().getY(), (this.getWidth()-this.getSocket())/2, this.getSocket());
-        g.fillRect(this.getPos().getX() + (this.getWidth() + this.getSocket())/2, this.getPos().getY(), (this.getWidth()-this.getSocket())/2, this.getSocket());
+    public Color getBlockColor(){
+        if(highlighted) {
+            return Color.GREEN;
+        }
+        else {
+            return Color.GRAY;
+        }
     }
 
-    public void renderNoTopSocket(Graphics g){
-        g.fillRect(this.getPos().getX(), this.getPos().getY(), this.getWidth(), this.getHeight());
+    public Color getSocketColor(){
+        return Color.WHITE;
     }
+
+    //TODO rendering sockets first and then plugs
+
+
+    public void renderTopSocket(Graphics g){
+        g.setColor(getBlockColor());
+        g.fillRect(this.getPos().getX() , (int) this.getPos().getY() , (int) (this.getWidth()-this.getSocketSize())/2, this.getSocketSize());
+        g.fillRect(this.getPos().getX() + (int) (this.getWidth()-this.getSocketSize())/2 + this.getSocketSize(), (int) this.getPos().getY() , (int) (this.getWidth()-this.getSocketSize())/2, this.getSocketSize());
+        
+    }
+
+    
 
     public void renderBottomPlug(Graphics g){
-        g.fillRect(this.getPos().getX() + (this.getWidth() - this.getSocket())/2,this.getPos().getY() + this.getHeight(), this.getSocket(), this.getSocket());
-    }
+        g.setColor(getBlockColor());
+        g.fillRect(this.getPos().getX() + (int) (this.getWidth() / 2 - this.getSocketSize()/2), this.getPos().getY() + (int) (this.getHeight()), this.getSocketSize(), this.getSocketSize());
+     }
 
     public void renderLeftPlug(Graphics g){
-        g.fillRect(this.getPos().getX() - this.getSocket(),this.getPos().getY() + (this.getHeight() - this.getSocket())/2, this.getSocket(), this.getSocket());
+        g.setColor(getBlockColor());
+        g.fillRect(this.getPos().getX() - this.getSocketSize(),this.getPos().getY() + (this.getHeight() - this.getSocketSize())/2, this.getSocketSize(), this.getSocketSize());
     }
 
     public void renderRightSocket(Graphics g){
-        g.fillRect(this.getPos().getX() + this.getWidth() - this.getSocket(),this.getPos().getY(), this.getSocket(), (this.getHeight() - this.getSocket())/2);
-        g.fillRect(this.getPos().getX() + this.getWidth() - this.getSocket(),this.getPos().getY() + (this.getHeight() + this.getSocket())/2, this.getSocket(), (this.getHeight() - this.getSocket())/2);
+        g.setColor(getBlockColor());
+        g.fillRect(this.getPos().getX() + this.getWidth() - this.getSocketSize(), (int) this.getPos().getY() , this.getSocketSize(), (int) (this.getHeight()-this.getSocketSize())/2);
+        g.fillRect(this.getPos().getX() + this.getWidth() - this.getSocketSize(), (int) this.getPos().getY() + this.getSocketSize() + (this.getHeight()-this.getSocketSize())/2, this.getSocketSize(), (int) (this.getHeight()-this.getSocketSize())/2);
     }
 
     public void renderNoRightSocket(Graphics g){
-        g.fillRect(this.getPos().getX() + this.getWidth() - this.getSocket(),this.getPos().getY(), this.getWidth(), this.getHeight());
+        g.setColor(getBlockColor());
+        g.fillRect(this.getPos().getX() + this.getWidth() - this.getSocketSize(), (int) this.getPos().getY() , this.getSocketSize(), this.getHeight());
     }
+
+    public void renderNoTopSocket(Graphics g){
+        g.setColor(getBlockColor());
+        g.fillRect(this.getPos().getX() , (int) this.getPos().getY() , this.getWidth(), this.getSocketSize());
+    }
+
 
     public void renderInnerBlock(Graphics g){
-        g.fillRect(this.getPos().getX() + this.getSocket(),this.getPos().getY(),this.getWidth() - this.getSocket(), this.getHeight() -this.getSocket());
+        g.setColor(getBlockColor());
+        g.fillRect(this.getPos().getX() ,this.getPos().getY() + this.getSocketSize(),this.getWidth() - this.getSocketSize(), this.getHeight() - this.getSocketSize());
     }
 
-    /**
+    /** 
      * This function renders the block
      * 
      * @param {Graphics} g The Graphics object on which the block is rendered
      */
     public void render(Graphics g){
-        if(highlighted) g.setColor(Color.GREEN);
-        else g.setColor(Color.GRAY);
 
+
+        
+    
         switch (this.getType().getType()){
             case(Blocktype.IF):
             case(Blocktype.WHILE):
+                this.renderInnerBlock(g);
                 this.renderBottomPlug(g);
                 this.renderTopSocket(g);
                 this.renderRightSocket(g);
-                this.renderInnerBlock(g);
+                
                 break;
             case(Blocktype.MOVEFORWARD):
             case(Blocktype.TURNLEFT):
             case(Blocktype.TURNRIGHT):
+                this.renderInnerBlock(g);
                 this.renderBottomPlug(g);
                 this.renderTopSocket(g);
                 this.renderNoRightSocket(g);
-                this.renderInnerBlock(g);
+                
+                
                 break;
             case(Blocktype.NOT):
+                this.renderInnerBlock(g);
                 this.renderNoTopSocket(g);
                 this.renderRightSocket(g);
                 this.renderLeftPlug(g);
-                this.renderInnerBlock(g);
+                
+                
+                
                 break;
             case(Blocktype.WALLINFRONT):
+                this.renderInnerBlock(g);
                 this.renderLeftPlug(g);
                 this.renderNoRightSocket(g);
                 this.renderNoTopSocket(g);
-                this.renderInnerBlock(g);
+                
+                
                 break;
             default:
-                throw new IllegalArgumentException("Invalid block type in case statement");
+                
+                break;
+
+            
+
+                
         }
+
+        g.setColor(Color.WHITE);
+        g.drawString(this.type.getTitle(), this.getPos().getX() + 10, this.getPos().getY() + (height/2));
+        
 
 /*
         switch (mBlock.getBlockType().getType()){
@@ -219,8 +264,8 @@ public class UIBlock extends UIElement {
         return this.height;
     }
 
-    public int getSocket() {
-        return this.socket;
+    public int getSocketSize() {
+        return this.socketSize;
     }
 
     public boolean isHighlighted() {

@@ -64,6 +64,7 @@ public class GlobalController {
                 break;
         }
         //TODO create function in modelcontroller
+        this.uiController.updateBlocks(this.modelController.getModelBlocks());
     }
 
     public void execute(){
@@ -157,47 +158,7 @@ public class GlobalController {
         return modelController;
     }
 
-    /*
-    public void renderUIElements(Graphics g, Rectangle uiBounds){
-
-        //TODO create a separate ui generation method for this later
-        
-        //TODO why is the UIgrid not a UIElement?this.renderUI(g);
-        this.renderUI(g);
-        this.renderBlocks(g);
-        this.renderGrid(g);
-
-        //TODO why is the UIgrid not a UIElement?
-
-        Location wall1 = new Location(2,2);
-        Location wall2 = new Location(1, 2);
-
-        ArrayList<Location> walls = new ArrayList<Location>();
-
-        walls.add(wall1);
-        walls.add(wall2);
-
-        Location robot = new Location(0, 0);
-        Direction robotDirection = new Direction(Direction.LEFT);
-
-        Location goal = new Location(3,3);
-
-
-        //w, h, cellSize
-        UIGrid grid = new UIGrid(new Location(2*MyCanvasWindow.WIDTH/3, 0), MyCanvasWindow.WIDTH / 3, MyCanvasWindow.HEIGHT, 50, walls, robot, robotDirection, goal);
-
-        grid.render(g);
-
-        Location randomLocation = new Location(300, 300);
-
-        Blocktype block_ = new Blocktype(Blocktype.IF);
-
-        System.out.println("rendering UI Elements");
-        uiElements.forEach((UIElement) -> (UIElement).render(g));
-
-
-    }
-    */
+    
 
 
     

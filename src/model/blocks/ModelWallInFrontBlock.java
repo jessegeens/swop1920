@@ -33,7 +33,7 @@ public class ModelWallInFrontBlock extends ModelBlock implements LeftPlug{
     public void connect(ModelBlock block) {
         System.out.println("DISTANCE");
         System.out.println(this.getLeftPlugPos().getDistance(((RightSocket)block).getRightSocketPos()));
-        if ((this.getLeftPlugPos().getDistance(((RightSocket)block).getRightSocketPos()) < 50)){
+        if ((this.getLeftPlugPos().getDistance(((RightSocket)block).getRightSocketPos()) < ModelBlock.PLUGSIZE * 1.5)){
             System.out.println("WIF CONNECTS");
             if(block.hasRightSocket()){
                 this.setLeftPlug(block);

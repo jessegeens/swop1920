@@ -19,6 +19,7 @@ public class UIController {
 
     private ArrayList<UIBlock> blocks;
 
+    // Constructor
     public UIController(int windowWidth, int windowHeight, ArrayList<ModelBlock> mBlocks, GridInfo gridInfo){
         this.wWidth = windowWidth;
         this.wHeight = windowHeight;

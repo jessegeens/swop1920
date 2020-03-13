@@ -110,7 +110,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      */
     public int getCavityHeight() {
         if(!getCavityBlocks().isEmpty()){
-            return getCavityBlocks().size() * HEIGHTSTD + HEIGHTSTD;
+            return getCavityBlocks().size() * STD_HEIGHT + STD_HEIGHT;
         }
         else return 0;
     }
@@ -121,7 +121,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      */
     public int getCavityWidth() {
         if(!getCavityBlocks().isEmpty())
-            return getWidestBlockInCavity().getWidth() + WIDTHSTD;
+            return getWidestBlockInCavity().getWidth() + STD_WIDTH;
         else
             return 0;
     }
@@ -202,11 +202,11 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     }
 
     public Location getCavitySocketPos() {
-        return this.getPos().add(new Location(ModelBlock.WIDTHSTD/2 + getCavityWidth(), this.getHeight() - ModelBlock.HEIGHTSTD/3));
+        return this.getPos().add(new Location(ModelBlock.STD_WIDTH/2 + getCavityWidth(), this.getHeight() - ModelBlock.STD_HEIGHT/3));
     }
 
     public Location getCavityPlugPos() {
-        return this.getPos().add(new Location(ModelBlock.WIDTHSTD/2 + getCavityWidth(), 2*ModelBlock.HEIGHTSTD/3));
+        return this.getPos().add(new Location(ModelBlock.STD_WIDTH/2 + getCavityWidth(), 2*ModelBlock.STD_HEIGHT/3));
     }
 
     public Location getTopSocketPos() {

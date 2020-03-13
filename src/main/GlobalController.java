@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.awt.*;
 
 import ui.*;
-import ui.blocks.*;
 import utilities.*;
 import model.*;
 import model.blocks.*;
@@ -38,9 +37,6 @@ public class GlobalController {
         this.running = false;
         this.current = null;
     }
-
-    private ArrayList<UIElement> uiElements = new ArrayList<UIElement>();
-    private ArrayList<ModelElement> modelElements = new ArrayList<ModelElement>();
 
     public void handleMouseEvent(int id, int x, int y, int clickCount){
         Location eventLocation = new Location(x,y);

@@ -5,11 +5,8 @@ import java.util.ArrayList;
 
 import main.MyCanvasWindow;
 import model.blocks.ModelBlock;
-import model.blocks.ModelMoveBlock;
 import utilities.GridInfo;
 import utilities.Location;
-import utilities.Blocktype;
-import main.*;
 
 
 
@@ -39,6 +36,12 @@ public class ModelController{
     }
 
 
+    /**
+     * 
+     * @param {ModelBlock} block block to move
+     * @param {Location} newPos new position the block should be at
+     * @param {Boolean} inProgramArea signify whether the block is moved into the program area
+     */
     public void moveBlock(ModelBlock block, Location newPos, boolean inProgramArea){
         if (block != null){
             if(inProgramArea){
@@ -50,30 +53,9 @@ public class ModelController{
         }
     }
 
-    
-
-    /*
-
-    public boolean blockInBounds(ModelBlock blk, ModelWindow win){
-        if(win instanceof ModelPalette && blk.getPos().getX() < win.getWidth()){
-            return true;
-        }
-        else if(win instanceof ModelProgramWindow && blk.getPos().getX() > getPalette().getWidth() && blk.getPos().getX() < (win.getWidth() + getPalette().getWidth())){
-            return true;
-        }
-        else if(win instanceof ModelGrid && blk.getPos().getX() > (getPalette().getWidth() + getPWindow().getWidth())){
-            return true;
-        }
-        else return false;
-    }
-
-    */
-
-    
-
     /**
      * 
-     * @param block The block of which the neighbour is searched.
+     * @param {ModelBlock} block The block of which the neighbour is searched.
      * @return the left neighbour of the block if there is one, otherwise null.
      */
     public ModelBlock findLeftNeighbour(ModelBlock block){
@@ -89,6 +71,11 @@ public class ModelController{
         return left;
     }
 
+    /**
+     * 
+     * @param {ModelBlock} block The block of which the neighbour is searched.
+     * @return the right neighbour of the block if there is one, otherwise null.
+     */
     public ModelBlock findRightNeighbour(ModelBlock block){
         ModelBlock right = null;
         forloop:
@@ -102,6 +89,12 @@ public class ModelController{
         return right;
     }
 
+
+    /**
+     * 
+     * @param {ModelBlock} block The block of which the neighbour is searched.
+     * @return the upper neighbour of the block if there is one, otherwise null.
+     */
     public ModelBlock findUpperNeighbour(ModelBlock block){
         ModelBlock up = null;
         forloop:
@@ -115,6 +108,11 @@ public class ModelController{
         return up;
     }
     
+    /**
+     * 
+     * @param {ModelBlock} block The block of which the neighbour is searched.
+     * @return the bottom neighbour of the block if there is one, otherwise null.
+     */
     public ModelBlock findBottomNeighbour(ModelBlock block){
         ModelBlock down = null;
         forloop:
@@ -128,37 +126,199 @@ public class ModelController{
         return down;
     }
 
+    /**
+     * 
+     * @return the model palette
+     */
     public ModelPalette getPalette() {
         return this.palette;
     }
 
+    /**
+     * Set the Model Palette of the controller
+     * 
+     * @param {ModelPalette} the palette the controller controls
+     */
     public void setPalette(ModelPalette palette) {
         this.palette = palette;
     }
 
+    /**
+     * 
+     * @return the model program window
+     */
     public ModelProgramWindow getPWindow() {
         return this.pWindow;
     }
 
+    /**
+     * Set the Model Program Window of the controller
+     * 
+     * @param {ModelProgramWindow} the program window the controller controls
+     */
     public void setPWindow(ModelProgramWindow pWindow) {
         this.pWindow = pWindow;
     }
 
+ 
+    /**
+     * 
+     * @return the model grid
+     */
     public ModelGrid getGrid() {
         return this.grid;
     }
 
+    /**
+     * Set the Model Grid of the controller
+     * 
+     * @param {ModelGrid} the grid the controller controls
+     */
     public void setGrid(ModelGrid grid) {
         this.grid = grid;
     }
 
+
+    /**
+     * general handler for mouse events, checks where the mouse event should be handled
+     * 
+     * TODO: for some reason I can't use the static fields MouseEvent.MOUSE_PRESSED etc
+     * TODO: get activeblock?
+     * TODO: check if a new block has been created
+     * 
+     * @param {int} id id of the event: - 500 = MOUSE_CLICKED: Press + release (comes after released + pressed), only comes if no dragging happended
+     *                                  - 501 = MOUSE_PRESSED: Where you start holding the button down
+     *                                  - 502 = MOUSE_RELEASED: Where you release the button
+     *                                  - 506 = MOUSE_DRAGGED: Holding down, gets triggerd after each small move
+     * @param {Location} eventLocation location where the event happened
+     * @param {int} clickCount number of clicks
+     */
+    public void handleMouseEvent(int id, Location eventLocation, int clickCount){
+        if(eventLocation.getX() > 0 && eventLocation.getX() < MyCanvasWindow.WIDTH/3 ){
+            System.out.println("Palette mouseEvent");
+            this.handlePaletteMouseEvent(id, eventLocation, clickCount);
+        }
+        if(eventLocation.getX() > MyCanvasWindow.WIDTH/3 && eventLocation.getX() <  2 * MyCanvasWindow.WIDTH/3){
+            System.out.println("Programarea mouseEvent");
+            this.handleProgramAreaMouseEvent(id, eventLocation, clickCount); 
+        }
+    }
+
+
+    /**
+     * handle mouse events in the palette
+     * 
+     * @param {int} id id of the event: - 500 = MOUSE_CLICKED: Press + release (comes after released + pressed), only comes if no dragging happended
+     *                                  - 501 = MOUSE_PRESSED: Where you start holding the button down
+     *                                  - 502 = MOUSE_RELEASED: Where you release the button
+     *                                  - 506 = MOUSE_DRAGGED: Holding down, gets triggerd after each small move
+     * @param {Location} eventLocation location where the event happened
+     * @param {int} clickCount number of clicks
+     */
+    protected void handlePaletteMouseEvent(int id, Location eventLocation, int clickCount){
+        switch(id){
+            case 501: //MOUSE_PRESSED
+                System.out.println("MOUSE PRESSED start");
+                if(this.MAX_BLOCKS <= this.getProgramAreaBlocks().size()+1){
+                    this.maxReached = true;
+                }
+                this.active = palette.handleMouseDown(eventLocation, maxReached);
+                break;
+            case 502: //MOUSE RELEASED
+                //delete the currently held item (if there is one)
+                System.out.println("MOUSE RELEASED start");
+                if(this.active != null){
+                    this.maxReached = false;
+                    this.palette.resetBlocks();
+                }
+                this.active = null;
+                break;
+            case 506: //MOUSE_DRAGGED
+                //if there is a currently held block, move it
+                System.out.println("MOUSE MOVED start");
+                this.moveBlock(active, eventLocation, false);
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    /**
+     * handle mouse events in the program area
+     * 
+     * @param {int} id id of the event: - 500 = MOUSE_CLICKED: Press + release (comes after released + pressed), only comes if no dragging happended
+     *                                  - 501 = MOUSE_PRESSED: Where you start holding the button down
+     *                                  - 502 = MOUSE_RELEASED: Where you release the button
+     *                                  - 506 = MOUSE_DRAGGED: Holding down, gets triggerd after each small move
+     * @param {Location} eventLocation location where the event happened
+     * @param {int} clickCount number of clicks
+     */
+    protected void handleProgramAreaMouseEvent(int id, Location eventLocation, int clickCount){
+        switch(id){
+            case 501: //MOUSE_PRESSED
+                //return the topmost active block if one is in the click location
+                //you remove it from the local list in pWindow until mouseup
+                System.out.println("MOUSE PRESSED start");
+                this.active = pWindow.handleMouseDown(eventLocation);
+                break;
+            case 502: //MOUSE RELEASED
+                System.out.println("MOUSE RELEASED start");
+                pWindow.handleMouseUp(eventLocation, this.active);
+                this.active = null;
+                break;
+            case 506: //MOUSE_DRAGGED
+                System.out.println("MOUSE MOVED start");
+                this.moveBlock(active, eventLocation, true);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * 
+     * @return all the blocks in the program. This includes, palette, program area and 
+     *         (if there is one) the active block
+     */
+    public ArrayList<ModelBlock> getModelBlocks(){
+        ArrayList<ModelBlock> blocks = new ArrayList<ModelBlock>();
+        blocks.addAll(this.getProgramAreaBlocks());
+        blocks.addAll(this.getPaletteBlocks());
+        if(this.getActiveBlock()!=null)
+            blocks.add(this.getActiveBlock());
+        return blocks;
+    }
+
+    /**
+     * 
+     * @return all the blocks that are currently in the palette
+     */
+    protected ArrayList<ModelBlock> getPaletteBlocks(){
+        return palette.getPaletteBlocks();
+
+    }
+
+    /**
+     * 
+     * @return all the blocks that are currently in the program area
+     */
+    protected ArrayList<ModelBlock> getProgramAreaBlocks(){
+        return pWindow.getPABlocks();
+    }
+
+    /**
+     * 
+     * @return the current active block
+     */
+    protected ModelBlock getActiveBlock(){
+        return this.active;
+    }
+
     
-
-
-            
-
-        
-        //TODO provide an explanation why the list should be traversed in reversed due to render order
+    
+}        
+        //TODO: provide an explanation why the list should be traversed in reversed due to render order
 
         //MOUSE_PRESSED where you start holding the button down 501
         //MOUSE_RELEASED where you release the button      502  
@@ -178,125 +338,22 @@ public class ModelController{
 
         */
 
+            /*
 
-    
-
-    //TODO for some reason I can't use the static fields MouseEvent.MOUSE_PRESSED etc
-
-    public void handleMouseEvent(int id, Location eventLocation, int clickCount){
-        if(eventLocation.getX() > 0 && eventLocation.getX() < MyCanvasWindow.WIDTH/3 ){
-            System.out.println("Palette mouseEvent");
-
-
-
-            this.handlePaletteMouseEvent(id, eventLocation, clickCount);
-
-            //TODO get activeblock?
-            //TODO check if a new block has been created
+    public boolean blockInBounds(ModelBlock blk, ModelWindow win){
+        if(win instanceof ModelPalette && blk.getPos().getX() < win.getWidth()){
+            return true;
         }
-        if(eventLocation.getX() > MyCanvasWindow.WIDTH/3 && eventLocation.getX() <  2 * MyCanvasWindow.WIDTH/3){
-            System.out.println("Programarea mouseEvent");
-            this.handleProgramAreaMouseEvent(id, eventLocation, clickCount);
-            
+        else if(win instanceof ModelProgramWindow && blk.getPos().getX() > getPalette().getWidth() && blk.getPos().getX() < (win.getWidth() + getPalette().getWidth())){
+            return true;
         }
+        else if(win instanceof ModelGrid && blk.getPos().getX() > (getPalette().getWidth() + getPWindow().getWidth())){
+            return true;
+        }
+        else return false;
     }
 
-    protected void handlePaletteMouseEvent(int id, Location eventLocation, int clickCount){
-        //MOUSE_PRESSED 501
-        if(id == 501){
-            //return the selected block if one is clicked
-            System.out.println("MOUSE PRESSED start");
-            if(this.MAX_BLOCKS <= this.getProgramAreaBlocks().size()+1){
-                this.maxReached = true;
-            }
-            this.active = palette.handleMouseDown(eventLocation, maxReached);
-            
-            
-
-        }
-        //MOUSE RELEASED 502
-        else if(id==502){
-            //MOUSE RELEASED, delete the currently held item (if there is one)
-            System.out.println("MOUSE RELEASED start");
-            if(this.active != null){
-                this.maxReached = false;
-                this.palette.resetBlocks();
-            }
-            this.active = null;    
-
-        }
-        //MOUSE MOVED 506
-        else if(id==506){
-            //MOUSE MOVED, if there is a currently held block, move it
-            System.out.println("MOUSE MOVED start");
-            this.moveBlock(active, eventLocation, false);
-        }
-
-    }
-
-    protected void handleProgramAreaMouseEvent(int id, Location eventLocation, int clickCount){
-        //MOUSE_PRESSED 501
-        if(id == 501){
-            //return the topmost active block if one is in the click location
-            //you remove it from the local list in pWindow until mouseup
-            System.out.println("MOUSE PRESSED start");
-            this.active = pWindow.handleMouseDown(eventLocation);
-        }
-        //MOUSE RELEASED 502
-        else if(id==502){
-            System.out.println("MOUSE RELEASED start");
-            pWindow.handleMouseUp(eventLocation, this.active);
-            this.active = null;
-
-        }
-        //MOUSE MOVED 506
-        else if(id==506){
-            System.out.println("MOUSE MOVED start");
-            this.moveBlock(active, eventLocation, true);
-
-        }
-
-    }
-
-    public ArrayList<ModelBlock> getModelBlocks(){
-        ArrayList<ModelBlock> blocks = new ArrayList<ModelBlock>();
-        blocks.addAll(this.getProgramAreaBlocks());
-        blocks.addAll(this.getPaletteBlocks());
-        if(this.getActiveBlock()!=null){
-            blocks.add(this.getActiveBlock());
-        }
-        
-
-        return blocks;
-    }
-
-    protected ArrayList<ModelBlock> getPaletteBlocks(){
-        return palette.getPaletteBlocks();
-
-    }
-
-    protected ArrayList<ModelBlock> getProgramAreaBlocks(){
-        return pWindow.getPABlocks();
-    }
-
-    protected ModelBlock getActiveBlock(){
-        return this.active;
-    }
+    */
 
     
     
-}
-
-/*abstract
-//MOUSE_PRESSED 501
-        if(id == 501){
-
-        }
-        //MOUSE RELEASED 502
-        else if(id==502){
-
-        }
-        //MOUSE MOVED 506
-        else if(id==506){
-
-        }*/

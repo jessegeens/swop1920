@@ -36,7 +36,7 @@ public final class Direction{
      * Method to turn left.
      */
     public void turnLeft(){
-        this.direction = (this.direction - 1) % 4;
+        this.direction = (this.direction + 3) % 4; //plus 3 equals -1 in mod 4
 
     }
 

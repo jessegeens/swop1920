@@ -31,6 +31,10 @@ public class GridInfo {
         this.cellSize = cellSize;
     }
 
+    public GridInfo(){
+        
+    }
+
     /**
      *
      * @return the goal cell.

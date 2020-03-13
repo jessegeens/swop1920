@@ -109,6 +109,7 @@ public class GlobalController {
     public void stopRunning(){
         this.running = false;
         if(!this.getCurrent().equals(this.getModelController().getPWindow().getFinishBlock())) findNextBlock().setUnHighlight();
+        this.getModelController().setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, GOAL_CELL, ROBOT_START_LOCATION, ROBOT_START_DIRECTION));
     }
 
     public ModelBlock getCurrent(){

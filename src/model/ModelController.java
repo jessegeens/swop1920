@@ -9,7 +9,6 @@ import utilities.GridInfo;
 import utilities.Location;
 
 
-
 /**
  * A controller that controls the changes in the logic of the Blockr system and propagates it to the view.
  */
@@ -314,46 +313,4 @@ public class ModelController{
     protected ModelBlock getActiveBlock(){
         return this.active;
     }
-
-    
-    
-}        
-        //TODO: provide an explanation why the list should be traversed in reversed due to render order
-
-        //MOUSE_PRESSED where you start holding the button down 501
-        //MOUSE_RELEASED where you release the button      502  
-        //MOUSE_CLICKED => press + release (comes after released + pressed) only comes if no dragging happended 500
-        //MOUSE_DRAGGED => Holding down, gets triggerd after each small move 506
-        //interesting to know: there is no difference detected between left and right button in the current handlemouseevent function
-
-        /*
-        if(id == 501){
-            
-            for (int i = modelElements.size() - 1; i >= 0; i--) {
-                if(modelElements.get(i).inBounds(eventLocation)){
-                    active = modelElements.get(i);
-                }
-            }            
-        }
-
-        */
-
-            /*
-
-    public boolean blockInBounds(ModelBlock blk, ModelWindow win){
-        if(win instanceof ModelPalette && blk.getPos().getX() < win.getWidth()){
-            return true;
-        }
-        else if(win instanceof ModelProgramWindow && blk.getPos().getX() > getPalette().getWidth() && blk.getPos().getX() < (win.getWidth() + getPalette().getWidth())){
-            return true;
-        }
-        else if(win instanceof ModelGrid && blk.getPos().getX() > (getPalette().getWidth() + getPWindow().getWidth())){
-            return true;
-        }
-        else return false;
-    }
-
-    */
-
-    
-    
+}

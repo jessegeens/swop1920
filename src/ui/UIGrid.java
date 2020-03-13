@@ -53,9 +53,6 @@ public class UIGrid {
 
     }
 
-
-    //TODO add graphics Graphics g
-
     /**
      * This function renders the complete grid:
      *  * the grid itself
@@ -119,14 +116,9 @@ public class UIGrid {
      * @param {Graphics} g The Graphics object on which the rendering happens
      */
     public void renderRobot(Graphics g) {
-        int x = xPosition + robotLocation.getX();
-        int y = yPosition + robotLocation.getY();
         g.setColor(Color.RED);
         g.fillRect(xPosition + robotLocation.getX()*cellSize, yPosition + robotLocation.getY()*cellSize,cellSize, cellSize);
-
         g.setColor(Color.BLUE);
-
-        //TODO: draw arrow at correct place
 
         if (this.robotDirection.getDirection() == Direction.UP || this.robotDirection.getDirection() == Direction.DOWN){
 

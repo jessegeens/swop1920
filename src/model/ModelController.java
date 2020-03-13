@@ -35,7 +35,7 @@ public class ModelController{
         //palette left, program middle, grid right
         this.setPalette(new ModelPalette(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
         this.setPWindow(new ModelProgramWindow(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
-        this.setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, gridInfo.getGoalCell(), gridInfo.getRobotLocation(), gridInfo.getRobotDirection())); 
+        this.setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, gridInfo.getGoalCell(), gridInfo.getRobotLocation(), gridInfo.getRobotDirection(),new ArrayList<Location>())); 
     }
 
 

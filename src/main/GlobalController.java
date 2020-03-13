@@ -34,7 +34,9 @@ public class GlobalController {
         GridInfo gridInfo = new GridInfo(GOAL_CELL, new ArrayList<Location>(), new ModelRobot(ROBOT_START_LOCATION, ROBOT_START_DIRECTION), CELL_SIZE);
         this.modelController = new ModelController(gridInfo, this.MAX_BLOCKS);
         System.out.println(modelController.getModelBlocks());
-        this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT, modelController.getModelBlocks(), gridInfo);      
+        this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT, modelController.getModelBlocks(), gridInfo);
+        this.running = false;
+        this.current = null;
     }
 
     private ArrayList<UIElement> uiElements = new ArrayList<UIElement>();
@@ -147,6 +149,9 @@ public class GlobalController {
         return negate;
     }
 
+    public ModelController getModelController() {
+        return modelController;
+    }
 
     /*
     public void renderUIElements(Graphics g, Rectangle uiBounds){

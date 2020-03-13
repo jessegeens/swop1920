@@ -23,11 +23,12 @@ public class GridInfo {
         this.cellSize = cellSize;
     }
 
+    // Constructor based on a ModelGrid
     public GridInfo(ModelGrid grid, int cellSize){
         this.goalCell = grid.getGoalCell();
+        this.walls = grid.getWalls();
         this.robotDirection = grid.getRobotDir();
         this.robotLocation = grid.getRobotPos();
-        this.walls = grid.getWalls();
         this.cellSize = cellSize;
     }
 

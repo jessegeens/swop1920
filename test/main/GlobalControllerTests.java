@@ -2,8 +2,7 @@ package main;
 
 import model.ModelController;
 import model.ModelGrid;
-import model.blocks.ModelBlock;
-import model.blocks.ModelMoveBlock;
+import model.blocks.*;
 import org.junit.Test;
 import ui.UIController;
 import utilities.Blocktype;
@@ -39,7 +38,37 @@ public class GlobalControllerTests {
         assertEquals(Direction.UP, gC.getModelController().getGrid().getRobotDir().getDirection());
         gC.execute();
         assertEquals(Direction.LEFT, gC.getModelController().getGrid().getRobotDir().getDirection());
-        //gC.execute();
-        //assertEquals(Direction.DOWN, gC.getModelController().getGrid().getRobotDir().getDirection());
+        gC.execute();
+        assertEquals(Direction.DOWN, gC.getModelController().getGrid().getRobotDir().getDirection());
+    }
+
+    @Test
+    public void globalControllerTest2() {
+        GlobalController gC = new GlobalController();
+        ArrayList<ModelBlock> mBlocks = new ArrayList<>();
+        Location pos1 = new Location(100, 100);
+        Blocktype t1 = new Blocktype(Blocktype.WHILE);
+        ModelWhileIfBlock mwb = new ModelWhileIfBlock(pos1, t1);
+        Location pos2 = new Location(100, 220);
+        Blocktype t2 = new Blocktype(Blocktype.NOT);
+        ModelNotBlock mnb = new ModelNotBlock(pos2, t2);
+        Location pos3 = new Location(100, 340);
+        Blocktype t3 = new Blocktype(Blocktype.WALLINFRONT);
+        ModelWallInFrontBlock mwifb = new ModelWallInFrontBlock(pos3, t3);
+        mwb.connect(mnb);
+        mnb.connect(mwifb);
+        mBlocks.add(mwb);
+        mBlocks.add(mnb);
+        mBlocks.add(mwifb);
+        Location pos4 = new Location(180, 150);
+        Blocktype t4 = new Blocktype(Blocktype.MOVEFORWARD);
+        ModelMoveBlock mmb = new ModelMoveBlock(pos4, t4);
+        mmb.connect(mwb);
+        mBlocks.add(mmb);
+        Location wall = new Location(2,0);
+        ArrayList<Location> walls = new ArrayList<>();
+        walls.add(wall);
+        gC.getModelController().getPWindow().setBlocks(mBlocks);
+        gC.execute();
     }
 }

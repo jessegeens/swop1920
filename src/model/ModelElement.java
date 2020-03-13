@@ -14,10 +14,12 @@ public abstract class ModelElement{
         this.pos = pos;
     }
 
-    //TODO: wat is het verschil tussen move en setPos()?
-    //Location of an element is the topmost left border (where left is more important than top)
     /**
      * Function that moves an element to the new position
+     * Location of an element is the topmost left border (where left is more important than top)
+     * 
+     * TODO: wat is het verschil tussen move en setPos()?
+     * 
      * @param newPos: the new position of the element.
      */
     public void move(Location newPos){
@@ -26,6 +28,7 @@ public abstract class ModelElement{
 
     /**
      * Getter for the position of the element.
+     * 
      * @return the position of the element.
      */
     public Location getPos() {
@@ -34,6 +37,7 @@ public abstract class ModelElement{
 
     /**
      * Setter for the position of the element.
+     * 
      * @param pos: the position of the element.
      */
     public void setPos(Location pos) {
@@ -41,10 +45,8 @@ public abstract class ModelElement{
     }
 
     /**
-     * Function that declares if the position is a right position. TODO: klopt dit?
+     * Function that declares if the position is a right position. 
      */
-    public boolean inBounds(Location pos) {
-        return false;
-    }
+    public abstract boolean inBounds(Location pos);
 
 }

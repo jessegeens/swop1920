@@ -61,6 +61,7 @@ public class UIController {
      * @param gridInfo variable containing information about the grid.
      */
     public void updateGrid(GridInfo gridInfo){
+        System.out.println("update grid gridinfo");
         this.grid = new UIGrid(new Location(2*this.wWidth/3, 0), this.wWidth/ 3, this.wHeight, gridInfo.getCellSize(), gridInfo.getWalls(), gridInfo.getRobotLocation(), gridInfo.getRobotDirection(), gridInfo.getGoalCell());
         System.out.println("GRIDINFO");
         System.out.println(gridInfo.getRobotLocation().getX());

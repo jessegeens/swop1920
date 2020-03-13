@@ -15,6 +15,7 @@ import utilities.Location;
 public class ModelController{
 
     private final int MAX_BLOCKS;
+    private final int CELL_SIZE;
     private boolean maxReached = false;
 
     private ModelPalette palette;
@@ -25,13 +26,13 @@ public class ModelController{
 
 
     // Constructor
-    public ModelController(GridInfo gridInfo, int max){
-        this.MAX_BLOCKS = max;
-        
+    public ModelController(GridInfo gridInfo, int maxBlocks, int cellSize){
+        this.MAX_BLOCKS = maxBlocks;
+        this.CELL_SIZE = cellSize;
         //palette left, program middle, grid right
         this.setPalette(new ModelPalette(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
         this.setPWindow(new ModelProgramWindow(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
-        this.setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, gridInfo.getGoalCell(), gridInfo.getRobotLocation(), gridInfo.getRobotDirection(),new ArrayList<Location>())); 
+        this.setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, gridInfo.getGoalCell(), gridInfo.getRobotLocation(), gridInfo.getRobotDirection(),new ArrayList<Location>(), CELL_SIZE)); 
     }
 
 

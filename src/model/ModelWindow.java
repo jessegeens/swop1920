@@ -1,8 +1,5 @@
 package model;
 
-import model.blocks.*;
-import java.util.ArrayList;
-
 /**
  * Abstract class representing a window in the program. The palette, program window extend this class. 
  */
@@ -11,25 +8,11 @@ abstract class ModelWindow{
     private int width; // Should be at least 300
     private int height; // Should be at least 600
 
-    
-
+    // Constructor    
     public ModelWindow(int width, int height){
         this.setWidth(width);
         this.setHeight(height);
     }
-
-    public static ArrayList<ModelBlock> removeDuplicates(ArrayList<ModelBlock> list) 
-    { 
-        ArrayList<ModelBlock> newL = new ArrayList<ModelBlock>(); 
-        for (ModelBlock blk : list) { 
-            if (!newL.contains(blk)) { 
-                newL.add(blk); 
-            } 
-        }
-        return newL; 
-    } 
-    
-
 
    /**
      * 

@@ -73,7 +73,7 @@ public class GlobalController {
         }
         step();
         this.setCurrent(findNextBlock());
-        this.highlightNext();
+        if(!this.getCurrent().equals(this.getModelController().getPWindow().getStartBlock())) this.highlightNext();
     }
 
     public void step(){

@@ -31,7 +31,7 @@ public class UIBlock extends UIElement {
     }
 
     public Color getBlockColor(){
-        if(highlighted) {
+        if(this.highlighted) {
             return Color.GREEN;
         }
         else {

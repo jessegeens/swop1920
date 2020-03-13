@@ -33,6 +33,7 @@ public class ModelGrid extends ModelWindow {
     }
 
     public Location robotStepPos(){
+        
         switch(getRobotDir().getDirection()){
             case(Direction.DOWN):
             return getRobotPos().add(new Location(0,1));

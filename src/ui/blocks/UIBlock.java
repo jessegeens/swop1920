@@ -95,8 +95,12 @@ public class UIBlock extends UIElement {
                     g.setColor(Color.GREEN);
                 else
                     g.setColor(Color.GRAY);
-                g.fillRect(this.getPos().getX() + (width / 4),this.getPos().getY(), width, height);
-                g.fillRect(this.getPos().getX(),this.getPos().getY() + (height / 3), (width/4), height/3);
+                
+
+                g.fillRect(this.getPos().getX(),this.getPos().getY(), this.height, this.width);
+                g.fillRect(this.getPos().getX()- width/4, this.getPos().getY()+(height/3), (width/4), height/3);
+                
+                
                 g.setColor(Color.WHITE);
                 g.drawString(mBlock.getBlockType().getTitle(), this.getPos().getX() + 10, this.getPos().getY() + (height/2));
                 break;

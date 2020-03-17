@@ -13,7 +13,7 @@ public final class Direction{
     
     public static final int LEFT = 3;
     
-    private int direction;
+    private final int direction;
 
     public Direction(int direction){
         if(direction >-1 && direction < 4){
@@ -35,16 +35,14 @@ public final class Direction{
     /**
      * Method to turn left.
      */
-    public void turnLeft(){
-        this.direction = (this.direction + 3) % 4; //plus 3 equals -1 in mod 4
-
+    public Direction turnLeft(){
+        return new Direction((this.getDirection() + 3) % 4); //plus 3 equals -1 in mod 4
     }
 
     /**
      * Method to turn right.
      */
-    public void turnRight(){
-        this.direction = (this.direction + 1) % 4;
-        
+    public Direction turnRight(){
+        return new Direction((this.getDirection() + 1) % 4);
     }
 }

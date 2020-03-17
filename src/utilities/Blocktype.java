@@ -19,8 +19,12 @@ public final class Blocktype{
 
     public static final int NOT = 6;
 
-    private int type;
+    private final int type;
 
+    /**
+     * Constructor for the blocktype
+     * @param type the type of the blocktype
+     */
     public Blocktype(int type){
         if(type >-1 && type < 7){
             this.type = type;

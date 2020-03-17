@@ -53,6 +53,19 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
             ((TopSocket)block).setTopSocket(this); 
             this.setPos(block.getPos().add(new WindowLocation(0, -block.getHeight())));
         }
+        if (block instanceof ModelWhileIfBlock){
+            if (this.getTopSocketPos().getDistance(((ModelWhileIfBlock) block).getCavityPlugPos()) < ModelBlock.PLUGSIZE * 1.5){
+                this.setTopSocket(block);
+                ((ModelWhileIfBlock) block).setCavityPlug(this);
+                this.setPos(block.getPos().add(ModelBlock.STD_HEIGHT/2,0));
+            }
+            if (this.getBottomPlugPos().getDistance(((ModelWhileIfBlock) block).getCavitySocketPos()) < ModelBlock.PLUGSIZE * 1.5){
+                this.setBottomPlug(block);
+                ((ModelWhileIfBlock) block).setCavitySocket(this);
+                this.setPos(block.getPos().add(block.getHeight() - ModelBlock.STD_HEIGHT/2,0));
+            }
+        }
+
     }
 
 

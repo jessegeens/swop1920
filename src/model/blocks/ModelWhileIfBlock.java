@@ -61,7 +61,8 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             if(this.getCavityPlug() == this){ 
                 this.setCavityPlug(block);
                 if(block.hasTopSocket()) ((TopSocket)block).setTopSocket(this);
-            }    
+            }
+            //TODO Oberon: set the position of the block that enters the cavity
         }
         else if ((block.hasTopSocket() && (this.getCavityPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5))){
             this.setCavityPlug(block);
@@ -70,6 +71,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
                 this.setCavitySocket(block);
                 if(block.hasBottomPlug()) ((BottomPlug)block).setBottomPlug(this);
             }
+            //TODO Oberon: set the position of the block that enters the cavity
         }
         else if ((block.hasBottomPlug() && (this.getTopSocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5))){
             this.setTopSocket(block);

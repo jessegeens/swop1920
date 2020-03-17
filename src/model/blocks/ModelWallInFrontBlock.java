@@ -10,7 +10,7 @@ public class ModelWallInFrontBlock extends ModelBlock implements LeftPlug{
     private ModelBlock leftPlug;
 
     // Constructor
-    public ModelWallInFrontBlock(Location pos, Blocktype type){
+    public ModelWallInFrontBlock(WindowLocation pos, Blocktype type){
         super(pos,type);
         this.setLeftPlug(null);
     }
@@ -38,7 +38,7 @@ public class ModelWallInFrontBlock extends ModelBlock implements LeftPlug{
             if(block.hasRightSocket()){
                 this.setLeftPlug(block);
                 ((RightSocket)block).setRightSocket(this); 
-                this.setPos(block.getPos().add(new Location(block.getWidth(),0)));  
+                this.setPos(block.getPos().add(new WindowLocation(block.getWidth(),0)));
             }  
         }  
     }
@@ -63,7 +63,7 @@ public class ModelWallInFrontBlock extends ModelBlock implements LeftPlug{
      * {@inheritDoc}
      */
     @Override
-    public Location getLeftPlugPos() {
+    public WindowLocation getLeftPlugPos() {
         return super.getPos().add(- ModelBlock.PLUGSIZE / 2, + this.getHeight() / 2);
     }
 

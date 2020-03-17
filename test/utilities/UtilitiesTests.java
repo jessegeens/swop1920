@@ -34,18 +34,18 @@ public class UtilitiesTests {
 
     @Test
     public void getDistanceIsZero() {
-        Location loc1 = new Location(1, 1);
-        Location loc2 = new Location(1, 1);
+        WindowLocation loc1 = new WindowLocation(1, 1);
+        WindowLocation loc2 = new WindowLocation(1, 1);
         assertEquals(0, loc1.getDistance(loc2));
         assertEquals(0, loc2.getDistance(loc1));
     }
 
     @Test
     public void getVectorSum() {
-        Location loc1 = new Location(2, 3);
-        Location loc2 = new Location(0, 0);
-        Location loc3 = new Location(4, 1);
-        Location loc4 = new Location(6, 4);
+        WindowLocation loc1 = new WindowLocation(2, 3);
+        WindowLocation loc2 = new WindowLocation(0, 0);
+        WindowLocation loc3 = new WindowLocation(4, 1);
+        WindowLocation loc4 = new WindowLocation(6, 4);
         assertEquals(loc4.getX(), loc1.add(loc3).getX());
         assertEquals(loc4.getY(), loc1.add(loc3).getY());
         assertEquals(loc1.getX(), loc1.add(loc2).getX());
@@ -54,7 +54,7 @@ public class UtilitiesTests {
 
     @Test
     public void getComponentSum() {
-        Location loc1 = new Location(2, 3);
+        WindowLocation loc1 = new WindowLocation(2, 3);
         assertEquals(4, loc1.add(2, 0).getX());
         assertEquals(3, loc1.add(2, 0).getY());
     }
@@ -83,10 +83,10 @@ public class UtilitiesTests {
     @Test
     public void gridInfoTest() {
         int cellSize = 100;
-        Location goal = new Location(10, 15);
-        Location rPos = new Location(20, 25);
+        WindowLocation goal = new WindowLocation(10, 15);
+        WindowLocation rPos = new WindowLocation(20, 25);
         Direction rDir = new Direction(Direction.RIGHT);
-        ArrayList<Location> walls = new ArrayList<>();
+        ArrayList<WindowLocation> walls = new ArrayList<>();
         ModelGrid grid = new ModelGrid(10, 10, goal, rPos, rDir, walls, 100);
         GridInfo gridInfo = new GridInfo(grid, cellSize);
         assertEquals(10, gridInfo.getGoalCell().getX());

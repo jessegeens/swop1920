@@ -17,7 +17,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     private ModelBlock cavityPlug;
 
     // Constructor
-    public ModelWhileIfBlock(Location pos, Blocktype type){
+    public ModelWhileIfBlock(WindowLocation pos, Blocktype type){
         super(pos,type);
 
         this.setTopSocket(null);
@@ -66,18 +66,18 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         else if ((block.hasBottomPlug() && (this.getTopSocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5))){
             this.setTopSocket(block);
             ((BottomPlug)block).setBottomPlug(this); 
-            this.setPos(block.getPos().add(new Location(0, this.getHeight()))); 
+            this.setPos(block.getPos().add(new WindowLocation(0, this.getHeight())));
              
         }
         else if ((block.hasTopSocket() && (this.getBottomPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5))){
             this.setBottomPlug(block);
             ((TopSocket)block).setTopSocket(this);  
-            this.setPos(block.getPos().add(new Location(0,-block.getHeight())));  
+            this.setPos(block.getPos().add(new WindowLocation(0,-block.getHeight())));
         }
         else if ((block.hasLeftPlug() && (this.getRightSocketPos().getDistance(((LeftPlug)block).getLeftPlugPos()) < ModelBlock.PLUGSIZE * 1.5))){
             this.setRightSocket(block);
             ((LeftPlug)block).setLeftPlug(this); 
-            this.setPos(block.getPos().add(new Location(-this.getWidth(),0)));   
+            this.setPos(block.getPos().add(new WindowLocation(-this.getWidth(),0)));
         }
     }
 
@@ -215,23 +215,23 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      * 
      * @return the position of the cavity socket
      */
-    public Location getCavitySocketPos() {
-        return this.getPos().add(new Location(ModelBlock.STD_WIDTH/2 + getCavityWidth(), this.getHeight() - ModelBlock.STD_HEIGHT/3));
+    public WindowLocation getCavitySocketPos() {
+        return this.getPos().add(new WindowLocation(ModelBlock.STD_WIDTH/2 + getCavityWidth(), this.getHeight() - ModelBlock.STD_HEIGHT/3));
     }
 
     /**
      * 
      * @return the position of the cavity plug
      */
-    public Location getCavityPlugPos() {
-        return this.getPos().add(new Location(ModelBlock.STD_WIDTH/2 + getCavityWidth(), 2*ModelBlock.STD_HEIGHT/3));
+    public WindowLocation getCavityPlugPos() {
+        return this.getPos().add(new WindowLocation(ModelBlock.STD_WIDTH/2 + getCavityWidth(), 2*ModelBlock.STD_HEIGHT/3));
     }
 
     /**
      * 
      * @return the position of the top socket
      */
-    public Location getTopSocketPos() {
+    public WindowLocation getTopSocketPos() {
         return super.getPos().add(this.getWidth() / 2, + ModelBlock.PLUGSIZE / 2);
     }
 
@@ -239,7 +239,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      * 
      * @return the position of the bottom plug
      */
-    public Location getBottomPlugPos() {
+    public WindowLocation getBottomPlugPos() {
         return super.getPos().add(this.getWidth() / 2,+this.getHeight() + ModelBlock.PLUGSIZE / 2);
     }
 
@@ -247,7 +247,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      * 
      * @return the position of the right socket
      */
-    public Location getRightSocketPos() {
+    public WindowLocation getRightSocketPos() {
         return super.getPos().add(this.getWidth() - ModelBlock.PLUGSIZE / 2, this.getHeight() / 2);
     }
 

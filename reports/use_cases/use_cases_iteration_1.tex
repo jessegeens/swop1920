@@ -101,8 +101,8 @@
         1b. The user left clicks on the block in the Program Area and holds the button down
         1c. The user moves the block in the Program Area
         1d. The user lets go of the left mouse button 
-        1e.The block gets placed in the Program Area at the cursor’s location
-    2. Moving blocks to an invalid location (outside of the Program Area, Palette Area 
+        1e.The block gets placed in the Program Area at the cursor’s windowLocation
+    2. Moving blocks to an invalid windowLocation (outside of the Program Area, Palette Area
     or placed top of another block)
         2a. Follow 1a.to 1d.
         2b. The block will relocate to it's original place in the Program Area or Palette.
@@ -132,7 +132,7 @@
 
 ### Succes guarantee
     The robot in the Game World has moved from its starting position 
-    to the location which results from follwing the instructions 
+    to the windowLocation which results from follwing the instructions
     on the group of blocks in the Program Area
 
 ### Main Success Scenario
@@ -164,14 +164,14 @@
  
 ### Extensions
     1. During executions, when the user presses Esc, the program execution halts. 
-    The robot in the Game World is reset to its original location 
+    The robot in the Game World is reset to its original windowLocation
     and pressing F5 again starts the program again
     2. If the robot in the game world is pointing towards a wall 
     and the next block it needs to process is a move block, the program execution stops. 
-    The robot in the Game World is reset to its original location 
+    The robot in the Game World is reset to its original windowLocation
     and pressing F5 again starts the program again
     3. If the instruction blocks in the Program Area run out without the robot reaching the goal area
-    the robot in the Game World is reset to its original location 
+    the robot in the Game World is reset to its original windowLocation
     and pressing F5 again starts the program again
 \end{verbatim}
 

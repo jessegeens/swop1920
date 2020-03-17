@@ -1,7 +1,7 @@
 package model.blocks.plugs;
 
 import model.blocks.*;
-import utilities.Location;
+import utilities.WindowLocation;
 
 public interface LeftPlug {
     /**
@@ -26,5 +26,5 @@ public interface LeftPlug {
      * 
      * @return the position of the right socket
      */
-    public Location getLeftPlugPos();
+    public WindowLocation getLeftPlugPos();
 }

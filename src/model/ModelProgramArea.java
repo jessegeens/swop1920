@@ -40,36 +40,36 @@ public class ModelProgramArea extends ModelWindow{
                             case Blocktype.IF:
                             case Blocktype.WHILE:
                                 if (((ModelWhileIfBlock)blk1).getTopSocket() == upd){
-                                    blk1.setPos(upd.getPos().add(new Location(0, upd.getHeight())));
+                                    blk1.setPos(upd.getPos().add(new WindowLocation(0, upd.getHeight())));
                                 }
                                 else if (((ModelWhileIfBlock)blk1).getBottomPlug() == upd){
-                                    blk1.setPos(upd.getPos().add(new Location(0, -blk1.getHeight())));
+                                    blk1.setPos(upd.getPos().add(new WindowLocation(0, -blk1.getHeight())));
                                 }
                                 else if (((ModelWhileIfBlock)blk1).getRightSocket() == upd){
-                                    blk1.setPos(upd.getPos().add(new Location(-blk1.getWidth(),0)));
+                                    blk1.setPos(upd.getPos().add(new WindowLocation(-blk1.getWidth(),0)));
                                 }
                                 break;
                             case Blocktype.MOVEFORWARD:
                             case Blocktype.TURNLEFT:
                             case Blocktype.TURNRIGHT:
                                 if (((ModelMoveBlock)blk1).getTopSocket() == upd){
-                                    blk1.setPos(upd.getPos().add(new Location(0, upd.getHeight())));
+                                    blk1.setPos(upd.getPos().add(new WindowLocation(0, upd.getHeight())));
                                 }
                                 else if (((ModelMoveBlock)blk1).getBottomPlug() == upd){
-                                    blk1.setPos(upd.getPos().add(new Location(0, -blk1.getHeight())));
+                                    blk1.setPos(upd.getPos().add(new WindowLocation(0, -blk1.getHeight())));
                                 }
                                 break;
                             case Blocktype.WALLINFRONT:
                                 if (((ModelWallInFrontBlock)blk1).getLeftPlug() == upd){
-                                    blk1.setPos(upd.getPos().add(new Location(upd.getWidth(),0)));
+                                    blk1.setPos(upd.getPos().add(new WindowLocation(upd.getWidth(),0)));
                                 }
                                 break;
                             case Blocktype.NOT:
                                 if (((ModelNotBlock)blk1).getLeftPlug() == upd){
-                                    blk1.setPos(upd.getPos().add(new Location(upd.getWidth(),0)));
+                                    blk1.setPos(upd.getPos().add(new WindowLocation(upd.getWidth(),0)));
                                 }
                                 else if (((ModelNotBlock)blk1).getRightSocket() == upd){
-                                    blk1.setPos(upd.getPos().add(new Location(-blk1.getWidth(),0)));
+                                    blk1.setPos(upd.getPos().add(new WindowLocation(-blk1.getWidth(),0)));
                                 }
                                 break;
                         }
@@ -239,12 +239,12 @@ public class ModelProgramArea extends ModelWindow{
      * Note that the blocks list has to be traversed in reverse 
      *  order due to rendering (ask Bert if unclear)
      * 
-     * @param eventLocation location of the mouseDown event
+     * @param eventWindowLocation location of the mouseDown event
      * @return block to be returned 
      */
-    public ModelBlock handleMouseDown(Location eventLocation){
+    public ModelBlock handleMouseDown(WindowLocation eventWindowLocation){
         for(int i = this.getPABlocks().size() - 1; i >= 0; i--){
-            if(this.getPABlocks().get(i).inBounds(eventLocation)){
+            if(this.getPABlocks().get(i).inBounds(eventWindowLocation)){
                 ModelBlock toBeReturned = this.getPABlocks().get(i);
                 this.removeBlock(toBeReturned);
                 return toBeReturned;
@@ -258,10 +258,10 @@ public class ModelProgramArea extends ModelWindow{
      * 
      * TODO: remove debug print statements
      * 
-     * @param eveLocation the location of the mouseUp event
+     * @param eveWindowLocation the location of the mouseUp event
      * @param activeB activeBlock the current active block
      */
-    public void handleMouseUp(Location eveLocation, ModelBlock activeB){
+    public void handleMouseUp(WindowLocation eveWindowLocation, ModelBlock activeB){
         this.addBlock(activeB);
         ModelBlock closest = this.findClosestBlock(activeB);
         if (closest != null){

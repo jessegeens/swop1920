@@ -19,8 +19,8 @@ public class GlobalController {
     //Program parameters
     private final int MAX_BLOCKS = 15;
     private final int CELL_SIZE = 50;
-    private final Location GOAL_CELL = new Location(5, 5);
-    private final Location ROBOT_START_LOCATION = new Location(0, 0);
+    private final GridLocation GOAL_CELL = new GridLocation(5, 5);
+    private final GridLocation ROBOT_START_LOCATION = new GridLocation(0, 0);
     private final Direction ROBOT_START_DIRECTION = new Direction(Direction.RIGHT);
 
     //Controllers
@@ -33,7 +33,7 @@ public class GlobalController {
 
     // Constructor
     public GlobalController(){
-        GridInfo gridInfo = new GridInfo(GOAL_CELL, new ArrayList<Location>(), ROBOT_START_LOCATION, ROBOT_START_DIRECTION, CELL_SIZE);
+        GridInfo gridInfo = new GridInfo(GOAL_CELL, new ArrayList<GridLocation>(), ROBOT_START_LOCATION, ROBOT_START_DIRECTION, CELL_SIZE);
         this.modelController = new ModelController(gridInfo, this.MAX_BLOCKS, this.CELL_SIZE);
         System.out.println(modelController.getModelBlocks());
         this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT, modelController.getModelBlocks(), gridInfo);
@@ -45,8 +45,8 @@ public class GlobalController {
      * This function handles mouse events and passes them on to the model- and UIController
      */
     public void handleMouseEvent(int id, int x, int y, int clickCount){
-        Location eventLocation = new Location(x,y);
-        this.modelController.handleMouseEvent(id, eventLocation, clickCount);
+        WindowLocation eventWindowLocation = new WindowLocation(x,y);
+        this.modelController.handleMouseEvent(id, eventWindowLocation, clickCount);
         this.uiController.updateBlocks(this.modelController.getModelBlocks());
 
     }
@@ -156,7 +156,7 @@ public class GlobalController {
         this.running = false;
         if(!this.getCurrent().equals(this.getModelController().getPArea().getFinishBlock())) findNextBlock().setUnHighlight();
         else this.getCurrent().setUnHighlight();
-        this.getModelController().setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, GOAL_CELL, ROBOT_START_LOCATION, ROBOT_START_DIRECTION, new ArrayList<Location>(), CELL_SIZE));
+        this.getModelController().setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, GOAL_CELL, ROBOT_START_LOCATION, ROBOT_START_DIRECTION, new ArrayList<GridLocation>(), CELL_SIZE));
         this.getCurrent().setUnHighlight();
     }
 

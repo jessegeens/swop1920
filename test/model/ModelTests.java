@@ -6,7 +6,7 @@ import model.blocks.ModelWhileIfBlock;
 import org.junit.Test;
 import utilities.Blocktype;
 import utilities.Direction;
-import utilities.Location;
+import utilities.WindowLocation;
 
 import java.util.ArrayList;
 
@@ -17,15 +17,15 @@ public class ModelTests {
 
     @Test
     public void TestModelGrid() {
-        Location loc = new Location(40, 40);
-        Location rPos = new Location(0, 0);
+        WindowLocation loc = new WindowLocation(40, 40);
+        WindowLocation rPos = new WindowLocation(0, 0);
         Direction rDir = new Direction(0);
-        ArrayList<Location> walls = new ArrayList<>();
+        ArrayList<WindowLocation> walls = new ArrayList<>();
         ModelGrid grid = new ModelGrid(200, 200, loc, rPos, rDir, walls, 100);
         assertEquals(loc, grid.getGoalCell());
-        Location wall1 = new Location(12, 15);
-        Location wall2 = new Location(22, 24);
-        ArrayList<Location> lst = new ArrayList<>();
+        WindowLocation wall1 = new WindowLocation(12, 15);
+        WindowLocation wall2 = new WindowLocation(22, 24);
+        ArrayList<WindowLocation> lst = new ArrayList<>();
         lst.add(wall1);
         lst.add(wall2);
         grid.setWalls(lst);
@@ -37,7 +37,7 @@ public class ModelTests {
     @Test
     public void testModelPalette() {
         ModelPalette mP = new ModelPalette(200, 200);
-        Location loc = new Location(10, 10);
+        WindowLocation loc = new WindowLocation(10, 10);
         Blocktype bt = new Blocktype(Blocktype.MOVEFORWARD);
         ModelMoveBlock blk = new ModelMoveBlock(loc, bt);
         mP.blockToProgramWindow(blk, false);
@@ -48,20 +48,20 @@ public class ModelTests {
     @Test
     public void testModelPalette2() {
         ModelPalette mP = new ModelPalette(200, 200);
-        assertNotNull(mP.handleMouseDown(mP.getForwardLocation().add(5,5), false));
+        assertNotNull(mP.handleMouseDown(mP.getForwardWindowLocation().add(5,5), false));
     }
 
     @Test
     public void programWindowTest() {
         ModelProgramArea pw = new ModelProgramArea(200, 200);
-        Location pos1 = new Location(180, 10);
+        WindowLocation pos1 = new WindowLocation(180, 10);
         Blocktype type1 = new Blocktype(Blocktype.WHILE);
         ModelWhileIfBlock block1 = new ModelWhileIfBlock(pos1, type1);
-        Location pos2 = new Location(180, 130);
+        WindowLocation pos2 = new WindowLocation(180, 130);
         Blocktype type2 = new Blocktype(Blocktype.WHILE);
         ModelWhileIfBlock block2  = new ModelWhileIfBlock(pos2, type2);
         block1.connect(block2);
-        Location pos3 = new Location(20,20);
+        WindowLocation pos3 = new WindowLocation(20,20);
         Blocktype type3 = new Blocktype(Blocktype.NOT);
         ModelNotBlock block3 = new ModelNotBlock(pos3, type3);
         pw.addBlock(block1);

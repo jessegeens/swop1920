@@ -7,20 +7,20 @@ import java.util.ArrayList;
  * Class representing a two-dimensional grid for Blockr. The grid contains walls, a robot and a goal cell.
  */
 public class ModelGrid extends ModelWindow {
-    private Location goalCell;
+    private GridLocation goalCell;
     private int cellHeight;
     private int cellWidth;
-    private Location robotPos;
+    private GridLocation robotPos;
     private Direction robotDir;
-    private ArrayList<Location> walls;
+    private ArrayList<GridLocation> walls;
 
     // Constructor
-    public ModelGrid(int width, int height, Location goal, Location robotPos, Direction robotDir, ArrayList<Location> walls, int cellSize){ 
+    public ModelGrid(int width, int height, GridLocation goal, GridLocation robotPos, Direction robotDir, ArrayList<GridLocation> walls, int cellSize){
         super(width,height);
         this.setGoalCell(goal);
         this.cellHeight = cellSize;
         this.cellWidth = cellSize;
-        this.setWalls(new ArrayList<Location>());
+        this.setWalls(new ArrayList<GridLocation>());
         this.setRobotDir(robotDir);
         this.setRobotPos(robotPos);        
     }
@@ -38,19 +38,19 @@ public class ModelGrid extends ModelWindow {
      * 
      * @return the new position of the robot after stepping
      */
-    public Location robotStepPos(){
+    public GridLocation robotStepPos(){
         
         switch(getRobotDir().getDirection()){
             case(Direction.DOWN):
-            return getRobotPos().add(new Location(0,1));
+            return getRobotPos().add(new GridLocation(0,1));
             case(Direction.UP):
-            return getRobotPos().add(new Location(0,-1));
+            return getRobotPos().add(new GridLocation(0,-1));
             case(Direction.LEFT):
-            return getRobotPos().add(new Location(-1,0));
+            return getRobotPos().add(new GridLocation(-1,0));
             case(Direction.RIGHT):
-            return getRobotPos().add(new Location(1,0));
+            return getRobotPos().add(new GridLocation(1,0));
         }
-        return new Location(0,0);
+        return new GridLocation(0,0);
     }
 
     /**
@@ -84,7 +84,7 @@ public class ModelGrid extends ModelWindow {
      * 
      * @return the goal cell.
      */
-    public Location getGoalCell() {
+    public GridLocation getGoalCell() {
         return this.goalCell;
     }
 
@@ -92,7 +92,7 @@ public class ModelGrid extends ModelWindow {
      * 
      * @param goalCell the cell that will be the goal cell.
      */
-    public void setGoalCell(Location goalCell) {
+    public void setGoalCell(GridLocation goalCell) {
         this.goalCell = goalCell;
     }
 
@@ -132,7 +132,7 @@ public class ModelGrid extends ModelWindow {
      * 
      * @return a list of locations where a wall stands.
      */
-    public ArrayList<Location> getWalls() {
+    public ArrayList<GridLocation> getWalls() {
         return this.walls;
     }
 
@@ -140,7 +140,7 @@ public class ModelGrid extends ModelWindow {
      * 
      * @param walls a list of walls to add to the grid.
      */
-    public void setWalls(ArrayList<Location> walls) {
+    public void setWalls(ArrayList<GridLocation> walls) {
         this.walls = walls;
     }
 
@@ -149,7 +149,7 @@ public class ModelGrid extends ModelWindow {
      * 
      * @return {Location} return the robot's current position
      */
-    public Location getRobotPos() {
+    public GridLocation getRobotPos() {
         return this.robotPos;
     }
 
@@ -158,7 +158,7 @@ public class ModelGrid extends ModelWindow {
      * 
      * @param robotPos the new position of the robot
      */
-    public void setRobotPos(Location robotPos) {
+    public void setRobotPos(GridLocation robotPos) {
         this.robotPos = robotPos;
         System.out.println("ROBOT POS UPDATE");
         System.out.println(this.robotPos.getX());

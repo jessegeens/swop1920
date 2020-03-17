@@ -1,13 +1,13 @@
 package utilities;
 
 /**
- * A class representing the location of some element in our system.
+ * A class representing the location of elements in the windows of our system.
  */
-public final class Location{
-    private int x;
-    private int y;
+public final class WindowLocation {
+    private final int x;
+    private final int y;
 
-    public Location(int i, int j) {
+    public WindowLocation(int i, int j) {
         this.x = i;
         this.y = j;
     }
@@ -18,7 +18,7 @@ public final class Location{
      * @param pos the other position
      * @return the distance of this position and another position.
      */
-    public int getDistance(Location pos){
+    public int getDistance(WindowLocation pos){
         return (int)Math.sqrt(Math.pow(this.getX()-pos.getX(),2)+Math.pow(this.getY()-pos.getY(),2));
     }
 
@@ -27,8 +27,8 @@ public final class Location{
      * @param pos the other position to add.
      * @return the new position. 
      */
-    public Location add(Location pos){
-        return new Location(this.getX() + pos.getX(), this.getY() + pos.getY());
+    public WindowLocation add(WindowLocation pos){
+        return new WindowLocation(this.getX() + pos.getX(), this.getY() + pos.getY());
     }
 
     /**
@@ -37,8 +37,8 @@ public final class Location{
      * @param j the component to be added to the y part of our location.
      * @return the sum of the location with i and j.
      */
-    public Location add(int i, int j){
-        return new Location(this.getX() + i, this.getY() + j);
+    public WindowLocation add(int i, int j){
+        return new WindowLocation(this.getX() + i, this.getY() + j);
     }
 
     /**

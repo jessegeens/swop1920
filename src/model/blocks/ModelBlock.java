@@ -27,7 +27,7 @@ public abstract class ModelBlock extends ModelElement{
     private boolean highlighted = false;
     
     // Constructor
-    public ModelBlock(Location pos, Blocktype type){
+    public ModelBlock(WindowLocation pos, Blocktype type){
         super(pos);
         this.type = type;
     }
@@ -36,7 +36,7 @@ public abstract class ModelBlock extends ModelElement{
      * {@inheritDoc}
      */
     @Override
-    public void move(Location newPos){
+    public void move(WindowLocation newPos){
         super.move(newPos);
     }
 
@@ -75,7 +75,7 @@ public abstract class ModelBlock extends ModelElement{
      * {@inheritDoc}
      */
     @Override
-    public boolean inBounds(Location coordinate){
+    public boolean inBounds(WindowLocation coordinate){
         if(this.getPos().getX() < coordinate.getX() && this.getPos().getX() + width > coordinate.getX() && this.getPos().getY() < coordinate.getY() && this.getPos().getY() + width > coordinate.getY() ){
             return true;
         }
@@ -91,7 +91,7 @@ public abstract class ModelBlock extends ModelElement{
      *              location will be determined by the position of this neighbour and the height/width of the two blocks.
      * @param closest The block closest to the location where the block is dragged.
      */
-    public void move(Location newPos, ModelBlock closest){
+    public void move(WindowLocation newPos, ModelBlock closest){
         super.move(newPos);
         this.disconnect();
         if (newPos.getDistance(closest.getPos()) < 50){

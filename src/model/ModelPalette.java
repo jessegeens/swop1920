@@ -4,20 +4,20 @@ import java.util.ArrayList;
 
 import model.blocks.*;
 import utilities.Blocktype;
-import utilities.Location;
+import utilities.WindowLocation;
 
 /**
  * Class representing the palette. Blocks will be dragged from the palette int the program area.
  */
 class ModelPalette extends ModelWindow{
 
-    private final Location turnLeftLocation = new Location(20, 20);
-    private final Location turnRightLocation = new Location(180, 20);
-    private final Location forwardLocation = new Location(20, 180);
-    private final Location notLocation = new Location(180, 180);
-    private final Location wallInFrontLocation = new Location(20, 340);
-    private final Location whileLocation = new Location(180, 340);
-    private final Location ifLocation = new Location(20, 500);
+    private final WindowLocation turnLeftWindowLocation = new WindowLocation(20, 20);
+    private final WindowLocation turnRightWindowLocation = new WindowLocation(180, 20);
+    private final WindowLocation forwardWindowLocation = new WindowLocation(20, 180);
+    private final WindowLocation notWindowLocation = new WindowLocation(180, 180);
+    private final WindowLocation wallInFrontWindowLocation = new WindowLocation(20, 340);
+    private final WindowLocation whileWindowLocation = new WindowLocation(180, 340);
+    private final WindowLocation ifWindowLocation = new WindowLocation(20, 500);
 
     private ModelMoveBlock turnLeftBlock;
     private ModelMoveBlock turnRightBlock;
@@ -30,13 +30,13 @@ class ModelPalette extends ModelWindow{
     // Constructor
     public ModelPalette(int width, int height){
         super(width,height);
-        this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftLocation(), new Blocktype(Blocktype.TURNLEFT)));
-        this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightLocation(), new Blocktype(Blocktype.TURNRIGHT)));
-        this.setForwardBlock(new ModelMoveBlock(this.getForwardLocation(), new Blocktype(Blocktype.MOVEFORWARD)));
-        this.setNotBlock(new ModelNotBlock(this.getNotLocation(),new Blocktype(Blocktype.NOT)));
-        this.setWallInFrontBlock(new ModelWallInFrontBlock(this.getWallInFrontLocation(),new Blocktype(Blocktype.WALLINFRONT)));
-        this.setWhileBlock(new ModelWhileIfBlock(this.getWhileLocation(),new Blocktype(Blocktype.WHILE)));
-        this.setIfBlock(new ModelWhileIfBlock(this.getIfLocation(),new Blocktype(Blocktype.IF)));
+        this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftWindowLocation(), new Blocktype(Blocktype.TURNLEFT)));
+        this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightWindowLocation(), new Blocktype(Blocktype.TURNRIGHT)));
+        this.setForwardBlock(new ModelMoveBlock(this.getForwardWindowLocation(), new Blocktype(Blocktype.MOVEFORWARD)));
+        this.setNotBlock(new ModelNotBlock(this.getNotWindowLocation(),new Blocktype(Blocktype.NOT)));
+        this.setWallInFrontBlock(new ModelWallInFrontBlock(this.getWallInFrontWindowLocation(),new Blocktype(Blocktype.WALLINFRONT)));
+        this.setWhileBlock(new ModelWhileIfBlock(this.getWhileWindowLocation(),new Blocktype(Blocktype.WHILE)));
+        this.setIfBlock(new ModelWhileIfBlock(this.getIfWindowLocation(),new Blocktype(Blocktype.IF)));
     }
 
     /**
@@ -61,25 +61,25 @@ class ModelPalette extends ModelWindow{
         else{
             switch(blk.getBlockType().getType()){
                 case Blocktype.IF:
-                    this.setIfBlock(new ModelWhileIfBlock(this.getIfLocation(),new Blocktype(Blocktype.IF)));
+                    this.setIfBlock(new ModelWhileIfBlock(this.getIfWindowLocation(),new Blocktype(Blocktype.IF)));
                     break;
                 case Blocktype.WHILE:
-                    this.setWhileBlock(new ModelWhileIfBlock(this.getWhileLocation(),new Blocktype(Blocktype.WHILE)));
+                    this.setWhileBlock(new ModelWhileIfBlock(this.getWhileWindowLocation(),new Blocktype(Blocktype.WHILE)));
                     break;
                 case Blocktype.MOVEFORWARD:
-                    this.setForwardBlock(new ModelMoveBlock(this.getForwardLocation(), new Blocktype(Blocktype.MOVEFORWARD)));
+                    this.setForwardBlock(new ModelMoveBlock(this.getForwardWindowLocation(), new Blocktype(Blocktype.MOVEFORWARD)));
                     break;
                 case Blocktype.TURNLEFT:
-                    this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftLocation(), new Blocktype(Blocktype.TURNLEFT)));
+                    this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftWindowLocation(), new Blocktype(Blocktype.TURNLEFT)));
                     break;
                 case Blocktype.TURNRIGHT:
-                    this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightLocation(), new Blocktype(Blocktype.TURNRIGHT)));
+                    this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightWindowLocation(), new Blocktype(Blocktype.TURNRIGHT)));
                     break;
                 case Blocktype.WALLINFRONT:
-                    this.setWallInFrontBlock(new ModelWallInFrontBlock(this.getWallInFrontLocation(),new Blocktype(Blocktype.WALLINFRONT)));
+                    this.setWallInFrontBlock(new ModelWallInFrontBlock(this.getWallInFrontWindowLocation(),new Blocktype(Blocktype.WALLINFRONT)));
                     break;
                 case Blocktype.NOT:
-                    this.setNotBlock(new ModelNotBlock(this.getNotLocation(),new Blocktype(Blocktype.NOT)));
+                    this.setNotBlock(new ModelNotBlock(this.getNotWindowLocation(),new Blocktype(Blocktype.NOT)));
                     break;
             }
         }    
@@ -89,13 +89,13 @@ class ModelPalette extends ModelWindow{
      * Reset all the blocks after the total amount of blocks is lower than the maximum
      */
     public void resetBlocks(){
-        this.setIfBlock(new ModelWhileIfBlock(this.getIfLocation(),new Blocktype(Blocktype.IF)));
-        this.setWhileBlock(new ModelWhileIfBlock(this.getWhileLocation(),new Blocktype(Blocktype.WHILE)));
-        this.setForwardBlock(new ModelMoveBlock(this.getForwardLocation(), new Blocktype(Blocktype.MOVEFORWARD)));
-        this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftLocation(), new Blocktype(Blocktype.TURNLEFT)));
-        this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightLocation(), new Blocktype(Blocktype.TURNRIGHT)));
-        this.setWallInFrontBlock(new ModelWallInFrontBlock(this.getWallInFrontLocation(),new Blocktype(Blocktype.WALLINFRONT)));
-        this.setNotBlock(new ModelNotBlock(this.getNotLocation(),new Blocktype(Blocktype.NOT)));
+        this.setIfBlock(new ModelWhileIfBlock(this.getIfWindowLocation(),new Blocktype(Blocktype.IF)));
+        this.setWhileBlock(new ModelWhileIfBlock(this.getWhileWindowLocation(),new Blocktype(Blocktype.WHILE)));
+        this.setForwardBlock(new ModelMoveBlock(this.getForwardWindowLocation(), new Blocktype(Blocktype.MOVEFORWARD)));
+        this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftWindowLocation(), new Blocktype(Blocktype.TURNLEFT)));
+        this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightWindowLocation(), new Blocktype(Blocktype.TURNRIGHT)));
+        this.setWallInFrontBlock(new ModelWallInFrontBlock(this.getWallInFrontWindowLocation(),new Blocktype(Blocktype.WALLINFRONT)));
+        this.setNotBlock(new ModelNotBlock(this.getNotWindowLocation(),new Blocktype(Blocktype.NOT)));
     }
 
     /**
@@ -214,56 +214,56 @@ class ModelPalette extends ModelWindow{
      * 
      * @return the location of the 'turn left' block.
      */
-    public Location getTurnLeftLocation(){
-        return this.turnLeftLocation;
+    public WindowLocation getTurnLeftWindowLocation(){
+        return this.turnLeftWindowLocation;
     }
 
     /**
      * 
      * @return the location of the 'turn right' block.
      */
-    public Location getTurnRightLocation(){
-        return this.turnRightLocation;
+    public WindowLocation getTurnRightWindowLocation(){
+        return this.turnRightWindowLocation;
     }
 
     /**
      * 
      * @return the location of the 'forward' block.
      */
-    public Location getForwardLocation(){
-        return this.forwardLocation;
+    public WindowLocation getForwardWindowLocation(){
+        return this.forwardWindowLocation;
     }
 
     /**
      * 
      * @return the location of the not block location.
      */
-    public Location getNotLocation(){
-        return this.notLocation;
+    public WindowLocation getNotWindowLocation(){
+        return this.notWindowLocation;
     }
 
     /**
      * 
      * @return the location of the 'wall in front' block.
      */
-    public Location getWallInFrontLocation(){
-        return this.wallInFrontLocation;
+    public WindowLocation getWallInFrontWindowLocation(){
+        return this.wallInFrontWindowLocation;
     }
 
     /**
      * 
      * @return the location of the if block.
      */
-    public Location getIfLocation(){
-        return this.ifLocation;
+    public WindowLocation getIfWindowLocation(){
+        return this.ifWindowLocation;
     }
 
     /**
      * 
      * @return the location of the while block.
      */
-    public Location getWhileLocation(){
-        return this.whileLocation;
+    public WindowLocation getWhileWindowLocation(){
+        return this.whileWindowLocation;
     }
 
     
@@ -279,33 +279,33 @@ class ModelPalette extends ModelWindow{
      * @param {Boolean} maxReached signifies whether the max number of blocks has been reached
      * @return the block to return when the mouse is held down
      */
-    protected ModelBlock handleMouseDown(Location eventLocation, boolean maxReached){
+    protected ModelBlock handleMouseDown(WindowLocation eventWindowLocation, boolean maxReached){
         ModelBlock selected = null;
-        if(this.turnLeftBlock.inBounds(eventLocation)){
+        if(this.turnLeftBlock.inBounds(eventWindowLocation)){
             selected = this.turnLeftBlock;
             this.blockToProgramWindow(this.turnLeftBlock, maxReached);
         }
-        else if(this.turnRightBlock.inBounds(eventLocation)){
+        else if(this.turnRightBlock.inBounds(eventWindowLocation)){
             selected = this.turnRightBlock;
             this.blockToProgramWindow(this.turnRightBlock, maxReached);
         }
-        else if(this.forwardBlock.inBounds(eventLocation)){
+        else if(this.forwardBlock.inBounds(eventWindowLocation)){
             selected = this.forwardBlock;
             this.blockToProgramWindow(this.forwardBlock, maxReached);
         }
-        else if(this.notBlock.inBounds(eventLocation)){
+        else if(this.notBlock.inBounds(eventWindowLocation)){
             selected = this.notBlock;
             this.blockToProgramWindow(this.notBlock, maxReached);
         }
-        else if(this.wallInFrontBlock.inBounds(eventLocation)){
+        else if(this.wallInFrontBlock.inBounds(eventWindowLocation)){
             selected = this.wallInFrontBlock;
             this.blockToProgramWindow(this.wallInFrontBlock, maxReached);
         }
-        else if(this.whileBlock.inBounds(eventLocation)){
+        else if(this.whileBlock.inBounds(eventWindowLocation)){
             selected = this.whileBlock;
             this.blockToProgramWindow(this.whileBlock, maxReached);
         }
-        else if(this.ifBlock.inBounds(eventLocation)){
+        else if(this.ifBlock.inBounds(eventWindowLocation)){
             selected = this.ifBlock;
             this.blockToProgramWindow(this.ifBlock, maxReached);
         }

@@ -11,9 +11,9 @@ public class ModelBlockTests {
 
     @Test
     public void connectAndDisconnectTest() {
-        Location loc1 = new Location(0, 0);
+        WindowLocation loc1 = new WindowLocation(0, 0);
         ModelMoveBlock mmb1 = new ModelMoveBlock(loc1, new Blocktype(Blocktype.MOVEFORWARD));
-        Location loc2 = new Location(10, 110);
+        WindowLocation loc2 = new WindowLocation(10, 110);
         ModelMoveBlock mmb2 = new ModelMoveBlock(loc2, new Blocktype(Blocktype.MOVEFORWARD));
         mmb1.connect(mmb2);
         assertEquals(mmb1.getBottomPlug(), mmb2);
@@ -24,8 +24,8 @@ public class ModelBlockTests {
 
     @Test
     public void illegalConnectionTest(){
-        Location loc1 = new Location(0,0);
-        Location loc2 = new Location(150, 150);
+        WindowLocation loc1 = new WindowLocation(0,0);
+        WindowLocation loc2 = new WindowLocation(150, 150);
         ModelMoveBlock mmb1 = new ModelMoveBlock(loc1, new Blocktype(Blocktype.TURNLEFT));
         ModelMoveBlock mmb2 = new ModelMoveBlock(loc2, new Blocktype(Blocktype.MOVEFORWARD));
         mmb1.connect(mmb2);
@@ -34,8 +34,8 @@ public class ModelBlockTests {
 
     @Test //(expected = IllegalStateException.class) // has fault in itself, should not have an expected exception.
     public void connectAndDisconnectTest2() {
-        Location loc1 = new Location(120, 0);
-        Location loc2 = new Location(0, 0);
+        WindowLocation loc1 = new WindowLocation(120, 0);
+        WindowLocation loc2 = new WindowLocation(0, 0);
         ModelNotBlock mnb1 = new ModelNotBlock(loc1, new Blocktype(Blocktype.NOT));
         ModelWhileIfBlock mwb = new ModelWhileIfBlock(loc2, new Blocktype(Blocktype.WHILE));
         mwb.connect(mnb1);
@@ -44,8 +44,8 @@ public class ModelBlockTests {
 
     @Test
     public void connectAndDisconnectTest3() {
-        Location loc1 = new Location(100, 100);
-        Location loc2 = new Location(220, 100);
+        WindowLocation loc1 = new WindowLocation(100, 100);
+        WindowLocation loc2 = new WindowLocation(220, 100);
         ModelNotBlock mnb = new ModelNotBlock(loc1, new Blocktype(Blocktype.NOT));
         ModelWallInFrontBlock mwb = new ModelWallInFrontBlock(loc2, new Blocktype(Blocktype.WALLINFRONT));
         mnb.connect(mwb);

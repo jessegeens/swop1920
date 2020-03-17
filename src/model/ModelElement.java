@@ -7,10 +7,10 @@ import utilities.*;
  */
 public abstract class ModelElement{
 
-    private Location pos;
+    private WindowLocation pos;
 
 
-    public ModelElement(Location pos){
+    public ModelElement(WindowLocation pos){
         this.pos = pos;
     }
 
@@ -22,7 +22,7 @@ public abstract class ModelElement{
      * 
      * @param newPos: the new position of the element.
      */
-    public void move(Location newPos){
+    public void move(WindowLocation newPos){
         this.setPos(newPos);
     }
 
@@ -31,7 +31,7 @@ public abstract class ModelElement{
      * 
      * @return the position of the element.
      */
-    public Location getPos() {
+    public WindowLocation getPos() {
         return this.pos;
     }
 
@@ -40,13 +40,13 @@ public abstract class ModelElement{
      * 
      * @param pos: the position of the element.
      */
-    public void setPos(Location pos) {
+    public void setPos(WindowLocation pos) {
         this.pos = pos;
     }
 
     /**
      * Function that declares if the position is a right position. 
      */
-    public abstract boolean inBounds(Location pos);
+    public abstract boolean inBounds(WindowLocation pos);
 
 }

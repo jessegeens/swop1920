@@ -26,5 +26,5 @@ public interface TopSocket {
      * 
      * @return the position of the top socket
      */
-    public Location getTopSocketPos();
+    public WindowLocation getTopSocketPos();
 }

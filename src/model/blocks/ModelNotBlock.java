@@ -9,7 +9,7 @@ public class ModelNotBlock extends ModelBlock implements RightSocket,LeftPlug{
     private ModelBlock rightSocket;
     private ModelBlock leftPlug;
 
-    public ModelNotBlock(Location pos, Blocktype type){
+    public ModelNotBlock(WindowLocation pos, Blocktype type){
         super(pos,type);
         this.setRightSocket(null);
         this.setLeftPlug(null);
@@ -39,13 +39,13 @@ public class ModelNotBlock extends ModelBlock implements RightSocket,LeftPlug{
             System.out.println("NOT CONNECTS LEFT");
             this.setRightSocket(block);
             ((LeftPlug)block).setLeftPlug(this);
-            this.setPos(block.getPos().add(new Location(-this.getWidth(),0)));   
+            this.setPos(block.getPos().add(new WindowLocation(-this.getWidth(),0)));
         }
         if ((block.hasRightSocket()) && (this.getLeftPlugPos().getDistance(((RightSocket)block).getRightSocketPos()) < ModelBlock.PLUGSIZE * 1.5)){
             System.out.println("NOT CONNECTS RIGHT");
             this.setLeftPlug(block);
             ((RightSocket)block).setRightSocket(this); 
-            this.setPos(block.getPos().add(new Location(block.getWidth(),0)));   
+            this.setPos(block.getPos().add(new WindowLocation(block.getWidth(),0)));
         }
         
     }
@@ -86,7 +86,7 @@ public class ModelNotBlock extends ModelBlock implements RightSocket,LeftPlug{
      * {@inheritDoc}
      */
     @Override
-    public Location getLeftPlugPos() {
+    public WindowLocation getLeftPlugPos() {
         return super.getPos().add(- ModelBlock.PLUGSIZE / 2, + this.getHeight() / 2);
     }
 
@@ -94,7 +94,7 @@ public class ModelNotBlock extends ModelBlock implements RightSocket,LeftPlug{
      * {@inheritDoc}
      */
     @Override
-    public Location getRightSocketPos() {
+    public WindowLocation getRightSocketPos() {
         return super.getPos().add(this.getWidth() - ModelBlock.PLUGSIZE/2, + this.getHeight() / 2);
     }
     

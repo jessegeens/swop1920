@@ -8,14 +8,14 @@ import model.*;
  */
 public class GridInfo {
 
-    private final Location goalCell;
-    private final ArrayList<Location> walls;
-    private final Location robotLocation;
+    private final GridLocation goalCell;
+    private final ArrayList<GridLocation> walls;
+    private final GridLocation robotLocation;
     private final Direction robotDirection;
     private final int cellSize;
 
     // Constructor
-    public GridInfo(Location goalCell, ArrayList<Location> walls, Location robotPos, Direction robotDir, int cellSize){
+    public GridInfo(GridLocation goalCell, ArrayList<GridLocation> walls, GridLocation robotPos, Direction robotDir, int cellSize){
         this.goalCell = goalCell;
         this.walls = walls;
         this.robotLocation = robotPos;
@@ -36,7 +36,7 @@ public class GridInfo {
      *
      * @return the goal cell.
      */
-    public Location getGoalCell(){
+    public GridLocation getGoalCell(){
         return this.goalCell;
     }
 
@@ -44,7 +44,7 @@ public class GridInfo {
      *
      * @return a list of walls in the grid.
      */
-    public ArrayList<Location> getWalls(){
+    public ArrayList<GridLocation> getWalls(){
         return this.walls;
     }
 
@@ -52,7 +52,7 @@ public class GridInfo {
      *
      * @return the location of the robot.
      */
-    public Location getRobotLocation(){
+    public GridLocation getRobotLocation(){
         return this.robotLocation;
     }
 

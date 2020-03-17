@@ -1,11 +1,11 @@
 package model.blocks.plugs;
 
 import model.blocks.*;
-import utilities.Location;
+import utilities.WindowLocation;
 
 public interface BottomPlug {
     public boolean hasBottomPlug();
     public void setBottomPlug(ModelBlock blk);
     public ModelBlock getBottomPlug();
-    public Location getBottomPlugPos();
+    public WindowLocation getBottomPlugPos();
 }

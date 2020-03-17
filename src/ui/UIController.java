@@ -62,7 +62,7 @@ public class UIController {
      */
     public void updateGrid(GridInfo gridInfo){
         System.out.println("update grid gridinfo");
-        this.grid = new UIGrid(new Location(2*this.wWidth/3, 0), this.wWidth/ 3, this.wHeight, gridInfo.getCellSize(), gridInfo.getWalls(), gridInfo.getRobotLocation(), gridInfo.getRobotDirection(), gridInfo.getGoalCell());
+        this.grid = new UIGrid(new WindowLocation(2*this.wWidth/3, 0), this.wWidth/ 3, this.wHeight, gridInfo.getCellSize(), gridInfo.getWalls(), gridInfo.getRobotLocation(), gridInfo.getRobotDirection(), gridInfo.getGoalCell());
         System.out.println("GRIDINFO");
         System.out.println(gridInfo.getRobotLocation().getX());
         System.out.println(gridInfo.getRobotLocation().getY());

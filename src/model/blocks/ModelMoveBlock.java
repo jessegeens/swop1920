@@ -2,7 +2,7 @@ package model.blocks;
 
 import model.blocks.plugs.*;
 import utilities.Blocktype;
-import utilities.Location;
+import utilities.WindowLocation;
 
 /**
  * Class representing the move forward, turn left and turn right blocks with one socket at the top and one plug at the bottom.
@@ -12,7 +12,7 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
     private ModelBlock topSocket;
     private ModelBlock bottomPlug;
     
-    public ModelMoveBlock(Location pos, Blocktype type) {
+    public ModelMoveBlock(WindowLocation pos, Blocktype type) {
         super(pos,type);
         this.setTopSocket(null);
         this.setBottomPlug(null);
@@ -45,13 +45,13 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
             System.out.println("TOPSOCKET WORKS of active");
             this.setTopSocket(block);
             ((BottomPlug)block).setBottomPlug(this);  
-            this.setPos(block.getPos().add(new Location(0,block.getHeight())));  
+            this.setPos(block.getPos().add(new WindowLocation(0,block.getHeight())));
         }
         if ((block.hasTopSocket() && (this.getBottomPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5))){
             System.out.println("BOTTOMSOCKET WORKS of active");
             this.setBottomPlug(block);
             ((TopSocket)block).setTopSocket(this); 
-            this.setPos(block.getPos().add(new Location(0, -block.getHeight())));  
+            this.setPos(block.getPos().add(new WindowLocation(0, -block.getHeight())));
         }
     }
 
@@ -76,7 +76,7 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
      * {@inheritDoc}
      */
     @Override
-    public Location getBottomPlugPos() {
+    public WindowLocation getBottomPlugPos() {
         return super.getPos().add(this.getWidth() / 2, + this.getHeight() + ModelBlock.PLUGSIZE/2);
     }
 
@@ -100,7 +100,7 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
      * {@inheritDoc}
      */
     @Override
-    public Location getTopSocketPos() {
+    public WindowLocation getTopSocketPos() {
         return super.getPos().add(this.getWidth() / 2, + ModelBlock.PLUGSIZE/2);
     }
 

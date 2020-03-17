@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import main.MyCanvasWindow;
 import model.blocks.ModelBlock;
 import utilities.GridInfo;
-import utilities.Location;
+import utilities.WindowLocation;
 
 
 /**
@@ -32,7 +32,7 @@ public class ModelController{
         //palette left, program middle, grid right
         this.setPalette(new ModelPalette(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
         this.setPArea(new ModelProgramArea(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
-        this.setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, gridInfo.getGoalCell(), gridInfo.getRobotLocation(), gridInfo.getRobotDirection(),new ArrayList<Location>(), CELL_SIZE)); 
+        this.setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, gridInfo.getGoalCell(), gridInfo.getRobotLocation(), gridInfo.getRobotDirection(),new ArrayList<WindowLocation>(), CELL_SIZE));
     }
 
 
@@ -42,7 +42,7 @@ public class ModelController{
      * @param newPos new position the block should be at
      * @param inProgramArea signify whether the block is moved into the program area
      */
-    public void moveBlock(ModelBlock block, Location newPos, boolean inProgramArea){
+    public void moveBlock(ModelBlock block, WindowLocation newPos, boolean inProgramArea){
         if (block != null){
             if(inProgramArea){
                 block.move(newPos);
@@ -188,17 +188,17 @@ public class ModelController{
      *                                  - 501 = MOUSE_PRESSED: Where you start holding the button down
      *                                  - 502 = MOUSE_RELEASED: Where you release the button
      *                                  - 506 = MOUSE_DRAGGED: Holding down, gets triggerd after each small move
-     * @param eventLocation location where the event happened
+     * @param eventWindowLocation location where the event happened
      * @param clickCount number of clicks
      */
-    public void handleMouseEvent(int id, Location eventLocation, int clickCount){
-        if(eventLocation.getX() > 0 && eventLocation.getX() < MyCanvasWindow.WIDTH/3 ){
+    public void handleMouseEvent(int id, WindowLocation eventWindowLocation, int clickCount){
+        if(eventWindowLocation.getX() > 0 && eventWindowLocation.getX() < MyCanvasWindow.WIDTH/3 ){
             System.out.println("Palette mouseEvent");
-            this.handlePaletteMouseEvent(id, eventLocation, clickCount);
+            this.handlePaletteMouseEvent(id, eventWindowLocation, clickCount);
         }
-        if(eventLocation.getX() > MyCanvasWindow.WIDTH/3 && eventLocation.getX() <  2 * MyCanvasWindow.WIDTH/3){
+        if(eventWindowLocation.getX() > MyCanvasWindow.WIDTH/3 && eventWindowLocation.getX() <  2 * MyCanvasWindow.WIDTH/3){
             System.out.println("Programarea mouseEvent");
-            this.handleProgramAreaMouseEvent(id, eventLocation, clickCount); 
+            this.handleProgramAreaMouseEvent(id, eventWindowLocation, clickCount);
         }
     }
 
@@ -210,17 +210,17 @@ public class ModelController{
      *                                  - 501 = MOUSE_PRESSED: Where you start holding the button down
      *                                  - 502 = MOUSE_RELEASED: Where you release the button
      *                                  - 506 = MOUSE_DRAGGED: Holding down, gets triggerd after each small move
-     * @param eventLocation location where the event happened
+     * @param eventWindowLocation location where the event happened
      * @param clickCount number of clicks
      */
-    protected void handlePaletteMouseEvent(int id, Location eventLocation, int clickCount){
+    protected void handlePaletteMouseEvent(int id, WindowLocation eventWindowLocation, int clickCount){
         switch(id){
             case 501: //MOUSE_PRESSED
                 System.out.println("MOUSE PRESSED start");
                 if(this.MAX_BLOCKS <= this.getProgramAreaBlocks().size()+1){
                     this.maxReached = true;
                 }
-                this.active = palette.handleMouseDown(eventLocation, maxReached);
+                this.active = palette.handleMouseDown(eventWindowLocation, maxReached);
                 break;
             case 502: //MOUSE RELEASED
                 //delete the currently held item (if there is one)
@@ -234,7 +234,7 @@ public class ModelController{
             case 506: //MOUSE_DRAGGED
                 //if there is a currently held block, move it
                 System.out.println("MOUSE MOVED start");
-                this.moveBlock(active, eventLocation, false);
+                this.moveBlock(active, eventWindowLocation, false);
                 break;
             default:
                 break;
@@ -249,25 +249,25 @@ public class ModelController{
      *                                  - 501 = MOUSE_PRESSED: Where you start holding the button down
      *                                  - 502 = MOUSE_RELEASED: Where you release the button
      *                                  - 506 = MOUSE_DRAGGED: Holding down, gets triggerd after each small move
-     * @param eventLocation location where the event happened
+     * @param eventWindowLocation location where the event happened
      * @param clickCount number of clicks
      */
-    protected void handleProgramAreaMouseEvent(int id, Location eventLocation, int clickCount){
+    protected void handleProgramAreaMouseEvent(int id, WindowLocation eventWindowLocation, int clickCount){
         switch(id){
             case 501: //MOUSE_PRESSED
                 //return the topmost active block if one is in the click location
                 //you remove it from the local list in PArea until mouseup
                 System.out.println("MOUSE PRESSED start");
-                this.active = PArea.handleMouseDown(eventLocation);
+                this.active = PArea.handleMouseDown(eventWindowLocation);
                 break;
             case 502: //MOUSE RELEASED
                 System.out.println("MOUSE RELEASED start");
-                PArea.handleMouseUp(eventLocation, this.active);
+                PArea.handleMouseUp(eventWindowLocation, this.active);
                 this.active = null;
                 break;
             case 506: //MOUSE_DRAGGED
                 System.out.println("MOUSE MOVED start");
-                this.moveBlock(active, eventLocation, true);
+                this.moveBlock(active, eventWindowLocation, true);
                 break;
             default:
                 break;

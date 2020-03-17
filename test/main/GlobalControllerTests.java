@@ -3,9 +3,7 @@ package main;
 import model.ModelGrid;
 import model.blocks.*;
 import org.junit.Test;
-import utilities.Blocktype;
-import utilities.Direction;
-import utilities.WindowLocation;
+import utilities.*;
 
 import static org.junit.Assert.*;
 
@@ -56,7 +54,7 @@ public class GlobalControllerTests {
         gC.getModelController().getPArea().setBlocks(mBlocks);
         Direction dir = new Direction(Direction.RIGHT);
         gC.getModelController().getGrid().setRobotDir(dir);
-        WindowLocation pos = new WindowLocation(5, 5);
+        GridLocation pos = new GridLocation(5, 5);
         gC.getModelController().getGrid().setRobotPos(pos);
         int a1 = gC.getModelController().getGrid().getRobotPos().getX();
         int b1 = gC.getModelController().getGrid().getRobotPos().getY();
@@ -99,11 +97,11 @@ public class GlobalControllerTests {
         ModelMoveBlock mmb = new ModelMoveBlock(pos4, t4);
         mwb.connect(mmb);
         mBlocks.add(mmb);
-        WindowLocation wall = new WindowLocation(2,0);
-        ArrayList<WindowLocation> walls = new ArrayList<>();
+        GridLocation wall = new GridLocation(2,0);
+        ArrayList<GridLocation> walls = new ArrayList<>();
         walls.add(wall);
-        WindowLocation goal = new WindowLocation(4,4);
-        WindowLocation rPos = new WindowLocation(0, 0);
+        GridLocation goal = new GridLocation(4,4);
+        GridLocation rPos = new GridLocation(0, 0);
         Direction rDir = new Direction(Direction.RIGHT);
         ModelGrid grid = new ModelGrid(5, 5, goal, rPos, rDir, walls, 100);
         gC.getModelController().setGrid(grid);

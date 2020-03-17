@@ -83,10 +83,10 @@ public class UtilitiesTests {
     @Test
     public void gridInfoTest() {
         int cellSize = 100;
-        WindowLocation goal = new WindowLocation(10, 15);
-        WindowLocation rPos = new WindowLocation(20, 25);
+        GridLocation goal = new GridLocation(10, 15);
+        GridLocation rPos = new GridLocation(20, 25);
         Direction rDir = new Direction(Direction.RIGHT);
-        ArrayList<WindowLocation> walls = new ArrayList<>();
+        ArrayList<GridLocation> walls = new ArrayList<>();
         ModelGrid grid = new ModelGrid(10, 10, goal, rPos, rDir, walls, 100);
         GridInfo gridInfo = new GridInfo(grid, cellSize);
         assertEquals(10, gridInfo.getGoalCell().getX());

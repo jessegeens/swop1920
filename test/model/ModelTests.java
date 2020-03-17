@@ -4,9 +4,8 @@ import model.blocks.ModelMoveBlock;
 import model.blocks.ModelNotBlock;
 import model.blocks.ModelWhileIfBlock;
 import org.junit.Test;
-import utilities.Blocktype;
-import utilities.Direction;
-import utilities.WindowLocation;
+import utilities.*;
+
 
 import java.util.ArrayList;
 
@@ -17,15 +16,15 @@ public class ModelTests {
 
     @Test
     public void TestModelGrid() {
-        WindowLocation loc = new WindowLocation(40, 40);
-        WindowLocation rPos = new WindowLocation(0, 0);
+        GridLocation loc = new GridLocation(40, 40);
+        GridLocation rPos = new GridLocation(0, 0);
         Direction rDir = new Direction(0);
-        ArrayList<WindowLocation> walls = new ArrayList<>();
+        ArrayList<GridLocation> walls = new ArrayList<>();
         ModelGrid grid = new ModelGrid(200, 200, loc, rPos, rDir, walls, 100);
         assertEquals(loc, grid.getGoalCell());
-        WindowLocation wall1 = new WindowLocation(12, 15);
-        WindowLocation wall2 = new WindowLocation(22, 24);
-        ArrayList<WindowLocation> lst = new ArrayList<>();
+        GridLocation wall1 = new GridLocation(12, 15);
+        GridLocation wall2 = new GridLocation(22, 24);
+        ArrayList<GridLocation> lst = new ArrayList<>();
         lst.add(wall1);
         lst.add(wall2);
         grid.setWalls(lst);

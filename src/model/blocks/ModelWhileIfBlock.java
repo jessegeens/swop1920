@@ -40,6 +40,14 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             ((TopSocket)this.getBottomPlug()).setTopSocket(null);
             this.setBottomPlug(null);
         }
+        if (this.getCavityPlug() != null){
+            ((TopSocket)this.getCavityPlug()).setTopSocket(null);
+            this.setCavityPlug(null);
+        }
+        if (this.getCavitySocket() != null){
+            ((BottomPlug)this.getCavitySocket()).setBottomPlug(null);
+            this.setCavitySocket(null);
+        }
     }
 
     /**
@@ -67,7 +75,6 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             this.setTopSocket(block);
             ((BottomPlug)block).setBottomPlug(this); 
             this.setPos(block.getPos().add(new WindowLocation(0, this.getHeight())));
-             
         }
         else if ((block.hasTopSocket() && (this.getBottomPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5))){
             this.setBottomPlug(block);

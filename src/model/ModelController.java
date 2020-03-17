@@ -220,7 +220,7 @@ public class ModelController{
      * @return all the blocks that are currently in the palette
      */
     protected ArrayList<ModelBlock> getPaletteBlocks(){
-        return palette.getPaletteBlocks();
+        return this.getPalette().getPaletteBlocks();
 
     }
 
@@ -229,7 +229,7 @@ public class ModelController{
      * @return all the blocks that are currently in the program area
      */
     protected ArrayList<ModelBlock> getProgramAreaBlocks(){
-        return PArea.getPABlocks();
+        return this.getPArea().getPABlocks();
     }
 
     /**

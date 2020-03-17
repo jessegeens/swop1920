@@ -156,7 +156,7 @@ public class ModelGrid extends ModelWindow {
     /**
      * Setter for the robot position
      * 
-     * @param {Location} robotPos the new position of the robot
+     * @param robotPos the new position of the robot
      */
     public void setRobotPos(Location robotPos) {
         this.robotPos = robotPos;
@@ -179,7 +179,7 @@ public class ModelGrid extends ModelWindow {
     /**
      * Setter for the robot direction
      * 
-     * @param {Direction} robotDir the new direction of the robot
+     * @param robotDir the new direction of the robot
      */
     public void setRobotDir(Direction robotDir) {
         this.robotDir = robotDir;

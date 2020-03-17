@@ -12,7 +12,7 @@ public interface RightSocket {
 
     /**
      * 
-     * @param {ModelBlock} blk the block to attach to the right socket
+     * @param blk the block to attach to the right socket
      */
     public void setRightSocket(ModelBlock blk);
 

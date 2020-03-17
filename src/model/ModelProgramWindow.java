@@ -166,7 +166,7 @@ public class ModelProgramWindow extends ModelWindow{
     /**
      * Remove a block from the Program Area
      * 
-     * @param {ModelBlock} toBeRemoved block that should be removed
+     * @param toBeRemoved block that should be removed
      */
     public void removeBlock(ModelBlock toBeRemoved){
         this.blocks.remove(toBeRemoved);
@@ -177,7 +177,7 @@ public class ModelProgramWindow extends ModelWindow{
      * 
      * TODO: remove debug print statements
      * 
-     * @param {ModelBlock} toBeAdded the block which should be added
+     * @param toBeAdded the block which should be added
      */
     public void addBlock(ModelBlock toBeAdded){
         System.out.println("here");
@@ -239,7 +239,7 @@ public class ModelProgramWindow extends ModelWindow{
      * Note that the blocks list has to be traversed in reverse 
      *  order due to rendering (ask Bert if unclear)
      * 
-     * @param {Location} eventLocation location of the mouseDown event
+     * @param eventLocation location of the mouseDown event
      * @return block to be returned 
      */
     public ModelBlock handleMouseDown(Location eventLocation){
@@ -258,8 +258,8 @@ public class ModelProgramWindow extends ModelWindow{
      * 
      * TODO: remove debug print statements
      * 
-     * @param {Location} the location of the mouseUp event 
-     * @param {ModelBlock} activeBlock the current active block
+     * @param eveLocation the location of the mouseUp event
+     * @param activeB activeBlock the current active block
      */
     public void handleMouseUp(Location eveLocation, ModelBlock activeB){
         this.addBlock(activeB);

@@ -12,7 +12,7 @@ public interface LeftPlug {
 
     /**
      * 
-     * @param {ModelBlock} blk the block to attach to the left plug
+     * @param blk the block to attach to the left plug
      */
     public void setLeftPlug(ModelBlock blk);
 

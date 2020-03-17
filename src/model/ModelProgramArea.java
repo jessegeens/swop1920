@@ -9,12 +9,12 @@ import model.blocks.plugs.*;
 /**
  * Class representing the Program Window where the blocks will be set.
  */
-public class ModelProgramWindow extends ModelWindow{
+public class ModelProgramArea extends ModelWindow{
 
     private ArrayList<ModelBlock> blocks;
 
     // Constructor
-    public ModelProgramWindow(int width, int height){
+    public ModelProgramArea(int width, int height){
         super(width, height);
         this.setBlocks(new ArrayList<ModelBlock>());
     }

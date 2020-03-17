@@ -326,6 +326,8 @@ public class CanvasWindow {
 		
 		{
 			setPreferredSize(new Dimension(width, height));
+			setMinimumSize(new Dimension(width, height));
+        	setMaximumSize(new Dimension(width, height));
 			setBackground(Color.WHITE);
 			setFocusable(true);
 			

@@ -33,7 +33,7 @@ public class GlobalControllerTests {
         mBlocks.add(mmb1);
         mBlocks.add(mmb2);
         mBlocks.add(mmb3);
-        gC.getModelController().getPWindow().setBlocks(mBlocks);
+        gC.getModelController().getPArea().setBlocks(mBlocks);
         gC.execute();
         assertEquals(Direction.UP, gC.getModelController().getGrid().getRobotDir().getDirection());
         gC.execute();
@@ -55,7 +55,7 @@ public class GlobalControllerTests {
         mmb1.connect(mmb2);
         mBlocks.add(mmb1);
         mBlocks.add(mmb2);
-        gC.getModelController().getPWindow().setBlocks(mBlocks);
+        gC.getModelController().getPArea().setBlocks(mBlocks);
         Direction dir = new Direction(Direction.RIGHT);
         gC.getModelController().getGrid().setRobotDir(dir);
         Location pos = new Location(5, 5);
@@ -109,7 +109,7 @@ public class GlobalControllerTests {
         Direction rDir = new Direction(Direction.RIGHT);
         ModelGrid grid = new ModelGrid(5, 5, goal, rPos, rDir, walls, 100);
         gC.getModelController().setGrid(grid);
-        gC.getModelController().getPWindow().setBlocks(mBlocks);
+        gC.getModelController().getPArea().setBlocks(mBlocks);
         gC.execute();
         assertEquals(1, gC.getModelController().getGrid().getRobotPos().getX());
     }

@@ -19,7 +19,7 @@ public class ModelController{
     private boolean maxReached = false;
 
     private ModelPalette palette;
-    private ModelProgramWindow pWindow;
+    private ModelProgramArea PArea;
     private ModelGrid grid;
 
     private ModelBlock active = null;
@@ -31,7 +31,7 @@ public class ModelController{
         this.CELL_SIZE = cellSize;
         //palette left, program middle, grid right
         this.setPalette(new ModelPalette(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
-        this.setPWindow(new ModelProgramWindow(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
+        this.setPArea(new ModelProgramArea(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
         this.setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, gridInfo.getGoalCell(), gridInfo.getRobotLocation(), gridInfo.getRobotDirection(),new ArrayList<Location>(), CELL_SIZE)); 
     }
 
@@ -147,17 +147,17 @@ public class ModelController{
      * 
      * @return the model program window
      */
-    public ModelProgramWindow getPWindow() {
-        return this.pWindow;
+    public ModelProgramArea getPArea() {
+        return this.PArea;
     }
 
     /**
      * Set the Model Program Window of the controller
      * 
-     * @param pWindow program window the controller controls
+     * @param PArea program window the controller controls
      */
-    public void setPWindow(ModelProgramWindow pWindow) {
-        this.pWindow = pWindow;
+    public void setPArea(ModelProgramArea PArea) {
+        this.PArea = PArea;
     }
 
  
@@ -256,13 +256,13 @@ public class ModelController{
         switch(id){
             case 501: //MOUSE_PRESSED
                 //return the topmost active block if one is in the click location
-                //you remove it from the local list in pWindow until mouseup
+                //you remove it from the local list in PArea until mouseup
                 System.out.println("MOUSE PRESSED start");
-                this.active = pWindow.handleMouseDown(eventLocation);
+                this.active = PArea.handleMouseDown(eventLocation);
                 break;
             case 502: //MOUSE RELEASED
                 System.out.println("MOUSE RELEASED start");
-                pWindow.handleMouseUp(eventLocation, this.active);
+                PArea.handleMouseUp(eventLocation, this.active);
                 this.active = null;
                 break;
             case 506: //MOUSE_DRAGGED
@@ -302,7 +302,7 @@ public class ModelController{
      * @return all the blocks that are currently in the program area
      */
     protected ArrayList<ModelBlock> getProgramAreaBlocks(){
-        return pWindow.getPABlocks();
+        return PArea.getPABlocks();
     }
 
     /**

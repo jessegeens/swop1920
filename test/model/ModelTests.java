@@ -53,7 +53,7 @@ public class ModelTests {
 
     @Test
     public void programWindowTest() {
-        ModelProgramWindow pw = new ModelProgramWindow(200, 200);
+        ModelProgramArea pw = new ModelProgramArea(200, 200);
         Location pos1 = new Location(180, 10);
         Blocktype type1 = new Blocktype(Blocktype.WHILE);
         ModelWhileIfBlock block1 = new ModelWhileIfBlock(pos1, type1);

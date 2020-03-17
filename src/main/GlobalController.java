@@ -15,6 +15,7 @@ import model.blocks.plugs.*;
  */
 public class GlobalController {
 
+    //TODO: move naar model: Jesse will do this
     //Program parameters
     private final int MAX_BLOCKS = 15;
     private final int CELL_SIZE = 50;
@@ -64,10 +65,10 @@ public class GlobalController {
         System.out.println("key pressed");
         switch(keyCode){
             case 65: //A;
-                if (this.modelController.getPWindow().allBlocksConnected()) execute();//Check if all blocks are connected, and if so execute.
+                if (this.modelController.getPArea().allBlocksConnected()) execute();//Check if all blocks are connected, and if so execute.
                 break;
             case 116: //F5;
-                if (this.modelController.getPWindow().allBlocksConnected()) execute();//Check if all blocks are connected, and if so execute.
+                if (this.modelController.getPArea().allBlocksConnected()) execute();//Check if all blocks are connected, and if so execute.
                 break;
             
             case 27: //Esc
@@ -92,13 +93,13 @@ public class GlobalController {
     public void execute(){
         if(!(isRunning())){
             startRunning();
-            setCurrent(this.modelController.getPWindow().getStartBlock());
+            setCurrent(this.modelController.getPArea().getStartBlock());
         }
         System.out.println("now executing: " + getCurrent().getBlockType().getType());
         step();
-        if(this.getCurrent().equals(this.getModelController().getPWindow().getFinishBlock())) stopRunning();
+        if(this.getCurrent().equals(this.getModelController().getPArea().getFinishBlock())) stopRunning();
         else{
-            if(!this.getCurrent().equals(this.getModelController().getPWindow().getFinishBlock())) this.highlightNext();
+            if(!this.getCurrent().equals(this.getModelController().getPArea().getFinishBlock())) this.highlightNext();
             this.setCurrent(findNextBlock());
         }
     }
@@ -153,7 +154,7 @@ public class GlobalController {
      */
     public void stopRunning(){
         this.running = false;
-        if(!this.getCurrent().equals(this.getModelController().getPWindow().getFinishBlock())) findNextBlock().setUnHighlight();
+        if(!this.getCurrent().equals(this.getModelController().getPArea().getFinishBlock())) findNextBlock().setUnHighlight();
         else this.getCurrent().setUnHighlight();
         this.getModelController().setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, GOAL_CELL, ROBOT_START_LOCATION, ROBOT_START_DIRECTION, new ArrayList<Location>(), CELL_SIZE));
         this.getCurrent().setUnHighlight();

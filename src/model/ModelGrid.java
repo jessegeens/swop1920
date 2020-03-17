@@ -56,7 +56,7 @@ public class ModelGrid extends ModelWindow {
     /**
      * Turn the robot 90° to the right
      * 
-     * TODO: zal de robot direction op deze manier juist geset worden?
+     * TODO: because the direction is changed to immutable this will no longer work
      */
     public void robotTurnRight(){//
         this.getRobotDir().turnRight();
@@ -65,7 +65,7 @@ public class ModelGrid extends ModelWindow {
     /**
      * Turn the robot 90° to the left
      * 
-     * TODO: zal de robot direction op deze manier juist geset worden?
+     * TODO: because the direction is changed to immutable this will no longer work
      */
     public void robotTurnLeft(){
         this.getRobotDir().turnLeft();

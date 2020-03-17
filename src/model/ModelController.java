@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import main.MyCanvasWindow;
 import model.blocks.ModelBlock;
-import utilities.GridInfo;
-import utilities.WindowLocation;
+import utilities.*;
+
 
 
 /**
@@ -32,10 +32,10 @@ public class ModelController{
         //palette left, program middle, grid right
         this.setPalette(new ModelPalette(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
         this.setPArea(new ModelProgramArea(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
-        this.setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, gridInfo.getGoalCell(), gridInfo.getRobotLocation(), gridInfo.getRobotDirection(),new ArrayList<WindowLocation>(), CELL_SIZE));
+        this.setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, gridInfo.getGoalCell(), gridInfo.getRobotLocation(), gridInfo.getRobotDirection(),new ArrayList<GridLocation>(), CELL_SIZE));
     }
 
-
+    //TODO this doesn't seem right
     /**
      * 
      * @param block block to move
@@ -45,85 +45,12 @@ public class ModelController{
     public void moveBlock(ModelBlock block, WindowLocation newPos, boolean inProgramArea){
         if (block != null){
             if(inProgramArea){
-                block.move(newPos);
+                block.setPos(newPos);
             }
             else{
                 block.setPos(newPos);
             }
         }
-    }
-
-    /**
-     * 
-     * @param block The block of which the neighbour is searched.
-     * @return the left neighbour of the block if there is one, otherwise null.
-     */
-    public ModelBlock findLeftNeighbour(ModelBlock block){
-        ModelBlock left = null;
-        forloop:
-        for(ModelBlock blk : getProgramAreaBlocks()){
-            if ((blk.getPos().getX() == block.getPos().getX() - block.getWidth()) &&
-            blk.getPos().getY() == block.getPos().getY()){
-                left = blk;
-                break forloop;
-            }
-        }
-        return left;
-    }
-
-    /**
-     * 
-     * @param block The block of which the neighbour is searched.
-     * @return the right neighbour of the block if there is one, otherwise null.
-     */
-    public ModelBlock findRightNeighbour(ModelBlock block){
-        ModelBlock right = null;
-        forloop:
-        for(ModelBlock blk : getProgramAreaBlocks()){
-            if ((blk.getPos().getX() == block.getPos().getX() + block.getWidth()) &&
-            blk.getPos().getY() == block.getPos().getY()){
-                right = blk;
-                break forloop;
-            }
-        }
-        return right;
-    }
-
-
-    /**
-     * 
-     * @param block The block of which the neighbour is searched.
-     * @return the upper neighbour of the block if there is one, otherwise null.
-     */
-    public ModelBlock findUpperNeighbour(ModelBlock block){
-        ModelBlock up = null;
-        forloop:
-        for(ModelBlock blk : getProgramAreaBlocks()){
-            if ((blk.getPos().getX() == block.getPos().getX()) &&
-            blk.getPos().getY() == block.getPos().getY() - block.getHeight()){
-                up = blk;
-                break forloop;
-            }
-        }
-        return up;
-    }
-    
-    /**
-     * 
-     * @param block The block of which the neighbour is searched.
-     * @return the bottom neighbour of the block if there is one, otherwise null.
-     */
-    public ModelBlock findBottomNeighbour(ModelBlock block){
-        ModelBlock down = null;
-        forloop:
-        for(ModelBlock blk : getProgramAreaBlocks()){
-            if ((blk.getPos().getX() == block.getPos().getX() - block.getWidth()) &&
-            blk.getPos().getY() == block.getPos().getY()){
-                down = blk;
-                break forloop;
-            }
-        }
-        return down;
     }
 
     /**

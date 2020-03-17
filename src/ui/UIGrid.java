@@ -13,14 +13,14 @@ public class UIGrid {
     private int height;
 
     private int cellSize;
-    private WindowLocation goalCell;
-    private WindowLocation robotLocation;
+    private GridLocation goalCell;
+    private GridLocation robotLocation;
     private Direction robotDirection;
-    private ArrayList<WindowLocation> walls;
+    private ArrayList<GridLocation> walls;
     
     
     // Constructor
-    public UIGrid(WindowLocation position, int width, int height, int cellSize, ArrayList<WindowLocation> walls, WindowLocation robotLocation, Direction roboDirection, WindowLocation goalCell) {
+    public UIGrid(WindowLocation position, int width, int height, int cellSize, ArrayList<GridLocation> walls, GridLocation robotLocation, Direction roboDirection, GridLocation goalCell) {
         this.cellSize = cellSize;
         this.walls = walls;
         this.robotLocation = robotLocation;
@@ -38,7 +38,7 @@ public class UIGrid {
      * 
      * @param newRobotLocation Location the robot should now have
      */
-    public void updateRobotLocation(WindowLocation newRobotLocation){
+    public void updateRobotLocation(GridLocation newRobotLocation){
         System.out.println("moving robot in UI");
         this.robotLocation = newRobotLocation;
 
@@ -94,7 +94,7 @@ public class UIGrid {
      */
     public void renderWalls(Graphics g) {
         g.setColor(Color.BLACK);
-        for(WindowLocation wall : walls){
+        for(GridLocation wall : walls){
             g.fillRect(xPosition + wall.getX()*cellSize, yPosition + wall.getY()*cellSize,cellSize, cellSize);
         }
     }

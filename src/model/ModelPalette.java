@@ -326,13 +326,13 @@ class ModelPalette extends ModelWindow{
         ArrayList<ModelBlock> blocks = new ArrayList<ModelBlock>();
         //if one of them is null, they all are
         if (this.turnLeftBlock != null){
-            blocks.add(this.turnLeftBlock);
-            blocks.add(this.turnRightBlock);
-            blocks.add(this.forwardBlock);
-            blocks.add(this.notBlock);
-            blocks.add(this.wallInFrontBlock);
-            blocks.add(this.whileBlock);
-            blocks.add(this.ifBlock);
+            blocks.add(this.getTurnLeftBlock());
+            blocks.add(this.getTurnRightBlock());
+            blocks.add(this.getForwardBlock());
+            blocks.add(this.getNotBlock());
+            blocks.add(this.getWallInFrontBlock());
+            blocks.add(this.getWhileBlock());
+            blocks.add(this.getIfBlock());
         }
         return blocks;
         

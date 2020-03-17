@@ -15,18 +15,6 @@ public abstract class ModelElement{
     }
 
     /**
-     * Function that moves an element to the new position
-     * Location of an element is the topmost left border (where left is more important than top)
-     * 
-     * TODO: wat is het verschil tussen move en setPos()?
-     * 
-     * @param newPos: the new position of the element.
-     */
-    public void move(WindowLocation newPos){
-        this.setPos(newPos);
-    }
-
-    /**
      * Getter for the position of the element.
      * 
      * @return the position of the element.

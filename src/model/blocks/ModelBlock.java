@@ -31,14 +31,6 @@ public abstract class ModelBlock extends ModelElement{
         super(pos);
         this.type = type;
     }
-    
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void move(WindowLocation newPos){
-        super.move(newPos);
-    }
 
     public void setHighlight(){
         this.highlighted = true;
@@ -53,22 +45,6 @@ public abstract class ModelBlock extends ModelElement{
         return this.highlighted;
     }
 
-    /**
-     * Removes duplicate modelblocks from the list
-     * 
-     * @param  list List with duplicates to remove
-     * @return list without duplicates
-     */
-    public static ArrayList<ModelBlock> removeDuplicates(ArrayList<ModelBlock> list) 
-    { 
-        ArrayList<ModelBlock> newL = new ArrayList<ModelBlock>(); 
-        for (ModelBlock blk : list) { 
-            if (!newL.contains(blk)) { 
-                newL.add(blk); 
-            } 
-        }
-        return newL; 
-    } 
 
     //For now a block is considered to be a square
     /**
@@ -92,22 +68,22 @@ public abstract class ModelBlock extends ModelElement{
      * @param closest The block closest to the location where the block is dragged.
      */
     public void move(WindowLocation newPos, ModelBlock closest){
-        super.move(newPos);
+        super.setPos(newPos);
         this.disconnect();
         if (newPos.getDistance(closest.getPos()) < 50){
             this.connect(closest);
         }
         if (this.hasTopSocket() && ((TopSocket)this).getTopSocket() == closest){
-            super.move(closest.getPos().add(0,this.getHeight()));
+            super.setPos(closest.getPos().add(0,this.getHeight()));
         }
         if (this.hasBottomPlug() && ((BottomPlug)this).getBottomPlug() == closest){
-            super.move(closest.getPos().add(0,-this.getHeight()));
+            super.setPos(closest.getPos().add(0,-this.getHeight()));
         }
         if (this.hasRightSocket() && ((RightSocket)this).getRightSocket() == closest){
-            super.move(closest.getPos().add(closest.getWidth(),0));
+            super.setPos(closest.getPos().add(closest.getWidth(),0));
         }
         if (this.hasLeftPlug() && ((LeftPlug)this).getLeftPlug() == closest){
-            super.move(closest.getPos().add(-closest.getWidth(),0));
+            super.setPos(closest.getPos().add(-closest.getWidth(),0));
         }
     }
 
@@ -122,83 +98,6 @@ public abstract class ModelBlock extends ModelElement{
      */
     public abstract void connect(ModelBlock block);
 
-    
-    //These getters and setters will be overwritten in the specific blocktype classes so that when they do support the socket or plug it will
-    //execute as expected.
-    //@return IllegalStateException when the socket or plug is not supported, iow when the function is not overwritten in the subclass.
-     
-    
-    /**
-     * 
-     * @return the top socket
-     * @throws IllegalStateException if the socket is not supported on this type.
-     */
-    //public ModelBlock getTopSocket(){
-    //    throw new IllegalStateException("This blocktype doesn't support this socket.");
-    //}
-
-    /**
-     * 
-     * @param blk the block that this block connects to.
-     * @throws IllegalStateException if the socket is not supported on this type.
-     */
-    //public void setTopSocket(ModelBlock blk){
-    //    throw new IllegalStateException("This blocktype doesn't support this socket.");
-    //}
-
-    /**
-     * 
-     * @return the bottom plug
-     * @throws IllegalStateException if the plug is not supported on this type.
-     */
-    //public ModelBlock getBottomPlug(){
-    //    throw new IllegalStateException("This blocktype doesn't support this plug.");
-    //}
-
-    /**
-     * 
-     * @param blk the block that this block connects to.
-     * @throws IllegalStateException if the plug is not supported on this type.
-     */
-    //public void setBottomPlug(ModelBlock blk){
-    //    throw new IllegalStateException("This blocktype doesn't support this plug.");
-    //}
-    
-    /**
-     * 
-     * @return the left plug
-     * @throws IllegalStateException if the plug is not supported on this type.
-     */
-    //public ModelBlock getLeftPlug(){
-    //    throw new IllegalStateException("This blocktype doesn't support this plug.");
-    //}
-
-    /**
-     * 
-     * @param blk the block that this block connects to.
-     * @throws IllegalStateException if the plug is not supported on this type.
-     */
-    //public void setLeftPlug(ModelBlock blk){
-    //    throw new IllegalStateException("This blocktype doesn't support this plug.");
-    //}
-
-    /**
-     * 
-     * @return the right socket
-     * @throws IllegalStateException if the socket is not supported on this type.
-     */
-    //public ModelBlock getRightSocket(){
-    //    throw new IllegalStateException("This blocktype doesn't support this socket.");
-    //}
-
-    /**
-     * 
-     * @param blk: the block that this block connects
-     * @throws IllegalStateException if the socket is not supported on this type.
-     */
-    //public void setRightSocket(ModelBlock blk){
-    //    throw new IllegalStateException("This blocktype doesn't support this socket.");
-    //}
 
     /**
      * A method that gives the connection from a block with all its neighbours.
@@ -214,7 +113,7 @@ public abstract class ModelBlock extends ModelElement{
     }
 
     /**
-     * @return whether this bluck is fully connected (at all ends)
+     * @return whether this block is fully connected (at all ends)
      */
     public boolean isFullyConnected() {
         if(this.hasTopSocket() && ((TopSocket)this).getTopSocket() == null) return false;
@@ -243,38 +142,6 @@ public abstract class ModelBlock extends ModelElement{
         }
         else return STD_WIDTH;
     }
-    
-    /**
-     * 
-     * @return the position of the bottom plug.
-     */
-    //public Location getBottomPlugPos() {
-	//	return this.bottomPlugPos;
-	//}
-
-    /**
-     * 
-     * @return the position of the top socket.
-     */
-    //public Location getTopSocketPos() {
-	//	return this.topSocketPos;
-	//}
-
-    /**
-     * 
-     * @return the position of the right socket.
-     */
-    //public Location getRightSocketPos() {
-	//	return this.rightSocketPos;
-	//}
-
-    /**
-     * 
-     * @return the position of the lefts socket.
-     */
-    //public Location getLeftPlugPos() {
-	//	return this.leftPlugPos;
-    //}
     
     /**
      * 

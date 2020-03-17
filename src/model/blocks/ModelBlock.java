@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import utilities.*;
 import model.*;
+import model.blocks.plugs.*;
 /**
  * Abstract representation of a block that can be placed from the palette onto the program area.
  */

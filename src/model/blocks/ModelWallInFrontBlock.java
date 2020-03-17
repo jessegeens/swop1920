@@ -1,7 +1,7 @@
 package model.blocks;
 
-import utilities.Blocktype;
-import utilities.Location;
+import utilities.*;
+import model.blocks.plugs.*;
 
 /**
  * Class representing the 'wall in front' block with one plug to their left.

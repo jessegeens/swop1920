@@ -2,10 +2,9 @@ package model;
 
 import java.util.ArrayList;
 
-import utilities.Blocktype;
-import utilities.Location;
+import utilities.*;
 import model.blocks.*;
-
+import model.blocks.plugs.*;
 
 /**
  * Class representing the Program Window where the blocks will be set.

@@ -2,8 +2,8 @@ package model.blocks;
 
 import java.util.ArrayList;
 
-import utilities.Blocktype;
-import utilities.Location;
+import utilities.*;
+import model.blocks.plugs.*;
 
 /**
  * Class representing the while and if blocks with one socket on the top and one plug at the bottom. They also have one socket on their 

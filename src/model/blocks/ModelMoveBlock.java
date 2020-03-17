@@ -1,5 +1,6 @@
 package model.blocks;
 
+import model.blocks.plugs.*;
 import utilities.Blocktype;
 import utilities.Location;
 

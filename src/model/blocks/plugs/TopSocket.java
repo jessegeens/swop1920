@@ -1,5 +1,6 @@
-package model.blocks;
+package model.blocks.plugs;
 
+import model.blocks.*;
 import utilities.*;
 
 public interface TopSocket {

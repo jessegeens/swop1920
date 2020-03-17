@@ -1,8 +1,7 @@
 package model.blocks;
 
-import utilities.Blocktype;
-import utilities.Location;
-
+import utilities.*;
+import model.blocks.plugs.*;
 /**
  * Class representing the not block with one plug to their left and one socket to their right.
  */

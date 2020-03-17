@@ -7,6 +7,7 @@ import ui.*;
 import utilities.*;
 import model.*;
 import model.blocks.*;
+import model.blocks.plugs.*;
 
 /**
  * The GlobalController is the heart of the program and coordinates the state flow of the program

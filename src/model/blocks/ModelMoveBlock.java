@@ -44,13 +44,23 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
         if ((block.hasBottomPlug() && (this.getTopSocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5))) {
             
             this.setTopSocket(block);
+            this.setBottomPlug((ModelBlock) (((BottomPlug) block).getBottomPlug()));
+             
             ((BottomPlug)block).setBottomPlug(this);  
+            
+
+            
             this.setPos(block.getPos().add(new WindowLocation(0,block.getHeight())));
         }
         if ((block.hasTopSocket() && (this.getBottomPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5))){
             
             this.setBottomPlug(block);
+            this.setTopSocket((ModelBlock) (((TopSocket) block).getTopSocket()));
+
             ((TopSocket)block).setTopSocket(this); 
+
+
+            ((BottomPlug)block).setBottomPlug(this); 
             this.setPos(block.getPos().add(new WindowLocation(0, -block.getHeight())));
         }
         

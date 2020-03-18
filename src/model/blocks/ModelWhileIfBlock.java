@@ -171,12 +171,16 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         ArrayList<ModelBlock> cav = new ArrayList<ModelBlock>();
 
         ModelBlock blk = this.getCavityPlug();
+        System.out.println("type1");
+        System.out.println(blk.getBlockType().getType());
         
         while(!blk.equals(this)){
             cav.add(blk);
             if(blk.hasBottomPlug()){
                 blk = ((BottomPlug)blk).getBottomPlug();
             }
+            System.out.println("type2");
+            System.out.println(blk.getBlockType().getType());
             //the issue is that the block does not get the wileifblock as a bottomplug when connecting
             //so its bottom plug is null resulting in a nullpointer exception
             //else blk = this;//make sure that it doesn't form an infinite loop.

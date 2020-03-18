@@ -15,12 +15,7 @@ public abstract class ModelBlock extends ModelElement{
 
     public static final int PLUGSIZE = 20;
     private final Blocktype type;
-    /*
-    private final Location topSocketPos = super.getPos().add(this.getWidth() / 2, + this.getPlugSize()/2);
-    private final Location bottomPlugPos = super.getPos().add(this.getWidth() / 2, + this.getHeight() + this.getPlugSize()/2);
-    private final Location rightSocketPos = super.getPos().add(this.getWidth() + this.getPlugSize()/2, + this.getHeight() / 2);
-    private final Location leftPlugPos = super.getPos().add(- this.getPlugSize() / 2, + this.getHeight() / 2);
-    */
+
     public static final int STD_WIDTH = 75; //final standard width of blocks
     public static final int STD_HEIGHT = 75; //final standard height of blocks
 
@@ -57,33 +52,6 @@ public abstract class ModelBlock extends ModelElement{
         }
         else{
             return false;
-        }
-    }
-
-    /**
-     * Connects this block to the closest block if the distance is less than 50 (pixels), puts the block directly next to the connecting block.
-     * If the distance is more than 50 (pixels), the block will be placed exactly at the newPos location.
-     * @param newPos The location to which the block is dragged, possibly the new location except if the block connects to a neighbour, then the new
-     *              location will be determined by the position of this neighbour and the height/width of the two blocks.
-     * @param closest The block closest to the location where the block is dragged.
-     */
-    public void move(WindowLocation newPos, ModelBlock closest){
-        super.setPos(newPos);
-        this.disconnect();
-        if (newPos.getDistance(closest.getPos()) < 50){
-            this.connect(closest);
-        }
-        if (this.hasTopSocket() && ((TopSocket)this).getTopSocket() == closest){
-            super.setPos(closest.getPos().add(0,this.getHeight()));
-        }
-        if (this.hasBottomPlug() && ((BottomPlug)this).getBottomPlug() == closest){
-            super.setPos(closest.getPos().add(0,-this.getHeight()));
-        }
-        if (this.hasRightSocket() && ((RightSocket)this).getRightSocket() == closest){
-            super.setPos(closest.getPos().add(closest.getWidth(),0));
-        }
-        if (this.hasLeftPlug() && ((LeftPlug)this).getLeftPlug() == closest){
-            super.setPos(closest.getPos().add(-closest.getWidth(),0));
         }
     }
 

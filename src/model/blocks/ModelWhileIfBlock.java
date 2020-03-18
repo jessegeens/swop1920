@@ -40,6 +40,14 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             ((TopSocket)this.getBottomPlug()).setTopSocket(null);
             this.setBottomPlug(null);
         }
+        if (this.getCavityPlug() != null){
+            ((TopSocket)this.getCavityPlug()).setTopSocket(null);
+            this.setCavityPlug(this);
+        }
+        if (this.getCavitySocket() != null){
+            ((BottomPlug)this.getCavitySocket()).setBottomPlug(null);
+            this.setCavitySocket(this);
+        }
     }
 
     /**
@@ -53,7 +61,8 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             if(this.getCavityPlug() == this){ 
                 this.setCavityPlug(block);
                 if(block.hasTopSocket()) ((TopSocket)block).setTopSocket(this);
-            }    
+            }
+            //TODO Oberon: set the position of the block that enters the cavity
         }
         else if ((block.hasTopSocket() && (this.getCavityPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5))){
             this.setCavityPlug(block);
@@ -62,12 +71,12 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
                 this.setCavitySocket(block);
                 if(block.hasBottomPlug()) ((BottomPlug)block).setBottomPlug(this);
             }
+            //TODO Oberon: set the position of the block that enters the cavity
         }
         else if ((block.hasBottomPlug() && (this.getTopSocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5))){
             this.setTopSocket(block);
             ((BottomPlug)block).setBottomPlug(this); 
             this.setPos(block.getPos().add(new WindowLocation(0, this.getHeight())));
-             
         }
         else if ((block.hasTopSocket() && (this.getBottomPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5))){
             this.setBottomPlug(block);
@@ -113,15 +122,19 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         this.bottomPlug = bottomPlug;
     }
 
+    
+
     /**
      * Getter for the height of the cavity of the while and if block.
      * @return the height of the block
      */
     public int getCavityHeight() {
-        if(!getCavityBlocks().isEmpty()){
+        if(!(getCavityBlocks().size() == 0)){
             return getCavityBlocks().size() * STD_HEIGHT + STD_HEIGHT;
         }
-        else return 0;
+        else{
+            return 0;
+        } 
     }
 
     /**
@@ -129,10 +142,12 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      * @return the width of the block
      */
     public int getCavityWidth() {
-        if(!getCavityBlocks().isEmpty())
+        if(!(getCavityBlocks().size() == 0)){
             return getWidestBlockInCavity().getWidth() + STD_WIDTH;
-        else
+        }
+        else{
             return 0;
+        }
     }
 
     /**
@@ -154,13 +169,21 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      */
     public ArrayList<ModelBlock> getCavityBlocks() {
         ArrayList<ModelBlock> cav = new ArrayList<ModelBlock>();
+
         ModelBlock blk = this.getCavityPlug();
+        System.out.println("type1");
+        System.out.println(blk.getBlockType().getType());
+        
         while(!blk.equals(this)){
             cav.add(blk);
             if(blk.hasBottomPlug()){
                 blk = ((BottomPlug)blk).getBottomPlug();
             }
-            else blk = this;//make sure that it doesn't form an infinite loop.
+            System.out.println("type2");
+            System.out.println(blk.getBlockType().getType());
+            //the issue is that the block does not get the wileifblock as a bottomplug when connecting
+            //so its bottom plug is null resulting in a nullpointer exception
+            //else blk = this;//make sure that it doesn't form an infinite loop.
         }
         return cav;
     }

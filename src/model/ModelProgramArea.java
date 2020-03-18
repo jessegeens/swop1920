@@ -20,9 +20,8 @@ public class ModelProgramArea extends ModelWindow{
     }
 
     /**
-     * This functionupdates the location of blocks
-     * 
-     * TODO: Oberon will clean up this code
+     * This functionupdates the location of blocks when a while or if block is resized.
+     *
      */
     public void updateLocationBlocks(){
         ArrayList<ModelBlock> thisBlocks = this.getPABlocks();
@@ -33,51 +32,55 @@ public class ModelProgramArea extends ModelWindow{
             thisBlocks.removeAll(connectedBlocks);
             updated.add(blk);
             while(!(connectedBlocks.isEmpty())){
-                forloop:
-                for(ModelBlock blk1 : connectedBlocks){
-                    for(ModelBlock upd : updated){
-                        switch(blk1.getBlockType().getType()){
-                            case Blocktype.IF:
-                            case Blocktype.WHILE:
-                                if (((ModelWhileIfBlock)blk1).getTopSocket() == upd){
-                                    blk1.setPos(upd.getPos().add(new WindowLocation(0, upd.getHeight())));
-                                }
-                                else if (((ModelWhileIfBlock)blk1).getBottomPlug() == upd){
-                                    blk1.setPos(upd.getPos().add(new WindowLocation(0, -blk1.getHeight())));
-                                }
-                                else if (((ModelWhileIfBlock)blk1).getRightSocket() == upd){
-                                    blk1.setPos(upd.getPos().add(new WindowLocation(-blk1.getWidth(),0)));
-                                }
-                                break;
-                            case Blocktype.MOVEFORWARD:
-                            case Blocktype.TURNLEFT:
-                            case Blocktype.TURNRIGHT:
-                                if (((ModelMoveBlock)blk1).getTopSocket() == upd){
-                                    blk1.setPos(upd.getPos().add(new WindowLocation(0, upd.getHeight())));
-                                }
-                                else if (((ModelMoveBlock)blk1).getBottomPlug() == upd){
-                                    blk1.setPos(upd.getPos().add(new WindowLocation(0, -blk1.getHeight())));
-                                }
-                                break;
-                            case Blocktype.WALLINFRONT:
-                                if (((ModelWallInFrontBlock)blk1).getLeftPlug() == upd){
-                                    blk1.setPos(upd.getPos().add(new WindowLocation(upd.getWidth(),0)));
-                                }
-                                break;
-                            case Blocktype.NOT:
-                                if (((ModelNotBlock)blk1).getLeftPlug() == upd){
-                                    blk1.setPos(upd.getPos().add(new WindowLocation(upd.getWidth(),0)));
-                                }
-                                else if (((ModelNotBlock)blk1).getRightSocket() == upd){
-                                    blk1.setPos(upd.getPos().add(new WindowLocation(-blk1.getWidth(),0)));
-                                }
-                                break;
+                updateLocationBlocksHelp(connectedBlocks, updated);
+            }
+        }
+    }
+
+    /**
+     * Help function to update the block location when a while or if block is resized.
+     * @param connectedBlocks
+     * @param updated
+     */
+    private void updateLocationBlocksHelp(ArrayList<ModelBlock> connectedBlocks, ArrayList<ModelBlock> updated){
+        for(ModelBlock blk : connectedBlocks) {
+            for (ModelBlock upd : updated) {
+                switch (blk.getBlockType().getType()) {
+                    case Blocktype.IF:
+                    case Blocktype.WHILE:
+                        if (((ModelWhileIfBlock) blk).getTopSocket() == upd) {
+                            blk.setPos(upd.getPos().add(new WindowLocation(0, upd.getHeight())));
+                        } else if (((ModelWhileIfBlock) blk).getBottomPlug() == upd) {
+                            blk.setPos(upd.getPos().add(new WindowLocation(0, -blk.getHeight())));
+                        } else if (((ModelWhileIfBlock) blk).getRightSocket() == upd) {
+                            blk.setPos(upd.getPos().add(new WindowLocation(-blk.getWidth(), 0)));
                         }
-                        updated.add(blk1);
-                        connectedBlocks.removeAll(updated);
-                        break forloop;
-                    }
+                        break;
+                    case Blocktype.MOVEFORWARD:
+                    case Blocktype.TURNLEFT:
+                    case Blocktype.TURNRIGHT:
+                        if (((ModelMoveBlock) blk).getTopSocket() == upd) {
+                            blk.setPos(upd.getPos().add(new WindowLocation(0, upd.getHeight())));
+                        } else if (((ModelMoveBlock) blk).getBottomPlug() == upd) {
+                            blk.setPos(upd.getPos().add(new WindowLocation(0, -blk.getHeight())));
+                        }
+                        break;
+                    case Blocktype.WALLINFRONT:
+                        if (((ModelWallInFrontBlock) blk).getLeftPlug() == upd) {
+                            blk.setPos(upd.getPos().add(new WindowLocation(upd.getWidth(), 0)));
+                        }
+                        break;
+                    case Blocktype.NOT:
+                        if (((ModelNotBlock) blk).getLeftPlug() == upd) {
+                            blk.setPos(upd.getPos().add(new WindowLocation(upd.getWidth(), 0)));
+                        } else if (((ModelNotBlock) blk).getRightSocket() == upd) {
+                            blk.setPos(upd.getPos().add(new WindowLocation(-blk.getWidth(), 0)));
+                        }
+                        break;
                 }
+                updated.add(blk);
+                connectedBlocks.removeAll(updated);
+                return;
             }
         }
     }
@@ -193,7 +196,6 @@ public class ModelProgramArea extends ModelWindow{
      * This function finds the block that is closest to the given block
      * 
      * TODO: remove debug print statements
-     * 
      * @param block The block for which the closest neighbour needs to be found
      * @return The closest neighbour of the block
      *         null if there is no closest block
@@ -254,7 +256,7 @@ public class ModelProgramArea extends ModelWindow{
     }
 
     /**
-     * This function handles the mouse up in the Progra Area
+     * This function handles the mouse up in the ProgramArea
      * 
      * TODO: remove debug print statements
      * 
@@ -268,8 +270,7 @@ public class ModelProgramArea extends ModelWindow{
             System.out.println("CLOSEST IS NOT NULL");
             System.out.println(closest.getBlockType().getType());
             System.out.println("list length");
-            if(closest instanceof ModelWhileIfBlock) closest.connect(activeB);
-            else activeB.connect(closest);
+            activeB.connect(closest);
         } 
         else{
             System.out.println("CLOSEST IS NULL");

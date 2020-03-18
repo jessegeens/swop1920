@@ -14,43 +14,57 @@ import utilities.*;
  */
 public class ModelController{
 
-    private final int MAX_BLOCKS;
-    private final int CELL_SIZE;
     private boolean maxReached = false;
+
+    private final int MAX_BLOCKS = 15;
 
     private ModelPalette palette;
     private ModelProgramArea PArea;
     private ModelGrid grid;
+    private ProgramRunner programRunner;
 
     private ModelBlock active = null;
 
 
     // Constructor
-    public ModelController(GridInfo gridInfo, int maxBlocks, int cellSize){
-        this.MAX_BLOCKS = maxBlocks;
-        this.CELL_SIZE = cellSize;
+    public ModelController(){
         //palette left, program middle, grid right
         this.setPalette(new ModelPalette(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
         this.setPArea(new ModelProgramArea(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
-        this.setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, gridInfo.getGoalCell(), gridInfo.getRobotLocation(), gridInfo.getRobotDirection(),new ArrayList<GridLocation>(), CELL_SIZE));
+        this.setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, ProgramRunner.getInitialState()));
+        this.programRunner = new ProgramRunner();
     }
 
-    //TODO this doesn't seem right
     /**
+     * This function handles key events by telling the model controller
+     * to either step through the execution or stop running the program
      * 
-     * @param block block to move
-     * @param newPos new position the block should be at
-     * @param inProgramArea signify whether the block is moved into the program area
+     * TODO: propragate to modelController
+     * 
+     * @param id id of the event
+     * @param keyCode keyCode of the pressed key: - 27  = ESC
+     *              see: http://keycode.info      - 65  = A
+     *                                            - 116 = F5 
+     * @param keyChar character of the pressed key
      */
-    public void moveBlock(ModelBlock block, WindowLocation newPos, boolean inProgramArea){
-        if (block != null){
-            if(inProgramArea){
-                block.setPos(newPos);
-            }
-            else{
-                block.setPos(newPos);
-            }
-        }
+    public void handleKeyEvent(int id, int keyCode, char keyChar){
+        System.out.println("key pressed");
+        switch(keyCode){
+            case 65: //A;
+            case 116: //F5;
+                if (getPArea().allBlocksConnected()){//Check if all blocks are connected, and if so execute.
+                    if(programRunner.isRunning()){
+                        getGrid().setGridState(programRunner.execute(getGrid().getGridState()));
+                    } else {
+                        programRunner.initialise(getPArea().getStartBlock(), getPArea().getFinishBlock());
+                        getGrid().setGridState(programRunner.execute(getGrid().getGridState()));
+                    }
+                } 
+                break;
+            case 27: //Esc
+ 
+                break;
+        }        
     }
 
     /**
@@ -200,6 +214,25 @@ public class ModelController{
                 break;
         }
     }
+
+    //TODO: this doesn't seem right
+    /**
+     * 
+     * @param block block to move
+     * @param newPos new position the block should be at
+     * @param inProgramArea signify whether the block is moved into the program area
+     */
+    public void moveBlock(ModelBlock block, WindowLocation newPos, boolean inProgramArea){
+        if (block != null){
+            if(inProgramArea){
+                block.setPos(newPos);
+            }
+            else{
+                block.setPos(newPos);
+            }
+        }
+    }
+
 
     /**
      * 

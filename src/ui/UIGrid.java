@@ -65,6 +65,7 @@ public class UIGrid {
      * @param g The Graphics object on which the rendering happens
      */
     public void render(Graphics g) {
+        System.out.println("Rendering grid");
         renderGrid(g);
         renderWalls(g);
         renderGoalCell(g);
@@ -82,7 +83,7 @@ public class UIGrid {
         for(int x = 0; x < this.width; x++){
             for(int y = 0; y < this.height; y++){
                 g.drawRect(xPosition + x * cellSize, yPosition + y*cellSize, cellSize, cellSize);
-
+                //System.out.println("drawing line at " + x + ", " + y);
             }
         }
     }

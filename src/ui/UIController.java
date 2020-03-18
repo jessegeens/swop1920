@@ -6,6 +6,7 @@ import java.awt.*;
 import ui.blocks.*;
 import utilities.*;
 import model.blocks.ModelBlock;
+import model.*;
 
 /**
  * Class controlling the UI elements.
@@ -20,11 +21,11 @@ public class UIController {
     private ArrayList<UIBlock> blocks;
 
     // Constructor
-    public UIController(int windowWidth, int windowHeight, ArrayList<ModelBlock> mBlocks, GridInfo gridInfo){
+    public UIController(int windowWidth, int windowHeight, ArrayList<ModelBlock> mBlocks, ProgramState programState){
         this.wWidth = windowWidth;
         this.wHeight = windowHeight;
         updateBlocks(mBlocks);
-        updateGrid(gridInfo);
+        updateGrid(programState);
     }
 
     /**
@@ -32,6 +33,7 @@ public class UIController {
      * @param g graphics object where the UI elements are rendered.
      */
     public void render(Graphics g){
+        System.out.println("Rendering UI, blocks and grid");
         this.renderUI(g);
         blocks.forEach((UIBlock block) -> block.render(g));
         this.grid.render(g);
@@ -60,13 +62,11 @@ public class UIController {
      * Method to update the grid.
      * @param gridInfo variable containing information about the grid.
      */
-    public void updateGrid(GridInfo gridInfo){
-        System.out.println("update grid gridinfo");
-        this.grid = new UIGrid(new WindowLocation(2*this.wWidth/3, 0), this.wWidth/ 3, this.wHeight, gridInfo.getCellSize(), gridInfo.getWalls(), gridInfo.getRobotLocation(), gridInfo.getRobotDirection(), gridInfo.getGoalCell());
-        System.out.println("GRIDINFO");
-        System.out.println(gridInfo.getRobotLocation().getX());
-        System.out.println(gridInfo.getRobotLocation().getY());
-
+    public void updateGrid(ProgramState programState){
+        if (programState == null) throw new IllegalArgumentException("updating grid with an illegal programState (is null)");
+        System.out.println("updating grid: " + programState.toString());
+        this.grid = new UIGrid(new WindowLocation(2*this.wWidth/3, 0), this.wWidth/ 3, this.wHeight, programState.getCellSize(), programState.getWalls(), programState.getRobotLocation(), programState.getRobotDirection(), programState.getGoalCell());
+        
 
     }
 

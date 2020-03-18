@@ -42,11 +42,11 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         }
         if (this.getCavityPlug() != null){
             ((TopSocket)this.getCavityPlug()).setTopSocket(null);
-            this.setCavityPlug(null);
+            this.setCavityPlug(this);
         }
         if (this.getCavitySocket() != null){
             ((BottomPlug)this.getCavitySocket()).setBottomPlug(null);
-            this.setCavitySocket(null);
+            this.setCavitySocket(this);
         }
     }
 
@@ -122,15 +122,19 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         this.bottomPlug = bottomPlug;
     }
 
+    
+
     /**
      * Getter for the height of the cavity of the while and if block.
      * @return the height of the block
      */
     public int getCavityHeight() {
-        if(!getCavityBlocks().isEmpty()){
+        if(!(getCavityBlocks().size() == 0)){
             return getCavityBlocks().size() * STD_HEIGHT + STD_HEIGHT;
         }
-        else return 0;
+        else{
+            return 0;
+        } 
     }
 
     /**
@@ -138,10 +142,12 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      * @return the width of the block
      */
     public int getCavityWidth() {
-        if(!getCavityBlocks().isEmpty())
+        if(!(getCavityBlocks().size() == 0)){
             return getWidestBlockInCavity().getWidth() + STD_WIDTH;
-        else
+        }
+        else{
             return 0;
+        }
     }
 
     /**
@@ -163,13 +169,17 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      */
     public ArrayList<ModelBlock> getCavityBlocks() {
         ArrayList<ModelBlock> cav = new ArrayList<ModelBlock>();
+
         ModelBlock blk = this.getCavityPlug();
+        
         while(!blk.equals(this)){
             cav.add(blk);
             if(blk.hasBottomPlug()){
                 blk = ((BottomPlug)blk).getBottomPlug();
             }
-            else blk = this;//make sure that it doesn't form an infinite loop.
+            //the issue is that the block does not get the wileifblock as a bottomplug when connecting
+            //so its bottom plug is null resulting in a nullpointer exception
+            //else blk = this;//make sure that it doesn't form an infinite loop.
         }
         return cav;
     }

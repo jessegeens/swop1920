@@ -35,8 +35,8 @@ public class ModelNotBlock extends ModelBlock implements RightSocket,LeftPlug{
      */
     @Override
     public void connect(ModelBlock block) {
-        if ((block.hasLeftPlug() && (this.getRightSocketPos().getDistance(((LeftPlug)block).getLeftPlugPos()) < ModelBlock.PLUGSIZE * 1.5)
-        && ((LeftPlug) block).getLeftPlug() == null)){
+        if (block.hasLeftPlug() && (this.getRightSocketPos().getDistance(((LeftPlug)block).getLeftPlugPos()) < ModelBlock.PLUGSIZE * 1.5)
+        && ((LeftPlug) block).getLeftPlug() == null){
             System.out.println("NOT CONNECTS LEFT");
             this.setRightSocket(block);
             ((LeftPlug)block).setLeftPlug(this);

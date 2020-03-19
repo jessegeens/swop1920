@@ -134,7 +134,7 @@ public class UIBlock extends UIElement {
         }
 
         g.setColor(Color.WHITE);
-        g.drawString(this.getType().getTitle(), this.getPos().getX() + 10, this.getPos().getY() + (this.getHeight()/2));
+        g.drawString(this.getType().getTitle(), this.getPos().getX() + 10, this.getPos().getY() + (ModelBlock.STD_HEIGHT/2));
         
     }
 

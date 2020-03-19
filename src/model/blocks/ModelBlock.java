@@ -120,6 +120,38 @@ public abstract class ModelBlock extends ModelElement{
     }
 
     /**
+     *
+     * @return true if and only if the block is within a cavity, false otherwise
+     */
+    public boolean isInCavity(){
+        ModelBlock plug = this;
+        if (this.hasBottomPlug()){
+            while (!(plug instanceof ModelWhileIfBlock || plug == null)){
+                plug = ((BottomPlug)plug).getBottomPlug();
+            }
+            if (plug == null) return false;
+            else if (plug instanceof ModelWhileIfBlock && ((ModelWhileIfBlock) plug).getCavityBlocks().contains(this)) return true;
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @return the while/if block that has this block in it's cavity, null if this block is within no cavity
+     */
+    public ModelBlock getSurroundingWhileIfBlock(){
+        ModelBlock plug = this;
+        if (this.hasBottomPlug()){
+            while (!(plug instanceof ModelWhileIfBlock || plug == null)){
+                plug = ((BottomPlug)plug).getBottomPlug();
+            }
+            if (plug == null) return null;
+            else if (plug instanceof ModelWhileIfBlock && ((ModelWhileIfBlock) plug).getCavityBlocks().contains(this)) return plug;
+        }
+        return null;
+    }
+
+    /**
      * If the block implementation has a top socket, override this function to return true
      * 
      * @return {boolean} true if this block has a top socket, false otherwise

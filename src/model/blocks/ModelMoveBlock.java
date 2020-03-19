@@ -54,24 +54,23 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
      */
     @Override
     public void connect(ModelBlock block) {
-        if ((block.hasBottomPlug() && (this.getTopSocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5)
-        && ((BottomPlug) block).getBottomPlug() == null)) {
-            
+        if (block instanceof ModelWhileIfBlock){
+            ((ModelWhileIfBlock) block).connectCavity(this);
+        }
+        else if (block.isInCavity()){
+            ((ModelWhileIfBlock)block.getSurroundingWhileIfBlock()).connectIntoCavity(this, block);
+        }
+        else if (block.hasBottomPlug() && (this.getTopSocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5)
+        && ((BottomPlug) block).getBottomPlug() == null) {
             this.setTopSocket(block);
-            ((BottomPlug)block).setBottomPlug(this);  
-
+            ((BottomPlug)block).setBottomPlug(this);
             this.setTopSocketPos(((BottomPlug) block).getBottomPlugPos());
         }
-        else if ((block.hasTopSocket() && (this.getBottomPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5)
-        && ((TopSocket) block).getTopSocket() == null)){
-            
+        else if (block.hasTopSocket() && (this.getBottomPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5)
+        && ((TopSocket) block).getTopSocket() == null){
             this.setBottomPlug(block);
-            ((TopSocket)block).setTopSocket(this); 
-
+            ((TopSocket)block).setTopSocket(this);
             this.setBottomPlugPos(((TopSocket) block).getTopSocketPos());
-        }
-        else if (block instanceof ModelWhileIfBlock){
-            ((ModelWhileIfBlock) block).connectCavity(this);
         }
     }
 

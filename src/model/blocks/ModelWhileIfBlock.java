@@ -97,18 +97,20 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             connected = connectCavity(block);
             if (connected) return;
         }
-        if ((block.hasBottomPlug() && (this.getTopSocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5)
-        && ((BottomPlug) block).getBottomPlug() == null)){
+        if (block.hasBottomPlug() && (this.getTopSocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5)
+        && ((BottomPlug) block).getBottomPlug() == null){
             this.setTopSocket(block);
             ((BottomPlug)block).setBottomPlug(this);
             this.setTopSocketPos(((BottomPlug) block).getBottomPlugPos());
         }
-        else if ((block.hasTopSocket() && (this.getBottomPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5))){
+        else if (block.hasTopSocket() && (this.getBottomPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5)
+        && ((TopSocket) block).getTopSocket() == null){
             this.setBottomPlug(block);
             ((TopSocket)block).setTopSocket(this);
             this.setBottomPlugPos(((TopSocket) block).getTopSocketPos());
         }
-        else if ((block.hasLeftPlug() && (this.getRightSocketPos().getDistance(((LeftPlug)block).getLeftPlugPos()) < ModelBlock.PLUGSIZE * 1.5))){
+        else if (block.hasLeftPlug() && (this.getRightSocketPos().getDistance(((LeftPlug)block).getLeftPlugPos()) < ModelBlock.PLUGSIZE * 1.5)
+        && ((LeftPlug) block).getLeftPlug() == null){
             this.setRightSocket(block);
             ((LeftPlug)block).setLeftPlug(this);
             this.setRightSocketPos(((LeftPlug) block).getLeftPlugPos());
@@ -136,7 +138,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         }
         if (block.hasTopSocket() && this.getCavityPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5){
             ModelBlock cavityNext = this.getCavityPlug();
-            this.setCavityPlug(this);
+            this.setCavityPlug(block);
             ((TopSocket)block).setTopSocket(this);
             if (block.hasBottomPlug()){
                 ((BottomPlug)block).setBottomPlug(cavityNext);
@@ -148,6 +150,27 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             return true;
         }
         return false;
+    }
+
+    public void connectIntoCavity(ModelBlock extra, ModelBlock closest){
+        if (closest.hasBottomPlug() && extra.hasTopSocket() && ((TopSocket)extra).getTopSocketPos().getDistance(((BottomPlug)closest).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5){
+            ModelBlock next = ((BottomPlug) closest).getBottomPlug();
+            ((TopSocket) extra).setTopSocket(closest);
+            ((BottomPlug) closest).setBottomPlug(extra);
+            if (extra.hasBottomPlug()){
+                ((BottomPlug)extra).setBottomPlug(next);
+            }
+            ((TopSocket) extra).setTopSocketPos(((BottomPlug) closest).getBottomPlugPos());
+        }
+        else if (closest.hasTopSocket() && extra.hasBottomPlug() && ((BottomPlug)extra).getBottomPlugPos().getDistance(((TopSocket)closest).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5){
+            ModelBlock next = ((TopSocket) closest).getTopSocket();
+            ((BottomPlug) extra).setBottomPlug(closest);
+            ((TopSocket) closest).setTopSocket(extra);
+            if (extra.hasTopSocket()){
+                ((TopSocket)extra).setTopSocket(next);
+            }
+            ((BottomPlug) extra).setBottomPlugPos(((TopSocket) closest).getTopSocketPos());
+        }
     }
 
     /**
@@ -299,7 +322,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      * @return the position of the cavity socket
      */
     public WindowLocation getCavitySocketPos() {
-        return this.getPos().add(ModelBlock.STD_WIDTH/2, this.getHeight() - ModelBlock.STD_HEIGHT/3);
+        return this.getPos().add(2*ModelBlock.STD_WIDTH/3, this.getHeight() - 2*ModelBlock.STD_HEIGHT/3);
     }
 
     /**
@@ -307,7 +330,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      * @return the position of the cavity plug
      */
     public WindowLocation getCavityPlugPos() {
-        return this.getPos().add(ModelBlock.STD_WIDTH/2, 2*ModelBlock.STD_HEIGHT/3);
+        return this.getPos().add(2*ModelBlock.STD_WIDTH/3, this.getHeight() - ModelBlock.STD_HEIGHT/3);
     }
 
     /**

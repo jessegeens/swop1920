@@ -10,7 +10,7 @@ public class ProgramState {
     private GridLocation goalCell;
     private int cellSize;
 
-    ProgramState(Direction robotDirection, GridLocation robotLocation, ArrayList<GridLocation> walls, GridLocation goalCell, int cellSize){
+    public ProgramState(Direction robotDirection, GridLocation robotLocation, ArrayList<GridLocation> walls, GridLocation goalCell, int cellSize){
         this.robotDirection = robotDirection;
         this.robotLocation = robotLocation;
         this.walls = walls;

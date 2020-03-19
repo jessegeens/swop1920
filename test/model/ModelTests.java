@@ -16,21 +16,23 @@ public class ModelTests {
 
     @Test
     public void TestModelGrid() {
-        GridLocation loc = new GridLocation(40, 40);
+        GridLocation goal = new GridLocation(40, 40);
         GridLocation rPos = new GridLocation(0, 0);
         Direction rDir = new Direction(0);
         ArrayList<GridLocation> walls = new ArrayList<>();
-        ModelGrid grid = new ModelGrid(200, 200, loc, rPos, rDir, walls, 100);
-        assertEquals(loc, grid.getGoalCell());
+        ProgramState state = new ProgramState(rDir, rPos, walls, goal, 100);
+        ModelGrid grid = new ModelGrid(200, 200, state);
+        assertEquals(goal, state.getGoalCell());
         GridLocation wall1 = new GridLocation(12, 15);
         GridLocation wall2 = new GridLocation(22, 24);
         ArrayList<GridLocation> lst = new ArrayList<>();
         lst.add(wall1);
         lst.add(wall2);
-        grid.setWalls(lst);
+        //state.setWalls(lst);
+        //states can't be set, a new state has to be created.
         assertNotNull(lst);
         assertEquals(22, lst.get(1).getX());
-        assertEquals(15, grid.getWalls().get(0).getY());
+        assertEquals(15, state.getWalls().get(0).getY());
     }
 
     @Test

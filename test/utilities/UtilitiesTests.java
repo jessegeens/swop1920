@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import model.ModelGrid;
+import model.ProgramState;
 import org.junit.*;
 
 import java.util.ArrayList;
@@ -87,10 +88,10 @@ public class UtilitiesTests {
         GridLocation rPos = new GridLocation(20, 25);
         Direction rDir = new Direction(Direction.RIGHT);
         ArrayList<GridLocation> walls = new ArrayList<>();
-        ModelGrid grid = new ModelGrid(10, 10, goal, rPos, rDir, walls, 100);
-        GridInfo gridInfo = new GridInfo(grid, cellSize);
-        assertEquals(10, gridInfo.getGoalCell().getX());
-        assertEquals(25, gridInfo.getRobotLocation().getY());
-        assertNotNull(gridInfo.getRobotDirection());
+        ProgramState state = new ProgramState(rDir, rPos, walls, goal, 100);
+        ModelGrid grid = new ModelGrid(10, 10, state);
+        assertEquals(10, state.getGoalCell().getX());
+        assertEquals(25, state.getRobotLocation().getY());
+        assertNotNull(state.getRobotDirection());
     }
 }

@@ -13,8 +13,8 @@ public abstract class ModelBlock extends ModelElement{
     public static final int PLUGSIZE = 20;
     private final Blocktype type;
 
-    public static final int STD_WIDTH = 75; //final standard width of blocks
-    public static final int STD_HEIGHT = 75; //final standard height of blocks
+    public static final int STD_WIDTH = 80; //final standard width of blocks
+    public static final int STD_HEIGHT = 80; //final standard height of blocks
 
     private boolean highlighted = false;
     

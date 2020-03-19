@@ -65,7 +65,7 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
             
             this.setPos(block.getPos().add(new WindowLocation(0,block.getHeight())));
         }
-        if ((block.hasTopSocket() && (this.getBottomPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5))){
+        else if ((block.hasTopSocket() && (this.getBottomPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5))){
             
             this.setBottomPlug(block);
             this.setTopSocket(((TopSocket) block).getTopSocket());
@@ -76,24 +76,24 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
             ((BottomPlug)block).setBottomPlug(this); 
             this.setPos(block.getPos().add(new WindowLocation(0, -block.getHeight())));
         }
-        if (block instanceof ModelWhileIfBlock){
-            this.connectModelWhileIfBlock((ModelWhileIfBlock) block);
+        else if (block instanceof ModelWhileIfBlock){
+            ((ModelWhileIfBlock) block).connectCavity(this);
         }
     }
 
-    
+
     public void connectModelWhileIfBlock(ModelWhileIfBlock block) {
         if (this.getTopSocketPos().getDistance(block.getCavityPlugPos()) < ModelBlock.PLUGSIZE * 1.5 ){
             this.setBottomPlug(block.getCavitySocket());
             this.setTopSocket(block);
             block.setCavityPlug(this);
-            this.setPos(block.getPos().add(ModelBlock.STD_HEIGHT/2,0));
+            this.setPos(block.getPos().add(ModelBlock.STD_WIDTH/3,ModelBlock.STD_HEIGHT/2));
         }
         if (this.getBottomPlugPos().getDistance(block.getCavitySocketPos()) < ModelBlock.PLUGSIZE * 1.5){
             this.setTopSocket(block.getCavitySocket());
             this.setBottomPlug(block);
             block.setCavitySocket(this);
-            this.setPos(block.getPos().add(block.getHeight() - ModelBlock.STD_HEIGHT/2,0));
+            this.setPos(block.getPos().add(ModelBlock.STD_WIDTH/3,block.getHeight() + ModelBlock.STD_HEIGHT/2));
         }
     }
 

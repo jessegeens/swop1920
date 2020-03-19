@@ -128,6 +128,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
                 ((TopSocket)block).setTopSocket(cavityPrevious); //The previous block in the cavitysocket needs to connect with the modelBlock
                 if (this.getCavityPlug() == this){
                     this.setCavityPlug(block);
+                    block.setPos(this.getPos().add(ModelBlock.STD_WIDTH/4, 2*ModelBlock.STD_HEIGHT/3));
                 }
             }
             return true;
@@ -140,6 +141,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
                 ((BottomPlug)block).setBottomPlug(cavityNext);
                 if (this.getCavitySocket() == this){
                     this.setCavityPlug(block);
+                    block.setPos(this.getPos().add(ModelBlock.STD_WIDTH/4,this.getHeight() - ModelBlock.STD_HEIGHT/3 - ModelBlock.STD_HEIGHT));
                 }
             }
             return true;
@@ -328,7 +330,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      * @return the position of the right socket
      */
     public WindowLocation getRightSocketPos() {
-        return super.getPos().add(this.getWidth() - ModelBlock.PLUGSIZE / 2, this.getHeight() / 2);
+        return super.getPos().add(this.getWidth() - ModelBlock.PLUGSIZE / 2, ModelBlock.STD_HEIGHT / 3);
     }
 
     /**

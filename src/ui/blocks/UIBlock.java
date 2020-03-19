@@ -1,4 +1,8 @@
 package ui.blocks;
+import model.blocks.plugs.BottomPlug;
+import model.blocks.plugs.LeftPlug;
+import model.blocks.plugs.RightSocket;
+import model.blocks.plugs.TopSocket;
 import ui.*;
 import java.awt.*;
 
@@ -36,27 +40,26 @@ public class UIBlock extends UIElement {
 
     private void renderTopSocket(Graphics g){
         g.setColor(getBlockColor());
-        g.fillRect(this.getPos().getX() , this.getPos().getY() , (this.getWidth()-this.getSocketSize())/2, this.getSocketSize());
-        g.fillRect(this.getPos().getX() + (this.getWidth()-this.getSocketSize())/2 + this.getSocketSize(), this.getPos().getY() , (this.getWidth()-this.getSocketSize())/2, this.getSocketSize());
-        
+        g.fillRect(this.getPos().getX() , this.getPos().getY() , this.getTopSocketPos().getX() - this.getPos().getX(), this.getSocketSize());
+        g.fillRect(this.getTopSocketPos().getX() + this.getSocketSize(), this.getPos().getY() , this.getPos().getX() + this.getWidth() - this.getTopSocketPos().getX() - this.getSocketSize(), this.getSocketSize());
     }
 
     
 
     private void renderBottomPlug(Graphics g){
         g.setColor(getBlockColor());
-        g.fillRect(this.getPos().getX() + (this.getWidth() / 2 - this.getSocketSize()/2), this.getPos().getY() + (this.getHeight()), this.getSocketSize(), this.getSocketSize());
+        g.fillRect(this.getBottomPlugPos().getX(), this.getBottomPlugPos().getY(), this.getSocketSize(), this.getSocketSize());
     }
 
     private void renderLeftPlug(Graphics g){
         g.setColor(getBlockColor());
-        g.fillRect(this.getPos().getX() - this.getSocketSize(),this.getPos().getY() + (this.getHeight() - this.getSocketSize())/2, this.getSocketSize(), this.getSocketSize());
+        g.fillRect(this.getLeftPlugPos().getX(),this.getLeftPlugPos().getY(), this.getSocketSize(), this.getSocketSize());
     }
 
     private void renderRightSocket(Graphics g){
         g.setColor(getBlockColor());
-        g.fillRect(this.getPos().getX() + this.getWidth() - this.getSocketSize(), this.getPos().getY() , this.getSocketSize(), (this.getHeight()-this.getSocketSize())/2);
-        g.fillRect(this.getPos().getX() + this.getWidth() - this.getSocketSize(), this.getPos().getY() + this.getSocketSize() + (this.getHeight()-this.getSocketSize())/2, this.getSocketSize(), (this.getHeight()-this.getSocketSize())/2);
+        g.fillRect(this.getRightSocketPos().getX(), this.getPos().getY() , this.getSocketSize(), this.getRightSocketPos().getY() - this.getPos().getY());
+        g.fillRect(this.getRightSocketPos().getX(), this.getRightSocketPos().getY() + this.getSocketSize(), this.getSocketSize(), this.getPos().getY() + this.getHeight() - this.getRightSocketPos().getY() - this.getSocketSize());
     }
 
     private void renderNoRightSocket(Graphics g){
@@ -142,6 +145,26 @@ public class UIBlock extends UIElement {
 
     public ModelBlock getmBlock(){
         return this.mBlock;
+    }
+
+    public WindowLocation getTopSocketPos(){
+        if (!this.getmBlock().hasTopSocket()) return new WindowLocation(0,0);
+        return ((TopSocket)this.getmBlock()).getTopSocketPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
+    }
+
+    public WindowLocation getRightSocketPos(){
+        if (!this.getmBlock().hasRightSocket()) return new WindowLocation(0,0);
+        return ((RightSocket)this.getmBlock()).getRightSocketPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
+    }
+
+    public WindowLocation getBottomPlugPos(){
+        if (!this.getmBlock().hasBottomPlug()) return new WindowLocation(0,0);
+        return ((BottomPlug)this.getmBlock()).getBottomPlugPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
+    }
+
+    public WindowLocation getLeftPlugPos() {
+        if (!this.getmBlock().hasLeftPlug()) return new WindowLocation(0,0);
+        return ((LeftPlug)this.getmBlock()).getLeftPlugPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
     }
 
     public int getWidth() {

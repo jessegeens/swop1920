@@ -3,3 +3,5 @@ out/
 .vscode/
 diagrams/structural_overview/.SWOP_Structural_Overview.vpp.lck
 swop1920.iml
+.idea/workspace.xml
+.idea/misc.xml

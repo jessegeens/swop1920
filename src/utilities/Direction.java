@@ -45,4 +45,20 @@ public final class Direction{
     public Direction turnRight(){
         return new Direction((this.getDirection() + 1) % 4);
     }
+
+    @Override
+    public String toString(){
+        switch(direction){
+            case 0:
+                return "UP";
+            case 1:
+                return "RIGHT";
+            case 2:
+                return "DOWN";
+            case 3:
+                return "LEFT";
+            default:
+                return "Invalid direction";
+        }
+    }
 }

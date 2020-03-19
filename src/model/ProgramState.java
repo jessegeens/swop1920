@@ -15,6 +15,7 @@ public class ProgramState {
         this.robotLocation = robotLocation;
         this.walls = walls;
         this.goalCell = goalCell;
+        this.cellSize = cellSize;
     }
 
     @Override

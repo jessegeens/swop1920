@@ -54,6 +54,7 @@ public class ModelController{
             case 116: //F5;
                 if (getPArea().allBlocksConnected()){//Check if all blocks are connected, and if so execute.
                     if(programRunner.isRunning()){
+                        System.out.println("executing on keypress, is already running");
                         getGrid().setGridState(programRunner.execute(getGrid().getGridState()));
                     } else {
                         programRunner.initialise(getPArea().getStartBlock(), getPArea().getFinishBlock());

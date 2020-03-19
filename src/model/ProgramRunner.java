@@ -59,6 +59,7 @@ public class ProgramRunner {
         else{
             this.highlightNext(programState);
             this.current = findNextBlock(programState);
+            System.out.println("programState: " + programState.toString());
             return step(programState);
         }
     }
@@ -72,17 +73,15 @@ public class ProgramRunner {
                 if(validPosition(move(pState))){
                     return move(pState);
                 } else {
-                    //TODO: what is move is invalid? Reset program? *yes reset*
                     this.reset();
                 }
                 break;
             case(Blocktype.TURNLEFT):
-                //TODO: update robot direction
-                return ProgramState.generateNew(pState, pState.getRobotDirection(), pState.getRobotLocation());
-                /*This doesn't set a new location or direction, the utilities give a new direction or location when you do direction.turnLeft() or something similar.
-                */
+                Direction directionL = pState.getRobotDirection().turnLeft();
+                return ProgramState.generateNew(pState, directionL, pState.getRobotLocation());
             case(Blocktype.TURNRIGHT):
-                return ProgramState.generateNew(pState, pState.getRobotDirection(), pState.getRobotLocation());
+                Direction directionR = pState.getRobotDirection().turnLeft();
+                return ProgramState.generateNew(pState, directionR, pState.getRobotLocation());
             default:
                 //TODO: what with other blocktypes? *MoveForwardBlock needs to move the robot in it's direction, others do nothing with the state except change current block*
                 break;

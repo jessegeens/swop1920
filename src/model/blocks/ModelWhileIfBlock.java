@@ -40,14 +40,50 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             ((TopSocket)this.getBottomPlug()).setTopSocket(null);
             this.setBottomPlug(null);
         }
-        if (this.getCavityPlug() != null){
+        /*if (this.getCavityPlug() != null){
             ((TopSocket)this.getCavityPlug()).setTopSocket(null);
             this.setCavityPlug(this);
         }
         if (this.getCavitySocket() != null){
             ((BottomPlug)this.getCavitySocket()).setBottomPlug(null);
             this.setCavitySocket(this);
+        }*/
+        //The cavity should not be disconnected, I would rather move the cavity blocks with the while if block if this gets moved.
+    }
+
+    /**
+     * Disconnects block from the cavity and connects its upper and lower neighbour in the cavity to eachother.
+     * @param block the block which is removed from the cavity.
+     */
+    public void disconnectCavity(ModelMoveBlock block){
+        ModelBlock plug = block.getBottomPlug();
+        ModelBlock socket = block.getTopSocket();
+        block.setBottomPlug(null);
+        block.setTopSocket(null);
+        ((BottomPlug)socket).setBottomPlug(plug);
+        ((TopSocket)plug).setTopSocket(socket);
+    }
+
+    /**
+     * Updates the block connections within the cavity. Disconnecting blocks within a cavity can cause two blocks within the cavity to be disconnected which is
+     * not wanted, because the cavity is a linked list.
+     * This should be unnecessary but you should always prepare more than is needed.
+     */
+    public void updateCavity(){
+        ModelBlock plug = this.getCavityPlug();
+        ModelBlock socket = this.getCavitySocket();
+
+        while (plug != null && plug != this){
+            ((BottomPlug)plug).getBottomPlug();
         }
+        if (plug == this) return;
+        else plug = ((TopSocket)plug).getTopSocket();
+        while (socket != null){
+            ((TopSocket)socket).getTopSocket();
+        }
+        socket = ((BottomPlug)socket).getBottomPlug();
+        ((BottomPlug)plug).setBottomPlug(socket);
+        ((TopSocket)socket).setTopSocket(plug);
     }
 
     /**

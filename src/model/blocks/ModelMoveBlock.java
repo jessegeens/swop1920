@@ -25,11 +25,24 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
     @Override
     public void disconnect() {
         if (this.getTopSocket() != null){
-            ((BottomPlug)this.getTopSocket()).setBottomPlug(null);
+            if (this.getTopSocket() instanceof ModelWhileIfBlock && ((ModelWhileIfBlock)this.getBottomPlug()).getCavityBlocks().contains(this)){
+
+                //if this block is in the cavity of the while if block it should be removed from that.
+                ((ModelWhileIfBlock)this.getTopSocket()).disconnectCavity(this);
+            }
+            else {
+                ((BottomPlug)this.getTopSocket()).setBottomPlug(null);
+            }
             this.setTopSocket(null);
         }
         if (this.getBottomPlug() != null){
-            ((TopSocket)this.getBottomPlug()).setTopSocket(null);
+            if (this.getBottomPlug() instanceof ModelWhileIfBlock && ((ModelWhileIfBlock) this.getBottomPlug()).getCavityBlocks().contains(this)){
+                //if this block is in the cavity of the while if block it should be removed from that
+                ((ModelWhileIfBlock)this.getBottomPlug()).disconnectCavity(this);
+            }
+            else{
+                ((TopSocket)this.getBottomPlug()).setTopSocket(null);
+            }
             this.setBottomPlug(null);
         }
     }

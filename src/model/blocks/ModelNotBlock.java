@@ -35,17 +35,19 @@ public class ModelNotBlock extends ModelBlock implements RightSocket,LeftPlug{
      */
     @Override
     public void connect(ModelBlock block) {
-        if ((block.hasLeftPlug() && (this.getRightSocketPos().getDistance(((LeftPlug)block).getLeftPlugPos()) < ModelBlock.PLUGSIZE * 1.5))){
+        if ((block.hasLeftPlug() && (this.getRightSocketPos().getDistance(((LeftPlug)block).getLeftPlugPos()) < ModelBlock.PLUGSIZE * 1.5)
+        && ((LeftPlug) block).getLeftPlug() == null)){
             System.out.println("NOT CONNECTS LEFT");
             this.setRightSocket(block);
             ((LeftPlug)block).setLeftPlug(this);
-            this.setPos(block.getPos().add(new WindowLocation(-this.getWidth(),0)));
+            this.setRightSocketPos(((LeftPlug) block).getLeftPlugPos());
         }
-        if ((block.hasRightSocket()) && (this.getLeftPlugPos().getDistance(((RightSocket)block).getRightSocketPos()) < ModelBlock.PLUGSIZE * 1.5)){
+        if ((block.hasRightSocket()) && (this.getLeftPlugPos().getDistance(((RightSocket)block).getRightSocketPos()) < ModelBlock.PLUGSIZE * 1.5)
+        && ((RightSocket) block).getRightSocket() == null){
             System.out.println("NOT CONNECTS RIGHT");
             this.setLeftPlug(block);
-            ((RightSocket)block).setRightSocket(this); 
-            this.setPos(block.getPos().add(new WindowLocation(block.getWidth(),0)));
+            ((RightSocket)block).setRightSocket(this);
+            this.setLeftPlugPos(((RightSocket) block).getRightSocketPos());
         }
         
     }

@@ -33,12 +33,13 @@ public class ModelWallInFrontBlock extends ModelBlock implements LeftPlug{
     public void connect(ModelBlock block) {
         System.out.println("DISTANCE");
         System.out.println(this.getLeftPlugPos().getDistance(((RightSocket)block).getRightSocketPos()));
-        if ((this.getLeftPlugPos().getDistance(((RightSocket)block).getRightSocketPos()) < ModelBlock.PLUGSIZE * 1.5)){
+        if (block.hasRightSocket() && (this.getLeftPlugPos().getDistance(((RightSocket)block).getRightSocketPos()) < ModelBlock.PLUGSIZE * 1.5)
+        && ((RightSocket) block).getRightSocket() == null){
             System.out.println("WIF CONNECTS");
             if(block.hasRightSocket()){
                 this.setLeftPlug(block);
-                ((RightSocket)block).setRightSocket(this); 
-                this.setPos(block.getPos().add(new WindowLocation(block.getWidth(),0)));
+                ((RightSocket)block).setRightSocket(this);
+                this.setLeftPlugPos(((RightSocket) block).getRightSocketPos());
             }  
         }  
     }

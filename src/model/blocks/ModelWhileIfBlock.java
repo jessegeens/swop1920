@@ -97,20 +97,21 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             connected = connectCavity(block);
             if (connected) return;
         }
-        if ((block.hasBottomPlug() && (this.getTopSocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5))){
+        if ((block.hasBottomPlug() && (this.getTopSocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5)
+        && ((BottomPlug) block).getBottomPlug() == null)){
             this.setTopSocket(block);
-            ((BottomPlug)block).setBottomPlug(this); 
-            this.setPos(block.getPos().add(new WindowLocation(0, this.getHeight())));
+            ((BottomPlug)block).setBottomPlug(this);
+            this.setTopSocketPos(((BottomPlug) block).getBottomPlugPos());
         }
         else if ((block.hasTopSocket() && (this.getBottomPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5))){
             this.setBottomPlug(block);
-            ((TopSocket)block).setTopSocket(this);  
-            this.setPos(block.getPos().add(new WindowLocation(0,-block.getHeight())));
+            ((TopSocket)block).setTopSocket(this);
+            this.setBottomPlugPos(((TopSocket) block).getTopSocketPos());
         }
         else if ((block.hasLeftPlug() && (this.getRightSocketPos().getDistance(((LeftPlug)block).getLeftPlugPos()) < ModelBlock.PLUGSIZE * 1.5))){
             this.setRightSocket(block);
-            ((LeftPlug)block).setLeftPlug(this); 
-            this.setPos(block.getPos().add(new WindowLocation(-this.getWidth(),0)));
+            ((LeftPlug)block).setLeftPlug(this);
+            this.setRightSocketPos(((LeftPlug) block).getLeftPlugPos());
         }
     }
 
@@ -128,7 +129,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
                 ((TopSocket)block).setTopSocket(cavityPrevious); //The previous block in the cavitysocket needs to connect with the modelBlock
                 if (this.getCavityPlug() == this){
                     this.setCavityPlug(block);
-                    block.setPos(this.getPos().add(ModelBlock.STD_WIDTH/4, 2*ModelBlock.STD_HEIGHT/3));
+                    ((TopSocket) block).setTopSocketPos(this.getCavityPlugPos());
                 }
             }
             return true;
@@ -141,7 +142,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
                 ((BottomPlug)block).setBottomPlug(cavityNext);
                 if (this.getCavitySocket() == this){
                     this.setCavityPlug(block);
-                    block.setPos(this.getPos().add(ModelBlock.STD_WIDTH/4,this.getHeight() - ModelBlock.STD_HEIGHT/3 - ModelBlock.STD_HEIGHT));
+                    ((BottomPlug) block).setBottomPlugPos(this.getCavityPlugPos());
                 }
             }
             return true;

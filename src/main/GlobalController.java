@@ -48,6 +48,7 @@ public class GlobalController {
      */
     public void handleKeyEvent(int id, int keyCode, char keyChar){
         this.getModelController().handleKeyEvent(id, keyCode, keyChar);
+        this.uiController.updateGrid(modelController.getGrid().getGridState());
     }
 
     /**

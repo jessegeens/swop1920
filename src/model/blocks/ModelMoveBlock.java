@@ -44,7 +44,7 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
         if ((block.hasBottomPlug() && (this.getTopSocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5))) {
             
             this.setTopSocket(block);
-            this.setBottomPlug((ModelBlock) (((BottomPlug) block).getBottomPlug()));
+            this.setBottomPlug(((BottomPlug) block).getBottomPlug());
              
             ((BottomPlug)block).setBottomPlug(this);  
             
@@ -55,7 +55,7 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
         if ((block.hasTopSocket() && (this.getBottomPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5))){
             
             this.setBottomPlug(block);
-            this.setTopSocket((ModelBlock) (((TopSocket) block).getTopSocket()));
+            this.setTopSocket(((TopSocket) block).getTopSocket());
 
             ((TopSocket)block).setTopSocket(this); 
 
@@ -63,30 +63,25 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
             ((BottomPlug)block).setBottomPlug(this); 
             this.setPos(block.getPos().add(new WindowLocation(0, -block.getHeight())));
         }
-        
         if (block instanceof ModelWhileIfBlock){
             this.connectModelWhileIfBlock((ModelWhileIfBlock) block);
-            
         }
-
     }
 
     
     public void connectModelWhileIfBlock(ModelWhileIfBlock block) {
-        if (this.getTopSocketPos().getDistance(((ModelWhileIfBlock) block).getCavityPlugPos()) < ModelBlock.PLUGSIZE * 1.5 ){
-            this.setBottomPlug(block.getCavityPlug());
+        if (this.getTopSocketPos().getDistance(block.getCavityPlugPos()) < ModelBlock.PLUGSIZE * 1.5 ){
+            this.setBottomPlug(block.getCavitySocket());
             this.setTopSocket(block);
-            ((ModelWhileIfBlock) block).setCavityPlug(this);
+            block.setCavityPlug(this);
             this.setPos(block.getPos().add(ModelBlock.STD_HEIGHT/2,0));
         }
-        if (this.getBottomPlugPos().getDistance(((ModelWhileIfBlock) block).getCavitySocketPos()) < ModelBlock.PLUGSIZE * 1.5){
+        if (this.getBottomPlugPos().getDistance(block.getCavitySocketPos()) < ModelBlock.PLUGSIZE * 1.5){
             this.setTopSocket(block.getCavitySocket());
             this.setBottomPlug(block);
-            ((ModelWhileIfBlock) block).setCavitySocket(this);
+            block.setCavitySocket(this);
             this.setPos(block.getPos().add(block.getHeight() - ModelBlock.STD_HEIGHT/2,0));
         }
-
-
     }
 
 

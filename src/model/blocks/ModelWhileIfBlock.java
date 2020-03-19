@@ -55,25 +55,13 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      */
     @Override
     public void connect(ModelBlock block) {
-        if ((block.hasBottomPlug() && (this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5))){
-            this.setCavitySocket(block);
-            ((BottomPlug)block).setBottomPlug(this);
-            if(this.getCavityPlug() == this){ 
-                this.setCavityPlug(block);
-                if(block.hasTopSocket()) ((TopSocket)block).setTopSocket(this);
-            }
-            //TODO Oberon: set the position of the block that enters the cavity
+        boolean connected;
+        if ((block.hasBottomPlug() && this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5)
+            || (block.hasTopSocket() && this.getCavityPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5)){
+            connected = connectCavity(block);
+            if (connected) return;
         }
-        else if ((block.hasTopSocket() && (this.getCavityPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5))){
-            this.setCavityPlug(block);
-            ((TopSocket)block).setTopSocket(this);
-            if(this.getCavitySocket() == this){ 
-                this.setCavitySocket(block);
-                if(block.hasBottomPlug()) ((BottomPlug)block).setBottomPlug(this);
-            }
-            //TODO Oberon: set the position of the block that enters the cavity
-        }
-        else if ((block.hasBottomPlug() && (this.getTopSocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5))){
+        if ((block.hasBottomPlug() && (this.getTopSocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5))){
             this.setTopSocket(block);
             ((BottomPlug)block).setBottomPlug(this); 
             this.setPos(block.getPos().add(new WindowLocation(0, this.getHeight())));
@@ -88,6 +76,39 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             ((LeftPlug)block).setLeftPlug(this); 
             this.setPos(block.getPos().add(new WindowLocation(-this.getWidth(),0)));
         }
+    }
+
+    /**
+     *
+     * @param block the block that possible needs to be connected in the cavity
+     * @return true if and only if block is connected within the cavity, false otherwise
+     */
+    public boolean connectCavity(ModelBlock block){
+        if (block.hasBottomPlug() && this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5){
+            ModelBlock cavityPrevious = this.getCavitySocket(); //The previous block that was connected to the cavity
+            this.setCavitySocket(block);
+            ((BottomPlug)block).setBottomPlug(this);
+            if (block.hasTopSocket()){
+                ((TopSocket)block).setTopSocket(cavityPrevious); //The previous block in the cavitysocket needs to connect with the modelBlock
+                if (this.getCavityPlug() == this){
+                    this.setCavityPlug(block);
+                }
+            }
+            return true;
+        }
+        if (block.hasTopSocket() && this.getCavityPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5){
+            ModelBlock cavityNext = this.getCavityPlug();
+            this.setCavityPlug(this);
+            ((TopSocket)block).setTopSocket(this);
+            if (block.hasBottomPlug()){
+                ((BottomPlug)block).setBottomPlug(cavityNext);
+                if (this.getCavitySocket() == this){
+                    this.setCavityPlug(block);
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     /**

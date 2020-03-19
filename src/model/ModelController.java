@@ -207,8 +207,14 @@ public class ModelController{
                 this.active = null;
                 break;
             case 506: //MOUSE_DRAGGED
-                System.out.println("MOUSE MOVED start");
-                this.moveBlock(active, eventWindowLocation, true);
+            System.out.println("MOUSE MOVED start");
+                if(active != null){
+                    if((int) 2 * MyCanvasWindow.WIDTH / 3 - active.getWidth() > eventWindowLocation.getX()){
+                        this.moveBlock(active, eventWindowLocation, true);
+                    }
+                    
+                }
+                
                 break;
             default:
                 break;

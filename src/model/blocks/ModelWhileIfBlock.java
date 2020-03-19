@@ -187,7 +187,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      */
     public int getCavityHeight() {
         if(!(getCavityBlocks().size() == 0)){
-            return getCavityBlocks().size() * STD_HEIGHT + STD_HEIGHT;
+            return getCavityBlocks().size() * STD_HEIGHT;
         }
         else{
             return 0;
@@ -296,7 +296,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      * @return the position of the cavity socket
      */
     public WindowLocation getCavitySocketPos() {
-        return this.getPos().add(new WindowLocation(ModelBlock.STD_WIDTH/2 + getCavityWidth(), this.getHeight() - ModelBlock.STD_HEIGHT/3));
+        return this.getPos().add(ModelBlock.STD_WIDTH/2, this.getHeight() - ModelBlock.STD_HEIGHT/3);
     }
 
     /**
@@ -304,7 +304,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      * @return the position of the cavity plug
      */
     public WindowLocation getCavityPlugPos() {
-        return this.getPos().add(new WindowLocation(ModelBlock.STD_WIDTH/2 + getCavityWidth(), 2*ModelBlock.STD_HEIGHT/3));
+        return this.getPos().add(ModelBlock.STD_WIDTH/2, 2*ModelBlock.STD_HEIGHT/3);
     }
 
     /**

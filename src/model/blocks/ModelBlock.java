@@ -10,9 +10,6 @@ import utilities.*;
  */
 public abstract class ModelBlock extends ModelElement{
 
-    private int width = 75; //variable can change because of cavity
-    private int height = 75; //variable can change because of cavity
-
     public static final int PLUGSIZE = 20;
     private final Blocktype type;
 
@@ -47,7 +44,7 @@ public abstract class ModelBlock extends ModelElement{
      */
     @Override
     public boolean inBounds(WindowLocation coordinate){
-        if(this.getPos().getX() < coordinate.getX() && this.getPos().getX() + width > coordinate.getX() && this.getPos().getY() < coordinate.getY() && this.getPos().getY() + width > coordinate.getY() ){
+        if(this.getPos().getX() < coordinate.getX() && this.getPos().getX() + getWidth() > coordinate.getX() && this.getPos().getY() < coordinate.getY() && this.getPos().getY() + getWidth() > coordinate.getY() ){
             return true;
         }
         else{
@@ -105,10 +102,12 @@ public abstract class ModelBlock extends ModelElement{
      * @return the width of the block.
      */
     public int getWidth() {
-		if (this instanceof ModelWhileIfBlock){
+		/*if (this instanceof ModelWhileIfBlock){
             return (((ModelWhileIfBlock)this).getCavityWidth() + STD_WIDTH);
-        }
-        else return STD_WIDTH;
+        }*/
+        return STD_WIDTH;
+        /*It would be more clear if the while and if blocks don't become so wide, this probably becomes more clear when the blocks have different colours.
+        Hopefully it doesn't become too confusing if multiple if or while blocks are nested within eachother.*/
     }
     
     /**

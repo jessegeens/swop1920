@@ -72,17 +72,19 @@ public class ProgramRunner {
                 if(validPosition(move(pState))){
                     return move(pState);
                 } else {
-                    //TODO: what is move is invalid? Reset program?
+                    //TODO: what is move is invalid? Reset program? *yes reset*
                     this.reset();
                 }
                 break;
             case(Blocktype.TURNLEFT):
                 //TODO: update robot direction
                 return ProgramState.generateNew(pState, pState.getRobotDirection(), pState.getRobotLocation());
+                /*This doesn't set a new location or direction, the utilities give a new direction or location when you do direction.turnLeft() or something similar.
+                */
             case(Blocktype.TURNRIGHT):
                 return ProgramState.generateNew(pState, pState.getRobotDirection(), pState.getRobotLocation());
             default:
-                //TODO: what with other blocktypes?
+                //TODO: what with other blocktypes? *MoveForwardBlock needs to move the robot in it's direction, others do nothing with the state except change current block*
                 break;
         }
         return null;
@@ -109,7 +111,7 @@ public class ProgramRunner {
      * If the condition of a WhileIfBlock succeeds it gives the first cavity block of the WhileIf block.
      * 
      * TODO: next block in execution // Maybe explain what is meant with this?
-     * 
+     * //This should point to the next block that has to be executed, this is needed so that when we step we know what block to run but also this one needs to be highlighted.
      * @return the next block that will be run in the program
      */
     public ModelBlock findNextBlock(ProgramState programState){
@@ -146,6 +148,8 @@ public class ProgramRunner {
         GridLocation robotLocation;
         switch(pState.getRobotDirection().getDirection()){
             case Direction.UP:
+                /*GridLocation has an add function so it would be more compact to write:
+                robotLocation = robotLocation.add(0,-1);*/
                 robotLocation = new GridLocation(pState.getRobotLocation().getX(), pState.getRobotLocation().getY() - 1);
                 break;
             case Direction.RIGHT:

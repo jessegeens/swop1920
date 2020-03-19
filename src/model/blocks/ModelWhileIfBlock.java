@@ -62,6 +62,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         block.setTopSocket(null);
         ((BottomPlug)socket).setBottomPlug(plug);
         ((TopSocket)plug).setTopSocket(socket);
+        socket.updatePos();
     }
 
     /**

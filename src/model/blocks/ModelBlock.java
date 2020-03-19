@@ -151,6 +151,21 @@ public abstract class ModelBlock extends ModelElement{
         return null;
     }
 
+    public void updatePos(){
+        if (this.hasTopSocket()){
+            ((TopSocket)this).setTopSocketPos(((BottomPlug)((TopSocket) this).getTopSocket()).getBottomPlugPos());
+        }
+        if (this.hasBottomPlug()){
+            ((BottomPlug)this).getBottomPlug().updatePos();
+        }
+        if (this.hasLeftPlug()){
+            ((LeftPlug)this).setLeftPlugPos(((RightSocket)((LeftPlug)this).getLeftPlug()).getRightSocketPos());
+        }
+        if (this.hasRightSocket()){
+            ((RightSocket)this).getRightSocket().updatePos();
+        }
+    }
+
     /**
      * If the block implementation has a top socket, override this function to return true
      * 

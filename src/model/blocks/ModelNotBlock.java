@@ -90,6 +90,11 @@ public class ModelNotBlock extends ModelBlock implements RightSocket,LeftPlug{
         return super.getPos().add(- ModelBlock.PLUGSIZE / 2, + this.getHeight() / 2);
     }
 
+    @Override
+    public void setLeftPlugPos(WindowLocation pos) {
+        super.setPos(pos.add(ModelBlock.PLUGSIZE/2, -this.getHeight()/2));
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -97,7 +102,12 @@ public class ModelNotBlock extends ModelBlock implements RightSocket,LeftPlug{
     public WindowLocation getRightSocketPos() {
         return super.getPos().add(this.getWidth() - ModelBlock.PLUGSIZE/2, + this.getHeight() / 2);
     }
-    
+
+    @Override
+    public void setRightSocketPos(WindowLocation pos) {
+        super.setPos(pos.add(-this.getWidth() + ModelBlock.PLUGSIZE/2, -this.getHeight()/2));
+    }
+
     /**
      * {@inheritDoc}
      */

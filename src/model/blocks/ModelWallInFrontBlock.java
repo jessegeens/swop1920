@@ -67,6 +67,11 @@ public class ModelWallInFrontBlock extends ModelBlock implements LeftPlug{
         return super.getPos().add(- ModelBlock.PLUGSIZE / 2, + this.getHeight() / 2);
     }
 
+    @Override
+    public void setLeftPlugPos(WindowLocation pos) {
+        super.setPos(pos.add(ModelBlock.PLUGSIZE/2, -this.getHeight()/2));
+    }
+
     /**
      * {@inheritDoc}
      */

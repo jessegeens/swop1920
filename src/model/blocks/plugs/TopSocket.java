@@ -27,4 +27,10 @@ public interface TopSocket {
      * @return the position of the top socket
      */
     public WindowLocation getTopSocketPos();
+
+    /**
+     * sets the position of the block so that the top socket will be at pos after execution
+     * @param pos the location at which the top socket should be after execution
+     */
+    public void setTopSocketPos(WindowLocation pos);
 }

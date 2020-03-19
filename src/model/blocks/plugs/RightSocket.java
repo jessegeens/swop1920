@@ -27,4 +27,10 @@ public interface RightSocket {
      * @return the position of the right socket
      */
     public WindowLocation getRightSocketPos();
+
+    /**
+     * Sets the position of the block so that the RightSocketPostion will be the given pos
+     * @param pos the location at which the right socket should be after execution.
+     */
+    public void setRightSocketPos(WindowLocation pos);
 }

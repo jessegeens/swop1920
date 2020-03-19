@@ -122,6 +122,11 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
         return super.getPos().add(this.getWidth() / 2, + this.getHeight() + ModelBlock.PLUGSIZE/2);
     }
 
+    @Override
+    public void setBottomPlugPos(WindowLocation pos) {
+        super.setPos(pos.add(-this.getWidth()/2, -this.getHeight() - ModelBlock.PLUGSIZE/2));
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -144,6 +149,11 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
     @Override
     public WindowLocation getTopSocketPos() {
         return super.getPos().add(this.getWidth() / 2, + ModelBlock.PLUGSIZE/2);
+    }
+
+    @Override
+    public void setTopSocketPos(WindowLocation pos) {
+        super.setPos(pos.add(-this.getWidth()/2, -ModelBlock.PLUGSIZE/2));
     }
 
     /**

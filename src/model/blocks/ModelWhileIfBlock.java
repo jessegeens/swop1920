@@ -317,6 +317,11 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         return super.getPos().add(this.getWidth() / 2, + ModelBlock.PLUGSIZE / 2);
     }
 
+    @Override
+    public void setTopSocketPos(WindowLocation pos) {
+        super.setPos(pos.add(-this.getWidth()/2, -ModelBlock.PLUGSIZE/2));
+    }
+
     /**
      * 
      * @return the position of the bottom plug
@@ -325,12 +330,22 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         return super.getPos().add(this.getWidth() / 2,+this.getHeight() + ModelBlock.PLUGSIZE / 2);
     }
 
+    @Override
+    public void setBottomPlugPos(WindowLocation pos) {
+        super.setPos(pos.add(-this.getWidth()/2, -this.getHeight() - ModelBlock.PLUGSIZE/2));
+    }
+
     /**
      * 
      * @return the position of the right socket
      */
     public WindowLocation getRightSocketPos() {
         return super.getPos().add(this.getWidth() - ModelBlock.PLUGSIZE / 2, ModelBlock.STD_HEIGHT / 3);
+    }
+
+    @Override
+    public void setRightSocketPos(WindowLocation pos) {
+        super.setPos(pos.add(-this.getWidth() + ModelBlock.PLUGSIZE/2, -ModelBlock.STD_HEIGHT/3));
     }
 
     /**

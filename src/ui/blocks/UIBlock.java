@@ -10,28 +10,16 @@ import utilities.*;
  */
 public class UIBlock extends UIElement {
 
-    int width;
-    int height;
-    int socketSize;
-    boolean highlighted;
-    Blocktype type;
-
-
-
-
+    private ModelBlock mBlock;
 
     // Constructor
     public UIBlock(ModelBlock mBlock) {
         super(mBlock.getPos());
-        this.width = mBlock.getWidth();
-        this.height = mBlock.getHeight(); 
-        this.socketSize = ModelBlock.PLUGSIZE;   
-        this.highlighted = mBlock.isHighlighted();
-        this.type = mBlock.getBlockType();
+        this.mBlock = mBlock;
     }
 
-    public Color getBlockColor(){
-        if(this.highlighted) {
+    private Color getBlockColor(){
+        if(this.isHighlighted()) {
             return Color.GREEN;
         }
         else {
@@ -46,43 +34,43 @@ public class UIBlock extends UIElement {
     //TODO rendering sockets first and then plugs
 
 
-    public void renderTopSocket(Graphics g){
+    private void renderTopSocket(Graphics g){
         g.setColor(getBlockColor());
-        g.fillRect(this.getPos().getX() , (int) this.getPos().getY() , (int) (this.getWidth()-this.getSocketSize())/2, this.getSocketSize());
-        g.fillRect(this.getPos().getX() + (int) (this.getWidth()-this.getSocketSize())/2 + this.getSocketSize(), (int) this.getPos().getY() , (int) (this.getWidth()-this.getSocketSize())/2, this.getSocketSize());
+        g.fillRect(this.getPos().getX() , this.getPos().getY() , (this.getWidth()-this.getSocketSize())/2, this.getSocketSize());
+        g.fillRect(this.getPos().getX() + (this.getWidth()-this.getSocketSize())/2 + this.getSocketSize(), this.getPos().getY() , (this.getWidth()-this.getSocketSize())/2, this.getSocketSize());
         
     }
 
     
 
-    public void renderBottomPlug(Graphics g){
+    private void renderBottomPlug(Graphics g){
         g.setColor(getBlockColor());
-        g.fillRect(this.getPos().getX() + (int) (this.getWidth() / 2 - this.getSocketSize()/2), this.getPos().getY() + (int) (this.getHeight()), this.getSocketSize(), this.getSocketSize());
-     }
+        g.fillRect(this.getPos().getX() + (this.getWidth() / 2 - this.getSocketSize()/2), this.getPos().getY() + (this.getHeight()), this.getSocketSize(), this.getSocketSize());
+    }
 
-    public void renderLeftPlug(Graphics g){
+    private void renderLeftPlug(Graphics g){
         g.setColor(getBlockColor());
         g.fillRect(this.getPos().getX() - this.getSocketSize(),this.getPos().getY() + (this.getHeight() - this.getSocketSize())/2, this.getSocketSize(), this.getSocketSize());
     }
 
-    public void renderRightSocket(Graphics g){
+    private void renderRightSocket(Graphics g){
         g.setColor(getBlockColor());
-        g.fillRect(this.getPos().getX() + this.getWidth() - this.getSocketSize(), (int) this.getPos().getY() , this.getSocketSize(), (int) (this.getHeight()-this.getSocketSize())/2);
-        g.fillRect(this.getPos().getX() + this.getWidth() - this.getSocketSize(), (int) this.getPos().getY() + this.getSocketSize() + (this.getHeight()-this.getSocketSize())/2, this.getSocketSize(), (int) (this.getHeight()-this.getSocketSize())/2);
+        g.fillRect(this.getPos().getX() + this.getWidth() - this.getSocketSize(), this.getPos().getY() , this.getSocketSize(), (this.getHeight()-this.getSocketSize())/2);
+        g.fillRect(this.getPos().getX() + this.getWidth() - this.getSocketSize(), this.getPos().getY() + this.getSocketSize() + (this.getHeight()-this.getSocketSize())/2, this.getSocketSize(), (this.getHeight()-this.getSocketSize())/2);
     }
 
-    public void renderNoRightSocket(Graphics g){
+    private void renderNoRightSocket(Graphics g){
         g.setColor(getBlockColor());
-        g.fillRect(this.getPos().getX() + this.getWidth() - this.getSocketSize(), (int) this.getPos().getY() , this.getSocketSize(), this.getHeight());
+        g.fillRect(this.getPos().getX() + this.getWidth() - this.getSocketSize(), this.getPos().getY() , this.getSocketSize(), this.getHeight());
     }
 
-    public void renderNoTopSocket(Graphics g){
+    private void renderNoTopSocket(Graphics g){
         g.setColor(getBlockColor());
-        g.fillRect(this.getPos().getX() , (int) this.getPos().getY() , this.getWidth(), this.getSocketSize());
+        g.fillRect(this.getPos().getX() , this.getPos().getY() , this.getWidth(), this.getSocketSize());
     }
 
 
-    public void renderInnerBlock(Graphics g){
+    private void renderInnerBlock(Graphics g){
         g.setColor(getBlockColor());
         g.fillRect(this.getPos().getX() ,this.getPos().getY() + this.getSocketSize(),this.getWidth() - this.getSocketSize(), this.getHeight() - this.getSocketSize());
     }
@@ -143,7 +131,7 @@ public class UIBlock extends UIElement {
         }
 
         g.setColor(Color.WHITE);
-        g.drawString(this.type.getTitle(), this.getPos().getX() + 10, this.getPos().getY() + (height/2));
+        g.drawString(this.getType().getTitle(), this.getPos().getX() + 10, this.getPos().getY() + (this.getHeight()/2));
         
     }
 
@@ -152,25 +140,27 @@ public class UIBlock extends UIElement {
 
 
 
-
+    public ModelBlock getmBlock(){
+        return this.mBlock;
+    }
 
     public int getWidth() {
-        return this.width;
+        return this.getmBlock().getWidth();
     }
 
     public int getHeight() {
-        return this.height;
+        return this.getmBlock().getHeight();
     }
 
     public int getSocketSize() {
-        return this.socketSize;
+        return ModelBlock.PLUGSIZE;
     }
 
     public boolean isHighlighted() {
-        return this.highlighted;
+        return this.getmBlock().isHighlighted();
     }
 
     public Blocktype getType() {
-        return this.type;
+        return this.getmBlock().getBlockType();
     }
 }

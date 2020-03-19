@@ -96,6 +96,7 @@ public abstract class ModelBlock extends ModelElement{
             return (((ModelWhileIfBlock)this).getCavityHeight() + STD_HEIGHT);
         }
         else return STD_HEIGHT;
+
     }
     
     /**

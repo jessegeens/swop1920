@@ -10,113 +10,116 @@ import utilities.*;
 
 public class ModelWhileIfBlockTests {
 
-    private ModelWhileIfBlock whileBlock;
-    private ModelWhileIfBlock ifBlock;
-    private ModelMoveBlock forwardBlock;
-    private ModelMoveBlock leftBlock;
-    private ModelMoveBlock rightBlock;
-    private ModelNotBlock notBlock;
-    private ModelWallInFrontBlock wallBlock;
-
-
-    /**
-     * One block of each type is generated at a certain place so we can interact with them within the tests.
-     */
-    @Before
-    public void setUp(){
-        whileBlock = new ModelWhileIfBlock(new WindowLocation(420,420), new Blocktype(Blocktype.WHILE));
-        ifBlock = new ModelWhileIfBlock(new WindowLocation(420,820), new Blocktype(Blocktype.IF));
-        forwardBlock = new ModelMoveBlock(new WindowLocation(20,20), new Blocktype(Blocktype.MOVEFORWARD));
-        leftBlock = new ModelMoveBlock(new WindowLocation(20,220), new Blocktype(Blocktype.TURNLEFT));
-        rightBlock = new ModelMoveBlock(new WindowLocation(20, 420), new Blocktype(Blocktype.TURNRIGHT));
-        notBlock = new ModelNotBlock(new WindowLocation(20, 620), new Blocktype(Blocktype.NOT));
-        wallBlock = new ModelWallInFrontBlock(new WindowLocation(20,820), new Blocktype(Blocktype.WALLINFRONT));
-    }
-
     @Test
-    public void ExactConnectTopSocketTest(){
-        forwardBlock.setPos(new WindowLocation(420,320));
+    public void connectTopSocket(){
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(100,20), new Blocktype(Blocktype.MOVEFORWARD));
         whileBlock.connect(forwardBlock);
         assertEquals(forwardBlock, whileBlock.getTopSocket());
     }
 
     @Test
-    public void ExactConnectTopSocketInverseTest(){
-        forwardBlock.setPos(new WindowLocation(420,320));
+    public void connectTopSocketInverse(){
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(100,20), new Blocktype(Blocktype.MOVEFORWARD));
         forwardBlock.connect(whileBlock);
         assertEquals(forwardBlock, whileBlock.getTopSocket());
     }
 
     @Test
-    public void ExactConnectBottomPlugTest(){
-        leftBlock.setPos(new WindowLocation(420, 500));
+    public void connectBottomPlug(){
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(100,180), new Blocktype(Blocktype.TURNLEFT));
         whileBlock.connect(leftBlock);
         assertEquals(leftBlock,whileBlock.getBottomPlug());
     }
 
     @Test
-    public void ExactConnectBottomPlugInverseTest(){
-        leftBlock.setPos(new WindowLocation(420, 500));
+    public void connectBottomPlugInverse(){
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(100,180), new Blocktype(Blocktype.TURNLEFT));
         leftBlock.connect(whileBlock);
         assertEquals(leftBlock,whileBlock.getBottomPlug());
     }
 
     @Test
-    public void ExactConnectRightSocketTest(){
-        notBlock.setPos(new WindowLocation(500, 420 - ModelBlock.STD_HEIGHT/6));
+    public void connectRightSocket(){
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelNotBlock notBlock = new ModelNotBlock(new WindowLocation(180,90), new Blocktype(Blocktype.NOT));
         whileBlock.connect(notBlock);
         assertEquals(notBlock, whileBlock.getRightSocket());
     }
 
     @Test
-    public void ExactConnectRightSocketInverseTest(){
-        notBlock.setPos(new WindowLocation(500, 420 - ModelBlock.STD_HEIGHT/6));
-        whileBlock.connect(notBlock);
+    public void connectRightSocketInverse(){
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelNotBlock notBlock = new ModelNotBlock(new WindowLocation(180,90), new Blocktype(Blocktype.NOT));
+        notBlock.connect(whileBlock);
         assertEquals(notBlock, whileBlock.getRightSocket());
     }
 
     @Test
-    public void RelativeConnectTopSocketTest(){
-        forwardBlock.setBottomPlugPos(whileBlock.getTopSocketPos());
-        whileBlock.connect(forwardBlock);
-        assertEquals(forwardBlock, whileBlock.getTopSocket());
+    public void connectCavityPlug(){
+        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(110,140), new Blocktype(Blocktype.MOVEFORWARD));
+        ifBlock.connect(forwardBlock);
+        assertEquals(forwardBlock, ifBlock.getCavityPlug());
     }
 
     @Test
-    public void RelativeConnectTopSocketInverseTest(){
-        forwardBlock.setBottomPlugPos(whileBlock.getTopSocketPos());
-        forwardBlock.connect(whileBlock);
-        assertEquals(forwardBlock, whileBlock.getTopSocket());
+    public void connectCavityPlugInverse(){
+        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(110,140), new Blocktype(Blocktype.MOVEFORWARD));
+        forwardBlock.connect(ifBlock);
+        assertEquals(forwardBlock, ifBlock.getCavityPlug());
     }
 
     @Test
-    public void RelativeConnectBottomPlugTest(){
-        leftBlock.setTopSocketPos(whileBlock.getBottomPlugPos());
-        whileBlock.connect(leftBlock);
-        assertEquals(leftBlock,whileBlock.getBottomPlug());
+    public void connectCavitySocket(){
+        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(110,60), new Blocktype(Blocktype.MOVEFORWARD));
+        ifBlock.connect(forwardBlock);
+        assertEquals(forwardBlock, ifBlock.getCavitySocket());
     }
 
     @Test
-    public void RelativeConnectBottomPlugInverseTest(){
-        leftBlock.setTopSocketPos(whileBlock.getBottomPlugPos());
-        leftBlock.connect(whileBlock);
-        assertEquals(leftBlock,whileBlock.getBottomPlug());
+    public void connectCavitySocketInverse(){
+        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(110,60), new Blocktype(Blocktype.MOVEFORWARD));
+        forwardBlock.connect(ifBlock);
+        assertEquals(forwardBlock, ifBlock.getCavitySocket());
     }
 
     @Test
-    public void RelativeConnectRightSocketTest(){
-        notBlock.setLeftPlugPos(whileBlock.getRightSocketPos());
-        whileBlock.connect(notBlock);
-        assertEquals(notBlock, whileBlock.getRightSocket());
+    public void connectCavityPlugConnectsSocket(){
+        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(110,140), new Blocktype(Blocktype.MOVEFORWARD));
+        ifBlock.connect(forwardBlock);
+        assertEquals(forwardBlock, ifBlock.getCavitySocket());
     }
 
     @Test
-    public void RelativeConnectRightSocketInverseTest(){
-        notBlock.setLeftPlugPos(whileBlock.getRightSocketPos());
-        whileBlock.connect(notBlock);
-        assertEquals(notBlock, whileBlock.getRightSocket());
+    public void connectCavityPlugInverseConnectsSocket(){
+        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(110,140), new Blocktype(Blocktype.MOVEFORWARD));
+        forwardBlock.connect(ifBlock);
+        assertEquals(forwardBlock, ifBlock.getCavitySocket());
     }
 
+    @Test
+    public void connectCavitySocketConnectsPlug(){
+        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(110,60), new Blocktype(Blocktype.MOVEFORWARD));
+        ifBlock.connect(forwardBlock);
+        assertEquals(forwardBlock, ifBlock.getCavityPlug());
+    }
 
+    @Test
+    public void connectCavitySocketInverseConnectsPlug(){
+        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(110,60), new Blocktype(Blocktype.MOVEFORWARD));
+        forwardBlock.connect(ifBlock);
+        assertEquals(forwardBlock, ifBlock.getCavityPlug());
+    }
 
 }

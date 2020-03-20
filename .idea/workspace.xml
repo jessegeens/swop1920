@@ -6,16 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="bdfc6573-f389-4d9a-9e2c-4612aa30b1a8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/main/GlobalController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/main/GlobalController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/ModelController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/ModelController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelMoveBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelMoveBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelNotBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelNotBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelWallInFrontBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelWallInFrontBlock.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelWhileIfBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelWhileIfBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/ui/blocks/UIBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/ui/blocks/UIBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelMoveBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelMoveBlock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/blocks/ModelWhileIfBlockTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/blocks/ModelWhileIfBlockTests.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +82,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelWhileIfBlockTests.ExactConnectTopSocketInverseTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ModelWhileIfBlockTests.ExactConnectCavityPlugTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
         <pattern>
@@ -99,13 +92,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="model.blocks" />
       <option name="MAIN_CLASS_NAME" value="model.blocks.ModelWhileIfBlockTests" />
-      <option name="METHOD_NAME" value="ExactConnectTopSocketInverseTest" />
+      <option name="METHOD_NAME" value="ExactConnectCavityPlugTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelWhileIfBlockTests.ExactConnectTopSocketTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ModelWhileIfBlockTests.connectCavityPlugConnectsSocket" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
         <pattern>
@@ -115,13 +108,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="model.blocks" />
       <option name="MAIN_CLASS_NAME" value="model.blocks.ModelWhileIfBlockTests" />
-      <option name="METHOD_NAME" value="ExactConnectTopSocketTest" />
+      <option name="METHOD_NAME" value="connectCavityPlugConnectsSocket" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelWhileIfBlockTests.RelativeConnectTopSocketInverseTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ModelWhileIfBlockTests.exactConnectCavityPlugTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
         <pattern>
@@ -131,13 +124,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="model.blocks" />
       <option name="MAIN_CLASS_NAME" value="model.blocks.ModelWhileIfBlockTests" />
-      <option name="METHOD_NAME" value="RelativeConnectTopSocketInverseTest" />
+      <option name="METHOD_NAME" value="exactConnectCavityPlugTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelWhileIfBlockTests.RelativeConnectTopSocketTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ModelWhileIfBlockTests.exactConnectCavitySocketTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
         <pattern>
@@ -147,7 +140,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="model.blocks" />
       <option name="MAIN_CLASS_NAME" value="model.blocks.ModelWhileIfBlockTests" />
-      <option name="METHOD_NAME" value="RelativeConnectTopSocketTest" />
+      <option name="METHOD_NAME" value="exactConnectCavitySocketTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -156,10 +149,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.ModelWhileIfBlockTests" />
-        <item itemvalue="JUnit.ModelWhileIfBlockTests.RelativeConnectTopSocketInverseTest" />
-        <item itemvalue="JUnit.ModelWhileIfBlockTests.RelativeConnectTopSocketTest" />
-        <item itemvalue="JUnit.ModelWhileIfBlockTests.ExactConnectTopSocketInverseTest" />
-        <item itemvalue="JUnit.ModelWhileIfBlockTests.ExactConnectTopSocketTest" />
+        <item itemvalue="JUnit.ModelWhileIfBlockTests.connectCavityPlugConnectsSocket" />
+        <item itemvalue="JUnit.ModelWhileIfBlockTests.exactConnectCavitySocketTest" />
+        <item itemvalue="JUnit.ModelWhileIfBlockTests.exactConnectCavityPlugTest" />
+        <item itemvalue="JUnit.ModelWhileIfBlockTests.ExactConnectCavityPlugTest" />
       </list>
     </recent_temporary>
   </component>
@@ -217,17 +210,21 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/test/model/blocks/ModelWhileIfBlockTests.java</url>
-          <line>87</line>
-          <option name="timeStamp" value="6" />
+          <line>96</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="this" />
+        <watch expression="this.getCavitySocketPos()" language="JAVA" />
+        <watch expression="((ModelMoveBlock) block).getBottomPlugPos()" language="JAVA" />
         <watch expression="this.getCurrent()" language="JAVA" />
         <watch expression="Math.sqrt(Math.pow(this.getX() - pos.getX(), 2) + Math.pow(this.getY() - pos.getY(), 2))" language="JAVA" />
         <watch expression="ModelBlock.PLUGSIZE * 1.5" language="JAVA" />
+        <watch expression="this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos())" language="JAVA" />
+        <watch expression="this.getCavityPlugPos().getDistance(((TopSocket)block).getTopSocketPos())" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>
@@ -262,60 +259,6 @@
     <SUITE FILE_PATH="coverage/swop1920$ModelPaletteTest.ic" NAME="ModelPaletteTest Coverage Results" MODIFIED="1584030845901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>model.*</FILTER>
     </SUITE>
-  </component>
-  <component name="debuggerHistoryManager">
-    <expressions id="watch">
-      <expression>
-        <expression-string>programState</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>ModelBlock.PLUGSIZE * 1.5</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>Math.sqrt(Math.pow(this.getX() - pos.getX(), 2) + Math.pow(this.getY() - pos.getY(), 2))</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>this.getCurrent()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>this.getTopSocketPos()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>this.getTopSocketPos().getDistance(((BottomPlug)block).getBottomPlugPos())</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>this.hasTopSocket()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>this.getModelController().getPWindow().getFinishBlock()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>!this.getCurrent().equals(this.getModelController().getPWindow().getFinishBlock())</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>(-1) % 4</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-    </expressions>
   </component>
   <component name="masterDetails">
     <states>

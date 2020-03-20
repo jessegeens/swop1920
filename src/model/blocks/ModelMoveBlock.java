@@ -20,7 +20,8 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
 
 
     /**
-     * Method describing how a block will disconnect from another block in the program area.
+     * {@inheritDoc}
+     * @author Oberon Swings
      */
     @Override
     public void disconnect() {
@@ -48,9 +49,8 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
     }
 
     /**
-     * Method describing how a block will connect to another block.
-     * 
-     * @param block Block
+     * {@inheritDoc}
+     * @author Oberon Swings
      */
     @Override
     public void connect(ModelBlock block) {
@@ -75,6 +75,12 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
     }
 
 
+    /**
+     *
+     * @param block
+     */
+    /*I think it was better to handle this in the while/if block it self, that's why I made IsInCavity and getSurroundingWhileIf.
+    Don't think this is still necessary -Oberon*/
     public void connectModelWhileIfBlock(ModelWhileIfBlock block) {
         if (this.getTopSocketPos().getDistance(block.getCavityPlugPos()) < ModelBlock.PLUGSIZE * 1.5 ){
             this.setBottomPlug(block.getCavitySocket());
@@ -115,6 +121,9 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
         return super.getPos().add(this.getWidth() / 2, + this.getHeight() + ModelBlock.PLUGSIZE/2);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setBottomPlugPos(WindowLocation pos) {
         super.setPos(pos.add(-this.getWidth()/2, -this.getHeight() - ModelBlock.PLUGSIZE/2));
@@ -144,6 +153,9 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
         return super.getPos().add(this.getWidth() / 2, + ModelBlock.PLUGSIZE/2);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setTopSocketPos(WindowLocation pos) {
         super.setPos(pos.add(-this.getWidth()/2, -ModelBlock.PLUGSIZE/2));

@@ -67,6 +67,7 @@ public abstract class ModelBlock extends ModelElement{
     /**
      * A method that gives the connection from a block with all its neighbours.
      * @return the list with all the connection of a block.
+     * @author Oberon Swings
      */
     public ArrayList<ModelBlock> getConnections(){
         ArrayList<ModelBlock> connections = new ArrayList<ModelBlock>();
@@ -79,6 +80,7 @@ public abstract class ModelBlock extends ModelElement{
 
     /**
      * @return whether this block is fully connected (at all ends)
+     * @author Oberon Swings
      */
     public boolean isFullyConnected() {
         if(this.hasTopSocket() && ((TopSocket)this).getTopSocket() == null) return false;
@@ -90,6 +92,7 @@ public abstract class ModelBlock extends ModelElement{
     
     /**
      * @return the height of the block.
+     * @author Oberon Swings
      */
     public int getHeight() {
 		if (this instanceof ModelWhileIfBlock){
@@ -101,6 +104,7 @@ public abstract class ModelBlock extends ModelElement{
     
     /**
      * @return the width of the block.
+     * @author Oberon Swings
      */
     public int getWidth() {
 		/*if (this instanceof ModelWhileIfBlock){
@@ -122,6 +126,7 @@ public abstract class ModelBlock extends ModelElement{
     /**
      *
      * @return true if and only if the block is within a cavity, false otherwise
+     * @author Oberon Swings
      */
     public boolean isInCavity(){
         ModelBlock plug = this;
@@ -138,6 +143,7 @@ public abstract class ModelBlock extends ModelElement{
     /**
      *
      * @return the while/if block that has this block in it's cavity, null if this block is within no cavity
+     * @author Oberon Swings
      */
     public ModelBlock getSurroundingWhileIfBlock(){
         ModelBlock plug = this;
@@ -151,6 +157,10 @@ public abstract class ModelBlock extends ModelElement{
         return null;
     }
 
+    /**
+     * Updates the position of the block according to their connections to other blocks
+     * @author Oberon Swings
+     */
     public void updatePos(){
         if (this.hasTopSocket()){
             ((TopSocket)this).setTopSocketPos(((BottomPlug)((TopSocket) this).getTopSocket()).getBottomPlugPos());

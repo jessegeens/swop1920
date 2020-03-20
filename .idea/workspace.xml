@@ -7,16 +7,21 @@
     <list default="true" id="bdfc6573-f389-4d9a-9e2c-4612aa30b1a8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/main/GlobalController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/main/GlobalController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/ModelController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/ModelController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelMoveBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelMoveBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelNotBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelNotBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelWallInFrontBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelWallInFrontBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelWhileIfBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelWhileIfBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/ui/blocks/UIBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/ui/blocks/UIBlock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ModelProgramArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ModelProgramArea.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/ProgramRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ProgramRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/UIGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/UIGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelMoveBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelMoveBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelNotBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelNotBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelWallInFrontBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelWallInFrontBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/plugs/BottomPlug.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/plugs/BottomPlug.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/plugs/LeftPlug.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/plugs/LeftPlug.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/plugs/RightSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/plugs/RightSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/plugs/TopSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/plugs/TopSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/blocks/UIBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/blocks/UIBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utilities/Direction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/Direction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utilities/GridLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/GridLocation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utilities/WindowLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/WindowLocation.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,19 +34,6 @@
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -61,37 +53,6 @@
   <component name="ProjectId" id="1ZFwflAwkPNV1YEe8VtxTXi74Ym" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
-  </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="swop1920" type="b2602c69:ProjectViewProjectNode" />
-              <item name="swop1920" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="swop1920" type="b2602c69:ProjectViewProjectNode" />
-              <item name="swop1920" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="swop1920" type="b2602c69:ProjectViewProjectNode" />
-              <item name="swop1920" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -224,40 +185,6 @@
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="48832000" />
   </component>
-  <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1444563" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Flutter Performance" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" weight="0.32936078" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Flutter Inspector" />
-      <window_info anchor="right" id="Maven" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Flutter Outline" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout>
-  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
@@ -267,12 +194,6 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
               <option name="COLUMN_ORDER" />
             </State>
           </value>
@@ -308,31 +229,31 @@
     <SUITE FILE_PATH="coverage/swop1920$ModelProgramWindowTest_programWindowTest.ic" NAME="ModelProgramWindowTest.programWindowTest Coverage Results" MODIFIED="1584049446708" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>model.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/swop1920$ModelRobotTest.ic" NAME="ModelRobotTest Coverage Results" MODIFIED="1584032593028" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>model.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/swop1920$ModelGridTest_TestModelGrid.ic" NAME="ModelGridTest.TestModelGrid Coverage Results" MODIFIED="1584025902451" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>model.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/swop1920$UtilitiesTests.ic" NAME="UtilitiesTests Coverage Results" MODIFIED="1584098413372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>utilities.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/swop1920$ModelGridTest.ic" NAME="ModelGridTest Coverage Results" MODIFIED="1584025978322" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>model.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/swop1920$ModelMoveBlockTests.ic" NAME="ModelMoveBlockTests Coverage Results" MODIFIED="1584019017493" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>model.blocks.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/swop1920$GlobalControllerTests_globalControllerTest.ic" NAME="GlobalControllerTests.globalControllerTest Coverage Results" MODIFIED="1584106780509" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>main.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/swop1920$ModelPaletteTest.ic" NAME="ModelPaletteTest Coverage Results" MODIFIED="1584030845901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>model.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/swop1920$ModelRobotTest.ic" NAME="ModelRobotTest Coverage Results" MODIFIED="1584032593028" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>model.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/swop1920$ModelGridTest.ic" NAME="ModelGridTest Coverage Results" MODIFIED="1584025978322" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>model.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/swop1920$ModelGridTest_TestModelGrid.ic" NAME="ModelGridTest.TestModelGrid Coverage Results" MODIFIED="1584025902451" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>model.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/swop1920$LocationTests.ic" NAME="LocationTests Coverage Results" MODIFIED="1584017354180" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>utilities.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/swop1920$UtilitiesTests.ic" NAME="UtilitiesTests Coverage Results" MODIFIED="1584098413372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>utilities.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/swop1920$ModelProgramWindowTest.ic" NAME="ModelProgramWindowTest Coverage Results" MODIFIED="1584032158676" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>model.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/swop1920$ModelPaletteTest.ic" NAME="ModelPaletteTest Coverage Results" MODIFIED="1584030845901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>model.*</FILTER>
     </SUITE>
   </component>
@@ -389,15 +310,6 @@
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
   </component>
   <component name="masterDetails">
     <states>

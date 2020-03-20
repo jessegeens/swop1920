@@ -34,6 +34,7 @@ public final class Direction{
 
     /**
      * Method to turn left.
+     * @author Oberon Swings
      */
     public Direction turnLeft(){
         return new Direction((this.getDirection() + 3) % 4); //plus 3 equals -1 in mod 4
@@ -41,6 +42,7 @@ public final class Direction{
 
     /**
      * Method to turn right.
+     * @author Oberon Swings
      */
     public Direction turnRight(){
         return new Direction((this.getDirection() + 1) % 4);

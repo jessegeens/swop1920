@@ -17,6 +17,7 @@ public class ModelNotBlock extends ModelBlock implements RightSocket,LeftPlug{
 
     /**
      * {@inheritDoc}
+     * @author Oberon Swings
      */
     @Override
     public void disconnect() {
@@ -32,6 +33,7 @@ public class ModelNotBlock extends ModelBlock implements RightSocket,LeftPlug{
 
     /**
      * {@inheritDoc}
+     * @author Oberon Swings
      */
     @Override
     public void connect(ModelBlock block) {
@@ -92,6 +94,9 @@ public class ModelNotBlock extends ModelBlock implements RightSocket,LeftPlug{
         return super.getPos().add(- ModelBlock.PLUGSIZE / 2, + this.getHeight() / 2);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setLeftPlugPos(WindowLocation pos) {
         super.setPos(pos.add(ModelBlock.PLUGSIZE/2, -this.getHeight()/2));
@@ -105,6 +110,9 @@ public class ModelNotBlock extends ModelBlock implements RightSocket,LeftPlug{
         return super.getPos().add(this.getWidth() - ModelBlock.PLUGSIZE/2, + this.getHeight() / 2);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setRightSocketPos(WindowLocation pos) {
         super.setPos(pos.add(-this.getWidth() + ModelBlock.PLUGSIZE/2, -this.getHeight()/2));

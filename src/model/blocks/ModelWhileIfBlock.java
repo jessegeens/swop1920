@@ -29,6 +29,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
 
     /**
      * {@inheritDoc}
+     * @author Oberon Swings
      */
     @Override
     public void disconnect() {
@@ -54,6 +55,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     /**
      * Disconnects block from the cavity and connects its upper and lower neighbour in the cavity to eachother.
      * @param block the block which is removed from the cavity.
+     * @author Oberon Swings
      */
     public void disconnectCavity(ModelMoveBlock block){
         ModelBlock plug = block.getBottomPlug();
@@ -69,6 +71,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      * Updates the block connections within the cavity. Disconnecting blocks within a cavity can cause two blocks within the cavity to be disconnected which is
      * not wanted, because the cavity is a linked list.
      * This should be unnecessary but you should always prepare more than is needed.
+     * @author Oberon Swings
      */
     public void updateCavity(){
         ModelBlock plug = this.getCavityPlug();
@@ -89,6 +92,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
 
     /**
      * {@inheritDoc}
+     * @author Oberon Swings
      */
     @Override
     public void connect(ModelBlock block) {
@@ -122,6 +126,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      *
      * @param block the block that possible needs to be connected in the cavity
      * @return true if and only if block is connected within the cavity, false otherwise
+     * @author Oberon Swings
      */
     public boolean connectCavity(ModelBlock block){
         if (block.hasBottomPlug() && this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5){
@@ -153,6 +158,13 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         return false;
     }
 
+    /**
+     * When a block connects to another block that is in a cavity this should be handled by the surroundingWhileIfBlock, that is this block
+     * This function makes sure the extra block is connected correctly to the closest block and is also taken account for within the cavity
+     * @param extra the newly added block
+     * @param closest the block closest to the new block
+     * @author Oberon Swings
+     */
     public void connectIntoCavity(ModelBlock extra, ModelBlock closest){
         if (closest.hasBottomPlug() && extra.hasTopSocket() && ((TopSocket)extra).getTopSocketPos().getDistance(((BottomPlug)closest).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5){
             ModelBlock next = ((BottomPlug) closest).getBottomPlug();
@@ -211,6 +223,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     /**
      * Getter for the height of the cavity of the while and if block.
      * @return the height of the block
+     * @author Oberon Swings
      */
     public int getCavityHeight() {
         if(!(getCavityBlocks().size() == 0)){
@@ -224,32 +237,35 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     /**
      * 
      * @return the width of the block
+     * @author Oberon Swings
      */
-    public int getCavityWidth() {
+    /*public int getCavityWidth() {
         if(!(getCavityBlocks().size() == 0)){
             return getWidestBlockInCavity().getWidth() + STD_WIDTH;
         }
         else{
             return 0;
         }
-    }
+    }function not used anymore because the cavity doesn't grow in width -Oberon*/
 
     /**
      * 
      * @return the widest block in the cavity of a if or while block
+     * @author Oberon Swings
      */
-    public ModelBlock getWidestBlockInCavity(){
+   /* public ModelBlock getWidestBlockInCavity(){
         ModelBlock widest = getCavityBlocks().get(0);
         for(int i = 0; i < this.getCavityBlocks().size(); i++){
             ModelBlock current = this.getCavityBlocks().get(i);
             if(current.getWidth() > widest.getWidth()) widest = current;
         }
         return widest;
-    }
+    }function not used anymore because the cavity doesn't grow in width -Oberon*/
 
     /**
      * Getter for a list of blocks this block has in its cavity.
      * @return the list of blocks.
+     * @author Oberon Swings
      */
     public ArrayList<ModelBlock> getCavityBlocks() {
         ArrayList<ModelBlock> cav = new ArrayList<ModelBlock>();
@@ -268,6 +284,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             //the issue is that the block does not get the wileifblock as a bottomplug when connecting
             //so its bottom plug is null resulting in a nullpointer exception
             //else blk = this;//make sure that it doesn't form an infinite loop.
+            //--Should be fixed now because connect works fine -Oberon
         }
         return cav;
     }

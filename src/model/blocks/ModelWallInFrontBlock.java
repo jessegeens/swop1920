@@ -17,6 +17,7 @@ public class ModelWallInFrontBlock extends ModelBlock implements LeftPlug{
 
     /**
      * {@inheritDoc}
+     * @author Oberon Swings
      */
     @Override
     public void disconnect() {
@@ -28,6 +29,7 @@ public class ModelWallInFrontBlock extends ModelBlock implements LeftPlug{
 
     /**
      * {@inheritDoc}
+     * @author Oberon Swings
      */
     @Override
     public void connect(ModelBlock block) {

@@ -139,50 +139,91 @@ public class UIBlock extends UIElement {
     }
 
 
- 
-
-
-
+    /**
+     *
+     * @return the modelBlock this UIBlock is representing
+     * @author Oberon Swings
+     */
     public ModelBlock getmBlock(){
         return this.mBlock;
     }
 
+    /**
+     *
+     * @return the position of the topSocket
+     * @author Oberon Swings
+     */
     public WindowLocation getTopSocketPos(){
         if (!this.getmBlock().hasTopSocket()) return new WindowLocation(0,0);
         return ((TopSocket)this.getmBlock()).getTopSocketPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
     }
 
+    /**
+     *
+     * @return the position of the rightSocket
+     * @author Oberon Swings
+     */
     public WindowLocation getRightSocketPos(){
         if (!this.getmBlock().hasRightSocket()) return new WindowLocation(0,0);
         return ((RightSocket)this.getmBlock()).getRightSocketPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
     }
 
+    /**
+     *
+     * @return the position of the bottomPlug
+     * @author Oberon Swings
+     */
     public WindowLocation getBottomPlugPos(){
         if (!this.getmBlock().hasBottomPlug()) return new WindowLocation(0,0);
         return ((BottomPlug)this.getmBlock()).getBottomPlugPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
     }
 
+    /**
+     *
+     * @return the position of the leftPlug
+     * @author Oberon Swings
+     */
     public WindowLocation getLeftPlugPos() {
         if (!this.getmBlock().hasLeftPlug()) return new WindowLocation(0,0);
         return ((LeftPlug)this.getmBlock()).getLeftPlugPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
     }
 
+    /**
+     *
+     * @return the width of the modelBlock
+     */
     public int getWidth() {
         return this.getmBlock().getWidth();
     }
 
+    /**
+     *
+     * @return the height of the modelBlock
+     */
     public int getHeight() {
         return this.getmBlock().getHeight();
     }
 
+    /**
+     *
+     * @return The size of the Socket/Plug
+     */
     public int getSocketSize() {
         return ModelBlock.PLUGSIZE;
     }
 
+    /**
+     *
+     * @return true if the modelBlock is highlighted
+     */
     public boolean isHighlighted() {
         return this.getmBlock().isHighlighted();
     }
 
+    /**
+     *
+     * @return the type of the modelBlock
+     */
     public Blocktype getType() {
         return this.getmBlock().getBlockType();
     }

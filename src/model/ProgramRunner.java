@@ -58,9 +58,10 @@ public class ProgramRunner {
         }
         else{
             this.highlightNext(programState);
+            ProgramState nextState = step(programState);
             this.current = findNextBlock(programState);
             System.out.println("programState: " + programState.toString());
-            return step(programState);
+            return nextState;
         }
     }
 
@@ -80,7 +81,7 @@ public class ProgramRunner {
                 Direction directionL = pState.getRobotDirection().turnLeft();
                 return ProgramState.generateNew(pState, directionL, pState.getRobotLocation());
             case(Blocktype.TURNRIGHT):
-                Direction directionR = pState.getRobotDirection().turnLeft();
+                Direction directionR = pState.getRobotDirection().turnRight();
                 return ProgramState.generateNew(pState, directionR, pState.getRobotLocation());
             default:
                 //TODO: what with other blocktypes? *MoveForwardBlock needs to move the robot in it's direction, others do nothing with the state except change current block*

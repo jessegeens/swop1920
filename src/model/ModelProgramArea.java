@@ -197,8 +197,8 @@ public class ModelProgramArea extends ModelWindow{
      * 
      * TODO: remove debug print statements
      * @param block The block for which the closest neighbour needs to be found
-     * @return The closest neighbour of the block
-     *         null if there is no closest block
+     * @return The closest neighbour of the block null if there is no closest block
+     * @author Oberon Swings
      */
     public ModelBlock findClosestBlock(ModelBlock block){
         System.out.println("list length");

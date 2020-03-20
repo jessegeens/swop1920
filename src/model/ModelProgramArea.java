@@ -21,7 +21,7 @@ public class ModelProgramArea extends ModelWindow{
 
     /**
      * This functionupdates the location of blocks when a while or if block is resized.
-     *
+     * @author Oberon Swings
      */
     public void updateLocationBlocks(){
         ArrayList<ModelBlock> thisBlocks = this.getPABlocks();
@@ -41,6 +41,7 @@ public class ModelProgramArea extends ModelWindow{
      * Help function to update the block location when a while or if block is resized.
      * @param connectedBlocks
      * @param updated
+     * @author Oberon Swings
      */
     private void updateLocationBlocksHelp(ArrayList<ModelBlock> connectedBlocks, ArrayList<ModelBlock> updated){
         for(ModelBlock blk : connectedBlocks) {
@@ -88,6 +89,7 @@ public class ModelProgramArea extends ModelWindow{
     /**
      * 
      * @return a list of all the blocks that are connected
+     * @author Oberon Swings
      */
     public ArrayList<ModelBlock> getConnectedBlocks(ModelBlock blk){
         ArrayList<ModelBlock> connectedBlocks = new ArrayList<ModelBlock>();
@@ -105,6 +107,7 @@ public class ModelProgramArea extends ModelWindow{
     /**
      * 
      * @return true if all the blocks in the ProgramArea are connected
+     * @author Oberon Swings
      */
     public Boolean allBlocksConnected(){
         if (this.getPABlocks().isEmpty()) return true;
@@ -131,6 +134,7 @@ public class ModelProgramArea extends ModelWindow{
     /**
      * 
      * @return the starting block of the program if all blocks are connected.
+     * @author Oberon Swings
      */
     public ModelBlock getStartBlock(){
         for(ModelBlock blk : getPABlocks()){
@@ -142,6 +146,7 @@ public class ModelProgramArea extends ModelWindow{
     /**
      * 
      * @return the finishing block of the program if all blocks are connected.
+     * @author Oberon Swings
      */
     public ModelBlock getFinishBlock(){
         for(ModelBlock blk : getPABlocks()){

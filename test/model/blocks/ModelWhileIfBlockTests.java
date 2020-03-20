@@ -215,6 +215,6 @@ public class ModelWhileIfBlockTests {
         assertTrue(whileBlock.getCavityBlocks().isEmpty());
     }
 
-    
+
 
 }

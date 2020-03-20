@@ -133,7 +133,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
                 ((BottomPlug)block).setBottomPlug(cavityNext);
                 if (this.getCavitySocket() == this){
                     this.setCavitySocket(block);
-                    ((BottomPlug) block).setBottomPlugPos(this.getCavityPlugPos());
+                    ((BottomPlug) block).setBottomPlugPos(this.getCavitySocketPos());
                 }
             }
             return true;

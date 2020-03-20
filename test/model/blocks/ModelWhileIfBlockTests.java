@@ -215,6 +215,7 @@ public class ModelWhileIfBlockTests {
         assertTrue(whileBlock.getCavityBlocks().isEmpty());
     }
 
-
+    //TODO test disconnect one block in a cavity of multiple blocks
+    //TODO test getCavityBlocks
 
 }

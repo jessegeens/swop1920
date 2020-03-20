@@ -49,7 +49,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             ((BottomPlug)this.getCavitySocket()).setBottomPlug(null);
             this.setCavitySocket(this);
         }*/
-        //The cavity should not be disconnected, I would rather move the cavity blocks with the while if block if this gets moved.
+        //The cavity should not be disconnected, I would rather move the cavity blocks with the while if block if this gets moved. -Oberon
     }
 
     /**
@@ -68,37 +68,14 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     }
 
     /**
-     * Updates the block connections within the cavity. Disconnecting blocks within a cavity can cause two blocks within the cavity to be disconnected which is
-     * not wanted, because the cavity is a linked list.
-     * This should be unnecessary but you should always prepare more than is needed.
-     * @author Oberon Swings
-     */
-    public void updateCavity(){
-        ModelBlock plug = this.getCavityPlug();
-        ModelBlock socket = this.getCavitySocket();
-
-        while (plug != null && plug != this){
-            ((BottomPlug)plug).getBottomPlug();
-        }
-        if (plug == this) return;
-        else plug = ((TopSocket)plug).getTopSocket();
-        while (socket != null){
-            ((TopSocket)socket).getTopSocket();
-        }
-        socket = ((BottomPlug)socket).getBottomPlug();
-        ((BottomPlug)plug).setBottomPlug(socket);
-        ((TopSocket)socket).setTopSocket(plug);
-    }
-
-    /**
      * {@inheritDoc}
      * @author Oberon Swings
      */
     @Override
     public void connect(ModelBlock block) {
         boolean connected;
-        if ((block.hasBottomPlug() && this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5)
-            || (block.hasTopSocket() && this.getCavityPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5)){
+        if ((block.hasBottomPlug() && this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE)
+            || (block.hasTopSocket() && this.getCavityPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE)){
             connected = connectCavity(block);
             if (connected) return;
         }
@@ -129,7 +106,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      * @author Oberon Swings
      */
     public boolean connectCavity(ModelBlock block){
-        if (block.hasBottomPlug() && this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5){
+        if (block.hasBottomPlug() && this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE){
             ModelBlock cavityPrevious = this.getCavitySocket(); //The previous block that was connected to the cavity
             this.setCavitySocket(block);
             ((BottomPlug)block).setBottomPlug(this);
@@ -142,7 +119,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             }
             return true;
         }
-        if (block.hasTopSocket() && this.getCavityPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5){
+        if (block.hasTopSocket() && this.getCavityPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE){
             ModelBlock cavityNext = this.getCavityPlug();
             this.setCavityPlug(block);
             ((TopSocket)block).setTopSocket(this);
@@ -338,6 +315,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     /**
      * 
      * @return the position of the cavity socket
+     * @author Oberon Swings
      */
     public WindowLocation getCavitySocketPos() {
         return this.getPos().add(2*ModelBlock.STD_WIDTH/3, this.getHeight() - 2*ModelBlock.STD_HEIGHT/3);
@@ -346,45 +324,58 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     /**
      * 
      * @return the position of the cavity plug
+     * @author Oberon Swings
      */
     public WindowLocation getCavityPlugPos() {
         return this.getPos().add(2*ModelBlock.STD_WIDTH/3, this.getHeight() - ModelBlock.STD_HEIGHT/3);
     }
 
     /**
-     * 
-     * @return the position of the top socket
+     * {@inheritDoc}
+     * @author Oberon Swings
      */
     public WindowLocation getTopSocketPos() {
         return super.getPos().add(this.getWidth() / 2, + ModelBlock.PLUGSIZE / 2);
     }
 
+    /**
+     * {@inheritDoc}
+     * @author Oberon Swings
+     */
     @Override
     public void setTopSocketPos(WindowLocation pos) {
         super.setPos(pos.add(-this.getWidth()/2, -ModelBlock.PLUGSIZE/2));
     }
 
     /**
-     * 
-     * @return the position of the bottom plug
+     * {@inheritDoc}
+     * @author Oberon Swings
      */
     public WindowLocation getBottomPlugPos() {
         return super.getPos().add(this.getWidth() / 2,+this.getHeight() + ModelBlock.PLUGSIZE / 2);
     }
 
+    /**
+     * {@inheritDoc}
+     * @author Oberon Swings
+     */
     @Override
     public void setBottomPlugPos(WindowLocation pos) {
         super.setPos(pos.add(-this.getWidth()/2, -this.getHeight() - ModelBlock.PLUGSIZE/2));
     }
 
     /**
-     * 
-     * @return the position of the right socket
+     * {@inheritDoc}
+     * @author Oberon Swings
      */
     public WindowLocation getRightSocketPos() {
         return super.getPos().add(this.getWidth() - ModelBlock.PLUGSIZE / 2, ModelBlock.STD_HEIGHT / 3);
     }
 
+    /**
+     * {@inheritDoc}
+     * @author Oberon Swings
+     */
     @Override
     public void setRightSocketPos(WindowLocation pos) {
         super.setPos(pos.add(-this.getWidth() + ModelBlock.PLUGSIZE/2, -ModelBlock.STD_HEIGHT/3));

@@ -54,9 +54,11 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
      */
     @Override
     public void connect(ModelBlock block) {
+        boolean connected = false;
         if (block instanceof ModelWhileIfBlock){
-            ((ModelWhileIfBlock) block).connectCavity(this);
+            connected = ((ModelWhileIfBlock) block).connectCavity(this);
         }
+        if (connected) return;
         else if (block.isInCavity()){
             ((ModelWhileIfBlock)block.getSurroundingWhileIfBlock()).connectIntoCavity(this, block);
         }

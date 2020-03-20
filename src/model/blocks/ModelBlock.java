@@ -162,16 +162,16 @@ public abstract class ModelBlock extends ModelElement{
      * @author Oberon Swings
      */
     public void updatePos(){
-        if (this.hasTopSocket()){
+        if (this.hasTopSocket() && ((TopSocket)this).getTopSocket() != null){
             ((TopSocket)this).setTopSocketPos(((BottomPlug)((TopSocket) this).getTopSocket()).getBottomPlugPos());
         }
-        if (this.hasBottomPlug()){
+        if (this.hasBottomPlug() && ((BottomPlug)this).getBottomPlug() != null){
             ((BottomPlug)this).getBottomPlug().updatePos();
         }
-        if (this.hasLeftPlug()){
+        if (this.hasLeftPlug() && ((LeftPlug)this).getLeftPlug() != null){
             ((LeftPlug)this).setLeftPlugPos(((RightSocket)((LeftPlug)this).getLeftPlug()).getRightSocketPos());
         }
-        if (this.hasRightSocket()){
+        if (this.hasRightSocket() && ((RightSocket)this).getRightSocket() != null){
             ((RightSocket)this).getRightSocket().updatePos();
         }
     }

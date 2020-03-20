@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="bdfc6573-f389-4d9a-9e2c-4612aa30b1a8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelBlock.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelWhileIfBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelWhileIfBlock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelBlock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/model/blocks/ModelWhileIfBlockTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/blocks/ModelWhileIfBlockTests.java" afterDir="false" />
     </list>
@@ -82,22 +84,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelWhileIfBlockTests.ExactConnectCavityPlugTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="swop1920" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="model.blocks.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="model.blocks" />
-      <option name="MAIN_CLASS_NAME" value="model.blocks.ModelWhileIfBlockTests" />
-      <option name="METHOD_NAME" value="ExactConnectCavityPlugTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="ModelWhileIfBlockTests.connectCavityPlugConnectsSocket" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
@@ -109,6 +95,22 @@
       <option name="PACKAGE_NAME" value="model.blocks" />
       <option name="MAIN_CLASS_NAME" value="model.blocks.ModelWhileIfBlockTests" />
       <option name="METHOD_NAME" value="connectCavityPlugConnectsSocket" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ModelWhileIfBlockTests.disconnectCavity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="swop1920" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="model.blocks.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="model.blocks" />
+      <option name="MAIN_CLASS_NAME" value="model.blocks.ModelWhileIfBlockTests" />
+      <option name="METHOD_NAME" value="disconnectCavity" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -149,10 +151,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.ModelWhileIfBlockTests" />
+        <item itemvalue="JUnit.ModelWhileIfBlockTests.disconnectCavity" />
         <item itemvalue="JUnit.ModelWhileIfBlockTests.connectCavityPlugConnectsSocket" />
         <item itemvalue="JUnit.ModelWhileIfBlockTests.exactConnectCavitySocketTest" />
         <item itemvalue="JUnit.ModelWhileIfBlockTests.exactConnectCavityPlugTest" />
-        <item itemvalue="JUnit.ModelWhileIfBlockTests.ExactConnectCavityPlugTest" />
       </list>
     </recent_temporary>
   </component>
@@ -206,15 +208,6 @@
     </option>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/test/model/blocks/ModelWhileIfBlockTests.java</url>
-          <line>96</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="this" />

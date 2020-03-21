@@ -431,4 +431,10 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     public boolean hasRightSocket(){
         return true;
     }
+
+    @Override
+    public void setPos(WindowLocation pos){
+        super.setPos(pos);
+        this.updateCavityBlocksLocations();
+    }
 }

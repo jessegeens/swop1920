@@ -355,7 +355,7 @@ public class ModelWhileIfBlockTests {
         leftBlock.connect(whileBlock);
         rightBlock.setBottomPlugPos(whileBlock.getCavitySocketPos());
         rightBlock.connect(whileBlock);
-        assertEquals(new WindowLocation(113,303), leftBlock.getPos());
+        assertEquals(new WindowLocation(113,303), rightBlock.getPos());
     }
 
     @Test
@@ -387,5 +387,7 @@ public class ModelWhileIfBlockTests {
         leftBlock.connect(rightBlock);
         assertEquals(new WindowLocation(113,303),rightBlock.getPos());
     }
+
+
 
 }

@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="bdfc6573-f389-4d9a-9e2c-4612aa30b1a8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelMoveBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelMoveBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelMoveBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelMoveBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelWhileIfBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelWhileIfBlock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/model/blocks/ModelWhileIfBlockTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/blocks/ModelWhileIfBlockTests.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -66,7 +66,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ModelWhileIfBlockTests.disconnectOneCavityManyHeight">
+  <component name="RunManager" selected="JUnit.ModelWhileIfBlockTests">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="swop1920" />
@@ -76,6 +76,21 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ModelWhileIfBlockTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="swop1920" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="model.blocks.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="model.blocks" />
+      <option name="MAIN_CLASS_NAME" value="model.blocks.ModelWhileIfBlockTests" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -96,7 +111,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelWhileIfBlockTests.disconnectOneCavityManySize" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ModelWhileIfBlockTests.testSetPos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
         <pattern>
@@ -106,13 +121,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="model.blocks" />
       <option name="MAIN_CLASS_NAME" value="model.blocks.ModelWhileIfBlockTests" />
-      <option name="METHOD_NAME" value="disconnectOneCavityManySize" />
+      <option name="METHOD_NAME" value="testSetPos" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelWhileIfBlockTests.updateCavityBlocksLocationTopMiddle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ModelWhileIfBlockTests.updateCavityBlocksLocationBottom" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
         <pattern>
@@ -122,23 +137,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="model.blocks" />
       <option name="MAIN_CLASS_NAME" value="model.blocks.ModelWhileIfBlockTests" />
-      <option name="METHOD_NAME" value="updateCavityBlocksLocationTopMiddle" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ModelWhileIfBlockTests.updateCavityBlocksLocationTopTop" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="swop1920" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="model.blocks.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="model.blocks" />
-      <option name="MAIN_CLASS_NAME" value="model.blocks.ModelWhileIfBlockTests" />
-      <option name="METHOD_NAME" value="updateCavityBlocksLocationTopTop" />
+      <option name="METHOD_NAME" value="updateCavityBlocksLocationBottom" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -146,11 +145,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ModelWhileIfBlockTests.disconnectOneCavityManyHeight" />
-        <item itemvalue="JUnit.ModelWhileIfBlockTests.disconnectOneCavityManySize" />
+        <item itemvalue="JUnit.ModelWhileIfBlockTests" />
+        <item itemvalue="JUnit.ModelWhileIfBlockTests.updateCavityBlocksLocationBottom" />
+        <item itemvalue="JUnit.ModelWhileIfBlockTests.testSetPos" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.ModelWhileIfBlockTests.updateCavityBlocksLocationTopTop" />
-        <item itemvalue="JUnit.ModelWhileIfBlockTests.updateCavityBlocksLocationTopMiddle" />
+        <item itemvalue="JUnit.ModelWhileIfBlockTests.disconnectOneCavityManyHeight" />
       </list>
     </recent_temporary>
   </component>
@@ -202,6 +201,17 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/test/model/blocks/ModelWhileIfBlockTests.java</url>
+          <line>357</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/swop1920$ModelProgramWindowTest_programWindowTest.ic" NAME="ModelProgramWindowTest.programWindowTest Coverage Results" MODIFIED="1584049446708" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

@@ -85,8 +85,10 @@ public class ModelProgramArea extends ModelWindow{
     public void updateConnections(){
         for (ModelBlock blk : getPABlocks()){
             for (ModelBlock blk1 : getPABlocks()){
-                if (blk.hasRightSocket() && blk1.hasLeftPlug() && ((RightSocket)blk).getRightSocketPos() == ((LeftPlug)blk1).getLeftPlugPos()) blk.connect(blk1);
-                if (blk.hasTopSocket() && blk1.hasBottomPlug() && ((TopSocket)blk).getTopSocketPos() == ((BottomPlug)blk1).getBottomPlugPos()) blk.connect(blk1);
+                if (blk.hasRightSocket() && blk1.hasLeftPlug() && ((RightSocket)blk).getRightSocketPos().equals(((LeftPlug)blk1).getLeftPlugPos())) blk.connect(blk1);
+                if (blk.hasTopSocket() && blk1.hasBottomPlug() && ((TopSocket)blk).getTopSocketPos().equals(((BottomPlug)blk1).getBottomPlugPos())) blk.connect(blk1);
+                if (blk instanceof ModelWhileIfBlock && ((blk1.hasTopSocket() && ((ModelWhileIfBlock) blk).getCavityPlugPos().equals(((TopSocket)blk1).getTopSocketPos()))
+                || (blk1.hasBottomPlug() && ((ModelWhileIfBlock) blk).getCavitySocketPos().equals(((BottomPlug)blk1).getBottomPlugPos())))) blk.connect(blk1);
             }
         }
     }

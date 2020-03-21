@@ -63,7 +63,6 @@ public abstract class ModelBlock extends ModelElement{
      */
     public abstract void connect(ModelBlock block);
 
-
     /**
      * A method that gives the connection from a block with all its neighbours.
      * @return the list with all the connection of a block.
@@ -158,7 +157,8 @@ public abstract class ModelBlock extends ModelElement{
     }
 
     /**
-     * Updates the position of the block according to their connections to other blocks
+     * Updates the position of the block according to their left and top connections to other blocks
+     * The update goes from top to bottom and from left to right
      * @author Oberon Swings
      */
     public void updatePos(){

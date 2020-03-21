@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bdfc6573-f389-4d9a-9e2c-4612aa30b1a8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/utilities/Condition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/blocks/UIBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/blocks/UIBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ModelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ModelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ModelProgramArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ModelProgramArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelBlock.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

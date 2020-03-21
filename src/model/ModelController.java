@@ -57,7 +57,7 @@ public class ModelController{
                         System.out.println("executing on keypress, is already running");
                         getGrid().setGridState(programRunner.execute(getGrid().getGridState()));
                     } else {
-                        programRunner.initialise(getPArea().getStartBlock(), getPArea().getFinishBlock());
+                        programRunner.initialise(getPArea().getStartBlocks().get(0), getPArea().getFinishBlocks().get(0));
                         getGrid().setGridState(programRunner.execute(getGrid().getGridState()));
                     }
                 } 

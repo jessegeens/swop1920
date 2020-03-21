@@ -20,71 +20,16 @@ public class ModelProgramArea extends ModelWindow{
     }
 
     /**
-     * This functionupdates the location of blocks when a while or if block is resized.
+     * This functionupdates the location of blocks. Can be usefull when a while if block has to resize, but should be used on every update.
      * @author Oberon Swings
      */
     public void updateLocationBlocks(){
-        ArrayList<ModelBlock> thisBlocks = this.getPABlocks();
-        ArrayList<ModelBlock> updated = new ArrayList<ModelBlock>();
-        while (!(thisBlocks.isEmpty())){
-            ModelBlock blk = thisBlocks.get(0);
-            ArrayList<ModelBlock> connectedBlocks = this.getConnectedBlocks(blk);
-            thisBlocks.removeAll(connectedBlocks);
-            updated.add(blk);
-            while(!(connectedBlocks.isEmpty())){
-                updateLocationBlocksHelp(connectedBlocks, updated);
-            }
+        for (ModelBlock blk : this.getStartBlocks()){
+            blk.updatePos();
         }
     }
 
-    /**
-     * Help function to update the block location when a while or if block is resized.
-     * @param connectedBlocks
-     * @param updated
-     * @author Oberon Swings
-     */
-    private void updateLocationBlocksHelp(ArrayList<ModelBlock> connectedBlocks, ArrayList<ModelBlock> updated){
-        for(ModelBlock blk : connectedBlocks) {
-            for (ModelBlock upd : updated) {
-                switch (blk.getBlockType().getType()) {
-                    case Blocktype.IF:
-                    case Blocktype.WHILE:
-                        if (((ModelWhileIfBlock) blk).getTopSocket() == upd) {
-                            blk.setPos(upd.getPos().add(new WindowLocation(0, upd.getHeight())));
-                        } else if (((ModelWhileIfBlock) blk).getBottomPlug() == upd) {
-                            blk.setPos(upd.getPos().add(new WindowLocation(0, -blk.getHeight())));
-                        } else if (((ModelWhileIfBlock) blk).getRightSocket() == upd) {
-                            blk.setPos(upd.getPos().add(new WindowLocation(-blk.getWidth(), 0)));
-                        }
-                        break;
-                    case Blocktype.MOVEFORWARD:
-                    case Blocktype.TURNLEFT:
-                    case Blocktype.TURNRIGHT:
-                        if (((ModelMoveBlock) blk).getTopSocket() == upd) {
-                            blk.setPos(upd.getPos().add(new WindowLocation(0, upd.getHeight())));
-                        } else if (((ModelMoveBlock) blk).getBottomPlug() == upd) {
-                            blk.setPos(upd.getPos().add(new WindowLocation(0, -blk.getHeight())));
-                        }
-                        break;
-                    case Blocktype.WALLINFRONT:
-                        if (((ModelWallInFrontBlock) blk).getLeftPlug() == upd) {
-                            blk.setPos(upd.getPos().add(new WindowLocation(upd.getWidth(), 0)));
-                        }
-                        break;
-                    case Blocktype.NOT:
-                        if (((ModelNotBlock) blk).getLeftPlug() == upd) {
-                            blk.setPos(upd.getPos().add(new WindowLocation(upd.getWidth(), 0)));
-                        } else if (((ModelNotBlock) blk).getRightSocket() == upd) {
-                            blk.setPos(upd.getPos().add(new WindowLocation(-blk.getWidth(), 0)));
-                        }
-                        break;
-                }
-                updated.add(blk);
-                connectedBlocks.removeAll(updated);
-                return;
-            }
-        }
-    }
+
 
     /**
      * 
@@ -111,18 +56,19 @@ public class ModelProgramArea extends ModelWindow{
      */
     public Boolean allBlocksConnected(){
         if (this.getPABlocks().isEmpty()) return true;
+        if (this.getStartBlocks().size() > 1) return false;
         ArrayList<ModelBlock> connectedB = getConnectedBlocks(this.getPABlocks().get(0));
         for (ModelBlock blk : getPABlocks()){
             if (!(connectedB.contains(blk))) return false;
-            if (!(blk.equals(this.getFinishBlock())||(blk.equals(this.getStartBlock())))){
+            if (!(blk.equals(this.getFinishBlocks().get(0))||(blk.equals(this.getStartBlocks().get(0))))){
                 return blk.isFullyConnected();
             }
-            else if(blk.equals(this.getFinishBlock())) {
+            else if(blk.equals(this.getFinishBlocks().get(0))) {
                 if(blk.hasTopSocket() && ((TopSocket)blk).getTopSocket() == null) return false;
                 if(blk.hasRightSocket() && ((RightSocket)blk).getRightSocket() == null) return false;
                 if(blk.hasLeftPlug() && ((LeftPlug)blk).getLeftPlug() == null) return false;
             }
-            else if(blk.equals(this.getStartBlock())){
+            else if(blk.equals(this.getStartBlocks().get(0))){
                 if(blk.hasBottomPlug() && ((BottomPlug)blk).getBottomPlug() == null) return false;
                 if(blk.hasRightSocket() && ((RightSocket)blk).getRightSocket() == null) return false;
                 if(blk.hasLeftPlug() && ((LeftPlug)blk).getLeftPlug() == null) return false;
@@ -132,27 +78,43 @@ public class ModelProgramArea extends ModelWindow{
     }
 
     /**
-     * 
-     * @return the starting block of the program if all blocks are connected.
+     * Checks if a pair of blocks has corresponding TopSocketPos and BottomPlugPos or RightSocketPos and LeftPlugPos
+     * If so they connect, otherwise they don't
      * @author Oberon Swings
      */
-    public ModelBlock getStartBlock(){
-        for(ModelBlock blk : getPABlocks()){
-            if(blk.hasTopSocket() && ((TopSocket)blk).getTopSocket() == null) return blk;
+    public void updateConnections(){
+        for (ModelBlock blk : getPABlocks()){
+            for (ModelBlock blk1 : getPABlocks()){
+                if (blk.hasRightSocket() && blk1.hasLeftPlug() && ((RightSocket)blk).getRightSocketPos() == ((LeftPlug)blk1).getLeftPlugPos()) blk.connect(blk1);
+                if (blk.hasTopSocket() && blk1.hasBottomPlug() && ((TopSocket)blk).getTopSocketPos() == ((BottomPlug)blk1).getBottomPlugPos()) blk.connect(blk1);
+            }
         }
-        return null;
     }
 
     /**
      * 
-     * @return the finishing block of the program if all blocks are connected.
+     * @return the starting blocks of the program, should be only one to be a valid start state
      * @author Oberon Swings
      */
-    public ModelBlock getFinishBlock(){
+    public ArrayList<ModelBlock> getStartBlocks(){
+        ArrayList<ModelBlock> startBlocks = new ArrayList<>();
         for(ModelBlock blk : getPABlocks()){
-            if(blk.hasBottomPlug() && ((BottomPlug)blk).getBottomPlug() == null) return blk;
+            if(blk.hasTopSocket() && ((TopSocket)blk).getTopSocket() == null) startBlocks.add(blk);
         }
-        return null;
+        return startBlocks;
+    }
+
+    /**
+     * 
+     * @return the finishing blocks of the program, should be only one to be a valid start state
+     * @author Oberon Swings
+     */
+    public ArrayList<ModelBlock> getFinishBlocks(){
+        ArrayList<ModelBlock> finishBlocks = new ArrayList<>();
+        for(ModelBlock blk : getPABlocks()){
+            if(blk.hasBottomPlug() && ((BottomPlug)blk).getBottomPlug() == null) finishBlocks.add(blk);
+        }
+        return finishBlocks;
     }
 
     /**
@@ -276,6 +238,8 @@ public class ModelProgramArea extends ModelWindow{
             System.out.println(closest.getBlockType().getType());
             System.out.println("list length");
             activeB.connect(closest);
+            this.updateConnections();
+            this.updateLocationBlocks();
         } 
         else{
             System.out.println("CLOSEST IS NULL");

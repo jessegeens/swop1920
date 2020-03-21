@@ -160,7 +160,7 @@ public class ModelProgramArea extends ModelWindow{
     }
 
     /**
-     * This function finds the block that is closest to the given block
+     * This function finds the block of which a matching socket/plug is closest to the given block's plug/socket
      * 
      * TODO: remove debug print statements
      * @param block The block for which the closest neighbour needs to be found
@@ -172,32 +172,33 @@ public class ModelProgramArea extends ModelWindow{
         System.out.println(this.getPABlocks().size());
 
         ModelBlock closest = null;
+        int d = ModelBlock.STD_HEIGHT;
 
         if(block == null){
             return null;
         }
-
         for(int i = 0; i < this.getPABlocks().size(); i++){
             ModelBlock current = this.getPABlocks().get(i);
             System.out.println("INDEX IN LIST");
             System.out.println(i);
             System.out.println("CURRENT BLOCK ID");
             System.out.println(this.getPABlocks().get(i).getBlockType().getType());
-            
-            if(closest == null){
-                if(current.getPos().getDistance(block.getPos()) > 0 ){
-                    if(current != block){
-                    closest = current;
-                    }
-                }
-            }
-            else if(current.getPos().getDistance(block.getPos()) < closest.getPos().getDistance(block.getPos()) ){
-                if(current != block){
-                    closest = current;
-                    System.out.println("CLOSEST CANDIDATE FOUND NO ID ISSUE");
 
-                }
-                System.out.println("CLOSEST CANDIDATE FOUND");
+            if (block.hasTopSocket() && current.hasBottomPlug() && ((TopSocket)block).getTopSocketPos().getDistance(((BottomPlug)current).getBottomPlugPos()) < d){
+                closest = current;
+                d = ((TopSocket)block).getTopSocketPos().getDistance(((BottomPlug)current).getBottomPlugPos());
+            }
+            if (block.hasBottomPlug() && current.hasTopSocket() && ((BottomPlug)block).getBottomPlugPos().getDistance(((TopSocket)current).getTopSocketPos()) < d){
+                closest = current;
+                d = ((BottomPlug)block).getBottomPlugPos().getDistance(((TopSocket)current).getTopSocketPos());
+            }
+            if (block.hasRightSocket() && current.hasLeftPlug() && ((RightSocket)block).getRightSocketPos().getDistance(((LeftPlug)current).getLeftPlugPos()) < d){
+                closest = current;
+                d = ((RightSocket)block).getRightSocketPos().getDistance(((LeftPlug)current).getLeftPlugPos());
+            }
+            if (block.hasLeftPlug() && current.hasRightSocket() && ((LeftPlug)block).getLeftPlugPos().getDistance(((RightSocket)current).getRightSocketPos()) < d){
+                closest = current;
+                d = ((LeftPlug)block).getLeftPlugPos().getDistance(((RightSocket)current).getRightSocketPos());
             }
         }
         return closest;             

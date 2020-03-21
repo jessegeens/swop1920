@@ -69,7 +69,7 @@ public class ModelTests {
         pw.addBlock(block2);
         pw.addBlock(block3);
         assertFalse(pw.allBlocksConnected());
-        assertEquals(130, pw.getFinishBlock().getPos().getY());
+        assertEquals(130, pw.getFinishBlocks().get(0).getPos().getY());
         pw.removeBlock(block3);
         assertEquals(2, pw.getPABlocks().size());
     }

@@ -174,6 +174,7 @@ public abstract class ModelBlock extends ModelElement{
         if (this.hasRightSocket() && ((RightSocket)this).getRightSocket() != null){
             ((RightSocket)this).getRightSocket().updatePos();
         }
+        if (this instanceof ModelWhileIfBlock) ((ModelWhileIfBlock) this).updateCavityBlocksLocations();
     }
 
     /**

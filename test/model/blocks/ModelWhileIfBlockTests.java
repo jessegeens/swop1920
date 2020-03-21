@@ -299,6 +299,22 @@ public class ModelWhileIfBlockTests {
     }
 
     @Test
+    public void disconnectMiddleCavityBottomPosition(){
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), new Blocktype(Blocktype.TURNLEFT));
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new WindowLocation(400, 700), new Blocktype(Blocktype.TURNRIGHT));
+        forwardBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        forwardBlock.connect(whileBlock);
+        leftBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        leftBlock.connect(whileBlock);
+        rightBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        rightBlock.connect(whileBlock);
+        leftBlock.disconnect();
+        assertEquals(new WindowLocation(113,223), forwardBlock.getPos());
+    }
+
+    @Test
     public void updateCavityBlocksLocationTopBottom(){
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));

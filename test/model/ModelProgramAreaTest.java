@@ -67,7 +67,15 @@ public class ModelProgramAreaTest {
     }
 
     @Test
-    public void allBlocksConnectedPositive(){
+    public void allBlocksConnectedSingle(){
+        ModelProgramArea area = new ModelProgramArea(1000,1000);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));
+        area.addBlock(forwardBlock);
+        assertTrue(area.allBlocksConnected());
+    }
+
+    @Test
+    public void allBlocksConnectedMultiplePositive(){
         ModelProgramArea area = new ModelProgramArea(1000,1000);
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(100,100), new Blocktype(Blocktype.MOVEFORWARD));
         ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), new Blocktype(Blocktype.TURNLEFT));
@@ -83,7 +91,7 @@ public class ModelProgramAreaTest {
     }
 
     @Test
-    public void allBlocksConnectedNegative(){
+    public void allBlocksConnectedMultipleNegative(){
         ModelProgramArea area = new ModelProgramArea(1000,1000);
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(100,100), new Blocktype(Blocktype.MOVEFORWARD));
         ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), new Blocktype(Blocktype.TURNLEFT));
@@ -115,6 +123,77 @@ public class ModelProgramAreaTest {
         wallBlock.setLeftPlugPos(whileBlock.getRightSocketPos());
         area.updateConnections();
         assertTrue(area.allBlocksConnected());
+    }
+
+    @Test
+    public void updateConnectionsInfiniteLoop(){
+        ModelProgramArea area = new ModelProgramArea(1000,1000);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        area.addBlock(whileBlock);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));
+        area.addBlock(forwardBlock);
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), new Blocktype(Blocktype.TURNLEFT));
+        area.addBlock(leftBlock);
+        forwardBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        forwardBlock.connect(whileBlock);
+        leftBlock.setTopSocketPos(forwardBlock.getBottomPlugPos());
+        leftBlock.connect(forwardBlock);
+        area.updateConnections();
+        assertTrue(true);
+    }
+
+    @Test
+    public void getStartBlocks(){
+        ModelProgramArea area = new ModelProgramArea(1000,1000);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), new Blocktype(Blocktype.TURNLEFT));
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new WindowLocation(400, 700), new Blocktype(Blocktype.TURNRIGHT));
+        ModelWallInFrontBlock wallBlock = new ModelWallInFrontBlock(new WindowLocation(400, 850), new Blocktype(Blocktype.WALLINFRONT));
+        area.addBlock(forwardBlock);
+        area.addBlock(leftBlock);
+        area.addBlock(rightBlock);
+        area.addBlock(wallBlock);
+        forwardBlock.setBottomPlugPos(leftBlock.getTopSocketPos());
+        forwardBlock.connect(leftBlock);
+        assertEquals(2, area.getStartBlocks().size());
+    }
+
+    @Test
+    public void getFinishBlocks(){
+        ModelProgramArea area = new ModelProgramArea(1000,1000);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), new Blocktype(Blocktype.TURNLEFT));
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new WindowLocation(400, 700), new Blocktype(Blocktype.TURNRIGHT));
+        ModelWallInFrontBlock wallBlock = new ModelWallInFrontBlock(new WindowLocation(400, 850), new Blocktype(Blocktype.WALLINFRONT));
+        area.addBlock(forwardBlock);
+        area.addBlock(leftBlock);
+        area.addBlock(rightBlock);
+        area.addBlock(wallBlock);
+        forwardBlock.setBottomPlugPos(leftBlock.getTopSocketPos());
+        forwardBlock.connect(leftBlock);
+        assertEquals(2, area.getFinishBlocks().size());
+    }
+
+    @Test
+    public void findClosestTopSocket(){
+        ModelProgramArea area = new ModelProgramArea(1000,1000);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), new Blocktype(Blocktype.TURNLEFT));
+        area.addBlock(forwardBlock);
+        area.addBlock(leftBlock);
+        forwardBlock.setBottomPlugPos(leftBlock.getTopSocketPos());
+        assertEquals(forwardBlock, area.findClosestBlock(leftBlock));
+    }
+
+    @Test
+    public void findClosestBottomPlug(){
+        ModelProgramArea area = new ModelProgramArea(1000,1000);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), new Blocktype(Blocktype.TURNLEFT));
+        area.addBlock(forwardBlock);
+        area.addBlock(leftBlock);
+        forwardBlock.setBottomPlugPos(leftBlock.getTopSocketPos());
+        assertEquals(leftBlock, area.findClosestBlock(forwardBlock));
     }
 
 

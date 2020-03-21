@@ -116,7 +116,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             ModelBlock cavityPrevious = this.getCavitySocket(); //The previous block that was connected to the cavity
             this.setCavitySocket(block);
             ((BottomPlug)block).setBottomPlug(this);
-            if (block.hasTopSocket()){
+            if (block.hasTopSocket() && !block.equals(cavityPrevious)){
                 ((TopSocket)block).setTopSocket(cavityPrevious); //The previous block in the cavitysocket needs to connect with the modelBlock
                 if (this.getCavityPlug() == this){
                     this.setCavityPlug(block);
@@ -130,7 +130,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             ModelBlock cavityNext = this.getCavityPlug();
             this.setCavityPlug(block);
             ((TopSocket)block).setTopSocket(this);
-            if (block.hasBottomPlug()){
+            if (block.hasBottomPlug() && !block.equals(cavityNext)){
                 ((BottomPlug)block).setBottomPlug(cavityNext);
                 if (this.getCavitySocket() == this){
                     this.setCavitySocket(block);
@@ -172,9 +172,10 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             ModelBlock next = ((BottomPlug) closest).getBottomPlug();
             ((TopSocket) extra).setTopSocket(closest);
             ((BottomPlug) closest).setBottomPlug(extra);
-            if (extra.hasBottomPlug()){
+            if (extra.hasBottomPlug() && !extra.equals(next)){
                 ((BottomPlug)extra).setBottomPlug(next);
-                ((TopSocket)next).setTopSocket(extra);
+                if (!(next.equals(this))) ((TopSocket)next).setTopSocket(extra);
+                else this.setCavitySocket(extra);
             }
             updateCavityBlocksLocations();
         }
@@ -182,9 +183,10 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             ModelBlock next = ((TopSocket) closest).getTopSocket();
             ((BottomPlug) extra).setBottomPlug(closest);
             ((TopSocket) closest).setTopSocket(extra);
-            if (extra.hasTopSocket()){
+            if (extra.hasTopSocket() && !extra.equals(next)){
                 ((TopSocket)extra).setTopSocket(next);
-                ((BottomPlug)next).setBottomPlug(extra);
+                if (!(next.equals(this))) ((BottomPlug)next).setBottomPlug(extra);
+                else this.setCavityPlug(extra);
             }
             updateCavityBlocksLocations();
         }
@@ -278,7 +280,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         //System.out.println("type1");
         //System.out.println(blk.getBlockType().getType());
         
-        while(!blk.equals(this)){
+        while(!(blk.equals(this))){
             cav.add(blk);
             if(blk.hasBottomPlug()){
                 blk = ((BottomPlug)blk).getBottomPlug();

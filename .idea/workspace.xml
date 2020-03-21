@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="bdfc6573-f389-4d9a-9e2c-4612aa30b1a8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelBlock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelWhileIfBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelWhileIfBlock.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/ModelProgramArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ModelProgramArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/model/ModelProgramAreaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/ModelProgramAreaTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -77,7 +77,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ModelProgramAreaTest.updateConnections">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.Main" />
+      <module name="swop1920" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ModelProgramAreaTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
@@ -89,38 +102,6 @@
       <option name="PACKAGE_NAME" value="model" />
       <option name="MAIN_CLASS_NAME" value="model.ModelProgramAreaTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ModelProgramAreaTest.addBlock" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="swop1920" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="model" />
-      <option name="MAIN_CLASS_NAME" value="model.ModelProgramAreaTest" />
-      <option name="METHOD_NAME" value="addBlock" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ModelProgramAreaTest.getConnectedBlocks" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="swop1920" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="model" />
-      <option name="MAIN_CLASS_NAME" value="model.ModelProgramAreaTest" />
-      <option name="METHOD_NAME" value="getConnectedBlocks" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -141,7 +122,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelProgramAreaTest.updateLocationBlocks" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ModelProgramAreaTest.updateConnectionsCavity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
         <pattern>
@@ -151,7 +132,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="model" />
       <option name="MAIN_CLASS_NAME" value="model.ModelProgramAreaTest" />
-      <option name="METHOD_NAME" value="updateLocationBlocks" />
+      <option name="METHOD_NAME" value="updateConnectionsCavity" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ModelProgramAreaTest.updateConnectionsInfiniteLoop" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="swop1920" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="model" />
+      <option name="MAIN_CLASS_NAME" value="model.ModelProgramAreaTest" />
+      <option name="METHOD_NAME" value="updateConnectionsInfiniteLoop" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -159,11 +156,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ModelProgramAreaTest.updateConnections" />
-        <item itemvalue="JUnit.ModelProgramAreaTest.getConnectedBlocks" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.ModelProgramAreaTest" />
-        <item itemvalue="JUnit.ModelProgramAreaTest.updateLocationBlocks" />
-        <item itemvalue="JUnit.ModelProgramAreaTest.addBlock" />
+        <item itemvalue="JUnit.ModelProgramAreaTest.updateConnectionsInfiniteLoop" />
+        <item itemvalue="JUnit.ModelProgramAreaTest.updateConnectionsCavity" />
+        <item itemvalue="JUnit.ModelProgramAreaTest.updateConnections" />
       </list>
     </recent_temporary>
   </component>
@@ -226,14 +223,6 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="JUnit">
-        <watch expression="((RightSocket)blk).getRightSocketPos()" language="JAVA" />
-        <watch expression="((LeftPlug)blk1).getLeftPlugPos()" language="JAVA" />
-        <watch expression="((TopSocket)blk).getTopSocketPos()" language="JAVA" />
-        <watch expression="((BottomPlug)blk1).getBottomPlugPos()" language="JAVA" />
-      </configuration>
-    </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/swop1920$ModelProgramWindowTest_programWindowTest.ic" NAME="ModelProgramWindowTest.programWindowTest Coverage Results" MODIFIED="1584049446708" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

@@ -63,6 +63,10 @@ public class ModelProgramArea extends ModelWindow{
             if (!(blk.equals(this.getFinishBlocks().get(0))||(blk.equals(this.getStartBlocks().get(0))))){
                 return blk.isFullyConnected();
             }
+            else if (blk.equals(this.getStartBlocks().get(0)) && blk.equals(this.getFinishBlocks().get(0))){
+                if(blk.hasRightSocket() && ((RightSocket)blk).getRightSocket() == null) return false;
+                if(blk.hasLeftPlug() && ((LeftPlug)blk).getLeftPlug() == null) return false;
+            }
             else if(blk.equals(this.getFinishBlocks().get(0))) {
                 if(blk.hasTopSocket() && ((TopSocket)blk).getTopSocket() == null) return false;
                 if(blk.hasRightSocket() && ((RightSocket)blk).getRightSocket() == null) return false;
@@ -84,13 +88,32 @@ public class ModelProgramArea extends ModelWindow{
      */
     public void updateConnections(){
         for (ModelBlock blk : getPABlocks()){
+            System.out.println("blk");
             for (ModelBlock blk1 : getPABlocks()){
-                if (blk.hasRightSocket() && blk1.hasLeftPlug() && ((RightSocket)blk).getRightSocketPos().equals(((LeftPlug)blk1).getLeftPlugPos())) blk.connect(blk1);
-                if (blk.hasTopSocket() && blk1.hasBottomPlug() && ((TopSocket)blk).getTopSocketPos().equals(((BottomPlug)blk1).getBottomPlugPos())) blk.connect(blk1);
-                if (blk instanceof ModelWhileIfBlock && ((blk1.hasTopSocket() && ((ModelWhileIfBlock) blk).getCavityPlugPos().equals(((TopSocket)blk1).getTopSocketPos()))
-                || (blk1.hasBottomPlug() && ((ModelWhileIfBlock) blk).getCavitySocketPos().equals(((BottomPlug)blk1).getBottomPlugPos())))) blk.connect(blk1);
+                if (!(blk.equals(blk1))){
+                    System.out.println("blk1");
+                    if (blk.hasRightSocket() && blk1.hasLeftPlug() && ((RightSocket)blk).getRightSocketPos().equals(((LeftPlug)blk1).getLeftPlugPos())){
+                        blk.connect(blk1);
+                        System.out.println("if1");
+                    }
+                    System.out.println("else1");
+                    if (blk.hasTopSocket() && blk1.hasBottomPlug() && ((TopSocket)blk).getTopSocketPos().equals(((BottomPlug)blk1).getBottomPlugPos())){
+                        blk.connect(blk1);
+                        System.out.println("if2");
+                    }
+                    System.out.println("else2");
+                    if (blk instanceof ModelWhileIfBlock && ((blk1.hasTopSocket() && ((ModelWhileIfBlock) blk).getCavityPlugPos().equals(((TopSocket)blk1).getTopSocketPos()))
+                            || (blk1.hasBottomPlug() && ((ModelWhileIfBlock) blk).getCavitySocketPos().equals(((BottomPlug)blk1).getBottomPlugPos())))){
+                        blk.connect(blk1);
+                        System.out.println("if3");
+                    }
+                    System.out.println("end blk1");
+                }
+                else System.out.println("same");
             }
+            System.out.println("end blk");
         }
+        System.out.println("end for");
     }
 
     /**
@@ -141,6 +164,7 @@ public class ModelProgramArea extends ModelWindow{
      * @param toBeRemoved block that should be removed
      */
     public void removeBlock(ModelBlock toBeRemoved){
+        toBeRemoved.disconnect();
         this.blocks.remove(toBeRemoved);
     }
 
@@ -239,10 +263,14 @@ public class ModelProgramArea extends ModelWindow{
         if (closest != null){
             System.out.println("CLOSEST IS NOT NULL");
             System.out.println(closest.getBlockType().getType());
-            System.out.println("list length");
+            System.out.println("list length2");
+            System.out.println(this.getPABlocks().size());
             activeB.connect(closest);
+            System.out.println("connection made");
             this.updateConnections();
+            System.out.println("connections updated");
             this.updateLocationBlocks();
+            System.out.println("locations updated");
         } 
         else{
             System.out.println("CLOSEST IS NULL");

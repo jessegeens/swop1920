@@ -63,4 +63,14 @@ public final class Direction{
                 return "Invalid direction";
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object o){
+        if (!(o instanceof Direction)) return false;
+        if (((Direction) o).getDirection() == this.getDirection()) return true;
+        else return false;
+    }
 }

@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import utilities.*;
 
+import java.awt.*;
+
 public class ModelWhileIfBlockTests {
 
     @Test
@@ -123,6 +125,55 @@ public class ModelWhileIfBlockTests {
     }
 
     @Test
+    public void connectMultipleTopCavity(){
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), new Blocktype(Blocktype.TURNLEFT));
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new WindowLocation(400, 700), new Blocktype(Blocktype.TURNRIGHT));
+        forwardBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        forwardBlock.connect(whileBlock);
+        leftBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        leftBlock.connect(whileBlock);
+        rightBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        rightBlock.connect(whileBlock);
+        assertEquals(3,whileBlock.getCavityBlocks().size()); /*The order may seem strange but that is because
+        the second block is actually connecting on the bottom of the if/while cavity because it's bottomPlug
+        is as close to the cavitySocket as it's topSocket is to the cavityPlug. We can't and we actually don't want
+        to change this, this purely has to do with the order of the if statements in the cavityConnect function.
+        */
+    }
+
+    @Test
+    public void connectMultipleBottomCavity(){
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), new Blocktype(Blocktype.TURNLEFT));
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new WindowLocation(400, 700), new Blocktype(Blocktype.TURNRIGHT));
+        forwardBlock.setBottomPlugPos(whileBlock.getCavitySocketPos());
+        forwardBlock.connect(whileBlock);
+        leftBlock.setBottomPlugPos(whileBlock.getCavitySocketPos());
+        leftBlock.connect(whileBlock);
+        rightBlock.setBottomPlugPos(whileBlock.getCavitySocketPos());
+        rightBlock.connect(whileBlock);
+        assertEquals(3,whileBlock.getCavityBlocks().size());
+    }
+
+    @Test
+    public void connectIntoCavity(){
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), new Blocktype(Blocktype.TURNLEFT));
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new WindowLocation(400, 700), new Blocktype(Blocktype.TURNRIGHT));
+        forwardBlock.setBottomPlugPos(whileBlock.getCavitySocketPos());
+        forwardBlock.connect(whileBlock);
+        rightBlock.setBottomPlugPos(whileBlock.getCavitySocketPos());
+        rightBlock.connect(whileBlock);
+        leftBlock.setBottomPlugPos(rightBlock.getTopSocketPos());
+        leftBlock.connect(rightBlock);
+        assertEquals(3,whileBlock.getCavityBlocks().size());
+    }
+
+    @Test
     public void setBottomPlugPosConnects(){
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));
@@ -215,7 +266,126 @@ public class ModelWhileIfBlockTests {
         assertTrue(whileBlock.getCavityBlocks().isEmpty());
     }
 
-    //TODO test disconnect one block in a cavity of multiple blocks
-    //TODO test getCavityBlocks
+    @Test
+    public void disconnectOneCavityManySize(){
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), new Blocktype(Blocktype.TURNLEFT));
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new WindowLocation(400, 700), new Blocktype(Blocktype.TURNRIGHT));
+        forwardBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        forwardBlock.connect(whileBlock);
+        leftBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        leftBlock.connect(whileBlock);
+        rightBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        rightBlock.connect(whileBlock);
+        leftBlock.disconnect();
+        assertEquals(2,whileBlock.getCavityBlocks().size());
+    }
+
+    @Test
+    public void disconnectOneCavityManyHeight(){
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), new Blocktype(Blocktype.TURNLEFT));
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new WindowLocation(400, 700), new Blocktype(Blocktype.TURNRIGHT));
+        forwardBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        forwardBlock.connect(whileBlock);
+        leftBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        leftBlock.connect(whileBlock);
+        rightBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        rightBlock.connect(whileBlock);
+        leftBlock.disconnect();
+        assertEquals(3*80,whileBlock.getHeight());
+    }
+
+    @Test
+    public void updateCavityBlocksLocationTopBottom(){
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), new Blocktype(Blocktype.TURNLEFT));
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new WindowLocation(400, 700), new Blocktype(Blocktype.TURNRIGHT));
+        forwardBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        forwardBlock.connect(whileBlock);
+        leftBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        leftBlock.connect(whileBlock);
+        rightBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        rightBlock.connect(whileBlock);
+        assertEquals(new WindowLocation(113,303), leftBlock.getPos());
+    }
+
+    @Test
+    public void updateCavityBlocksLocationTopMiddle(){
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), new Blocktype(Blocktype.TURNLEFT));
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new WindowLocation(400, 700), new Blocktype(Blocktype.TURNRIGHT));
+        forwardBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        forwardBlock.connect(whileBlock);
+        leftBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        leftBlock.connect(whileBlock);
+        rightBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        rightBlock.connect(whileBlock);
+        assertEquals(new WindowLocation(113,223), forwardBlock.getPos());
+    }
+
+    @Test
+    public void updateCavityBlocksLocationTopTop(){
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), new Blocktype(Blocktype.TURNLEFT));
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new WindowLocation(400, 700), new Blocktype(Blocktype.TURNRIGHT));
+        forwardBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        forwardBlock.connect(whileBlock);
+        leftBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        leftBlock.connect(whileBlock);
+        rightBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        rightBlock.connect(whileBlock);
+        assertEquals(new WindowLocation(113,143), rightBlock.getPos());
+    }
+
+    @Test
+    public void updateCavityBlocksLocationBottom(){
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), new Blocktype(Blocktype.TURNLEFT));
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new WindowLocation(400, 700), new Blocktype(Blocktype.TURNRIGHT));
+        forwardBlock.setBottomPlugPos(whileBlock.getCavitySocketPos());
+        forwardBlock.connect(whileBlock);
+        leftBlock.setBottomPlugPos(whileBlock.getCavitySocketPos());
+        leftBlock.connect(whileBlock);
+        rightBlock.setBottomPlugPos(whileBlock.getCavitySocketPos());
+        rightBlock.connect(whileBlock);
+        assertEquals(new WindowLocation(113,303), leftBlock.getPos());
+    }
+
+    @Test
+    public void updateCavityBlocksLocationIntoMiddle(){
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), new Blocktype(Blocktype.TURNLEFT));
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new WindowLocation(400, 700), new Blocktype(Blocktype.TURNRIGHT));
+        forwardBlock.setBottomPlugPos(whileBlock.getCavitySocketPos());
+        forwardBlock.connect(whileBlock);
+        rightBlock.setBottomPlugPos(whileBlock.getCavitySocketPos());
+        rightBlock.connect(whileBlock);
+        leftBlock.setBottomPlugPos(rightBlock.getTopSocketPos());
+        leftBlock.connect(rightBlock);
+        assertEquals(new WindowLocation(113,223), leftBlock.getPos());
+    }
+
+    @Test
+    public void updateCavityBlocksLocationIntoBottom(){
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100),new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), new Blocktype(Blocktype.TURNLEFT));
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new WindowLocation(400, 700), new Blocktype(Blocktype.TURNRIGHT));
+        forwardBlock.setBottomPlugPos(whileBlock.getCavitySocketPos());
+        forwardBlock.connect(whileBlock);
+        rightBlock.setBottomPlugPos(whileBlock.getCavitySocketPos());
+        rightBlock.connect(whileBlock);
+        leftBlock.setBottomPlugPos(rightBlock.getTopSocketPos());
+        leftBlock.connect(rightBlock);
+        assertEquals(new WindowLocation(113,303),rightBlock.getPos());
+    }
 
 }

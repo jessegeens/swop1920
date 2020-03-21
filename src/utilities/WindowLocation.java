@@ -59,4 +59,14 @@ public final class WindowLocation {
     public int getY() {
         return this.y;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object o){
+        if (!(o instanceof WindowLocation)) return false;
+        if (((WindowLocation) o).getX() == this.getX() && ((WindowLocation) o).getY() == this.getY()) return true;
+        else return false;
+    }
 }

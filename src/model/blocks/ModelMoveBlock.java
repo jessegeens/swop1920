@@ -29,7 +29,7 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
             if (this.isInCavity()){
 
                 //if this block is in the cavity of the while if block it should be removed from that.
-                ((ModelWhileIfBlock)this.getTopSocket()).disconnectCavity(this);
+                ((ModelWhileIfBlock)this.getSurroundingWhileIfBlock()).disconnectCavity(this);
             }
             else {
                 ((BottomPlug)this.getTopSocket()).setBottomPlug(null);
@@ -39,7 +39,7 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
         if (this.getBottomPlug() != null){
             if (this.isInCavity()){
                 //if this block is in the cavity of the while if block it should be removed from that
-                ((ModelWhileIfBlock)this.getBottomPlug()).disconnectCavity(this);
+                ((ModelWhileIfBlock)this.getSurroundingWhileIfBlock()).disconnectCavity(this);
             }
             else{
                 ((TopSocket)this.getBottomPlug()).setTopSocket(null);

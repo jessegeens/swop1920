@@ -60,4 +60,14 @@ public final class GridLocation{
     public int getY() {
         return this.y;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object o){
+        if (!(o instanceof GridLocation)) return false;
+        if (((GridLocation) o).getX() == this.getX() && ((GridLocation) o).getY() == this.getY()) return true;
+        else return false;
+    }
 }

@@ -54,4 +54,7 @@ public class ModelBlockTests {
         assertNull(mnb.getRightSocket());
         assertNull(mwb.getLeftPlug());
     }
+
+    //TODO test isInCavity()
+    //TODO test getSurroundingIfWhileBlock()
 }

@@ -6,7 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="bdfc6573-f389-4d9a-9e2c-4612aa30b1a8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/ModelProgramArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ModelProgramArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelWhileIfBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/blocks/ModelWhileIfBlock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utilities/Blocktype.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/Blocktype.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utilities/Direction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/Direction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utilities/GridLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/GridLocation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utilities/WindowLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/WindowLocation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/blocks/ModelBlockTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/blocks/ModelBlockTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/blocks/ModelWhileIfBlockTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/blocks/ModelWhileIfBlockTests.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +71,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.ModelWhileIfBlockTests.updateCavityBlocksLocationIntoBottom">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="swop1920" />
@@ -78,7 +85,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelWhileIfBlockTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ModelWhileIfBlockTests.connectIntoCavity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
         <pattern>
@@ -88,28 +95,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="model.blocks" />
       <option name="MAIN_CLASS_NAME" value="model.blocks.ModelWhileIfBlockTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ModelWhileIfBlockTests.connectCavityPlugConnectsSocket" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="swop1920" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="model.blocks.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="model.blocks" />
-      <option name="MAIN_CLASS_NAME" value="model.blocks.ModelWhileIfBlockTests" />
-      <option name="METHOD_NAME" value="connectCavityPlugConnectsSocket" />
+      <option name="METHOD_NAME" value="connectIntoCavity" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelWhileIfBlockTests.disconnectCavity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ModelWhileIfBlockTests.connectMultipleMiddleCavity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
         <pattern>
@@ -119,13 +111,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="model.blocks" />
       <option name="MAIN_CLASS_NAME" value="model.blocks.ModelWhileIfBlockTests" />
-      <option name="METHOD_NAME" value="disconnectCavity" />
+      <option name="METHOD_NAME" value="connectMultipleMiddleCavity" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelWhileIfBlockTests.exactConnectCavitySocketTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ModelWhileIfBlockTests.updateCavityBlocksLocationIntoBottom" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
         <pattern>
@@ -135,7 +127,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="model.blocks" />
       <option name="MAIN_CLASS_NAME" value="model.blocks.ModelWhileIfBlockTests" />
-      <option name="METHOD_NAME" value="exactConnectCavitySocketTest" />
+      <option name="METHOD_NAME" value="updateCavityBlocksLocationIntoBottom" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ModelWhileIfBlockTests.updateCavityBlocksLocationIntoMiddle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="swop1920" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="model.blocks.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="model.blocks" />
+      <option name="MAIN_CLASS_NAME" value="model.blocks.ModelWhileIfBlockTests" />
+      <option name="METHOD_NAME" value="updateCavityBlocksLocationIntoMiddle" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -143,11 +151,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ModelWhileIfBlockTests.updateCavityBlocksLocationIntoBottom" />
+        <item itemvalue="JUnit.ModelWhileIfBlockTests.updateCavityBlocksLocationIntoMiddle" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.ModelWhileIfBlockTests" />
-        <item itemvalue="JUnit.ModelWhileIfBlockTests.disconnectCavity" />
-        <item itemvalue="JUnit.ModelWhileIfBlockTests.connectCavityPlugConnectsSocket" />
-        <item itemvalue="JUnit.ModelWhileIfBlockTests.exactConnectCavitySocketTest" />
+        <item itemvalue="JUnit.ModelWhileIfBlockTests.connectIntoCavity" />
+        <item itemvalue="JUnit.ModelWhileIfBlockTests.connectMultipleMiddleCavity" />
       </list>
     </recent_temporary>
   </component>
@@ -199,20 +207,6 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <watches-manager>
-      <configuration name="JUnit">
-        <watch expression="this" />
-        <watch expression="this.getCavitySocketPos()" language="JAVA" />
-        <watch expression="((ModelMoveBlock) block).getBottomPlugPos()" language="JAVA" />
-        <watch expression="this.getCurrent()" language="JAVA" />
-        <watch expression="Math.sqrt(Math.pow(this.getX() - pos.getX(), 2) + Math.pow(this.getY() - pos.getY(), 2))" language="JAVA" />
-        <watch expression="ModelBlock.PLUGSIZE * 1.5" language="JAVA" />
-        <watch expression="this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos())" language="JAVA" />
-        <watch expression="this.getCavityPlugPos().getDistance(((TopSocket)block).getTopSocketPos())" language="JAVA" />
-      </configuration>
-    </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/swop1920$ModelProgramWindowTest_programWindowTest.ic" NAME="ModelProgramWindowTest.programWindowTest Coverage Results" MODIFIED="1584049446708" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

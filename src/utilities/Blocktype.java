@@ -1,5 +1,6 @@
 package utilities;
 
+
 /**
  * Class representing a mapping between the blocktypes and a subset of integers.
  */
@@ -66,5 +67,15 @@ public final class Blocktype{
             default:
                 return "error";
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object o){
+        if (!(o instanceof Blocktype)) return false;
+        if (((Blocktype) o).getType() == this.getType()) return true;
+        else return false;
     }
 }

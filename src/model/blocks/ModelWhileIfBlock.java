@@ -120,9 +120,10 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
                 ((TopSocket)block).setTopSocket(cavityPrevious); //The previous block in the cavitysocket needs to connect with the modelBlock
                 if (this.getCavityPlug() == this){
                     this.setCavityPlug(block);
-                    ((TopSocket) block).setTopSocketPos(this.getCavityPlugPos());
                 }
+                else ((BottomPlug)cavityPrevious).setBottomPlug(block);
             }
+            updateCavityBlocksLocations();
             return true;
         }
         if (block.hasTopSocket() && this.getCavityPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE){
@@ -133,12 +134,30 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
                 ((BottomPlug)block).setBottomPlug(cavityNext);
                 if (this.getCavitySocket() == this){
                     this.setCavitySocket(block);
-                    ((BottomPlug) block).setBottomPlugPos(this.getCavitySocketPos());
                 }
+                else ((TopSocket)cavityNext).setTopSocket(block);
             }
+            updateCavityBlocksLocations();
             return true;
         }
         return false;
+    }
+
+    /**
+     * Updates the locations of the cavity blocks when one is added in the middle
+     * This is much easier this way than trying to get this to work within the connect methods.
+     * @author Oberon Swings
+     */
+    public void updateCavityBlocksLocations(){
+        ModelBlock next = this.getCavityPlug();
+        while (next != this && next != null){
+            if (((TopSocket)next).getTopSocket() == this){
+                ((TopSocket)next).setTopSocketPos(this.getCavityPlugPos());
+            }
+            else ((TopSocket)next).setTopSocketPos(((BottomPlug)((TopSocket) next).getTopSocket()).getBottomPlugPos());
+            next = ((BottomPlug)next).getBottomPlug();
+        }
+        if (next == this) return;
     }
 
     /**
@@ -155,8 +174,9 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             ((BottomPlug) closest).setBottomPlug(extra);
             if (extra.hasBottomPlug()){
                 ((BottomPlug)extra).setBottomPlug(next);
+                ((TopSocket)next).setTopSocket(extra);
             }
-            ((TopSocket) extra).setTopSocketPos(((BottomPlug) closest).getBottomPlugPos());
+            updateCavityBlocksLocations();
         }
         else if (closest.hasTopSocket() && extra.hasBottomPlug() && ((BottomPlug)extra).getBottomPlugPos().getDistance(((TopSocket)closest).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5){
             ModelBlock next = ((TopSocket) closest).getTopSocket();
@@ -164,8 +184,9 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             ((TopSocket) closest).setTopSocket(extra);
             if (extra.hasTopSocket()){
                 ((TopSocket)extra).setTopSocket(next);
+                ((BottomPlug)next).setBottomPlug(extra);
             }
-            ((BottomPlug) extra).setBottomPlugPos(((TopSocket) closest).getTopSocketPos());
+            updateCavityBlocksLocations();
         }
     }
 

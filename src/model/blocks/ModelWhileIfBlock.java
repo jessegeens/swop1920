@@ -417,6 +417,8 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      * @return the condition
      * @throws NoSuchFieldException if the WHILEIF rightsocket or the chain of condition blocks has an empty right sockket
      * (method should only be called when the blocks are in a valid state to run the program)
+     * 
+     * @author Bert De Vleeschouwer
      */
     public Condition getCondition() throws NoSuchFieldException {
         boolean not = false;
@@ -426,17 +428,17 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             throw new NoSuchFieldException("the WHILEIF block socket is null");
         }
 
-        while( current.getClass() != ModelWallInFrontBlock.class){
-            if(current == null){
-                throw new NoSuchFieldException("the right socket of a condition block is null");
-            }
+        while( current.getClass() != ModelWallInFrontBlock.class){  
             if(current.getClass() == ModelNotBlock.class){
                 not = !not;
             }
             if(current.getClass() == ModelWallInFrontBlock.class){
                 break;
             }
-            current = ((ModelNotBlock) current).getRightSocket();            
+            current = ((ModelNotBlock) current).getRightSocket();  
+            if(current == null){
+                throw new NoSuchFieldException("the right socket of a condition block is null");
+            }          
 
         }
 

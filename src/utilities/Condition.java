@@ -2,6 +2,8 @@ package utilities;
 
 /**
  * Class representing the possible conditions in an IF or WHILE block
+ * 
+ * @author Bert De Vleeschouwer
  */
 public final class Condition{
 

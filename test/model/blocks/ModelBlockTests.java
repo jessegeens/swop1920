@@ -55,6 +55,6 @@ public class ModelBlockTests {
         assertNull(mwb.getLeftPlug());
     }
 
-    //TODO test isInCavity()
-    //TODO test getSurroundingIfWhileBlock()
+    //TODO test isInCavity() (should work at the moment though)
+    //TODO test getSurroundingIfWhileBlock() (should work at the moment though)
 }

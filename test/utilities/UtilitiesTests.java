@@ -94,4 +94,6 @@ public class UtilitiesTests {
         assertEquals(25, state.getRobotLocation().getY());
         assertNotNull(state.getRobotDirection());
     }
+
+    //TODO fix test (mainly because utilities became truly immutable now)
 }

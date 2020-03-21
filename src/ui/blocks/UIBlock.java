@@ -6,7 +6,9 @@ import model.blocks.plugs.TopSocket;
 import ui.*;
 import java.awt.*;
 
+
 import model.blocks.ModelBlock;
+import model.blocks.ModelWhileIfBlock;
 import utilities.*;
 
 /**
@@ -79,9 +81,35 @@ public class UIBlock extends UIElement {
     }
 
     /** 
+     * This function renders the cavity socket (socket is at the bottom)
+     * 
+     * @param g The Graphics object on which the block is rendered
+     * @author Bert De Vleeschouwer
+     */
+    private void renderCavitySocket(Graphics g){
+        g.setColor(Color.GREEN);
+        g.fillRect(this.getCavitySocketPos().getX(),this.getCavitySocketPos().getY(), this.getSocketSize(), this.getSocketSize());
+
+
+    }
+
+    /** 
+     * This function renders the cavity plug (plug is at the top)
+     * 
+     * @param g The Graphics object on which the block is rendered
+     * @author Bert De Vleeschouwer
+     */
+    private void renderCavityPlug(Graphics g){
+        g.setColor(Color.GREEN);
+        g.fillRect(this.getCavityPlugPos().getX(),this.getCavityPlugPos().getY(), this.getSocketSize(), this.getSocketSize());
+        
+    }
+
+    /** 
      * This function renders the block
      * 
      * @param g The Graphics object on which the block is rendered
+     * @author Bert De Vleeschouwer
      */
     public void render(Graphics g){
 
@@ -95,6 +123,10 @@ public class UIBlock extends UIElement {
                 this.renderBottomPlug(g);
                 this.renderTopSocket(g);
                 this.renderRightSocket(g);
+                this.renderCavityPlug(g);
+                this.renderCavitySocket(g);
+
+                
                 
                 break;
             case(Blocktype.MOVEFORWARD):
@@ -146,6 +178,30 @@ public class UIBlock extends UIElement {
      */
     public ModelBlock getmBlock(){
         return this.mBlock;
+    }
+
+    /**
+     *
+     * @return the position of the cavity socket in a WHILEIF block
+     * @author Bert De Vleeschouwer
+     */
+    public WindowLocation getCavitySocketPos(){
+        if (this.getmBlock().getBlockType().getType() == Blocktype.WHILE || this.getmBlock().getBlockType().getType() == Blocktype.IF){
+            return ((ModelWhileIfBlock)this.getmBlock()).getCavitySocketPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
+        }
+        return new WindowLocation(0,0);
+    }
+
+    /**
+     *
+     * @return the position of the cavity plug in a WHILEIF block
+     * @author Bert De Vleeschouwer
+     */
+    public WindowLocation getCavityPlugPos(){
+        if (this.getmBlock().getBlockType().getType() == Blocktype.WHILE || this.getmBlock().getBlockType().getType() == Blocktype.IF){
+            return ((ModelWhileIfBlock)this.getmBlock()).getCavityPlugPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
+        }
+        return new WindowLocation(0,0);
     }
 
     /**

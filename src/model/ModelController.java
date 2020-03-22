@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import main.MyCanvasWindow;
 import model.blocks.ModelBlock;
+import model.blocks.ModelWhileIfBlock;
 import utilities.*;
 
 
@@ -170,6 +171,11 @@ public class ModelController{
                 if(this.active != null){
                     this.maxReached = false;
                     this.palette.resetBlocks();
+                }
+                if (this.getActiveBlock() instanceof ModelWhileIfBlock){
+                    for (ModelBlock block : ((ModelWhileIfBlock) this.getActiveBlock()).getCavityBlocks()){
+                        block = null;
+                    }
                 }
                 this.active = null;
                 break;

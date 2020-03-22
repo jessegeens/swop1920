@@ -335,7 +335,7 @@ class ModelPalette extends ModelWindow{
             blocks.add(this.getIfBlock());
         }
         return blocks;
-        
+
     }
     
 }

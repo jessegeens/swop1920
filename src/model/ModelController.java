@@ -17,7 +17,7 @@ public class ModelController{
 
     private boolean maxReached = false;
 
-    private final int MAX_BLOCKS = 15;
+    private final int MAX_BLOCKS = 10;
 
     private ModelPalette palette;
     private ModelProgramArea PArea;
@@ -33,7 +33,7 @@ public class ModelController{
         this.setPalette(new ModelPalette(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
         this.setPArea(new ModelProgramArea(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
         this.setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, ProgramRunner.getInitialState()));
-        this.programRunner = new ProgramRunner();
+        this.setProgramRunner(new ProgramRunner());
     }
 
     /**
@@ -54,17 +54,17 @@ public class ModelController{
             case 65: //A;
             case 116: //F5;
                 if (getPArea().allBlocksConnected()){//Check if all blocks are connected, and if so execute.
-                    if(programRunner.isRunning()){
+                    if(this.getProgramRunner().isRunning()){
                         System.out.println("executing on keypress, is already running");
-                        getGrid().setGridState(programRunner.execute(getGrid().getGridState()));
+                        getGrid().setGridState(this.getProgramRunner().execute(getGrid().getGridState()));
                     } else {
-                        programRunner.initialise(getPArea().getStartBlocks().get(0), getPArea().getFinishBlocks().get(0));
-                        getGrid().setGridState(programRunner.execute(getGrid().getGridState()));
+                        this.getProgramRunner().initialise(getPArea().getStartBlocks().get(0), getPArea().getFinishBlocks().get(0));
+                        getGrid().setGridState(this.getProgramRunner().execute(getGrid().getGridState()));
                     }
                 } 
                 break;
             case 27: //Esc
- 
+                this.getProgramRunner().reset();
                 break;
         }        
     }
@@ -161,16 +161,16 @@ public class ModelController{
             case 501: //MOUSE_PRESSED
                 System.out.println("MOUSE PRESSED start");
                 if(this.MAX_BLOCKS <= this.getProgramAreaBlocks().size()+1){
-                    this.maxReached = true;
+                    this.setMaxReached(true);
                 }
-                this.active = palette.handleMouseDown(eventWindowLocation, maxReached);
+                this.setActiveBlock(this.getPalette().handleMouseDown(eventWindowLocation, this.isMaxReached()));
                 break;
             case 502: //MOUSE RELEASED
                 //delete the currently held item (if there is one)
                 System.out.println("MOUSE RELEASED start");
-                if(this.active != null){
-                    this.maxReached = false;
-                    this.palette.resetBlocks();
+                if(this.getActiveBlock() != null){
+                    this.setMaxReached(false);
+                    this.getPalette().resetBlocks();
                 }
                 if (this.getActiveBlock() instanceof ModelWhileIfBlock){
                     for (ModelBlock block : ((ModelWhileIfBlock) this.getActiveBlock()).getCavityBlocks()){
@@ -182,7 +182,7 @@ public class ModelController{
             case 506: //MOUSE_DRAGGED
                 //if there is a currently held block, move it
                 System.out.println("MOUSE MOVED start");
-                this.moveBlock(active, eventWindowLocation, false);
+                this.moveBlock(this.getActiveBlock(), eventWindowLocation, false);
                 break;
             default:
                 break;
@@ -206,18 +206,18 @@ public class ModelController{
                 //return the topmost active block if one is in the click location
                 //you remove it from the local list in PArea until mouseup
                 System.out.println("MOUSE PRESSED start");
-                this.active = PArea.handleMouseDown(eventWindowLocation);
+                this.setActiveBlock(this.getPArea().handleMouseDown(eventWindowLocation));
                 break;
             case 502: //MOUSE RELEASED
                 System.out.println("MOUSE RELEASED start");
-                PArea.handleMouseUp(eventWindowLocation, this.active);
-                this.active = null;
+                this.getPArea().handleMouseUp(eventWindowLocation, this.getActiveBlock());
+                this.setActiveBlock(null);
                 break;
             case 506: //MOUSE_DRAGGED
             System.out.println("MOUSE MOVED start");
-                if(active != null){
-                    if((int) 2 * MyCanvasWindow.WIDTH / 3 - active.getWidth() > eventWindowLocation.getX()){
-                        this.moveBlock(active, eventWindowLocation, true);
+                if(this.getActiveBlock() != null){
+                    if((int) 2 * MyCanvasWindow.WIDTH / 3 - this.getActiveBlock().getWidth() > eventWindowLocation.getX()){
+                        this.moveBlock(this.getActiveBlock(), eventWindowLocation, true);
                     }
                     
                 }
@@ -285,4 +285,27 @@ public class ModelController{
     protected ModelBlock getActiveBlock(){
         return this.active;
     }
+
+    public void setActiveBlock(ModelBlock blk){
+        this.active = blk;
+    }
+
+
+    public ProgramRunner getProgramRunner() {
+        return programRunner;
+    }
+
+    public void setProgramRunner(ProgramRunner programRunner) {
+        this.programRunner = programRunner;
+    }
+
+    public boolean isMaxReached() {
+        return maxReached;
+    }
+
+    public void setMaxReached(boolean maxReached) {
+        this.maxReached = maxReached;
+    }
+
+
 }

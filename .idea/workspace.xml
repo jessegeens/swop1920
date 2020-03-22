@@ -7,8 +7,8 @@
     <list default="true" id="bdfc6573-f389-4d9a-9e2c-4612aa30b1a8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/ModelController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/ModelController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/ModelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ModelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/ModelPalette.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ModelPalette.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ModelProgramArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ModelProgramArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/ModelProgramAreaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/ModelProgramAreaTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -76,7 +76,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.ModelProgramAreaTest">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="swop1920" />
@@ -105,7 +105,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelProgramAreaTest.updateConnections" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ModelProgramAreaTest.handleMouseDown" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
         <pattern>
@@ -115,13 +115,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="model" />
       <option name="MAIN_CLASS_NAME" value="model.ModelProgramAreaTest" />
-      <option name="METHOD_NAME" value="updateConnections" />
+      <option name="METHOD_NAME" value="handleMouseDown" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelProgramAreaTest.updateConnectionsCavity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ModelProgramAreaTest.handleMouseUp" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
         <pattern>
@@ -131,13 +131,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="model" />
       <option name="MAIN_CLASS_NAME" value="model.ModelProgramAreaTest" />
-      <option name="METHOD_NAME" value="updateConnectionsCavity" />
+      <option name="METHOD_NAME" value="handleMouseUp" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelProgramAreaTest.updateConnectionsInfiniteLoop" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ModelProgramAreaTest.removeBlock" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
         <pattern>
@@ -147,7 +147,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="model" />
       <option name="MAIN_CLASS_NAME" value="model.ModelProgramAreaTest" />
-      <option name="METHOD_NAME" value="updateConnectionsInfiniteLoop" />
+      <option name="METHOD_NAME" value="removeBlock" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -155,11 +155,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.ModelProgramAreaTest" />
-        <item itemvalue="JUnit.ModelProgramAreaTest.updateConnectionsInfiniteLoop" />
-        <item itemvalue="JUnit.ModelProgramAreaTest.updateConnectionsCavity" />
-        <item itemvalue="JUnit.ModelProgramAreaTest.updateConnections" />
+        <item itemvalue="JUnit.ModelProgramAreaTest.handleMouseUp" />
+        <item itemvalue="JUnit.ModelProgramAreaTest.handleMouseDown" />
+        <item itemvalue="JUnit.ModelProgramAreaTest.removeBlock" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>

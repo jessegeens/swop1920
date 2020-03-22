@@ -29,8 +29,6 @@ public class ModelProgramArea extends ModelWindow{
         }
     }
 
-
-
     /**
      * 
      * @return a list of all the blocks that are connected

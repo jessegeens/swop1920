@@ -41,8 +41,8 @@ public class ModelTests {
         WindowLocation loc = new WindowLocation(10, 10);
         Blocktype bt = new Blocktype(Blocktype.MOVEFORWARD);
         ModelMoveBlock blk = new ModelMoveBlock(loc, bt);
-        mP.blockToProgramWindow(blk, false);
-        mP.blockToProgramWindow(blk, true);
+        mP.blockToProgramArea(blk, false);
+        mP.blockToProgramArea(blk, true);
         assertNull(mP.getForwardBlock());
     }
 

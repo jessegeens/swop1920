@@ -48,7 +48,7 @@ class ModelPalette extends ModelWindow{
      * @param {ModelBlock} blk the block to be added from the palette into the program window. 
      * @param {Boolean} limitReached true than it won't be possible to place a block of some specific type into the program window.
      */
-    public void blockToProgramWindow(ModelBlock blk, Boolean limitReached){
+    public void blockToProgramArea(ModelBlock blk, Boolean limitReached){
         if (limitReached){
             setTurnLeftBlock(null);
             setTurnRightBlock(null);
@@ -281,38 +281,35 @@ class ModelPalette extends ModelWindow{
      */
     protected ModelBlock handleMouseDown(WindowLocation eventWindowLocation, boolean maxReached){
         ModelBlock selected = null;
-        if(this.turnLeftBlock.inBounds(eventWindowLocation)){
-            selected = this.turnLeftBlock;
-            this.blockToProgramWindow(this.turnLeftBlock, maxReached);
+        if(this.getTurnLeftBlock().inBounds(eventWindowLocation)){
+            selected = this.getTurnLeftBlock();
+            this.blockToProgramArea(this.getTurnLeftBlock(), maxReached);
         }
-        else if(this.turnRightBlock.inBounds(eventWindowLocation)){
-            selected = this.turnRightBlock;
-            this.blockToProgramWindow(this.turnRightBlock, maxReached);
+        else if(this.getTurnRightBlock().inBounds(eventWindowLocation)){
+            selected = this.getTurnRightBlock();
+            this.blockToProgramArea(this.getTurnRightBlock(), maxReached);
         }
-        else if(this.forwardBlock.inBounds(eventWindowLocation)){
-            selected = this.forwardBlock;
-            this.blockToProgramWindow(this.forwardBlock, maxReached);
+        else if(this.getForwardBlock().inBounds(eventWindowLocation)){
+            selected = this.getForwardBlock();
+            this.blockToProgramArea(this.getForwardBlock(), maxReached);
         }
-        else if(this.notBlock.inBounds(eventWindowLocation)){
-            selected = this.notBlock;
-            this.blockToProgramWindow(this.notBlock, maxReached);
+        else if(this.getNotBlock().inBounds(eventWindowLocation)){
+            selected = this.getNotBlock();
+            this.blockToProgramArea(this.getNotBlock(), maxReached);
         }
-        else if(this.wallInFrontBlock.inBounds(eventWindowLocation)){
-            selected = this.wallInFrontBlock;
-            this.blockToProgramWindow(this.wallInFrontBlock, maxReached);
+        else if(this.getWallInFrontBlock().inBounds(eventWindowLocation)){
+            selected = this.getWallInFrontBlock();
+            this.blockToProgramArea(this.getWallInFrontBlock(), maxReached);
         }
-        else if(this.whileBlock.inBounds(eventWindowLocation)){
-            selected = this.whileBlock;
-            this.blockToProgramWindow(this.whileBlock, maxReached);
+        else if(this.getWhileBlock().inBounds(eventWindowLocation)){
+            selected = this.getWhileBlock();
+            this.blockToProgramArea(this.getWhileBlock(), maxReached);
         }
-        else if(this.ifBlock.inBounds(eventWindowLocation)){
-            selected = this.ifBlock;
-            this.blockToProgramWindow(this.ifBlock, maxReached);
+        else if(this.getIfBlock().inBounds(eventWindowLocation)){
+            selected = this.getIfBlock();
+            this.blockToProgramArea(this.getIfBlock(), maxReached);
         }
-
-
         return selected;
-
     }
 
     /**

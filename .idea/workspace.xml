@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="bdfc6573-f389-4d9a-9e2c-4612aa30b1a8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/ModelProgramArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ModelProgramArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/model/ModelProgramAreaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/ModelProgramAreaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ModelPalette.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ModelPalette.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/ModelTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/ModelTests.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,7 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageViewManager">
-    <option name="myElementSize" value="182" />
+    <option name="myElementSize" value="212" />
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
@@ -25,6 +25,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -44,8 +45,9 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="Groovy JUnit" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.Groovy JUnit" value="groovy.util.GroovyTestCase" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -60,6 +62,7 @@
       <recent name="model" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
       <recent name="groovy.util.GroovyTestCase" />
     </key>
   </component>
@@ -75,16 +78,34 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="main.Main" />
+  <component name="RunManager" selected="JUnit.utilities in swop1920">
+    <configuration name="ModelPaletteTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="main.*" />
+          <option name="PATTERN" value="model.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="model" />
+      <option name="MAIN_CLASS_NAME" value="model.ModelPaletteTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ModelPaletteTest.getPaletteBlocks" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="swop1920" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="model" />
+      <option name="MAIN_CLASS_NAME" value="model.ModelPaletteTest" />
+      <option name="METHOD_NAME" value="getPaletteBlocks" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -104,38 +125,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelProgramAreaTest.addWhileBlockCavity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="swop1920" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="model" />
-      <option name="MAIN_CLASS_NAME" value="model.ModelProgramAreaTest" />
-      <option name="METHOD_NAME" value="addWhileBlockCavity" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ModelProgramAreaTest.removeWhileBlockCavity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="swop1920" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="model" />
-      <option name="MAIN_CLASS_NAME" value="model.ModelProgramAreaTest" />
-      <option name="METHOD_NAME" value="removeWhileBlockCavity" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="ModelWhileIfBlockTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
@@ -151,13 +140,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="utilities in swop1920" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="swop1920" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="utilities.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="utilities" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.ModelProgramAreaTest" />
-        <item itemvalue="JUnit.ModelProgramAreaTest.addWhileBlockCavity" />
-        <item itemvalue="JUnit.ModelProgramAreaTest.removeWhileBlockCavity" />
+        <item itemvalue="JUnit.utilities in swop1920" />
         <item itemvalue="JUnit.ModelWhileIfBlockTest" />
+        <item itemvalue="JUnit.ModelPaletteTest" />
+        <item itemvalue="JUnit.ModelProgramAreaTest" />
+        <item itemvalue="JUnit.ModelPaletteTest.getPaletteBlocks" />
       </list>
     </recent_temporary>
   </component>
@@ -217,13 +220,25 @@
     <SUITE FILE_PATH="coverage/swop1920$ModelRobotTest.ic" NAME="ModelRobotTest Coverage Results" MODIFIED="1584032593028" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>model.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/swop1920$ModelGridTest_TestModelGrid.ic" NAME="ModelGridTest.TestModelGrid Coverage Results" MODIFIED="1584025902451" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>model.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/swop1920$UtilitiesTests.ic" NAME="UtilitiesTests Coverage Results" MODIFIED="1584098413372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>utilities.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/swop1920$ModelWhileIfBlockTest.ic" NAME="ModelWhileIfBlockTest Coverage Results" MODIFIED="1584872982919" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>model.blocks.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/swop1920$ModelGridTest.ic" NAME="ModelGridTest Coverage Results" MODIFIED="1584025978322" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>model.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/swop1920$ModelProgramAreaTest.ic" NAME="ModelProgramAreaTest Coverage Results" MODIFIED="1584872875519" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>model.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/swop1920$ModelPaletteTest.ic" NAME="ModelPaletteTest Coverage Results" MODIFIED="1584872912725" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>model.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/swop1920$utilities_in_swop1920.ic" NAME="utilities in swop1920 Coverage Results" MODIFIED="1584873024807" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>utilities.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/swop1920$ModelGridTest_TestModelGrid.ic" NAME="ModelGridTest.TestModelGrid Coverage Results" MODIFIED="1584025902451" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>model.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/swop1920$ModelMoveBlockTests.ic" NAME="ModelMoveBlockTests Coverage Results" MODIFIED="1584019017493" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -236,9 +251,6 @@
       <FILTER>utilities.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/swop1920$ModelProgramWindowTest.ic" NAME="ModelProgramWindowTest Coverage Results" MODIFIED="1584032158676" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>model.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/swop1920$ModelPaletteTest.ic" NAME="ModelPaletteTest Coverage Results" MODIFIED="1584030845901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>model.*</FILTER>
     </SUITE>
   </component>

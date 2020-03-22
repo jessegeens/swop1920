@@ -192,6 +192,37 @@ public class ModelProgramAreaTest {
     }
 
     @Test
+    public void removeWhileBlockCavity(){
+        ModelProgramArea area = new ModelProgramArea(1000,1000);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(400,400), new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), new Blocktype(Blocktype.TURNLEFT));
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new WindowLocation(400, 700), new Blocktype(Blocktype.TURNRIGHT));
+        area.addBlock(whileBlock);
+        area.addBlock(leftBlock);
+        area.addBlock(rightBlock);
+        leftBlock.setBottomPlugPos(whileBlock.getCavitySocketPos());
+        leftBlock.connect(whileBlock);
+        rightBlock.setTopSocketPos(leftBlock.getBottomPlugPos());
+        rightBlock.connect(leftBlock);
+        area.removeBlock(whileBlock);
+        assertEquals(0,area.getPABlocks().size());
+    }
+
+    @Test
+    public void addWhileBlockCavity(){
+        ModelProgramArea area = new ModelProgramArea(1000,1000);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(400,400), new Blocktype(Blocktype.WHILE));
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), new Blocktype(Blocktype.TURNLEFT));
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new WindowLocation(400, 700), new Blocktype(Blocktype.TURNRIGHT));
+        leftBlock.setBottomPlugPos(whileBlock.getCavitySocketPos());
+        leftBlock.connect(whileBlock);
+        rightBlock.setTopSocketPos(leftBlock.getBottomPlugPos());
+        rightBlock.connect(leftBlock);
+        area.addBlock(whileBlock);
+        assertEquals(3,area.getPABlocks().size());
+    }
+
+    @Test
     public void findClosestTopSocket(){
         ModelProgramArea area = new ModelProgramArea(1000,1000);
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));

@@ -163,7 +163,12 @@ public class ModelProgramArea extends ModelWindow{
      */
     public void removeBlock(ModelBlock toBeRemoved){
         toBeRemoved.disconnect();
-        this.blocks.remove(toBeRemoved);
+        this.getPABlocks().remove(toBeRemoved);
+        if(toBeRemoved instanceof ModelWhileIfBlock){
+            for (ModelBlock block : ((ModelWhileIfBlock) toBeRemoved).getCavityBlocks()){
+                this.getPABlocks().remove(block);
+            }
+        }
     }
 
     /**
@@ -177,6 +182,9 @@ public class ModelProgramArea extends ModelWindow{
         System.out.println("here");
         if(toBeAdded != null){
             this.blocks.add(toBeAdded);
+            if (toBeAdded instanceof ModelWhileIfBlock){
+                this.blocks.addAll(((ModelWhileIfBlock) toBeAdded).getCavityBlocks());
+            }
             System.out.println("adds");
         }
         System.out.println("notadds");

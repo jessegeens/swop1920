@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bdfc6573-f389-4d9a-9e2c-4612aa30b1a8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/ModelController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/ModelController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/ModelProgramArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ModelProgramArea.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/model/ModelProgramAreaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/ModelProgramAreaTest.java" afterDir="false" />
     </list>
@@ -76,7 +75,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ModelProgramAreaTest">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="swop1920" />
@@ -105,7 +104,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelProgramAreaTest.handleMouseDown" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ModelProgramAreaTest.addWhileBlockCavity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
         <pattern>
@@ -115,13 +114,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="model" />
       <option name="MAIN_CLASS_NAME" value="model.ModelProgramAreaTest" />
-      <option name="METHOD_NAME" value="handleMouseDown" />
+      <option name="METHOD_NAME" value="addWhileBlockCavity" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelProgramAreaTest.handleMouseUp" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ModelProgramAreaTest.removeWhileBlockCavity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
         <pattern>
@@ -131,35 +130,34 @@
       </extension>
       <option name="PACKAGE_NAME" value="model" />
       <option name="MAIN_CLASS_NAME" value="model.ModelProgramAreaTest" />
-      <option name="METHOD_NAME" value="handleMouseUp" />
+      <option name="METHOD_NAME" value="removeWhileBlockCavity" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelProgramAreaTest.removeBlock" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ModelWhileIfBlockTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="model.*" />
+          <option name="PATTERN" value="model.blocks.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="model" />
-      <option name="MAIN_CLASS_NAME" value="model.ModelProgramAreaTest" />
-      <option name="METHOD_NAME" value="removeBlock" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="model.blocks" />
+      <option name="MAIN_CLASS_NAME" value="model.blocks.ModelWhileIfBlockTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ModelProgramAreaTest" />
-        <item itemvalue="JUnit.ModelProgramAreaTest.handleMouseUp" />
-        <item itemvalue="JUnit.ModelProgramAreaTest.handleMouseDown" />
-        <item itemvalue="JUnit.ModelProgramAreaTest.removeBlock" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.ModelProgramAreaTest" />
+        <item itemvalue="JUnit.ModelProgramAreaTest.addWhileBlockCavity" />
+        <item itemvalue="JUnit.ModelProgramAreaTest.removeWhileBlockCavity" />
+        <item itemvalue="JUnit.ModelWhileIfBlockTest" />
       </list>
     </recent_temporary>
   </component>
@@ -211,17 +209,6 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/test/model/blocks/ModelWhileIfBlockTest.java</url>
-          <line>368</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/swop1920$ModelProgramWindowTest_programWindowTest.ic" NAME="ModelProgramWindowTest.programWindowTest Coverage Results" MODIFIED="1584049446708" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

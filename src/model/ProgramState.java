@@ -10,12 +10,24 @@ public class ProgramState {
     private GridLocation goalCell;
     private int cellSize;
 
+    //Parameters
+    private static final int CELL_SIZE = 50;
+    private static final GridLocation GOAL_CELL = new GridLocation(5, 5);
+    private static final GridLocation ROBOT_START_LOCATION = new GridLocation(0, 0);
+    private static final Direction ROBOT_START_DIRECTION = new Direction(Direction.RIGHT);
+    private static final ArrayList<GridLocation> WALLS = new ArrayList<GridLocation>();
+
+
     public ProgramState(Direction robotDirection, GridLocation robotLocation, ArrayList<GridLocation> walls, GridLocation goalCell, int cellSize){
         this.robotDirection = robotDirection;
         this.robotLocation = robotLocation;
         this.walls = walls;
         this.goalCell = goalCell;
         this.cellSize = cellSize;
+    }
+
+    public static ProgramState getInitialState(){
+        return new ProgramState(ROBOT_START_DIRECTION, ROBOT_START_LOCATION, WALLS, GOAL_CELL, CELL_SIZE);
     }
 
     @Override

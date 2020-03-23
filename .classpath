@@ -1,5 +1,0 @@
-<classpathentry kind="src" path="src/test/java" output="build/classes/test">
-    <attributes>
-        <attribute name="test" value="true" />
-    </attributes>
-</classpathentry>

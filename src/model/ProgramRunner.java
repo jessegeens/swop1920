@@ -7,20 +7,10 @@ import model.blocks.plugs.*;
 
 public class ProgramRunner {
 
-    //Parameters
-    private static final int CELL_SIZE = 50;
-    private static final GridLocation GOAL_CELL = new GridLocation(5, 5);
-    private static final GridLocation ROBOT_START_LOCATION = new GridLocation(0, 0);
-    private static final Direction ROBOT_START_DIRECTION = new Direction(Direction.RIGHT);
-    private static final ArrayList<GridLocation> WALLS = new ArrayList<GridLocation>();
 
     private ModelBlock finishBlock;
     private boolean running;
     private ModelBlock current;
-
-    public static ProgramState getInitialState(){
-        return new ProgramState(ROBOT_START_DIRECTION, ROBOT_START_LOCATION, WALLS, GOAL_CELL, CELL_SIZE);
-    }
 
     public ProgramRunner(){
         this.running = false;
@@ -54,7 +44,7 @@ public class ProgramRunner {
         System.out.println("now executing: " + current.getBlockType().getType());
         if(this.current.equals(this.finishBlock)) {
             reset();
-            return ProgramRunner.getInitialState();
+            return ProgramState.getInitialState();
         }
         else{
             this.highlightNext(programState);
@@ -68,7 +58,7 @@ public class ProgramRunner {
     /**
      * This function executes one step of the program
      */
-    public ProgramState step(ProgramState pState){
+    private ProgramState step(ProgramState pState){
         switch(current.getBlockType().getType()){
             case(Blocktype.MOVEFORWARD):
                 if(validPosition(move(pState))){
@@ -101,7 +91,7 @@ public class ProgramRunner {
     /**
      * Highlights the next block in the program and unhighlight the currrent one
      */
-    public void highlightNext(ProgramState programState){
+    private void highlightNext(ProgramState programState){
         current.setUnHighlight();
         findNextBlock(programState).setHighlight();
     }
@@ -114,7 +104,7 @@ public class ProgramRunner {
      * //This should point to the next block that has to be executed, this is needed so that when we step we know what block to run but also this one needs to be highlighted.
      * @return the next block that will be run in the program
      */
-    public ModelBlock findNextBlock(ProgramState programState){
+    private ModelBlock findNextBlock(ProgramState programState){
         if ((current.getBlockType().getType() == Blocktype.IF) || (current.getBlockType().getType() == Blocktype.WHILE)){
             if (evaluateCurrentCondition(programState)){
                 return ((ModelWhileIfBlock)current).getCavitySocket();
@@ -127,7 +117,7 @@ public class ProgramRunner {
      * 
      * @return whether the current condition is true or false
      */
-    public boolean evaluateCurrentCondition(ProgramState programState){
+    private boolean evaluateCurrentCondition(ProgramState programState){
         boolean negate = false;
         if (current.hasRightSocket()){
             ModelBlock cond = ((RightSocket)current).getRightSocket();

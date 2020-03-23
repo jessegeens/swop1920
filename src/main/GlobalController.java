@@ -24,7 +24,7 @@ public class GlobalController {
     public GlobalController(){
         this.modelController = new ModelController();
         System.out.println(modelController.getModelBlocks());
-        this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT, modelController.getModelBlocks(), ProgramRunner.getInitialState());
+        this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT, modelController.getModelBlocks(), ProgramState.getInitialState());
     }
     
     /**

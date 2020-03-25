@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bdfc6573-f389-4d9a-9e2c-4612aa30b1a8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/swop1920/model/ModelController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/swop1920/model/ModelController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/ModelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ModelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diagrams/structural_overview/SWOP_Structural_Overview.vpp" beforeDir="false" afterPath="$PROJECT_DIR$/diagrams/structural_overview/SWOP_Structural_Overview.vpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

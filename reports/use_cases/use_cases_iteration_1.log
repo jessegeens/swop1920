@@ -1,0 +1,198 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.3.26)  26 MAR 2020 10:17
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**use_cases_iteration_1.tex
+(./use_cases_iteration_1.tex
+LaTeX2e <2018-12-01>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2018/09/03 v1.4i Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2018/08/11 v1.3c Input encoding file
+\inpenc@prehook=\toks14
+\inpenc@posthook=\toks15
+)
+(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2018/04/16 v5.8 Page Geometry
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2018/09/07 v3.3 Provides the ifpdf switch
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count88
+\Gm@cntv=\count89
+\c@Gm@tempcnt=\count90
+\Gm@bindingoffset=\dimen103
+\Gm@wd@mp=\dimen104
+\Gm@odd@mp=\dimen105
+\Gm@even@mp=\dimen106
+\Gm@layoutwidth=\dimen107
+\Gm@layoutheight=\dimen108
+\Gm@layouthoffset=\dimen109
+\Gm@layoutvoffset=\dimen110
+\Gm@dimlist=\toks17
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks18
+\verbatim@line=\toks19
+\verbatim@in@stream=\read1
+)
+(./use_cases_iteration_1.aux)
+\openout1 = `use_cases_iteration_1.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(50.58878pt, 513.11745pt, 50.58878pt)
+* v-part:(T,H,B)=(50.58878pt, 693.79243pt, 50.58878pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=513.11745pt
+* \textheight=693.79243pt
+* \oddsidemargin=-21.68121pt
+* \evensidemargin=-21.68121pt
+* \topmargin=-58.68121pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 13.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 13.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 13.
+
+Overfull \hbox (17.12793pt too wide) in paragraph at lines 33--33
+[]    \OT1/cmtt/m/n/10 Otherwise the program has been expanded by one block and
+ the block has re-appeared in the Palette[] 
+ []
+
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+Overfull \hbox (90.62729pt too wide) in paragraph at lines 128--128
+[]    \OT1/cmtt/m/n/10 2. Adding or moving a block during program execution wil
+l reset the grid state en end execution of the program.[] 
+ []
+
+
+Overfull \hbox (1.37807pt too wide) in paragraph at lines 147--147
+[]                \OT1/cmtt/m/n/10 the arrow showing the robot's current direct
+ion in the Game World turns 90 degrees[] 
+ []
+
+
+Overfull \hbox (17.12793pt too wide) in paragraph at lines 160--160
+[]    \OT1/cmtt/m/n/10 3. If the instruction blocks in the Program Area run out
+ without the robot reaching the goal area[] 
+ []
+
+
+Overfull \hbox (48.62766pt too wide) in paragraph at lines 175--175
+[]    \OT1/cmtt/m/n/10 removed or the moved block was set back to it's previous
+ position or the removed block was added again.[] 
+ []
+
+[3]
+Overfull \hbox (1.37807pt too wide) in paragraph at lines 197--197
+[]    \OT1/cmtt/m/n/10 The grid state is set to the next on if the program was 
+running and there is a next grid state[] 
+ []
+
+
+Overfull \hbox (59.12756pt too wide) in paragraph at lines 199--199
+[]    \OT1/cmtt/m/n/10 The last undone change to the blocks in the program area
+ was redone, the removed added block was readded,[] 
+ []
+
+
+Overfull \hbox (27.62784pt too wide) in paragraph at lines 205--205
+[]        \OT1/cmtt/m/n/10 a. If the program is running and there is an undone 
+next grid state, use this next state again.[] 
+ []
+
+
+Overfull \hbox (90.62729pt too wide) in paragraph at lines 207--207
+[]        \OT1/cmtt/m/n/10 b. If the program was not running and there is an un
+done next program area stat, use this next state again.[] 
+ []
+
+[4] (./use_cases_iteration_1.aux) ) 
+Here is how much of TeX's memory you used:
+ 802 strings out of 494553
+ 11259 string characters out of 6177377
+ 82737 words of memory out of 5000000
+ 4522 multiletter control sequences out of 15000+600000
+ 6843 words of font info for 25 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 24i,6n,32p,156b,252s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
+t10.pfb>
+Output written on use_cases_iteration_1.pdf (4 pages, 54943 bytes).
+PDF statistics:
+ 33 PDF objects out of 1000 (max. 8388607)
+ 22 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

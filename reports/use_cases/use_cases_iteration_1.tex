@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage[margin=0.7in]{geometry}
+\usepackage{verbatim}
 
 
 \title{\vspace{-50pt}Blockr: Use Cases}
@@ -12,6 +13,7 @@
 \maketitle
 
 \begin{verbatim}
+
 # Use Cases
 
 ## Use Case 1: Add Program Block
@@ -45,20 +47,6 @@
     3. The number of blocks in the Program Area has reached its maximum
         3a. All of the blocks in the Palette disappear
         3b. If the user drags a block back to the Palette, all blocks in the Palette reappear
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ## Use Case 2: Moving Program Blocks in the Program Area
@@ -137,8 +125,7 @@
 
 ### Main Success Scenario
     1. The user presses F5
-    2. It is not possible to add Program Blocks 
-    or move Program Blocks until the program execution has halted
+    2. Adding or moving a block during program execution will reset the grid state en end execution of the program.
         a. If the robot in the Game World is at the Goal Cell
         the program execution halts successfully
         b. Otherwise
@@ -157,7 +144,7 @@
                 -. If the current block is a move block, the robot moves in the direction
                 its arrow is pointing in the grid
                 -. If the current block is a turn left or turn right block, 
-                the arrow showing the robot's current direction in the Game World turns 90°
+                the arrow showing the robot's current direction in the Game World turns 90 degrees
                 left or right respecively. 
                 For future moves this is the direction in which the robot will move.
         c. The program execution pauses until the user presses F5 again (go back to step 1.)
@@ -173,6 +160,55 @@
     3. If the instruction blocks in the Program Area run out without the robot reaching the goal area
     the robot in the Game World is reset to its original windowLocation
     and pressing F5 again starts the program again
+
+#Use Case 4: Undo action
+
+### Primary actor:
+    User
+
+### Stakeholders and interests
+    The user wishes to undo a certain action from the grid or program area.
+
+### Succes guarantee
+    The grid state is set back to the previous one if the program was running.
+    The last change made to the blocks in the program area was undone, the added block was
+    removed or the moved block was set back to it's previous position or the removed block was added again.
+
+### Main succes scenario
+    1. User presses Shift + F5
+    2. Check if the program is running.
+       a. If the program was running the previous grid state is used again.
+          Except if the current grid state is the initial grid state, then nothing will happen.
+       b. If the program was not running the previous program area state is used again.
+          If there is no previous program area state nothing will happen.
+    
+### Extensions
+
+
+#Use Case 5: Redo action
+
+### Primary actor:
+    User
+
+### Stakeholders and interests
+    The user wishes to undo a certain action from the grid or program area.
+
+### Succes guarantee
+    The grid state is set to the next on if the program was running and there is a next grid state 
+    (one or more undo's has been done before redo).
+    The last undone change to the blocks in the program area was redone, the removed added block was readded,
+    the unmoved moved block was again moved or the added removed block was removed again.
+
+### Main succes scenario
+    1. User presses Shift + Alt + F5
+    2. Check if the program is running
+        a. If the program is running and there is an undone next grid state, use this next state again.
+           If there is no next grid state, nothing will happen.
+        b. If the program was not running and there is an undone next program area stat, use this next state again.
+           If there is no next program area state nothing will happen.
+
+## Extensions
+
 \end{verbatim}
 
 

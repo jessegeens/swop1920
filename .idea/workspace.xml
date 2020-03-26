@@ -39,37 +39,6 @@
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="swop1920" type="b2602c69:ProjectViewProjectNode" />
-              <item name="swop1920" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="swop1920" type="b2602c69:ProjectViewProjectNode" />
-              <item name="swop1920" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="swop1920" type="b2602c69:ProjectViewProjectNode" />
-              <item name="swop1920" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-    </panes>
-  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -80,9 +49,9 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="coverage" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -206,6 +175,7 @@
       <workItem from="1584041890631" duration="9456000" />
       <workItem from="1584091824271" duration="24710000" />
       <workItem from="1585164459640" duration="43000" />
+      <workItem from="1585164642900" duration="953000" />
     </task>
     <servers />
   </component>
@@ -215,42 +185,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48875000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <layout>
-      <window_info id="Designer" />
-      <window_info id="Image Layers" />
-      <window_info id="Capture Tool" />
-      <window_info id="UI Designer" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24966443" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" weight="0.3286119" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3286119" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Maven" />
-      <window_info anchor="right" id="PlantUML" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout>
+    <option name="totallyTimeSpent" value="49828000" />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -261,12 +196,6 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
               <option name="COLUMN_ORDER" />
             </State>
           </value>
@@ -289,26 +218,35 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/swop1920$ModelPaletteTest.ic" NAME="ModelPaletteTest Coverage Results" MODIFIED="1584872912725" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/swop1920$ModelProgramWindowTest_programWindowTest.ic" NAME="ModelProgramWindowTest.programWindowTest Coverage Results" MODIFIED="1584049446708" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>model.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/swop1920$GlobalControllerTests_globalControllerTest.ic" NAME="GlobalControllerTests.globalControllerTest Coverage Results" MODIFIED="1584106780509" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>main.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/swop1920$ModelProgramWindowTest_programWindowTest.ic" NAME="ModelProgramWindowTest.programWindowTest Coverage Results" MODIFIED="1584049446708" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/swop1920$ModelRobotTest.ic" NAME="ModelRobotTest Coverage Results" MODIFIED="1584032593028" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>model.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/swop1920$UtilitiesTests.ic" NAME="UtilitiesTests Coverage Results" MODIFIED="1584098413372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>utilities.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/swop1920$ModelWhileIfBlockTest.ic" NAME="ModelWhileIfBlockTest Coverage Results" MODIFIED="1584872982919" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>model.blocks.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/swop1920$ModelGridTest.ic" NAME="ModelGridTest Coverage Results" MODIFIED="1584025978322" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>model.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/swop1920$ModelGridTest_TestModelGrid.ic" NAME="ModelGridTest.TestModelGrid Coverage Results" MODIFIED="1584025902451" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/swop1920$ModelProgramAreaTest.ic" NAME="ModelProgramAreaTest Coverage Results" MODIFIED="1584872875519" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>model.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/swop1920$ModelPaletteTest.ic" NAME="ModelPaletteTest Coverage Results" MODIFIED="1584872912725" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>model.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/swop1920$utilities_in_swop1920.ic" NAME="utilities in swop1920 Coverage Results" MODIFIED="1584873024807" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>utilities.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/swop1920$ModelGridTest_TestModelGrid.ic" NAME="ModelGridTest.TestModelGrid Coverage Results" MODIFIED="1584025902451" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>model.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/swop1920$GlobalControllerTests_globalControllerTest.ic" NAME="GlobalControllerTests.globalControllerTest Coverage Results" MODIFIED="1584106780509" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>main.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/swop1920$ModelProgramWindowTest.ic" NAME="ModelProgramWindowTest Coverage Results" MODIFIED="1584032158676" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>model.*</FILTER>
@@ -317,15 +255,6 @@
       <FILTER>utilities.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/swop1920$ModelMoveBlockTests.ic" NAME="ModelMoveBlockTests Coverage Results" MODIFIED="1584019017493" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>model.blocks.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/swop1920$ModelRobotTest.ic" NAME="ModelRobotTest Coverage Results" MODIFIED="1584032593028" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>model.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/swop1920$ModelProgramAreaTest.ic" NAME="ModelProgramAreaTest Coverage Results" MODIFIED="1584872875519" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>model.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/swop1920$ModelWhileIfBlockTest.ic" NAME="ModelWhileIfBlockTest Coverage Results" MODIFIED="1584872982919" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>model.blocks.*</FILTER>
     </SUITE>
   </component>
@@ -345,6 +274,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
+          <last-edited>No facets are configured</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -367,6 +297,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
+          <last-edited>11</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -378,10 +309,12 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
+          <last-edited>swop1920</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -401,6 +334,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
+          <last-edited>lib</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

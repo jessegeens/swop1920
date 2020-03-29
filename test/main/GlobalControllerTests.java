@@ -32,11 +32,11 @@ public class GlobalControllerTests {
         mBlocks.add(mmb3);
         gC.getModelController().getPArea().setBlocks(mBlocks);
         //gC.execute();
-        assertEquals(Direction.UP, gC.getModelController().getGrid().getGridState().getRobotDirection().getDirection());
+        assertEquals(Direction.UP, gC.getModelController().getGrid().getGridState().getRobotDirection());
         //gC.execute();
-        assertEquals(Direction.LEFT, gC.getModelController().getGrid().getGridState().getRobotDirection().getDirection());
+        assertEquals(Direction.LEFT, gC.getModelController().getGrid().getGridState().getRobotDirection());
         //gC.execute();
-        assertEquals(Direction.DOWN, gC.getModelController().getGrid().getGridState().getRobotDirection().getDirection());
+        assertEquals(Direction.DOWN, gC.getModelController().getGrid().getGridState().getRobotDirection());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class GlobalControllerTests {
         mBlocks.add(mmb1);
         mBlocks.add(mmb2);
         gC.getModelController().getPArea().setBlocks(mBlocks);
-        Direction dir = new Direction(Direction.RIGHT);
+        Direction dir = Direction.RIGHT;
         //gC.getModelController().getGrid().setRobotDir(dir);
         GridLocation pos = new GridLocation(5, 5);
         //gC.getModelController().getGrid().setRobotPos(pos);
@@ -103,7 +103,7 @@ public class GlobalControllerTests {
         walls.add(wall);
         GridLocation goal = new GridLocation(4,4);
         GridLocation rPos = new GridLocation(0, 0);
-        Direction rDir = new Direction(Direction.RIGHT);
+        Direction rDir = Direction.RIGHT;
         ProgramState state = new ProgramState(rDir, rPos, walls, goal, 100);
         ModelGrid grid = new ModelGrid(5, 5, state);
         gC.getModelController().setGrid(grid);

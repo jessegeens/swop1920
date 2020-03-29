@@ -125,14 +125,14 @@ public class UIGrid {
         System.out.println(robotLocation.getY());
         g.setColor(Color.BLUE);
 
-        if (this.robotDirection.getDirection() == Direction.UP || this.robotDirection.getDirection() == Direction.DOWN){
+        if (this.robotDirection == Direction.UP || this.robotDirection == Direction.DOWN){
 
             g.drawLine(xPosition + robotLocation.getX()*cellSize + cellSize / 2, yPosition + robotLocation.getY()*cellSize , xPosition + robotLocation.getX()*cellSize + cellSize / 2, yPosition + robotLocation.getY()*cellSize + cellSize);
-            if(this.robotDirection.getDirection() == Direction.UP){
+            if(this.robotDirection == Direction.UP){
                 g.drawLine(xPosition + robotLocation.getX()*cellSize + cellSize / 2, yPosition + robotLocation.getY()*cellSize, xPosition + robotLocation.getX()*cellSize + cellSize / 4, yPosition + robotLocation.getY()*cellSize + cellSize / 4);
                 g.drawLine(xPosition + robotLocation.getX()*cellSize + cellSize / 2, yPosition + robotLocation.getY()*cellSize, xPosition + robotLocation.getX()*cellSize + 3 * cellSize / 4, yPosition + robotLocation.getY()*cellSize + cellSize / 4);
             }
-            else if(this.robotDirection.getDirection() == Direction.DOWN){
+            else if(this.robotDirection == Direction.DOWN){
 
                 g.drawLine(xPosition + robotLocation.getX()*cellSize + cellSize / 2, yPosition + robotLocation.getY()*cellSize + cellSize, xPosition + robotLocation.getX()*cellSize + cellSize / 4, yPosition + robotLocation.getY()*cellSize + 3 * cellSize / 4);
                 g.drawLine(xPosition + robotLocation.getX()*cellSize + cellSize / 2, yPosition + robotLocation.getY()*cellSize + cellSize, xPosition + robotLocation.getX()*cellSize + 3 * cellSize / 4, yPosition + robotLocation.getY()*cellSize + 3 * cellSize / 4);
@@ -140,14 +140,14 @@ public class UIGrid {
             }
         }
 
-        else if (this.robotDirection.getDirection() == Direction.LEFT || this.robotDirection.getDirection() == Direction.RIGHT){
+        else if (this.robotDirection == Direction.LEFT || this.robotDirection == Direction.RIGHT){
 
             g.drawLine(xPosition + robotLocation.getX()*cellSize , yPosition + robotLocation.getY()*cellSize + cellSize / 2, xPosition + robotLocation.getX()*cellSize + cellSize, yPosition + robotLocation.getY()*cellSize  + cellSize / 2);
-            if(this.robotDirection.getDirection() == Direction.LEFT){
+            if(this.robotDirection == Direction.LEFT){
                 g.drawLine(xPosition + robotLocation.getX()*cellSize , yPosition + robotLocation.getY()*cellSize + cellSize / 2, xPosition + robotLocation.getX()*cellSize + cellSize / 4, yPosition + robotLocation.getY()*cellSize + 1 * cellSize / 4);
                 g.drawLine(xPosition + robotLocation.getX()*cellSize , yPosition + robotLocation.getY()*cellSize + cellSize / 2, xPosition + robotLocation.getX()*cellSize + cellSize / 4, yPosition + robotLocation.getY()*cellSize + 3 * cellSize / 4);
             }
-            else if(this.robotDirection.getDirection() == Direction.RIGHT){
+            else if(this.robotDirection == Direction.RIGHT){
                 g.drawLine(xPosition + robotLocation.getX()*cellSize + cellSize, yPosition + robotLocation.getY()*cellSize + cellSize / 2, xPosition + robotLocation.getX()*cellSize + 3 * cellSize / 4, yPosition + robotLocation.getY()*cellSize + 1 * cellSize / 4);
                 g.drawLine(xPosition + robotLocation.getX()*cellSize + cellSize, yPosition + robotLocation.getY()*cellSize + cellSize / 2, xPosition + robotLocation.getX()*cellSize + 3 * cellSize / 4, yPosition + robotLocation.getY()*cellSize + 3 * cellSize / 4);
             }

@@ -18,7 +18,7 @@ public class ModelTests {
     public void TestModelGrid() {
         GridLocation goal = new GridLocation(40, 40);
         GridLocation rPos = new GridLocation(0, 0);
-        Direction rDir = new Direction(0);
+        Direction rDir = Direction.RIGHT;
         ArrayList<GridLocation> walls = new ArrayList<>();
         ProgramState state = new ProgramState(rDir, rPos, walls, goal, 100);
         ModelGrid grid = new ModelGrid(200, 200, state);

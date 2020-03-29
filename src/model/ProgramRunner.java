@@ -138,19 +138,19 @@ public class ProgramRunner {
 
     private ProgramState move(ProgramState pState){
         GridLocation robotLocation;
-        switch(pState.getRobotDirection().getDirection()){
-            case Direction.UP:
+        switch(pState.getRobotDirection()){
+            case UP:
                 /*GridLocation has an add function so it would be more compact to write:
                 robotLocation = robotLocation.add(0,-1);*/
                 robotLocation = new GridLocation(pState.getRobotLocation().getX(), pState.getRobotLocation().getY() - 1);
                 break;
-            case Direction.RIGHT:
+            case RIGHT:
                 robotLocation = new GridLocation(pState.getRobotLocation().getX() + 1, pState.getRobotLocation().getY());
                 break;
-            case Direction.DOWN:
+            case DOWN:
                 robotLocation = new GridLocation(pState.getRobotLocation().getX(), pState.getRobotLocation().getY() + 1);
                 break;
-            case Direction.LEFT:
+            case LEFT:
                 robotLocation = new GridLocation(pState.getRobotLocation().getX() - 1, pState.getRobotLocation().getY());
                 break;
             default:

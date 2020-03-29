@@ -3,41 +3,27 @@ package utilities;
 /**
  * Class representing the direction of an element in Blockr.
  */
-public final class Direction{
+public enum Direction{
 
-    public static final int UP = 0;
-
-    public static final int RIGHT = 1;
-  
-    public static final int DOWN = 2;
-    
-    public static final int LEFT = 3;
-    
-    private final int direction;
-
-    public Direction(int direction){
-        if(direction >-1 && direction < 4){
-            this.direction = direction;
-        }
-        else{
-            throw new IllegalArgumentException("Invalid direction given");
-        }
-    }
-    
-    /**
-     * 
-     * @return the direction of the element.
-     */
-    public int getDirection() {
-        return this.direction;
-    }
+    UP, RIGHT, DOWN, LEFT;
 
     /**
      * Method to turn left.
      * @author Oberon Swings
      */
     public Direction turnLeft(){
-        return new Direction((this.getDirection() + 3) % 4); //plus 3 equals -1 in mod 4
+        switch (this){
+            case UP:
+                return LEFT;
+            case RIGHT:
+                return UP;
+            case DOWN:
+                return RIGHT;
+            case LEFT:
+                return DOWN;
+            default:
+                throw new IllegalArgumentException("Invalid direction given");
+        }
     }
 
     /**
@@ -45,32 +31,33 @@ public final class Direction{
      * @author Oberon Swings
      */
     public Direction turnRight(){
-        return new Direction((this.getDirection() + 1) % 4);
+        switch (this){
+            case UP:
+                return RIGHT;
+            case RIGHT:
+                return DOWN;
+            case DOWN:
+                return LEFT;
+            case LEFT:
+                return UP;
+            default:
+                throw new IllegalArgumentException("Invalid direction given");
+        }
     }
 
     @Override
     public String toString(){
-        switch(direction){
-            case 0:
-                return "UP";
-            case 1:
-                return "RIGHT";
-            case 2:
-                return "DOWN";
-            case 3:
-                return "LEFT";
+        switch(this){
+            case UP:
+                return "up";
+            case RIGHT:
+                return "right";
+            case DOWN:
+                return "down";
+            case LEFT:
+                return "left";
             default:
-                return "Invalid direction";
+                return "";
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean equals(Object o){
-        if (!(o instanceof Direction)) return false;
-        if (((Direction) o).getDirection() == this.getDirection()) return true;
-        else return false;
     }
 }

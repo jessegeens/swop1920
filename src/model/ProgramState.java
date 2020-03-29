@@ -14,7 +14,7 @@ public class ProgramState {
     private static final int CELL_SIZE = 50;
     private static final GridLocation GOAL_CELL = new GridLocation(5, 5);
     private static final GridLocation ROBOT_START_LOCATION = new GridLocation(0, 0);
-    private static final Direction ROBOT_START_DIRECTION = new Direction(Direction.RIGHT);
+    private static final Direction ROBOT_START_DIRECTION = Direction.RIGHT;
     private static final ArrayList<GridLocation> WALLS = new ArrayList<GridLocation>();
 
 

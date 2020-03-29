@@ -469,10 +469,10 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         Condition toBeReturned;
 
         if(not){
-            toBeReturned = new Condition(Condition.NOT_WALL_IN_FRONT);
+            toBeReturned = Condition.NOT_WALL_IN_FRONT;
         }
         else{
-            toBeReturned = new Condition(Condition.WALL_IN_FRONT);
+            toBeReturned = Condition.WALL_IN_FRONT;
         }
 
         return toBeReturned;

@@ -21,7 +21,7 @@ public class ModelWallInFrontBlock extends ModelBlock implements LeftPlug{
      */
     @Override
     public void disconnect() {
-        if (this.hasLeftPlug()){
+        if (this.getLeftPlug() != null){
             ((RightSocket)this.getLeftPlug()).setRightSocket(null);
             this.setLeftPlug(null);
         }

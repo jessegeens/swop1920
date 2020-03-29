@@ -35,19 +35,50 @@ public class ModelControllerTest {
     }
 
     @Test
-    public void handlePaletteMouseEvent() {
+    public void handlePaletteMouseDownEvent() {
         ModelController controller = new ModelController();
         controller.handleMouseEvent(501,new WindowLocation(40,40),1);
         assertEquals(controller.getPalette().getTurnLeftBlock().getBlockType().getType(), controller.getActiveBlock().getBlockType().getType());
     }
 
     @Test
-    public void handleProgramAreaMouseEvent() {
+    public void handlePaletteMouseUpEvent(){
+
+    }
+
+    @Test
+    public void handlePaletteMouseDragEvent(){
+
+    }
+
+    @Test
+    public void handleProgramAreaMouseDownEvent() {
         ModelController controller = new ModelController();
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));
         controller.getPArea().addBlock(forwardBlock);
         controller.handleMouseEvent(501,new WindowLocation(420,420),1);
         assertEquals(forwardBlock, controller.getActiveBlock());
     }
-    
+
+    @Test
+    public void handleProgramAreaMouseUpEvent(){
+
+    }
+
+    @Test
+    public void handleProgramAreaMouseDragEvent(){
+
+    }
+
+
+    @Test
+    public void wallInFrontBlockNullPointer(){
+        ModelController controller = new ModelController();
+        ModelWallInFrontBlock wallInFrontBlock = new ModelWallInFrontBlock(new WindowLocation(400,400), new Blocktype(Blocktype.WALLINFRONT));
+        controller.setActiveBlock(wallInFrontBlock);
+        controller.handleProgramAreaMouseEvent(502, new WindowLocation(420,420), 1);
+        controller.handleProgramAreaMouseEvent(501, new WindowLocation(440,440), 1);
+        assertEquals(wallInFrontBlock, controller.getActiveBlock());
+    }
+
 }

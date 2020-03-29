@@ -41,14 +41,6 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             ((TopSocket)this.getBottomPlug()).setTopSocket(null);
             this.setBottomPlug(null);
         }
-        /*if (this.getCavityPlug() != null){
-            ((TopSocket)this.getCavityPlug()).setTopSocket(null);
-            this.setCavityPlug(this);
-        }
-        if (this.getCavitySocket() != null){
-            ((BottomPlug)this.getCavitySocket()).setBottomPlug(null);
-            this.setCavitySocket(this);
-        }*/
         //The cavity should not be disconnected, I would rather move the cavity blocks with the while if block if this gets moved. -Oberon
     }
 

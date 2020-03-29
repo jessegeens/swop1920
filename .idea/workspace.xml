@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="bdfc6573-f389-4d9a-9e2c-4612aa30b1a8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/ModelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ModelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelWallInFrontBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelWallInFrontBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/model/ModelControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/ModelControllerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -79,7 +80,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ModelControllerTest.handleProgramAreaMouseEvent">
+  <component name="RunManager" selected="JUnit.ModelControllerTest.wallInFrontBlockNullPointer">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="swop1920" />
@@ -89,22 +90,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ModelControllerTest.handleKeyEventStart" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="swop1920" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="model" />
-      <option name="MAIN_CLASS_NAME" value="model.ModelControllerTest" />
-      <option name="METHOD_NAME" value="handleKeyEventStart" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -157,13 +142,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ModelControllerTest.wallInFrontBlockNullPointer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="swop1920" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="model" />
+      <option name="MAIN_CLASS_NAME" value="model.ModelControllerTest" />
+      <option name="METHOD_NAME" value="wallInFrontBlockNullPointer" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ModelControllerTest.wallInFrontBlockNullPointer" />
         <item itemvalue="JUnit.ModelControllerTest.handleProgramAreaMouseEvent" />
         <item itemvalue="JUnit.ModelControllerTest.handlePaletteMouseEvent" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.ModelControllerTest.handleKeyEventStop" />
-        <item itemvalue="JUnit.ModelControllerTest.handleKeyEventStart" />
       </list>
     </recent_temporary>
   </component>
@@ -217,6 +218,17 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/test/model/ModelControllerTest.java</url>
+          <line>78</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/swop1920$ModelProgramWindowTest_programWindowTest.ic" NAME="ModelProgramWindowTest.programWindowTest Coverage Results" MODIFIED="1584049446708" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

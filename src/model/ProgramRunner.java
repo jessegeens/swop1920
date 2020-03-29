@@ -7,8 +7,6 @@ import model.blocks.plugs.*;
 
 public class ProgramRunner {
 
-
-    private ModelBlock finishBlock;
     private boolean running;
     private ModelBlock current;
 
@@ -16,16 +14,17 @@ public class ProgramRunner {
         this.running = false;
     }
 
-    public void initialise(ModelBlock start, ModelBlock finish){
+    public void initialise(ModelBlock start){
         this.running = true;
-        this.finishBlock = finish;
         this.current = start;
+        this.current.setHighlight();
     }
 
     public void reset(){
-        current.setUnHighlight();
+        if (this.current != null){
+            this.current.setUnHighlight();
+        }
         this.running = false;
-        this.finishBlock = null;
         this.current = null;
     }
 
@@ -41,13 +40,19 @@ public class ProgramRunner {
         if(!(isRunning())){
             throw new IllegalStateException("tried executing the program without initialising it");
         }
-        System.out.println("now executing: " + current.getBlockType().getType());
-        if(this.current.equals(this.finishBlock)) {
+
+        if(this.current == null) {
             reset();
             return ProgramState.getInitialState();
         }
         else{
-            this.highlightNext(programState);
+            System.out.println("now executing: " + current.getBlockType().getType());
+            if (this.findNextBlock(programState) != null){
+                this.highlightNext(programState);
+            }
+            else{
+                this.current.setUnHighlight();
+            }
             ProgramState nextState = step(programState);
             this.current = findNextBlock(programState);
             System.out.println("programState: " + programState.toString());
@@ -99,15 +104,14 @@ public class ProgramRunner {
     /**
      * Returns the bottomplug if it is a normal block (move block) or if the condition of a WhileIf block fails 
      * If the condition of a WhileIfBlock succeeds it gives the first cavity block of the WhileIf block.
-     * 
-     * TODO: next block in execution // Maybe explain what is meant with this?
      * //This should point to the next block that has to be executed, this is needed so that when we step we know what block to run but also this one needs to be highlighted.
      * @return the next block that will be run in the program
+     * @author Oberon Swings
      */
     private ModelBlock findNextBlock(ProgramState programState){
         if ((current.getBlockType().getType() == Blocktype.IF) || (current.getBlockType().getType() == Blocktype.WHILE)){
             if (evaluateCurrentCondition(programState)){
-                return ((ModelWhileIfBlock)current).getCavitySocket();
+                return ((ModelWhileIfBlock)current).getCavityPlug();
             }
         }
         return ((BottomPlug)current).getBottomPlug();

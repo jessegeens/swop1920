@@ -182,7 +182,7 @@ public class ModelController{
             case 506: //MOUSE_DRAGGED
                 //if there is a currently held block, move it
                 System.out.println("MOUSE MOVED start");
-                this.moveBlock(this.getActiveBlock(), eventWindowLocation, false);
+                this.getActiveBlock().setPos(eventWindowLocation);
                 break;
             default:
                 break;
@@ -217,35 +217,14 @@ public class ModelController{
             System.out.println("MOUSE MOVED start");
                 if(this.getActiveBlock() != null){
                     if((int) 2 * MyCanvasWindow.WIDTH / 3 - this.getActiveBlock().getWidth() > eventWindowLocation.getX()){
-                        this.moveBlock(this.getActiveBlock(), eventWindowLocation, true);
+                        this.getActiveBlock().setPos(eventWindowLocation);
                     }
-                    
                 }
-                
                 break;
             default:
                 break;
         }
     }
-
-    //TODO: this doesn't seem right
-    /**
-     * 
-     * @param block block to move
-     * @param newPos new position the block should be at
-     * @param inProgramArea signify whether the block is moved into the program area
-     */
-    public void moveBlock(ModelBlock block, WindowLocation newPos, boolean inProgramArea){
-        if (block != null){
-            if(inProgramArea){
-                block.setPos(newPos);
-            }
-            else{
-                block.setPos(newPos);
-            }
-        }
-    }
-
 
     /**
      * 

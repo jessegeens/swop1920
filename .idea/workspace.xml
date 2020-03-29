@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="bdfc6573-f389-4d9a-9e2c-4612aa30b1a8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diagrams/sequence_diagrams/.add_block_sequence.vpp.lck" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/diagrams/sequence_diagrams/add_block_sequence.vpp" beforeDir="false" afterPath="$PROJECT_DIR$/diagrams/sequence_diagrams/add_block_sequence.vpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ModelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ModelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/ModelControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/ModelControllerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,6 +59,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="model.blocks" />
       <recent name="model" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
@@ -78,7 +79,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.ModelControllerTest.handleProgramAreaMouseEvent">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="swop1920" />
@@ -124,42 +125,45 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ModelWhileIfBlockTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ModelControllerTest.handlePaletteMouseEvent" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="model.blocks.*" />
+          <option name="PATTERN" value="model.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="model.blocks" />
-      <option name="MAIN_CLASS_NAME" value="model.blocks.ModelWhileIfBlockTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="model" />
+      <option name="MAIN_CLASS_NAME" value="model.ModelControllerTest" />
+      <option name="METHOD_NAME" value="handlePaletteMouseEvent" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="utilities in swop1920" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ModelControllerTest.handleProgramAreaMouseEvent" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="swop1920" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="utilities.*" />
+          <option name="PATTERN" value="model.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="utilities" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="PACKAGE_NAME" value="model" />
+      <option name="MAIN_CLASS_NAME" value="model.ModelControllerTest" />
+      <option name="METHOD_NAME" value="handleProgramAreaMouseEvent" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ModelControllerTest.handleProgramAreaMouseEvent" />
+        <item itemvalue="JUnit.ModelControllerTest.handlePaletteMouseEvent" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.ModelControllerTest.handleKeyEventStop" />
         <item itemvalue="JUnit.ModelControllerTest.handleKeyEventStart" />
-        <item itemvalue="JUnit.utilities in swop1920" />
-        <item itemvalue="JUnit.ModelWhileIfBlockTest" />
       </list>
     </recent_temporary>
   </component>
@@ -180,11 +184,6 @@
       <workItem from="1585164642900" duration="953000" />
     </task>
     <servers />
-  </component>
-  <component name="TestHistory">
-    <history-entry file="ModelControllerTest_handleKeyEventStop - 2020.03.25 at 20h 28m 05s.xml">
-      <configuration name="ModelControllerTest.handleKeyEventStop" configurationId="JUnit" />
-    </history-entry>
   </component>
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="49828000" />

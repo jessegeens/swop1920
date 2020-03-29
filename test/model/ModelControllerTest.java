@@ -35,23 +35,19 @@ public class ModelControllerTest {
     }
 
     @Test
-    public void handleMouseEvent() {
-
-    }
-
-    @Test
     public void handlePaletteMouseEvent() {
+        ModelController controller = new ModelController();
+        controller.handleMouseEvent(501,new WindowLocation(40,40),1);
+        assertEquals(controller.getPalette().getTurnLeftBlock().getBlockType().getType(), controller.getActiveBlock().getBlockType().getType());
     }
 
     @Test
     public void handleProgramAreaMouseEvent() {
+        ModelController controller = new ModelController();
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), new Blocktype(Blocktype.MOVEFORWARD));
+        controller.getPArea().addBlock(forwardBlock);
+        controller.handleMouseEvent(501,new WindowLocation(420,420),1);
+        assertEquals(forwardBlock, controller.getActiveBlock());
     }
-
-    @Test
-    public void moveBlock() {
-    }
-
-    @Test
-    public void getActiveBlock() {
-    }
+    
 }

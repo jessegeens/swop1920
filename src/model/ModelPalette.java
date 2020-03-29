@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 import model.blocks.*;
-import utilities.Blocktype;
+import utilities.BlockType;
 import utilities.WindowLocation;
 
 /**
@@ -30,13 +30,13 @@ class ModelPalette extends ModelWindow{
     // Constructor
     public ModelPalette(int width, int height){
         super(width,height);
-        this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftWindowLocation(), new Blocktype(Blocktype.TURNLEFT)));
-        this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightWindowLocation(), new Blocktype(Blocktype.TURNRIGHT)));
-        this.setForwardBlock(new ModelMoveBlock(this.getForwardWindowLocation(), new Blocktype(Blocktype.MOVEFORWARD)));
-        this.setNotBlock(new ModelNotBlock(this.getNotWindowLocation(),new Blocktype(Blocktype.NOT)));
-        this.setWallInFrontBlock(new ModelWallInFrontBlock(this.getWallInFrontWindowLocation(),new Blocktype(Blocktype.WALLINFRONT)));
-        this.setWhileBlock(new ModelWhileIfBlock(this.getWhileWindowLocation(),new Blocktype(Blocktype.WHILE)));
-        this.setIfBlock(new ModelWhileIfBlock(this.getIfWindowLocation(),new Blocktype(Blocktype.IF)));
+        this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftWindowLocation(), BlockType.TURNLEFT));
+        this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightWindowLocation(), BlockType.TURNRIGHT));
+        this.setForwardBlock(new ModelMoveBlock(this.getForwardWindowLocation(), BlockType.MOVEFORWARD));
+        this.setNotBlock(new ModelNotBlock(this.getNotWindowLocation(), BlockType.NOT));
+        this.setWallInFrontBlock(new ModelWallInFrontBlock(this.getWallInFrontWindowLocation(), BlockType.WALLINFRONT));
+        this.setWhileBlock(new ModelWhileIfBlock(this.getWhileWindowLocation(), BlockType.WHILE));
+        this.setIfBlock(new ModelWhileIfBlock(this.getIfWindowLocation(), BlockType.IF));
     }
 
     /**
@@ -59,27 +59,27 @@ class ModelPalette extends ModelWindow{
             setIfBlock(null);
         }
         else{
-            switch(blk.getBlockType().getType()){
-                case Blocktype.IF:
-                    this.setIfBlock(new ModelWhileIfBlock(this.getIfWindowLocation(),new Blocktype(Blocktype.IF)));
+            switch(blk.getBlockType()){
+                case IF:
+                    this.setIfBlock(new ModelWhileIfBlock(this.getIfWindowLocation(), BlockType.IF));
                     break;
-                case Blocktype.WHILE:
-                    this.setWhileBlock(new ModelWhileIfBlock(this.getWhileWindowLocation(),new Blocktype(Blocktype.WHILE)));
+                case WHILE:
+                    this.setWhileBlock(new ModelWhileIfBlock(this.getWhileWindowLocation(), BlockType.WHILE));
                     break;
-                case Blocktype.MOVEFORWARD:
-                    this.setForwardBlock(new ModelMoveBlock(this.getForwardWindowLocation(), new Blocktype(Blocktype.MOVEFORWARD)));
+                case MOVEFORWARD:
+                    this.setForwardBlock(new ModelMoveBlock(this.getForwardWindowLocation(), BlockType.MOVEFORWARD));
                     break;
-                case Blocktype.TURNLEFT:
-                    this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftWindowLocation(), new Blocktype(Blocktype.TURNLEFT)));
+                case TURNLEFT:
+                    this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftWindowLocation(), BlockType.TURNLEFT));
                     break;
-                case Blocktype.TURNRIGHT:
-                    this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightWindowLocation(), new Blocktype(Blocktype.TURNRIGHT)));
+                case TURNRIGHT:
+                    this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightWindowLocation(), BlockType.TURNRIGHT));
                     break;
-                case Blocktype.WALLINFRONT:
-                    this.setWallInFrontBlock(new ModelWallInFrontBlock(this.getWallInFrontWindowLocation(),new Blocktype(Blocktype.WALLINFRONT)));
+                case WALLINFRONT:
+                    this.setWallInFrontBlock(new ModelWallInFrontBlock(this.getWallInFrontWindowLocation(), BlockType.WALLINFRONT));
                     break;
-                case Blocktype.NOT:
-                    this.setNotBlock(new ModelNotBlock(this.getNotWindowLocation(),new Blocktype(Blocktype.NOT)));
+                case NOT:
+                    this.setNotBlock(new ModelNotBlock(this.getNotWindowLocation(), BlockType.NOT));
                     break;
             }
         }    
@@ -89,13 +89,13 @@ class ModelPalette extends ModelWindow{
      * Reset all the blocks after the total amount of blocks is lower than the maximum
      */
     public void resetBlocks(){
-        this.setIfBlock(new ModelWhileIfBlock(this.getIfWindowLocation(),new Blocktype(Blocktype.IF)));
-        this.setWhileBlock(new ModelWhileIfBlock(this.getWhileWindowLocation(),new Blocktype(Blocktype.WHILE)));
-        this.setForwardBlock(new ModelMoveBlock(this.getForwardWindowLocation(), new Blocktype(Blocktype.MOVEFORWARD)));
-        this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftWindowLocation(), new Blocktype(Blocktype.TURNLEFT)));
-        this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightWindowLocation(), new Blocktype(Blocktype.TURNRIGHT)));
-        this.setWallInFrontBlock(new ModelWallInFrontBlock(this.getWallInFrontWindowLocation(),new Blocktype(Blocktype.WALLINFRONT)));
-        this.setNotBlock(new ModelNotBlock(this.getNotWindowLocation(),new Blocktype(Blocktype.NOT)));
+        this.setIfBlock(new ModelWhileIfBlock(this.getIfWindowLocation(), BlockType.IF));
+        this.setWhileBlock(new ModelWhileIfBlock(this.getWhileWindowLocation(), BlockType.WHILE));
+        this.setForwardBlock(new ModelMoveBlock(this.getForwardWindowLocation(), BlockType.MOVEFORWARD));
+        this.setTurnLeftBlock(new ModelMoveBlock(this.getTurnLeftWindowLocation(), BlockType.TURNLEFT));
+        this.setTurnRightBlock(new ModelMoveBlock(this.getTurnRightWindowLocation(), BlockType.TURNRIGHT));
+        this.setWallInFrontBlock(new ModelWallInFrontBlock(this.getWallInFrontWindowLocation(), BlockType.WALLINFRONT));
+        this.setNotBlock(new ModelNotBlock(this.getNotWindowLocation(), BlockType.NOT));
     }
 
     /**

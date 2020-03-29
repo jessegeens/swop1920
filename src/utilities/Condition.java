@@ -15,7 +15,7 @@ public final class Condition{
 
     /**
      * Constructor for the condition
-     * @param condtion the condtion
+     * @param condition the condtion
      */
     public Condition(int condition){
         if(condition >-1 && condition < 2){
@@ -38,25 +38,27 @@ public final class Condition{
      * 
      * @return the name of the condition.
      */
+    /*
     public String getTitle(){
         switch(this.condition){
-            case Blocktype.IF:
+            case BlockType.IF:
                 return "IF";
-            case Blocktype.WHILE:
+            case BlockType.WHILE:
                 return "WHILE";
-            case Blocktype.MOVEFORWARD:
+            case BlockType.MOVEFORWARD:
                 return "Move F";
-            case Blocktype.TURNLEFT:
+            case BlockType.TURNLEFT:
                 return "Turn L";
-            case Blocktype.TURNRIGHT:
+            case BlockType.TURNRIGHT:
                 return "Turn R";
-            case Blocktype.WALLINFRONT:
+            case BlockType.WALLINFRONT:
                 return "Wall In F";
-            case Blocktype.NOT:
+            case BlockType.NOT:
                 return "NOT";
             default:
                 return "error";
         }
-    }
+    }*/
+    //What is all this? there should only be two conditions wallInFront and notWallInFront. -Oberon
 
 }

@@ -1,7 +1,7 @@
 package model.blocks;
 
 import model.blocks.plugs.*;
-import utilities.Blocktype;
+import utilities.BlockType;
 import utilities.WindowLocation;
 
 /**
@@ -12,7 +12,7 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
     private ModelBlock topSocket;
     private ModelBlock bottomPlug;
     
-    public ModelMoveBlock(WindowLocation pos, Blocktype type) {
+    public ModelMoveBlock(WindowLocation pos, BlockType type) {
         super(pos,type);
         this.setTopSocket(null);
         this.setBottomPlug(null);

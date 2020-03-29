@@ -116,53 +116,38 @@ public class UIBlock extends UIElement {
 
         
     
-        switch (this.getType().getType()){
-            case(Blocktype.IF):
-            case(Blocktype.WHILE):
+        switch (this.getType()){
+            case IF:
+            case WHILE:
                 this.renderInnerBlock(g);
                 this.renderBottomPlug(g);
                 this.renderTopSocket(g);
                 this.renderRightSocket(g);
                 this.renderCavityPlug(g);
                 this.renderCavitySocket(g);
-
-                
-                
                 break;
-            case(Blocktype.MOVEFORWARD):
-            case(Blocktype.TURNLEFT):
-            case(Blocktype.TURNRIGHT):
+            case MOVEFORWARD:
+            case TURNLEFT:
+            case TURNRIGHT:
                 this.renderInnerBlock(g);
                 this.renderBottomPlug(g);
                 this.renderTopSocket(g);
                 this.renderNoRightSocket(g);
-                
-                
                 break;
-            case(Blocktype.NOT):
+            case NOT:
                 this.renderInnerBlock(g);
                 this.renderNoTopSocket(g);
                 this.renderRightSocket(g);
                 this.renderLeftPlug(g);
-                
-                
-                
                 break;
-            case(Blocktype.WALLINFRONT):
+            case WALLINFRONT:
                 this.renderInnerBlock(g);
                 this.renderLeftPlug(g);
                 this.renderNoRightSocket(g);
                 this.renderNoTopSocket(g);
-                
-                
                 break;
             default:
-                
                 break;
-
-            
-
-                
         }
 
         g.setColor(Color.WHITE);
@@ -186,7 +171,7 @@ public class UIBlock extends UIElement {
      * @author Bert De Vleeschouwer
      */
     public WindowLocation getCavitySocketPos(){
-        if (this.getmBlock().getBlockType().getType() == Blocktype.WHILE || this.getmBlock().getBlockType().getType() == Blocktype.IF){
+        if (this.getmBlock().getBlockType() == BlockType.WHILE || this.getmBlock().getBlockType() == BlockType.IF){
             return ((ModelWhileIfBlock)this.getmBlock()).getCavitySocketPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
         }
         return new WindowLocation(0,0);
@@ -198,7 +183,7 @@ public class UIBlock extends UIElement {
      * @author Bert De Vleeschouwer
      */
     public WindowLocation getCavityPlugPos(){
-        if (this.getmBlock().getBlockType().getType() == Blocktype.WHILE || this.getmBlock().getBlockType().getType() == Blocktype.IF){
+        if (this.getmBlock().getBlockType() == BlockType.WHILE || this.getmBlock().getBlockType() == BlockType.IF){
             return ((ModelWhileIfBlock)this.getmBlock()).getCavityPlugPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
         }
         return new WindowLocation(0,0);
@@ -280,7 +265,7 @@ public class UIBlock extends UIElement {
      *
      * @return the type of the modelBlock
      */
-    public Blocktype getType() {
+    public BlockType getType() {
         return this.getmBlock().getBlockType();
     }
 }

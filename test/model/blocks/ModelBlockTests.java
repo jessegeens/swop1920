@@ -12,9 +12,9 @@ public class ModelBlockTests {
     @Test
     public void connectAndDisconnectTest() {
         WindowLocation loc1 = new WindowLocation(0, 0);
-        ModelMoveBlock mmb1 = new ModelMoveBlock(loc1, new Blocktype(Blocktype.MOVEFORWARD));
+        ModelMoveBlock mmb1 = new ModelMoveBlock(loc1, BlockType.MOVEFORWARD);
         WindowLocation loc2 = new WindowLocation(10, 110);
-        ModelMoveBlock mmb2 = new ModelMoveBlock(loc2, new Blocktype(Blocktype.MOVEFORWARD));
+        ModelMoveBlock mmb2 = new ModelMoveBlock(loc2, BlockType.MOVEFORWARD);
         mmb1.connect(mmb2);
         assertEquals(mmb1.getBottomPlug(), mmb2);
         mmb1.disconnect();
@@ -26,8 +26,8 @@ public class ModelBlockTests {
     public void illegalConnectionTest(){
         WindowLocation loc1 = new WindowLocation(0,0);
         WindowLocation loc2 = new WindowLocation(150, 150);
-        ModelMoveBlock mmb1 = new ModelMoveBlock(loc1, new Blocktype(Blocktype.TURNLEFT));
-        ModelMoveBlock mmb2 = new ModelMoveBlock(loc2, new Blocktype(Blocktype.MOVEFORWARD));
+        ModelMoveBlock mmb1 = new ModelMoveBlock(loc1, BlockType.TURNLEFT);
+        ModelMoveBlock mmb2 = new ModelMoveBlock(loc2, BlockType.MOVEFORWARD);
         mmb1.connect(mmb2);
         assertNull(mmb1.getBottomPlug());
     }
@@ -36,8 +36,8 @@ public class ModelBlockTests {
     public void connectAndDisconnectTest2() {
         WindowLocation loc1 = new WindowLocation(120, 0);
         WindowLocation loc2 = new WindowLocation(0, 0);
-        ModelNotBlock mnb1 = new ModelNotBlock(loc1, new Blocktype(Blocktype.NOT));
-        ModelWhileIfBlock mwb = new ModelWhileIfBlock(loc2, new Blocktype(Blocktype.WHILE));
+        ModelNotBlock mnb1 = new ModelNotBlock(loc1, BlockType.NOT);
+        ModelWhileIfBlock mwb = new ModelWhileIfBlock(loc2, BlockType.WHILE);
         mwb.connect(mnb1);
         assertEquals(mwb.getRightSocket(), mnb1);
     }
@@ -46,8 +46,8 @@ public class ModelBlockTests {
     public void connectAndDisconnectTest3() {
         WindowLocation loc1 = new WindowLocation(100, 100);
         WindowLocation loc2 = new WindowLocation(220, 100);
-        ModelNotBlock mnb = new ModelNotBlock(loc1, new Blocktype(Blocktype.NOT));
-        ModelWallInFrontBlock mwb = new ModelWallInFrontBlock(loc2, new Blocktype(Blocktype.WALLINFRONT));
+        ModelNotBlock mnb = new ModelNotBlock(loc1, BlockType.NOT);
+        ModelWallInFrontBlock mwb = new ModelWallInFrontBlock(loc2, BlockType.WALLINFRONT);
         mnb.connect(mwb);
         assertEquals(mnb.getRightSocket(), mwb);
         mwb.disconnect();

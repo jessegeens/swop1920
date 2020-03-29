@@ -214,7 +214,7 @@ public class ModelProgramArea extends ModelWindow{
             System.out.println("INDEX IN LIST");
             System.out.println(i);
             System.out.println("CURRENT BLOCK ID");
-            System.out.println(this.getPABlocks().get(i).getBlockType().getType());
+            System.out.println(this.getPABlocks().get(i).getBlockType());
 
             if (block.hasTopSocket() && current.hasBottomPlug() && ((TopSocket)block).getTopSocketPos().getDistance(((BottomPlug)current).getBottomPlugPos()) < d){
                 closest = current;
@@ -268,7 +268,7 @@ public class ModelProgramArea extends ModelWindow{
         ModelBlock closest = this.findClosestBlock(activeB);
         if (closest != null){
             System.out.println("CLOSEST IS NOT NULL");
-            System.out.println(closest.getBlockType().getType());
+            System.out.println(closest.getBlockType());
             System.out.println("list length2");
             System.out.println(this.getPABlocks().size());
             activeB.connect(closest);

@@ -13,25 +13,16 @@ public class UtilitiesTests {
 
     @Test
     public void getRightType() {
-        Blocktype blkt = new Blocktype(1);
-        assertEquals(1, blkt.getType());
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void getWrongType() {
-        Blocktype blkt = new Blocktype(-1);
+        BlockType blkt = BlockType.MOVEFORWARD;
+        assertEquals(BlockType.MOVEFORWARD, blkt);
     }
 
     @Test
     public void getRightTitle() {
-        Blocktype blkt = new Blocktype(5);
-        assertEquals("Wall in front", blkt.getTitle());
+        BlockType blkt = BlockType.WALLINFRONT;
+        assertEquals("wall in front", blkt.getTitle());
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void getWrongTitle() {
-        Blocktype blkt = new Blocktype(7);
-    }
 
     @Test
     public void getDistanceIsZero() {

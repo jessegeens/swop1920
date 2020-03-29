@@ -6,8 +6,25 @@
   <component name="ChangeListManager">
     <list default="true" id="bdfc6573-f389-4d9a-9e2c-4612aa30b1a8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/ModelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ModelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ModelPalette.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ModelPalette.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ModelProgramArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ModelProgramArea.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/ProgramRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ProgramRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelMoveBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelMoveBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelNotBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelNotBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelWallInFrontBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelWallInFrontBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/blocks/UIBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/blocks/UIBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utilities/Blocktype.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/BlockType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utilities/Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/Condition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/main/GlobalControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/main/GlobalControllerTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/ModelControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/ModelControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/ModelPaletteTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/ModelPaletteTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/ModelProgramAreaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/ModelProgramAreaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/ModelTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/ModelTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/blocks/ModelBlockTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/blocks/ModelBlockTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/model/blocks/ModelWhileIfBlockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/blocks/ModelWhileIfBlockTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/utilities/UtilitiesTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/utilities/UtilitiesTests.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,11 +48,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="950" />
-    <option name="width" value="980" />
-    <option name="height" value="1040" />
   </component>
   <component name="ProjectId" id="1ZFwflAwkPNV1YEe8VtxTXi74Ym" />
   <component name="ProjectLevelVcsManager">

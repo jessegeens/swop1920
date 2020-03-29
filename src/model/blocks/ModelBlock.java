@@ -11,7 +11,7 @@ import utilities.*;
 public abstract class ModelBlock extends ModelElement{
 
     public static final int PLUGSIZE = 20;
-    private final Blocktype type;
+    private final BlockType type;
 
     public static final int STD_WIDTH = 80; //final standard width of blocks
     public static final int STD_HEIGHT = 80; //final standard height of blocks
@@ -19,7 +19,7 @@ public abstract class ModelBlock extends ModelElement{
     private boolean highlighted = false;
     
     // Constructor
-    public ModelBlock(WindowLocation pos, Blocktype type){
+    public ModelBlock(WindowLocation pos, BlockType type){
         super(pos);
         this.type = type;
     }
@@ -119,7 +119,7 @@ public abstract class ModelBlock extends ModelElement{
      * 
      * @return {Blocktype} the Blocktype of this block
      */
-    public Blocktype getBlockType() {
+    public BlockType getBlockType() {
 		return this.type;
     }
 

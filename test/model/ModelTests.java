@@ -39,7 +39,7 @@ public class ModelTests {
     public void testModelPalette() {
         ModelPalette mP = new ModelPalette(200, 200);
         WindowLocation loc = new WindowLocation(10, 10);
-        Blocktype bt = new Blocktype(Blocktype.MOVEFORWARD);
+        BlockType bt = BlockType.MOVEFORWARD;
         ModelMoveBlock blk = new ModelMoveBlock(loc, bt);
         mP.blockToProgramArea(blk, false);
         mP.blockToProgramArea(blk, true);
@@ -56,14 +56,14 @@ public class ModelTests {
     public void programWindowTest() {
         ModelProgramArea pw = new ModelProgramArea(200, 200);
         WindowLocation pos1 = new WindowLocation(180, 10);
-        Blocktype type1 = new Blocktype(Blocktype.WHILE);
+        BlockType type1 = BlockType.WHILE;
         ModelWhileIfBlock block1 = new ModelWhileIfBlock(pos1, type1);
         WindowLocation pos2 = new WindowLocation(180, 130);
-        Blocktype type2 = new Blocktype(Blocktype.WHILE);
+        BlockType type2 = BlockType.WHILE;
         ModelWhileIfBlock block2  = new ModelWhileIfBlock(pos2, type2);
         block1.connect(block2);
         WindowLocation pos3 = new WindowLocation(20,20);
-        Blocktype type3 = new Blocktype(Blocktype.NOT);
+        BlockType type3 = BlockType.NOT;
         ModelNotBlock block3 = new ModelNotBlock(pos3, type3);
         pw.addBlock(block1);
         pw.addBlock(block2);

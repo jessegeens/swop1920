@@ -13,7 +13,7 @@ public class ModelPaletteTest {
     public void blockToProgramWindow() {
         ModelPalette palette = new ModelPalette(1000,1000);
         palette.setTurnLeftBlock(null);
-        ModelBlock blk = new ModelMoveBlock(new WindowLocation(100,100),new Blocktype(Blocktype.TURNLEFT));
+        ModelBlock blk = new ModelMoveBlock(new WindowLocation(100,100), BlockType.TURNLEFT);
         palette.blockToProgramArea(blk,false);
         assertEquals(7, palette.getPaletteBlocks().size());
     }
@@ -22,7 +22,7 @@ public class ModelPaletteTest {
     public void blockToProgramWindowLimit() {
         ModelPalette palette = new ModelPalette(1000,1000);
         palette.setTurnLeftBlock(null);
-        ModelBlock blk = new ModelMoveBlock(new WindowLocation(100,100),new Blocktype(Blocktype.TURNLEFT));
+        ModelBlock blk = new ModelMoveBlock(new WindowLocation(100,100), BlockType.TURNLEFT);
         palette.blockToProgramArea(blk,true);
         assertEquals(0, palette.getPaletteBlocks().size());
     }

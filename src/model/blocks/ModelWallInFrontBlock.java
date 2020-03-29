@@ -10,7 +10,7 @@ public class ModelWallInFrontBlock extends ModelBlock implements LeftPlug{
     private ModelBlock leftPlug;
 
     // Constructor
-    public ModelWallInFrontBlock(WindowLocation pos, Blocktype type){
+    public ModelWallInFrontBlock(WindowLocation pos, BlockType type){
         super(pos,type);
         this.setLeftPlug(null);
     }

@@ -17,7 +17,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     private ModelBlock cavityPlug;
 
     // Constructor
-    public ModelWhileIfBlock(WindowLocation pos, Blocktype type){
+    public ModelWhileIfBlock(WindowLocation pos, BlockType type){
         super(pos,type);
 
         this.setTopSocket(null);

@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 import utilities.*;
 import model.blocks.*;
 import model.blocks.plugs.*;
@@ -46,7 +45,7 @@ public class ProgramRunner {
             return ProgramState.getInitialState();
         }
         else{
-            System.out.println("now executing: " + current.getBlockType().getType());
+            System.out.println("now executing: " + current.getBlockType());
             if (this.findNextBlock(programState) != null){
                 this.highlightNext(programState);
             }
@@ -64,22 +63,21 @@ public class ProgramRunner {
      * This function executes one step of the program
      */
     private ProgramState step(ProgramState pState){
-        switch(current.getBlockType().getType()){
-            case(Blocktype.MOVEFORWARD):
+        switch(current.getBlockType()){
+            case MOVEFORWARD:
                 if(validPosition(move(pState))){
                     return move(pState);
                 } else {
                     this.reset();
                 }
                 break;
-            case(Blocktype.TURNLEFT):
+            case TURNLEFT:
                 Direction directionL = pState.getRobotDirection().turnLeft();
                 return ProgramState.generateNew(pState, directionL, pState.getRobotLocation());
-            case(Blocktype.TURNRIGHT):
+            case TURNRIGHT:
                 Direction directionR = pState.getRobotDirection().turnRight();
                 return ProgramState.generateNew(pState, directionR, pState.getRobotLocation());
             default:
-                //TODO: what with other blocktypes? *MoveForwardBlock needs to move the robot in it's direction, others do nothing with the state except change current block*
                 break;
         }
         return null;
@@ -109,7 +107,7 @@ public class ProgramRunner {
      * @author Oberon Swings
      */
     private ModelBlock findNextBlock(ProgramState programState){
-        if ((current.getBlockType().getType() == Blocktype.IF) || (current.getBlockType().getType() == Blocktype.WHILE)){
+        if ((current.getBlockType() == BlockType.IF) || (current.getBlockType() == BlockType.WHILE)){
             if (evaluateCurrentCondition(programState)){
                 return ((ModelWhileIfBlock)current).getCavityPlug();
             }

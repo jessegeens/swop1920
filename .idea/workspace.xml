@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bdfc6573-f389-4d9a-9e2c-4612aa30b1a8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/model/ModelControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/ModelControllerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -228,6 +227,9 @@
     </SUITE>
     <SUITE FILE_PATH="coverage/swop1920$UtilitiesTests.ic" NAME="UtilitiesTests Coverage Results" MODIFIED="1584098413372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>utilities.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/swop1920$ModelControllerTest.ic" NAME="ModelControllerTest Coverage Results" MODIFIED="1585474646292" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>model.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/swop1920$ModelWhileIfBlockTest.ic" NAME="ModelWhileIfBlockTest Coverage Results" MODIFIED="1584872982919" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>model.blocks.*</FILTER>

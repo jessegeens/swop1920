@@ -20,45 +20,6 @@ public class ModelNotBlock extends ModelBlock{
         connectionPoints.add(ConnectionPoint.RIGHTSOCKET);
         super.setConnectionPoints(connectionPoints);
     }
-
-    /**
-     * {@inheritDoc}
-     * @author Oberon Swings
-     */
-    @Override
-    public void disconnect() {
-        if (this.getRightSocket() != null){
-            this.getRightSocket().setLeftPlug(null);
-            this.setRightSocket(null);
-        }
-        if (this.getLeftPlug() != null){
-            this.getLeftPlug().setRightSocket(null);
-            this.setLeftPlug(null);
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     * @author Oberon Swings
-     */
-    @Override
-    public void connect(ModelBlock block) {
-        if (block.hasLeftPlug() && (this.getRightSocketPos().getDistance(block.getLeftPlugPos()) < ModelBlock.PLUGSIZE * 1.5)
-        && block.getLeftPlug() == null){
-            System.out.println("NOT CONNECTS LEFT");
-            this.setRightSocket(block);
-            block.setLeftPlug(this);
-            this.setRightSocketPos(block.getLeftPlugPos());
-        }
-        if ((block.hasRightSocket()) && (this.getLeftPlugPos().getDistance(block.getRightSocketPos()) < ModelBlock.PLUGSIZE * 1.5)
-        && block.getRightSocket() == null){
-            System.out.println("NOT CONNECTS RIGHT");
-            this.setLeftPlug(block);
-            block.setRightSocket(this);
-            this.setLeftPlugPos(block.getRightSocketPos());
-        }
-        
-    }
     
     /**
      * {@inheritDoc}

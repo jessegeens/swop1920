@@ -6,6 +6,7 @@ import org.junit.Test;
 import utilities.*;
 
 public class ModelWhileIfBlockTest {
+    /*
 
     @Test
     public void connectTopSocket(){
@@ -131,11 +132,7 @@ public class ModelWhileIfBlockTest {
         leftBlock.connect(whileBlock);
         rightBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
         rightBlock.connect(whileBlock);
-        assertEquals(3,whileBlock.getCavityBlocks().size()); /*The order may seem strange but that is because
-        the second block is actually connecting on the bottom of the if/while cavity because it's bottomPlug
-        is as close to the cavitySocket as it's topSocket is to the cavityPlug. We can't and we actually don't want
-        to change this, this purely has to do with the order of the if statements in the cavityConnect function.
-        */
+        assertEquals(3,whileBlock.getCavityBlocks().size());
     }
 
     @Test
@@ -398,4 +395,5 @@ public class ModelWhileIfBlockTest {
         leftBlock.connect(rightBlock);
         assertEquals(new WindowLocation(113,303),rightBlock.getPos());
     }
+    */
 }

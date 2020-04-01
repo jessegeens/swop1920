@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 public class GlobalControllerTests {
-
+/*
     @Test
     public void globalControllerTest() {
         GlobalController gC = new GlobalController();
@@ -111,4 +111,6 @@ public class GlobalControllerTests {
         //gC.execute();
         //assertEquals(1, gC.getModelController().getGrid().getRobotPos().getX());
     }
+
+ */
 }

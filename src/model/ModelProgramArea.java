@@ -11,11 +11,13 @@ import model.blocks.*;
 public class ModelProgramArea extends ModelWindow{
 
     private ArrayList<ModelBlock> blocks;
+    private ConnectionController CC;
 
     // Constructor
     public ModelProgramArea(int width, int height){
         super(width, height);
         this.setBlocks(new ArrayList<ModelBlock>());
+        CC = new ConnectionController();
     }
 
     /**
@@ -90,18 +92,18 @@ public class ModelProgramArea extends ModelWindow{
                 if (!(blk.equals(blk1))){
                     System.out.println("blk1");
                     if (blk.hasRightSocket() && blk1.hasLeftPlug() && blk.getRightSocketPos().equals(blk1.getLeftPlugPos())){
-                        blk.connect(blk1);
+                        CC.connect(blk,blk1);
                         System.out.println("if1");
                     }
                     System.out.println("else1");
                     if (blk.hasTopSocket() && blk1.hasBottomPlug() && blk.getTopSocketPos().equals(blk1.getBottomPlugPos())){
-                        blk.connect(blk1);
+                        CC.connect(blk,blk1);
                         System.out.println("if2");
                     }
                     System.out.println("else2");
                     if (blk instanceof ModelWhileIfBlock && ((blk1.hasTopSocket() && ((ModelWhileIfBlock) blk).getCavityPlugPos().equals(blk1.getTopSocketPos()))
                             || (blk1.hasBottomPlug() && ((ModelWhileIfBlock) blk).getCavitySocketPos().equals(blk1.getBottomPlugPos())))){
-                        blk.connect(blk1);
+                        CC.connect(blk, blk1);
                         System.out.println("if3");
                     }
                     System.out.println("end blk1");
@@ -161,7 +163,7 @@ public class ModelProgramArea extends ModelWindow{
      * @param toBeRemoved block that should be removed
      */
     public void removeBlock(ModelBlock toBeRemoved){
-        toBeRemoved.disconnect();
+        CC.disconnect(toBeRemoved);
         this.getPABlocks().remove(toBeRemoved);
         if(toBeRemoved instanceof ModelWhileIfBlock){
             for (ModelBlock block : ((ModelWhileIfBlock) toBeRemoved).getCavityBlocks()){
@@ -270,7 +272,7 @@ public class ModelProgramArea extends ModelWindow{
             System.out.println(closest.getBlockType());
             System.out.println("list length2");
             System.out.println(this.getPABlocks().size());
-            activeB.connect(closest);
+            CC.connect(activeB, closest);
             System.out.println("connection made");
             this.updateConnections();
             System.out.println("connections updated");

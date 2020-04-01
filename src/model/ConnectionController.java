@@ -5,6 +5,9 @@ import model.blocks.*;
 public class ConnectionController {
 
 
+    public ConnectionController() {
+    }
+
     /**
      * Disconnecting by setting the connections of block a to null.
      * @param a the modelBlock which is disconnected
@@ -60,33 +63,39 @@ public class ConnectionController {
      */
     public void connect(ModelBlock a, ModelBlock b) {
         boolean connected;
-        if ((a instanceof ModelWhileIfBlock && b.hasBottomPlug() && ((ModelWhileIfBlock)a).getCavitySocketPos().getDistance(b.getBottomPlugPos()) < ModelBlock.PLUGSIZE)
-                || (b.hasTopSocket() && ((ModelWhileIfBlock)a).getCavityPlugPos().getDistance(b.getTopSocketPos()) < ModelBlock.PLUGSIZE)){
+        if ((a instanceof ModelWhileIfBlock && b.hasBottomPlug()) || (a instanceof ModelWhileIfBlock && b.hasTopSocket())){
             connected = connectCavity(((ModelWhileIfBlock)a), b);
             if (connected) return;
         }
-        else if ((b instanceof ModelWhileIfBlock && a.hasBottomPlug() && ((ModelWhileIfBlock)b).getCavitySocketPos().getDistance(a.getBottomPlugPos()) < ModelBlock.PLUGSIZE)
-                || (a.hasTopSocket() && ((ModelWhileIfBlock)b).getCavityPlugPos().getDistance(a.getTopSocketPos()) < ModelBlock.PLUGSIZE)){
+        else if ((b instanceof ModelWhileIfBlock && a.hasBottomPlug()) || (b instanceof ModelWhileIfBlock && a.hasTopSocket())){
             connected = connectCavity(((ModelWhileIfBlock)b), a);
             if (connected) return;
         }
-        if (b.hasBottomPlug() && (a.getTopSocketPos().getDistance(b.getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5)
-                && b.getBottomPlug() == null){
+        if (a.isInCavity()){
+            this.connectIntoCavity(((ModelWhileIfBlock)a.getSurroundingWhileIfBlock()),a,b);
+        }
+        else if (b.isInCavity()){
+            this.connectIntoCavity(((ModelWhileIfBlock)b.getSurroundingWhileIfBlock()),a,b);
+        }
+        if (a.hasTopSocket() && b.hasBottomPlug() && b.getBottomPlug() == null){
             a.setTopSocket(b);
             b.setBottomPlug(a);
-            a.setTopSocketPos(b.getBottomPlugPos());
+            //a.setTopSocketPos(b.getBottomPlugPos());
         }
-        else if (b.hasTopSocket() && (a.getBottomPlugPos().getDistance(b.getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5)
-                && b.getTopSocket() == null){
+        else if (a.hasBottomPlug() && b.hasTopSocket() && b.getTopSocket() == null){
             a.setBottomPlug(b);
             b.setTopSocket(a);
-            a.setBottomPlugPos(b.getTopSocketPos());
+            //a.setBottomPlugPos(b.getTopSocketPos());
         }
-        else if (b.hasLeftPlug() && (a.getRightSocketPos().getDistance(b.getLeftPlugPos()) < ModelBlock.PLUGSIZE * 1.5)
-                && b.getLeftPlug() == null){
+        else if (a.hasRightSocket() && b.hasLeftPlug() && b.getLeftPlug() == null){
             a.setRightSocket(b);
             b.setLeftPlug(a);
-            a.setRightSocketPos(b.getLeftPlugPos());
+            //a.setRightSocketPos(b.getLeftPlugPos());
+        }
+        else if (a.hasLeftPlug() && b.hasRightSocket() && b.getLeftPlug() == null){
+            a.setLeftPlug(b);
+            b.setRightSocket(a);
+            //a.setRightSocketPos(b.getLeftPlugPos());
         }
     }
 

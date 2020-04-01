@@ -13,6 +13,7 @@ import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.*;
 
 public class ModelTests {
+    /*
 
     @Test
     public void TestModelGrid() {
@@ -73,4 +74,6 @@ public class ModelTests {
         pw.removeBlock(block3);
         assertEquals(2, pw.getPABlocks().size());
     }
+
+     */
 }

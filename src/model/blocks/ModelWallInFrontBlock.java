@@ -21,37 +21,6 @@ public class ModelWallInFrontBlock extends ModelBlock{
 
     /**
      * {@inheritDoc}
-     * @author Oberon Swings
-     */
-    @Override
-    public void disconnect() {
-        if (this.getLeftPlug() != null){
-            this.getLeftPlug().setRightSocket(null);
-            this.setLeftPlug(null);
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     * @author Oberon Swings
-     */
-    @Override
-    public void connect(ModelBlock block) {
-        System.out.println("DISTANCE");
-        System.out.println(this.getLeftPlugPos().getDistance(block.getRightSocketPos()));
-        if (block.hasRightSocket() && (this.getLeftPlugPos().getDistance(block.getRightSocketPos()) < ModelBlock.PLUGSIZE * 1.5)
-        && block.getRightSocket() == null){
-            System.out.println("WIF CONNECTS");
-            if(block.hasRightSocket()){
-                this.setLeftPlug(block);
-                block.setRightSocket(this);
-                this.setLeftPlugPos(block.getRightSocketPos());
-            }  
-        }  
-    }
-
-    /**
-     * {@inheritDoc}
      */
     public ModelBlock getLeftPlug() {
         return this.leftPlug;

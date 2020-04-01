@@ -53,17 +53,6 @@ public abstract class ModelBlock extends ModelElement{
     }
 
     /**
-     * abstract method describing how a block will disconnect from another block in the program area.
-     */
-    public abstract void disconnect();
-
-    /**
-     * abstract method describing how a block will connect to another block
-     * @param block the other block to connect to. 
-     */
-    public abstract void connect(ModelBlock block);
-
-    /**
      * A method that gives the connection from a block with all its neighbours.
      * @return the list with all the connection of a block.
      * @author Oberon Swings

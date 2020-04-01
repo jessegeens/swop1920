@@ -8,7 +8,7 @@ import org.junit.Test;
 import utilities.*;
 
 public class ModelBlockTests {
-
+/*
     @Test
     public void connectAndDisconnectTest() {
         WindowLocation loc1 = new WindowLocation(0, 0);
@@ -54,6 +54,8 @@ public class ModelBlockTests {
         assertNull(mnb.getRightSocket());
         assertNull(mwb.getLeftPlug());
     }
+
+ */
 
     //TODO test isInCavity() (should work at the moment though)
     //TODO test getSurroundingIfWhileBlock() (should work at the moment though)

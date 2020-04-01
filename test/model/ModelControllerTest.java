@@ -9,6 +9,7 @@ import utilities.*;
 
 public class ModelControllerTest {
 
+    /*
     @Test
     public void handleKeyEventStart() {
         ModelController controller = new ModelController();
@@ -94,5 +95,7 @@ public class ModelControllerTest {
         controller.handleProgramAreaMouseEvent(501, new WindowLocation(440,440), 1);
         assertEquals(wallInFrontBlock, controller.getActiveBlock());
     }
+
+     */
 
 }

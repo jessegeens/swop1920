@@ -6,18 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bdfc6573-f389-4d9a-9e2c-4612aa30b1a8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/ModelProgramArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ModelProgramArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/ProgramRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ProgramRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelMoveBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelMoveBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelNotBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelNotBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelWallInFrontBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelWallInFrontBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/blocks/ModelWhileIfBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/blocks/plugs/BottomPlug.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/blocks/plugs/LeftPlug.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/blocks/plugs/RightSocket.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/blocks/plugs/TopSocket.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/blocks/UIBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/blocks/UIBlock.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,8 +23,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit5 Test Class" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>

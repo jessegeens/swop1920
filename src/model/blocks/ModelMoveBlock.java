@@ -2,7 +2,10 @@ package model.blocks;
 
 import model.blocks.plugs.*;
 import utilities.BlockType;
+import utilities.ConnectionPoint;
 import utilities.WindowLocation;
+
+import java.util.ArrayList;
 
 /**
  * Class representing the move forward, turn left and turn right blocks with one socket at the top and one plug at the bottom.
@@ -16,6 +19,10 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
         super(pos,type);
         this.setTopSocket(null);
         this.setBottomPlug(null);
+        ArrayList<ConnectionPoint> connectionPoints = new ArrayList<>();
+        connectionPoints.add(ConnectionPoint.BOTTOMPLUG);
+        connectionPoints.add(ConnectionPoint.TOPSOCKET);
+        super.setConnectionPoints(connectionPoints);
     }
 
 

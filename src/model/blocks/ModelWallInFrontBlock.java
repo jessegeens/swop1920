@@ -3,6 +3,8 @@ package model.blocks;
 import utilities.*;
 import model.blocks.plugs.*;
 
+import java.util.ArrayList;
+
 /**
  * Class representing the 'wall in front' block with one plug to their left.
  */
@@ -13,6 +15,9 @@ public class ModelWallInFrontBlock extends ModelBlock implements LeftPlug{
     public ModelWallInFrontBlock(WindowLocation pos, BlockType type){
         super(pos,type);
         this.setLeftPlug(null);
+        ArrayList<ConnectionPoint> connectionPoints = new ArrayList<>();
+        connectionPoints.add(ConnectionPoint.LEFTPLUG);
+        super.setConnectionPoints(connectionPoints);
     }
 
     /**

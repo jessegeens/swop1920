@@ -12,6 +12,7 @@ public abstract class ModelBlock extends ModelElement{
 
     public static final int PLUGSIZE = 20;
     private final BlockType type;
+    private ArrayList<ConnectionPoint> connectionPoints = new ArrayList<>();
 
     public static final int STD_WIDTH = 80; //final standard width of blocks
     public static final int STD_HEIGHT = 80; //final standard height of blocks
@@ -212,6 +213,10 @@ public abstract class ModelBlock extends ModelElement{
      */
     public boolean hasLeftPlug(){
         return false;
+    }
+
+    public void setConnectionPoints(ArrayList<ConnectionPoint> connectionPoints) {
+        this.connectionPoints = connectionPoints;
     }
 
 }

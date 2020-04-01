@@ -25,6 +25,13 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         this.setRightSocket(null);
         this.setCavityPlug(this);
         this.setCavitySocket(this);
+        ArrayList<ConnectionPoint> connectionPoints = new ArrayList<>();
+        connectionPoints.add(ConnectionPoint.BOTTOMPLUG);
+        connectionPoints.add(ConnectionPoint.TOPSOCKET);
+        connectionPoints.add(ConnectionPoint.CAVITYPLUG);
+        connectionPoints.add(ConnectionPoint.CAVITYSOCKET);
+        connectionPoints.add(ConnectionPoint.RIGHTSOCKET);
+        super.setConnectionPoints(connectionPoints);
     }
 
     /**
@@ -231,34 +238,6 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
             return 0;
         } 
     }
-
-    /**
-     * 
-     * @return the width of the block
-     * @author Oberon Swings
-     */
-    /*public int getCavityWidth() {
-        if(!(getCavityBlocks().size() == 0)){
-            return getWidestBlockInCavity().getWidth() + STD_WIDTH;
-        }
-        else{
-            return 0;
-        }
-    }function not used anymore because the cavity doesn't grow in width -Oberon*/
-
-    /**
-     * 
-     * @return the widest block in the cavity of a if or while block
-     * @author Oberon Swings
-     */
-   /* public ModelBlock getWidestBlockInCavity(){
-        ModelBlock widest = getCavityBlocks().get(0);
-        for(int i = 0; i < this.getCavityBlocks().size(); i++){
-            ModelBlock current = this.getCavityBlocks().get(i);
-            if(current.getWidth() > widest.getWidth()) widest = current;
-        }
-        return widest;
-    }function not used anymore because the cavity doesn't grow in width -Oberon*/
 
     /**
      * Getter for a list of blocks this block has in its cavity.

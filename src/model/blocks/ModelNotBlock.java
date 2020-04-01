@@ -2,6 +2,9 @@ package model.blocks;
 
 import utilities.*;
 import model.blocks.plugs.*;
+
+import java.util.ArrayList;
+
 /**
  * Class representing the not block with one plug to their left and one socket to their right.
  */
@@ -13,6 +16,10 @@ public class ModelNotBlock extends ModelBlock implements RightSocket,LeftPlug{
         super(pos,type);
         this.setRightSocket(null);
         this.setLeftPlug(null);
+        ArrayList<ConnectionPoint> connectionPoints = new ArrayList<>();
+        connectionPoints.add(ConnectionPoint.LEFTPLUG);
+        connectionPoints.add(ConnectionPoint.RIGHTSOCKET);
+        super.setConnectionPoints(connectionPoints);
     }
 
     /**

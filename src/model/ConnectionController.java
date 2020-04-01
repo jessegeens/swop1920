@@ -52,7 +52,7 @@ public class ConnectionController {
             a.setCavityPlug(plug);
         }
         else socket.setBottomPlug(plug);
-        socket.updatePos();
+        //socket.updatePos();
     }
 
     /**
@@ -78,25 +78,43 @@ public class ConnectionController {
             this.connectIntoCavity(((ModelWhileIfBlock)b.getSurroundingWhileIfBlock()),a,b);
         }
         if (a.hasTopSocket() && b.hasBottomPlug() && b.getBottomPlug() == null){
-            a.setTopSocket(b);
-            b.setBottomPlug(a);
+            this.connectTopBottom(b,a);
             //a.setTopSocketPos(b.getBottomPlugPos());
         }
         else if (a.hasBottomPlug() && b.hasTopSocket() && b.getTopSocket() == null){
-            a.setBottomPlug(b);
-            b.setTopSocket(a);
+            this.connectTopBottom(a,b);
             //a.setBottomPlugPos(b.getTopSocketPos());
         }
         else if (a.hasRightSocket() && b.hasLeftPlug() && b.getLeftPlug() == null){
-            a.setRightSocket(b);
-            b.setLeftPlug(a);
+            this.connectRightLeft(b,a);
             //a.setRightSocketPos(b.getLeftPlugPos());
         }
         else if (a.hasLeftPlug() && b.hasRightSocket() && b.getLeftPlug() == null){
-            a.setLeftPlug(b);
-            b.setRightSocket(a);
+            this.connectRightLeft(a,b);
             //a.setRightSocketPos(b.getLeftPlugPos());
         }
+    }
+
+    /**
+     * Connects two blocks in horizontal direction
+     * @param right the block at the right
+     * @param left the block at the left
+     * @author Oberon Swings
+     */
+    public void connectRightLeft(ModelBlock right, ModelBlock left){
+        left.setRightSocket(right);
+        right.setLeftPlug(left);
+    }
+
+    /**
+     * Connects two blocks in vertical direction
+     * @param top the block at the top
+     * @param bottom the block at the bottom
+     * @author Oberon Swings
+     */
+    public void connectTopBottom(ModelBlock top, ModelBlock bottom){
+        top.setBottomPlug(bottom);
+        bottom.setTopSocket(top);
     }
 
     /**
@@ -106,7 +124,7 @@ public class ConnectionController {
      * @author Oberon Swings
      */
     public boolean connectCavity(ModelWhileIfBlock a, ModelBlock b){
-        if (b.hasBottomPlug() && a.getCavitySocketPos().getDistance(b.getBottomPlugPos()) < ModelBlock.PLUGSIZE){
+        if (b.hasBottomPlug()){
             ModelBlock cavityPrevious = a.getCavitySocket(); //The previous block that was connected to the cavity
             a.setCavitySocket(b);
             b.setBottomPlug(a);
@@ -120,7 +138,7 @@ public class ConnectionController {
             //updateCavityBlocksLocations();
             return true;
         }
-        if (b.hasTopSocket() && a.getCavityPlugPos().getDistance(b.getTopSocketPos()) < ModelBlock.PLUGSIZE){
+        if (b.hasTopSocket()){
             ModelBlock cavityNext = a.getCavityPlug();
             a.setCavityPlug(b);
             b.setTopSocket(a);
@@ -145,7 +163,7 @@ public class ConnectionController {
      * @author Oberon Swings
      */
     public void connectIntoCavity(ModelWhileIfBlock a, ModelBlock extra, ModelBlock closest){
-        if (closest.hasBottomPlug() && extra.hasTopSocket() && extra.getTopSocketPos().getDistance(closest.getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5){
+        if (closest.hasBottomPlug() && extra.hasTopSocket()){
             ModelBlock next = closest.getBottomPlug();
             extra.setTopSocket(closest);
             closest.setBottomPlug(extra);
@@ -156,7 +174,7 @@ public class ConnectionController {
             }
             //updateCavityBlocksLocations();
         }
-        else if (closest.hasTopSocket() && extra.hasBottomPlug() && extra.getBottomPlugPos().getDistance(closest.getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5){
+        else if (closest.hasTopSocket() && extra.hasBottomPlug()){
             ModelBlock next = closest.getTopSocket();
             extra.setBottomPlug(closest);
             closest.setTopSocket(extra);

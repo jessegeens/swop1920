@@ -104,12 +104,39 @@ public class ConnectionControllerTest {
     }
 
     @Test
-    public void connect() {
+    public void connectTopBottom() {
         ConnectionController CC = new ConnectionController();
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(100,100), BlockType.MOVEFORWARD);
         ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(100,20), BlockType.TURNLEFT);
-        CC.connect(forwardBlock,leftBlock);
+        CC.connectTopBottom(leftBlock,forwardBlock);
         assertEquals(leftBlock, forwardBlock.getTopSocket());
+    }
+
+    @Test
+    public void connectTopBottomInverse() {
+        ConnectionController CC = new ConnectionController();
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(100,100), BlockType.MOVEFORWARD);
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(100,20), BlockType.TURNLEFT);
+        CC.connectTopBottom(leftBlock,forwardBlock);
+        assertEquals(forwardBlock, leftBlock.getBottomPlug());
+    }
+
+    @Test
+    public void connectRightLeft(){
+        ConnectionController CC = new ConnectionController();
+        ModelNotBlock notBlock = new ModelNotBlock(new WindowLocation(100,100), BlockType.NOT);
+        ModelWallInFrontBlock wifBlock = new ModelWallInFrontBlock(new WindowLocation(100,20), BlockType.WALLINFRONT);
+        CC.connectRightLeft(wifBlock, notBlock);
+        assertEquals(wifBlock, notBlock.getRightSocket());
+    }
+
+    @Test
+    public void connectRightLeftInverse(){
+        ConnectionController CC = new ConnectionController();
+        ModelNotBlock notBlock = new ModelNotBlock(new WindowLocation(100,100), BlockType.NOT);
+        ModelWallInFrontBlock wifBlock = new ModelWallInFrontBlock(new WindowLocation(100,20), BlockType.WALLINFRONT);
+        CC.connectRightLeft(wifBlock, notBlock);
+        assertEquals(notBlock, wifBlock.getLeftPlug());
     }
 
     @Test

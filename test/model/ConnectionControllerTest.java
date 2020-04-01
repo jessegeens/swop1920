@@ -97,10 +97,75 @@ public class ConnectionControllerTest {
         assertEquals(null, wifBlock.getLeftPlug());
     }
 
-
+    @Test
+    public void disconnectCavity(){
+        ConnectionController CC = new ConnectionController();
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100), BlockType.WHILE);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), BlockType.MOVEFORWARD);
+        forwardBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        whileBlock.setCavityPlug(forwardBlock);
+        whileBlock.setCavitySocket(forwardBlock);
+        forwardBlock.setTopSocket(whileBlock);
+        forwardBlock.setBottomPlug(whileBlock);
+        CC.disconnectCavity(whileBlock,forwardBlock);
+        assertTrue(whileBlock.getCavityBlocks().isEmpty());
+    }
 
     @Test
-    public void disconnectCavity() {
+    public void disconnectOneCavityManySize(){
+        ConnectionController CC = new ConnectionController();
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100), BlockType.WHILE);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), BlockType.MOVEFORWARD);
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), BlockType.TURNLEFT);
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new WindowLocation(400, 700), BlockType.TURNRIGHT);
+        forwardBlock.setTopSocket(whileBlock);
+        whileBlock.setCavityPlug(forwardBlock);
+        leftBlock.setTopSocket(forwardBlock);
+        forwardBlock.setBottomPlug(leftBlock);
+        rightBlock.setTopSocket(leftBlock);
+        leftBlock.setBottomPlug(rightBlock);
+        whileBlock.setCavitySocket(leftBlock);
+        rightBlock.setBottomPlug(whileBlock);
+        CC.disconnectCavity(whileBlock,rightBlock);
+        assertEquals(2,whileBlock.getCavityBlocks().size());
+    }
+
+    @Test
+    public void disconnectOneCavityManyTop(){
+        ConnectionController CC = new ConnectionController();
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100), BlockType.WHILE);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), BlockType.MOVEFORWARD);
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), BlockType.TURNLEFT);
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new WindowLocation(400, 700), BlockType.TURNRIGHT);
+        forwardBlock.setTopSocket(whileBlock);
+        whileBlock.setCavityPlug(forwardBlock);
+        leftBlock.setTopSocket(forwardBlock);
+        forwardBlock.setBottomPlug(leftBlock);
+        rightBlock.setTopSocket(leftBlock);
+        leftBlock.setBottomPlug(rightBlock);
+        whileBlock.setCavitySocket(leftBlock);
+        rightBlock.setBottomPlug(whileBlock);
+        CC.disconnectCavity(whileBlock,forwardBlock);
+        assertEquals(rightBlock,whileBlock.getCavityPlug());
+    }
+
+    @Test
+    public void disconnectOneCavityManyBottom(){
+        ConnectionController CC = new ConnectionController();
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100), BlockType.WHILE);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), BlockType.MOVEFORWARD);
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), BlockType.TURNLEFT);
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new WindowLocation(400, 700), BlockType.TURNRIGHT);
+        forwardBlock.setTopSocket(whileBlock);
+        whileBlock.setCavityPlug(forwardBlock);
+        leftBlock.setTopSocket(forwardBlock);
+        forwardBlock.setBottomPlug(leftBlock);
+        rightBlock.setTopSocket(leftBlock);
+        leftBlock.setBottomPlug(rightBlock);
+        whileBlock.setCavitySocket(leftBlock);
+        rightBlock.setBottomPlug(whileBlock);
+        CC.disconnectCavity(whileBlock,forwardBlock);
+        assertEquals(rightBlock,whileBlock.getCavityPlug());
     }
 
     @Test
@@ -140,10 +205,55 @@ public class ConnectionControllerTest {
     }
 
     @Test
-    public void connectCavity() {
+    public void connectCavityPlug(){
+        ConnectionController CC = new ConnectionController();
+        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new WindowLocation(100,100), BlockType.WHILE);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(110,140), BlockType.MOVEFORWARD);
+        CC.connectCavity(ifBlock,forwardBlock);
+        assertEquals(forwardBlock, ifBlock.getCavityPlug());
     }
 
     @Test
-    public void connectIntoCavity() {
+    public void connectCavitySocket(){
+        ConnectionController CC = new ConnectionController();
+        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new WindowLocation(100,100), BlockType.WHILE);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(110,60), BlockType.MOVEFORWARD);
+        CC.connectCavity(ifBlock,forwardBlock);
+        assertEquals(forwardBlock, ifBlock.getCavitySocket());
+    }
+
+    @Test
+    public void connectCavityPlugConnectsSocket(){
+        ConnectionController CC = new ConnectionController();
+        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new WindowLocation(100,100), BlockType.WHILE);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(110,140), BlockType.MOVEFORWARD);
+        CC.connectCavity(ifBlock,forwardBlock);
+        assertEquals(forwardBlock, ifBlock.getCavitySocket());
+    }
+
+    @Test
+    public void connectCavitySocketConnectsPlug(){
+        ConnectionController CC = new ConnectionController();
+        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new WindowLocation(100,100), BlockType.WHILE);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(110,60), BlockType.MOVEFORWARD);
+        CC.connectCavity(ifBlock,forwardBlock);
+        assertEquals(forwardBlock, ifBlock.getCavityPlug());
+    }
+
+    @Test
+    public void connectIntoCavity(){
+        ConnectionController CC = new ConnectionController();
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new WindowLocation(100,100), BlockType.WHILE);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), BlockType.MOVEFORWARD);
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 550), BlockType.TURNLEFT);
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new WindowLocation(400, 700), BlockType.TURNRIGHT);
+        forwardBlock.setTopSocket(whileBlock);
+        whileBlock.setCavityPlug(forwardBlock);
+        leftBlock.setTopSocket(forwardBlock);
+        forwardBlock.setBottomPlug(leftBlock);
+        leftBlock.setBottomPlug(whileBlock);
+        whileBlock.setCavitySocket(leftBlock);
+        CC.connectIntoCavity(whileBlock, leftBlock,rightBlock);
+        assertEquals(3,whileBlock.getCavityBlocks().size());
     }
 }

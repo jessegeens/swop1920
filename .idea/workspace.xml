@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bdfc6573-f389-4d9a-9e2c-4612aa30b1a8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/ConnectionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ConnectionController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/model/ConnectionControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/model/ConnectionControllerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -75,7 +74,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ConnectionControllerTest">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="swop1920" />
@@ -154,11 +153,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.ConnectionControllerTest" />
         <item itemvalue="JUnit.ConnectionControllerTest.connect" />
         <item itemvalue="JUnit.ConnectionControllerTest.disconnectTopSocketReverse" />
         <item itemvalue="JUnit.ConnectionControllerTest.disconnectTopSocket" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>

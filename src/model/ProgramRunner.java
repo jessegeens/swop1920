@@ -2,7 +2,6 @@ package model;
 
 import utilities.*;
 import model.blocks.*;
-import model.blocks.plugs.*;
 
 public class ProgramRunner {
 
@@ -112,7 +111,7 @@ public class ProgramRunner {
                 return ((ModelWhileIfBlock)current).getCavityPlug();
             }
         }
-        return ((BottomPlug)current).getBottomPlug();
+        return current.getBottomPlug();
     }
 
     /**
@@ -122,11 +121,11 @@ public class ProgramRunner {
     private boolean evaluateCurrentCondition(ProgramState programState){
         boolean negate = false;
         if (current.hasRightSocket()){
-            ModelBlock cond = ((RightSocket)current).getRightSocket();
+            ModelBlock cond = current.getRightSocket();
             while (cond.hasRightSocket()){
                 if(cond instanceof ModelNotBlock){
                     negate = !negate;
-                    cond = ((ModelNotBlock)cond).getRightSocket();
+                    cond = cond.getRightSocket();
                 }
                 else if((cond instanceof ModelWallInFrontBlock) && programState.wallInFrontOfRobot()){
                     return !negate;

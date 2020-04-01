@@ -3,13 +3,12 @@ package model.blocks;
 import java.util.ArrayList;
 
 import utilities.*;
-import model.blocks.plugs.*;
 
 /**
  * Class representing the while and if blocks with one socket on the top and one plug at the bottom. They also have one socket on their 
  * right side for a condition block.
  */
-public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlug,RightSocket{ 
+public class ModelWhileIfBlock extends ModelBlock{
     private ModelBlock topSocket;
     private ModelBlock bottomPlug;
     private ModelBlock rightSocket;
@@ -41,11 +40,11 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     @Override
     public void disconnect() {
         if (this.getTopSocket() != null){
-            ((BottomPlug)this.getTopSocket()).setBottomPlug(null);
+            this.getTopSocket().setBottomPlug(null);
             this.setTopSocket(null);
         }
         if (this.getBottomPlug() != null){
-            ((TopSocket)this.getBottomPlug()).setTopSocket(null);
+            this.getBottomPlug().setTopSocket(null);
             this.setBottomPlug(null);
         }
         //The cavity should not be disconnected, I would rather move the cavity blocks with the while if block if this gets moved. -Oberon
@@ -64,11 +63,11 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         if (plug == this){
             this.setCavitySocket(socket);
         }
-        else ((TopSocket)plug).setTopSocket(socket);
+        else plug.setTopSocket(socket);
         if (socket == this){
             this.setCavityPlug(plug);
         }
-        else  ((BottomPlug)socket).setBottomPlug(plug);
+        else socket.setBottomPlug(plug);
         socket.updatePos();
     }
 
@@ -79,28 +78,28 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     @Override
     public void connect(ModelBlock block) {
         boolean connected;
-        if ((block.hasBottomPlug() && this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE)
-            || (block.hasTopSocket() && this.getCavityPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE)){
+        if ((block.hasBottomPlug() && this.getCavitySocketPos().getDistance(block.getBottomPlugPos()) < ModelBlock.PLUGSIZE)
+            || (block.hasTopSocket() && this.getCavityPlugPos().getDistance(block.getTopSocketPos()) < ModelBlock.PLUGSIZE)){
             connected = connectCavity(block);
             if (connected) return;
         }
-        if (block.hasBottomPlug() && (this.getTopSocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5)
-        && ((BottomPlug) block).getBottomPlug() == null){
+        if (block.hasBottomPlug() && (this.getTopSocketPos().getDistance(block.getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5)
+        && block.getBottomPlug() == null){
             this.setTopSocket(block);
-            ((BottomPlug)block).setBottomPlug(this);
-            this.setTopSocketPos(((BottomPlug) block).getBottomPlugPos());
+            block.setBottomPlug(this);
+            this.setTopSocketPos(block.getBottomPlugPos());
         }
-        else if (block.hasTopSocket() && (this.getBottomPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5)
-        && ((TopSocket) block).getTopSocket() == null){
+        else if (block.hasTopSocket() && (this.getBottomPlugPos().getDistance(block.getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5)
+        && block.getTopSocket() == null){
             this.setBottomPlug(block);
-            ((TopSocket)block).setTopSocket(this);
-            this.setBottomPlugPos(((TopSocket) block).getTopSocketPos());
+            block.setTopSocket(this);
+            this.setBottomPlugPos(block.getTopSocketPos());
         }
-        else if (block.hasLeftPlug() && (this.getRightSocketPos().getDistance(((LeftPlug)block).getLeftPlugPos()) < ModelBlock.PLUGSIZE * 1.5)
-        && ((LeftPlug) block).getLeftPlug() == null){
+        else if (block.hasLeftPlug() && (this.getRightSocketPos().getDistance(block.getLeftPlugPos()) < ModelBlock.PLUGSIZE * 1.5)
+        && block.getLeftPlug() == null){
             this.setRightSocket(block);
-            ((LeftPlug)block).setLeftPlug(this);
-            this.setRightSocketPos(((LeftPlug) block).getLeftPlugPos());
+            block.setLeftPlug(this);
+            this.setRightSocketPos(block.getLeftPlugPos());
         }
     }
 
@@ -111,30 +110,30 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      * @author Oberon Swings
      */
     public boolean connectCavity(ModelBlock block){
-        if (block.hasBottomPlug() && this.getCavitySocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE){
+        if (block.hasBottomPlug() && this.getCavitySocketPos().getDistance(block.getBottomPlugPos()) < ModelBlock.PLUGSIZE){
             ModelBlock cavityPrevious = this.getCavitySocket(); //The previous block that was connected to the cavity
             this.setCavitySocket(block);
-            ((BottomPlug)block).setBottomPlug(this);
+            block.setBottomPlug(this);
             if (block.hasTopSocket() && !block.equals(cavityPrevious)){
-                ((TopSocket)block).setTopSocket(cavityPrevious); //The previous block in the cavitysocket needs to connect with the modelBlock
+                block.setTopSocket(cavityPrevious); //The previous block in the cavitysocket needs to connect with the modelBlock
                 if (this.getCavityPlug() == this){
                     this.setCavityPlug(block);
                 }
-                else ((BottomPlug)cavityPrevious).setBottomPlug(block);
+                else cavityPrevious.setBottomPlug(block);
             }
             updateCavityBlocksLocations();
             return true;
         }
-        if (block.hasTopSocket() && this.getCavityPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE){
+        if (block.hasTopSocket() && this.getCavityPlugPos().getDistance(block.getTopSocketPos()) < ModelBlock.PLUGSIZE){
             ModelBlock cavityNext = this.getCavityPlug();
             this.setCavityPlug(block);
-            ((TopSocket)block).setTopSocket(this);
+            block.setTopSocket(this);
             if (block.hasBottomPlug() && !block.equals(cavityNext)){
-                ((BottomPlug)block).setBottomPlug(cavityNext);
+                block.setBottomPlug(cavityNext);
                 if (this.getCavitySocket() == this){
                     this.setCavitySocket(block);
                 }
-                else ((TopSocket)cavityNext).setTopSocket(block);
+                else cavityNext.setTopSocket(block);
             }
             updateCavityBlocksLocations();
             return true;
@@ -150,11 +149,11 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     public void updateCavityBlocksLocations(){
         ModelBlock next = this.getCavityPlug();
         while (next != this && next != null){
-            if (((TopSocket)next).getTopSocket() == this){
-                ((TopSocket)next).setTopSocketPos(this.getCavityPlugPos());
+            if (next.getTopSocket() == this){
+                next.setTopSocketPos(this.getCavityPlugPos());
             }
-            else ((TopSocket)next).setTopSocketPos(((BottomPlug)((TopSocket) next).getTopSocket()).getBottomPlugPos());
-            next = ((BottomPlug)next).getBottomPlug();
+            else next.setTopSocketPos(next.getTopSocket().getBottomPlugPos());
+            next = next.getBottomPlug();
         }
         if (next == this) return;
     }
@@ -167,24 +166,24 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      * @author Oberon Swings
      */
     public void connectIntoCavity(ModelBlock extra, ModelBlock closest){
-        if (closest.hasBottomPlug() && extra.hasTopSocket() && ((TopSocket)extra).getTopSocketPos().getDistance(((BottomPlug)closest).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5){
-            ModelBlock next = ((BottomPlug) closest).getBottomPlug();
-            ((TopSocket) extra).setTopSocket(closest);
-            ((BottomPlug) closest).setBottomPlug(extra);
+        if (closest.hasBottomPlug() && extra.hasTopSocket() && extra.getTopSocketPos().getDistance(closest.getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5){
+            ModelBlock next = closest.getBottomPlug();
+            extra.setTopSocket(closest);
+            closest.setBottomPlug(extra);
             if (extra.hasBottomPlug() && !extra.equals(next)){
-                ((BottomPlug)extra).setBottomPlug(next);
-                if (!(next.equals(this))) ((TopSocket)next).setTopSocket(extra);
+                extra.setBottomPlug(next);
+                if (!(next.equals(this))) next.setTopSocket(extra);
                 else this.setCavitySocket(extra);
             }
             updateCavityBlocksLocations();
         }
-        else if (closest.hasTopSocket() && extra.hasBottomPlug() && ((BottomPlug)extra).getBottomPlugPos().getDistance(((TopSocket)closest).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5){
-            ModelBlock next = ((TopSocket) closest).getTopSocket();
-            ((BottomPlug) extra).setBottomPlug(closest);
-            ((TopSocket) closest).setTopSocket(extra);
+        else if (closest.hasTopSocket() && extra.hasBottomPlug() && extra.getBottomPlugPos().getDistance(closest.getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5){
+            ModelBlock next = closest.getTopSocket();
+            extra.setBottomPlug(closest);
+            closest.setTopSocket(extra);
             if (extra.hasTopSocket() && !extra.equals(next)){
-                ((TopSocket)extra).setTopSocket(next);
-                if (!(next.equals(this))) ((BottomPlug)next).setBottomPlug(extra);
+                extra.setTopSocket(next);
+                if (!(next.equals(this))) next.setBottomPlug(extra);
                 else this.setCavityPlug(extra);
             }
             updateCavityBlocksLocations();
@@ -194,7 +193,6 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     /**
      * {@inheritDoc}
      */
-    @Override
     public ModelBlock getTopSocket() {
         return this.topSocket;
     }
@@ -202,7 +200,6 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     /**
      * {@inheritDoc}
      */
-    @Override
     public void setTopSocket(ModelBlock topSocket) {
         this.topSocket = topSocket;
     }
@@ -210,7 +207,6 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     /**
      * {@inheritDoc}
      */
-    @Override
     public ModelBlock getBottomPlug() {
         return this.bottomPlug;
     }
@@ -218,7 +214,6 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
     /**
      * {@inheritDoc}
      */
-    @Override
     public void setBottomPlug(ModelBlock bottomPlug) {
         this.bottomPlug = bottomPlug;
     }
@@ -254,7 +249,7 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
         while(!(blk.equals(this))){
             cav.add(blk);
             if(blk.hasBottomPlug()){
-                blk = ((BottomPlug)blk).getBottomPlug();
+                blk = blk.getBottomPlug();
             }
            // System.out.println("type2");
            // System.out.println(blk.getBlockType().getType());
@@ -342,7 +337,6 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      * {@inheritDoc}
      * @author Oberon Swings
      */
-    @Override
     public void setTopSocketPos(WindowLocation pos) {
         super.setPos(pos.add(-this.getWidth()/2, -ModelBlock.PLUGSIZE/2));
     }
@@ -359,7 +353,6 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      * {@inheritDoc}
      * @author Oberon Swings
      */
-    @Override
     public void setBottomPlugPos(WindowLocation pos) {
         super.setPos(pos.add(-this.getWidth()/2, -this.getHeight() - ModelBlock.PLUGSIZE/2));
     }
@@ -376,33 +369,8 @@ public class ModelWhileIfBlock extends ModelBlock implements TopSocket,BottomPlu
      * {@inheritDoc}
      * @author Oberon Swings
      */
-    @Override
     public void setRightSocketPos(WindowLocation pos) {
         super.setPos(pos.add(-this.getWidth() + ModelBlock.PLUGSIZE/2, -ModelBlock.STD_HEIGHT/3));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasTopSocket(){
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasBottomPlug(){
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasRightSocket(){
-        return true;
     }
 
     /**

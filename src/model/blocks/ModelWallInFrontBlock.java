@@ -1,14 +1,13 @@
 package model.blocks;
 
 import utilities.*;
-import model.blocks.plugs.*;
 
 import java.util.ArrayList;
 
 /**
  * Class representing the 'wall in front' block with one plug to their left.
  */
-public class ModelWallInFrontBlock extends ModelBlock implements LeftPlug{
+public class ModelWallInFrontBlock extends ModelBlock{
     private ModelBlock leftPlug;
 
     // Constructor
@@ -27,7 +26,7 @@ public class ModelWallInFrontBlock extends ModelBlock implements LeftPlug{
     @Override
     public void disconnect() {
         if (this.getLeftPlug() != null){
-            ((RightSocket)this.getLeftPlug()).setRightSocket(null);
+            this.getLeftPlug().setRightSocket(null);
             this.setLeftPlug(null);
         }
     }
@@ -39,14 +38,14 @@ public class ModelWallInFrontBlock extends ModelBlock implements LeftPlug{
     @Override
     public void connect(ModelBlock block) {
         System.out.println("DISTANCE");
-        System.out.println(this.getLeftPlugPos().getDistance(((RightSocket)block).getRightSocketPos()));
-        if (block.hasRightSocket() && (this.getLeftPlugPos().getDistance(((RightSocket)block).getRightSocketPos()) < ModelBlock.PLUGSIZE * 1.5)
-        && ((RightSocket) block).getRightSocket() == null){
+        System.out.println(this.getLeftPlugPos().getDistance(block.getRightSocketPos()));
+        if (block.hasRightSocket() && (this.getLeftPlugPos().getDistance(block.getRightSocketPos()) < ModelBlock.PLUGSIZE * 1.5)
+        && block.getRightSocket() == null){
             System.out.println("WIF CONNECTS");
             if(block.hasRightSocket()){
                 this.setLeftPlug(block);
-                ((RightSocket)block).setRightSocket(this);
-                this.setLeftPlugPos(((RightSocket) block).getRightSocketPos());
+                block.setRightSocket(this);
+                this.setLeftPlugPos(block.getRightSocketPos());
             }  
         }  
     }
@@ -54,7 +53,6 @@ public class ModelWallInFrontBlock extends ModelBlock implements LeftPlug{
     /**
      * {@inheritDoc}
      */
-    @Override
     public ModelBlock getLeftPlug() {
         return this.leftPlug;
     }
@@ -62,7 +60,6 @@ public class ModelWallInFrontBlock extends ModelBlock implements LeftPlug{
     /**
      * {@inheritDoc}
      */
-    @Override
     public void setLeftPlug(ModelBlock leftPlug) {
         this.leftPlug = leftPlug;
     }
@@ -70,12 +67,10 @@ public class ModelWallInFrontBlock extends ModelBlock implements LeftPlug{
     /**
      * {@inheritDoc}
      */
-    @Override
     public WindowLocation getLeftPlugPos() {
         return super.getPos().add(- ModelBlock.PLUGSIZE / 2, + this.getHeight() / 2);
     }
 
-    @Override
     public void setLeftPlugPos(WindowLocation pos) {
         super.setPos(pos.add(ModelBlock.PLUGSIZE/2, -this.getHeight()/2));
     }

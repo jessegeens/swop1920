@@ -3,7 +3,6 @@ package model.blocks;
 import java.util.ArrayList;
 
 import model.*;
-import model.blocks.plugs.*;
 import utilities.*;
 /**
  * Abstract representation of a block that can be placed from the palette onto the program area.
@@ -71,10 +70,10 @@ public abstract class ModelBlock extends ModelElement{
      */
     public ArrayList<ModelBlock> getConnections(){
         ArrayList<ModelBlock> connections = new ArrayList<ModelBlock>();
-        if (this.hasBottomPlug() && ((BottomPlug)this).getBottomPlug() != null) connections.add(((BottomPlug)this).getBottomPlug());
-        if (this.hasLeftPlug() && ((LeftPlug)this).getLeftPlug() != null) connections.add(((LeftPlug)this).getLeftPlug());
-        if (this.hasTopSocket() && ((TopSocket)this).getTopSocket() != null) connections.add(((TopSocket)this).getTopSocket());
-        if (this.hasRightSocket() && ((RightSocket)this).getRightSocket() != null) connections.add(((RightSocket)this).getRightSocket());
+        if (this.hasBottomPlug() && this.getBottomPlug() != null) connections.add(this.getBottomPlug());
+        if (this.hasLeftPlug() && this.getLeftPlug() != null) connections.add(this.getLeftPlug());
+        if (this.hasTopSocket() && this.getTopSocket() != null) connections.add(this.getTopSocket());
+        if (this.hasRightSocket() && this.getRightSocket() != null) connections.add(this.getRightSocket());
         if (this instanceof ModelWhileIfBlock) connections.addAll(((ModelWhileIfBlock) this).getCavityBlocks());
         return connections; 
     }
@@ -84,10 +83,10 @@ public abstract class ModelBlock extends ModelElement{
      * @author Oberon Swings
      */
     public boolean isFullyConnected() {
-        if(this.hasTopSocket() && ((TopSocket)this).getTopSocket() == null) return false;
-        if(this.hasBottomPlug() && ((BottomPlug)this).getBottomPlug() == null) return false;
-        if(this.hasRightSocket() && ((RightSocket)this).getRightSocket() == null) return false;
-        if(this.hasLeftPlug() && ((LeftPlug)this).getLeftPlug() == null) return false;
+        if(this.hasTopSocket() && this.getTopSocket() == null) return false;
+        if(this.hasBottomPlug() && this.getBottomPlug() == null) return false;
+        if(this.hasRightSocket() && this.getRightSocket() == null) return false;
+        if(this.hasLeftPlug() && this.getLeftPlug() == null) return false;
         return true;
     }
     
@@ -133,7 +132,7 @@ public abstract class ModelBlock extends ModelElement{
         ModelBlock plug = this;
         if (this.hasBottomPlug()){
             while (!(plug instanceof ModelWhileIfBlock || plug == null)){
-                plug = ((BottomPlug)plug).getBottomPlug();
+                plug = plug.getBottomPlug();
             }
             if (plug == null) return false;
             else if (plug instanceof ModelWhileIfBlock && ((ModelWhileIfBlock) plug).getCavityBlocks().contains(this)) return true;
@@ -150,7 +149,7 @@ public abstract class ModelBlock extends ModelElement{
         ModelBlock plug = this;
         if (this.hasBottomPlug()){
             while (!(plug instanceof ModelWhileIfBlock || plug == null)){
-                plug = ((BottomPlug)plug).getBottomPlug();
+                plug = plug.getBottomPlug();
             }
             if (plug == null) return null;
             else if (plug instanceof ModelWhileIfBlock && ((ModelWhileIfBlock) plug).getCavityBlocks().contains(this)) return plug;
@@ -164,59 +163,138 @@ public abstract class ModelBlock extends ModelElement{
      * @author Oberon Swings
      */
     public void updatePos(){
-        if (this.hasTopSocket() && ((TopSocket)this).getTopSocket() != null){
-            ((TopSocket)this).setTopSocketPos(((BottomPlug)((TopSocket) this).getTopSocket()).getBottomPlugPos());
+        if (this.hasTopSocket() && this.getTopSocket() != null){
+            this.setTopSocketPos(this.getTopSocket().getBottomPlugPos());
         }
-        if (this.hasBottomPlug() && ((BottomPlug)this).getBottomPlug() != null){
-            ((BottomPlug)this).getBottomPlug().updatePos();
+        if (this.hasBottomPlug() && this.getBottomPlug() != null){
+            this.getBottomPlug().updatePos();
         }
-        if (this.hasLeftPlug() && ((LeftPlug)this).getLeftPlug() != null){
-            ((LeftPlug)this).setLeftPlugPos(((RightSocket)((LeftPlug)this).getLeftPlug()).getRightSocketPos());
+        if (this.hasLeftPlug() && this.getLeftPlug() != null){
+            this.setLeftPlugPos(this.getLeftPlug().getRightSocketPos());
         }
-        if (this.hasRightSocket() && ((RightSocket)this).getRightSocket() != null){
-            ((RightSocket)this).getRightSocket().updatePos();
+        if (this.hasRightSocket() && this.getRightSocket() != null){
+            this.getRightSocket().updatePos();
         }
         if (this instanceof ModelWhileIfBlock) ((ModelWhileIfBlock) this).updateCavityBlocksLocations();
     }
 
     /**
-     * If the block implementation has a top socket, override this function to return true
      * 
      * @return {boolean} true if this block has a top socket, false otherwise
      */
     public boolean hasTopSocket(){
-        return false;
+        if (this.connectionPoints.contains(ConnectionPoint.TOPSOCKET)) return true;
+        else return false;
     }
 
     /**
-     * If the block implementation has a bottom plug, override this function to return true
      * 
      * @return {boolean} true if this block has a bottom plug, false otherwise
      */
     public boolean hasBottomPlug(){
-        return false;
+        if (this.connectionPoints.contains(ConnectionPoint.BOTTOMPLUG)) return true;
+        else return false;
     }
 
     /**
-     * If the block implementation has a right socket, override this function to return true
      * 
      * @return {boolean} true if this block has a right socket, false otherwise
      */
     public boolean hasRightSocket(){
-        return false;
+        if (this.connectionPoints.contains(ConnectionPoint.RIGHTSOCKET)) return true;
+        else return false;
     }
 
     /**
-     * If the block implementation has a left, override this function to return true
      * 
      * @return {boolean} true if this block has a left plug, false otherwise
      */
     public boolean hasLeftPlug(){
-        return false;
+        if (this.connectionPoints.contains(ConnectionPoint.LEFTPLUG)) return true;
+        else return false;
+    }
+
+    /**
+     *
+     * @return {boolean} true if this block has a cavity socket, false otherwise
+     */
+    public boolean hasCavitySocket(){
+        if (this.connectionPoints.contains(ConnectionPoint.CAVITYSOCKET)) return true;
+        else return false;
+    }
+
+    /**
+     *
+     * @return {boolean} true if this block has a cavity plug, false otherwise
+     */
+    public boolean hasCavityPlug(){
+        if (this.connectionPoints.contains(ConnectionPoint.CAVITYPLUG)) return true;
+        else return false;
     }
 
     public void setConnectionPoints(ArrayList<ConnectionPoint> connectionPoints) {
         this.connectionPoints = connectionPoints;
     }
 
+    public ModelBlock getBottomPlug(){
+        return null;
+    }
+    public ModelBlock getTopSocket(){
+        return null;
+    }
+    public ModelBlock getLeftPlug(){
+        return null;
+    }
+    public ModelBlock getRightSocket(){
+        return null;
+    }
+    public void setBottomPlug(ModelBlock block){
+
+    }
+    public void setTopSocket(ModelBlock block){
+
+    }
+    public void setLeftPlug(ModelBlock block){
+
+    }
+    public void setRightSocket(ModelBlock block){
+
+    }
+
+    public WindowLocation getTopSocketPos() {
+        return super.getPos().add(this.getWidth() / 2, + ModelBlock.PLUGSIZE/2);
+    }
+
+
+    public void setTopSocketPos(WindowLocation pos) {
+        super.setPos(pos.add(-this.getWidth()/2, -ModelBlock.PLUGSIZE/2));
+    }
+
+    public WindowLocation getBottomPlugPos() {
+        return super.getPos().add(this.getWidth() / 2, + this.getHeight() + ModelBlock.PLUGSIZE/2);
+    }
+
+
+    public void setBottomPlugPos(WindowLocation pos) {
+        super.setPos(pos.add(-this.getWidth()/2, -this.getHeight() - ModelBlock.PLUGSIZE/2));
+    }
+
+    public WindowLocation getLeftPlugPos() {
+        return super.getPos().add(- ModelBlock.PLUGSIZE / 2, + this.getHeight() / 2);
+    }
+
+
+    public void setLeftPlugPos(WindowLocation pos) {
+        super.setPos(pos.add(ModelBlock.PLUGSIZE/2, -this.getHeight()/2));
+    }
+
+
+    public WindowLocation getRightSocketPos() {
+        return super.getPos().add(this.getWidth() - ModelBlock.PLUGSIZE/2, + this.getHeight() / 2);
+    }
+
+
+    public void setRightSocketPos(WindowLocation pos) {
+        super.setPos(pos.add(-this.getWidth() + ModelBlock.PLUGSIZE/2, -this.getHeight()/2));
+    }
 }

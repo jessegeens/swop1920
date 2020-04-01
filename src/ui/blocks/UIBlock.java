@@ -1,8 +1,4 @@
 package ui.blocks;
-import model.blocks.plugs.BottomPlug;
-import model.blocks.plugs.LeftPlug;
-import model.blocks.plugs.RightSocket;
-import model.blocks.plugs.TopSocket;
 import ui.*;
 import java.awt.*;
 
@@ -196,7 +192,7 @@ public class UIBlock extends UIElement {
      */
     public WindowLocation getTopSocketPos(){
         if (!this.getmBlock().hasTopSocket()) return new WindowLocation(0,0);
-        return ((TopSocket)this.getmBlock()).getTopSocketPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
+        return this.getmBlock().getTopSocketPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
     }
 
     /**
@@ -206,7 +202,7 @@ public class UIBlock extends UIElement {
      */
     public WindowLocation getRightSocketPos(){
         if (!this.getmBlock().hasRightSocket()) return new WindowLocation(0,0);
-        return ((RightSocket)this.getmBlock()).getRightSocketPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
+        return this.getmBlock().getRightSocketPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
     }
 
     /**
@@ -216,7 +212,7 @@ public class UIBlock extends UIElement {
      */
     public WindowLocation getBottomPlugPos(){
         if (!this.getmBlock().hasBottomPlug()) return new WindowLocation(0,0);
-        return ((BottomPlug)this.getmBlock()).getBottomPlugPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
+        return this.getmBlock().getBottomPlugPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
     }
 
     /**
@@ -226,7 +222,7 @@ public class UIBlock extends UIElement {
      */
     public WindowLocation getLeftPlugPos() {
         if (!this.getmBlock().hasLeftPlug()) return new WindowLocation(0,0);
-        return ((LeftPlug)this.getmBlock()).getLeftPlugPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
+        return this.getmBlock().getLeftPlugPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
     }
 
     /**

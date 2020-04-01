@@ -1,6 +1,5 @@
 package model.blocks;
 
-import model.blocks.plugs.*;
 import utilities.BlockType;
 import utilities.ConnectionPoint;
 import utilities.WindowLocation;
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Class representing the move forward, turn left and turn right blocks with one socket at the top and one plug at the bottom.
  */
-public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
+public class ModelMoveBlock extends ModelBlock{
 
     private ModelBlock topSocket;
     private ModelBlock bottomPlug;
@@ -39,7 +38,7 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
                 ((ModelWhileIfBlock)this.getSurroundingWhileIfBlock()).disconnectCavity(this);
             }
             else {
-                ((BottomPlug)this.getTopSocket()).setBottomPlug(null);
+                this.getTopSocket().setBottomPlug(null);
             }
             this.setTopSocket(null);
         }
@@ -49,7 +48,7 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
                 ((ModelWhileIfBlock)this.getSurroundingWhileIfBlock()).disconnectCavity(this);
             }
             else{
-                ((TopSocket)this.getBottomPlug()).setTopSocket(null);
+                this.getBottomPlug().setTopSocket(null);
             }
             this.setBottomPlug(null);
         }
@@ -69,17 +68,17 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
         else if (block.isInCavity()){
             ((ModelWhileIfBlock)block.getSurroundingWhileIfBlock()).connectIntoCavity(this, block);
         }
-        else if (block.hasBottomPlug() && (this.getTopSocketPos().getDistance(((BottomPlug)block).getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5)
-        && ((BottomPlug) block).getBottomPlug() == null) {
+        else if (block.hasBottomPlug() && (this.getTopSocketPos().getDistance(block.getBottomPlugPos()) < ModelBlock.PLUGSIZE * 1.5)
+        && block.getBottomPlug() == null) {
             this.setTopSocket(block);
-            ((BottomPlug)block).setBottomPlug(this);
-            this.setTopSocketPos(((BottomPlug) block).getBottomPlugPos());
+            block.setBottomPlug(this);
+            this.setTopSocketPos(block.getBottomPlugPos());
         }
-        else if (block.hasTopSocket() && (this.getBottomPlugPos().getDistance(((TopSocket)block).getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5)
-        && ((TopSocket) block).getTopSocket() == null){
+        else if (block.hasTopSocket() && (this.getBottomPlugPos().getDistance(block.getTopSocketPos()) < ModelBlock.PLUGSIZE * 1.5)
+        && block.getTopSocket() == null){
             this.setBottomPlug(block);
-            ((TopSocket)block).setTopSocket(this);
-            this.setBottomPlugPos(((TopSocket) block).getTopSocketPos());
+            block.setTopSocket(this);
+            this.setBottomPlugPos(block.getTopSocketPos());
         }
     }
 
@@ -109,7 +108,6 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
     /**
      * {@inheritDoc}
      */
-    @Override
     public void setBottomPlug(ModelBlock blk) {
         this.bottomPlug = blk;
     }
@@ -117,31 +115,16 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
     /**
      * {@inheritDoc}
      */
-    @Override
     public ModelBlock getBottomPlug() {
         return this.bottomPlug;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public WindowLocation getBottomPlugPos() {
-        return super.getPos().add(this.getWidth() / 2, + this.getHeight() + ModelBlock.PLUGSIZE/2);
-    }
+
+
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    public void setBottomPlugPos(WindowLocation pos) {
-        super.setPos(pos.add(-this.getWidth()/2, -this.getHeight() - ModelBlock.PLUGSIZE/2));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void setTopSocket(ModelBlock blk) {
         this.topSocket = blk;
     }
@@ -149,40 +132,11 @@ public class ModelMoveBlock extends ModelBlock implements TopSocket,BottomPlug{
     /**
      * {@inheritDoc}
      */
-    @Override
     public ModelBlock getTopSocket() {
         return this.topSocket;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public WindowLocation getTopSocketPos() {
-        return super.getPos().add(this.getWidth() / 2, + ModelBlock.PLUGSIZE/2);
-    }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setTopSocketPos(WindowLocation pos) {
-        super.setPos(pos.add(-this.getWidth()/2, -ModelBlock.PLUGSIZE/2));
-    }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasTopSocket(){
-        return true;
-    }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasBottomPlug(){
-        return true;
-    }
 }

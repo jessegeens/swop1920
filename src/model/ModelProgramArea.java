@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import utilities.*;
 import model.blocks.*;
-import model.blocks.plugs.*;
 
 /**
  * Class representing the Program Window where the blocks will be set.
@@ -62,18 +61,18 @@ public class ModelProgramArea extends ModelWindow{
                 return blk.isFullyConnected();
             }
             else if (blk.equals(this.getStartBlocks().get(0)) && blk.equals(this.getFinishBlocks().get(0))){
-                if(blk.hasRightSocket() && ((RightSocket)blk).getRightSocket() == null) return false;
-                if(blk.hasLeftPlug() && ((LeftPlug)blk).getLeftPlug() == null) return false;
+                if(blk.hasRightSocket() && blk.getRightSocket() == null) return false;
+                if(blk.hasLeftPlug() && blk.getLeftPlug() == null) return false;
             }
             else if(blk.equals(this.getFinishBlocks().get(0))) {
-                if(blk.hasTopSocket() && ((TopSocket)blk).getTopSocket() == null) return false;
-                if(blk.hasRightSocket() && ((RightSocket)blk).getRightSocket() == null) return false;
-                if(blk.hasLeftPlug() && ((LeftPlug)blk).getLeftPlug() == null) return false;
+                if(blk.hasTopSocket() && blk.getTopSocket() == null) return false;
+                if(blk.hasRightSocket() && blk.getRightSocket() == null) return false;
+                if(blk.hasLeftPlug() && blk.getLeftPlug() == null) return false;
             }
             else if(blk.equals(this.getStartBlocks().get(0))){
-                if(blk.hasBottomPlug() && ((BottomPlug)blk).getBottomPlug() == null) return false;
-                if(blk.hasRightSocket() && ((RightSocket)blk).getRightSocket() == null) return false;
-                if(blk.hasLeftPlug() && ((LeftPlug)blk).getLeftPlug() == null) return false;
+                if(blk.hasBottomPlug() && blk.getBottomPlug() == null) return false;
+                if(blk.hasRightSocket() && blk.getRightSocket() == null) return false;
+                if(blk.hasLeftPlug() && blk.getLeftPlug() == null) return false;
             }
         }
         return true;
@@ -90,18 +89,18 @@ public class ModelProgramArea extends ModelWindow{
             for (ModelBlock blk1 : getPABlocks()){
                 if (!(blk.equals(blk1))){
                     System.out.println("blk1");
-                    if (blk.hasRightSocket() && blk1.hasLeftPlug() && ((RightSocket)blk).getRightSocketPos().equals(((LeftPlug)blk1).getLeftPlugPos())){
+                    if (blk.hasRightSocket() && blk1.hasLeftPlug() && blk.getRightSocketPos().equals(blk1.getLeftPlugPos())){
                         blk.connect(blk1);
                         System.out.println("if1");
                     }
                     System.out.println("else1");
-                    if (blk.hasTopSocket() && blk1.hasBottomPlug() && ((TopSocket)blk).getTopSocketPos().equals(((BottomPlug)blk1).getBottomPlugPos())){
+                    if (blk.hasTopSocket() && blk1.hasBottomPlug() && blk.getTopSocketPos().equals(blk1.getBottomPlugPos())){
                         blk.connect(blk1);
                         System.out.println("if2");
                     }
                     System.out.println("else2");
-                    if (blk instanceof ModelWhileIfBlock && ((blk1.hasTopSocket() && ((ModelWhileIfBlock) blk).getCavityPlugPos().equals(((TopSocket)blk1).getTopSocketPos()))
-                            || (blk1.hasBottomPlug() && ((ModelWhileIfBlock) blk).getCavitySocketPos().equals(((BottomPlug)blk1).getBottomPlugPos())))){
+                    if (blk instanceof ModelWhileIfBlock && ((blk1.hasTopSocket() && ((ModelWhileIfBlock) blk).getCavityPlugPos().equals(blk1.getTopSocketPos()))
+                            || (blk1.hasBottomPlug() && ((ModelWhileIfBlock) blk).getCavitySocketPos().equals(blk1.getBottomPlugPos())))){
                         blk.connect(blk1);
                         System.out.println("if3");
                     }
@@ -122,7 +121,7 @@ public class ModelProgramArea extends ModelWindow{
     public ArrayList<ModelBlock> getStartBlocks(){
         ArrayList<ModelBlock> startBlocks = new ArrayList<>();
         for(ModelBlock blk : getPABlocks()){
-            if(blk.hasTopSocket() && ((TopSocket)blk).getTopSocket() == null) startBlocks.add(blk);
+            if(blk.hasTopSocket() && blk.getTopSocket() == null) startBlocks.add(blk);
         }
         return startBlocks;
     }
@@ -135,7 +134,7 @@ public class ModelProgramArea extends ModelWindow{
     public ArrayList<ModelBlock> getFinishBlocks(){
         ArrayList<ModelBlock> finishBlocks = new ArrayList<>();
         for(ModelBlock blk : getPABlocks()){
-            if(blk.hasBottomPlug() && ((BottomPlug)blk).getBottomPlug() == null) finishBlocks.add(blk);
+            if(blk.hasBottomPlug() && blk.getBottomPlug() == null) finishBlocks.add(blk);
         }
         return finishBlocks;
     }
@@ -216,21 +215,21 @@ public class ModelProgramArea extends ModelWindow{
             System.out.println("CURRENT BLOCK ID");
             System.out.println(this.getPABlocks().get(i).getBlockType());
 
-            if (block.hasTopSocket() && current.hasBottomPlug() && ((TopSocket)block).getTopSocketPos().getDistance(((BottomPlug)current).getBottomPlugPos()) < d){
+            if (block.hasTopSocket() && current.hasBottomPlug() && block.getTopSocketPos().getDistance(current.getBottomPlugPos()) < d){
                 closest = current;
-                d = ((TopSocket)block).getTopSocketPos().getDistance(((BottomPlug)current).getBottomPlugPos());
+                d = block.getTopSocketPos().getDistance(current.getBottomPlugPos());
             }
-            if (block.hasBottomPlug() && current.hasTopSocket() && ((BottomPlug)block).getBottomPlugPos().getDistance(((TopSocket)current).getTopSocketPos()) < d){
+            if (block.hasBottomPlug() && current.hasTopSocket() && (block.getBottomPlugPos().getDistance(current.getTopSocketPos()) < d)){
                 closest = current;
-                d = ((BottomPlug)block).getBottomPlugPos().getDistance(((TopSocket)current).getTopSocketPos());
+                d = block.getBottomPlugPos().getDistance(current.getTopSocketPos());
             }
-            if (block.hasRightSocket() && current.hasLeftPlug() && ((RightSocket)block).getRightSocketPos().getDistance(((LeftPlug)current).getLeftPlugPos()) < d){
+            if (block.hasRightSocket() && current.hasLeftPlug() && block.getRightSocketPos().getDistance(current.getLeftPlugPos()) < d){
                 closest = current;
-                d = ((RightSocket)block).getRightSocketPos().getDistance(((LeftPlug)current).getLeftPlugPos());
+                d = block.getRightSocketPos().getDistance(current.getLeftPlugPos());
             }
-            if (block.hasLeftPlug() && current.hasRightSocket() && ((LeftPlug)block).getLeftPlugPos().getDistance(((RightSocket)current).getRightSocketPos()) < d){
+            if (block.hasLeftPlug() && current.hasRightSocket() && block.getLeftPlugPos().getDistance(current.getRightSocketPos()) < d){
                 closest = current;
-                d = ((LeftPlug)block).getLeftPlugPos().getDistance(((RightSocket)current).getRightSocketPos());
+                d = block.getLeftPlugPos().getDistance(current.getRightSocketPos());
             }
         }
         return closest;             

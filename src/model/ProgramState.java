@@ -5,20 +5,20 @@ import utilities.*;
 
 public class ProgramState {
     private Direction robotDirection;
-    private GridLocation robotLocation;
-    private ArrayList<GridLocation> walls;
-    private GridLocation goalCell;
+    private Location robotLocation;
+    private ArrayList<Location> walls;
+    private Location goalCell;
     private int cellSize;
 
     //Parameters
     private static final int CELL_SIZE = 50;
-    private static final GridLocation GOAL_CELL = new GridLocation(5, 5);
-    private static final GridLocation ROBOT_START_LOCATION = new GridLocation(0, 0);
+    private static final Location GOAL_CELL = new Location(5, 5);
+    private static final Location ROBOT_START_LOCATION = new Location(0, 0);
     private static final Direction ROBOT_START_DIRECTION = Direction.RIGHT;
-    private static final ArrayList<GridLocation> WALLS = new ArrayList<GridLocation>();
+    private static final ArrayList<Location> WALLS = new ArrayList<Location>();
 
 
-    public ProgramState(Direction robotDirection, GridLocation robotLocation, ArrayList<GridLocation> walls, GridLocation goalCell, int cellSize){
+    public ProgramState(Direction robotDirection, Location robotLocation, ArrayList<Location> walls, Location goalCell, int cellSize){
         this.robotDirection = robotDirection;
         this.robotLocation = robotLocation;
         this.walls = walls;
@@ -35,8 +35,8 @@ public class ProgramState {
         return "[ProgramState: " + robotDirection.toString() + ", " + robotLocation.toString() + ", " + goalCell.toString() + "]";
     }
 
-    static ProgramState generateNew(ProgramState programState, Direction robotDirection, GridLocation robotLocation){
-        return new ProgramState(robotDirection, robotLocation, programState.getWalls(), programState.getGoalCell(), programState.getCellSize());
+    static ProgramState generateNew(ProgramState programState, Direction robotDirection, Location robotGridLocation){
+        return new ProgramState(robotDirection, robotGridLocation, programState.getWalls(), programState.getGoalCell(), programState.getCellSize());
     }
 
     //TODO: implement
@@ -47,11 +47,11 @@ public class ProgramState {
         return false;
     }
 
-    public ArrayList<GridLocation> getWalls(){
+    public ArrayList<Location> getWalls(){
         return this.walls;
     }
 
-    public GridLocation getGoalCell(){
+    public Location getGoalCell(){
         return this.goalCell;
     }
 
@@ -59,7 +59,7 @@ public class ProgramState {
         return this.robotDirection;
     }
 
-    public GridLocation getRobotLocation(){
+    public Location getRobotLocation(){
         return this.robotLocation;
     }
 

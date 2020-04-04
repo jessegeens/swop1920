@@ -136,26 +136,26 @@ public class ProgramRunner {
     }
 
     private ProgramState move(ProgramState pState){
-        GridLocation robotLocation;
+        Location robotGridLocation;
         switch(pState.getRobotDirection()){
             case UP:
-                /*GridLocation has an add function so it would be more compact to write:
+                /*Location has an add function so it would be more compact to write:
                 robotLocation = robotLocation.add(0,-1);*/
-                robotLocation = new GridLocation(pState.getRobotLocation().getX(), pState.getRobotLocation().getY() - 1);
+                robotGridLocation = new Location(pState.getRobotLocation().getX(), pState.getRobotLocation().getY() - 1);
                 break;
             case RIGHT:
-                robotLocation = new GridLocation(pState.getRobotLocation().getX() + 1, pState.getRobotLocation().getY());
+                robotGridLocation = new Location(pState.getRobotLocation().getX() + 1, pState.getRobotLocation().getY());
                 break;
             case DOWN:
-                robotLocation = new GridLocation(pState.getRobotLocation().getX(), pState.getRobotLocation().getY() + 1);
+                robotGridLocation = new Location(pState.getRobotLocation().getX(), pState.getRobotLocation().getY() + 1);
                 break;
             case LEFT:
-                robotLocation = new GridLocation(pState.getRobotLocation().getX() - 1, pState.getRobotLocation().getY());
+                robotGridLocation = new Location(pState.getRobotLocation().getX() - 1, pState.getRobotLocation().getY());
                 break;
             default:
                 throw new IllegalStateException("ProgramState has an illegal direction");
         }
-        return ProgramState.generateNew(pState, pState.getRobotDirection(), robotLocation);
+        return ProgramState.generateNew(pState, pState.getRobotDirection(), robotGridLocation);
     }
 
     /**

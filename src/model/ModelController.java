@@ -133,7 +133,7 @@ public class ModelController{
      * @param eventWindowLocation location where the event happened
      * @param clickCount number of clicks
      */
-    public void handleMouseEvent(int id, WindowLocation eventWindowLocation, int clickCount){
+    public void handleMouseEvent(int id, Location eventWindowLocation, int clickCount){
         if(eventWindowLocation.getX() > 0 && eventWindowLocation.getX() < MyCanvasWindow.WIDTH/3 ){
             System.out.println("Palette mouseEvent");
             this.handlePaletteMouseEvent(id, eventWindowLocation, clickCount);
@@ -155,7 +155,7 @@ public class ModelController{
      * @param eventWindowLocation location where the event happened
      * @param clickCount number of clicks
      */
-    protected void handlePaletteMouseEvent(int id, WindowLocation eventWindowLocation, int clickCount){
+    protected void handlePaletteMouseEvent(int id, Location eventWindowLocation, int clickCount){
         switch(id){
             case 501: //MOUSE_PRESSED
                 System.out.println("MOUSE PRESSED start");
@@ -199,7 +199,7 @@ public class ModelController{
      * @param eventWindowLocation location where the event happened
      * @param clickCount number of clicks
      */
-    protected void handleProgramAreaMouseEvent(int id, WindowLocation eventWindowLocation, int clickCount){
+    protected void handleProgramAreaMouseEvent(int id, Location eventWindowLocation, int clickCount){
         switch(id){
             case 501: //MOUSE_PRESSED
                 //return the topmost active block if one is in the click location

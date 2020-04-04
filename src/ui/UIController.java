@@ -65,7 +65,7 @@ public class UIController {
     public void updateGrid(ProgramState programState){
         if (programState == null) throw new IllegalArgumentException("updating grid with an illegal programState (is null)");
         System.out.println("updating grid: " + programState.toString());
-        this.grid = new UIGrid(new WindowLocation(2*this.wWidth/3, 0), this.wWidth/ 3, this.wHeight, programState.getCellSize(), programState.getWalls(), programState.getRobotLocation(), programState.getRobotDirection(), programState.getGoalCell());
+        this.grid = new UIGrid(new Location(2*this.wWidth/3, 0), this.wWidth/ 3, this.wHeight, programState.getCellSize(), programState.getWalls(), programState.getRobotLocation(), programState.getRobotDirection(), programState.getGoalCell());
         
 
     }

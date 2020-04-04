@@ -1,8 +1,6 @@
 package model.blocks;
 
-import utilities.BlockType;
-import utilities.ConnectionPoint;
-import utilities.WindowLocation;
+import utilities.*;
 
 import java.util.ArrayList;
 
@@ -14,7 +12,7 @@ public class ModelMoveBlock extends ModelBlock{
     private ModelBlock topSocket;
     private ModelBlock bottomPlug;
     
-    public ModelMoveBlock(WindowLocation pos, BlockType type) {
+    public ModelMoveBlock(Location pos, BlockType type) {
         super(pos,type);
         this.setTopSocket(null);
         this.setBottomPlug(null);

@@ -19,8 +19,8 @@ public abstract class ModelBlock extends ModelElement{
     private boolean highlighted = false;
     
     // Constructor
-    public ModelBlock(WindowLocation pos, BlockType type){
-        super(pos);
+    public ModelBlock(Location windowLocation, BlockType type){
+        super(windowLocation);
         this.type = type;
     }
 
@@ -43,7 +43,7 @@ public abstract class ModelBlock extends ModelElement{
      * {@inheritDoc}
      */
     @Override
-    public boolean inBounds(WindowLocation coordinate){
+    public boolean inBounds(Location coordinate){
         if(this.getPos().getX() < coordinate.getX() && this.getPos().getX() + getWidth() > coordinate.getX() && this.getPos().getY() < coordinate.getY() && this.getPos().getY() + getWidth() > coordinate.getY() ){
             return true;
         }
@@ -250,40 +250,40 @@ public abstract class ModelBlock extends ModelElement{
 
     }
 
-    public WindowLocation getTopSocketPos() {
+    public Location getTopSocketPos() {
         return super.getPos().add(this.getWidth() / 2, + ModelBlock.PLUGSIZE/2);
     }
 
 
-    public void setTopSocketPos(WindowLocation pos) {
+    public void setTopSocketPos(Location pos) {
         super.setPos(pos.add(-this.getWidth()/2, -ModelBlock.PLUGSIZE/2));
     }
 
-    public WindowLocation getBottomPlugPos() {
+    public Location getBottomPlugPos() {
         return super.getPos().add(this.getWidth() / 2, + this.getHeight() + ModelBlock.PLUGSIZE/2);
     }
 
 
-    public void setBottomPlugPos(WindowLocation pos) {
+    public void setBottomPlugPos(Location pos) {
         super.setPos(pos.add(-this.getWidth()/2, -this.getHeight() - ModelBlock.PLUGSIZE/2));
     }
 
-    public WindowLocation getLeftPlugPos() {
+    public Location getLeftPlugPos() {
         return super.getPos().add(- ModelBlock.PLUGSIZE / 2, + this.getHeight() / 2);
     }
 
 
-    public void setLeftPlugPos(WindowLocation pos) {
+    public void setLeftPlugPos(Location pos) {
         super.setPos(pos.add(ModelBlock.PLUGSIZE/2, -this.getHeight()/2));
     }
 
 
-    public WindowLocation getRightSocketPos() {
+    public Location getRightSocketPos() {
         return super.getPos().add(this.getWidth() - ModelBlock.PLUGSIZE/2, + this.getHeight() / 2);
     }
 
 
-    public void setRightSocketPos(WindowLocation pos) {
+    public void setRightSocketPos(Location pos) {
         super.setPos(pos.add(-this.getWidth() + ModelBlock.PLUGSIZE/2, -this.getHeight()/2));
     }
 }

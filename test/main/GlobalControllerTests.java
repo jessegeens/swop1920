@@ -16,13 +16,13 @@ public class GlobalControllerTests {
     public void globalControllerTest() {
         GlobalController gC = new GlobalController();
         ArrayList<ModelBlock> mBlocks = new ArrayList<>();
-        WindowLocation pos1 = new WindowLocation(100, 100);
+        Location pos1 = new Location(100, 100);
         BlockType t1 = BlockType.TURNLEFT;
         ModelMoveBlock mmb1 = new ModelMoveBlock(pos1, t1);
-        WindowLocation pos2 = new WindowLocation(100, 220);
+        Location pos2 = new Location(100, 220);
         BlockType t2 = BlockType.TURNLEFT;
         ModelMoveBlock mmb2 = new ModelMoveBlock(pos2, t2);
-        WindowLocation pos3 = new WindowLocation(100, 340);
+        Location pos3 = new Location(100, 340);
         BlockType t3 = BlockType.TURNLEFT;
         ModelMoveBlock mmb3 = new ModelMoveBlock(pos3, t3);
         mmb1.connect(mmb2);
@@ -43,10 +43,10 @@ public class GlobalControllerTests {
     public void globalControllerMoveForwardTest() {
         GlobalController gC = new GlobalController();
         ArrayList<ModelBlock> mBlocks = new ArrayList<>();
-        WindowLocation pos1 = new WindowLocation(100, 100);
+        Location pos1 = new Location(100, 100);
         BlockType t1 = BlockType.MOVEFORWARD;
         ModelMoveBlock mmb1 = new ModelMoveBlock(pos1, t1);
-        WindowLocation pos2 = new WindowLocation(100, 200);
+        Location pos2 = new Location(100, 200);
         BlockType t2 = BlockType.MOVEFORWARD;
         ModelMoveBlock mmb2 = new ModelMoveBlock(pos2, t2);
         mmb1.connect(mmb2);
@@ -79,13 +79,13 @@ public class GlobalControllerTests {
     public void globalControllerTest2() {
         GlobalController gC = new GlobalController();
         ArrayList<ModelBlock> mBlocks = new ArrayList<>();
-        WindowLocation pos1 = new WindowLocation(100, 100);
+        Location pos1 = new Location(100, 100);
         BlockType t1 = BlockType.WHILE;
         ModelWhileIfBlock mwb = new ModelWhileIfBlock(pos1, t1);
-        WindowLocation pos2 = new WindowLocation(220, 100);
+        Location pos2 = new Location(220, 100);
         BlockType t2 = BlockType.NOT;
         ModelNotBlock mnb = new ModelNotBlock(pos2, t2);
-        WindowLocation pos3 = new WindowLocation(340, 100);
+        Location pos3 = new Location(340, 100);
         BlockType t3 = BlockType.WALLINFRONT;
         ModelWallInFrontBlock mwifb = new ModelWallInFrontBlock(pos3, t3);
         mwb.connect(mnb);
@@ -93,7 +93,7 @@ public class GlobalControllerTests {
         mBlocks.add(mwb);
         mBlocks.add(mnb);
         mBlocks.add(mwifb);
-        WindowLocation pos4 = new WindowLocation(160, 180);
+        Location pos4 = new Location(160, 180);
         BlockType t4 = BlockType.MOVEFORWARD;
         ModelMoveBlock mmb = new ModelMoveBlock(pos4, t4);
         mwb.connect(mmb);

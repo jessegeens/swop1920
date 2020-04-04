@@ -1,17 +1,18 @@
 package utilities;
 
 /**
- * A class representing the location of elements in the windows of our system.
+ * Representation of location in the grid, not expressed in pixels but in grid tiles.
  */
-public final class WindowLocation {
+public final class Location{
+
     private final int x;
     private final int y;
 
-    public WindowLocation(int i, int j) {
+    public Location(int i, int j) {
         this.x = i;
         this.y = j;
     }
-    
+
 
     /**
      * Method calculating the Euclidian distance of two positions.
@@ -19,7 +20,7 @@ public final class WindowLocation {
      * @return the distance of this position and another position.
      * @author Oberon Swings
      */
-    public int getDistance(WindowLocation pos){
+    public int getDistance(Location pos){
         return (int)Math.sqrt(Math.pow(this.getX()-pos.getX(),2)+Math.pow(this.getY()-pos.getY(),2));
     }
 
@@ -29,8 +30,8 @@ public final class WindowLocation {
      * @return the new position.
      * @author Oberon Swings
      */
-    public WindowLocation add(WindowLocation pos){
-        return new WindowLocation(this.getX() + pos.getX(), this.getY() + pos.getY());
+    public Location add(Location pos){
+        return new Location(this.getX() + pos.getX(), this.getY() + pos.getY());
     }
 
     /**
@@ -40,20 +41,20 @@ public final class WindowLocation {
      * @return the sum of the location with i and j.
      * @author Oberon Swings
      */
-    public WindowLocation add(int i, int j){
-        return new WindowLocation(this.getX() + i, this.getY() + j);
+    public Location add(int i, int j){
+        return new Location(this.getX() + i, this.getY() + j);
     }
 
     /**
-     * 
+     *
      * @return the x coordinate.
      */
-	public int getX() {
+    public int getX() {
         return this.x;
     }
-    
+
     /**
-     * 
+     *
      * @return the y coordinate.
      */
     public int getY() {
@@ -65,8 +66,8 @@ public final class WindowLocation {
      */
     @Override
     public boolean equals(Object o){
-        if (!(o instanceof WindowLocation)) return false;
-        if (((WindowLocation) o).getX() == this.getX() && ((WindowLocation) o).getY() == this.getY()) return true;
+        if (!(o instanceof Location)) return false;
+        if (((Location) o).getX() == this.getX() && ((Location) o).getY() == this.getY()) return true;
         else return false;
     }
 }

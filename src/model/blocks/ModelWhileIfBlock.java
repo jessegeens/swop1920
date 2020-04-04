@@ -16,7 +16,7 @@ public class ModelWhileIfBlock extends ModelBlock{
     private ModelBlock cavityPlug;
 
     // Constructor
-    public ModelWhileIfBlock(WindowLocation pos, BlockType type){
+    public ModelWhileIfBlock(Location pos, BlockType type){
         super(pos,type);
 
         this.setTopSocket(null);
@@ -172,7 +172,7 @@ public class ModelWhileIfBlock extends ModelBlock{
      * @return the position of the cavity socket
      * @author Oberon Swings
      */
-    public WindowLocation getCavitySocketPos() {
+    public Location getCavitySocketPos() {
         return this.getPos().add(2*ModelBlock.STD_WIDTH/3, this.getHeight() - ModelBlock.STD_HEIGHT/3);
     }
 
@@ -181,7 +181,7 @@ public class ModelWhileIfBlock extends ModelBlock{
      * @return the position of the cavity plug
      * @author Oberon Swings
      */
-    public WindowLocation getCavityPlugPos() {
+    public Location getCavityPlugPos() {
         return this.getPos().add(2*ModelBlock.STD_WIDTH/3, 2*ModelBlock.STD_HEIGHT/3);
     }
 
@@ -189,7 +189,7 @@ public class ModelWhileIfBlock extends ModelBlock{
      * {@inheritDoc}
      * @author Oberon Swings
      */
-    public WindowLocation getTopSocketPos() {
+    public Location getTopSocketPos() {
         return super.getPos().add(this.getWidth() / 2, + ModelBlock.PLUGSIZE / 2);
     }
 
@@ -197,7 +197,7 @@ public class ModelWhileIfBlock extends ModelBlock{
      * {@inheritDoc}
      * @author Oberon Swings
      */
-    public void setTopSocketPos(WindowLocation pos) {
+    public void setTopSocketPos(Location pos) {
         super.setPos(pos.add(-this.getWidth()/2, -ModelBlock.PLUGSIZE/2));
     }
 
@@ -205,7 +205,7 @@ public class ModelWhileIfBlock extends ModelBlock{
      * {@inheritDoc}
      * @author Oberon Swings
      */
-    public WindowLocation getBottomPlugPos() {
+    public Location getBottomPlugPos() {
         return super.getPos().add(this.getWidth() / 2,+this.getHeight() + ModelBlock.PLUGSIZE / 2);
     }
 
@@ -213,7 +213,7 @@ public class ModelWhileIfBlock extends ModelBlock{
      * {@inheritDoc}
      * @author Oberon Swings
      */
-    public void setBottomPlugPos(WindowLocation pos) {
+    public void setBottomPlugPos(Location pos) {
         super.setPos(pos.add(-this.getWidth()/2, -this.getHeight() - ModelBlock.PLUGSIZE/2));
     }
 
@@ -221,7 +221,7 @@ public class ModelWhileIfBlock extends ModelBlock{
      * {@inheritDoc}
      * @author Oberon Swings
      */
-    public WindowLocation getRightSocketPos() {
+    public Location getRightSocketPos() {
         return super.getPos().add(this.getWidth() - ModelBlock.PLUGSIZE / 2, ModelBlock.STD_HEIGHT / 3);
     }
 
@@ -229,7 +229,7 @@ public class ModelWhileIfBlock extends ModelBlock{
      * {@inheritDoc}
      * @author Oberon Swings
      */
-    public void setRightSocketPos(WindowLocation pos) {
+    public void setRightSocketPos(Location pos) {
         super.setPos(pos.add(-this.getWidth() + ModelBlock.PLUGSIZE/2, -ModelBlock.STD_HEIGHT/3));
     }
 
@@ -237,7 +237,7 @@ public class ModelWhileIfBlock extends ModelBlock{
      * {@inheritDoc}
      */
     @Override
-    public void setPos(WindowLocation pos) {
+    public void setPos(Location pos) {
         super.setPos(pos);
         this.updateCavityBlocksLocations();
     }

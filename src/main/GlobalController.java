@@ -7,7 +7,7 @@ import ui.*;
 import utilities.*;
 import model.*;
 import model.blocks.*;
-import model.blocks.plugs.*;
+//import model.blocks.plugs.*;
 
 /**
  * The GlobalController is the heart of the program and coordinates the state flow of the program
@@ -31,7 +31,7 @@ public class GlobalController {
      * This function handles mouse events and passes them on to the model- and UIController
      */
     public void handleMouseEvent(int id, int x, int y, int clickCount){
-        WindowLocation eventWindowLocation = new WindowLocation(x,y);
+        Location eventWindowLocation = new Location(x,y);
         this.modelController.handleMouseEvent(id, eventWindowLocation, clickCount);
         this.uiController.updateBlocks(this.modelController.getModelBlocks());
 

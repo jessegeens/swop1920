@@ -11,7 +11,7 @@ public class ModelNotBlock extends ModelBlock{
     private ModelBlock rightSocket;
     private ModelBlock leftPlug;
 
-    public ModelNotBlock(WindowLocation pos, BlockType type){
+    public ModelNotBlock(Location pos, BlockType type){
         super(pos,type);
         this.setRightSocket(null);
         this.setLeftPlug(null);

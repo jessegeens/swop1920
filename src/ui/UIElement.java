@@ -10,15 +10,15 @@ import java.awt.*;
  *  including Blocks, the Grid, the ProgramArea, etc 
  */
 public abstract class UIElement {
-	private WindowLocation pos;
+	private Location pos;
 
 	public abstract void render(Graphics g);
 	
 	// Constructor
-	public UIElement(WindowLocation windowLocation) {
-		if(windowLocation == null)
+	public UIElement(Location location) {
+		if(location == null)
 			throw new IllegalArgumentException("Invalid location given to UIElement init");
-		pos = windowLocation;
+		pos = location;
 	}
 
 	/**
@@ -30,7 +30,7 @@ public abstract class UIElement {
 	 * @return {Location} the position of the element
 	 * 	
 	 */
-	public WindowLocation getPos(){
+	public Location getPos(){
 		return this.pos;
 	}
 
@@ -44,7 +44,7 @@ public abstract class UIElement {
 	 * 
 	 * @param Pos the new position of the UI Element
 	 */
-	public void setPos(WindowLocation Pos) {
+	public void setPos(Location Pos) {
 		this.pos = Pos;
 	}
 

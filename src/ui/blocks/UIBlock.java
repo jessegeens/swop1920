@@ -166,11 +166,11 @@ public class UIBlock extends UIElement {
      * @return the position of the cavity socket in a WHILEIF block
      * @author Bert De Vleeschouwer
      */
-    public WindowLocation getCavitySocketPos(){
+    public Location getCavitySocketPos(){
         if (this.getmBlock().getBlockType() == BlockType.WHILE || this.getmBlock().getBlockType() == BlockType.IF){
             return ((ModelWhileIfBlock)this.getmBlock()).getCavitySocketPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
         }
-        return new WindowLocation(0,0);
+        return new Location(0,0);
     }
 
     /**
@@ -178,11 +178,11 @@ public class UIBlock extends UIElement {
      * @return the position of the cavity plug in a WHILEIF block
      * @author Bert De Vleeschouwer
      */
-    public WindowLocation getCavityPlugPos(){
+    public Location getCavityPlugPos(){
         if (this.getmBlock().getBlockType() == BlockType.WHILE || this.getmBlock().getBlockType() == BlockType.IF){
             return ((ModelWhileIfBlock)this.getmBlock()).getCavityPlugPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
         }
-        return new WindowLocation(0,0);
+        return new Location(0,0);
     }
 
     /**
@@ -190,8 +190,8 @@ public class UIBlock extends UIElement {
      * @return the position of the topSocket
      * @author Oberon Swings
      */
-    public WindowLocation getTopSocketPos(){
-        if (!this.getmBlock().hasTopSocket()) return new WindowLocation(0,0);
+    public Location getTopSocketPos(){
+        if (!this.getmBlock().hasTopSocket()) return new Location(0,0);
         return this.getmBlock().getTopSocketPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
     }
 
@@ -200,8 +200,8 @@ public class UIBlock extends UIElement {
      * @return the position of the rightSocket
      * @author Oberon Swings
      */
-    public WindowLocation getRightSocketPos(){
-        if (!this.getmBlock().hasRightSocket()) return new WindowLocation(0,0);
+    public Location getRightSocketPos(){
+        if (!this.getmBlock().hasRightSocket()) return new Location(0,0);
         return this.getmBlock().getRightSocketPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
     }
 
@@ -210,8 +210,8 @@ public class UIBlock extends UIElement {
      * @return the position of the bottomPlug
      * @author Oberon Swings
      */
-    public WindowLocation getBottomPlugPos(){
-        if (!this.getmBlock().hasBottomPlug()) return new WindowLocation(0,0);
+    public Location getBottomPlugPos(){
+        if (!this.getmBlock().hasBottomPlug()) return new Location(0,0);
         return this.getmBlock().getBottomPlugPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
     }
 
@@ -220,8 +220,8 @@ public class UIBlock extends UIElement {
      * @return the position of the leftPlug
      * @author Oberon Swings
      */
-    public WindowLocation getLeftPlugPos() {
-        if (!this.getmBlock().hasLeftPlug()) return new WindowLocation(0,0);
+    public Location getLeftPlugPos() {
+        if (!this.getmBlock().hasLeftPlug()) return new Location(0,0);
         return this.getmBlock().getLeftPlugPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
     }
 

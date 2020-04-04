@@ -245,7 +245,7 @@ public class ModelProgramArea extends ModelWindow{
      * @param eventWindowLocation location of the mouseDown event
      * @return block to be returned 
      */
-    public ModelBlock handleMouseDown(WindowLocation eventWindowLocation){
+    public ModelBlock handleMouseDown(Location eventWindowLocation){
         for(int i = this.getPABlocks().size() - 1; i >= 0; i--){
             if(this.getPABlocks().get(i).inBounds(eventWindowLocation)){
                 ModelBlock toBeReturned = this.getPABlocks().get(i);
@@ -264,7 +264,7 @@ public class ModelProgramArea extends ModelWindow{
      * @param eveWindowLocation the location of the mouseUp event
      * @param activeB activeBlock the current active block
      */
-    public void handleMouseUp(WindowLocation eveWindowLocation, ModelBlock activeB){
+    public void handleMouseUp(Location eveWindowLocation, ModelBlock activeB){
         this.addBlock(activeB);
         ModelBlock closest = this.findClosestBlock(activeB);
         if (closest != null){

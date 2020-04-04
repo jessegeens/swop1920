@@ -13,8 +13,8 @@ public class ModelControllerTest {
     @Test
     public void handleKeyEventStart() {
         ModelController controller = new ModelController();
-        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), BlockType.MOVEFORWARD);
-        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 480), BlockType.TURNLEFT);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(400,400), BlockType.MOVEFORWARD);
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(400, 480), BlockType.TURNLEFT);
         forwardBlock.connect(leftBlock);
         controller.getPArea().addBlock(forwardBlock);
         controller.getPArea().addBlock(leftBlock);
@@ -25,8 +25,8 @@ public class ModelControllerTest {
     @Test
     public void handleKeyEventStop() {
         ModelController controller = new ModelController();
-        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), BlockType.MOVEFORWARD);
-        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(400, 480), BlockType.TURNLEFT);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(400,400), BlockType.MOVEFORWARD);
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(400, 480), BlockType.TURNLEFT);
         forwardBlock.connect(leftBlock);
         controller.getPArea().addBlock(forwardBlock);
         controller.getPArea().addBlock(leftBlock);
@@ -38,61 +38,61 @@ public class ModelControllerTest {
     @Test
     public void handlePaletteMouseDownEvent() {
         ModelController controller = new ModelController();
-        controller.handleMouseEvent(501,new WindowLocation(40,40),1);
+        controller.handleMouseEvent(501,new Location(40,40),1);
         assertEquals(controller.getPalette().getTurnLeftBlock().getBlockType(), controller.getActiveBlock().getBlockType());
     }
 
     @Test
     public void handlePaletteMouseUpEvent(){
         ModelController controller = new ModelController();
-        controller.setActiveBlock(new ModelMoveBlock(new WindowLocation(120,120), BlockType.TURNLEFT));
-        controller.handleMouseEvent(502,new WindowLocation(120,120),1);
+        controller.setActiveBlock(new ModelMoveBlock(new Location(120,120), BlockType.TURNLEFT));
+        controller.handleMouseEvent(502,new Location(120,120),1);
         assertNull(controller.getActiveBlock());
     }
 
     @Test
     public void handlePaletteMouseDragEvent(){
         ModelController controller = new ModelController();
-        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(120,120), BlockType.TURNLEFT);
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(120,120), BlockType.TURNLEFT);
         controller.setActiveBlock(leftBlock);
-        controller.handleMouseEvent(506,new WindowLocation(170,170),1);
-        assertEquals(new WindowLocation(170,170), leftBlock.getPos());
+        controller.handleMouseEvent(506,new Location(170,170),1);
+        assertEquals(new Location(170,170), leftBlock.getPos());
     }
 
     @Test
     public void handleProgramAreaMouseDownEvent() {
         ModelController controller = new ModelController();
-        ModelMoveBlock forwardBlock = new ModelMoveBlock(new WindowLocation(400,400), BlockType.MOVEFORWARD);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(400,400), BlockType.MOVEFORWARD);
         controller.getPArea().addBlock(forwardBlock);
-        controller.handleMouseEvent(501,new WindowLocation(420,420),1);
+        controller.handleMouseEvent(501,new Location(420,420),1);
         assertEquals(forwardBlock, controller.getActiveBlock());
     }
 
     @Test
     public void handleProgramAreaMouseUpEvent(){
         ModelController controller = new ModelController();
-        controller.setActiveBlock(new ModelMoveBlock(new WindowLocation(120,120), BlockType.TURNLEFT));
-        controller.handleMouseEvent(502,new WindowLocation(420,120),1);
+        controller.setActiveBlock(new ModelMoveBlock(new Location(120,120), BlockType.TURNLEFT));
+        controller.handleMouseEvent(502,new Location(420,120),1);
         assertNull(controller.getActiveBlock());
     }
 
     @Test
     public void handleProgramAreaMouseDragEvent(){
         ModelController controller = new ModelController();
-        ModelMoveBlock leftBlock = new ModelMoveBlock(new WindowLocation(120,120), BlockType.TURNLEFT);
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(120,120), BlockType.TURNLEFT);
         controller.setActiveBlock(leftBlock);
-        controller.handleMouseEvent(506,new WindowLocation(470,170),1);
-        assertEquals(new WindowLocation(470,170), leftBlock.getPos());
+        controller.handleMouseEvent(506,new Location(470,170),1);
+        assertEquals(new Location(470,170), leftBlock.getPos());
     }
 
 
     @Test
     public void wallInFrontBlockNullPointer(){
         ModelController controller = new ModelController();
-        ModelWallInFrontBlock wallInFrontBlock = new ModelWallInFrontBlock(new WindowLocation(400,400), BlockType.WALLINFRONT);
+        ModelWallInFrontBlock wallInFrontBlock = new ModelWallInFrontBlock(new Location(400,400), BlockType.WALLINFRONT);
         controller.setActiveBlock(wallInFrontBlock);
-        controller.handleProgramAreaMouseEvent(502, new WindowLocation(420,420), 1);
-        controller.handleProgramAreaMouseEvent(501, new WindowLocation(440,440), 1);
+        controller.handleProgramAreaMouseEvent(502, new Location(420,420), 1);
+        controller.handleProgramAreaMouseEvent(501, new Location(440,440), 1);
         assertEquals(wallInFrontBlock, controller.getActiveBlock());
     }
 

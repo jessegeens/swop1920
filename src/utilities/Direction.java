@@ -57,7 +57,7 @@ public enum Direction{
             case LEFT:
                 return "left";
             default:
-                return "";
+                throw new IllegalStateException("illegal direction found");
         }
     }
 }

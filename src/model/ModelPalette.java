@@ -4,20 +4,20 @@ import java.util.ArrayList;
 
 import model.blocks.*;
 import utilities.BlockType;
-import utilities.WindowLocation;
+import utilities.Location;
 
 /**
  * Class representing the palette. Blocks will be dragged from the palette int the program area.
  */
 class ModelPalette extends ModelWindow{
 
-    private final WindowLocation turnLeftWindowLocation = new WindowLocation(20, 20);
-    private final WindowLocation turnRightWindowLocation = new WindowLocation(180, 20);
-    private final WindowLocation forwardWindowLocation = new WindowLocation(20, 180);
-    private final WindowLocation notWindowLocation = new WindowLocation(180, 180);
-    private final WindowLocation wallInFrontWindowLocation = new WindowLocation(20, 340);
-    private final WindowLocation whileWindowLocation = new WindowLocation(180, 340);
-    private final WindowLocation ifWindowLocation = new WindowLocation(20, 500);
+    private final Location turnLeftWindowLocation = new Location(20, 20);
+    private final Location turnRightWindowLocation = new Location(180, 20);
+    private final Location forwardWindowLocation = new Location(20, 180);
+    private final Location notWindowLocation = new Location(180, 180);
+    private final Location wallInFrontWindowLocation = new Location(20, 340);
+    private final Location whileWindowLocation = new Location(180, 340);
+    private final Location ifWindowLocation = new Location(20, 500);
 
     private ModelMoveBlock turnLeftBlock;
     private ModelMoveBlock turnRightBlock;
@@ -214,7 +214,7 @@ class ModelPalette extends ModelWindow{
      * 
      * @return the location of the 'turn left' block.
      */
-    public WindowLocation getTurnLeftWindowLocation(){
+    public Location getTurnLeftWindowLocation(){
         return this.turnLeftWindowLocation;
     }
 
@@ -222,7 +222,7 @@ class ModelPalette extends ModelWindow{
      * 
      * @return the location of the 'turn right' block.
      */
-    public WindowLocation getTurnRightWindowLocation(){
+    public Location getTurnRightWindowLocation(){
         return this.turnRightWindowLocation;
     }
 
@@ -230,7 +230,7 @@ class ModelPalette extends ModelWindow{
      * 
      * @return the location of the 'forward' block.
      */
-    public WindowLocation getForwardWindowLocation(){
+    public Location getForwardWindowLocation(){
         return this.forwardWindowLocation;
     }
 
@@ -238,7 +238,7 @@ class ModelPalette extends ModelWindow{
      * 
      * @return the location of the not block location.
      */
-    public WindowLocation getNotWindowLocation(){
+    public Location getNotWindowLocation(){
         return this.notWindowLocation;
     }
 
@@ -246,7 +246,7 @@ class ModelPalette extends ModelWindow{
      * 
      * @return the location of the 'wall in front' block.
      */
-    public WindowLocation getWallInFrontWindowLocation(){
+    public Location getWallInFrontWindowLocation(){
         return this.wallInFrontWindowLocation;
     }
 
@@ -254,7 +254,7 @@ class ModelPalette extends ModelWindow{
      * 
      * @return the location of the if block.
      */
-    public WindowLocation getIfWindowLocation(){
+    public Location getIfWindowLocation(){
         return this.ifWindowLocation;
     }
 
@@ -262,7 +262,7 @@ class ModelPalette extends ModelWindow{
      * 
      * @return the location of the while block.
      */
-    public WindowLocation getWhileWindowLocation(){
+    public Location getWhileWindowLocation(){
         return this.whileWindowLocation;
     }
 
@@ -279,7 +279,7 @@ class ModelPalette extends ModelWindow{
      * @param {Boolean} maxReached signifies whether the max number of blocks has been reached
      * @return the block to return when the mouse is held down
      */
-    protected ModelBlock handleMouseDown(WindowLocation eventWindowLocation, boolean maxReached){
+    protected ModelBlock handleMouseDown(Location eventWindowLocation, boolean maxReached){
         ModelBlock selected = null;
         if(this.getTurnLeftBlock().inBounds(eventWindowLocation)){
             selected = this.getTurnLeftBlock();

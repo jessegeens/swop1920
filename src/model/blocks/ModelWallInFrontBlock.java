@@ -11,7 +11,7 @@ public class ModelWallInFrontBlock extends ModelBlock{
     private ModelBlock leftPlug;
 
     // Constructor
-    public ModelWallInFrontBlock(WindowLocation pos, BlockType type){
+    public ModelWallInFrontBlock(Location pos, BlockType type){
         super(pos,type);
         this.setLeftPlug(null);
         ArrayList<ConnectionPoint> connectionPoints = new ArrayList<>();
@@ -36,11 +36,11 @@ public class ModelWallInFrontBlock extends ModelBlock{
     /**
      * {@inheritDoc}
      */
-    public WindowLocation getLeftPlugPos() {
+    public Location getLeftPlugPos() {
         return super.getPos().add(- ModelBlock.PLUGSIZE / 2, + this.getHeight() / 2);
     }
 
-    public void setLeftPlugPos(WindowLocation pos) {
+    public void setLeftPlugPos(Location pos) {
         super.setPos(pos.add(ModelBlock.PLUGSIZE/2, -this.getHeight()/2));
     }
 

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d69d0d1a-3bb5-4bd8-bbbd-706c664026e9" name="Default Changelist" comment="" />
+    <list default="true" id="d69d0d1a-3bb5-4bd8-bbbd-706c664026e9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../gameworldapi/src/ActionResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gameworldapi/src/GameWorldState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gameworldapi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../gameworldapi/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gameworldapi/src/GameWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gameworldapi/src/GameWorld.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

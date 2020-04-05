@@ -6,7 +6,14 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8346d5e9-0e48-4aa0-95e5-daa1d4527371" name="Default Changelist" comment="" />
+    <list default="true" id="8346d5e9-0e48-4aa0-95e5-daa1d4527371" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/ActionResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GameWorldState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../blockr/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../blockr/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Action.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameWorld.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,8 +22,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -38,6 +45,11 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="" />
+    </key>
   </component>
   <component name="SvnConfiguration">
     <configuration />

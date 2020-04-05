@@ -13,19 +13,13 @@ import model.*;
  */
 public class UIController {
 
-    private UIGrid grid;
-    
     private final int wWidth;  //window width
     private final int wHeight; //window height
 
-    private ArrayList<UIBlock> blocks;
-
     // Constructor
-    public UIController(int windowWidth, int windowHeight, ArrayList<ModelBlock> mBlocks, ProgramState programState){
+    public UIController(int windowWidth, int windowHeight){
         this.wWidth = windowWidth;
         this.wHeight = windowHeight;
-        updateBlocks(mBlocks);
-        updateGrid(programState);
     }
 
     /**
@@ -35,7 +29,7 @@ public class UIController {
     public void render(Graphics g){
         System.out.println("Rendering UI, blocks and grid");
         this.renderUI(g);
-        blocks.forEach((UIBlock block) -> block.render(g));
+        //blocks.forEach((UIBlock block) -> block.render(g));
         //this.grid.render(g);
     }
 
@@ -44,12 +38,16 @@ public class UIController {
      * @param g Graphics object
      * @param state the program state that needs to be rendered
      */
-    public void render(Graphics g, ProgramState state){
+    public void render(Graphics g, ProgramState state, ArrayList<BlockState> blocks){
         Location gridLocation = new Location(wWidth*2/3, 0);
+        UIBlock uiBlock = new UIBlock();
+        UIGrid uiGrid = new UIGrid();
         System.out.println("Rendering UI, blocks and grid");
         this.renderUI(g);
-        blocks.forEach((UIBlock block) -> block.render(g));
-        this.grid.render(g, wWidth, wHeight, gridLocation, state);
+        for (BlockState block : blocks){
+            uiBlock.render(g, block);
+        }
+        uiGrid.render(g, wWidth, wHeight, gridLocation, state);
     }
 
     /**
@@ -61,27 +59,4 @@ public class UIController {
         g.drawLine(this.wWidth/3, 0, this.wWidth/3, this.wHeight);
         g.drawLine(2*this.wWidth/3, 0, 2*this.wWidth/3, this.wHeight);
     }
-
-    /**
-     * Method to update a list of block elements.
-     * @param mBlocks list of blocks to be updated
-     */
-    public void updateBlocks(ArrayList<ModelBlock> mBlocks){
-        this.blocks = new ArrayList<UIBlock>();
-        mBlocks.forEach((ModelBlock mBlock) -> this.blocks.add(new UIBlock(mBlock)));
-    }
-
-    /**
-     * Method to update the grid.
-     * @param programState variable containing information about the grid.
-     */
-    public void updateGrid(ProgramState programState){
-        if (programState == null) throw new IllegalArgumentException("updating grid with an illegal programState (is null)");
-        System.out.println("updating grid: " + programState.toString());
-        this.grid = new UIGrid(new Location(2*this.wWidth/3, 0), this.wWidth/ 3, this.wHeight, programState.getCellSize(), programState.getWalls(), programState.getRobotLocation(), programState.getRobotDirection(), programState.getGoalCell());
-    }
-
-
-    
-
 }

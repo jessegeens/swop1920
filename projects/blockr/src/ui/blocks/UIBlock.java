@@ -10,258 +10,210 @@ import utilities.*;
 /**
  * Class representing the different blocks and their visualisation.
  */
-public class UIBlock extends UIElement {
+public class UIBlock{
 
-    private ModelBlock mBlock;
 
-    // Constructor
-    public UIBlock(ModelBlock mBlock) {
-        super(mBlock.getPos());
-        this.mBlock = mBlock;
+    public static final int PLUGSIZE = 20; //final standard size of plugs and sockets
+    public static final int STD_WIDTH = 80; //final standard width of blocks
+    public static final int STD_HEIGHT = 80; //final standard height of blocks
+
+
+    public UIBlock() {
     }
 
-    private Color getBlockColor(){
-        if(this.isHighlighted()) {
+    /**
+     * Gives the color in which the blocks need to be rendered according to whether they are highlighted or not
+     * @param highlighted the bool to know if the block is highlighted
+     * @return color green if highlighted, gray otherwise
+     * @author Oberon Swings
+     */
+    private Color getBlockColor(boolean highlighted) {
+        if (highlighted) {
             return Color.GREEN;
-        }
-        else {
+        } else {
             return Color.GRAY;
         }
     }
 
-    public Color getSocketColor(){
+    public Color getSocketColor() {
         return Color.WHITE;
     }
 
     //TODO rendering sockets first and then plugs
 
 
-    private void renderTopSocket(Graphics g){
-        g.setColor(getBlockColor());
-        g.fillRect(this.getPos().getX() , this.getPos().getY() , this.getTopSocketPos().getX() - this.getPos().getX(), this.getSocketSize());
-        g.fillRect(this.getTopSocketPos().getX() + this.getSocketSize(), this.getPos().getY() , this.getPos().getX() + this.getWidth() - this.getTopSocketPos().getX() - this.getSocketSize(), this.getSocketSize());
+    private void renderTopSocket(Graphics g, Location blockLocation, boolean highlighted) {
+        g.setColor(getBlockColor(highlighted));
+        g.fillRect(blockLocation.getX(), blockLocation.getY(), this.getTopSocketPos(blockLocation).getX() - blockLocation.getX(), PLUGSIZE);
+        g.fillRect(this.getTopSocketPos(blockLocation).getX() + PLUGSIZE, blockLocation.getY(), blockLocation.getX() + this.getWidth() - this.getTopSocketPos(blockLocation).getX() - PLUGSIZE, PLUGSIZE);
     }
 
-    
-
-    private void renderBottomPlug(Graphics g){
-        g.setColor(getBlockColor());
-        g.fillRect(this.getBottomPlugPos().getX(), this.getBottomPlugPos().getY(), this.getSocketSize(), this.getSocketSize());
+    private void renderBottomPlug(Graphics g, Location blockLocation, boolean highlighted, int cavitySize) {
+        g.setColor(getBlockColor(highlighted));
+        g.fillRect(this.getBottomPlugPos(blockLocation, cavitySize).getX(), this.getBottomPlugPos(blockLocation, cavitySize).getY(), PLUGSIZE, PLUGSIZE);
     }
 
-    private void renderLeftPlug(Graphics g){
-        g.setColor(getBlockColor());
-        g.fillRect(this.getLeftPlugPos().getX(),this.getLeftPlugPos().getY(), this.getSocketSize(), this.getSocketSize());
+    private void renderLeftPlug(Graphics g, Location blockLocation, boolean highlighted) {
+        g.setColor(getBlockColor(highlighted));
+        g.fillRect(this.getLeftPlugPos(blockLocation).getX(), this.getLeftPlugPos(blockLocation).getY(), PLUGSIZE, PLUGSIZE);
     }
 
-    private void renderRightSocket(Graphics g){
-        g.setColor(getBlockColor());
-        g.fillRect(this.getRightSocketPos().getX(), this.getPos().getY() , this.getSocketSize(), this.getRightSocketPos().getY() - this.getPos().getY());
-        g.fillRect(this.getRightSocketPos().getX(), this.getRightSocketPos().getY() + this.getSocketSize(), this.getSocketSize(), this.getPos().getY() + this.getHeight() - this.getRightSocketPos().getY() - this.getSocketSize());
+    private void renderRightSocket(Graphics g, Location blockLocation, boolean highlighted, int cavitySize) {
+        g.setColor(getBlockColor(highlighted));
+        g.fillRect(this.getRightSocketPos(blockLocation).getX(), blockLocation.getY(), PLUGSIZE, this.getRightSocketPos(blockLocation).getY() - blockLocation.getY());
+        g.fillRect(this.getRightSocketPos(blockLocation).getX(), this.getRightSocketPos(blockLocation).getY() + PLUGSIZE, PLUGSIZE, blockLocation.getY() + this.getHeight(cavitySize) - this.getRightSocketPos(blockLocation).getY() - PLUGSIZE);
     }
 
-    private void renderNoRightSocket(Graphics g){
-        g.setColor(getBlockColor());
-        g.fillRect(this.getPos().getX() + this.getWidth() - this.getSocketSize(), this.getPos().getY() , this.getSocketSize(), this.getHeight());
+    private void renderNoRightSocket(Graphics g, Location blockLocation, boolean highlighted, int cavitySize) {
+        g.setColor(getBlockColor(highlighted));
+        g.fillRect(blockLocation.getX() + this.getWidth() - PLUGSIZE, blockLocation.getY(), PLUGSIZE, this.getHeight(cavitySize));
     }
 
-    private void renderNoTopSocket(Graphics g){
-        g.setColor(getBlockColor());
-        g.fillRect(this.getPos().getX() , this.getPos().getY() , this.getWidth(), this.getSocketSize());
+    private void renderNoTopSocket(Graphics g, Location blockLocation, boolean highlighted) {
+        g.setColor(getBlockColor(highlighted));
+        g.fillRect(blockLocation.getX(), blockLocation.getY(), this.getWidth(), PLUGSIZE);
     }
 
 
-    private void renderInnerBlock(Graphics g){
-        g.setColor(getBlockColor());
-        g.fillRect(this.getPos().getX() ,this.getPos().getY() + this.getSocketSize(),this.getWidth() - this.getSocketSize(), this.getHeight() - this.getSocketSize());
+    private void renderInnerBlock(Graphics g, Location blockLocation, boolean highlighted, int cavitySize) {
+        g.setColor(getBlockColor(highlighted));
+        g.fillRect(blockLocation.getX(), blockLocation.getY() + PLUGSIZE, this.getWidth() - PLUGSIZE, this.getHeight(cavitySize) - PLUGSIZE);
     }
 
-    /** 
+    /**
      * This function renders the cavity socket (socket is at the bottom)
-     * 
+     *
      * @param g The Graphics object on which the block is rendered
      * @author Bert De Vleeschouwer
      */
-    private void renderCavitySocket(Graphics g){
+    private void renderCavitySocket(Graphics g, Location blockLocation, int cavitySize) {
         g.setColor(Color.GREEN);
-        g.fillRect(this.getCavitySocketPos().getX(),this.getCavitySocketPos().getY(), this.getSocketSize(), this.getSocketSize());
-
-
+        g.fillRect(this.getCavitySocketPos(blockLocation,cavitySize).getX(), this.getCavitySocketPos(blockLocation,cavitySize).getY(), PLUGSIZE, PLUGSIZE);
     }
 
-    /** 
+    /**
      * This function renders the cavity plug (plug is at the top)
-     * 
+     *
      * @param g The Graphics object on which the block is rendered
      * @author Bert De Vleeschouwer
      */
-    private void renderCavityPlug(Graphics g){
+    private void renderCavityPlug(Graphics g, Location blockLocation) {
         g.setColor(Color.GREEN);
-        g.fillRect(this.getCavityPlugPos().getX(),this.getCavityPlugPos().getY(), this.getSocketSize(), this.getSocketSize());
-        
+        g.fillRect(this.getCavityPlugPos(blockLocation).getX(), this.getCavityPlugPos(blockLocation).getY(), PLUGSIZE, PLUGSIZE);
     }
 
-    /** 
+    /**
      * This function renders the block
-     * 
+     *
      * @param g The Graphics object on which the block is rendered
+     * @param blockState the state in which the block needs to be rendered
      * @author Bert De Vleeschouwer
      */
-    public void render(Graphics g){
-
-
-        
-    
-        switch (this.getType()){
+    public void render(Graphics g, BlockState blockState) {
+        Location blockLocation = blockState.getBlockLocation();
+        BlockType blockType = blockState.getBlockType();
+        boolean highlighted = blockState.isHighlighted();
+        int cavitySize = blockState.getCavitySize();
+        switch (blockType) {
             case IF:
             case WHILE:
-                this.renderInnerBlock(g);
-                this.renderBottomPlug(g);
-                this.renderTopSocket(g);
-                this.renderRightSocket(g);
-                this.renderCavityPlug(g);
-                this.renderCavitySocket(g);
+                this.renderInnerBlock(g,blockLocation,highlighted,cavitySize);
+                this.renderBottomPlug(g,blockLocation,highlighted,cavitySize);
+                this.renderTopSocket(g,blockLocation,highlighted);
+                this.renderRightSocket(g,blockLocation,highlighted,cavitySize);
+                this.renderCavityPlug(g,blockLocation);
+                this.renderCavitySocket(g,blockLocation,cavitySize);
                 break;
             case MOVEFORWARD:
             case TURNLEFT:
             case TURNRIGHT:
-                this.renderInnerBlock(g);
-                this.renderBottomPlug(g);
-                this.renderTopSocket(g);
-                this.renderNoRightSocket(g);
+                this.renderInnerBlock(g,blockLocation,highlighted,cavitySize);
+                this.renderBottomPlug(g,blockLocation,highlighted,cavitySize);
+                this.renderTopSocket(g,blockLocation,highlighted);
+                this.renderNoRightSocket(g,blockLocation,highlighted,cavitySize);
                 break;
             case NOT:
-                this.renderInnerBlock(g);
-                this.renderNoTopSocket(g);
-                this.renderRightSocket(g);
-                this.renderLeftPlug(g);
+                this.renderInnerBlock(g,blockLocation,highlighted,cavitySize);
+                this.renderNoTopSocket(g,blockLocation,highlighted);
+                this.renderRightSocket(g,blockLocation,highlighted,cavitySize);
+                this.renderLeftPlug(g,blockLocation,highlighted);
                 break;
             case WALLINFRONT:
-                this.renderInnerBlock(g);
-                this.renderLeftPlug(g);
-                this.renderNoRightSocket(g);
-                this.renderNoTopSocket(g);
+                this.renderInnerBlock(g,blockLocation,highlighted,cavitySize);
+                this.renderLeftPlug(g,blockLocation,highlighted);
+                this.renderNoRightSocket(g,blockLocation,highlighted,cavitySize);
+                this.renderNoTopSocket(g,blockLocation,highlighted);
                 break;
             default:
                 break;
         }
-
         g.setColor(Color.WHITE);
-        g.drawString(this.getType().getTitle(), this.getPos().getX() + 10, this.getPos().getY() + (ModelBlock.STD_HEIGHT/2));
-        
+        g.drawString(blockType.getTitle(), blockLocation.getX() + 10, blockLocation.getY() + (ModelBlock.STD_HEIGHT / 2));
+
     }
 
 
     /**
-     *
-     * @return the modelBlock this UIBlock is representing
-     * @author Oberon Swings
-     */
-    public ModelBlock getmBlock(){
-        return this.mBlock;
-    }
-
-    /**
-     *
      * @return the position of the cavity socket in a WHILEIF block
      * @author Bert De Vleeschouwer
      */
-    public Location getCavitySocketPos(){
-        if (this.getmBlock().getBlockType() == BlockType.WHILE || this.getmBlock().getBlockType() == BlockType.IF){
-            return ((ModelWhileIfBlock)this.getmBlock()).getCavitySocketPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
-        }
-        return new Location(0,0);
+    public Location getCavitySocketPos(Location blockLocation, int cavitySize) {
+        return blockLocation.add(2*ModelBlock.STD_WIDTH/3, this.getHeight(cavitySize) - ModelBlock.STD_HEIGHT/3);
     }
 
     /**
-     *
      * @return the position of the cavity plug in a WHILEIF block
      * @author Bert De Vleeschouwer
      */
-    public Location getCavityPlugPos(){
-        if (this.getmBlock().getBlockType() == BlockType.WHILE || this.getmBlock().getBlockType() == BlockType.IF){
-            return ((ModelWhileIfBlock)this.getmBlock()).getCavityPlugPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
-        }
-        return new Location(0,0);
+    public Location getCavityPlugPos(Location blockLocation) {
+        return blockLocation.add(2*ModelBlock.STD_WIDTH/3, 2*ModelBlock.STD_HEIGHT/3);
     }
 
     /**
-     *
      * @return the position of the topSocket
      * @author Oberon Swings
      */
-    public Location getTopSocketPos(){
-        if (!this.getmBlock().hasTopSocket()) return new Location(0,0);
-        return this.getmBlock().getTopSocketPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
+    public Location getTopSocketPos(Location blockLocation) {
+        return blockLocation.add(this.getWidth()/2 - PLUGSIZE/2, 0);
     }
 
     /**
-     *
      * @return the position of the rightSocket
      * @author Oberon Swings
      */
-    public Location getRightSocketPos(){
-        if (!this.getmBlock().hasRightSocket()) return new Location(0,0);
-        return this.getmBlock().getRightSocketPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
+    public Location getRightSocketPos(Location blockLocation) {
+        return blockLocation.add(this.getWidth() - PLUGSIZE, STD_HEIGHT/2 -PLUGSIZE/2);
     }
 
     /**
-     *
      * @return the position of the bottomPlug
      * @author Oberon Swings
      */
-    public Location getBottomPlugPos(){
-        if (!this.getmBlock().hasBottomPlug()) return new Location(0,0);
-        return this.getmBlock().getBottomPlugPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
+    public Location getBottomPlugPos(Location blockLocation, int cavitySize) {
+        return blockLocation.add(this.getWidth()/2 - PLUGSIZE/2, this.getHeight(cavitySize));
     }
 
     /**
-     *
      * @return the position of the leftPlug
      * @author Oberon Swings
      */
-    public Location getLeftPlugPos() {
-        if (!this.getmBlock().hasLeftPlug()) return new Location(0,0);
-        return this.getmBlock().getLeftPlugPos().add(-this.getSocketSize()/2, -this.getSocketSize()/2);
+    public Location getLeftPlugPos(Location blockLocation) {
+        return blockLocation.add(0, STD_HEIGHT/2 - PLUGSIZE/2);
     }
 
     /**
-     *
      * @return the width of the modelBlock
      */
     public int getWidth() {
-        return this.getmBlock().getWidth();
+        return STD_WIDTH;
     }
 
     /**
-     *
-     * @return the height of the modelBlock
+     * gives the height that the rendered block needs to have
+     * @param cavitySize the size of the cavity if the block has one, 0 if there is no cavity
+     * @return the height that the rendered block gets
      */
-    public int getHeight() {
-        return this.getmBlock().getHeight();
-    }
-
-    /**
-     *
-     * @return The size of the Socket/Plug
-     */
-    public int getSocketSize() {
-        return ModelBlock.PLUGSIZE;
-    }
-
-    /**
-     *
-     * @return true if the modelBlock is highlighted
-     */
-    public boolean isHighlighted() {
-        return this.getmBlock().isHighlighted();
-    }
-
-    /**
-     *
-     * @return the type of the modelBlock
-     */
-    public BlockType getType() {
-        return this.getmBlock().getBlockType();
+    public int getHeight(int cavitySize) {
+        return (cavitySize + 1) * STD_HEIGHT;
     }
 }

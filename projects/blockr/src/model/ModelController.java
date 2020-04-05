@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import main.MyCanvasWindow;
 import model.blocks.ModelBlock;
 import model.blocks.ModelWhileIfBlock;
+import ui.blocks.BlockState;
 import utilities.*;
 
 
@@ -285,5 +286,16 @@ public class ModelController{
         this.maxReached = maxReached;
     }
 
-
+    /**
+     *
+     * @return the block states for all blocks in the model
+     * @author Oberon Swings
+     */
+    public ArrayList<BlockState> getBlockStates(){
+        ArrayList<BlockState> blockStates = new ArrayList<>();
+        for (ModelBlock block : getModelBlocks()){
+            blockStates.add(new BlockState(block));
+        }
+        return blockStates;
+    }
 }

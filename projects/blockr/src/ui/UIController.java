@@ -23,20 +23,11 @@ public class UIController {
     }
 
     /**
-     * Method to render the UI elements.
-     * @param g graphics object where the UI elements are rendered.
-     */
-    public void render(Graphics g){
-        System.out.println("Rendering UI, blocks and grid");
-        this.renderUI(g);
-        //blocks.forEach((UIBlock block) -> block.render(g));
-        //this.grid.render(g);
-    }
-
-    /**
      * Method to render the UI elements
      * @param g Graphics object
      * @param state the program state that needs to be rendered
+     * @param blocks the block states that need to be rendered
+     * @author Oberon Swings
      */
     public void render(Graphics g, ProgramState state, ArrayList<BlockState> blocks){
         Location gridLocation = new Location(wWidth*2/3, 0);

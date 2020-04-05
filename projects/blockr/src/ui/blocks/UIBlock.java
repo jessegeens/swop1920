@@ -1,10 +1,8 @@
 package ui.blocks;
-import ui.*;
 import java.awt.*;
 
 
 import model.blocks.ModelBlock;
-import model.blocks.ModelWhileIfBlock;
 import utilities.*;
 
 /**
@@ -17,8 +15,8 @@ public class UIBlock{
     public static final int STD_WIDTH = 80; //final standard width of blocks
     public static final int STD_HEIGHT = 80; //final standard height of blocks
 
+    public UIBlock(){
 
-    public UIBlock() {
     }
 
     /**
@@ -34,13 +32,6 @@ public class UIBlock{
             return Color.GRAY;
         }
     }
-
-    public Color getSocketColor() {
-        return Color.WHITE;
-    }
-
-    //TODO rendering sockets first and then plugs
-
 
     private void renderTopSocket(Graphics g, Location blockLocation, boolean highlighted) {
         g.setColor(getBlockColor(highlighted));
@@ -82,7 +73,8 @@ public class UIBlock{
 
     /**
      * This function renders the cavity socket (socket is at the bottom)
-     *
+     * @param blockLocation the location of the block
+     * @param cavitySize the size of the cavity of the block
      * @param g The Graphics object on which the block is rendered
      * @author Bert De Vleeschouwer
      */
@@ -93,7 +85,7 @@ public class UIBlock{
 
     /**
      * This function renders the cavity plug (plug is at the top)
-     *
+     * @param blockLocation the location of the block
      * @param g The Graphics object on which the block is rendered
      * @author Bert De Vleeschouwer
      */
@@ -104,7 +96,6 @@ public class UIBlock{
 
     /**
      * This function renders the block
-     *
      * @param g The Graphics object on which the block is rendered
      * @param blockState the state in which the block needs to be rendered
      * @author Bert De Vleeschouwer
@@ -149,11 +140,12 @@ public class UIBlock{
         }
         g.setColor(Color.WHITE);
         g.drawString(blockType.getTitle(), blockLocation.getX() + 10, blockLocation.getY() + (ModelBlock.STD_HEIGHT / 2));
-
     }
 
 
     /**
+     * @param blockLocation the location of the block
+     * @param cavitySize the size of the cavity of the block
      * @return the position of the cavity socket in a WHILEIF block
      * @author Bert De Vleeschouwer
      */
@@ -162,6 +154,7 @@ public class UIBlock{
     }
 
     /**
+     * @param blockLocation the location of the block
      * @return the position of the cavity plug in a WHILEIF block
      * @author Bert De Vleeschouwer
      */
@@ -170,6 +163,7 @@ public class UIBlock{
     }
 
     /**
+     * @param blockLocation the location of the block
      * @return the position of the topSocket
      * @author Oberon Swings
      */
@@ -178,6 +172,7 @@ public class UIBlock{
     }
 
     /**
+     * @param blockLocation the location of the block
      * @return the position of the rightSocket
      * @author Oberon Swings
      */
@@ -186,6 +181,8 @@ public class UIBlock{
     }
 
     /**
+     * @param blockLocation the location of the block
+     * @param cavitySize the size of the cavity of the block
      * @return the position of the bottomPlug
      * @author Oberon Swings
      */
@@ -194,6 +191,7 @@ public class UIBlock{
     }
 
     /**
+     * @param blockLocation the location of the block
      * @return the position of the leftPlug
      * @author Oberon Swings
      */

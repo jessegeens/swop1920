@@ -45,7 +45,7 @@ public class GlobalController {
      * @param keyChar character of the pressed key
      */
     public void handleKeyEvent(int id, int keyCode, char keyChar){
-        this.getModelController().handleKeyEvent(id, keyCode, keyChar);
+        this.modelController.handleKeyEvent(id, keyCode, keyChar);
     }
 
     /**
@@ -57,17 +57,4 @@ public class GlobalController {
         uiController.render(g, modelController.getGrid().getGridState(), modelController.getBlockStates());
     }
 
-    /**
-     * @return the modelController
-     */
-    public ModelController getModelController() {
-        return this.modelController;
-    }
-
-    /**
-     * @return the uiController
-     */
-    public UIController getUIController(){
-        return this.uiController;
-    }
 }

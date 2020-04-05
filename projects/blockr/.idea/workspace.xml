@@ -4,8 +4,13 @@
     <list default="true" id="d69d0d1a-3bb5-4bd8-bbbd-706c664026e9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/GlobalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/GlobalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ModelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ModelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ModelGrid.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/UIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/UIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/blocks/UIBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/blocks/UIBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/blocks/BlockState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/BlockState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/blocks/UIBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/UIBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/main/GlobalControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/main/GlobalControllerTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/utilities/UtilitiesTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/utilities/UtilitiesTests.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,6 +47,11 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="ui" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">

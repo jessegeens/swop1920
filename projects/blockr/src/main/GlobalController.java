@@ -54,7 +54,7 @@ public class GlobalController {
      * @param g the graphics object which the rendering uses
      */
     public void render(Graphics g){
-        uiController.render(g, modelController.getGrid().getGridState(), modelController.getBlockStates());
+        uiController.render(g, modelController.getState(), modelController.getBlockStates());
     }
 
 }

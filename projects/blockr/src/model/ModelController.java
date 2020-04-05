@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import main.MyCanvasWindow;
 import model.blocks.ModelBlock;
 import model.blocks.ModelWhileIfBlock;
-import ui.blocks.BlockState;
+import ui.BlockState;
 import utilities.*;
 
 
@@ -22,7 +22,7 @@ public class ModelController{
 
     private ModelPalette palette;
     private ModelProgramArea PArea;
-    private ModelGrid grid;
+    private ProgramState state;
     private ProgramRunner programRunner;
 
     private ModelBlock active = null;
@@ -33,7 +33,7 @@ public class ModelController{
         //palette left, program middle, grid right
         this.setPalette(new ModelPalette(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
         this.setPArea(new ModelProgramArea(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT));
-        this.setGrid(new ModelGrid(MyCanvasWindow.WIDTH/3, MyCanvasWindow.HEIGHT, ProgramState.getInitialState()));
+        this.state = ProgramState.getInitialState();
         this.setProgramRunner(new ProgramRunner());
     }
 
@@ -57,7 +57,7 @@ public class ModelController{
                 if (getPArea().allBlocksConnected()){//Check if all blocks are connected, and if so execute.
                     if(this.getProgramRunner().isRunning()){
                         System.out.println("executing on keypress, is already running");
-                        getGrid().setGridState(this.getProgramRunner().execute(getGrid().getGridState()));
+                        state = this.getProgramRunner().execute(state);
                     } else {
                         this.getProgramRunner().initialise(getPArea().getStartBlocks().get(0));
                     }
@@ -102,25 +102,6 @@ public class ModelController{
     public void setPArea(ModelProgramArea PArea) {
         this.PArea = PArea;
     }
-
- 
-    /**
-     * 
-     * @return the model grid
-     */
-    public ModelGrid getGrid() {
-        return this.grid;
-    }
-
-    /**
-     * Set the Model Grid of the controller
-     * 
-     * @param grid the grid the controller controls
-     */
-    public void setGrid(ModelGrid grid) {
-        this.grid = grid;
-    }
-
 
     /**
      * general handler for mouse events, checks where the mouse event should be handled
@@ -297,5 +278,9 @@ public class ModelController{
             blockStates.add(new BlockState(block));
         }
         return blockStates;
+    }
+
+    public ProgramState getState() {
+        return state;
     }
 }

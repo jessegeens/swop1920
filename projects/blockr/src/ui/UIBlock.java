@@ -1,8 +1,9 @@
-package ui.blocks;
+package ui;
 import java.awt.*;
 
 
 import model.blocks.ModelBlock;
+import ui.BlockState;
 import utilities.*;
 
 /**
@@ -46,7 +47,7 @@ public class UIBlock{
 
     private void renderLeftPlug(Graphics g, Location blockLocation, boolean highlighted) {
         g.setColor(getBlockColor(highlighted));
-        g.fillRect(this.getLeftPlugPos(blockLocation).getX(), this.getLeftPlugPos(blockLocation).getY(), PLUGSIZE, PLUGSIZE);
+        g.fillRect(this.getLeftPlugPos(blockLocation).getX() - PLUGSIZE, this.getLeftPlugPos(blockLocation).getY(), PLUGSIZE, PLUGSIZE);
     }
 
     private void renderRightSocket(Graphics g, Location blockLocation, boolean highlighted, int cavitySize) {

@@ -1,4 +1,4 @@
-package ui.blocks;
+package ui;
 
 import model.blocks.ModelBlock;
 import model.blocks.ModelWhileIfBlock;

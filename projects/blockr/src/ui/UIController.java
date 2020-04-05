@@ -3,9 +3,7 @@ package ui;
 import java.util.ArrayList;
 import java.awt.*;
 
-import ui.blocks.*;
 import utilities.*;
-import model.blocks.ModelBlock;
 import model.*;
 
 /**

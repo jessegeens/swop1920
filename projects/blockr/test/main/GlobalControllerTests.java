@@ -1,6 +1,5 @@
 package main;
 
-import model.ModelGrid;
 import model.ProgramState;
 import model.blocks.*;
 import org.junit.Test;

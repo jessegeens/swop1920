@@ -24,7 +24,7 @@ public class GlobalController {
     public GlobalController(){
         this.modelController = new ModelController();
         System.out.println(modelController.getModelBlocks());
-        this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT, modelController.getModelBlocks(), ProgramState.getInitialState());
+        this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT);
     }
     
     /**
@@ -33,8 +33,6 @@ public class GlobalController {
     public void handleMouseEvent(int id, int x, int y, int clickCount){
         Location eventWindowLocation = new Location(x,y);
         this.modelController.handleMouseEvent(id, eventWindowLocation, clickCount);
-        this.uiController.updateBlocks(this.modelController.getModelBlocks());
-
     }
 
         /**
@@ -47,8 +45,7 @@ public class GlobalController {
      * @param keyChar character of the pressed key
      */
     public void handleKeyEvent(int id, int keyCode, char keyChar){
-        this.getModelController().handleKeyEvent(id, keyCode, keyChar);
-        this.uiController.updateGrid(modelController.getGrid().getGridState());
+        this.modelController.handleKeyEvent(id, keyCode, keyChar);
     }
 
     /**
@@ -57,20 +54,7 @@ public class GlobalController {
      * @param g the graphics object which the rendering uses
      */
     public void render(Graphics g){
-        uiController.render(g, modelController.getGrid().getGridState());
+        uiController.render(g, modelController.getState(), modelController.getBlockStates());
     }
 
-    /**
-     * @return the modelController
-     */
-    public ModelController getModelController() {
-        return this.modelController;
-    }
-
-    /**
-     * @return the uiController
-     */
-    public UIController getUIController(){
-        return this.uiController;
-    }
 }

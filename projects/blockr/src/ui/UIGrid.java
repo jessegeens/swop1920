@@ -10,8 +10,7 @@ import utilities.*;
 public class UIGrid {
 
     // Constructor
-    public UIGrid(Location position, int width, int height, int cellSize, ArrayList<Location> walls, Location robotGridLocation, Direction roboDirection, Location goalCell) {
-
+    public UIGrid() {
     }
 
     /**

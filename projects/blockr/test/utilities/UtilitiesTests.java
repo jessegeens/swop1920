@@ -1,10 +1,7 @@
 package utilities;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
-import model.ModelGrid;
-import model.ProgramState;
 import org.junit.*;
 
 import java.util.ArrayList;

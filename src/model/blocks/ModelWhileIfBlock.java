@@ -259,18 +259,14 @@ public class ModelWhileIfBlock extends ModelBlock{
             throw new NoSuchFieldException("the WHILEIF block socket is null");
         }
 
-        while( current.getClass() != ModelWallInFrontBlock.class){  
-            if(current.getClass() == ModelNotBlock.class){
+        while(!(current instanceof ModelWallInFrontBlock)){
+            if(current instanceof ModelNotBlock){
                 not = !not;
             }
-            if(current.getClass() == ModelWallInFrontBlock.class){
-                break;
-            }
-            current = ((ModelNotBlock) current).getRightSocket();  
+            if (current.hasRightSocket()) current = current.getRightSocket();
             if(current == null){
                 throw new NoSuchFieldException("the right socket of a condition block is null");
-            }          
-
+            }
         }
 
         Condition toBeReturned;

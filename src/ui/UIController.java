@@ -36,7 +36,20 @@ public class UIController {
         System.out.println("Rendering UI, blocks and grid");
         this.renderUI(g);
         blocks.forEach((UIBlock block) -> block.render(g));
-        this.grid.render(g);
+        //this.grid.render(g);
+    }
+
+    /**
+     * Method to render the UI elements
+     * @param g Graphics object
+     * @param state the program state that needs to be rendered
+     */
+    public void render(Graphics g, ProgramState state){
+        Location gridLocation = new Location(wWidth*2/3, 0);
+        System.out.println("Rendering UI, blocks and grid");
+        this.renderUI(g);
+        blocks.forEach((UIBlock block) -> block.render(g));
+        this.grid.render(g, wWidth, wHeight, gridLocation, state);
     }
 
     /**

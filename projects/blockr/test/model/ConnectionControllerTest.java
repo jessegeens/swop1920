@@ -209,7 +209,7 @@ public class ConnectionControllerTest {
         ConnectionController CC = new ConnectionController();
         ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(110,140), BlockType.MOVEFORWARD);
-        CC.connectCavity(ifBlock,forwardBlock);
+        CC.connectCavityPlug(ifBlock,forwardBlock);
         assertEquals(forwardBlock, ifBlock.getCavityPlug());
     }
 
@@ -218,7 +218,7 @@ public class ConnectionControllerTest {
         ConnectionController CC = new ConnectionController();
         ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(110,60), BlockType.MOVEFORWARD);
-        CC.connectCavity(ifBlock,forwardBlock);
+        CC.connectCavitySocket(ifBlock,forwardBlock);
         assertEquals(forwardBlock, ifBlock.getCavitySocket());
     }
 
@@ -227,7 +227,7 @@ public class ConnectionControllerTest {
         ConnectionController CC = new ConnectionController();
         ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(110,140), BlockType.MOVEFORWARD);
-        CC.connectCavity(ifBlock,forwardBlock);
+        CC.connectCavitySocket(ifBlock,forwardBlock);
         assertEquals(forwardBlock, ifBlock.getCavitySocket());
     }
 
@@ -236,7 +236,7 @@ public class ConnectionControllerTest {
         ConnectionController CC = new ConnectionController();
         ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(110,60), BlockType.MOVEFORWARD);
-        CC.connectCavity(ifBlock,forwardBlock);
+        CC.connectCavityPlug(ifBlock,forwardBlock);
         assertEquals(forwardBlock, ifBlock.getCavityPlug());
     }
 
@@ -253,7 +253,7 @@ public class ConnectionControllerTest {
         forwardBlock.setBottomPlug(leftBlock);
         leftBlock.setBottomPlug(whileBlock);
         whileBlock.setCavitySocket(leftBlock);
-        CC.connectIntoCavity(whileBlock, leftBlock,rightBlock);
+        CC.connectIntoCavityTop(whileBlock, leftBlock,rightBlock);
         assertEquals(3,whileBlock.getCavityBlocks().size());
     }
 }

@@ -3,154 +3,119 @@ package ui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
+
+import model.ProgramState;
 import utilities.*;
 
 public class UIGrid {
 
-    private int xPosition;
-    private int yPosition;
-    private int width;
-    private int height;
-
-    private int cellSize;
-    private Location goalCell;
-    private Location robotGridLocation;
-    private Direction robotDirection;
-    private ArrayList<Location> walls;
-    
-    
     // Constructor
     public UIGrid(Location position, int width, int height, int cellSize, ArrayList<Location> walls, Location robotGridLocation, Direction roboDirection, Location goalCell) {
-        this.cellSize = cellSize;
-        this.walls = walls;
-        this.robotGridLocation = robotGridLocation;
-        this.robotDirection = roboDirection;
-        this.goalCell = goalCell;
-        this.xPosition = position.getX();
-        this.yPosition = position.getY();
-        this.width = width;
-        this.height = height;
-    }
-    
-
-    /**
-     * Sets the robot's new location {@link #robotGridLocation}
-     * 
-     * @param newRobotGridLocation Location the robot should now have
-     */
-    public void updateRobotGridLocation(Location newRobotGridLocation){
-        System.out.println("moving robot in UI");
-        this.robotGridLocation = newRobotGridLocation;
 
     }
 
     /**
-     * Sets the robot's new direction {@link #robotDirection}
-     * 
-     * @param newRobotDirection Direction the robot should now have
+     * Renders everything in the grid,
+     * the grid itself, the walls, the goal cell and the robot.
+     * @param g Graphics object
+     * @param width width of the window
+     * @param height height of the window
+     * @param gridLocation location where the grid starts
+     * @param state the programState that needs to be rendered
+     * @author Oberon Swings
      */
-    public void updateRobotDirection(Direction newRobotDirection){
-        this.robotDirection = newRobotDirection;
-
+    public void render(Graphics g, int width, int height, Location gridLocation, ProgramState state){
+        renderGrid(g, width, height, gridLocation, state.getCellSize());
+        renderWalls(g, state.getWalls(), gridLocation, state.getCellSize());
+        renderGoalCell(g, state.getGoalCell(), gridLocation, state.getCellSize());
+        renderRobot(g, state.getRobotLocation(), state.getRobotDirection(), gridLocation, state.getCellSize());
     }
 
     /**
-     * This function renders the complete grid:
-     *  * the grid itself
-     *  * the walls, stored in {@link UIGrid#walls}
-     *  * the goal cell, stored in {@link UIGrid#goalCell}
-     *  * the robot, with direction stored in {@link UIGrid#robotDirection}
-     *     and location stored in {@link UIGrid#robotGridLocation}
-     * 
-     * @param g The Graphics object on which the rendering happens
+     * Render function for the grid without using class variables
+     * @param g Graphics object
+     * @param width the width of the grid
+     * @param height the height of the grid
+     * @param gridLocation the location where the grid starts
+     * @param cellSize the size of the grid cells
+     * @author Oberon Swings
      */
-    public void render(Graphics g) {
-        System.out.println("Rendering grid");
-        renderGrid(g);
-        renderWalls(g);
-        renderGoalCell(g);
-        renderRobot(g);
-    }
-
-
-    /**
-     * This function renders the grid itself (e.g. the raster lines, given by dimension)
-     * 
-     * @param g The Graphics object on which the rendering happens
-     */
-    public void renderGrid(Graphics g) {
+    public void renderGrid(Graphics g, int width, int height, Location gridLocation, int cellSize){
         g.setColor(Color.GRAY);
-        for(int x = 0; x < this.width; x++){
-            for(int y = 0; y < this.height; y++){
-                g.drawRect(xPosition + x * cellSize, yPosition + y*cellSize, cellSize, cellSize);
-                //System.out.println("drawing line at " + x + ", " + y);
+        for(int x = 0; x < width; x++){
+            for(int y = 0; y < height; y++){
+                g.drawRect(gridLocation.getX() + x * cellSize, gridLocation.getY() + y*cellSize, cellSize, cellSize);
             }
         }
     }
 
     /**
-     * This function renders all the walls (stored in {@link #walls}) on the grid
-     * 
-     * @param g The Graphics object on which the rendering happens
+     * Render function for the walls without using class variables
+     * @param g Graphics object
+     * @param walls arraylist of locations where the walls are
+     * @param gridLocation the location where the grid starts
+     * @param cellSize the size of the grid cells
+     * @author Oberon Swings
      */
-    public void renderWalls(Graphics g) {
+    public void renderWalls(Graphics g, ArrayList<Location> walls, Location gridLocation, int cellSize){
         g.setColor(Color.BLACK);
         for(Location wall : walls){
-            g.fillRect(xPosition + wall.getX()*cellSize, yPosition + wall.getY()*cellSize,cellSize, cellSize);
+            g.fillRect(gridLocation.getX() + wall.getX()*cellSize, gridLocation.getY() + wall.getY()*cellSize,cellSize, cellSize);
         }
     }
 
     /**
-     * This function renders the goal cell (stored in {@link #goalCell}) on the grid
-     * 
-     * @param g The Graphics object on which the rendering happens
+     * Render function for the goal cell without using class variables
+     * @param g Graphics object
+     * @param goalCell the location of the goal cell
+     * @param gridLocation the location where the grid starts
+     * @param cellSize the size of the grid cells
+     * @author Oberon Swings
      */
-    public void renderGoalCell(Graphics g) {
+    public void renderGoalCell(Graphics g, Location goalCell, Location gridLocation, int cellSize){
         g.setColor(Color.YELLOW);
-        g.fillRect(xPosition + goalCell.getX()*cellSize, yPosition + goalCell.getY()*cellSize,cellSize, cellSize);
+        g.fillRect(gridLocation.getX() + goalCell.getX()*cellSize, gridLocation.getY() + goalCell.getY()*cellSize,cellSize, cellSize);
     }
 
-
     /**
-     * This function renders the robot (with direction stored in {@link #robotDirection}
-     * and location stored in {@link #robotGridLocation}) on the grid
-     * 
-     * @param g The Graphics object on which the rendering happens
+     * Render function for the robot without using class variables
+     * @param g Graphics object
+     * @param robotLocation the location of the robot
+     * @param robotDirection the direction of the robot
+     * @param gridLocation the location where the grid starts
+     * @param cellSize the size of the grid cells
+     * @author Oberon Swings
      */
-    public void renderRobot(Graphics g) {
+    public void renderRobot(Graphics g, Location robotLocation, Direction robotDirection, Location gridLocation, int cellSize){
         g.setColor(Color.RED);
-        g.fillRect(xPosition + robotGridLocation.getX()*cellSize, yPosition + robotGridLocation.getY()*cellSize,cellSize, cellSize);
+        g.fillRect(gridLocation.getX() + robotLocation.getX()*cellSize, gridLocation.getY() + robotLocation.getY()*cellSize,cellSize, cellSize);
         System.out.println("RENDERING");
-        System.out.println(robotGridLocation.getX());
-        System.out.println(robotGridLocation.getY());
+        System.out.println(robotLocation.getX());
+        System.out.println(robotLocation.getY());
         g.setColor(Color.BLUE);
 
-        if (this.robotDirection == Direction.UP || this.robotDirection == Direction.DOWN){
-
-            g.drawLine(xPosition + robotGridLocation.getX()*cellSize + cellSize / 2, yPosition + robotGridLocation.getY()*cellSize , xPosition + robotGridLocation.getX()*cellSize + cellSize / 2, yPosition + robotGridLocation.getY()*cellSize + cellSize);
-            if(this.robotDirection == Direction.UP){
-                g.drawLine(xPosition + robotGridLocation.getX()*cellSize + cellSize / 2, yPosition + robotGridLocation.getY()*cellSize, xPosition + robotGridLocation.getX()*cellSize + cellSize / 4, yPosition + robotGridLocation.getY()*cellSize + cellSize / 4);
-                g.drawLine(xPosition + robotGridLocation.getX()*cellSize + cellSize / 2, yPosition + robotGridLocation.getY()*cellSize, xPosition + robotGridLocation.getX()*cellSize + 3 * cellSize / 4, yPosition + robotGridLocation.getY()*cellSize + cellSize / 4);
+        if (robotDirection == Direction.UP || robotDirection == Direction.DOWN){
+            g.drawLine(gridLocation.getX() + robotLocation.getX()*cellSize + cellSize / 2, gridLocation.getY() + robotLocation.getY()*cellSize , gridLocation.getX() + robotLocation.getX()*cellSize + cellSize / 2, gridLocation.getY() + robotLocation.getY()*cellSize + cellSize);
+            if(robotDirection == Direction.UP){
+                g.drawLine(gridLocation.getX() + robotLocation.getX()*cellSize + cellSize / 2, gridLocation.getY() + robotLocation.getY()*cellSize, gridLocation.getX() + robotLocation.getX()*cellSize + cellSize / 4, gridLocation.getY() + robotLocation.getY()*cellSize + cellSize / 4);
+                g.drawLine(gridLocation.getX() + robotLocation.getX()*cellSize + cellSize / 2, gridLocation.getY() + robotLocation.getY()*cellSize, gridLocation.getX() + robotLocation.getX()*cellSize + 3 * cellSize / 4, gridLocation.getY() + robotLocation.getY()*cellSize + cellSize / 4);
             }
-            else if(this.robotDirection == Direction.DOWN){
-
-                g.drawLine(xPosition + robotGridLocation.getX()*cellSize + cellSize / 2, yPosition + robotGridLocation.getY()*cellSize + cellSize, xPosition + robotGridLocation.getX()*cellSize + cellSize / 4, yPosition + robotGridLocation.getY()*cellSize + 3 * cellSize / 4);
-                g.drawLine(xPosition + robotGridLocation.getX()*cellSize + cellSize / 2, yPosition + robotGridLocation.getY()*cellSize + cellSize, xPosition + robotGridLocation.getX()*cellSize + 3 * cellSize / 4, yPosition + robotGridLocation.getY()*cellSize + 3 * cellSize / 4);
-            
+            else{
+                g.drawLine(gridLocation.getX() + robotLocation.getX()*cellSize + cellSize / 2, gridLocation.getY() + robotLocation.getY()*cellSize + cellSize, gridLocation.getX() + robotLocation.getX()*cellSize + cellSize / 4, gridLocation.getY() + robotLocation.getY()*cellSize + 3 * cellSize / 4);
+                g.drawLine(gridLocation.getX() + robotLocation.getX()*cellSize + cellSize / 2, gridLocation.getY() + robotLocation.getY()*cellSize + cellSize, gridLocation.getX() + robotLocation.getX()*cellSize + 3 * cellSize / 4, gridLocation.getY() + robotLocation.getY()*cellSize + 3 * cellSize / 4);
             }
         }
 
-        else if (this.robotDirection == Direction.LEFT || this.robotDirection == Direction.RIGHT){
-
-            g.drawLine(xPosition + robotGridLocation.getX()*cellSize , yPosition + robotGridLocation.getY()*cellSize + cellSize / 2, xPosition + robotGridLocation.getX()*cellSize + cellSize, yPosition + robotGridLocation.getY()*cellSize  + cellSize / 2);
-            if(this.robotDirection == Direction.LEFT){
-                g.drawLine(xPosition + robotGridLocation.getX()*cellSize , yPosition + robotGridLocation.getY()*cellSize + cellSize / 2, xPosition + robotGridLocation.getX()*cellSize + cellSize / 4, yPosition + robotGridLocation.getY()*cellSize + 1 * cellSize / 4);
-                g.drawLine(xPosition + robotGridLocation.getX()*cellSize , yPosition + robotGridLocation.getY()*cellSize + cellSize / 2, xPosition + robotGridLocation.getX()*cellSize + cellSize / 4, yPosition + robotGridLocation.getY()*cellSize + 3 * cellSize / 4);
+        else if (robotDirection == Direction.LEFT || robotDirection == Direction.RIGHT){
+            g.drawLine(gridLocation.getX() + robotLocation.getX()*cellSize , gridLocation.getY() + robotLocation.getY()*cellSize + cellSize / 2, gridLocation.getX() + robotLocation.getX()*cellSize + cellSize, gridLocation.getY() + robotLocation.getY()*cellSize  + cellSize / 2);
+            if(robotDirection == Direction.LEFT){
+                g.drawLine(gridLocation.getX() + robotLocation.getX()*cellSize , gridLocation.getY() + robotLocation.getY()*cellSize + cellSize / 2, gridLocation.getX() + robotLocation.getX()*cellSize + cellSize / 4, gridLocation.getY() + robotLocation.getY()*cellSize + 1 * cellSize / 4);
+                g.drawLine(gridLocation.getX() + robotLocation.getX()*cellSize , gridLocation.getY() + robotLocation.getY()*cellSize + cellSize / 2, gridLocation.getX() + robotLocation.getX()*cellSize + cellSize / 4, gridLocation.getY() + robotLocation.getY()*cellSize + 3 * cellSize / 4);
             }
-            else if(this.robotDirection == Direction.RIGHT){
-                g.drawLine(xPosition + robotGridLocation.getX()*cellSize + cellSize, yPosition + robotGridLocation.getY()*cellSize + cellSize / 2, xPosition + robotGridLocation.getX()*cellSize + 3 * cellSize / 4, yPosition + robotGridLocation.getY()*cellSize + 1 * cellSize / 4);
-                g.drawLine(xPosition + robotGridLocation.getX()*cellSize + cellSize, yPosition + robotGridLocation.getY()*cellSize + cellSize / 2, xPosition + robotGridLocation.getX()*cellSize + 3 * cellSize / 4, yPosition + robotGridLocation.getY()*cellSize + 3 * cellSize / 4);
+            else{
+                g.drawLine(gridLocation.getX() + robotLocation.getX()*cellSize + cellSize, gridLocation.getY() + robotLocation.getY()*cellSize + cellSize / 2, gridLocation.getX() + robotLocation.getX()*cellSize + 3 * cellSize / 4, gridLocation.getY() + robotLocation.getY()*cellSize + 1 * cellSize / 4);
+                g.drawLine(gridLocation.getX() + robotLocation.getX()*cellSize + cellSize, gridLocation.getY() + robotLocation.getY()*cellSize + cellSize / 2, gridLocation.getX() + robotLocation.getX()*cellSize + 3 * cellSize / 4, gridLocation.getY() + robotLocation.getY()*cellSize + 3 * cellSize / 4);
             }
-        }  
+        }
     }
 }

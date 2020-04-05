@@ -106,33 +106,40 @@ public class ProgramRunner {
      * @author Oberon Swings
      */
     private ModelBlock findNextBlock(ProgramState programState){
-        if ((current.getBlockType() == BlockType.IF) || (current.getBlockType() == BlockType.WHILE)){
+        if (current instanceof ModelWhileIfBlock){
             if (evaluateCurrentCondition(programState)){
                 return ((ModelWhileIfBlock)current).getCavityPlug();
             }
         }
-        return current.getBottomPlug();
+        if (current.getBottomPlug().getBlockType() == BlockType.IF) return current.getBottomPlug().getBottomPlug(); //If block should only be executed once.
+        else return current.getBottomPlug();
     }
 
     /**
-     * 
+     * Evaluates the condition (of a while if block)
      * @return whether the current condition is true or false
+     * @author Oberon Swings
      */
     private boolean evaluateCurrentCondition(ProgramState programState){
-        boolean negate = false;
-        if (current.hasRightSocket()){
-            ModelBlock cond = current.getRightSocket();
-            while (cond.hasRightSocket()){
-                if(cond instanceof ModelNotBlock){
-                    negate = !negate;
-                    cond = cond.getRightSocket();
-                }
-                else if((cond instanceof ModelWallInFrontBlock) && programState.wallInFrontOfRobot()){
-                    return !negate;
-                }
+        Condition condition = null;
+        if (current instanceof ModelWhileIfBlock) {
+            try {
+                condition = ((ModelWhileIfBlock) current).getCondition();
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
             }
-        } 
-        return negate;
+        }
+        if (condition != null){
+            switch (condition){
+                case NOT_WALL_IN_FRONT:
+                    if (programState.wallInFrontOfRobot()) return false;
+                    else return true;
+                case WALL_IN_FRONT:
+                    if (programState.wallInFrontOfRobot()) return true;
+                    else return false;
+            }
+        }
+        return false;
     }
 
     private ProgramState move(ProgramState pState){

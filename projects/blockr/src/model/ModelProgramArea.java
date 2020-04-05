@@ -92,19 +92,22 @@ public class ModelProgramArea extends ModelWindow{
                 if (!(blk.equals(blk1))){
                     System.out.println("blk1");
                     if (blk.hasRightSocket() && blk1.hasLeftPlug() && blk.getRightSocketPos().equals(blk1.getLeftPlugPos())){
-                        CC.connect(blk,blk1);
+                        CC.connect(blk,blk1,ConnectionPoint.RIGHTSOCKET);
                         System.out.println("if1");
                     }
                     System.out.println("else1");
-                    if (blk.hasTopSocket() && blk1.hasBottomPlug() && blk.getTopSocketPos().equals(blk1.getBottomPlugPos())){
-                        CC.connect(blk,blk1);
+                    if (blk.hasBottomPlug() && blk1.hasTopSocket() && blk.getBottomPlugPos().equals(blk1.getTopSocketPos())){
+                        CC.connect(blk,blk1,ConnectionPoint.BOTTOMPLUG);
                         System.out.println("if2");
                     }
                     System.out.println("else2");
-                    if (blk instanceof ModelWhileIfBlock && ((blk1.hasTopSocket() && ((ModelWhileIfBlock) blk).getCavityPlugPos().equals(blk1.getTopSocketPos()))
-                            || (blk1.hasBottomPlug() && ((ModelWhileIfBlock) blk).getCavitySocketPos().equals(blk1.getBottomPlugPos())))){
-                        CC.connect(blk, blk1);
+                    if (blk instanceof ModelWhileIfBlock && ((blk1.hasTopSocket() && ((ModelWhileIfBlock) blk).getCavityPlugPos().equals(blk1.getTopSocketPos())))){
+                        CC.connect(blk,blk1,ConnectionPoint.CAVITYPLUG);
                         System.out.println("if3");
+                    }
+                    if (blk instanceof ModelWhileIfBlock && ((blk1.hasBottomPlug() && ((ModelWhileIfBlock) blk).getCavitySocketPos().equals(blk1.getBottomPlugPos())))){
+                        CC.connect(blk, blk1,ConnectionPoint.CAVITYSOCKET);
+                        System.out.println("if4");
                     }
                     System.out.println("end blk1");
                 }
@@ -237,6 +240,32 @@ public class ModelProgramArea extends ModelWindow{
         return closest;             
     }
 
+    public ConnectionPoint findClosestConnectionPoint(ModelBlock closest, ModelBlock active){
+        int d = ModelBlock.STD_WIDTH;
+        int dTop = 0, dBottom = 0, dRight = 0, dLeft = 0;
+        if (closest.hasTopSocket() && active.hasBottomPlug()){
+            dTop = closest.getTopSocketPos().getDistance(active.getBottomPlugPos());
+            if (dTop < d) d = dTop;
+        }
+        if (closest.hasBottomPlug() && active.hasTopSocket()){
+            dBottom = closest.getBottomPlugPos().getDistance(active.getTopSocketPos());
+            if (dBottom < d) d = dBottom;
+        }
+        if (closest.hasRightSocket() && active.hasLeftPlug()){
+            dRight = closest.getRightSocketPos().getDistance(active.getLeftPlugPos());
+            if (dRight < d) d = dRight;
+        }
+        if (closest.hasLeftPlug() && active.hasRightSocket()){
+            dLeft = closest.getLeftPlugPos().getDistance(active.getRightSocketPos());
+            if (dLeft < d) d = dLeft;
+        }
+        if (d == dTop) return ConnectionPoint.TOPSOCKET;
+        if (d == dBottom) return ConnectionPoint.BOTTOMPLUG;
+        if (d == dRight) return ConnectionPoint.RIGHTSOCKET;
+        if (d == dLeft) return ConnectionPoint.LEFTPLUG;
+        return null;
+    }
+
     /**
      * This function handles the mouseDown in the Program Area
      * Note that the blocks list has to be traversed in reverse 
@@ -272,7 +301,8 @@ public class ModelProgramArea extends ModelWindow{
             System.out.println(closest.getBlockType());
             System.out.println("list length2");
             System.out.println(this.getPABlocks().size());
-            CC.connect(activeB, closest);
+            ConnectionPoint point = this.findClosestConnectionPoint(closest, activeB);
+            CC.connect(closest, activeB, point);
             System.out.println("connection made");
             this.updateConnections();
             System.out.println("connections updated");

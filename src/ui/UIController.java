@@ -60,14 +60,12 @@ public class UIController {
 
     /**
      * Method to update the grid.
-     * @param gridInfo variable containing information about the grid.
+     * @param programState variable containing information about the grid.
      */
     public void updateGrid(ProgramState programState){
         if (programState == null) throw new IllegalArgumentException("updating grid with an illegal programState (is null)");
         System.out.println("updating grid: " + programState.toString());
         this.grid = new UIGrid(new Location(2*this.wWidth/3, 0), this.wWidth/ 3, this.wHeight, programState.getCellSize(), programState.getWalls(), programState.getRobotLocation(), programState.getRobotDirection(), programState.getGoalCell());
-        
-
     }
 
 

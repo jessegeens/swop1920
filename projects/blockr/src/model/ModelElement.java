@@ -35,6 +35,6 @@ public abstract class ModelElement{
     /**
      * Function that declares if the position is a right position. 
      */
-    public abstract boolean inBounds(Location pos);
+    public abstract boolean inBoundsOfElement(Location pos);
 
 }

@@ -41,7 +41,7 @@ public class ModelController{
      * This function handles key events by telling the model controller
      * to either step through the execution or stop running the program
      * 
-     * TODO: propragate to modelController
+     * TODO: propagate to modelController
      * 
      * @param id id of the event
      * @param keyCode keyCode of the pressed key: - 27  = ESC

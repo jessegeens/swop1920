@@ -143,10 +143,10 @@ public class ConnectionControllerTest {
         forwardBlock.setBottomPlug(leftBlock);
         rightBlock.setTopSocket(leftBlock);
         leftBlock.setBottomPlug(rightBlock);
-        whileBlock.setCavitySocket(leftBlock);
+        whileBlock.setCavitySocket(rightBlock);
         rightBlock.setBottomPlug(whileBlock);
         CC.disconnectCavity(whileBlock,forwardBlock);
-        assertEquals(rightBlock,whileBlock.getCavityPlug());
+        assertEquals(rightBlock,whileBlock.getCavitySocket());
     }
 
     @Test
@@ -162,10 +162,10 @@ public class ConnectionControllerTest {
         forwardBlock.setBottomPlug(leftBlock);
         rightBlock.setTopSocket(leftBlock);
         leftBlock.setBottomPlug(rightBlock);
-        whileBlock.setCavitySocket(leftBlock);
+        whileBlock.setCavitySocket(rightBlock);
         rightBlock.setBottomPlug(whileBlock);
         CC.disconnectCavity(whileBlock,forwardBlock);
-        assertEquals(rightBlock,whileBlock.getCavityPlug());
+        assertEquals(leftBlock,whileBlock.getCavityPlug());
     }
 
     @Test
@@ -253,7 +253,7 @@ public class ConnectionControllerTest {
         forwardBlock.setBottomPlug(leftBlock);
         leftBlock.setBottomPlug(whileBlock);
         whileBlock.setCavitySocket(leftBlock);
-        CC.connectIntoCavityTop(whileBlock, leftBlock,rightBlock);
+        CC.connectIntoCavityTop(whileBlock, rightBlock,leftBlock);
         assertEquals(3,whileBlock.getCavityBlocks().size());
     }
 }

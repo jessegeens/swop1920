@@ -281,31 +281,31 @@ class ModelPalette extends ModelWindow{
      */
     protected ModelBlock handleMouseDown(Location eventWindowLocation, boolean maxReached){
         ModelBlock selected = null;
-        if(this.getTurnLeftBlock().inBounds(eventWindowLocation)){
+        if(this.getTurnLeftBlock().inBoundsOfElement(eventWindowLocation)){
             selected = this.getTurnLeftBlock();
             this.blockToProgramArea(this.getTurnLeftBlock(), maxReached);
         }
-        else if(this.getTurnRightBlock().inBounds(eventWindowLocation)){
+        else if(this.getTurnRightBlock().inBoundsOfElement(eventWindowLocation)){
             selected = this.getTurnRightBlock();
             this.blockToProgramArea(this.getTurnRightBlock(), maxReached);
         }
-        else if(this.getForwardBlock().inBounds(eventWindowLocation)){
+        else if(this.getForwardBlock().inBoundsOfElement(eventWindowLocation)){
             selected = this.getForwardBlock();
             this.blockToProgramArea(this.getForwardBlock(), maxReached);
         }
-        else if(this.getNotBlock().inBounds(eventWindowLocation)){
+        else if(this.getNotBlock().inBoundsOfElement(eventWindowLocation)){
             selected = this.getNotBlock();
             this.blockToProgramArea(this.getNotBlock(), maxReached);
         }
-        else if(this.getWallInFrontBlock().inBounds(eventWindowLocation)){
+        else if(this.getWallInFrontBlock().inBoundsOfElement(eventWindowLocation)){
             selected = this.getWallInFrontBlock();
             this.blockToProgramArea(this.getWallInFrontBlock(), maxReached);
         }
-        else if(this.getWhileBlock().inBounds(eventWindowLocation)){
+        else if(this.getWhileBlock().inBoundsOfElement(eventWindowLocation)){
             selected = this.getWhileBlock();
             this.blockToProgramArea(this.getWhileBlock(), maxReached);
         }
-        else if(this.getIfBlock().inBounds(eventWindowLocation)){
+        else if(this.getIfBlock().inBoundsOfElement(eventWindowLocation)){
             selected = this.getIfBlock();
             this.blockToProgramArea(this.getIfBlock(), maxReached);
         }

@@ -2,17 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="755588a3-c9a4-4cc7-8182-006509a4e4aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../gameworldapi/src/ActionType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Action.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/RobotGameWorld.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/RobotGameWorldType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gameworldapi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../gameworldapi/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gameworldapi/src/Action.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GameWorldStateFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Predicate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gameworldapi/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../gameworldapi/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gameworldapi/src/GameWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gameworldapi/src/GameWorld.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gameworldapi/src/GameWorldType.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gameworldapi/src/GameWorldType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gameworldapi/src/Predicate.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gameworldapi/src/PredicateType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameWorld.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Action.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RobotGameWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RobotGameWorld.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RobotGameWorldType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RobotGameWorldType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,8 +22,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -41,8 +41,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../gameworldapi/out/artifacts/gameworldapi_jar/gameworldapi.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RunManager">
@@ -78,14 +78,14 @@
     </ignored-roots>
   </component>
   <component name="WindowStateProjectService">
-    <state x="773" y="253" key="#com.intellij.ide.util.MemberChooser" timestamp="1586161744475">
+    <state x="773" y="253" key="#com.intellij.ide.util.MemberChooser" timestamp="1586163361518">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state x="773" y="253" key="#com.intellij.ide.util.MemberChooser/1920.0.1920.1080/0.0.1920.1035@0.0.1920.1035" timestamp="1586161744475" />
-    <state x="676" y="341" key="FileChooserDialogImpl" timestamp="1586162071010">
+    <state x="773" y="253" key="#com.intellij.ide.util.MemberChooser/1920.0.1920.1080/0.0.1920.1035@0.0.1920.1035" timestamp="1586163361518" />
+    <state x="676" y="341" key="FileChooserDialogImpl" timestamp="1586164462073">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state x="676" y="341" key="FileChooserDialogImpl/1920.0.1920.1080/0.0.1920.1035@0.0.1920.1035" timestamp="1586162071010" />
+    <state x="676" y="341" key="FileChooserDialogImpl/1920.0.1920.1080/0.0.1920.1035@0.0.1920.1035" timestamp="1586164462073" />
     <state width="1874" height="288" key="GridCell.Tab.0.bottom" timestamp="1586093154972">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -102,10 +102,10 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1874" height="288" key="GridCell.Tab.0.right/1920.0.1920.1080/0.0.1920.1035@1920.0.1920.1080" timestamp="1586093154972" />
-    <state x="469" y="175" width="1183" height="844" key="SettingsEditor" timestamp="1586162074745">
+    <state x="469" y="175" width="1183" height="844" key="SettingsEditor" timestamp="1586164466467">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state x="469" y="175" width="1183" height="844" key="SettingsEditor/1920.0.1920.1080/0.0.1920.1035@0.0.1920.1035" timestamp="1586162074745" />
+    <state x="469" y="175" width="1183" height="844" key="SettingsEditor/1920.0.1920.1080/0.0.1920.1035@0.0.1920.1035" timestamp="1586164466467" />
     <state x="2260" y="131" key="new project wizard" timestamp="1586079083118">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>

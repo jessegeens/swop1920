@@ -1,21 +1,20 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.function.Predicate;
 
 public class RobotGameWorldType implements GameWorldType {
 
     @Override
     public ArrayList<ActionType> getSupportedActions() {
-        return new ArrayList<Action>(Arrays.asList(Action.MOVE_FORWARD, Action.TURN_LEFT, Action.TURN_RIGHT));
+        return new ArrayList<ActionType>(Arrays.asList(Action.MOVE_FORWARD, Action.TURN_LEFT, Action.TURN_RIGHT));
     }
 
     @Override
-    public ArrayList<Predicate> getSupportedPredicates() {
-        return null;
+    public ArrayList<PredicateType> getSupportedPredicates() {
+        return new ArrayList<PredicateType>(Arrays.asList());
     }
 
     @Override
     public GameWorld newWorldInstance() {
-        return null;
+        return new RobotGameWorld();
     }
 }

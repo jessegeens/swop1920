@@ -2,17 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50ba4d34-1a8c-4015-86a4-853b4c2ff968" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/projects/gameworldapi/src/ActionType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/robotgameworld/src/Action.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/robotgameworld/src/RobotGameWorld.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projects/robotgameworld/src/RobotGameWorldType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/gameworldapi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/projects/gameworldapi/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/gameworldapi/src/Action.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/robotgameworld/src/GameWorldStateFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/robotgameworld/src/Predicate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/gameworldapi/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/projects/gameworldapi/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/gameworldapi/src/GameWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/projects/gameworldapi/src/GameWorld.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/gameworldapi/src/GameWorldType.java" beforeDir="false" afterPath="$PROJECT_DIR$/projects/gameworldapi/src/GameWorldType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/gameworldapi/src/Predicate.java" beforeDir="false" afterPath="$PROJECT_DIR$/projects/gameworldapi/src/PredicateType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/robotgameworld/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/projects/robotgameworld/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/robotgameworld/src/GameWorld.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/robotgameworld/src/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/projects/robotgameworld/src/Action.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/robotgameworld/src/RobotGameWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/projects/robotgameworld/src/RobotGameWorld.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/robotgameworld/src/RobotGameWorldType.java" beforeDir="false" afterPath="$PROJECT_DIR$/projects/robotgameworld/src/RobotGameWorldType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

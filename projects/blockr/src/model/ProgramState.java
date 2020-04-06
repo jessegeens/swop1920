@@ -39,13 +39,38 @@ public class ProgramState {
         return new ProgramState(robotDirection, robotGridLocation, programState.getWalls(), programState.getGoalCell(), programState.getCellSize());
     }
 
-    //TODO: implement
+    
     /*I would make all variables of Program State immutable, also I would make a function for robot direction and location variable so that the function
     Returns a new ProgramState with all the same fields except that one parameter that is changed. That is handy when the robot direction or position is changed and all
     other things stay the same.*/
     public boolean wallInFrontOfRobot(){
+        Location findOutIfWall = new Location(robotLocation.getX(), robotLocation.getY());
+        switch (robotDirection.toString()){
+            case "left": 
+                findOutIfWall.add(-1,0);
+                break;
+            case "right": 
+                findOutIfWall.add(1,0);
+                break;
+            case "up": 
+                findOutIfWall.add(0,1);
+                break;
+            case "down": 
+                findOutIfWall.add(0,-1);
+                break;
+        }
+
+        for (Location currrentWall : walls){
+            if(currrentWall.getX() == findOutIfWall.getX() && currrentWall.getY() == findOutIfWall.getY()){
+                return true;
+            }
+        }      
+
+
         return false;
     }
+
+
 
     public ArrayList<Location> getWalls(){
         return this.walls;

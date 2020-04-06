@@ -242,7 +242,7 @@ public class ModelProgramArea extends ModelWindow{
 
     public ConnectionPoint findClosestConnectionPoint(ModelBlock closest, ModelBlock active){
         int d = ModelBlock.STD_WIDTH;
-        int dTop = 0, dBottom = 0, dRight = 0, dLeft = 0;
+        int dTop = 0, dBottom = 0, dRight = 0, dLeft = 0, dCPlug = 0, dCSocket = 0;
         if (closest.hasTopSocket() && active.hasBottomPlug()){
             dTop = closest.getTopSocketPos().getDistance(active.getBottomPlugPos());
             if (dTop < d) d = dTop;
@@ -259,10 +259,20 @@ public class ModelProgramArea extends ModelWindow{
             dLeft = closest.getLeftPlugPos().getDistance(active.getRightSocketPos());
             if (dLeft < d) d = dLeft;
         }
+        if (closest instanceof ModelWhileIfBlock && active.hasTopSocket()){
+            dCPlug = ((ModelWhileIfBlock) closest).getCavityPlugPos().getDistance(active.getTopSocketPos());
+            if (dCPlug < d) d = dCPlug;
+        }
+        if (closest instanceof ModelWhileIfBlock && active.hasBottomPlug()){
+            dCSocket = ((ModelWhileIfBlock) closest).getCavitySocketPos().getDistance(active.getBottomPlugPos());
+            if (dCSocket < d) d = dCSocket;
+        }
         if (d == dTop) return ConnectionPoint.TOPSOCKET;
         if (d == dBottom) return ConnectionPoint.BOTTOMPLUG;
         if (d == dRight) return ConnectionPoint.RIGHTSOCKET;
         if (d == dLeft) return ConnectionPoint.LEFTPLUG;
+        if (d == dCPlug) return ConnectionPoint.CAVITYPLUG;
+        if (d == dCSocket) return ConnectionPoint.CAVITYSOCKET;
         return null;
     }
 

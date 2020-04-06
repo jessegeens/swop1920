@@ -98,23 +98,23 @@ public class ConnectionController {
     }*/
 
     /**
-     * Connects block b to the connectionPoint p of block a.
-     * @param a first block
-     * @param b second block
+     * Connects block extra to the connectionPoint p of block closest.
+     * @param closest first block
+     * @param extra second block
      * @param p The plug/socket of the first block to which the second block needs to be connected
      * @author Oberon Swings
      */
-    public void connect(ModelBlock a, ModelBlock b, ConnectionPoint p) {
-        if ((a instanceof ModelWhileIfBlock && b.hasTopSocket() && p.equals(ConnectionPoint.CAVITYPLUG))) this.connectCavityPlug((ModelWhileIfBlock)a,b);
-        else if ((a instanceof ModelWhileIfBlock && b.hasBottomPlug() && p.equals(ConnectionPoint.CAVITYSOCKET))) this.connectCavitySocket((ModelWhileIfBlock)a,b);
-        else if ((a.isInCavity() && a.hasTopSocket() && b.hasBottomPlug() && p.equals(ConnectionPoint.TOPSOCKET))) this.connectIntoCavityBottom((ModelWhileIfBlock)a.getSurroundingWhileIfBlock(), b, a);
-        else if ((a.isInCavity() && b.hasTopSocket() && a.hasBottomPlug() && p.equals(ConnectionPoint.BOTTOMPLUG))) this.connectIntoCavityTop((ModelWhileIfBlock)a.getSurroundingWhileIfBlock(), b, a);
-        else if ((b.isInCavity() && b.hasTopSocket() && a.hasBottomPlug() && p.equals(ConnectionPoint.TOPSOCKET))) this.connectIntoCavityBottom((ModelWhileIfBlock)b.getSurroundingWhileIfBlock(), a, b);
-        else if ((b.isInCavity() && a.hasTopSocket() && b.hasBottomPlug() && p.equals(ConnectionPoint.BOTTOMPLUG))) this.connectIntoCavityTop((ModelWhileIfBlock)b.getSurroundingWhileIfBlock(), a, b);
-        else if (a.hasTopSocket() && b.hasBottomPlug() && p.equals(ConnectionPoint.TOPSOCKET)) this.connectTopBottom(b, a);
-        else if (a.hasBottomPlug() && b.hasTopSocket() && p.equals(ConnectionPoint.BOTTOMPLUG)) this.connectTopBottom(a, b);
-        else if (a.hasLeftPlug() && b.hasRightSocket() && p.equals(ConnectionPoint.LEFTPLUG)) this.connectRightLeft(b, a);
-        else if (a.hasRightSocket() && b.hasLeftPlug() && p.equals(ConnectionPoint.RIGHTSOCKET)) this.connectRightLeft(a, b);
+    public void connect(ModelBlock closest, ModelBlock extra, ConnectionPoint p) {
+        if ((closest instanceof ModelWhileIfBlock && extra.hasTopSocket() && p.equals(ConnectionPoint.CAVITYPLUG))) this.connectCavityPlug((ModelWhileIfBlock)closest,extra);
+        else if ((closest instanceof ModelWhileIfBlock && extra.hasBottomPlug() && p.equals(ConnectionPoint.CAVITYSOCKET))) this.connectCavitySocket((ModelWhileIfBlock)closest,extra);
+        else if ((closest.isInCavity() && closest.hasTopSocket() && extra.hasBottomPlug() && p.equals(ConnectionPoint.TOPSOCKET))) this.connectIntoCavityBottom((ModelWhileIfBlock)closest.getSurroundingWhileIfBlock(), extra, closest);
+        else if ((closest.isInCavity() && extra.hasTopSocket() && closest.hasBottomPlug() && p.equals(ConnectionPoint.BOTTOMPLUG))) this.connectIntoCavityTop((ModelWhileIfBlock)closest.getSurroundingWhileIfBlock(), extra, closest);
+        else if ((extra.isInCavity() && extra.hasTopSocket() && closest.hasBottomPlug() && p.equals(ConnectionPoint.TOPSOCKET))) this.connectIntoCavityBottom((ModelWhileIfBlock)extra.getSurroundingWhileIfBlock(), closest, extra);
+        else if ((extra.isInCavity() && closest.hasTopSocket() && extra.hasBottomPlug() && p.equals(ConnectionPoint.BOTTOMPLUG))) this.connectIntoCavityTop((ModelWhileIfBlock)extra.getSurroundingWhileIfBlock(), closest, extra);
+        else if (closest.hasTopSocket() && extra.hasBottomPlug() && p.equals(ConnectionPoint.TOPSOCKET)) this.connectTopBottom(extra, closest);
+        else if (closest.hasBottomPlug() && extra.hasTopSocket() && p.equals(ConnectionPoint.BOTTOMPLUG)) this.connectTopBottom(closest, extra);
+        else if (closest.hasLeftPlug() && extra.hasRightSocket() && p.equals(ConnectionPoint.LEFTPLUG)) this.connectRightLeft(extra, closest);
+        else if (closest.hasRightSocket() && extra.hasLeftPlug() && p.equals(ConnectionPoint.RIGHTSOCKET)) this.connectRightLeft(closest, extra);
     }
 
     /**

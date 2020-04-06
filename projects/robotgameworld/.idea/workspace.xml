@@ -2,48 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="755588a3-c9a4-4cc7-8182-006509a4e4aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../gameworldapi/src/Action.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../gameworldapi/src/GameWorld.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../gameworldapi/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../gameworldapi/src/Predicate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GameWorld.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/main/CanvasWindow.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/main/GlobalController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/main/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/main/MyCanvasWindow.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/model/ConnectionController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/model/ModelController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/model/ModelElement.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/model/ModelGrid.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/model/ModelPalette.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/model/ModelProgramArea.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/model/ModelWindow.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/model/ProgramRunner.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/model/ProgramState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/model/blocks/ModelBlock.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/model/blocks/ModelMoveBlock.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/model/blocks/ModelNotBlock.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/model/blocks/ModelWallInFrontBlock.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/model/blocks/ModelWhileIfBlock.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/ui/UIController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/ui/UIElement.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/ui/UIGrid.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/ui/blocks/UIBlock.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/utilities/BlockType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/utilities/Condition.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/utilities/ConnectionPoint.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/utilities/Direction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../src/utilities/Location.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../test/main/GlobalControllerTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../test/model/ConnectionControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../test/model/ModelControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../test/model/ModelPaletteTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../test/model/ModelProgramAreaTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../test/model/ModelTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../test/model/blocks/ModelBlockTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../test/model/blocks/ModelWhileIfBlockTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../test/utilities/UtilitiesTests.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gameworldapi/src/ActionType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Action.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/RobotGameWorld.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/RobotGameWorldType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gameworldapi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../gameworldapi/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gameworldapi/src/Action.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gameworldapi/src/GameWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gameworldapi/src/GameWorld.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gameworldapi/src/GameWorldType.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gameworldapi/src/GameWorldType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameWorld.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +23,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -108,10 +78,14 @@
     </ignored-roots>
   </component>
   <component name="WindowStateProjectService">
-    <state x="676" y="341" key="FileChooserDialogImpl" timestamp="1586087767764">
+    <state x="773" y="253" key="#com.intellij.ide.util.MemberChooser" timestamp="1586161744475">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state x="676" y="341" key="FileChooserDialogImpl/1920.0.1920.1080/0.0.1920.1035@0.0.1920.1035" timestamp="1586087767764" />
+    <state x="773" y="253" key="#com.intellij.ide.util.MemberChooser/1920.0.1920.1080/0.0.1920.1035@0.0.1920.1035" timestamp="1586161744475" />
+    <state x="676" y="341" key="FileChooserDialogImpl" timestamp="1586162071010">
+      <screen x="0" y="0" width="1920" height="1035" />
+    </state>
+    <state x="676" y="341" key="FileChooserDialogImpl/1920.0.1920.1080/0.0.1920.1035@0.0.1920.1035" timestamp="1586162071010" />
     <state width="1874" height="288" key="GridCell.Tab.0.bottom" timestamp="1586093154972">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -128,10 +102,10 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1874" height="288" key="GridCell.Tab.0.right/1920.0.1920.1080/0.0.1920.1035@1920.0.1920.1080" timestamp="1586093154972" />
-    <state x="469" y="175" width="1183" height="844" key="SettingsEditor" timestamp="1586087777098">
+    <state x="469" y="175" width="1183" height="844" key="SettingsEditor" timestamp="1586162074745">
       <screen x="0" y="0" width="1920" height="1035" />
     </state>
-    <state x="469" y="175" width="1183" height="844" key="SettingsEditor/1920.0.1920.1080/0.0.1920.1035@0.0.1920.1035" timestamp="1586087777098" />
+    <state x="469" y="175" width="1183" height="844" key="SettingsEditor/1920.0.1920.1080/0.0.1920.1035@0.0.1920.1035" timestamp="1586162074745" />
     <state x="2260" y="131" key="new project wizard" timestamp="1586079083118">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>

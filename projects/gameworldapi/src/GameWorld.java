@@ -11,7 +11,7 @@ import java.awt.*;
  */
 public interface GameWorld {
 
-    ActionResult perform(Action action);
+    ActionResult perform(ActionType action);
 
     Boolean evaluate(Predicate predicate);
 

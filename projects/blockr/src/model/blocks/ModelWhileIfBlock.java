@@ -36,6 +36,7 @@ public class ModelWhileIfBlock extends ModelBlock{
 
 
     /**
+     * TODO move to LocationController
      * Updates the locations of the cavity blocks when one is added in the middle
      * This is much easier this way than trying to get this to work within the connect methods.
      * @author Oberon Swings
@@ -214,27 +215,12 @@ public class ModelWhileIfBlock extends ModelBlock{
      * {@inheritDoc}
      * @author Oberon Swings
      */
-    public void setBottomPlugPos(Location pos) {
-        super.setPos(pos.add(-this.getWidth()/2, -this.getHeight() - UIBlock.PLUGSIZE/2));
-    }
-
-    /**
-     * {@inheritDoc}
-     * @author Oberon Swings
-     */
     public Location getRightSocketPos() {
         return super.getPos().add(this.getWidth() - UIBlock.PLUGSIZE / 2, UIBlock.STD_HEIGHT / 3);
     }
 
     /**
-     * {@inheritDoc}
-     * @author Oberon Swings
-     */
-    public void setRightSocketPos(Location pos) {
-        super.setPos(pos.add(-this.getWidth() + UIBlock.PLUGSIZE/2, -UIBlock.STD_HEIGHT/3));
-    }
-
-    /**
+     * TODO move to LocationController
      * {@inheritDoc}
      */
     @Override

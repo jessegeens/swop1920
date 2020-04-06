@@ -47,4 +47,32 @@ public class ModelBlockTests {
         CC.connect(leftBlock, rightBlock, ConnectionPoint.BOTTOMPLUG);
         assertEquals(whileBlock, forwardBlock.getSurroundingWhileIfBlock());
     }
+
+    @Test
+    public void inBoundsOfElement(){
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new Location(400, 700), BlockType.TURNRIGHT);
+        assertTrue(rightBlock.inBoundsOfElement(new Location(420, 720)));
+    }
+
+
+
+    //TODO move the following tests to the LocationController tests
+
+    @Test
+    public void setTopSocketPosConnects(){
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(400,400), BlockType.MOVEFORWARD);
+        forwardBlock.setTopSocketPos(whileBlock.getBottomPlugPos());
+        assertEquals(forwardBlock.getTopSocketPos(), whileBlock.getBottomPlugPos());
+    }
+
+    @Test
+    public void setLeftPlugPosConnects(){
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
+        ModelNotBlock notBlock = new ModelNotBlock(new Location(400,400), BlockType.NOT);
+        notBlock.setLeftPlugPos(whileBlock.getRightSocketPos());
+        assertEquals(notBlock.getLeftPlugPos(), whileBlock.getRightSocketPos());
+    }
+
+
 }

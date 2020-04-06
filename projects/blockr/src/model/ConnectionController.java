@@ -113,8 +113,8 @@ public class ConnectionController {
         else if ((extra.isInCavity() && closest.hasTopSocket() && extra.hasBottomPlug() && p.equals(ConnectionPoint.BOTTOMPLUG))) this.connectIntoCavityTop((ModelWhileIfBlock)extra.getSurroundingWhileIfBlock(), closest, extra);
         else if (closest.hasTopSocket() && extra.hasBottomPlug() && p.equals(ConnectionPoint.TOPSOCKET)) this.connectTopBottom(extra, closest);
         else if (closest.hasBottomPlug() && extra.hasTopSocket() && p.equals(ConnectionPoint.BOTTOMPLUG)) this.connectTopBottom(closest, extra);
-        else if (closest.hasLeftPlug() && extra.hasRightSocket() && p.equals(ConnectionPoint.LEFTPLUG)) this.connectRightLeft(extra, closest);
-        else if (closest.hasRightSocket() && extra.hasLeftPlug() && p.equals(ConnectionPoint.RIGHTSOCKET)) this.connectRightLeft(closest, extra);
+        else if (closest.hasLeftPlug() && extra.hasRightSocket() && p.equals(ConnectionPoint.LEFTPLUG)) this.connectRightLeft(closest, extra);
+        else if (closest.hasRightSocket() && extra.hasLeftPlug() && p.equals(ConnectionPoint.RIGHTSOCKET)) this.connectRightLeft(extra, closest);
     }
 
     /**

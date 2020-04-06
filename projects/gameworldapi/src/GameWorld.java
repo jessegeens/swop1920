@@ -13,7 +13,7 @@ public interface GameWorld {
 
     ActionResult perform(ActionType action);
 
-    Boolean evaluate(Predicate predicate);
+    Boolean evaluate(PredicateType predicateType);
 
     GameWorldState getSnapshot();
 

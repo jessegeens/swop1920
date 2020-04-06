@@ -1,3 +1,3 @@
-public interface Predicate {
+public interface PredicateType {
     public boolean evaluate();
 }

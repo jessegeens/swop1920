@@ -188,38 +188,6 @@ public class ModelWhileIfBlock extends ModelBlock{
     }
 
     /**
-     * {@inheritDoc}
-     * @author Oberon Swings
-     */
-    public Location getTopSocketPos() {
-        return super.getPos().add(this.getWidth() / 2, + UIBlock.PLUGSIZE / 2);
-    }
-
-    /**
-     * {@inheritDoc}
-     * @author Oberon Swings
-     */
-    public void setTopSocketPos(Location pos) {
-        super.setPos(pos.add(-this.getWidth()/2, -UIBlock.PLUGSIZE/2));
-    }
-
-    /**
-     * {@inheritDoc}
-     * @author Oberon Swings
-     */
-    public Location getBottomPlugPos() {
-        return super.getPos().add(this.getWidth() / 2,+this.getHeight() + UIBlock.PLUGSIZE / 2);
-    }
-
-    /**
-     * {@inheritDoc}
-     * @author Oberon Swings
-     */
-    public Location getRightSocketPos() {
-        return super.getPos().add(this.getWidth() - UIBlock.PLUGSIZE / 2, UIBlock.STD_HEIGHT / 3);
-    }
-
-    /**
      * TODO move to LocationController
      * {@inheritDoc}
      */

@@ -45,14 +45,6 @@ public class ModelWallInFrontBlock extends ModelBlock{
         super.setPos(pos.add(UIBlock.PLUGSIZE/2, -this.getHeight()/2));
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasLeftPlug(){
-        return true;
-    }
-
     
 
 

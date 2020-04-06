@@ -137,7 +137,7 @@ public abstract class ModelBlock extends ModelElement{
     }
 
     /**
-     * TODO put in LocationController
+     * TODO move to LocationController
      * Updates the position of the block according to their left and top connections to other blocks
      * The update goes from top to bottom and from left to right
      * @author Oberon Swings

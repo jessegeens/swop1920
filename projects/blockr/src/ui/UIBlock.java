@@ -140,7 +140,7 @@ public class UIBlock{
                 break;
         }
         g.setColor(Color.WHITE);
-        g.drawString(blockType.getTitle(), blockLocation.getX() + 10, blockLocation.getY() + (ModelBlock.STD_HEIGHT / 2));
+        g.drawString(blockType.getTitle(), blockLocation.getX() + 10, blockLocation.getY() + (STD_HEIGHT / 2));
     }
 
 
@@ -151,7 +151,7 @@ public class UIBlock{
      * @author Bert De Vleeschouwer
      */
     public Location getCavitySocketPos(Location blockLocation, int cavitySize) {
-        return blockLocation.add(2*ModelBlock.STD_WIDTH/3 - PLUGSIZE/2, this.getHeight(cavitySize) - ModelBlock.STD_HEIGHT/3 - PLUGSIZE/2);
+        return blockLocation.add(2*STD_WIDTH/3 - PLUGSIZE/2, this.getHeight(cavitySize) - STD_HEIGHT/3 - PLUGSIZE/2);
     }
 
     /**
@@ -160,7 +160,7 @@ public class UIBlock{
      * @author Bert De Vleeschouwer
      */
     public Location getCavityPlugPos(Location blockLocation) {
-        return blockLocation.add(2*ModelBlock.STD_WIDTH/3 - PLUGSIZE/2, 2*ModelBlock.STD_HEIGHT/3 - PLUGSIZE/2);
+        return blockLocation.add(2*STD_WIDTH/3 - PLUGSIZE/2, 2*STD_HEIGHT/3 - PLUGSIZE/2);
     }
 
     /**

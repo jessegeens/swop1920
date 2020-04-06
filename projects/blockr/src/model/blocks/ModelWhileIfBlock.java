@@ -2,6 +2,7 @@ package model.blocks;
 
 import java.util.ArrayList;
 
+import ui.UIBlock;
 import utilities.*;
 
 /**
@@ -87,7 +88,7 @@ public class ModelWhileIfBlock extends ModelBlock{
      */
     public int getCavityHeight() {
         if(!(getCavityBlocks().size() == 0)){
-            return getCavityBlocks().size() * STD_HEIGHT;
+            return getCavityBlocks().size() * UIBlock.STD_HEIGHT;
         }
         else{
             return 0;
@@ -173,7 +174,7 @@ public class ModelWhileIfBlock extends ModelBlock{
      * @author Oberon Swings
      */
     public Location getCavitySocketPos() {
-        return this.getPos().add(2*ModelBlock.STD_WIDTH/3, this.getHeight() - ModelBlock.STD_HEIGHT/3);
+        return this.getPos().add(2*UIBlock.STD_WIDTH/3, this.getHeight() - UIBlock.STD_HEIGHT/3);
     }
 
     /**
@@ -182,7 +183,7 @@ public class ModelWhileIfBlock extends ModelBlock{
      * @author Oberon Swings
      */
     public Location getCavityPlugPos() {
-        return this.getPos().add(2*ModelBlock.STD_WIDTH/3, 2*ModelBlock.STD_HEIGHT/3);
+        return this.getPos().add(2*UIBlock.STD_WIDTH/3, 2*UIBlock.STD_HEIGHT/3);
     }
 
     /**
@@ -190,7 +191,7 @@ public class ModelWhileIfBlock extends ModelBlock{
      * @author Oberon Swings
      */
     public Location getTopSocketPos() {
-        return super.getPos().add(this.getWidth() / 2, + ModelBlock.PLUGSIZE / 2);
+        return super.getPos().add(this.getWidth() / 2, + UIBlock.PLUGSIZE / 2);
     }
 
     /**
@@ -198,7 +199,7 @@ public class ModelWhileIfBlock extends ModelBlock{
      * @author Oberon Swings
      */
     public void setTopSocketPos(Location pos) {
-        super.setPos(pos.add(-this.getWidth()/2, -ModelBlock.PLUGSIZE/2));
+        super.setPos(pos.add(-this.getWidth()/2, -UIBlock.PLUGSIZE/2));
     }
 
     /**
@@ -206,7 +207,7 @@ public class ModelWhileIfBlock extends ModelBlock{
      * @author Oberon Swings
      */
     public Location getBottomPlugPos() {
-        return super.getPos().add(this.getWidth() / 2,+this.getHeight() + ModelBlock.PLUGSIZE / 2);
+        return super.getPos().add(this.getWidth() / 2,+this.getHeight() + UIBlock.PLUGSIZE / 2);
     }
 
     /**
@@ -214,7 +215,7 @@ public class ModelWhileIfBlock extends ModelBlock{
      * @author Oberon Swings
      */
     public void setBottomPlugPos(Location pos) {
-        super.setPos(pos.add(-this.getWidth()/2, -this.getHeight() - ModelBlock.PLUGSIZE/2));
+        super.setPos(pos.add(-this.getWidth()/2, -this.getHeight() - UIBlock.PLUGSIZE/2));
     }
 
     /**
@@ -222,7 +223,7 @@ public class ModelWhileIfBlock extends ModelBlock{
      * @author Oberon Swings
      */
     public Location getRightSocketPos() {
-        return super.getPos().add(this.getWidth() - ModelBlock.PLUGSIZE / 2, ModelBlock.STD_HEIGHT / 3);
+        return super.getPos().add(this.getWidth() - UIBlock.PLUGSIZE / 2, UIBlock.STD_HEIGHT / 3);
     }
 
     /**
@@ -230,7 +231,7 @@ public class ModelWhileIfBlock extends ModelBlock{
      * @author Oberon Swings
      */
     public void setRightSocketPos(Location pos) {
-        super.setPos(pos.add(-this.getWidth() + ModelBlock.PLUGSIZE/2, -ModelBlock.STD_HEIGHT/3));
+        super.setPos(pos.add(-this.getWidth() + UIBlock.PLUGSIZE/2, -UIBlock.STD_HEIGHT/3));
     }
 
     /**

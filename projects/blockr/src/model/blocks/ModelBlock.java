@@ -3,18 +3,15 @@ package model.blocks;
 import java.util.ArrayList;
 
 import model.*;
+import ui.UIBlock;
 import utilities.*;
 /**
  * Abstract representation of a block that can be placed from the palette onto the program area.
  */
 public abstract class ModelBlock extends ModelElement{
 
-    public static final int PLUGSIZE = 20;
     private final BlockType type;
     private ArrayList<ConnectionPoint> connectionPoints = new ArrayList<>();
-
-    public static final int STD_WIDTH = 80; //final standard width of blocks
-    public static final int STD_HEIGHT = 80; //final standard height of blocks
 
     private boolean highlighted = false;
     
@@ -85,9 +82,9 @@ public abstract class ModelBlock extends ModelElement{
      */
     public int getHeight() {
 		if (this instanceof ModelWhileIfBlock){
-            return (((ModelWhileIfBlock)this).getCavityHeight() + STD_HEIGHT);
+            return (((ModelWhileIfBlock)this).getCavityHeight() + UIBlock.STD_HEIGHT);
         }
-        else return STD_HEIGHT;
+        else return UIBlock.STD_HEIGHT;
 
     }
     
@@ -96,12 +93,7 @@ public abstract class ModelBlock extends ModelElement{
      * @author Oberon Swings
      */
     public int getWidth() {
-		/*if (this instanceof ModelWhileIfBlock){
-            return (((ModelWhileIfBlock)this).getCavityWidth() + STD_WIDTH);
-        }*/
-        return STD_WIDTH;
-        /*It would be more clear if the while and if blocks don't become so wide, this probably becomes more clear when the blocks have different colours.
-        Hopefully it doesn't become too confusing if multiple if or while blocks are nested within eachother.*/
+        return UIBlock.STD_WIDTH;
     }
     
     /**
@@ -251,39 +243,39 @@ public abstract class ModelBlock extends ModelElement{
     }
 
     public Location getTopSocketPos() {
-        return super.getPos().add(this.getWidth() / 2, + ModelBlock.PLUGSIZE/2);
+        return super.getPos().add(this.getWidth() / 2, + UIBlock.PLUGSIZE/2);
     }
 
 
     public void setTopSocketPos(Location pos) {
-        super.setPos(pos.add(-this.getWidth()/2, -ModelBlock.PLUGSIZE/2));
+        super.setPos(pos.add(-this.getWidth()/2, -UIBlock.PLUGSIZE/2));
     }
 
     public Location getBottomPlugPos() {
-        return super.getPos().add(this.getWidth() / 2, + this.getHeight() + ModelBlock.PLUGSIZE/2);
+        return super.getPos().add(this.getWidth() / 2, + this.getHeight() + UIBlock.PLUGSIZE/2);
     }
 
 
     public void setBottomPlugPos(Location pos) {
-        super.setPos(pos.add(-this.getWidth()/2, -this.getHeight() - ModelBlock.PLUGSIZE/2));
+        super.setPos(pos.add(-this.getWidth()/2, -this.getHeight() - UIBlock.PLUGSIZE/2));
     }
 
     public Location getLeftPlugPos() {
-        return super.getPos().add(- ModelBlock.PLUGSIZE / 2, + this.getHeight() / 2);
+        return super.getPos().add(- UIBlock.PLUGSIZE / 2, + this.getHeight() / 2);
     }
 
 
     public void setLeftPlugPos(Location pos) {
-        super.setPos(pos.add(ModelBlock.PLUGSIZE/2, -this.getHeight()/2));
+        super.setPos(pos.add(UIBlock.PLUGSIZE/2, -this.getHeight()/2));
     }
 
 
     public Location getRightSocketPos() {
-        return super.getPos().add(this.getWidth() - ModelBlock.PLUGSIZE/2, + this.getHeight() / 2);
+        return super.getPos().add(this.getWidth() - UIBlock.PLUGSIZE/2, + this.getHeight() / 2);
     }
 
 
     public void setRightSocketPos(Location pos) {
-        super.setPos(pos.add(-this.getWidth() + ModelBlock.PLUGSIZE/2, -this.getHeight()/2));
+        super.setPos(pos.add(-this.getWidth() + UIBlock.PLUGSIZE/2, -this.getHeight()/2));
     }
 }

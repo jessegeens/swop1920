@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
+import ui.UIBlock;
 import utilities.*;
 import model.blocks.*;
 
@@ -208,7 +209,7 @@ public class ModelProgramArea extends ModelWindow{
         System.out.println(this.getPABlocks().size());
 
         ModelBlock closest = null;
-        int d = ModelBlock.STD_HEIGHT;
+        int d = UIBlock.STD_HEIGHT;
 
         if(block == null){
             return null;
@@ -241,7 +242,7 @@ public class ModelProgramArea extends ModelWindow{
     }
 
     public ConnectionPoint findClosestConnectionPoint(ModelBlock closest, ModelBlock active){
-        int d = ModelBlock.STD_WIDTH;
+        int d = UIBlock.STD_WIDTH;
         int dTop = 0, dBottom = 0, dRight = 0, dLeft = 0, dCPlug = 0, dCSocket = 0;
         if (closest.hasTopSocket() && active.hasBottomPlug()){
             dTop = closest.getTopSocketPos().getDistance(active.getBottomPlugPos());

@@ -2,18 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="755588a3-c9a4-4cc7-8182-006509a4e4aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../gameworldapi/src/ActionType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Action.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/RobotGameWorld.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/RobotGameWorldType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gameworldapi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../gameworldapi/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gameworldapi/src/Action.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gameworldapi/src/GameWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gameworldapi/src/GameWorld.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gameworldapi/src/GameWorldType.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gameworldapi/src/GameWorldType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/gameworldapi.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/gameworldapi.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameWorld.java" beforeDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,11 +32,24 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../gameworldapi/out/artifacts/gameworldapi_jar/gameworldapi.jar!/" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../gameworldapi/out/production/gameworldapi" />
     <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="GameWorld" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -71,6 +77,19 @@
       <updated>1586078768844</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>

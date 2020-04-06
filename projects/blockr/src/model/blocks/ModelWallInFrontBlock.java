@@ -1,5 +1,6 @@
 package model.blocks;
 
+import ui.UIBlock;
 import utilities.*;
 
 import java.util.ArrayList;
@@ -37,11 +38,11 @@ public class ModelWallInFrontBlock extends ModelBlock{
      * {@inheritDoc}
      */
     public Location getLeftPlugPos() {
-        return super.getPos().add(- ModelBlock.PLUGSIZE / 2, + this.getHeight() / 2);
+        return super.getPos().add(- UIBlock.PLUGSIZE / 2, + this.getHeight() / 2);
     }
 
     public void setLeftPlugPos(Location pos) {
-        super.setPos(pos.add(ModelBlock.PLUGSIZE/2, -this.getHeight()/2));
+        super.setPos(pos.add(UIBlock.PLUGSIZE/2, -this.getHeight()/2));
     }
 
     /**

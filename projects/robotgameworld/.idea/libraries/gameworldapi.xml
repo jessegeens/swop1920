@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="gameworldapi">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../gameworldapi/out/artifacts/gameworldapi_jar/gameworldapi.jar!/" />
+      <root url="file://$PROJECT_DIR$/../gameworldapi/out/production/gameworldapi" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

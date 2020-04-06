@@ -46,9 +46,11 @@ public class ProgramRunner {
         else{
             System.out.println("now executing: " + current.getBlockType());
             if (this.findNextBlock(programState) != null){
+                System.out.println("lala1");
                 this.highlightNext(programState);
             }
             else{
+                System.out.println("lala2");
                 this.current.setUnHighlight();
             }
             ProgramState nextState = step(programState);
@@ -103,15 +105,19 @@ public class ProgramRunner {
      * If the condition of a WhileIfBlock succeeds it gives the first cavity block of the WhileIf block.
      * //This should point to the next block that has to be executed, this is needed so that when we step we know what block to run but also this one needs to be highlighted.
      * @return the next block that will be run in the program
-     * @author Oberon Swings
+     * @author Oberon Swings (debugged by Bert)
      */
     private ModelBlock findNextBlock(ProgramState programState){
+
         if (current instanceof ModelWhileIfBlock){
             if (evaluateCurrentCondition(programState)){
                 return ((ModelWhileIfBlock)current).getCavityPlug();
             }
         }
-        if (current.getBottomPlug().getBlockType() == BlockType.IF) return current.getBottomPlug().getBottomPlug(); //If block should only be executed once.
+        
+        if (current.getBottomPlug() != null && current.getBottomPlug().getBlockType() == BlockType.IF){
+            return current.getBottomPlug().getBottomPlug(); //If block should only be executed once.
+        } 
         else return current.getBottomPlug();
     }
 

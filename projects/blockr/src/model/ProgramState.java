@@ -43,6 +43,13 @@ public class ProgramState {
     /*I would make all variables of Program State immutable, also I would make a function for robot direction and location variable so that the function
     Returns a new ProgramState with all the same fields except that one parameter that is changed. That is handy when the robot direction or position is changed and all
     other things stay the same.*/
+
+    //TODO is a game border a wall?
+    /**
+     * 
+     * @return true if there's a wall in front of the direction the robot is facing 
+     * @author Bert
+     */
     public boolean wallInFrontOfRobot(){
         Location findOutIfWall = new Location(robotLocation.getX(), robotLocation.getY());
         switch (robotDirection.toString()){

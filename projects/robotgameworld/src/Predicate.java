@@ -1,8 +1,4 @@
 public enum Predicate implements PredicateType {
-    WALL_IN_FRONT;
+    WALL_IN_FRONT, NOT_WALL_IN_FRONT;
 
-    @Override
-    public boolean evaluate() {
-        return false;
-    }
 }

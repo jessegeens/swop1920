@@ -287,7 +287,7 @@ public class ModelProgramArea extends ModelWindow{
      */
     public ModelBlock handleMouseDown(Location eventWindowLocation){
         for(int i = this.getPABlocks().size() - 1; i >= 0; i--){
-            if(this.getPABlocks().get(i).inBounds(eventWindowLocation)){
+            if(this.getPABlocks().get(i).inBoundsOfElement(eventWindowLocation)){
                 ModelBlock toBeReturned = this.getPABlocks().get(i);
                 this.removeBlock(toBeReturned);
                 return toBeReturned;

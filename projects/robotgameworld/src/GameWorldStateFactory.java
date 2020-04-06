@@ -18,10 +18,18 @@ public class GameWorldStateFactory {
      * @author Jesse Geens
      * @return
      */
-    GameWorldState createNew(GameWorldState old, Action action){
+    RobotGameWorldState createNew(RobotGameWorldState old, Action action){
         switch (action){
 
         }
+        return null;
+    }
+
+    RobotGameWorldState createNext(Action action){
+        return createNew(getCurrentRobotGameWorldState(), action);
+    }
+
+    RobotGameWorldState getCurrentRobotGameWorldState(){
         return null;
     }
 

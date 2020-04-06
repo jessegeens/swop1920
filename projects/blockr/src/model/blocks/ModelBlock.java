@@ -34,13 +34,11 @@ public abstract class ModelBlock extends ModelElement{
         return this.highlighted;
     }
 
-
-    //For now a block is considered to be a square
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean inBounds(Location coordinate){
+    public boolean inBoundsOfElement(Location coordinate){
         if(this.getPos().getX() < coordinate.getX() && this.getPos().getX() + getWidth() > coordinate.getX() && this.getPos().getY() < coordinate.getY() && this.getPos().getY() + getWidth() > coordinate.getY() ){
             return true;
         }
@@ -139,6 +137,7 @@ public abstract class ModelBlock extends ModelElement{
     }
 
     /**
+     * TODO put in LocationController
      * Updates the position of the block according to their left and top connections to other blocks
      * The update goes from top to bottom and from left to right
      * @author Oberon Swings
@@ -195,25 +194,7 @@ public abstract class ModelBlock extends ModelElement{
         else return false;
     }
 
-    /**
-     *
-     * @return {boolean} true if this block has a cavity socket, false otherwise
-     */
-    public boolean hasCavitySocket(){
-        if (this.connectionPoints.contains(ConnectionPoint.CAVITYSOCKET)) return true;
-        else return false;
-    }
-
-    /**
-     *
-     * @return {boolean} true if this block has a cavity plug, false otherwise
-     */
-    public boolean hasCavityPlug(){
-        if (this.connectionPoints.contains(ConnectionPoint.CAVITYPLUG)) return true;
-        else return false;
-    }
-
-    public void setConnectionPoints(ArrayList<ConnectionPoint> connectionPoints) {
+    protected void setConnectionPoints(ArrayList<ConnectionPoint> connectionPoints) {
         this.connectionPoints = connectionPoints;
     }
 
@@ -245,37 +226,20 @@ public abstract class ModelBlock extends ModelElement{
     public Location getTopSocketPos() {
         return super.getPos().add(this.getWidth() / 2, + UIBlock.PLUGSIZE/2);
     }
-
-
-    public void setTopSocketPos(Location pos) {
-        super.setPos(pos.add(-this.getWidth()/2, -UIBlock.PLUGSIZE/2));
-    }
-
     public Location getBottomPlugPos() {
         return super.getPos().add(this.getWidth() / 2, + this.getHeight() + UIBlock.PLUGSIZE/2);
     }
-
-
-    public void setBottomPlugPos(Location pos) {
-        super.setPos(pos.add(-this.getWidth()/2, -this.getHeight() - UIBlock.PLUGSIZE/2));
-    }
-
     public Location getLeftPlugPos() {
         return super.getPos().add(- UIBlock.PLUGSIZE / 2, + this.getHeight() / 2);
     }
-
-
-    public void setLeftPlugPos(Location pos) {
-        super.setPos(pos.add(UIBlock.PLUGSIZE/2, -this.getHeight()/2));
-    }
-
-
     public Location getRightSocketPos() {
         return super.getPos().add(this.getWidth() - UIBlock.PLUGSIZE/2, + this.getHeight() / 2);
     }
 
-
-    public void setRightSocketPos(Location pos) {
-        super.setPos(pos.add(-this.getWidth() + UIBlock.PLUGSIZE/2, -this.getHeight()/2));
+    public void setTopSocketPos(Location pos) {
+        super.setPos(pos.add(-this.getWidth()/2, -UIBlock.PLUGSIZE/2));
+    }
+    public void setLeftPlugPos(Location pos) {
+        super.setPos(pos.add(UIBlock.PLUGSIZE/2, -this.getHeight()/2));
     }
 }

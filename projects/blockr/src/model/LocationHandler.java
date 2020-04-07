@@ -130,43 +130,4 @@ public class LocationHandler {
         }
         return closest;
     }
-
-
-    //TODO remove if not used by 13th of April
-    public ConnectionPoint findClosestConnectionPoint(ModelBlock closest, ModelBlock active){
-        int d = UIBlock.STD_WIDTH;
-        int dTop = 0, dBottom = 0, dRight = 0, dLeft = 0, dCPlug = 0, dCSocket = 0;
-        if (closest.hasTopSocket() && active.hasBottomPlug()){
-            dTop = closest.getTopSocketPos().getDistance(active.getBottomPlugPos());
-            if (dTop < d) d = dTop;
-        }
-        if (closest.hasBottomPlug() && active.hasTopSocket()){
-            dBottom = closest.getBottomPlugPos().getDistance(active.getTopSocketPos());
-            if (dBottom < d) d = dBottom;
-        }
-        if (closest.hasRightSocket() && active.hasLeftPlug()){
-            dRight = closest.getRightSocketPos().getDistance(active.getLeftPlugPos());
-            if (dRight < d) d = dRight;
-        }
-        if (closest.hasLeftPlug() && active.hasRightSocket()){
-            dLeft = closest.getLeftPlugPos().getDistance(active.getRightSocketPos());
-            if (dLeft < d) d = dLeft;
-        }
-        if (closest instanceof ModelWhileIfBlock && active.hasTopSocket()){
-            dCPlug = ((ModelWhileIfBlock) closest).getCavityPlugPos().getDistance(active.getTopSocketPos());
-            if (dCPlug < d) d = dCPlug;
-        }
-        if (closest instanceof ModelWhileIfBlock && active.hasBottomPlug()){
-            dCSocket = ((ModelWhileIfBlock) closest).getCavitySocketPos().getDistance(active.getBottomPlugPos());
-            if (dCSocket < d) d = dCSocket;
-        }
-        if (d == dTop) return ConnectionPoint.TOPSOCKET;
-        if (d == dBottom) return ConnectionPoint.BOTTOMPLUG;
-        if (d == dRight) return ConnectionPoint.RIGHTSOCKET;
-        if (d == dLeft) return ConnectionPoint.LEFTPLUG;
-        if (d == dCPlug) return ConnectionPoint.CAVITYPLUG;
-        if (d == dCSocket) return ConnectionPoint.CAVITYSOCKET;
-        return null;
-    }
-
 }

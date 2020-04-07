@@ -34,24 +34,6 @@ public class ModelWhileIfBlock extends ModelBlock{
         super.setConnectionPoints(connectionPoints);
     }
 
-
-    /**
-     * TODO move to LocationController
-     * Updates the locations of the cavity blocks when one is added in the middle
-     * This is much easier this way than trying to get this to work within the connect methods.
-     * @author Oberon Swings
-     */
-    public void updateCavityBlocksLocations(){
-        ModelBlock next = this.getCavityPlug();
-        while (next != this && next != null){
-            if (next.getTopSocket() == this){
-                next.setTopSocketPos(this.getCavityPlugPos());
-            }
-            else next.setTopSocketPos(next.getTopSocket().getBottomPlugPos());
-            next = next.getBottomPlug();
-        }
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -79,8 +61,6 @@ public class ModelWhileIfBlock extends ModelBlock{
     public void setBottomPlug(ModelBlock bottomPlug) {
         this.bottomPlug = bottomPlug;
     }
-
-    
 
     /**
      * Getter for the height of the cavity of the while and if block.
@@ -176,16 +156,6 @@ public class ModelWhileIfBlock extends ModelBlock{
      */
     public Location getCavityPlugPos() {
         return this.getPos().add(2*UIBlock.STD_WIDTH/3, 2*UIBlock.STD_HEIGHT/3);
-    }
-
-    /**
-     * TODO move to LocationController
-     * {@inheritDoc}
-     */
-    @Override
-    public void setPos(Location pos) {
-        super.setPos(pos);
-        this.updateCavityBlocksLocations();
     }
 
     /**

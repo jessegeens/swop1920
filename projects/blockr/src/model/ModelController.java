@@ -54,12 +54,12 @@ public class ModelController{
         switch(keyCode){
             case 65: //A;
             case 116: //F5;
-                if (getPArea().allBlocksConnected()){//Check if all blocks are connected, and if so execute.
+                if (PArea.allBlocksConnected()){//Check if all blocks are connected, and if so execute.
                     if(this.getProgramRunner().isRunning()){
                         System.out.println("executing on keypress, is already running");
                         state = this.getProgramRunner().execute(state);
                     } else {
-                        this.getProgramRunner().initialise(getPArea().getStartBlocks().get(0));
+                        this.getProgramRunner().initialise(PArea.getStartBlocks().get(0));
                     }
                 } 
                 break;
@@ -219,7 +219,7 @@ public class ModelController{
     /**
      * handle block moving, relocate an active block if there is one
      * 
-     * @param eventWindowLocation location where the event happened
+     * @param eventLocation location where the event happened
      * @author Bert
      */
     public void move(Location eventLocation){

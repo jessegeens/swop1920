@@ -61,18 +61,6 @@ public abstract class ModelBlock extends ModelElement{
         if (this instanceof ModelWhileIfBlock) connections.addAll(((ModelWhileIfBlock) this).getCavityBlocks());
         return connections; 
     }
-
-    /**
-     * @return whether this block is fully connected (at all ends)
-     * @author Oberon Swings
-     */
-    public boolean isFullyConnected() {
-        if(this.hasTopSocket() && this.getTopSocket() == null) return false;
-        if(this.hasBottomPlug() && this.getBottomPlug() == null) return false;
-        if(this.hasRightSocket() && this.getRightSocket() == null) return false;
-        if(this.hasLeftPlug() && this.getLeftPlug() == null) return false;
-        return true;
-    }
     
     /**
      * @return the height of the block.
@@ -137,56 +125,6 @@ public abstract class ModelBlock extends ModelElement{
     }
 
     /**
-     * TODO move to LocationController
-     * 
-     * TODO2 this method causes a bug (it might be constantly calling itself)
-     * Updates the position of the block according to their left and top connections to other blocks
-     * The update goes from top to bottom and from left to right
-     * @author Oberon Swings
-     * 
-     * 
-     */
-    public void updatePos(){
-        System.out.println("updatepos");
-        //System.out.println(this.getBlockType().toString());
-        /*
-        try{
-        System.out.println(this.getBottomPlug().getBlockType().toString());
-        }
-        catch(Exception e){
-            System.out.println("null");
-        }
-        */
-        
-        if (this.hasTopSocket() && this.getTopSocket() != null){
-            //System.out.println("topsocket update pos");
-            this.setTopSocketPos(this.getTopSocket().getBottomPlugPos());
-        }
-
-        if (this.hasBottomPlug() && this.getBottomPlug() != null){
-            //System.out.println("bottomplug update pos");
-            this.getBottomPlug().updatePos();
-        }
-
-        if (this.hasLeftPlug() && this.getLeftPlug() != null){
-            //System.out.println("leftplug update pos");
-            this.setLeftPlugPos(this.getLeftPlug().getRightSocketPos());
-        }
-        if (this.hasRightSocket() && this.getRightSocket() != null){
-            //System.out.println("rightsocket update pos");
-            this.getRightSocket().updatePos();
-        }
-        if (this instanceof ModelWhileIfBlock) ((ModelWhileIfBlock) this).updateCavityBlocksLocations();
-    }
-
-    public void setTopSocketPos(Location pos) {
-        super.setPos(pos.add(-this.getWidth()/2, -UIBlock.PLUGSIZE/2));
-    }
-    public void setLeftPlugPos(Location pos) {
-        super.setPos(pos.add(UIBlock.PLUGSIZE/2, -this.getHeight()/2));
-    }
-
-    /**
      * 
      * @return {boolean} true if this block has a top socket, false otherwise
      */
@@ -238,18 +176,10 @@ public abstract class ModelBlock extends ModelElement{
     public ModelBlock getRightSocket(){
         return null;
     }
-    public void setBottomPlug(ModelBlock block){
-
-    }
-    public void setTopSocket(ModelBlock block){
-
-    }
-    public void setLeftPlug(ModelBlock block){
-
-    }
-    public void setRightSocket(ModelBlock block){
-
-    }
+    public void setBottomPlug(ModelBlock block){}
+    public void setTopSocket(ModelBlock block){}
+    public void setLeftPlug(ModelBlock block){}
+    public void setRightSocket(ModelBlock block){}
 
     public Location getTopSocketPos() {
         return super.getPos().add(this.getWidth() / 2, + UIBlock.PLUGSIZE/2);

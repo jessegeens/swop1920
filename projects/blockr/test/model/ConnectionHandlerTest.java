@@ -101,8 +101,7 @@ public class ConnectionHandlerTest {
     public void disconnectCavity(){
         ConnectionHandler CC = new ConnectionHandler();
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
-        ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(400,400), BlockType.MOVEFORWARD);
-        forwardBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(113,143), BlockType.MOVEFORWARD);
         whileBlock.setCavityPlug(forwardBlock);
         whileBlock.setCavitySocket(forwardBlock);
         forwardBlock.setTopSocket(whileBlock);
@@ -364,5 +363,19 @@ public class ConnectionHandlerTest {
         whileBlock.setCavitySocket(leftBlock);
         CC.connect(rightBlock,leftBlock);
         assertEquals(leftBlock, whileBlock.getCavitySocket());
+    }
+
+    @Test
+    public void isFullyConnected(){
+        ConnectionHandler CC = new ConnectionHandler();
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(113,143), BlockType.MOVEFORWARD);
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(113, 223), BlockType.TURNLEFT);
+        ModelWallInFrontBlock wifBlock = new ModelWallInFrontBlock(new Location(113, 223), BlockType.WALLINFRONT);
+        CC.connectTopBottom(forwardBlock, whileBlock);
+        CC.connectTopBottom(whileBlock, leftBlock);
+        CC.connectRightLeft(wifBlock, whileBlock);
+        boolean bool = CC.isFullyConnected(whileBlock);
+        assertTrue(bool);
     }
 }

@@ -4,6 +4,8 @@ import model.blocks.*;
 import ui.UIBlock;
 import utilities.ConnectionPoint;
 
+import java.util.ArrayList;
+
 public class ConnectionHandler {
 
 
@@ -55,47 +57,6 @@ public class ConnectionHandler {
         }
         else socket.setBottomPlug(plug);
     }
-
-    /**
-     * Connecting by setting the correct connections of blocks a and b to point to eachother.
-     * @param a first block
-     * @param b second block
-     * @author Oberon Swings
-     */
-    /*
-    public void connect(ModelBlock a, ModelBlock b) {
-        boolean connected;
-        if ((a instanceof ModelWhileIfBlock && b.hasBottomPlug()) || (a instanceof ModelWhileIfBlock && b.hasTopSocket())){
-            connected = connectCavity(((ModelWhileIfBlock)a), b);
-            if (connected) return;
-        }
-        else if ((b instanceof ModelWhileIfBlock && a.hasBottomPlug()) || (b instanceof ModelWhileIfBlock && a.hasTopSocket())){
-            connected = connectCavity(((ModelWhileIfBlock)b), a);
-            if (connected) return;
-        }
-        if (a.isInCavity()){
-            this.connectIntoCavity(((ModelWhileIfBlock)a.getSurroundingWhileIfBlock()),a,b);
-        }
-        else if (b.isInCavity()){
-            this.connectIntoCavity(((ModelWhileIfBlock)b.getSurroundingWhileIfBlock()),a,b);
-        }
-        if (a.hasTopSocket() && b.hasBottomPlug() && b.getBottomPlug() == null){
-            this.connectTopBottom(b,a);
-            //a.setTopSocketPos(b.getBottomPlugPos());
-        }
-        else if (a.hasBottomPlug() && b.hasTopSocket() && b.getTopSocket() == null){
-            this.connectTopBottom(a,b);
-            //a.setBottomPlugPos(b.getTopSocketPos());
-        }
-        else if (a.hasRightSocket() && b.hasLeftPlug() && b.getLeftPlug() == null){
-            this.connectRightLeft(b,a);
-            //a.setRightSocketPos(b.getLeftPlugPos());
-        }
-        else if (a.hasLeftPlug() && b.hasRightSocket() && b.getLeftPlug() == null){
-            this.connectRightLeft(a,b);
-            //a.setRightSocketPos(b.getLeftPlugPos());
-        }
-    }*/
 
     /**
      * Connects block extra to the connectionPoint p of block closest.
@@ -247,5 +208,120 @@ public class ConnectionHandler {
             return true;
         }
         return false;
+    }
+
+    /**
+     * @return whether the block is fully connected (at all ends)
+     * @param block the block for which the connections are checked.
+     * @author Oberon Swings
+     */
+    public boolean isFullyConnected(ModelBlock block) {
+        if(block.hasTopSocket() && block.getTopSocket() == null) return false;
+        if(block.hasBottomPlug() && block.getBottomPlug() == null) return false;
+        if(block.hasRightSocket() && block.getRightSocket() == null) return false;
+        if(block.hasLeftPlug() && block.getLeftPlug() == null) return false;
+        return true;
+    }
+
+    /**
+     *
+     * @return true if all the blocks in the ProgramArea are connected
+     * @author Oberon Swings
+     */
+    public Boolean allBlocksConnected(ArrayList<ModelBlock> blocks){
+        if (blocks.isEmpty()) return true;
+        if (this.getStartBlocks(blocks).size() > 1) return false;
+        ArrayList<ModelBlock> connectedB = getConnectedBlocks(blocks.get(0));
+        for (ModelBlock blk : blocks){
+            if (!(connectedB.contains(blk))) return false;
+            if (!(blk.equals(this.getFinishBlocks(blocks).get(0))||(blk.equals(this.getStartBlocks(blocks).get(0))))){
+                return isFullyConnected(blk);
+            }
+            else if (blk.equals(this.getStartBlocks(blocks).get(0)) && blk.equals(this.getFinishBlocks(blocks).get(0))){
+                if(blk.hasRightSocket() && blk.getRightSocket() == null) return false;
+                if(blk.hasLeftPlug() && blk.getLeftPlug() == null) return false;
+            }
+            else if(blk.equals(this.getFinishBlocks(blocks).get(0))) {
+                if(blk.hasTopSocket() && blk.getTopSocket() == null) return false;
+                if(blk.hasRightSocket() && blk.getRightSocket() == null) return false;
+                if(blk.hasLeftPlug() && blk.getLeftPlug() == null) return false;
+            }
+            else if(blk.equals(this.getStartBlocks(blocks).get(0))){
+                if(blk.hasBottomPlug() && blk.getBottomPlug() == null) return false;
+                if(blk.hasRightSocket() && blk.getRightSocket() == null) return false;
+                if(blk.hasLeftPlug() && blk.getLeftPlug() == null) return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     *
+     * @return the starting blocks of the program, should be only one to be a valid start state
+     * @author Oberon Swings
+     */
+    public ArrayList<ModelBlock> getStartBlocks(ArrayList<ModelBlock> blocks){
+        ArrayList<ModelBlock> startBlocks = new ArrayList<>();
+        for(ModelBlock blk : blocks){
+            if(blk.hasTopSocket() && blk.getTopSocket() == null) startBlocks.add(blk);
+        }
+        return startBlocks;
+    }
+
+    /**
+     *
+     * @return the finishing blocks of the program, should be only one to be a valid start state
+     * @author Oberon Swings
+     */
+    public ArrayList<ModelBlock> getFinishBlocks(ArrayList<ModelBlock> blocks){
+        ArrayList<ModelBlock> finishBlocks = new ArrayList<>();
+        for(ModelBlock blk : blocks){
+            if(blk.hasBottomPlug() && blk.getBottomPlug() == null) finishBlocks.add(blk);
+        }
+        return finishBlocks;
+    }
+
+    /**
+     *
+     * @return a list of all the blocks that are connected
+     * @author Oberon Swings
+     */
+    public ArrayList<ModelBlock> getConnectedBlocks(ModelBlock blk){
+        ArrayList<ModelBlock> connectedBlocks = new ArrayList<ModelBlock>();
+        connectedBlocks.add(blk);
+        ArrayList<ModelBlock> nextConnection = blk.getConnections();
+        while(!(nextConnection.isEmpty())){
+            ModelBlock blk1 = nextConnection.get(0);
+            connectedBlocks.add(blk1);
+            nextConnection.addAll(blk1.getConnections());
+            nextConnection.removeAll(connectedBlocks);
+        }
+        return connectedBlocks;
+    }
+
+    /**
+     * Checks if a pair of blocks has corresponding TopSocketPos and BottomPlugPos or RightSocketPos and LeftPlugPos
+     * If so they connect, otherwise they don't
+     * @author Oberon Swings
+     */
+    public void updateConnections(ArrayList<ModelBlock> blocks){
+        for (ModelBlock blk : blocks){
+            for (ModelBlock blk1 : blocks){
+                if (!(blk.equals(blk1))){
+                    if (blk.hasRightSocket() && blk1.hasLeftPlug() && blk.getRightSocketPos().equals(blk1.getLeftPlugPos())){
+                        connect(blk,blk1);
+                    }
+                    if (blk.hasBottomPlug() && blk1.hasTopSocket() && blk.getBottomPlugPos().equals(blk1.getTopSocketPos())){
+                        connect(blk,blk1);
+                    }
+                    if (blk instanceof ModelWhileIfBlock && ((blk1.hasTopSocket() && ((ModelWhileIfBlock) blk).getCavityPlugPos().equals(blk1.getTopSocketPos())))){
+                        connect(blk,blk1);
+                    }
+                    if (blk instanceof ModelWhileIfBlock && ((blk1.hasBottomPlug() && ((ModelWhileIfBlock) blk).getCavitySocketPos().equals(blk1.getBottomPlugPos())))){
+                        connect(blk, blk1);
+                    }
+                }
+            }
+        }
     }
 }

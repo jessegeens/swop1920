@@ -54,12 +54,12 @@ public class ModelController{
         switch(keyCode){
             case 65: //A;
             case 116: //F5;
-                if (PArea.allBlocksConnected()){//Check if all blocks are connected, and if so execute.
+                if (PArea.validExecutionState()){//Check if all blocks are connected, and if so execute.
                     if(this.getProgramRunner().isRunning()){
                         System.out.println("executing on keypress, is already running");
                         state = this.getProgramRunner().execute(state);
                     } else {
-                        this.getProgramRunner().initialise(PArea.getStartBlocks().get(0));
+                        this.getProgramRunner().initialise(PArea.getFirstBlock().get(0));
                     }
                 } 
                 break;

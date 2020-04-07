@@ -101,11 +101,11 @@ public class ModelProgramArea extends ModelWindow{
         }
     }
 
-    public boolean allBlocksConnected(){
+    public boolean validExecutionState(){
         return CH.allBlocksConnected(blocks);
     }
 
-    public ArrayList<ModelBlock> getStartBlocks(){
+    public ArrayList<ModelBlock> getFirstBlock(){
         return CH.getStartBlocks(blocks);
     }
    

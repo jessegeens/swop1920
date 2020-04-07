@@ -12,6 +12,14 @@ public class LocationHandler {
     public LocationHandler() {
     }
 
+
+    public void setLocationBlock(ModelBlock block, Location location){
+        block.setPos(location);
+        if (block instanceof ModelWhileIfBlock){
+            updateCavityBlocksLocations((ModelWhileIfBlock) block);
+        }
+    }
+
     /**
      * This functionupdates the location of blocks. Can be usefull when a while if block has to resize, but should be used on every update.
      * @param startBlocks the blocks where a blockcluster starts so the top left block
@@ -55,9 +63,9 @@ public class LocationHandler {
         ModelBlock next = block.getCavityPlug();
         while (next != block && next != null){
             if (next.getTopSocket() == block){
-                next.setTopSocketPos(block.getCavityPlugPos());
+                setTopSocketLocation(next, block);
             }
-            else next.setTopSocketPos(next.getTopSocket().getBottomPlugPos());
+            else setTopSocketLocation(next, next.getTopSocket());
             next = next.getBottomPlug();
         }
     }
@@ -105,19 +113,19 @@ public class LocationHandler {
             ModelBlock current = blocks.get(i);
             if (current.compatibleTopBottom(block) && current.distanceTopBottom(block) < d){
                 closest = current;
-                d = block.getTopSocketPos().getDistance(current.getBottomPlugPos());
+                d = current.distanceTopBottom(block);
             }
             if (block.compatibleTopBottom(current) && block.distanceTopBottom(current) < d){
                 closest = current;
-                d = block.getBottomPlugPos().getDistance(current.getTopSocketPos());
+                d = block.distanceTopBottom(current);
             }
             if (block.compatibleLeftRight(current) && block.distanceLeftRight(current) < d){
                 closest = current;
-                d = block.getRightSocketPos().getDistance(current.getLeftPlugPos());
+                d = block.distanceLeftRight(current);
             }
             if (current.compatibleLeftRight(block) && current.distanceLeftRight(block) < d){
                 closest = current;
-                d = block.getLeftPlugPos().getDistance(current.getRightSocketPos());
+                d = current.distanceLeftRight(block);
             }
         }
         return closest;

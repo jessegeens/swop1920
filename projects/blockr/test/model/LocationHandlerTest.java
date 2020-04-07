@@ -12,6 +12,14 @@ import static org.junit.Assert.*;
 public class LocationHandlerTest {
 
     @Test
+    public void setLocationBlock(){
+        LocationHandler LH = new LocationHandler();
+        ModelWhileIfBlock whileB = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
+        LH.setLocationBlock(whileB, new Location(200,200));
+        assertEquals(new Location(200, 200), whileB.getPos());
+    }
+
+    @Test
     public void updateLocationBlocksTop() {
         LocationHandler LH = new LocationHandler();
         ModelBlock rightB = new ModelMoveBlock(new Location(100,100), BlockType.TURNRIGHT);

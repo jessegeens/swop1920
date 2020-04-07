@@ -127,6 +127,55 @@ public class ModelController{
     }
 
 
+
+    public void select(Location eventLocation){
+        if(eventLocation.getX() > 0 && eventLocation.getX() < MyCanvasWindow.WIDTH/3 ){
+            System.out.println("Palette select");
+            if(this.MAX_BLOCKS <= this.getProgramAreaBlocks().size()+1){
+                this.setMaxReached(true);
+            }
+            this.setActiveBlock(this.getPalette().handleMouseDown(eventLocation, this.isMaxReached()));
+        }
+        if(eventLocation.getX() > MyCanvasWindow.WIDTH/3 && eventLocation.getX() <  2 * MyCanvasWindow.WIDTH/3){
+            System.out.println("Programarea select");
+            this.setActiveBlock(this.getPArea().handleMouseDown(eventLocation));
+        }
+
+    }
+
+    public void release(Location eventLocation){
+        if(eventLocation.getX() > 0 && eventLocation.getX() < MyCanvasWindow.WIDTH/3 ){
+            System.out.println("Palette release");
+            if(this.getActiveBlock() != null){
+                this.setMaxReached(false);
+                this.getPalette().resetBlocks();
+            }
+            if (this.getActiveBlock() instanceof ModelWhileIfBlock){
+                for (ModelBlock block : ((ModelWhileIfBlock) this.getActiveBlock()).getCavityBlocks()){
+                    block = null;
+                }
+            }
+            this.active = null;
+            
+        }
+        if(eventLocation.getX() > MyCanvasWindow.WIDTH/3 && eventLocation.getX() <  2 * MyCanvasWindow.WIDTH/3){
+            System.out.println("Programarea release");
+            this.getPArea().handleMouseUp(eventLocation, this.getActiveBlock());
+            this.setActiveBlock(null);
+        }
+        
+    }
+
+    public void move(Location eventLocation){
+        if(this.getActiveBlock() != null){
+            if((int) 2 * MyCanvasWindow.WIDTH / 3 - this.getActiveBlock().getWidth() > eventLocation.getX()){
+                this.getActiveBlock().setPos(eventLocation);
+            }
+        }
+        
+    }
+
+
     /**
      * handle mouse events in the palette
      * 

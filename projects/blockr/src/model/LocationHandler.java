@@ -31,17 +31,16 @@ public class LocationHandler {
      */
     public void updateLocationBlock(ModelBlock block){
         if (block.hasTopSocket() && block.getTopSocket() != null){
-            setTopSocketPos();
-            block.setTopSocketPos(block.getTopSocket().getBottomPlugPos());
+            setTopSocketLocation(block, block.getTopSocket());
         }
         if (block.hasBottomPlug() && block.getBottomPlug() != null){
-            block.getBottomPlug().updatePos();
+            updateLocationBlock(block.getBottomPlug());
         }
         if (block.hasLeftPlug() && block.getLeftPlug() != null){
-            block.setLeftPlugPos(block.getLeftPlug().getRightSocketPos());
+            setLeftPlugLocation(block, block.getLeftPlug());
         }
         if (block.hasRightSocket() && block.getRightSocket() != null){
-            block.getRightSocket().updatePos();
+            updateLocationBlock(block.getRightSocket());
         }
         if (block instanceof ModelWhileIfBlock) updateCavityBlocksLocations((ModelWhileIfBlock) block);
     }
@@ -63,30 +62,33 @@ public class LocationHandler {
         }
     }
 
+    /**
+     * Sets the topSocket location of the toBeMoved block to the bottomPlug location of the reference block
+     * @param toBeMoved the block that needs to be moved
+     * @param reference the block to which the first one needs to be moved
+     * @author Oberon Swings
+     */
     public void setTopSocketLocation(ModelBlock toBeMoved, ModelBlock reference){
         Location referenceLocation = reference.getBottomPlugPos();
         toBeMoved.setPos(referenceLocation.add(-UIBlock.STD_WIDTH/2, -UIBlock.PLUGSIZE/2));
     }
 
+    /**
+     * Sets the leftPlug location of the toBeMoved block to the rightSocket location of the reference block
+     * @param toBeMoved the block that needs to be moved
+     * @param reference the block to which the first one needs to be moved
+     * @author Oberon Swings
+     */
     public void setLeftPlugLocation(ModelBlock toBeMoved, ModelBlock reference){
         Location referenceLocation = reference.getRightSocketPos();
         toBeMoved.setPos(referenceLocation.add(UIBlock.PLUGSIZE/2, -UIBlock.STD_HEIGHT/2));
     }
-    /*
-    public void setTopSocketPos(Location pos, ModelBlock block) {
-        block.setPos(pos.add(-block.getWidth()/2, -UIBlock.PLUGSIZE/2));
-    }
-    public void setLeftPlugPos(Location pos, ModelBlock block) {
-        block.setPos(pos.add(UIBlock.PLUGSIZE/2, -block.getHeight()/2));
-    }
-*/
 
     /**
      * This function finds the block of which a matching socket/plug is closest to the given block's plug/socket
-     *
-     * TODO: remove debug print statements
-     * @param block The block for which the closest neighbour needs to be found
-     * @return The closest neighbour of the block null if there is no closest block
+     * @param block the block for which the closest neighbour needs to be found
+     * @param blocks the group of blocks in which the closest needs to be found
+     * @return the closest neighbour of the block, null if there is no closest block
      * @author Oberon Swings
      */
     public ModelBlock findClosestBlock(ModelBlock block, ArrayList<ModelBlock> blocks){
@@ -97,25 +99,27 @@ public class LocationHandler {
         }
         for(int i = 0; i < blocks.size(); i++){
             ModelBlock current = blocks.get(i);
-            if (block.hasTopSocket() && current.hasBottomPlug() && block.getTopSocketPos().getDistance(current.getBottomPlugPos()) < d){
+            if (current.compatibleTopBottom(block) && current.distanceTopBottom(block) < d){
                 closest = current;
                 d = block.getTopSocketPos().getDistance(current.getBottomPlugPos());
             }
-            if (block.hasBottomPlug() && current.hasTopSocket() && (block.getBottomPlugPos().getDistance(current.getTopSocketPos()) < d)){
+            if (block.compatibleTopBottom(current) && block.distanceTopBottom(current) < d){
                 closest = current;
                 d = block.getBottomPlugPos().getDistance(current.getTopSocketPos());
             }
-            if (block.hasRightSocket() && current.hasLeftPlug() && block.getRightSocketPos().getDistance(current.getLeftPlugPos()) < d){
+            if (block.compatibleLeftRight(current) && block.distanceLeftRight(current) < d){
                 closest = current;
                 d = block.getRightSocketPos().getDistance(current.getLeftPlugPos());
             }
-            if (block.hasLeftPlug() && current.hasRightSocket() && block.getLeftPlugPos().getDistance(current.getRightSocketPos()) < d){
+            if (current.compatibleLeftRight(block) && current.distanceLeftRight(block) < d){
                 closest = current;
                 d = block.getLeftPlugPos().getDistance(current.getRightSocketPos());
             }
         }
         return closest;
     }
+
+
 
     public ConnectionPoint findClosestConnectionPoint(ModelBlock closest, ModelBlock active){
         int d = UIBlock.STD_WIDTH;

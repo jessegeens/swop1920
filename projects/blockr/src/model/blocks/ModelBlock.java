@@ -264,5 +264,23 @@ public abstract class ModelBlock extends ModelElement{
         return super.getPos().add(this.getWidth() - UIBlock.PLUGSIZE/2, + this.getHeight() / 2);
     }
 
+
+    public boolean compatibleLeftRight(ModelBlock right){
+        if (this.hasRightSocket() && right.hasLeftPlug()) return true;
+        else return false;
+    }
+
+    public boolean compatibleTopBottom(ModelBlock bottom){
+        if (this.hasBottomPlug() && bottom.hasTopSocket()) return true;
+        else return false;
+    }
+
+    public int distanceLeftRight(ModelBlock right){
+        return this.getRightSocketPos().getDistance(right.getLeftPlugPos());
+    }
+
+    public int distanceTopBottom(ModelBlock bottom){
+        return this.getBottomPlugPos().getDistance(bottom.getTopSocketPos());
+    }
     
 }

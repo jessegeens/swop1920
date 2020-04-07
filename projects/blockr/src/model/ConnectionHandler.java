@@ -132,10 +132,10 @@ public class ConnectionHandler {
      * @author Oberon Swings
      */
     public void connectRightLeft(ModelBlock right, ModelBlock left){
-        if (left.getRightSocket() != null && right.hasRightSocket()){
-            ModelBlock temp = left.getRightSocket();
-            right.setRightSocket(temp);
-            temp.setLeftPlug(right);
+        if (right.getLeftPlug() != null && left.hasLeftPlug()){
+            ModelBlock temp = right.getLeftPlug();
+            left.setLeftPlug(temp);
+            temp.setRightSocket(left);
         }
         left.setRightSocket(right);
         right.setLeftPlug(left);

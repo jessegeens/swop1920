@@ -226,4 +226,22 @@ public class ModelWhileIfBlock extends ModelBlock{
 
         return toBeReturned;
     }
+
+    /**
+     * Calculates the distance between cavityPlug and TopSocket
+     * @param top the block with the topSocket
+     * @return the distance form the cavityPlug to the topSocket of the top block
+     */
+    public int distanceCavityPlug(ModelBlock top){
+        return this.getCavityPlugPos().getDistance(top.getTopSocketPos());
+    }
+
+    /**
+     * Calculates the distance between cavitySocket and bottomPlug
+     * @param bottom the block with the bottomPlug
+     * @return the distance form the cavitySocket to the bottomPlug of the bottom block
+     */
+    public int distanceCavitySocket(ModelBlock bottom){
+        return this.getCavitySocketPos().getDistance(bottom.getBottomPlugPos());
+    }
 }

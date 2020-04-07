@@ -15,8 +15,8 @@ public class ModelWhileIfBlockTest {
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
         ModelNotBlock notBlock = new ModelNotBlock(new Location(180,100), BlockType.NOT);
         ModelWallInFrontBlock wifBlock = new ModelWallInFrontBlock(new Location(260, 100), BlockType.WALLINFRONT);
-        CC.connect(whileBlock, notBlock, ConnectionPoint.RIGHTSOCKET);
-        CC.connect(notBlock, wifBlock, ConnectionPoint.RIGHTSOCKET);
+        CC.connect(whileBlock, notBlock);
+        CC.connect(notBlock, wifBlock);
         Condition whileCondition = null;
         try {
             whileCondition = whileBlock.getCondition();
@@ -36,11 +36,11 @@ public class ModelWhileIfBlockTest {
         ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(400, 550), BlockType.TURNLEFT);
         ModelMoveBlock rightBlock = new ModelMoveBlock(new Location(400, 700), BlockType.TURNRIGHT);
         forwardBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
-        CC.connect(whileBlock, forwardBlock, ConnectionPoint.CAVITYPLUG);
+        CC.connect(whileBlock, forwardBlock);
         leftBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
-        CC.connect(forwardBlock, leftBlock, ConnectionPoint.BOTTOMPLUG);
+        CC.connect(forwardBlock, leftBlock);
         rightBlock.setTopSocketPos(whileBlock.getCavityPlugPos());
-        CC.connect(leftBlock, rightBlock, ConnectionPoint.BOTTOMPLUG);
+        CC.connect(leftBlock, rightBlock);
         whileBlock.updateCavityBlocksLocations();
         assertEquals(new Location(113,303), rightBlock.getPos());
     }

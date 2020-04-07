@@ -16,9 +16,9 @@ public class ModelBlockTests {
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(400,400), BlockType.MOVEFORWARD);
         ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(400, 550), BlockType.TURNLEFT);
         ModelMoveBlock rightBlock = new ModelMoveBlock(new Location(400, 700), BlockType.TURNRIGHT);
-        CC.connect(whileBlock, forwardBlock, ConnectionPoint.CAVITYPLUG);
-        CC.connect(forwardBlock, leftBlock, ConnectionPoint.BOTTOMPLUG);
-        CC.connect(leftBlock, rightBlock, ConnectionPoint.BOTTOMPLUG);
+        CC.connect(whileBlock, forwardBlock);
+        CC.connect(forwardBlock, leftBlock);
+        CC.connect(leftBlock, rightBlock);
         assertTrue(forwardBlock.isInCavity());
     }
 
@@ -29,9 +29,9 @@ public class ModelBlockTests {
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(400,400), BlockType.MOVEFORWARD);
         ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(400, 550), BlockType.TURNLEFT);
         ModelMoveBlock rightBlock = new ModelMoveBlock(new Location(400, 700), BlockType.TURNRIGHT);
-        CC.connect(whileBlock, forwardBlock, ConnectionPoint.CAVITYPLUG);
-        CC.connect(whileBlock, leftBlock, ConnectionPoint.BOTTOMPLUG);
-        CC.connect(forwardBlock, rightBlock, ConnectionPoint.BOTTOMPLUG);
+        CC.connect(whileBlock, forwardBlock);
+        CC.connect(whileBlock, leftBlock);
+        CC.connect(forwardBlock, rightBlock);
         assertFalse(leftBlock.isInCavity());
     }
 
@@ -42,9 +42,9 @@ public class ModelBlockTests {
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(400,400), BlockType.MOVEFORWARD);
         ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(400, 550), BlockType.TURNLEFT);
         ModelMoveBlock rightBlock = new ModelMoveBlock(new Location(400, 700), BlockType.TURNRIGHT);
-        CC.connect(whileBlock, forwardBlock, ConnectionPoint.CAVITYPLUG);
-        CC.connect(forwardBlock, leftBlock, ConnectionPoint.BOTTOMPLUG);
-        CC.connect(leftBlock, rightBlock, ConnectionPoint.BOTTOMPLUG);
+        CC.connect(whileBlock, forwardBlock);
+        CC.connect(forwardBlock, leftBlock);
+        CC.connect(leftBlock, rightBlock);
         assertEquals(whileBlock, forwardBlock.getSurroundingWhileIfBlock());
     }
 

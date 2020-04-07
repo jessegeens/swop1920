@@ -253,7 +253,7 @@ public class ConnectionHandlerTest {
         forwardBlock.setBottomPlug(leftBlock);
         leftBlock.setBottomPlug(whileBlock);
         whileBlock.setCavitySocket(leftBlock);
-        CC.connectIntoCavityTop(whileBlock, rightBlock,leftBlock);
+        CC.connectIntoCavityTop(rightBlock,leftBlock);
         assertEquals(3,whileBlock.getCavityBlocks().size());
     }
 }

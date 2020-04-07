@@ -1,6 +1,7 @@
 package model;
 
 import model.blocks.*;
+import ui.UIBlock;
 import utilities.ConnectionPoint;
 
 public class ConnectionHandler {
@@ -11,6 +12,7 @@ public class ConnectionHandler {
 
     /**
      * Disconnecting by setting the connections of block a to null.
+     * This doesn't disconnect the cavity because we want to move the cavity blocks together with the if/while block when the if/while block is moved for instance
      * @param a the modelBlock which is disconnected
      * @author Oberon Swings
      */
@@ -31,7 +33,6 @@ public class ConnectionHandler {
             a.getLeftPlug().setRightSocket(null);
             a.setLeftPlug(null);
         }
-        //The cavity should not be disconnected, I would rather move the cavity blocks with the while if block if this gets moved. -Oberon
     }
 
     /**
@@ -53,7 +54,6 @@ public class ConnectionHandler {
             a.setCavityPlug(plug);
         }
         else socket.setBottomPlug(plug);
-        //socket.updatePos();
     }
 
     /**
@@ -101,22 +101,28 @@ public class ConnectionHandler {
      * Connects block extra to the connectionPoint p of block closest.
      * @param closest first block
      * @param extra second block
-     * @param p The plug/socket of the first block to which the second block needs to be connected
      * @author Oberon Swings
      */
-    public void connect(ModelBlock closest, ModelBlock extra, ConnectionPoint p) {
-        
-
-        if ((closest instanceof ModelWhileIfBlock && extra.hasTopSocket() && p.equals(ConnectionPoint.CAVITYPLUG))) this.connectCavityPlug((ModelWhileIfBlock)closest,extra);
-        else if ((closest instanceof ModelWhileIfBlock && extra.hasBottomPlug() && p.equals(ConnectionPoint.CAVITYSOCKET))) this.connectCavitySocket((ModelWhileIfBlock)closest,extra);
-        else if ((closest.isInCavity() && closest.hasTopSocket() && extra.hasBottomPlug() && p.equals(ConnectionPoint.TOPSOCKET))) this.connectIntoCavityBottom((ModelWhileIfBlock)closest.getSurroundingWhileIfBlock(), extra, closest);
-        else if ((closest.isInCavity() && extra.hasTopSocket() && closest.hasBottomPlug() && p.equals(ConnectionPoint.BOTTOMPLUG))) this.connectIntoCavityTop((ModelWhileIfBlock)closest.getSurroundingWhileIfBlock(), extra, closest);
-        else if ((extra.isInCavity() && extra.hasTopSocket() && closest.hasBottomPlug() && p.equals(ConnectionPoint.TOPSOCKET))) this.connectIntoCavityBottom((ModelWhileIfBlock)extra.getSurroundingWhileIfBlock(), closest, extra);
-        else if ((extra.isInCavity() && closest.hasTopSocket() && extra.hasBottomPlug() && p.equals(ConnectionPoint.BOTTOMPLUG))) this.connectIntoCavityTop((ModelWhileIfBlock)extra.getSurroundingWhileIfBlock(), closest, extra);
-        else if (closest.hasTopSocket() && extra.hasBottomPlug() && p.equals(ConnectionPoint.TOPSOCKET)) this.connectTopBottom(extra, closest);
-        else if (closest.hasBottomPlug() && extra.hasTopSocket() && p.equals(ConnectionPoint.BOTTOMPLUG)) this.connectTopBottom(closest, extra);
-        else if (closest.hasLeftPlug() && extra.hasRightSocket() && p.equals(ConnectionPoint.LEFTPLUG)) this.connectRightLeft(closest, extra);
-        else if (closest.hasRightSocket() && extra.hasLeftPlug() && p.equals(ConnectionPoint.RIGHTSOCKET)) this.connectRightLeft(extra, closest);
+    public void connect(ModelBlock closest, ModelBlock extra) {
+        boolean connect = false;
+        if (closest instanceof ModelWhileIfBlock){
+            if (extra.hasTopSocket() && ((ModelWhileIfBlock) closest).distanceCavityPlug(extra) < UIBlock.PLUGSIZE) connect = this.connectCavityPlug(((ModelWhileIfBlock)closest), extra);
+            if (extra.hasBottomPlug() && ((ModelWhileIfBlock) closest).distanceCavitySocket(extra) < UIBlock.PLUGSIZE) connect = this.connectCavitySocket((ModelWhileIfBlock) closest, extra);
+        }
+        if (connect) return;
+        else{
+            if (closest.isInCavity() && closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) < UIBlock.PLUGSIZE) connect = connectIntoCavityTop(extra, closest);
+            if (closest.isInCavity() && extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) < UIBlock.PLUGSIZE) connect = connectIntoCavityBottom(extra, closest);
+            if (extra.isInCavity() && extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) < UIBlock.PLUGSIZE) connect = connectIntoCavityTop(closest, extra);
+            if (extra.isInCavity() && closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) < UIBlock.PLUGSIZE) connect = connectIntoCavityBottom(closest, extra);
+        }
+        if (connect) return;
+        else{
+            if (extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) < UIBlock.PLUGSIZE) this.connectTopBottom(extra, closest);
+            if (closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) < UIBlock.PLUGSIZE) this.connectTopBottom(closest, extra);
+            if (extra.compatibleLeftRight(closest) && extra.distanceLeftRight(closest) < UIBlock.PLUGSIZE) this.connectRightLeft(closest, extra);
+            if (closest.compatibleLeftRight(extra) && closest.distanceLeftRight(extra) < UIBlock.PLUGSIZE) this.connectRightLeft(extra, closest);
+        }
     }
 
     /**
@@ -169,7 +175,6 @@ public class ConnectionHandler {
                 }
                 else cavityPrevious.setBottomPlug(b);
             }
-            //updateCavityBlocksLocations();
             return true;
         }
         return false;
@@ -193,7 +198,6 @@ public class ConnectionHandler {
                 }
                 else cavityNext.setTopSocket(b);
             }
-            //updateCavityBlocksLocations();
             return true;
         }
         return false;
@@ -206,8 +210,9 @@ public class ConnectionHandler {
      * @param closest the block closest to the new block
      * @author Oberon Swings
      */
-    public void connectIntoCavityTop(ModelWhileIfBlock a, ModelBlock extra, ModelBlock closest){
-        if (closest.hasBottomPlug() && extra.hasTopSocket()){
+    public boolean connectIntoCavityTop(ModelBlock extra, ModelBlock closest){
+        ModelWhileIfBlock a = closest.getSurroundingWhileIfBlock();
+        if (closest.compatibleTopBottom(extra)){
             ModelBlock next = closest.getBottomPlug();
             extra.setTopSocket(closest);
             closest.setBottomPlug(extra);
@@ -216,8 +221,9 @@ public class ConnectionHandler {
                 if (!(next.equals(a))) next.setTopSocket(extra);
                 else a.setCavitySocket(extra);
             }
-            //updateCavityBlocksLocations();
+            return true;
         }
+        return false;
     }
 
     /**
@@ -227,8 +233,9 @@ public class ConnectionHandler {
      * @param closest the block closest to the new block
      * @author Oberon Swings
      */
-    public void connectIntoCavityBottom(ModelWhileIfBlock a, ModelBlock extra, ModelBlock closest){
-        if (closest.hasTopSocket() && extra.hasBottomPlug()){
+    public boolean connectIntoCavityBottom(ModelBlock extra, ModelBlock closest){
+        ModelWhileIfBlock a = closest.getSurroundingWhileIfBlock();
+        if (extra.compatibleTopBottom(closest)){
             ModelBlock next = closest.getTopSocket();
             extra.setBottomPlug(closest);
             closest.setTopSocket(extra);
@@ -237,7 +244,8 @@ public class ConnectionHandler {
                 if (!(next.equals(a))) next.setBottomPlug(extra);
                 else a.setCavityPlug(extra);
             }
-            //updateCavityBlocksLocations();
+            return true;
         }
+        return false;
     }
 }

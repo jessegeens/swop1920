@@ -124,14 +124,14 @@ public abstract class ModelBlock extends ModelElement{
      * @return the while/if block that has this block in it's cavity, null if this block is within no cavity
      * @author Oberon Swings
      */
-    public ModelBlock getSurroundingWhileIfBlock(){
+    public ModelWhileIfBlock getSurroundingWhileIfBlock(){
         ModelBlock plug = this;
         if (this.hasBottomPlug()){
             while (!(plug instanceof ModelWhileIfBlock || plug == null)){
                 plug = plug.getBottomPlug();
             }
             if (plug == null) return null;
-            else if (plug instanceof ModelWhileIfBlock && ((ModelWhileIfBlock) plug).getCavityBlocks().contains(this)) return plug;
+            else if (plug instanceof ModelWhileIfBlock && ((ModelWhileIfBlock) plug).getCavityBlocks().contains(this)) return ((ModelWhileIfBlock)plug);
         }
         return null;
     }
@@ -265,20 +265,40 @@ public abstract class ModelBlock extends ModelElement{
     }
 
 
+    /**
+     * Finds out if this block is compatible with the right block
+     * @param right the block which this block is checked against
+     * @return true if this has a rightSocket and right has a leftPlug
+     */
     public boolean compatibleLeftRight(ModelBlock right){
         if (this.hasRightSocket() && right.hasLeftPlug()) return true;
         else return false;
     }
 
+    /**
+     * Finds out if this block is compatible with the bottom block
+     * @param bottom the block which this block is checked against
+     * @return true if this has a bottomPlug and bottom has a topSocket
+     */
     public boolean compatibleTopBottom(ModelBlock bottom){
         if (this.hasBottomPlug() && bottom.hasTopSocket()) return true;
         else return false;
     }
 
+    /**
+     * Calculates the distance between rightSocket and leftPlug
+     * @param right the block with the leftPlug
+     * @return the distance form the rightSocket to the leftPlug of the right block
+     */
     public int distanceLeftRight(ModelBlock right){
         return this.getRightSocketPos().getDistance(right.getLeftPlugPos());
     }
 
+    /**
+     * Calculates the distance between bottomPlug and TopSocket
+     * @param bottom the block with the topSocket
+     * @return the distance form the bottomPlug to the topSocket of the bottom block
+     */
     public int distanceTopBottom(ModelBlock bottom){
         return this.getBottomPlugPos().getDistance(bottom.getTopSocketPos());
     }

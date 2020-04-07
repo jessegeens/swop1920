@@ -93,21 +93,21 @@ public class ModelProgramArea extends ModelWindow{
                 if (!(blk.equals(blk1))){
                     //System.out.println("blk1");
                     if (blk.hasRightSocket() && blk1.hasLeftPlug() && blk.getRightSocketPos().equals(blk1.getLeftPlugPos())){
-                        CC.connect(blk,blk1,ConnectionPoint.RIGHTSOCKET);
+                        CC.connect(blk,blk1);
                         //System.out.println("if1");
                     }
                     //System.out.println("else1");
                     if (blk.hasBottomPlug() && blk1.hasTopSocket() && blk.getBottomPlugPos().equals(blk1.getTopSocketPos())){
-                        CC.connect(blk,blk1,ConnectionPoint.BOTTOMPLUG);
+                        CC.connect(blk,blk1);
                         //System.out.println("if2");
                     }
                     //System.out.println("else2");
                     if (blk instanceof ModelWhileIfBlock && ((blk1.hasTopSocket() && ((ModelWhileIfBlock) blk).getCavityPlugPos().equals(blk1.getTopSocketPos())))){
-                        CC.connect(blk,blk1,ConnectionPoint.CAVITYPLUG);
+                        CC.connect(blk,blk1);
                         //System.out.println("if3");
                     }
                     if (blk instanceof ModelWhileIfBlock && ((blk1.hasBottomPlug() && ((ModelWhileIfBlock) blk).getCavitySocketPos().equals(blk1.getBottomPlugPos())))){
-                        CC.connect(blk, blk1,ConnectionPoint.CAVITYSOCKET);
+                        CC.connect(blk, blk1);
                         //System.out.println("if4");
                     }
                     //System.out.println("end blk1");
@@ -318,9 +318,7 @@ public class ModelProgramArea extends ModelWindow{
         if (closest != null){
             System.out.println("CLOSEST IS NOT NULL");
             System.out.println(closest.getBlockType().toString());
-            
-            ConnectionPoint point = this.findClosestConnectionPoint(closest, activeB);
-            CC.connect(closest, activeB, point);
+            CC.connect(closest, activeB);
             System.out.println("connection made");
             this.updateConnections();
             System.out.println("connections updated");

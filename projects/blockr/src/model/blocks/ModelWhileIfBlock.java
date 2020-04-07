@@ -103,22 +103,13 @@ public class ModelWhileIfBlock extends ModelBlock{
      */
     public ArrayList<ModelBlock> getCavityBlocks() {
         ArrayList<ModelBlock> cav = new ArrayList<ModelBlock>();
-
         ModelBlock blk = this.getCavityPlug();
-        //System.out.println("type1");
-        //System.out.println(blk.getBlockType().getType());
-        
-        while(!(blk.equals(this))){
+        while(!(blk.equals(this) || blk == null)){
             cav.add(blk);
+            if (blk == null) System.out.println("The cavity of the while/if block is not connected properly, got null somewhere in the link");
             if(blk.hasBottomPlug()){
                 blk = blk.getBottomPlug();
             }
-           // System.out.println("type2");
-           // System.out.println(blk.getBlockType().getType());
-            //the issue is that the block does not get the wileifblock as a bottomplug when connecting
-            //so its bottom plug is null resulting in a nullpointer exception
-            //else blk = this;//make sure that it doesn't form an infinite loop.
-            //--Should be fixed now because connect works fine -Oberon
         }
         return cav;
     }

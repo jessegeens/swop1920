@@ -69,7 +69,11 @@ public class LocationHandler {
      * @author Oberon Swings
      */
     public void setTopSocketLocation(ModelBlock toBeMoved, ModelBlock reference){
-        Location referenceLocation = reference.getBottomPlugPos();
+        Location referenceLocation;
+        if (toBeMoved.isInCavity() && reference instanceof ModelWhileIfBlock){
+            referenceLocation = ((ModelWhileIfBlock) reference).getCavityPlugPos();
+        }
+        else referenceLocation = reference.getBottomPlugPos();
         toBeMoved.setPos(referenceLocation.add(-UIBlock.STD_WIDTH/2, -UIBlock.PLUGSIZE/2));
     }
 

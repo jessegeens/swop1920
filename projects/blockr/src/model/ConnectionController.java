@@ -105,6 +105,8 @@ public class ConnectionController {
      * @author Oberon Swings
      */
     public void connect(ModelBlock closest, ModelBlock extra, ConnectionPoint p) {
+        
+
         if ((closest instanceof ModelWhileIfBlock && extra.hasTopSocket() && p.equals(ConnectionPoint.CAVITYPLUG))) this.connectCavityPlug((ModelWhileIfBlock)closest,extra);
         else if ((closest instanceof ModelWhileIfBlock && extra.hasBottomPlug() && p.equals(ConnectionPoint.CAVITYSOCKET))) this.connectCavitySocket((ModelWhileIfBlock)closest,extra);
         else if ((closest.isInCavity() && closest.hasTopSocket() && extra.hasBottomPlug() && p.equals(ConnectionPoint.TOPSOCKET))) this.connectIntoCavityBottom((ModelWhileIfBlock)closest.getSurroundingWhileIfBlock(), extra, closest);

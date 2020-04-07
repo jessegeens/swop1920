@@ -26,7 +26,7 @@ public abstract class ModelBlock extends ModelElement{
     }
 
     public void setUnHighlight(){
-        System.out.println("UNHIGHLIGHT");
+        
         this.highlighted = false;
     }
 
@@ -147,21 +147,33 @@ public abstract class ModelBlock extends ModelElement{
      * 
      */
     public void updatePos(){
+        System.out.println("updatepos");
+        //System.out.println(this.getBlockType().toString());
+        /*
+        try{
+        System.out.println(this.getBottomPlug().getBlockType().toString());
+        }
+        catch(Exception e){
+            System.out.println("null");
+        }
+        */
         
         if (this.hasTopSocket() && this.getTopSocket() != null){
-            System.out.println("topsocket");
+            //System.out.println("topsocket update pos");
             this.setTopSocketPos(this.getTopSocket().getBottomPlugPos());
         }
-        else if (this.hasBottomPlug() && this.getBottomPlug() != null){
-            System.out.println("bottomplug");
+
+        if (this.hasBottomPlug() && this.getBottomPlug() != null){
+            //System.out.println("bottomplug update pos");
             this.getBottomPlug().updatePos();
         }
-        else if (this.hasLeftPlug() && this.getLeftPlug() != null){
-            System.out.println("leftplug");
+
+        if (this.hasLeftPlug() && this.getLeftPlug() != null){
+            //System.out.println("leftplug update pos");
             this.setLeftPlugPos(this.getLeftPlug().getRightSocketPos());
         }
-        else if (this.hasRightSocket() && this.getRightSocket() != null){
-            System.out.println("rightsocket");
+        if (this.hasRightSocket() && this.getRightSocket() != null){
+            //System.out.println("rightsocket update pos");
             this.getRightSocket().updatePos();
         }
         if (this instanceof ModelWhileIfBlock) ((ModelWhileIfBlock) this).updateCavityBlocksLocations();

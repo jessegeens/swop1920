@@ -88,35 +88,37 @@ public class ModelProgramArea extends ModelWindow{
      */
     public void updateConnections(){
         for (ModelBlock blk : getPABlocks()){
-            System.out.println("blk");
+            //System.out.println("blk");
             for (ModelBlock blk1 : getPABlocks()){
                 if (!(blk.equals(blk1))){
-                    System.out.println("blk1");
+                    //System.out.println("blk1");
                     if (blk.hasRightSocket() && blk1.hasLeftPlug() && blk.getRightSocketPos().equals(blk1.getLeftPlugPos())){
                         CC.connect(blk,blk1,ConnectionPoint.RIGHTSOCKET);
-                        System.out.println("if1");
+                        //System.out.println("if1");
                     }
-                    System.out.println("else1");
+                    //System.out.println("else1");
                     if (blk.hasBottomPlug() && blk1.hasTopSocket() && blk.getBottomPlugPos().equals(blk1.getTopSocketPos())){
                         CC.connect(blk,blk1,ConnectionPoint.BOTTOMPLUG);
-                        System.out.println("if2");
+                        //System.out.println("if2");
                     }
-                    System.out.println("else2");
+                    //System.out.println("else2");
                     if (blk instanceof ModelWhileIfBlock && ((blk1.hasTopSocket() && ((ModelWhileIfBlock) blk).getCavityPlugPos().equals(blk1.getTopSocketPos())))){
                         CC.connect(blk,blk1,ConnectionPoint.CAVITYPLUG);
-                        System.out.println("if3");
+                        //System.out.println("if3");
                     }
                     if (blk instanceof ModelWhileIfBlock && ((blk1.hasBottomPlug() && ((ModelWhileIfBlock) blk).getCavitySocketPos().equals(blk1.getBottomPlugPos())))){
                         CC.connect(blk, blk1,ConnectionPoint.CAVITYSOCKET);
-                        System.out.println("if4");
+                        //System.out.println("if4");
                     }
-                    System.out.println("end blk1");
+                    //System.out.println("end blk1");
                 }
-                else System.out.println("same");
+                else{
+                        //System.out.println("same");
+                } 
             }
-            System.out.println("end blk");
+            //System.out.println("end blk");
         }
-        System.out.println("end for");
+        //System.out.println("end for");
     }
 
     /**
@@ -184,15 +186,15 @@ public class ModelProgramArea extends ModelWindow{
      * @param toBeAdded the block which should be added
      */
     public void addBlock(ModelBlock toBeAdded){
-        System.out.println("here");
+        //System.out.println("here");
         if(toBeAdded != null){
             this.blocks.add(toBeAdded);
             if (toBeAdded instanceof ModelWhileIfBlock){
                 this.blocks.addAll(((ModelWhileIfBlock) toBeAdded).getCavityBlocks());
             }
-            System.out.println("adds");
+            //System.out.println("adds");
         }
-        System.out.println("notadds");
+        //System.out.println("notadds");
         
     }
 
@@ -205,8 +207,8 @@ public class ModelProgramArea extends ModelWindow{
      * @author Oberon Swings
      */
     public ModelBlock findClosestBlock(ModelBlock block){
-        System.out.println("list length");
-        System.out.println(this.getPABlocks().size());
+        //System.out.println("list length");
+        //System.out.println(this.getPABlocks().size());
 
         ModelBlock closest = null;
         int d = UIBlock.STD_HEIGHT;
@@ -216,10 +218,10 @@ public class ModelProgramArea extends ModelWindow{
         }
         for(int i = 0; i < this.getPABlocks().size(); i++){
             ModelBlock current = this.getPABlocks().get(i);
-            System.out.println("INDEX IN LIST");
-            System.out.println(i);
-            System.out.println("CURRENT BLOCK ID");
-            System.out.println(this.getPABlocks().get(i).getBlockType());
+            //System.out.println("INDEX IN LIST");
+            //System.out.println(i);
+            //System.out.println("CURRENT BLOCK ID");
+            //System.out.println(this.getPABlocks().get(i).getBlockType());
 
             if (block.hasTopSocket() && current.hasBottomPlug() && block.getTopSocketPos().getDistance(current.getBottomPlugPos()) < d){
                 closest = current;
@@ -305,13 +307,18 @@ public class ModelProgramArea extends ModelWindow{
      * @param activeB activeBlock the current active block
      */
     public void handleMouseUp(Location eveWindowLocation, ModelBlock activeB){
+        System.out.println("ModelPA.HANDLEMOUSEUP");
+        System.out.println(activeB.getBlockType().toString());
+
         this.addBlock(activeB);
         ModelBlock closest = this.findClosestBlock(activeB);
+        
+        
+
         if (closest != null){
             System.out.println("CLOSEST IS NOT NULL");
-            System.out.println(closest.getBlockType());
-            System.out.println("list length2");
-            System.out.println(this.getPABlocks().size());
+            System.out.println(closest.getBlockType().toString());
+            
             ConnectionPoint point = this.findClosestConnectionPoint(closest, activeB);
             CC.connect(closest, activeB, point);
             System.out.println("connection made");

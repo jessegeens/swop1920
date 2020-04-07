@@ -126,25 +126,74 @@ public class ModelController{
         }
     }
 
+    /**
+     * 
+     * @param location
+     * @return whether this event location is inside of the Palette
+     * 
+     * @author Bert
+     */
+    protected boolean inPalette(Location location){
+        if(location.getX() > 0 && location.getX() < MyCanvasWindow.WIDTH/3 ){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 
+     * @param location
+     * @return whether this event location is inside of the ProgramArea
+     * 
+     * @author Bert
+     */
+    protected boolean inProgramArea(Location location){
+        if(location.getX() > MyCanvasWindow.WIDTH/3 && location.getX() <  2 * MyCanvasWindow.WIDTH/3){
+            return true;
+        }
+        return false;
+    }
 
 
+    /**
+     * Handle a possible block selection (if the position is inbounds of a block)
+     * 
+     * If it's selected in the palette, a new block gets selected and a new block of this type gets created in the palette
+     * If it's selected in the programarea, the active block gets set to this block
+     * 
+     * 
+     * @param eventLocation location of the event
+     * 
+     * @author Bert
+     */
     public void select(Location eventLocation){
-        if(eventLocation.getX() > 0 && eventLocation.getX() < MyCanvasWindow.WIDTH/3 ){
+        if(this.inPalette(eventLocation)){
             System.out.println("Palette select");
             if(this.MAX_BLOCKS <= this.getProgramAreaBlocks().size()+1){
                 this.setMaxReached(true);
             }
             this.setActiveBlock(this.getPalette().handleMouseDown(eventLocation, this.isMaxReached()));
         }
-        if(eventLocation.getX() > MyCanvasWindow.WIDTH/3 && eventLocation.getX() <  2 * MyCanvasWindow.WIDTH/3){
+        else if(this.inProgramArea(eventLocation)){
             System.out.println("Programarea select");
             this.setActiveBlock(this.getPArea().handleMouseDown(eventLocation));
         }
 
     }
 
+    /**
+     * Handle a selected block being released (if there is one)
+     * 
+     * If it's released in the palette, the block gets deleted
+     * If it's released in the programarea, it gets checked whether the block needs to get connected to another block
+     * 
+     * @param eventLocation location of the event
+     * 
+     * @author Bert
+     */
+
     public void release(Location eventLocation){
-        if(eventLocation.getX() > 0 && eventLocation.getX() < MyCanvasWindow.WIDTH/3 ){
+        if(this.inPalette(eventLocation) ){
             System.out.println("Palette release");
             if(this.getActiveBlock() != null){
                 this.setMaxReached(false);
@@ -158,7 +207,7 @@ public class ModelController{
             this.active = null;
             
         }
-        if(eventLocation.getX() > MyCanvasWindow.WIDTH/3 && eventLocation.getX() <  2 * MyCanvasWindow.WIDTH/3){
+        else if(this.inProgramArea(eventLocation)){
             System.out.println("Programarea release");
             this.getPArea().handleMouseUp(eventLocation, this.getActiveBlock());
             this.setActiveBlock(null);
@@ -166,6 +215,13 @@ public class ModelController{
         
     }
 
+
+    /**
+     * handle block moving, relocate an active block if there is one
+     * 
+     * @param eventWindowLocation location where the event happened
+     * @author Bert
+     */
     public void move(Location eventLocation){
         if(this.getActiveBlock() != null){
             if((int) 2 * MyCanvasWindow.WIDTH / 3 - this.getActiveBlock().getWidth() > eventLocation.getX()){
@@ -175,8 +231,8 @@ public class ModelController{
         
     }
 
-
     /**
+     * DEPRECATED
      * handle mouse events in the palette
      * 
      * @param id id of the event: - 500 = MOUSE_CLICKED: Press + release (comes after released + pressed), only comes if no dragging happended
@@ -221,6 +277,7 @@ public class ModelController{
     }
 
     /**
+     * DEPRECATED
      * handle mouse events in the program area
      * 
      * @param id id of the event: - 500 = MOUSE_CLICKED: Press + release (comes after released + pressed), only comes if no dragging happended

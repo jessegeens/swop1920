@@ -138,24 +138,40 @@ public abstract class ModelBlock extends ModelElement{
 
     /**
      * TODO move to LocationController
+     * 
+     * TODO2 this method causes a bug (it might be constantly calling itself)
      * Updates the position of the block according to their left and top connections to other blocks
      * The update goes from top to bottom and from left to right
      * @author Oberon Swings
+     * 
+     * 
      */
     public void updatePos(){
+        
         if (this.hasTopSocket() && this.getTopSocket() != null){
+            System.out.println("topsocket");
             this.setTopSocketPos(this.getTopSocket().getBottomPlugPos());
         }
-        if (this.hasBottomPlug() && this.getBottomPlug() != null){
+        else if (this.hasBottomPlug() && this.getBottomPlug() != null){
+            System.out.println("bottomplug");
             this.getBottomPlug().updatePos();
         }
-        if (this.hasLeftPlug() && this.getLeftPlug() != null){
+        else if (this.hasLeftPlug() && this.getLeftPlug() != null){
+            System.out.println("leftplug");
             this.setLeftPlugPos(this.getLeftPlug().getRightSocketPos());
         }
-        if (this.hasRightSocket() && this.getRightSocket() != null){
+        else if (this.hasRightSocket() && this.getRightSocket() != null){
+            System.out.println("rightsocket");
             this.getRightSocket().updatePos();
         }
         if (this instanceof ModelWhileIfBlock) ((ModelWhileIfBlock) this).updateCavityBlocksLocations();
+    }
+
+    public void setTopSocketPos(Location pos) {
+        super.setPos(pos.add(-this.getWidth()/2, -UIBlock.PLUGSIZE/2));
+    }
+    public void setLeftPlugPos(Location pos) {
+        super.setPos(pos.add(UIBlock.PLUGSIZE/2, -this.getHeight()/2));
     }
 
     /**
@@ -236,10 +252,5 @@ public abstract class ModelBlock extends ModelElement{
         return super.getPos().add(this.getWidth() - UIBlock.PLUGSIZE/2, + this.getHeight() / 2);
     }
 
-    public void setTopSocketPos(Location pos) {
-        super.setPos(pos.add(-this.getWidth()/2, -UIBlock.PLUGSIZE/2));
-    }
-    public void setLeftPlugPos(Location pos) {
-        super.setPos(pos.add(UIBlock.PLUGSIZE/2, -this.getHeight()/2));
-    }
+    
 }

@@ -12,13 +12,13 @@ import model.blocks.*;
 public class ModelProgramArea extends ModelWindow{
 
     private ArrayList<ModelBlock> blocks;
-    private ConnectionController CC;
+    private ConnectionHandler CC;
 
     // Constructor
     public ModelProgramArea(int width, int height){
         super(width, height);
         this.setBlocks(new ArrayList<ModelBlock>());
-        CC = new ConnectionController();
+        CC = new ConnectionHandler();
     }
 
     /**

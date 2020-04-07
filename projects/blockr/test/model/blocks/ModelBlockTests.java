@@ -1,6 +1,6 @@
 package model.blocks;
 
-import model.ConnectionController;
+import model.ConnectionHandler;
 import org.junit.Test;
 
 import utilities.*;
@@ -11,7 +11,7 @@ public class ModelBlockTests {
 
     @Test
     public void isInCavityTrue(){
-        ConnectionController CC = new ConnectionController();
+        ConnectionHandler CC = new ConnectionHandler();
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(400,400), BlockType.MOVEFORWARD);
         ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(400, 550), BlockType.TURNLEFT);
@@ -24,7 +24,7 @@ public class ModelBlockTests {
 
     @Test
     public void isInCavityFalse(){
-        ConnectionController CC = new ConnectionController();
+        ConnectionHandler CC = new ConnectionHandler();
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(400,400), BlockType.MOVEFORWARD);
         ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(400, 550), BlockType.TURNLEFT);
@@ -37,7 +37,7 @@ public class ModelBlockTests {
 
     @Test
     public void getSurroundingIfWhileBlock(){
-        ConnectionController CC = new ConnectionController();
+        ConnectionHandler CC = new ConnectionHandler();
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(400,400), BlockType.MOVEFORWARD);
         ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(400, 550), BlockType.TURNLEFT);

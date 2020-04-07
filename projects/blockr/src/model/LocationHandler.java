@@ -124,7 +124,7 @@ public class LocationHandler {
     }
 
 
-
+    //TODO remove if not used by 13th of April
     public ConnectionPoint findClosestConnectionPoint(ModelBlock closest, ModelBlock active){
         int d = UIBlock.STD_WIDTH;
         int dTop = 0, dBottom = 0, dRight = 0, dLeft = 0, dCPlug = 0, dCSocket = 0;

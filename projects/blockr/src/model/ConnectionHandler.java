@@ -3,10 +3,10 @@ package model;
 import model.blocks.*;
 import utilities.ConnectionPoint;
 
-public class ConnectionController {
+public class ConnectionHandler {
 
 
-    public ConnectionController() {
+    public ConnectionHandler() {
     }
 
     /**

@@ -28,15 +28,15 @@ public class UIController {
      * @author Oberon Swings
      */
     public void render(Graphics g, ProgramState state, ArrayList<BlockState> blocks){
-        Location gridLocation = new Location(wWidth*2/3, 0);
+        ProgramLocation gridLocation = new ProgramLocation(wWidth*2/3, 0);
         UIBlock uiBlock = new UIBlock();
         UIGrid uiGrid = new UIGrid();
+        uiGrid.render(g, wWidth / 3, wHeight, gridLocation, state);
         System.out.println("Rendering UI, blocks and grid");
         this.renderUI(g);
         for (BlockState block : blocks){
             uiBlock.render(g, block);
         }
-        uiGrid.render(g, wWidth, wHeight, gridLocation, state);
     }
 
     /**

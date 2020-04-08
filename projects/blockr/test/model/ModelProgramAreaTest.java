@@ -102,6 +102,26 @@ public class ModelProgramAreaTest {
     }
 
     @Test
+    public void handleMouseUpWhileWithCavity(){
+        ModelProgramArea area = new ModelProgramArea();
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(90,20), BlockType.MOVEFORWARD);
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(113, 143), BlockType.TURNLEFT);
+        ModelWallInFrontBlock wifBlock = new ModelWallInFrontBlock(new Location(180, 100), BlockType.WALLINFRONT);
+        area.addPABlock(whileBlock);
+        area.addPABlock(leftBlock);
+        area.addPABlock(wifBlock);
+        whileBlock.setRightSocket(wifBlock);
+        wifBlock.setLeftPlug(whileBlock);
+        whileBlock.setCavityPlug(leftBlock);
+        leftBlock.setTopSocket(whileBlock);
+        leftBlock.setBottomPlug(whileBlock);
+        whileBlock.setCavitySocket(leftBlock);
+        area.handleMouseUp(new Location(90,20),forwardBlock);
+        assertEquals(new Location(90, 100), whileBlock.getPos());
+    }
+
+    @Test
     public void getFirstBlock(){
         ModelProgramArea area = new ModelProgramArea();
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);

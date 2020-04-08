@@ -10,41 +10,23 @@ import utilities.*;
 public class ModelPaletteTest {
 
     @Test
-    public void blockToProgramWindow() {
+    public void resetBlocks() {
         ModelPalette palette = new ModelPalette(1000,1000);
-        palette.setTurnLeftBlock(null);
-        ModelBlock blk = new ModelMoveBlock(new Location(100,100), BlockType.TURNLEFT);
-        palette.blockToProgramArea(blk,false);
+        palette.resetBlocks();
         assertEquals(7, palette.getPaletteBlocks().size());
     }
 
     @Test
-    public void blockToProgramWindowLimit() {
+    public void removeBlocks(){
         ModelPalette palette = new ModelPalette(1000,1000);
-        palette.setTurnLeftBlock(null);
-        ModelBlock blk = new ModelMoveBlock(new Location(100,100), BlockType.TURNLEFT);
-        palette.blockToProgramArea(blk,true);
-        assertEquals(0, palette.getPaletteBlocks().size());
-    }
-
-    @Test
-    public void resetBlocks() {
-        ModelPalette palette = new ModelPalette(1000,1000);
-        palette.setTurnLeftBlock(null);
-        palette.resetBlocks();
-        assertFalse(palette.getTurnLeftBlock() == null);
-    }
-
-    @Test
-    public void handleMouseDownLeft() {
-        ModelPalette palette = new ModelPalette(1000,1000);
-        assertEquals(palette.getTurnLeftBlock(), palette.handleMouseDown(new Location(60,60), false));
+        palette.removeBlocks();
+        assertTrue(palette.getPaletteBlocks().isEmpty());
     }
 
     @Test
     public void handleMouseDownIf() {
         ModelPalette palette = new ModelPalette(1000,1000);
-        assertEquals(palette.getIfBlock(), palette.handleMouseDown(new Location(60,540), false));
+        assertEquals(BlockType.IF, palette.handleMouseDown(new Location(60,540)).getBlockType());
     }
 
     @Test

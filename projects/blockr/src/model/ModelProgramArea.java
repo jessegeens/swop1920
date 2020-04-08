@@ -11,6 +11,7 @@ import model.blocks.*;
  */
 public class ModelProgramArea extends ModelWindow{
 
+    private final int MAX_BLOCKS = 10;
     private ArrayList<ModelBlock> blocks;
     private ConnectionHandler CH;
     private LocationHandler LH;
@@ -46,7 +47,7 @@ public class ModelProgramArea extends ModelWindow{
      */
     public void removePABlock(ModelBlock toBeRemoved){
         CH.disconnect(toBeRemoved);
-        this.getPABlocks().remove(toBeRemoved);
+        blocks.remove(toBeRemoved);
         if(toBeRemoved instanceof ModelWhileIfBlock){
             for (ModelBlock block : ((ModelWhileIfBlock) toBeRemoved).getCavityBlocks()){
                 blocks.remove(block);
@@ -76,8 +77,8 @@ public class ModelProgramArea extends ModelWindow{
      * @return block to be returned 
      */
     public ModelBlock handleMouseDown(Location eventWindowLocation){
-        for(int i = this.getPABlocks().size() - 1; i >= 0; i--){
-            if(this.getPABlocks().get(i).inBoundsOfElement(eventWindowLocation)){
+        for(int i = blocks.size() - 1; i >= 0; i--){
+            if(blocks.get(i).inBoundsOfElement(eventWindowLocation)){
                 ModelBlock toBeReturned = blocks.get(i);
                 removePABlock(toBeReturned);
                 return toBeReturned;
@@ -93,6 +94,7 @@ public class ModelProgramArea extends ModelWindow{
      */
     public void handleMouseUp(Location eveWindowLocation, ModelBlock activeB){
         this.addPABlock(activeB);
+        LH.setLocationBlock(activeB, eveWindowLocation);
         ModelBlock closest = LH.findClosestBlock(activeB, blocks);
         if (closest != null){
             CH.connect(closest, activeB);
@@ -101,12 +103,20 @@ public class ModelProgramArea extends ModelWindow{
         }
     }
 
+    public void dragBlock(ModelBlock block, Location location){
+        LH.setLocationBlock(block, location);
+    }
+
     public boolean validExecutionState(){
         return CH.allBlocksConnected(blocks);
     }
 
-    public ArrayList<ModelBlock> getFirstBlock(){
-        return CH.getStartBlocks(blocks);
+    public ModelBlock getFirstBlock(){
+        return CH.getStartBlocks(blocks).get(0);
+    }
+
+    public boolean maxReached(){
+        return (blocks.size() >= MAX_BLOCKS);
     }
    
 }

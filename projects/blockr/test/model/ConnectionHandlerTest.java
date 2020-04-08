@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import utilities.*;
 
+import java.util.ArrayList;
+
 public class ConnectionHandlerTest {
 
     @Test
@@ -377,5 +379,132 @@ public class ConnectionHandlerTest {
         CC.connectRightLeft(wifBlock, whileBlock);
         boolean bool = CC.isFullyConnected(whileBlock);
         assertTrue(bool);
+    }
+
+    @Test
+    public void allBlocksConnectedTrue(){
+        ConnectionHandler CC = new ConnectionHandler();
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(113,143), BlockType.MOVEFORWARD);
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(113, 223), BlockType.TURNLEFT);
+        ModelWallInFrontBlock wifBlock = new ModelWallInFrontBlock(new Location(113, 223), BlockType.WALLINFRONT);
+        CC.connectTopBottom(forwardBlock, whileBlock);
+        CC.connectTopBottom(whileBlock, leftBlock);
+        CC.connectRightLeft(wifBlock, whileBlock);
+        ArrayList<ModelBlock> blocks = new ArrayList<>();
+        blocks.add(whileBlock);
+        blocks.add(forwardBlock);
+        blocks.add(leftBlock);
+        blocks.add(wifBlock);
+        boolean bool = CC.allBlocksConnected(blocks);
+        assertTrue(bool);
+    }
+
+    @Test
+    public void allBlocksConnectedFalse(){
+        ConnectionHandler CC = new ConnectionHandler();
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(113,143), BlockType.MOVEFORWARD);
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(113, 223), BlockType.TURNLEFT);
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new Location(200,200), BlockType.TURNRIGHT);
+        ModelWallInFrontBlock wifBlock = new ModelWallInFrontBlock(new Location(113, 223), BlockType.WALLINFRONT);
+        CC.connectTopBottom(forwardBlock, whileBlock);
+        CC.connectTopBottom(whileBlock, leftBlock);
+        CC.connectRightLeft(wifBlock, whileBlock);
+        ArrayList<ModelBlock> blocks = new ArrayList<>();
+        blocks.add(whileBlock);
+        blocks.add(forwardBlock);
+        blocks.add(leftBlock);
+        blocks.add(wifBlock);
+        blocks.add(rightBlock);
+        boolean bool = CC.allBlocksConnected(blocks);
+        assertFalse(bool);
+    }
+
+    @Test
+    public void startBlocks(){
+        ConnectionHandler CC = new ConnectionHandler();
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(113,143), BlockType.MOVEFORWARD);
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(113, 223), BlockType.TURNLEFT);
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new Location(200,200), BlockType.TURNRIGHT);
+        ModelWallInFrontBlock wifBlock = new ModelWallInFrontBlock(new Location(113, 223), BlockType.WALLINFRONT);
+        CC.connectTopBottom(forwardBlock, whileBlock);
+        CC.connectTopBottom(whileBlock, leftBlock);
+        CC.connectRightLeft(wifBlock, whileBlock);
+        ArrayList<ModelBlock> blocks = new ArrayList<>();
+        blocks.add(whileBlock);
+        blocks.add(forwardBlock);
+        blocks.add(leftBlock);
+        blocks.add(wifBlock);
+        blocks.add(rightBlock);
+        ArrayList<ModelBlock> startBlocks = CC.getStartBlocks(blocks);
+        boolean bool = false;
+        if (startBlocks.contains(rightBlock) && startBlocks.contains(forwardBlock)) bool = true;
+        assertTrue(bool);
+    }
+
+    @Test
+    public void finishBlocks(){
+        ConnectionHandler CC = new ConnectionHandler();
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(113,143), BlockType.MOVEFORWARD);
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(113, 223), BlockType.TURNLEFT);
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new Location(200,200), BlockType.TURNRIGHT);
+        ModelWallInFrontBlock wifBlock = new ModelWallInFrontBlock(new Location(113, 223), BlockType.WALLINFRONT);
+        CC.connectTopBottom(forwardBlock, whileBlock);
+        CC.connectTopBottom(whileBlock, leftBlock);
+        CC.connectRightLeft(wifBlock, whileBlock);
+        ArrayList<ModelBlock> blocks = new ArrayList<>();
+        blocks.add(whileBlock);
+        blocks.add(forwardBlock);
+        blocks.add(leftBlock);
+        blocks.add(wifBlock);
+        blocks.add(rightBlock);
+        ArrayList<ModelBlock> finishBlocks = CC.getFinishBlocks(blocks);
+        boolean bool = false;
+        if (finishBlocks.contains(rightBlock) && finishBlocks.contains(leftBlock)) bool = true;
+        assertTrue(bool);
+    }
+
+    @Test
+    public void getConnectedBlocks(){
+        ConnectionHandler CC = new ConnectionHandler();
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(113,143), BlockType.MOVEFORWARD);
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(113, 223), BlockType.TURNLEFT);
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new Location(200,200), BlockType.TURNRIGHT);
+        ModelWallInFrontBlock wifBlock = new ModelWallInFrontBlock(new Location(113, 223), BlockType.WALLINFRONT);
+        CC.connectTopBottom(forwardBlock, whileBlock);
+        CC.connectTopBottom(whileBlock, leftBlock);
+        CC.connectRightLeft(wifBlock, whileBlock);
+        ArrayList<ModelBlock> blocks = new ArrayList<>();
+        blocks.add(whileBlock);
+        blocks.add(forwardBlock);
+        blocks.add(leftBlock);
+        blocks.add(wifBlock);
+        blocks.add(rightBlock);
+        ArrayList<ModelBlock> connectedBlocks = CC.getConnectedBlocks(forwardBlock);
+        boolean bool = false;
+        if (connectedBlocks.contains(whileBlock) && connectedBlocks.contains(leftBlock) && connectedBlocks.contains(forwardBlock) && connectedBlocks.contains(wifBlock)) bool = true;
+        assertTrue(bool);
+    }
+
+    @Test
+    public void updateConnections(){
+        ConnectionHandler CC = new ConnectionHandler();
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(100,180), BlockType.WHILE);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(100,100), BlockType.MOVEFORWARD);
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(113, 223), BlockType.TURNLEFT);
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new Location(100,340), BlockType.TURNRIGHT);
+        ModelWallInFrontBlock wifBlock = new ModelWallInFrontBlock(new Location(180, 180), BlockType.WALLINFRONT);
+        ArrayList<ModelBlock> blocks = new ArrayList<>();
+        blocks.add(whileBlock);
+        blocks.add(forwardBlock);
+        blocks.add(leftBlock);
+        blocks.add(wifBlock);
+        blocks.add(rightBlock);
+        CC.updateConnections(blocks);
+        assertTrue(CC.allBlocksConnected(blocks));
     }
 }

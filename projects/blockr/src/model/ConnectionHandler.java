@@ -308,17 +308,17 @@ public class ConnectionHandler {
         for (ModelBlock blk : blocks){
             for (ModelBlock blk1 : blocks){
                 if (!(blk.equals(blk1))){
-                    if (blk.hasRightSocket() && blk1.hasLeftPlug() && blk.getRightSocketPos().equals(blk1.getLeftPlugPos())){
-                        connect(blk,blk1);
+                    if (blk.compatibleLeftRight(blk1) && blk.distanceLeftRight(blk1) == 0){
+                        connectRightLeft(blk1,blk);
                     }
-                    if (blk.hasBottomPlug() && blk1.hasTopSocket() && blk.getBottomPlugPos().equals(blk1.getTopSocketPos())){
-                        connect(blk,blk1);
+                    if (blk.compatibleTopBottom(blk1) && blk.distanceTopBottom(blk1) == 0){
+                        connectTopBottom(blk,blk1);
                     }
-                    if (blk instanceof ModelWhileIfBlock && ((blk1.hasTopSocket() && ((ModelWhileIfBlock) blk).getCavityPlugPos().equals(blk1.getTopSocketPos())))){
-                        connect(blk,blk1);
+                    if (blk instanceof ModelWhileIfBlock && blk1.hasTopSocket() && ((ModelWhileIfBlock) blk).distanceCavityPlug(blk1) == 0){
+                        connectCavityPlug((ModelWhileIfBlock) blk,blk1);
                     }
-                    if (blk instanceof ModelWhileIfBlock && ((blk1.hasBottomPlug() && ((ModelWhileIfBlock) blk).getCavitySocketPos().equals(blk1.getBottomPlugPos())))){
-                        connect(blk, blk1);
+                    if (blk instanceof ModelWhileIfBlock && blk1.hasBottomPlug() && ((ModelWhileIfBlock) blk).distanceCavitySocket(blk1) == 0){
+                        connectCavitySocket((ModelWhileIfBlock) blk, blk1);
                     }
                 }
             }

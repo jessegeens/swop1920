@@ -47,7 +47,7 @@ public class GlobalController {
      * @author Bert
      */
     public void handleMouseEvent(int id, int x, int y, int clickCount){
-        Location eventWindowLocation = new ProgramLocation(x,y);
+        ProgramLocation eventWindowLocation = new ProgramLocation(x,y);
 
         switch(id){
             case 501: //MOUSE_PRESSED

@@ -59,7 +59,7 @@ public class ModelController{
                         System.out.println("executing on keypress, is already running");
                         state = this.getProgramRunner().execute(state);
                     } else {
-                        this.getProgramRunner().initialise(PArea.getFirstBlock().get(0));
+                        this.getProgramRunner().initialise(PArea.getFirstBlock());
                     }
                 } 
                 break;

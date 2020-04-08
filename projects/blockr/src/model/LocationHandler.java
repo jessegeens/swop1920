@@ -38,21 +38,19 @@ public class LocationHandler {
      * @author Oberon Swings
      */
     public void updateLocationBlock(ModelBlock block){
-        if (block instanceof ModelWhileIfBlock) updateCavityBlocksLocations((ModelWhileIfBlock) block);
-        else{
-            if (block.hasTopSocket() && block.getTopSocket() != null){
-                setTopSocketLocation(block, block.getTopSocket());
-            }
-            if (block.hasBottomPlug() && block.getBottomPlug() != null){
-                updateLocationBlock(block.getBottomPlug());
-            }
-            if (block.hasLeftPlug() && block.getLeftPlug() != null){
-                setLeftPlugLocation(block, block.getLeftPlug());
-            }
-            if (block.hasRightSocket() && block.getRightSocket() != null){
-                updateLocationBlock(block.getRightSocket());
-            }
+        if (block.hasTopSocket() && block.getTopSocket() != null){
+            setTopSocketLocation(block, block.getTopSocket());
         }
+        if (block.hasBottomPlug() && block.getBottomPlug() != null){
+            updateLocationBlock(block.getBottomPlug());
+        }
+        if (block.hasLeftPlug() && block.getLeftPlug() != null){
+            setLeftPlugLocation(block, block.getLeftPlug());
+        }
+        if (block.hasRightSocket() && block.getRightSocket() != null){
+            updateLocationBlock(block.getRightSocket());
+        }
+        if (block instanceof ModelWhileIfBlock) updateCavityBlocksLocations((ModelWhileIfBlock) block);
     }
 
     /**

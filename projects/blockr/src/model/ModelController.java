@@ -27,8 +27,8 @@ public class ModelController{
     // Constructor
     public ModelController(){
         //palette left, program middle, grid right
-        palette = new ModelPalette(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT);
-        PArea = new ModelProgramArea(MyCanvasWindow.WIDTH/3,MyCanvasWindow.HEIGHT);
+        palette = new ModelPalette();
+        PArea = new ModelProgramArea();
         state = ProgramState.getInitialState();
         programRunner = new ProgramRunner();
     }

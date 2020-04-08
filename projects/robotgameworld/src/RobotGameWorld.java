@@ -1,20 +1,32 @@
 import java.awt.*;
-import java.util.ArrayList;
 
+/**
+ * Class that implements the GameWorld API
+ * Acts as a Facade to the Blockr application for the current world instance
+ *
+ * @author Jesse Geens
+ */
 public class RobotGameWorld implements GameWorld {
 
     private ActionExecutor actionExecutor = ActionExecutor.getInstance();
     private UIController uiController = new UIController();
 
-    public static void main(String[] args) {
-
-    }
-
+    /**
+     *
+     * @author Jesse Geens
+     * @param actionType
+     * @return
+     */
     @Override
     public ActionResult perform(ActionType actionType) {
         return actionExecutor.execute((Action) actionType);
     }
 
+    /**
+     * @author Jesse Geens
+     * @param predicateType
+     * @return
+     */
     @Override
     public Boolean evaluate(PredicateType predicateType) {
         if (predicateType != null){
@@ -29,19 +41,34 @@ public class RobotGameWorld implements GameWorld {
         return false;
     }
 
+    /**
+     * @author Jesse Geens
+     * @return {GameWorldState} the current GameWorldState
+     */
     @Override
     public GameWorldState getSnapshot() {
         return actionExecutor.getState();
     }
 
+    /**
+     * Set the gameWorld to a given gameWorldState
+     *
+     * @author Jesse Geens
+     * @param gameWorldState state to set
+     */
     @Override
     public void restore(GameWorldState gameWorldState) {
         actionExecutor.setState((RobotGameWorldState) gameWorldState);
     }
 
+    /**
+     * @author Jesse Geens
+     * @param graphics Graphics object to draw on
+     * @param leftTop top-left corner position (in px) of the grid on the CanvasWindow
+     */
     @Override
-    public void render(Graphics graphics, GameWorldState gameWorldState, Location leftTop, int width, int height) {
-        uiController.render(graphics, (RobotGameWorldState) gameWorldState, (GridLocation) leftTop, width, height);
+    public void render(Graphics graphics, Location leftTop) {
+        uiController.render(graphics, ActionExecutor.getInstance().getState(), (GridLocation) leftTop);
     }
 
 }

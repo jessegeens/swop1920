@@ -19,6 +19,6 @@ public interface GameWorld {
 
     void restore(GameWorldState gameWorldState);
 
-    void render(Graphics g, GameWorldState gameWorldState, Location leftTop, int width, int height);
+    void render(Graphics g, Location leftTop);
 
 }

@@ -1,5 +1,10 @@
 import java.util.ArrayList;
 
+/**
+ * State of the Robot game
+ * Immutable class
+ * @author Jesse Geens
+ */
 public final class RobotGameWorldState implements GameWorldState {
 
     private final Direction robotDirection;

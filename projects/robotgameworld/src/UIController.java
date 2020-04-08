@@ -3,14 +3,21 @@ import java.util.ArrayList;
 
 public class UIController {
 
+    //Width and height of a cell in px
     private final int CELL_SIZE = 50;
     
     // Constructor
     public UIController(){}
 
-
-    public void render(Graphics g, RobotGameWorldState state, GridLocation leftTop, int width, int height){
-        renderGrid(g, width, height, leftTop);
+    /**
+     *
+     * @param g Graphics object to draw on
+     * @param state {RobotGameWorldState} state to draw
+     * @param leftTop {GridLocation} Top-left location of the grid on the CanvasWindow
+     * @author Jesse Geens
+     */
+    public void render(Graphics g, RobotGameWorldState state, GridLocation leftTop){
+        renderGrid(g, ActionExecutor.getInstance().getGridWidth(), ActionExecutor.getInstance().getGridHeight(), leftTop);
         renderWalls(g, ActionExecutor.getInstance().getWalls(), leftTop);
         renderGoalCell(g, ActionExecutor.getInstance().getGoalCell(), leftTop);
         renderRobot(g, state.getRobotLocation(), state.getRobotDirection(), leftTop);

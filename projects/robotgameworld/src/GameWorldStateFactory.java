@@ -13,26 +13,32 @@ public class GameWorldStateFactory {
     private static final Direction ROBOT_START_DIRECTION = Direction.RIGHT;
 
 
-
+    //Constructor
     private GameWorldStateFactory(){}
 
+    /**
+     * Get the singleton instance
+     *
+     * @author Jesse Geens
+     * @return GameWorldStateFactory instance
+     */
     public static GameWorldStateFactory getInstance(){
         if(instance == null)
             instance = new GameWorldStateFactory();
         return instance;
     }
 
+
     public RobotGameWorldState getInitialState() {
         return new RobotGameWorldState(ROBOT_START_DIRECTION, ROBOT_START_LOCATION);
     }
 
     /**
-     * TODO implement
      *
-     * @param old
-     * @param action
+     * @param old previous gameWorldState
+     * @param action action to execute for generating the new state
      * @author Jesse Geens
-     * @return
+     * @return {GameWorldState} gameWorldState after the action has been executed
      */
     public RobotGameWorldState createNew(RobotGameWorldState old, Action action){
         switch (action){
@@ -47,11 +53,11 @@ public class GameWorldStateFactory {
     }
 
     /**
-     * Get a new GameWorldState in which the robot has moved
+     * Get the new location of the robot when it moves
      *
      * @author Jesse Geens
      * @param state {robotGameWorldState}
-     * @return
+     * @return {GridLocation} new location of the robot
      */
     private GridLocation move(RobotGameWorldState state){
         switch(state.getRobotDirection()){

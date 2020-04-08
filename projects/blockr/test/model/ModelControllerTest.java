@@ -5,9 +5,23 @@ import static org.junit.Assert.*;
 import model.blocks.*;
 import org.junit.Test;
 
+import ui.BlockState;
 import utilities.*;
 
+import java.util.ArrayList;
+
 public class ModelControllerTest {
+
+    @Test
+    public void getBlockStates(){
+        ModelController MC = new ModelController();
+        MC.select(new Location (40, 40));
+        MC.release(new Location (420, 420));
+        MC.select(new Location(40, 200));
+        MC.release(new Location(420, 500));
+    }
+
+
 
     /*
     @Test
@@ -94,8 +108,6 @@ public class ModelControllerTest {
         controller.handleProgramAreaMouseEvent(502, new Location(420,420), 1);
         controller.handleProgramAreaMouseEvent(501, new Location(440,440), 1);
         assertEquals(wallInFrontBlock, controller.getActiveBlock());
-    }
-
-     */
+    }*/
 
 }

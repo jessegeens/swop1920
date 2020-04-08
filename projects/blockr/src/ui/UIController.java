@@ -14,10 +14,15 @@ public class UIController {
     private final int wWidth;  //window width
     private final int wHeight; //window height
 
+    UIBlock uiBlock;
+    UIGrid uiGrid;
+
     // Constructor
     public UIController(int windowWidth, int windowHeight){
         this.wWidth = windowWidth;
         this.wHeight = windowHeight;
+        uiBlock = new UIBlock();
+        uiGrid = new UIGrid();
     }
 
     /**
@@ -29,8 +34,6 @@ public class UIController {
      */
     public void render(Graphics g, ProgramState state, ArrayList<BlockState> blocks){
         Location gridLocation = new Location(wWidth*2/3, 0);
-        UIBlock uiBlock = new UIBlock();
-        UIGrid uiGrid = new UIGrid();
         System.out.println("Rendering UI, blocks and grid");
         this.renderUI(g);
         for (BlockState block : blocks){

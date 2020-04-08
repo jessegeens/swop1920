@@ -5,12 +5,30 @@ import model.blocks.*;
 import org.junit.Test;
 import utilities.*;
 
+import javax.swing.*;
+
 import static org.junit.Assert.*;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class GlobalControllerTests {
-/*
+
+    @Test
+    public void HandleMouseEventDragPerformance(){
+        GlobalController GC = new GlobalController();
+        GC.handleMouseEvent(501, 30, 30, 1);
+        GC.handleMouseEvent(506, 420, 420, 1);
+        GC.handleMouseEvent(502, 420, 420, 1);
+        assertTrue(true);
+    }
+
+
+
+
+
+    //TODO the person who wrote these following tests, could you explain what they are supposed to test? test1, test2 are not really explanatory.
+    /*
     @Test
     public void globalControllerTest() {
         GlobalController gC = new GlobalController();
@@ -109,7 +127,6 @@ public class GlobalControllerTests {
         gC.getModelController().getPArea().setBlocks(mBlocks);
         //gC.execute();
         //assertEquals(1, gC.getModelController().getGrid().getRobotPos().getX());
-    }
+    }*/
 
- */
 }

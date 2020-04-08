@@ -14,10 +14,15 @@ public class UIController {
     private final int wWidth;  //window width
     private final int wHeight; //window height
 
+    UIBlock uiBlock;
+    UIGrid uiGrid;
+
     // Constructor
     public UIController(int windowWidth, int windowHeight){
         this.wWidth = windowWidth;
         this.wHeight = windowHeight;
+        uiBlock = new UIBlock();
+        uiGrid = new UIGrid();
     }
 
     /**

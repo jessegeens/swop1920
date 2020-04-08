@@ -1,5 +1,6 @@
 package ui;
 
+import gameworldapi.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class UIGrid {
      * @param state the programState that needs to be rendered
      * @author Oberon Swings
      */
-    public void render(Graphics g, int width, int height, Location gridLocation, ProgramState state){
+    public void render(Graphics g, int width, int height, ProgramLocation gridLocation, ProgramState state){
         renderGrid(g, width, height, gridLocation, state.getCellSize());
         renderWalls(g, state.getWalls(), gridLocation, state.getCellSize());
         renderGoalCell(g, state.getGoalCell(), gridLocation, state.getCellSize());
@@ -39,7 +40,7 @@ public class UIGrid {
      * @param cellSize the size of the grid cells
      * @author Oberon Swings
      */
-    public void renderGrid(Graphics g, int width, int height, Location gridLocation, int cellSize){
+    public void renderGrid(Graphics g, int width, int height, ProgramLocation gridLocation, int cellSize){
         g.setColor(Color.GRAY);
         for(int x = 0; x < width; x++){
             for(int y = 0; y < height; y++){
@@ -56,7 +57,7 @@ public class UIGrid {
      * @param cellSize the size of the grid cells
      * @author Oberon Swings
      */
-    public void renderWalls(Graphics g, ArrayList<Location> walls, Location gridLocation, int cellSize){
+    public void renderWalls(Graphics g, ArrayList<ProgramLocation> walls, ProgramLocation gridLocation, int cellSize){
         g.setColor(Color.BLACK);
         for(Location wall : walls){
             g.fillRect(gridLocation.getX() + wall.getX()*cellSize, gridLocation.getY() + wall.getY()*cellSize,cellSize, cellSize);
@@ -71,7 +72,7 @@ public class UIGrid {
      * @param cellSize the size of the grid cells
      * @author Oberon Swings
      */
-    public void renderGoalCell(Graphics g, Location goalCell, Location gridLocation, int cellSize){
+    public void renderGoalCell(Graphics g, ProgramLocation goalCell, ProgramLocation gridLocation, int cellSize){
         g.setColor(Color.YELLOW);
         g.fillRect(gridLocation.getX() + goalCell.getX()*cellSize, gridLocation.getY() + goalCell.getY()*cellSize,cellSize, cellSize);
     }
@@ -85,7 +86,7 @@ public class UIGrid {
      * @param cellSize the size of the grid cells
      * @author Oberon Swings
      */
-    public void renderRobot(Graphics g, Location robotLocation, Direction robotDirection, Location gridLocation, int cellSize){
+    public void renderRobot(Graphics g, ProgramLocation robotLocation, Direction robotDirection, ProgramLocation gridLocation, int cellSize){
         g.setColor(Color.RED);
         g.fillRect(gridLocation.getX() + robotLocation.getX()*cellSize, gridLocation.getY() + robotLocation.getY()*cellSize,cellSize, cellSize);
         System.out.println("RENDERING");

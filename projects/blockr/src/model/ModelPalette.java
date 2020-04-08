@@ -4,20 +4,20 @@ import java.util.ArrayList;
 
 import model.blocks.*;
 import utilities.BlockType;
-import utilities.Location;
+import utilities.ProgramLocation;
 
 /**
  * Class representing the palette. Blocks will be dragged from the palette int the program area.
  */
 class ModelPalette{
 
-    private final Location turnLeftWindowLocation = new Location(20, 20);
-    private final Location turnRightWindowLocation = new Location(180, 20);
-    private final Location forwardWindowLocation = new Location(20, 180);
-    private final Location notWindowLocation = new Location(180, 180);
-    private final Location wallInFrontWindowLocation = new Location(20, 340);
-    private final Location whileWindowLocation = new Location(180, 340);
-    private final Location ifWindowLocation = new Location(20, 500);
+    private final ProgramLocation turnLeftWindowLocation = new ProgramLocation(20, 20);
+    private final ProgramLocation turnRightWindowLocation = new ProgramLocation(180, 20);
+    private final ProgramLocation forwardWindowLocation = new ProgramLocation(20, 180);
+    private final ProgramLocation notWindowLocation = new ProgramLocation(180, 180);
+    private final ProgramLocation wallInFrontWindowLocation = new ProgramLocation(20, 340);
+    private final ProgramLocation whileWindowLocation = new ProgramLocation(180, 340);
+    private final ProgramLocation ifWindowLocation = new ProgramLocation(20, 500);
 
     private ModelMoveBlock turnLeftBlock;
     private ModelMoveBlock turnRightBlock;
@@ -76,7 +76,7 @@ class ModelPalette{
      * @param {Boolean} maxReached signifies whether the max number of blocks has been reached
      * @return the block to return when the mouse is held down
      */
-    protected ModelBlock handleMouseDown(Location eventWindowLocation){
+    protected ModelBlock handleMouseDown(ProgramLocation eventWindowLocation){
         ModelBlock selected = null;
         if(turnLeftBlock.inBoundsOfElement(eventWindowLocation)){
             selected = turnLeftBlock;

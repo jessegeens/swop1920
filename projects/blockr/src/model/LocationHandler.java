@@ -13,7 +13,7 @@ public class LocationHandler {
     }
 
 
-    public void setLocationBlock(ModelBlock block, Location location){
+    public void setLocationBlock(ModelBlock block, ProgramLocation location){
         block.setPos(location);
         if (block instanceof ModelWhileIfBlock){
             updateCavityBlocksLocations((ModelWhileIfBlock) block);
@@ -77,7 +77,7 @@ public class LocationHandler {
      * @author Oberon Swings
      */
     public void setTopSocketLocation(ModelBlock toBeMoved, ModelBlock reference){
-        Location referenceLocation;
+        ProgramLocation referenceLocation;
         if (toBeMoved.isInCavity() && reference instanceof ModelWhileIfBlock){
             referenceLocation = ((ModelWhileIfBlock) reference).getCavityPlugPos();
         }
@@ -92,7 +92,7 @@ public class LocationHandler {
      * @author Oberon Swings
      */
     public void setLeftPlugLocation(ModelBlock toBeMoved, ModelBlock reference){
-        Location referenceLocation = reference.getRightSocketPos();
+        ProgramLocation referenceLocation = reference.getRightSocketPos();
         toBeMoved.setPos(referenceLocation.add(UIBlock.PLUGSIZE/2, -UIBlock.STD_HEIGHT/2));
     }
 

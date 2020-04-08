@@ -1,24 +1,25 @@
 package model;
 
+import gameworldapi.*;
 import java.util.ArrayList;
 import utilities.*;
 
 public class ProgramState {
     private Direction robotDirection;
-    private Location robotLocation;
-    private ArrayList<Location> walls;
-    private Location goalCell;
+    private ProgramLocation robotLocation;
+    private ArrayList<ProgramLocation> walls;
+    private ProgramLocation goalCell;
     private int cellSize;
 
     //Parameters
     private static final int CELL_SIZE = 50;
-    private static final Location GOAL_CELL = new Location(5, 5);
-    private static final Location ROBOT_START_LOCATION = new Location(0, 0);
+    private static final ProgramLocation GOAL_CELL = new ProgramLocation(5, 5);
+    private static final ProgramLocation ROBOT_START_LOCATION = new ProgramLocation(0, 0);
     private static final Direction ROBOT_START_DIRECTION = Direction.RIGHT;
-    private static final ArrayList<Location> WALLS = new ArrayList<Location>();
+    private static final ArrayList<ProgramLocation> WALLS = new ArrayList<ProgramLocation>();
 
 
-    public ProgramState(Direction robotDirection, Location robotLocation, ArrayList<Location> walls, Location goalCell, int cellSize){
+    public ProgramState(Direction robotDirection, ProgramLocation robotLocation, ArrayList<ProgramLocation> walls, ProgramLocation goalCell, int cellSize){
         this.robotDirection = robotDirection;
         this.robotLocation = robotLocation;
         this.walls = walls;
@@ -35,7 +36,7 @@ public class ProgramState {
         return "[ProgramState: " + robotDirection.toString() + ", " + robotLocation.toString() + ", " + goalCell.toString() + "]";
     }
 
-    static ProgramState generateNew(ProgramState programState, Direction robotDirection, Location robotGridLocation){
+    static ProgramState generateNew(ProgramState programState, Direction robotDirection, ProgramLocation robotGridLocation){
         return new ProgramState(robotDirection, robotGridLocation, programState.getWalls(), programState.getGoalCell(), programState.getCellSize());
     }
 
@@ -51,7 +52,7 @@ public class ProgramState {
      * @author Bert
      */
     public boolean wallInFrontOfRobot(){
-        Location findOutIfWall = new Location(robotLocation.getX(), robotLocation.getY());
+        ProgramLocation findOutIfWall = new ProgramLocation(robotLocation.getX(), robotLocation.getY());
         switch (robotDirection.toString()){
             case "left": 
                 findOutIfWall.add(-1,0);
@@ -79,11 +80,11 @@ public class ProgramState {
 
 
 
-    public ArrayList<Location> getWalls(){
+    public ArrayList<ProgramLocation> getWalls(){
         return this.walls;
     }
 
-    public Location getGoalCell(){
+    public ProgramLocation getGoalCell(){
         return this.goalCell;
     }
 
@@ -91,7 +92,7 @@ public class ProgramState {
         return this.robotDirection;
     }
 
-    public Location getRobotLocation(){
+    public ProgramLocation getRobotLocation(){
         return this.robotLocation;
     }
 

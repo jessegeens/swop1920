@@ -16,7 +16,7 @@ public abstract class ModelBlock extends ModelElement{
     private boolean highlighted = false;
     
     // Constructor
-    public ModelBlock(Location windowLocation, BlockType type){
+    public ModelBlock(ProgramLocation windowLocation, BlockType type){
         super(windowLocation);
         this.type = type;
     }
@@ -38,7 +38,7 @@ public abstract class ModelBlock extends ModelElement{
      * {@inheritDoc}
      */
     @Override
-    public boolean inBoundsOfElement(Location coordinate){
+    public boolean inBoundsOfElement(ProgramLocation coordinate){
         if(this.getPos().getX() < coordinate.getX() && this.getPos().getX() + getWidth() > coordinate.getX() && this.getPos().getY() < coordinate.getY() && this.getPos().getY() + getWidth() > coordinate.getY() ){
             return true;
         }
@@ -181,16 +181,16 @@ public abstract class ModelBlock extends ModelElement{
     public void setLeftPlug(ModelBlock block){}
     public void setRightSocket(ModelBlock block){}
 
-    public Location getTopSocketPos() {
+    public ProgramLocation getTopSocketPos() {
         return super.getPos().add(UIBlock.STD_WIDTH / 2, + UIBlock.PLUGSIZE/2);
     }
-    public Location getBottomPlugPos() {
+    public ProgramLocation getBottomPlugPos() {
         return super.getPos().add(UIBlock.STD_WIDTH / 2, + this.getHeight() + UIBlock.PLUGSIZE/2);
     }
-    public Location getLeftPlugPos() {
+    public ProgramLocation getLeftPlugPos() {
         return super.getPos().add(- UIBlock.PLUGSIZE / 2, + UIBlock.STD_HEIGHT / 2);
     }
-    public Location getRightSocketPos() {
+    public ProgramLocation getRightSocketPos() {
         return super.getPos().add(this.getWidth() - UIBlock.PLUGSIZE/2, + UIBlock.STD_HEIGHT / 2);
     }
 

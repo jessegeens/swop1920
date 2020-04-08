@@ -1,6 +1,7 @@
 
 package main;
 
+import gameworldapi.*;
 import java.awt.Graphics;
 
 public class MyCanvasWindow extends CanvasWindow {
@@ -10,9 +11,9 @@ public class MyCanvasWindow extends CanvasWindow {
 
     private GlobalController globalController;
 
-    protected MyCanvasWindow(String title) {
+    protected MyCanvasWindow(String title, GameWorldType gameWorldType) {
         super(title);
-        globalController = new GlobalController();
+        globalController = new GlobalController(gameWorldType);
     }
 
     @Override

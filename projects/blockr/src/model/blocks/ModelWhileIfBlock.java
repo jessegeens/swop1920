@@ -17,7 +17,7 @@ public class ModelWhileIfBlock extends ModelBlock{
     private ModelBlock cavityPlug;
 
     // Constructor
-    public ModelWhileIfBlock(Location pos, BlockType type){
+    public ModelWhileIfBlock(ProgramLocation pos, BlockType type){
         super(pos,type);
 
         this.setTopSocket(null);
@@ -145,7 +145,7 @@ public class ModelWhileIfBlock extends ModelBlock{
      * @return the position of the cavity socket
      * @author Oberon Swings
      */
-    public Location getCavitySocketPos() {
+    public ProgramLocation getCavitySocketPos() {
         return this.getPos().add(2*UIBlock.STD_WIDTH/3, this.getHeight() - UIBlock.STD_HEIGHT/3);
     }
 
@@ -154,7 +154,7 @@ public class ModelWhileIfBlock extends ModelBlock{
      * @return the position of the cavity plug
      * @author Oberon Swings
      */
-    public Location getCavityPlugPos() {
+    public ProgramLocation getCavityPlugPos() {
         return this.getPos().add(2*UIBlock.STD_WIDTH/3, 2*UIBlock.STD_HEIGHT/3);
     }
 

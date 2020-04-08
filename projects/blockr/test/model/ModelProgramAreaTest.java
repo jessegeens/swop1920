@@ -11,7 +11,7 @@ public class ModelProgramAreaTest {
 
     @Test
     public void addPABlock(){
-        ModelProgramArea area = new ModelProgramArea(1000,1000);
+        ModelProgramArea area = new ModelProgramArea();
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(100,100), BlockType.MOVEFORWARD);
         ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(400, 550), BlockType.TURNLEFT);
         ModelMoveBlock rightBlock = new ModelMoveBlock(new Location(400, 700), BlockType.TURNRIGHT);
@@ -27,7 +27,7 @@ public class ModelProgramAreaTest {
 
     @Test
     public void removePABlock(){
-        ModelProgramArea area = new ModelProgramArea(1000,1000);
+        ModelProgramArea area = new ModelProgramArea();
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(400,400), BlockType.MOVEFORWARD);
         ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(400, 480), BlockType.TURNLEFT);
         ModelMoveBlock rightBlock = new ModelMoveBlock(new Location(400, 560), BlockType.TURNRIGHT);
@@ -44,7 +44,7 @@ public class ModelProgramAreaTest {
 
     @Test
     public void removeWhileBlockCavity(){
-        ModelProgramArea area = new ModelProgramArea(1000,1000);
+        ModelProgramArea area = new ModelProgramArea();
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(400,400), BlockType.WHILE);
         ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(413, 443), BlockType.TURNLEFT);
         ModelMoveBlock rightBlock = new ModelMoveBlock(new Location(413, 523), BlockType.TURNRIGHT);
@@ -63,7 +63,7 @@ public class ModelProgramAreaTest {
 
     @Test
     public void addWhileBlockCavity(){
-        ModelProgramArea area = new ModelProgramArea(1000,1000);
+        ModelProgramArea area = new ModelProgramArea();
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(400,400), BlockType.WHILE);
         ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(413, 443), BlockType.TURNLEFT);
         ModelMoveBlock rightBlock = new ModelMoveBlock(new Location(413, 523), BlockType.TURNRIGHT);
@@ -79,7 +79,7 @@ public class ModelProgramAreaTest {
 
     @Test
     public void handleMouseDown(){
-        ModelProgramArea area = new ModelProgramArea(1000,1000);
+        ModelProgramArea area = new ModelProgramArea();
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(100,100), BlockType.MOVEFORWARD);
         area.addPABlock(forwardBlock);
         ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(100, 100), BlockType.TURNLEFT);
@@ -89,7 +89,7 @@ public class ModelProgramAreaTest {
 
     @Test
     public void handleMouseUp(){
-        ModelProgramArea area = new ModelProgramArea(1000,1000);
+        ModelProgramArea area = new ModelProgramArea();
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(100,20), BlockType.MOVEFORWARD);
         ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(100, 180), BlockType.TURNLEFT);
@@ -103,7 +103,7 @@ public class ModelProgramAreaTest {
 
     @Test
     public void getFirstBlock(){
-        ModelProgramArea area = new ModelProgramArea(1000,1000);
+        ModelProgramArea area = new ModelProgramArea();
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(100,20), BlockType.MOVEFORWARD);
         ModelMoveBlock rightBlock = new ModelMoveBlock(new Location(113, 143), BlockType.TURNRIGHT);
@@ -129,7 +129,7 @@ public class ModelProgramAreaTest {
 
     @Test
     public void maxReached(){
-        ModelProgramArea area = new ModelProgramArea(1000,1000);
+        ModelProgramArea area = new ModelProgramArea();
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(100,20), BlockType.MOVEFORWARD);
         ModelMoveBlock rightBlock = new ModelMoveBlock(new Location(113, 143), BlockType.TURNRIGHT);
@@ -155,7 +155,7 @@ public class ModelProgramAreaTest {
 
     @Test
     public void dragBlock(){
-        ModelProgramArea area = new ModelProgramArea(1000,1000);
+        ModelProgramArea area = new ModelProgramArea();
         ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(100,20), BlockType.MOVEFORWARD);
         area.addPABlock(forwardBlock);
         area.dragBlock(forwardBlock, new Location(250, 300));

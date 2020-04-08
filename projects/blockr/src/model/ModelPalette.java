@@ -9,7 +9,7 @@ import utilities.Location;
 /**
  * Class representing the palette. Blocks will be dragged from the palette int the program area.
  */
-class ModelPalette extends ModelWindow{
+class ModelPalette{
 
     private final Location turnLeftWindowLocation = new Location(20, 20);
     private final Location turnRightWindowLocation = new Location(180, 20);
@@ -28,8 +28,7 @@ class ModelPalette extends ModelWindow{
     private ModelWhileIfBlock ifBlock;
 
     // Constructor
-    public ModelPalette(int width, int height){
-        super(width,height);
+    public ModelPalette(){
         turnLeftBlock = new ModelMoveBlock(turnLeftWindowLocation, BlockType.TURNLEFT);
         turnRightBlock = new ModelMoveBlock(turnRightWindowLocation, BlockType.TURNRIGHT);
         forwardBlock = new ModelMoveBlock(forwardWindowLocation, BlockType.MOVEFORWARD);

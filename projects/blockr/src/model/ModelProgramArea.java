@@ -9,7 +9,7 @@ import model.blocks.*;
 /**
  * Class representing the Program Window where the blocks will be set.
  */
-public class ModelProgramArea extends ModelWindow{
+public class ModelProgramArea{
 
     private final int MAX_BLOCKS = 10;
     private ArrayList<ModelBlock> blocks;
@@ -17,8 +17,7 @@ public class ModelProgramArea extends ModelWindow{
     private LocationHandler LH;
 
     // Constructor
-    public ModelProgramArea(int width, int height){
-        super(width, height);
+    public ModelProgramArea(){
         blocks = new ArrayList<ModelBlock>();
         CH = new ConnectionHandler();
         LH = new LocationHandler();

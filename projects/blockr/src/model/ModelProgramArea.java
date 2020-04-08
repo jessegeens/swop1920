@@ -116,8 +116,7 @@ public class ModelProgramArea extends ModelWindow{
     }
 
     public boolean maxReached(){
-        if (blocks.size() >= MAX_BLOCKS) return true;
-        else return false;
+        return (blocks.size() >= MAX_BLOCKS);
     }
    
 }

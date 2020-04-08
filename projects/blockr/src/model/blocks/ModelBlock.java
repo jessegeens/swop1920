@@ -182,16 +182,16 @@ public abstract class ModelBlock extends ModelElement{
     public void setRightSocket(ModelBlock block){}
 
     public Location getTopSocketPos() {
-        return super.getPos().add(this.getWidth() / 2, + UIBlock.PLUGSIZE/2);
+        return super.getPos().add(UIBlock.STD_WIDTH / 2, + UIBlock.PLUGSIZE/2);
     }
     public Location getBottomPlugPos() {
-        return super.getPos().add(this.getWidth() / 2, + this.getHeight() + UIBlock.PLUGSIZE/2);
+        return super.getPos().add(UIBlock.STD_WIDTH / 2, + this.getHeight() + UIBlock.PLUGSIZE/2);
     }
     public Location getLeftPlugPos() {
-        return super.getPos().add(- UIBlock.PLUGSIZE / 2, + this.getHeight() / 2);
+        return super.getPos().add(- UIBlock.PLUGSIZE / 2, + UIBlock.STD_HEIGHT / 2);
     }
     public Location getRightSocketPos() {
-        return super.getPos().add(this.getWidth() - UIBlock.PLUGSIZE/2, + this.getHeight() / 2);
+        return super.getPos().add(this.getWidth() - UIBlock.PLUGSIZE/2, + UIBlock.STD_HEIGHT / 2);
     }
 
 

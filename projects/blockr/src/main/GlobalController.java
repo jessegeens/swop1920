@@ -1,12 +1,10 @@
 package main;
 
-import java.util.ArrayList;
 import java.awt.*;
 
 import ui.*;
 import utilities.*;
 import model.*;
-import model.blocks.*;
 //import model.blocks.plugs.*;
 
 /**
@@ -57,7 +55,7 @@ public class GlobalController {
                 break;
             case 506: //MOUSE_DRAGGED
             System.out.println("MOUSE MOVED start");
-                this.modelController.move(eventWindowLocation);
+                this.modelController.drag(eventWindowLocation);
                 break;
             default:
                 break;

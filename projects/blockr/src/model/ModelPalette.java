@@ -40,52 +40,6 @@ class ModelPalette extends ModelWindow{
     }
 
     /**
-     * This method creates a new block and assigns the global variable of this specific blocktype to it.
-     * 
-     * TODO: limitreached is better of being a global var in modelpalette than a method parameter
-     *       or maybe have a static int called maxAmountOfElements somewhere?
-     * 
-     * @param {ModelBlock} blk the block to be added from the palette into the program window. 
-     * @param {Boolean} limitReached true than it won't be possible to place a block of some specific type into the program window.
-     */
-    public void blockToProgramArea(ModelBlock blk, Boolean limitReached){
-        if (limitReached){
-            turnLeftBlock = null;
-            turnRightBlock = null;
-            forwardBlock = null;
-            notBlock = null;
-            wallInFrontBlock = null;
-            whileBlock = null;
-            ifBlock = null;
-        }
-        else{
-            switch(blk.getBlockType()){
-                case IF:
-                    ifBlock = new ModelWhileIfBlock(ifWindowLocation, BlockType.IF);
-                    break;
-                case WHILE:
-                    whileBlock = new ModelWhileIfBlock(whileWindowLocation, BlockType.WHILE);
-                    break;
-                case MOVEFORWARD:
-                    forwardBlock = new ModelMoveBlock(forwardWindowLocation, BlockType.MOVEFORWARD);
-                    break;
-                case TURNLEFT:
-                    turnLeftBlock = new ModelMoveBlock(turnLeftWindowLocation, BlockType.TURNLEFT);
-                    break;
-                case TURNRIGHT:
-                    turnRightBlock = new ModelMoveBlock(turnRightWindowLocation, BlockType.TURNRIGHT);
-                    break;
-                case WALLINFRONT:
-                    wallInFrontBlock = new ModelWallInFrontBlock(wallInFrontWindowLocation, BlockType.WALLINFRONT);
-                    break;
-                case NOT:
-                    notBlock = new ModelNotBlock(notWindowLocation, BlockType.NOT);
-                    break;
-            }
-        }    
-    }
-
-    /**
      * Reset all the blocks after the total amount of blocks is lower than the maximum
      */
     public void resetBlocks(){
@@ -99,6 +53,20 @@ class ModelPalette extends ModelWindow{
     }
 
     /**
+     * removes all the blocks from the palette, when the maximum in the program area is reached for instance
+     * @author Oberon Swings
+     */
+    public void removeBlocks(){
+        turnLeftBlock = null;
+        turnRightBlock = null;
+        forwardBlock = null;
+        notBlock = null;
+        wallInFrontBlock = null;
+        whileBlock = null;
+        ifBlock = null;
+    }
+
+    /**
      * This function handles the mouse down
      * 
      * 1. On mousedown, it checks whether a block is selected
@@ -109,45 +77,41 @@ class ModelPalette extends ModelWindow{
      * @param {Boolean} maxReached signifies whether the max number of blocks has been reached
      * @return the block to return when the mouse is held down
      */
-    protected ModelBlock handleMouseDown(Location eventWindowLocation, boolean maxReached){
+    protected ModelBlock handleMouseDown(Location eventWindowLocation){
         ModelBlock selected = null;
         if(turnLeftBlock.inBoundsOfElement(eventWindowLocation)){
             selected = turnLeftBlock;
-            this.blockToProgramArea(turnLeftBlock, maxReached);
+            resetBlocks();
         }
         else if(turnRightBlock.inBoundsOfElement(eventWindowLocation)){
             selected = turnRightBlock;
-            this.blockToProgramArea(turnRightBlock, maxReached);
+            resetBlocks();
         }
         else if(forwardBlock.inBoundsOfElement(eventWindowLocation)){
             selected = forwardBlock;
-            this.blockToProgramArea(forwardBlock, maxReached);
+            resetBlocks();
         }
         else if(notBlock.inBoundsOfElement(eventWindowLocation)){
             selected = notBlock;
-            this.blockToProgramArea(notBlock, maxReached);
+            resetBlocks();
         }
         else if(wallInFrontBlock.inBoundsOfElement(eventWindowLocation)){
             selected = wallInFrontBlock;
-            this.blockToProgramArea(wallInFrontBlock, maxReached);
+            resetBlocks();
         }
         else if(whileBlock.inBoundsOfElement(eventWindowLocation)){
             selected = whileBlock;
-            this.blockToProgramArea(whileBlock, maxReached);
+            resetBlocks();
         }
         else if(ifBlock.inBoundsOfElement(eventWindowLocation)){
             selected = ifBlock;
-            this.blockToProgramArea(ifBlock, maxReached);
+            resetBlocks();
         }
         return selected;
     }
 
     /**
      * Return all the blocks in the palette
-     * 
-     * TODO: what when max happens
-     * TODO: refactoring to global arraylist
-     * 
      */
     protected ArrayList<ModelBlock> getPaletteBlocks(){
         ArrayList<ModelBlock> blocks = new ArrayList<ModelBlock>();

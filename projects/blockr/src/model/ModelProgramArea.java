@@ -94,12 +94,17 @@ public class ModelProgramArea extends ModelWindow{
      */
     public void handleMouseUp(Location eveWindowLocation, ModelBlock activeB){
         this.addPABlock(activeB);
+        LH.setLocationBlock(activeB, eveWindowLocation);
         ModelBlock closest = LH.findClosestBlock(activeB, blocks);
         if (closest != null){
             CH.connect(closest, activeB);
             CH.updateConnections(blocks);
             LH.updateLocationBlocks(blocks);
         }
+    }
+
+    public void dragBlock(ModelBlock block, Location location){
+        LH.setLocationBlock(block, location);
     }
 
     public boolean validExecutionState(){

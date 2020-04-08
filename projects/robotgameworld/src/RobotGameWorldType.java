@@ -11,7 +11,7 @@ public class RobotGameWorldType implements GameWorldType {
 
     @Override
     public ArrayList<PredicateType> getSupportedPredicates() {
-        return new ArrayList<PredicateType>(Arrays.asList(Predicate.WALL_IN_FRONT, Predicate.NOT_WALL_IN_FRONT));
+        return new ArrayList<PredicateType>(Arrays.asList(Predicate.WALL_IN_FRONT));
     }
 
     @Override

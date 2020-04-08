@@ -93,7 +93,7 @@ public class ConnectionHandler {
      * @author Oberon Swings
      */
     public void connectRightLeft(ModelBlock right, ModelBlock left){
-        if (right.getLeftPlug() != null && left.hasLeftPlug()){
+        if (right.getLeftPlug() != null && left.hasLeftPlug() && !left.equals(right.getLeftPlug())){
             ModelBlock temp = right.getLeftPlug();
             left.setLeftPlug(temp);
             temp.setRightSocket(left);
@@ -109,7 +109,7 @@ public class ConnectionHandler {
      * @author Oberon Swings
      */
     public void connectTopBottom(ModelBlock top, ModelBlock bottom){
-        if (top.getBottomPlug() != null && bottom.hasBottomPlug()){
+        if (top.getBottomPlug() != null && bottom.hasBottomPlug() && !bottom.equals(top.getBottomPlug())){
             ModelBlock temp = top.getBottomPlug();
             bottom.setBottomPlug(temp);
             temp.setTopSocket(bottom);
@@ -234,7 +234,7 @@ public class ConnectionHandler {
         ArrayList<ModelBlock> connectedB = getConnectedBlocks(blocks.get(0));
         for (ModelBlock blk : blocks){
             if (!(connectedB.contains(blk))) return false;
-            if (!(blk.equals(this.getFinishBlocks(blocks).get(0))||(blk.equals(this.getStartBlocks(blocks).get(0))))){
+            if (!(blk.equals(getFinishBlocks(blocks).get(0))||(blk.equals(getStartBlocks(blocks).get(0))))){
                 return isFullyConnected(blk);
             }
             else if (blk.equals(this.getStartBlocks(blocks).get(0)) && blk.equals(this.getFinishBlocks(blocks).get(0))){

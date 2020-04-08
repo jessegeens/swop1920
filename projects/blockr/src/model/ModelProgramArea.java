@@ -19,7 +19,7 @@ public class ModelProgramArea extends ModelWindow{
     // Constructor
     public ModelProgramArea(int width, int height){
         super(width, height);
-        this.setBlocks(new ArrayList<ModelBlock>());
+        blocks = new ArrayList<ModelBlock>();
         CH = new ConnectionHandler();
         LH = new LocationHandler();
     }
@@ -30,14 +30,6 @@ public class ModelProgramArea extends ModelWindow{
      */
     public ArrayList<ModelBlock> getPABlocks() {
         return this.blocks;
-    }
-
-    /**
-     * 
-     * @param blocks list of blocks to be set in a window.
-     */
-    public void setBlocks(ArrayList<ModelBlock> blocks) {
-        this.blocks = blocks;
     }
 
     /**
@@ -74,7 +66,8 @@ public class ModelProgramArea extends ModelWindow{
      *  order due to rendering (ask Bert if unclear)
      * 
      * @param eventWindowLocation location of the mouseDown event
-     * @return block to be returned 
+     * @return block to be returned
+     * @author Bert
      */
     public ModelBlock handleMouseDown(Location eventWindowLocation){
         for(int i = blocks.size() - 1; i >= 0; i--){
@@ -91,6 +84,7 @@ public class ModelProgramArea extends ModelWindow{
      * This function handles the mouse up in the ProgramArea
      * @param eveWindowLocation the location of the mouseUp event
      * @param activeB activeBlock the current active block
+     * @author Oberon Swings
      */
     public void handleMouseUp(Location eveWindowLocation, ModelBlock activeB){
         this.addPABlock(activeB);
@@ -98,23 +92,45 @@ public class ModelProgramArea extends ModelWindow{
         ModelBlock closest = LH.findClosestBlock(activeB, blocks);
         if (closest != null){
             CH.connect(closest, activeB);
+            LH.updateLocationBlock(activeB);
             CH.updateConnections(blocks);
-            LH.updateLocationBlocks(blocks);
+            LH.updateLocationBlocks(CH.getStartBlocks(blocks));
         }
     }
 
+    /**
+     * Moves a block to the location to which it is dragged
+     * @param block the block that needs to be moved
+     * @param location the location to which the block is dragged
+     * @author Oberon Swings
+     */
     public void dragBlock(ModelBlock block, Location location){
         LH.setLocationBlock(block, location);
     }
 
+    /**
+     * Tests if the current state of the program Area is valid to start execution
+     * @return true if all blocks are connected
+     * @author Oberon Swings
+     */
     public boolean validExecutionState(){
         return CH.allBlocksConnected(blocks);
     }
 
+    /**
+     * Gives the block at which the execution needs to start
+     * @return the first block for execution
+     * @author Oberon Swings
+     */
     public ModelBlock getFirstBlock(){
         return CH.getStartBlocks(blocks).get(0);
     }
 
+    /**
+     * Tests if the maximum amount of blocks in the program area is reached
+     * @return true if blocks.size >= MAX_BLOCKS
+     * @author Oberon Swings
+     */
     public boolean maxReached(){
         return (blocks.size() >= MAX_BLOCKS);
     }

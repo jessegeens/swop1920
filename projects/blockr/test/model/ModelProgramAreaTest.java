@@ -101,4 +101,65 @@ public class ModelProgramAreaTest {
         assertTrue(area.validExecutionState());
     }
 
+    @Test
+    public void getFirstBlock(){
+        ModelProgramArea area = new ModelProgramArea(1000,1000);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(100,20), BlockType.MOVEFORWARD);
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new Location(113, 143), BlockType.TURNRIGHT);
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(100, 260), BlockType.TURNLEFT);
+        ModelWallInFrontBlock wifBlock = new ModelWallInFrontBlock(new Location(180, 100), BlockType.WALLINFRONT);
+        area.addPABlock(forwardBlock);
+        area.addPABlock(leftBlock);
+        area.addPABlock(wifBlock);
+        area.addPABlock(whileBlock);
+        area.addPABlock(rightBlock);
+        forwardBlock.setBottomPlug(whileBlock);
+        whileBlock.setTopSocket(forwardBlock);
+        whileBlock.setCavityPlug(rightBlock);
+        rightBlock.setTopSocket(whileBlock);
+        rightBlock.setBottomPlug(whileBlock);
+        whileBlock.setCavitySocket(rightBlock);
+        whileBlock.setBottomPlug(leftBlock);
+        leftBlock.setTopSocket(whileBlock);
+        whileBlock.setRightSocket(wifBlock);
+        wifBlock.setLeftPlug(whileBlock);
+        assertEquals(forwardBlock, area.getFirstBlock());
+    }
+
+    @Test
+    public void maxReached(){
+        ModelProgramArea area = new ModelProgramArea(1000,1000);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(100,20), BlockType.MOVEFORWARD);
+        ModelMoveBlock rightBlock = new ModelMoveBlock(new Location(113, 143), BlockType.TURNRIGHT);
+        ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(100, 260), BlockType.TURNLEFT);
+        ModelWallInFrontBlock wifBlock = new ModelWallInFrontBlock(new Location(180, 100), BlockType.WALLINFRONT);
+        ModelWhileIfBlock whileBlock2 = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
+        ModelMoveBlock forwardBlock2 = new ModelMoveBlock(new Location(100,20), BlockType.MOVEFORWARD);
+        ModelMoveBlock rightBlock2 = new ModelMoveBlock(new Location(113, 143), BlockType.TURNRIGHT);
+        ModelMoveBlock leftBlock2 = new ModelMoveBlock(new Location(100, 260), BlockType.TURNLEFT);
+        ModelWallInFrontBlock wifBlock2 = new ModelWallInFrontBlock(new Location(180, 100), BlockType.WALLINFRONT);
+        area.addPABlock(forwardBlock);
+        area.addPABlock(leftBlock);
+        area.addPABlock(wifBlock);
+        area.addPABlock(whileBlock);
+        area.addPABlock(rightBlock);
+        area.addPABlock(forwardBlock2);
+        area.addPABlock(leftBlock2);
+        area.addPABlock(wifBlock2);
+        area.addPABlock(whileBlock2);
+        area.addPABlock(rightBlock2);
+        assertTrue(area.maxReached());
+    }
+
+    @Test
+    public void dragBlock(){
+        ModelProgramArea area = new ModelProgramArea(1000,1000);
+        ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(100,20), BlockType.MOVEFORWARD);
+        area.addPABlock(forwardBlock);
+        area.dragBlock(forwardBlock, new Location(250, 300));
+        assertEquals(new Location(250, 300), forwardBlock.getPos());
+    }
+
 }

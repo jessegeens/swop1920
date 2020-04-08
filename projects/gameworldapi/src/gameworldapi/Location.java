@@ -1,3 +1,4 @@
+package gameworldapi;
 public interface Location {
 
         /**

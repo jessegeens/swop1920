@@ -12,7 +12,7 @@ public class ModelMoveBlock extends ModelBlock{
     private ModelBlock topSocket;
     private ModelBlock bottomPlug;
     
-    public ModelMoveBlock(Location pos, BlockType type) {
+    public ModelMoveBlock(ProgramLocation pos, BlockType type) {
         super(pos,type);
         this.setTopSocket(null);
         this.setBottomPlug(null);

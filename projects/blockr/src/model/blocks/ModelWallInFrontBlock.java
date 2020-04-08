@@ -12,7 +12,7 @@ public class ModelWallInFrontBlock extends ModelBlock{
     private ModelBlock leftPlug;
 
     // Constructor
-    public ModelWallInFrontBlock(Location pos, BlockType type){
+    public ModelWallInFrontBlock(ProgramLocation pos, BlockType type){
         super(pos,type);
         this.setLeftPlug(null);
         ArrayList<ConnectionPoint> connectionPoints = new ArrayList<>();

@@ -69,7 +69,7 @@ public class ModelProgramArea extends ModelWindow{
      * @return block to be returned
      * @author Bert
      */
-    public ModelBlock handleMouseDown(Location eventWindowLocation){
+    public ModelBlock handleMouseDown(ProgramLocation eventWindowLocation){
         for(int i = blocks.size() - 1; i >= 0; i--){
             if(blocks.get(i).inBoundsOfElement(eventWindowLocation)){
                 ModelBlock toBeReturned = blocks.get(i);
@@ -86,7 +86,7 @@ public class ModelProgramArea extends ModelWindow{
      * @param activeB activeBlock the current active block
      * @author Oberon Swings
      */
-    public void handleMouseUp(Location eveWindowLocation, ModelBlock activeB){
+    public void handleMouseUp(ProgramLocation eveWindowLocation, ModelBlock activeB){
         this.addPABlock(activeB);
         LH.setLocationBlock(activeB, eveWindowLocation);
         ModelBlock closest = LH.findClosestBlock(activeB, blocks);
@@ -104,7 +104,7 @@ public class ModelProgramArea extends ModelWindow{
      * @param location the location to which the block is dragged
      * @author Oberon Swings
      */
-    public void dragBlock(ModelBlock block, Location location){
+    public void dragBlock(ModelBlock block, ProgramLocation location){
         LH.setLocationBlock(block, location);
     }
 

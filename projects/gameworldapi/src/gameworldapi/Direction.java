@@ -1,7 +1,7 @@
-package utilities;
+package gameworldapi;
 
 /**
- * Class representing the direction of an element in Blockr.
+ * Enum representing the direction of an element.
  */
 public enum Direction{
 

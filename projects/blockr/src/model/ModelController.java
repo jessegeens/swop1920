@@ -72,7 +72,7 @@ public class ModelController{
      * 
      * @author Bert
      */
-    protected boolean inPalette(Location location){
+    protected boolean inPalette(ProgramLocation location){
         if(location.getX() > 0 && location.getX() < MyCanvasWindow.WIDTH/3 ){
             return true;
         }
@@ -86,7 +86,7 @@ public class ModelController{
      * 
      * @author Bert
      */
-    protected boolean inProgramArea(Location location){
+    protected boolean inProgramArea(ProgramLocation location){
         if(location.getX() > MyCanvasWindow.WIDTH/3 && location.getX() <  2 * MyCanvasWindow.WIDTH/3){
             return true;
         }
@@ -105,7 +105,7 @@ public class ModelController{
      * 
      * @author Bert
      */
-    public void select(Location eventLocation){
+    public void select(ProgramLocation eventLocation){
         if(this.inPalette(eventLocation)){
             System.out.println("Palette select");
             active = palette.handleMouseDown(eventLocation);
@@ -128,7 +128,7 @@ public class ModelController{
      * @author Bert
      */
 
-    public void release(Location eventLocation){
+    public void release(ProgramLocation eventLocation){
         if(inPalette(eventLocation) ){
             System.out.println("Palette release");
             if(active != null){
@@ -157,7 +157,7 @@ public class ModelController{
      * @param eventLocation location where the event happened
      * @author Bert
      */
-    public void drag(Location eventLocation){
+    public void drag(ProgramLocation eventLocation){
         if(active != null){
             if(2 * MyCanvasWindow.WIDTH / 3 - active.getWidth() > eventLocation.getX()){
                 PArea.dragBlock(active, eventLocation);

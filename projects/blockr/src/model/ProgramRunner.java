@@ -2,6 +2,7 @@ package model;
 
 import utilities.*;
 import model.blocks.*;
+import gameworldapi.*;
 
 public class ProgramRunner {
 
@@ -149,21 +150,21 @@ public class ProgramRunner {
     }
 
     private ProgramState move(ProgramState pState){
-        Location robotGridLocation;
+        ProgramLocation robotGridLocation;
         switch(pState.getRobotDirection()){
             case UP:
                 /*Location has an add function so it would be more compact to write:
                 robotLocation = robotLocation.add(0,-1);*/
-                robotGridLocation = new Location(pState.getRobotLocation().getX(), pState.getRobotLocation().getY() - 1);
+                robotGridLocation = new ProgramLocation(pState.getRobotLocation().getX(), pState.getRobotLocation().getY() - 1);
                 break;
             case RIGHT:
-                robotGridLocation = new Location(pState.getRobotLocation().getX() + 1, pState.getRobotLocation().getY());
+                robotGridLocation = new ProgramLocation(pState.getRobotLocation().getX() + 1, pState.getRobotLocation().getY());
                 break;
             case DOWN:
-                robotGridLocation = new Location(pState.getRobotLocation().getX(), pState.getRobotLocation().getY() + 1);
+                robotGridLocation = new ProgramLocation(pState.getRobotLocation().getX(), pState.getRobotLocation().getY() + 1);
                 break;
             case LEFT:
-                robotGridLocation = new Location(pState.getRobotLocation().getX() - 1, pState.getRobotLocation().getY());
+                robotGridLocation = new ProgramLocation(pState.getRobotLocation().getX() - 1, pState.getRobotLocation().getY());
                 break;
             default:
                 throw new IllegalStateException("ProgramState has an illegal direction");

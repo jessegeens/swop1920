@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import gameworldapi.*;
 
 /**
  * The Game World API defines a GameWorldType interface, that offers methods to:

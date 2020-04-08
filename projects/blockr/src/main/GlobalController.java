@@ -1,10 +1,12 @@
 package main;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 import ui.*;
 import utilities.*;
 import model.*;
+import gameworldapi.*;
 //import model.blocks.plugs.*;
 
 /**
@@ -16,13 +18,18 @@ public class GlobalController {
     //Controllers
     private ModelController modelController;
     private UIController uiController;
-
+    private GameWorld gameWorld;
+    private ArrayList<ActionType> actions;
+    private ArrayList<PredicateType> predicates;
 
     // Constructor
-    public GlobalController(){
+    public GlobalController(GameWorldType gameWorldType){
         this.modelController = new ModelController();
-        System.out.println(modelController.getModelBlocks());
+        //System.out.println(modelController.getModelBlocks());
         this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT);
+        this.gameWorld = gameWorldType.newWorldInstance();
+        this.actions = gameWorldType.getSupportedActions();
+        this.predicates = gameWorldType.getSupportedPredicates();
     }
     
     /**
@@ -40,7 +47,7 @@ public class GlobalController {
      * @author Bert
      */
     public void handleMouseEvent(int id, int x, int y, int clickCount){
-        Location eventWindowLocation = new Location(x,y);
+        Location eventWindowLocation = new ProgramLocation(x,y);
 
         switch(id){
             case 501: //MOUSE_PRESSED

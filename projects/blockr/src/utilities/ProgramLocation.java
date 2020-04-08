@@ -1,10 +1,16 @@
+package utilities;
+
 import gameworldapi.*;
-public final class GridLocation implements Location{
+
+/**
+ * Representation of location in the grid, not expressed in pixels but in grid tiles.
+ */
+public final class ProgramLocation implements Location {
 
     private final int x;
     private final int y;
 
-    public GridLocation(int i, int j) {
+    public ProgramLocation(int i, int j) {
         this.x = i;
         this.y = j;
     }
@@ -22,16 +28,16 @@ public final class GridLocation implements Location{
      * {@inheritDoc}
      */
     @Override
-    public GridLocation add(Location pos){
-        return new GridLocation(this.getX() + pos.getX(), this.getY() + pos.getY());
+    public ProgramLocation add(Location pos){
+        return new ProgramLocation(this.getX() + pos.getX(), this.getY() + pos.getY());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public GridLocation add(int i, int j){
-        return new GridLocation(this.getX() + i, this.getY() + j);
+    public ProgramLocation add(int i, int j){
+        return new ProgramLocation(this.getX() + i, this.getY() + j);
     }
 
     /**

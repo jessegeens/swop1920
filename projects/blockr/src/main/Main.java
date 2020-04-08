@@ -8,7 +8,7 @@ class Main {
      * main function of the program
      * @param {String[]} args list of arguments to pass on to the program
      */
-    public void main(String[] args) {
+    public static void main(String[] args) {
         try{
             GameWorldType worldType = ((GameWorldType) Class.forName(args[0]).newInstance());
             java.awt.EventQueue.invokeLater(() -> {

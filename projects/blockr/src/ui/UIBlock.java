@@ -34,40 +34,40 @@ public class UIBlock{
         }
     }
 
-    private void renderTopSocket(Graphics g, Location blockLocation, boolean highlighted) {
+    private void renderTopSocket(Graphics g, ProgramLocation blockLocation, boolean highlighted) {
         g.setColor(getBlockColor(highlighted));
         g.fillRect(blockLocation.getX(), blockLocation.getY(), this.getTopSocketPos(blockLocation).getX() - blockLocation.getX(), PLUGSIZE);
         g.fillRect(this.getTopSocketPos(blockLocation).getX() + PLUGSIZE, blockLocation.getY(), blockLocation.getX() + this.getWidth() - this.getTopSocketPos(blockLocation).getX() - PLUGSIZE, PLUGSIZE);
     }
 
-    private void renderBottomPlug(Graphics g, Location blockLocation, boolean highlighted, int cavitySize) {
+    private void renderBottomPlug(Graphics g, ProgramLocation blockLocation, boolean highlighted, int cavitySize) {
         g.setColor(getBlockColor(highlighted));
         g.fillRect(this.getBottomPlugPos(blockLocation, cavitySize).getX(), this.getBottomPlugPos(blockLocation, cavitySize).getY(), PLUGSIZE, PLUGSIZE);
     }
 
-    private void renderLeftPlug(Graphics g, Location blockLocation, boolean highlighted) {
+    private void renderLeftPlug(Graphics g, ProgramLocation blockLocation, boolean highlighted) {
         g.setColor(getBlockColor(highlighted));
         g.fillRect(this.getLeftPlugPos(blockLocation).getX() - PLUGSIZE, this.getLeftPlugPos(blockLocation).getY(), PLUGSIZE, PLUGSIZE);
     }
 
-    private void renderRightSocket(Graphics g, Location blockLocation, boolean highlighted, int cavitySize) {
+    private void renderRightSocket(Graphics g, ProgramLocation blockLocation, boolean highlighted, int cavitySize) {
         g.setColor(getBlockColor(highlighted));
         g.fillRect(this.getRightSocketPos(blockLocation).getX(), blockLocation.getY(), PLUGSIZE, this.getRightSocketPos(blockLocation).getY() - blockLocation.getY());
         g.fillRect(this.getRightSocketPos(blockLocation).getX(), this.getRightSocketPos(blockLocation).getY() + PLUGSIZE, PLUGSIZE, blockLocation.getY() + this.getHeight(cavitySize) - this.getRightSocketPos(blockLocation).getY() - PLUGSIZE);
     }
 
-    private void renderNoRightSocket(Graphics g, Location blockLocation, boolean highlighted, int cavitySize) {
+    private void renderNoRightSocket(Graphics g, ProgramLocation blockLocation, boolean highlighted, int cavitySize) {
         g.setColor(getBlockColor(highlighted));
         g.fillRect(blockLocation.getX() + this.getWidth() - PLUGSIZE, blockLocation.getY(), PLUGSIZE, this.getHeight(cavitySize));
     }
 
-    private void renderNoTopSocket(Graphics g, Location blockLocation, boolean highlighted) {
+    private void renderNoTopSocket(Graphics g, ProgramLocation blockLocation, boolean highlighted) {
         g.setColor(getBlockColor(highlighted));
         g.fillRect(blockLocation.getX(), blockLocation.getY(), this.getWidth(), PLUGSIZE);
     }
 
 
-    private void renderInnerBlock(Graphics g, Location blockLocation, boolean highlighted, int cavitySize) {
+    private void renderInnerBlock(Graphics g, ProgramLocation blockLocation, boolean highlighted, int cavitySize) {
         g.setColor(getBlockColor(highlighted));
         g.fillRect(blockLocation.getX(), blockLocation.getY() + PLUGSIZE, this.getWidth() - PLUGSIZE, this.getHeight(cavitySize) - PLUGSIZE);
     }
@@ -79,7 +79,7 @@ public class UIBlock{
      * @param g The Graphics object on which the block is rendered
      * @author Bert De Vleeschouwer
      */
-    private void renderCavitySocket(Graphics g, Location blockLocation, int cavitySize) {
+    private void renderCavitySocket(Graphics g, ProgramLocation blockLocation, int cavitySize) {
         g.setColor(Color.GREEN);
         g.fillRect(this.getCavitySocketPos(blockLocation,cavitySize).getX(), this.getCavitySocketPos(blockLocation,cavitySize).getY(), PLUGSIZE, PLUGSIZE);
     }
@@ -90,7 +90,7 @@ public class UIBlock{
      * @param g The Graphics object on which the block is rendered
      * @author Bert De Vleeschouwer
      */
-    private void renderCavityPlug(Graphics g, Location blockLocation) {
+    private void renderCavityPlug(Graphics g, ProgramLocation blockLocation) {
         g.setColor(Color.GREEN);
         g.fillRect(this.getCavityPlugPos(blockLocation).getX(), this.getCavityPlugPos(blockLocation).getY(), PLUGSIZE, PLUGSIZE);
     }
@@ -102,7 +102,7 @@ public class UIBlock{
      * @author Bert De Vleeschouwer
      */
     public void render(Graphics g, BlockState blockState) {
-        Location blockLocation = blockState.getBlockLocation();
+        ProgramLocation blockLocation = blockState.getBlockLocation();
         BlockType blockType = blockState.getBlockType();
         boolean highlighted = blockState.isHighlighted();
         int cavitySize = blockState.getCavitySize();
@@ -150,7 +150,7 @@ public class UIBlock{
      * @return the position of the cavity socket in a WHILEIF block
      * @author Bert De Vleeschouwer
      */
-    public Location getCavitySocketPos(Location blockLocation, int cavitySize) {
+    public ProgramLocation getCavitySocketPos(ProgramLocation blockLocation, int cavitySize) {
         return blockLocation.add(2*STD_WIDTH/3 - PLUGSIZE/2, this.getHeight(cavitySize) - STD_HEIGHT/3 - PLUGSIZE/2);
     }
 
@@ -159,7 +159,7 @@ public class UIBlock{
      * @return the position of the cavity plug in a WHILEIF block
      * @author Bert De Vleeschouwer
      */
-    public Location getCavityPlugPos(Location blockLocation) {
+    public ProgramLocation getCavityPlugPos(ProgramLocation blockLocation) {
         return blockLocation.add(2*STD_WIDTH/3 - PLUGSIZE/2, 2*STD_HEIGHT/3 - PLUGSIZE/2);
     }
 
@@ -168,7 +168,7 @@ public class UIBlock{
      * @return the position of the topSocket
      * @author Oberon Swings
      */
-    public Location getTopSocketPos(Location blockLocation) {
+    public ProgramLocation getTopSocketPos(ProgramLocation blockLocation) {
         return blockLocation.add(this.getWidth()/2 - PLUGSIZE/2, 0);
     }
 
@@ -177,7 +177,7 @@ public class UIBlock{
      * @return the position of the rightSocket
      * @author Oberon Swings
      */
-    public Location getRightSocketPos(Location blockLocation) {
+    public ProgramLocation getRightSocketPos(ProgramLocation blockLocation) {
         return blockLocation.add(this.getWidth() - PLUGSIZE, STD_HEIGHT/2 -PLUGSIZE/2);
     }
 
@@ -187,7 +187,7 @@ public class UIBlock{
      * @return the position of the bottomPlug
      * @author Oberon Swings
      */
-    public Location getBottomPlugPos(Location blockLocation, int cavitySize) {
+    public ProgramLocation getBottomPlugPos(ProgramLocation blockLocation, int cavitySize) {
         return blockLocation.add(this.getWidth()/2 - PLUGSIZE/2, this.getHeight(cavitySize));
     }
 
@@ -196,7 +196,7 @@ public class UIBlock{
      * @return the position of the leftPlug
      * @author Oberon Swings
      */
-    public Location getLeftPlugPos(Location blockLocation) {
+    public ProgramLocation getLeftPlugPos(ProgramLocation blockLocation) {
         return blockLocation.add(0, STD_HEIGHT/2 - PLUGSIZE/2);
     }
 

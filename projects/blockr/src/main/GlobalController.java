@@ -7,7 +7,6 @@ import ui.*;
 import utilities.*;
 import model.*;
 import gameworldapi.*;
-//import model.blocks.plugs.*;
 
 /**
  * The GlobalController is the heart of the program and coordinates the state flow of the program
@@ -24,7 +23,7 @@ public class GlobalController {
 
     // Constructor
     public GlobalController(GameWorldType gameWorldType){
-        this.modelController = new ModelController();
+        this.modelController = new ModelController(gameWorldType.getSupportedActions(), gameWorldType.getSupportedPredicates());
         //System.out.println(modelController.getModelBlocks());
         this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT);
         this.gameWorld = gameWorldType.newWorldInstance();

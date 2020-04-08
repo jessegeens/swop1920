@@ -1,8 +1,11 @@
 package model;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
+import gameworldapi.ActionType;
+import gameworldapi.PredicateType;
 import main.MyCanvasWindow;
 import model.blocks.ModelBlock;
 import model.blocks.ModelWhileIfBlock;
@@ -25,9 +28,9 @@ public class ModelController{
 
 
     // Constructor
-    public ModelController(){
+    public ModelController(ArrayList<ActionType> actions, ArrayList<PredicateType> predicates){
         //palette left, program middle, grid right
-        palette = new ModelPalette();
+        palette = new ModelPalette(actions, predicates);
         PArea = new ModelProgramArea();
         state = ProgramState.getInitialState();
         programRunner = new ProgramRunner();

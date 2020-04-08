@@ -2,14 +2,22 @@ package model;
 
 import java.util.ArrayList;
 
+import gameworldapi.ActionType;
+import gameworldapi.PredicateType;
 import model.blocks.*;
 import utilities.BlockType;
 import utilities.ProgramLocation;
+
+import javax.swing.*;
 
 /**
  * Class representing the palette. Blocks will be dragged from the palette int the program area.
  */
 class ModelPalette{
+
+    private final ArrayList<ActionType> actions;
+    private final ArrayList<PredicateType> predicates;
+    private ArrayList<ModelBlock> blocks;
 
     private final ProgramLocation turnLeftWindowLocation = new ProgramLocation(20, 20);
     private final ProgramLocation turnRightWindowLocation = new ProgramLocation(180, 20);
@@ -28,7 +36,9 @@ class ModelPalette{
     private ModelWhileIfBlock ifBlock;
 
     // Constructor
-    public ModelPalette(){
+    public ModelPalette(ArrayList<ActionType> actions, ArrayList<PredicateType> predicates){
+        this.actions = actions;
+        this.predicates = predicates;
         turnLeftBlock = new ModelMoveBlock(turnLeftWindowLocation, BlockType.TURNLEFT);
         turnRightBlock = new ModelMoveBlock(turnRightWindowLocation, BlockType.TURNRIGHT);
         forwardBlock = new ModelMoveBlock(forwardWindowLocation, BlockType.MOVEFORWARD);

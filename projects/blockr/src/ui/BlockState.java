@@ -6,7 +6,7 @@ import utilities.*;
 
 public class BlockState {
 
-    private Location blockLocation;
+    private ProgramLocation blockLocation;
     private BlockType blockType;
     private boolean highlighted;
     private int cavitySize;
@@ -31,7 +31,7 @@ public class BlockState {
      * @return the location of the block
      * @author Oberon Swings
      */
-    public Location getBlockLocation() {
+    public ProgramLocation getBlockLocation() {
         return blockLocation;
     }
 

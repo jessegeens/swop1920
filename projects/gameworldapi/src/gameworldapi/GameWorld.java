@@ -20,6 +20,6 @@ public interface GameWorld {
 
     void restore(GameWorldState gameWorldState);
 
-    void render(Graphics g, Location leftTop);
+    void render(Graphics g, int x, int y);
 
 }

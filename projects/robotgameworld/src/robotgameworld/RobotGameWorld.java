@@ -75,8 +75,8 @@ public class RobotGameWorld implements GameWorld {
      * @param leftTop top-left corner position (in px) of the grid on the CanvasWindow
      */
     @Override
-    public void render(Graphics graphics, Location leftTop) {
-        uiController.render(graphics, ActionExecutor.getInstance().getState(), (GridLocation) leftTop);
+    public void render(Graphics graphics, int x, int y) {
+        uiController.render(graphics, ActionExecutor.getInstance().getState(), new GridLocation(x, y));
     }
 
 }

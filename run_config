@@ -1,0 +1,4 @@
+Blockr
+-run
+-edit configurations
+--Program arguments "dir path" [space] robotgameworld.RobotGameWorldType

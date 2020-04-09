@@ -85,7 +85,7 @@ public class GlobalController {
      */
     public void render(Graphics g){
         ProgramLocation gridLocation = new ProgramLocation(MyCanvasWindow.WIDTH*2/3, 0);
-        modelController.getGameWorld().render(g, gridLocation);
+        modelController.getGameWorld().render(g, gridLocation.getX(), gridLocation.getY());
         uiController.render(g, modelController.getBlockStates());
     }
 

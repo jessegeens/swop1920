@@ -1,8 +1,10 @@
+package robotgameworld;
+
 import java.util.ArrayList;
 import gameworldapi.*;
 
 /**
- * Singleton class that executes an Action.
+ * Singleton class that executes an robotgameworld.Action.
  * This class uses the Command (GoF) pattern
  * Executed actions will be saved on a stack for UNDO/REDO
  *
@@ -96,7 +98,7 @@ public class ActionExecutor {
      * not on a wall)
      * @author Jesse Geens
      *
-     * @param state {RobotGameWorldState} state to check
+     * @param state {robotgameworld.RobotGameWorldState} state to check
      * @return true if the state is valid, false otherwise
      */
     private boolean validState(RobotGameWorldState state){
@@ -111,7 +113,7 @@ public class ActionExecutor {
     /**
      * @author Jesse Geens
      *
-     * @param {RobotGameWorldState} state to check if it is finished
+     * @param {robotgameworld.RobotGameWorldState} state to check if it is finished
      * @return true if the state is a finished game,
      *         false otherwise
      */

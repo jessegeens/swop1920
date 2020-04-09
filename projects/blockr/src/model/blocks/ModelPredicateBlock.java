@@ -1,5 +1,6 @@
 package model.blocks;
 
+import gameworldapi.PredicateType;
 import ui.UIBlock;
 import utilities.*;
 
@@ -8,16 +9,34 @@ import java.util.ArrayList;
 /**
  * Class representing the 'wall in front' block with one plug to their left.
  */
-public class ModelWallInFrontBlock extends ModelBlock{
+public class ModelPredicateBlock extends ModelBlock{
     private ModelBlock leftPlug;
+    private PredicateType predicate;
 
     // Constructor
-    public ModelWallInFrontBlock(ProgramLocation pos, BlockType type){
+    public ModelPredicateBlock(ProgramLocation pos, BlockType type, PredicateType predicate){
         super(pos,type);
         this.setLeftPlug(null);
+        this.predicate = predicate;
         ArrayList<ConnectionPoint> connectionPoints = new ArrayList<>();
         connectionPoints.add(ConnectionPoint.LEFTPLUG);
         super.setConnectionPoints(connectionPoints);
+    }
+
+    /**
+     *
+     * @return the predicate block's predicate
+     */
+    public PredicateType getPredicate(){
+        return this.predicate;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ModelBlock clone() {
+        return new ModelPredicateBlock(this.getPos(), this.getBlockType(), this.getPredicate());
     }
 
     /**

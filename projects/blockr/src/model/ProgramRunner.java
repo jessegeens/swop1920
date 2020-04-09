@@ -8,8 +8,11 @@ public class ProgramRunner {
 
     private boolean running;
     private ModelBlock current;
+    private GameWorld gameWorld;
 
-    public ProgramRunner(){
+    //Constructor
+    public ProgramRunner(GameWorld gameWorld){
+        this.gameWorld = gameWorld;
         this.running = false;
     }
 
@@ -35,55 +38,35 @@ public class ProgramRunner {
      *  3a. if necessary, the program stops running
      *  3b. otherwise, the next block is highlighted
      */
-    public ProgramState execute(ProgramState programState){
+    public ActionResult execute(){
         if(!(isRunning())){
             throw new IllegalStateException("tried executing the program without initialising it");
         }
 
         if(this.current == null) {
             reset();
-            return ProgramState.getInitialState();
+            return null;
+            //return gameWorld.();
+            //TODO: used to reset to initial state
         }
         else{
             System.out.println("now executing: " + current.getBlockType());
-            if (this.findNextBlock(programState) != null){
-                System.out.println("lala1");
-                this.highlightNext(programState);
+            if (this.findNextBlock() != null){
+                this.highlightNext();
             }
             else{
-                System.out.println("lala2");
                 this.current.setUnHighlight();
             }
-            ProgramState nextState = step(programState);
-            this.current = findNextBlock(programState);
-            System.out.println("programState: " + programState.toString());
-            return nextState;
+            ActionResult result = ActionResult.FAILURE;
+            if(current instanceof ModelActionBlock){
+                result = gameWorld.perform(((ModelActionBlock) current).getAction());
+            }
+            this.current = findNextBlock();
+            return result;
         }
     }
 
-    /**
-     * This function executes one step of the program
-     */
-    private ProgramState step(ProgramState pState){
-        switch(current.getBlockType()){
-            case MOVEFORWARD:
-                if(validPosition(move(pState))){
-                    return move(pState);
-                } else {
-                    this.reset();
-                }
-                break;
-            case TURNLEFT:
-                Direction directionL = pState.getRobotDirection().turnLeft();
-                return ProgramState.generateNew(pState, directionL, pState.getRobotLocation());
-            case TURNRIGHT:
-                Direction directionR = pState.getRobotDirection().turnRight();
-                return ProgramState.generateNew(pState, directionR, pState.getRobotLocation());
-            default:
-                break;
-        }
-        return null;
-    }
+
 
     /**
      * 
@@ -96,9 +79,9 @@ public class ProgramRunner {
     /**
      * Highlights the next block in the program and unhighlight the currrent one
      */
-    private void highlightNext(ProgramState programState){
+    private void highlightNext(){
         current.setUnHighlight();
-        findNextBlock(programState).setHighlight();
+        findNextBlock().setHighlight();
     }
 
     /**
@@ -108,11 +91,21 @@ public class ProgramRunner {
      * @return the next block that will be run in the program
      * @author Oberon Swings (debugged by Bert)
      */
-    private ModelBlock findNextBlock(ProgramState programState){
+    private ModelBlock findNextBlock(){
 
         if (current instanceof ModelWhileIfBlock){
-            if (evaluateCurrentCondition(programState)){
-                return ((ModelWhileIfBlock)current).getCavityPlug();
+            if (((ModelWhileIfBlock) current).isNegated()) {
+                if (!(gameWorld.evaluate(((ModelWhileIfBlock) current).getPredicate()))) {
+                    return ((ModelWhileIfBlock) current).getCavityPlug();
+                } else {
+                    return current.getBottomPlug();
+                }
+            } else {
+                if((gameWorld.evaluate(((ModelWhileIfBlock) current).getPredicate()))){
+                    return ((ModelWhileIfBlock) current).getCavityPlug();
+                } else {
+                    return current.getBottomPlug();
+                }
             }
         }
         
@@ -120,68 +113,6 @@ public class ProgramRunner {
             return current.getBottomPlug().getBottomPlug(); //If block should only be executed once.
         } 
         else return current.getBottomPlug();
-    }
-
-    /**
-     * Evaluates the condition (of a while if block)
-     * @return whether the current condition is true or false
-     * @author Oberon Swings
-     */
-    private boolean evaluateCurrentCondition(ProgramState programState){
-        Condition condition = null;
-        if (current instanceof ModelWhileIfBlock) {
-            try {
-                condition = ((ModelWhileIfBlock) current).getCondition();
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            }
-        }
-        if (condition != null){
-            switch (condition){
-                case NOT_WALL_IN_FRONT:
-                    if (programState.wallInFrontOfRobot()) return false;
-                    else return true;
-                case WALL_IN_FRONT:
-                    if (programState.wallInFrontOfRobot()) return true;
-                    else return false;
-            }
-        }
-        return false;
-    }
-
-    private ProgramState move(ProgramState pState){
-        ProgramLocation robotGridLocation;
-        switch(pState.getRobotDirection()){
-            case UP:
-                /*Location has an add function so it would be more compact to write:
-                robotLocation = robotLocation.add(0,-1);*/
-                robotGridLocation = new ProgramLocation(pState.getRobotLocation().getX(), pState.getRobotLocation().getY() - 1);
-                break;
-            case RIGHT:
-                robotGridLocation = new ProgramLocation(pState.getRobotLocation().getX() + 1, pState.getRobotLocation().getY());
-                break;
-            case DOWN:
-                robotGridLocation = new ProgramLocation(pState.getRobotLocation().getX(), pState.getRobotLocation().getY() + 1);
-                break;
-            case LEFT:
-                robotGridLocation = new ProgramLocation(pState.getRobotLocation().getX() - 1, pState.getRobotLocation().getY());
-                break;
-            default:
-                throw new IllegalStateException("ProgramState has an illegal direction");
-        }
-        return ProgramState.generateNew(pState, pState.getRobotDirection(), robotGridLocation);
-    }
-
-    /**
-     * 
-     * TODO: get max grid width and height and check if it is out of bounds there
-     * 
-     */
-    private boolean validPosition(ProgramState pState){
-        if(pState.getRobotLocation().getX() < 0) return false;
-        if(pState.getRobotLocation().getY() < 0) return false;
-        if(pState.getWalls().contains(pState.getRobotLocation())) return false;
-        return true;
     }
 
 }

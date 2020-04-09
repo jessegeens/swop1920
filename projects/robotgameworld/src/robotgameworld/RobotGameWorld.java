@@ -1,4 +1,11 @@
+package robotgameworld;
+
 import gameworldapi.*;
+import robotgameworld.Action;
+import robotgameworld.ActionExecutor;
+import robotgameworld.GridLocation;
+import robotgameworld.Predicate;
+
 import java.awt.*;
 
 /**

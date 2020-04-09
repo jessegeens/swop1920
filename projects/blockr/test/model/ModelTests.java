@@ -1,16 +1,7 @@
 package model;
 
-import model.blocks.ModelMoveBlock;
-import model.blocks.ModelNotBlock;
-import model.blocks.ModelWhileIfBlock;
-import org.junit.Test;
-import utilities.*;
-
-
-import java.util.ArrayList;
 
 import static junit.framework.Assert.assertNotNull;
-import static org.junit.Assert.*;
 
 public class ModelTests {
     /*

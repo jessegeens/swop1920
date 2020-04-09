@@ -22,21 +22,17 @@ public class UIController {
         this.wWidth = windowWidth;
         this.wHeight = windowHeight;
         uiBlock = new UIBlock();
-        uiGrid = new UIGrid();
     }
 
     /**
      * Method to render the UI elements
      * @param g Graphics object
-     * @param state the program state that needs to be rendered
      * @param blocks the block states that need to be rendered
      * @author Oberon Swings
      */
-    public void render(Graphics g, ProgramState state, ArrayList<BlockState> blocks){
+    public void render(Graphics g, ArrayList<BlockState> blocks){
         ProgramLocation gridLocation = new ProgramLocation(wWidth*2/3, 0);
         UIBlock uiBlock = new UIBlock();
-        UIGrid uiGrid = new UIGrid();
-        uiGrid.render(g, wWidth / 3, wHeight, gridLocation, state);
         System.out.println("Rendering UI, blocks and grid");
         this.renderUI(g);
         for (BlockState block : blocks){

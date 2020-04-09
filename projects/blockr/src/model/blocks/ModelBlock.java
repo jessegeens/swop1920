@@ -8,7 +8,7 @@ import utilities.*;
 /**
  * Abstract representation of a block that can be placed from the palette onto the program area.
  */
-public abstract class ModelBlock extends ModelElement{
+public abstract class ModelBlock extends ModelElement implements java.lang.Cloneable{
 
     private final BlockType type;
     private ArrayList<ConnectionPoint> connectionPoints = new ArrayList<>();
@@ -33,6 +33,9 @@ public abstract class ModelBlock extends ModelElement{
     public boolean isHighlighted(){
         return this.highlighted;
     }
+
+    @Override
+    public abstract ModelBlock clone();
 
     /**
      * {@inheritDoc}

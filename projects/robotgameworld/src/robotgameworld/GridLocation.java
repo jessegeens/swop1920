@@ -1,3 +1,5 @@
+package robotgameworld;
+
 import gameworldapi.*;
 public final class GridLocation implements Location{
 

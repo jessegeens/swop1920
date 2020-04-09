@@ -1,6 +1,11 @@
+package robotgameworld;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import gameworldapi.*;
+import robotgameworld.Action;
+import robotgameworld.Predicate;
+import robotgameworld.RobotGameWorld;
 
 /**
  * The Game World API defines a GameWorldType interface, that offers methods to:
@@ -18,16 +23,18 @@ public class RobotGameWorldType implements GameWorldType {
 
     @Override
     public ArrayList<ActionType> getSupportedActions() {
-        return new ArrayList<ActionType>(Arrays.asList(Action.MOVE_FORWARD, Action.TURN_LEFT, Action.TURN_RIGHT));
+        return new ArrayList<>(Arrays.asList(Action.MOVE_FORWARD, Action.TURN_LEFT, Action.TURN_RIGHT));
     }
 
     @Override
     public ArrayList<PredicateType> getSupportedPredicates() {
-        return new ArrayList<PredicateType>(Arrays.asList(Predicate.WALL_IN_FRONT));
+        return new ArrayList<>(Arrays.asList(Predicate.WALL_IN_FRONT));
     }
 
     @Override
     public GameWorld newWorldInstance() {
         return new RobotGameWorld();
     }
+
+    public static void main(String[] args){}
 }

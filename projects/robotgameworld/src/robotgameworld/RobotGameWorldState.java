@@ -1,5 +1,7 @@
-import java.util.ArrayList;
+package robotgameworld;
+
 import gameworldapi.*;
+import robotgameworld.GridLocation;
 
 /**
  * State of the Robot game
@@ -18,7 +20,7 @@ public final class RobotGameWorldState implements GameWorldState {
 
     @Override
     public String toString() {
-        return "[RobotGameWorldState: " + robotDirection.toString() + ", " + robotLocation.toString() + "]";
+        return "[robotgameworld.RobotGameWorldState: " + robotDirection.toString() + ", " + robotLocation.toString() + "]";
     }
 
     GridLocation getRobotLocation(){

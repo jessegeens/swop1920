@@ -17,18 +17,12 @@ public class GlobalController {
     //Controllers
     private ModelController modelController;
     private UIController uiController;
-    private GameWorld gameWorld;
-    private ArrayList<ActionType> actions;
-    private ArrayList<PredicateType> predicates;
 
     // Constructor
     public GlobalController(GameWorldType gameWorldType){
-        this.modelController = new ModelController(gameWorldType.getSupportedActions(), gameWorldType.getSupportedPredicates());
+        this.modelController = new ModelController(gameWorldType);
         //System.out.println(modelController.getModelBlocks());
         this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT);
-        this.gameWorld = gameWorldType.newWorldInstance();
-        this.actions = gameWorldType.getSupportedActions();
-        this.predicates = gameWorldType.getSupportedPredicates();
     }
     
     /**
@@ -90,9 +84,9 @@ public class GlobalController {
      * @param g the graphics object which the rendering uses
      */
     public void render(Graphics g){
-        //ProgramLocation gridLocation = new ProgramLocation(MyCanvasWindow.WIDTH*2/3, 0);
-        //gameWorld.render(g, gridLocation);
-        uiController.render(g, modelController.getState(), modelController.getBlockStates());
+        ProgramLocation gridLocation = new ProgramLocation(MyCanvasWindow.WIDTH*2/3, 0);
+        modelController.getGameWorld().render(g, gridLocation);
+        uiController.render(g, modelController.getBlockStates());
     }
 
 }

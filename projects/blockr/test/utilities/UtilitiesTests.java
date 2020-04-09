@@ -7,7 +7,7 @@ import org.junit.*;
 import java.util.ArrayList;
 
 public class UtilitiesTests {
-
+/*
     @Test
     public void getRightType() {
         BlockType blkt = BlockType.MOVEFORWARD;

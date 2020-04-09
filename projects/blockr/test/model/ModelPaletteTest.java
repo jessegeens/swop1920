@@ -8,7 +8,7 @@ import org.junit.Test;
 import utilities.*;
 
 public class ModelPaletteTest {
-
+/*
     @Test
     public void resetBlocks() {
         ModelPalette palette = new ModelPalette();
@@ -33,5 +33,5 @@ public class ModelPaletteTest {
     public void getPaletteBlocks() {
         ModelPalette palette = new ModelPalette();
         assertEquals(7, palette.getPaletteBlocks().size());
-    }
+    }*/
 }

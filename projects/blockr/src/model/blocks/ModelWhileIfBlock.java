@@ -2,6 +2,7 @@ package model.blocks;
 
 import java.util.ArrayList;
 
+import gameworldapi.PredicateType;
 import ui.UIBlock;
 import utilities.*;
 
@@ -32,6 +33,21 @@ public class ModelWhileIfBlock extends ModelBlock{
         connectionPoints.add(ConnectionPoint.CAVITYSOCKET);
         connectionPoints.add(ConnectionPoint.RIGHTSOCKET);
         super.setConnectionPoints(connectionPoints);
+    }
+
+    @Override
+    public ModelWhileIfBlock clone() {
+        return new ModelWhileIfBlock(this.getPos(), this.getBlockType());
+    }
+
+    //TODO
+    public boolean isNegated(){
+        return false;
+    }
+
+    //TODO
+    public PredicateType getPredicate(){
+        return null;
     }
 
     /**
@@ -175,7 +191,7 @@ public class ModelWhileIfBlock extends ModelBlock{
             throw new NoSuchFieldException("the WHILEIF block socket is null");
         }
 
-        while(!(current instanceof ModelWallInFrontBlock)){
+        while(!(current instanceof ModelPredicateBlock)){
             if(current instanceof ModelNotBlock){
                 not = !not;
             }

@@ -2,7 +2,6 @@ package model;
 
 import model.blocks.*;
 import ui.UIBlock;
-import utilities.ConnectionPoint;
 
 import java.util.ArrayList;
 
@@ -43,7 +42,7 @@ public class ConnectionHandler {
      * @param b The cavityBlock
      * @author Oberon Swings
      */
-    public void disconnectCavity(ModelWhileIfBlock a, ModelMoveBlock b){
+    public void disconnectCavity(ModelWhileIfBlock a, ModelActionBlock b){
         ModelBlock plug = b.getBottomPlug();
         ModelBlock socket = b.getTopSocket();
         b.setBottomPlug(null);

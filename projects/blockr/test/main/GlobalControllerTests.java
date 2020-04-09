@@ -13,7 +13,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class GlobalControllerTests {
-
+/*
     @Test
     public void HandleMouseEventDragPerformance(){
         GlobalController GC = new GlobalController();
@@ -22,7 +22,7 @@ public class GlobalControllerTests {
         GC.handleMouseEvent(502, 420, 420, 1);
         assertTrue(true);
     }
-
+*/
 
 
 

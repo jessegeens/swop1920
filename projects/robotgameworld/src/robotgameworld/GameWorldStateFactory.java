@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package robotgameworld;
+
 import gameworldapi.*;
 
 /**
@@ -21,7 +22,7 @@ public class GameWorldStateFactory {
      * Get the singleton instance
      *
      * @author Jesse Geens
-     * @return GameWorldStateFactory instance
+     * @return robotgameworld.GameWorldStateFactory instance
      */
     public static GameWorldStateFactory getInstance(){
         if(instance == null)
@@ -58,7 +59,7 @@ public class GameWorldStateFactory {
      *
      * @author Jesse Geens
      * @param state {robotGameWorldState}
-     * @return {GridLocation} new location of the robot
+     * @return {robotgameworld.GridLocation} new location of the robot
      */
     private GridLocation move(RobotGameWorldState state){
         switch(state.getRobotDirection()){

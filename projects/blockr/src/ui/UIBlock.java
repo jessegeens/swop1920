@@ -116,9 +116,7 @@ public class UIBlock{
                 this.renderCavityPlug(g,blockLocation);
                 this.renderCavitySocket(g,blockLocation,cavitySize);
                 break;
-            case MOVEFORWARD:
-            case TURNLEFT:
-            case TURNRIGHT:
+            case ACTION:
                 this.renderInnerBlock(g,blockLocation,highlighted,cavitySize);
                 this.renderBottomPlug(g,blockLocation,highlighted,cavitySize);
                 this.renderTopSocket(g,blockLocation,highlighted);
@@ -130,7 +128,7 @@ public class UIBlock{
                 this.renderRightSocket(g,blockLocation,highlighted,cavitySize);
                 this.renderLeftPlug(g,blockLocation,highlighted);
                 break;
-            case WALLINFRONT:
+            case PREDICATE:
                 this.renderInnerBlock(g,blockLocation,highlighted,cavitySize);
                 this.renderLeftPlug(g,blockLocation,highlighted);
                 this.renderNoRightSocket(g,blockLocation,highlighted,cavitySize);

@@ -1,28 +1,39 @@
 package model.blocks;
 
+import gameworldapi.*;
 import utilities.*;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 /**
  * Class representing the move forward, turn left and turn right blocks with one socket at the top and one plug at the bottom.
  */
-public class ModelMoveBlock extends ModelBlock{
+public class ModelActionBlock extends ModelBlock{
 
     private ModelBlock topSocket;
     private ModelBlock bottomPlug;
+    private ActionType action;
     
-    public ModelMoveBlock(ProgramLocation pos, BlockType type) {
+    public ModelActionBlock(ProgramLocation pos, BlockType type, ActionType action) {
         super(pos,type);
         this.setTopSocket(null);
         this.setBottomPlug(null);
+        this.action = action;
         ArrayList<ConnectionPoint> connectionPoints = new ArrayList<>();
         connectionPoints.add(ConnectionPoint.BOTTOMPLUG);
         connectionPoints.add(ConnectionPoint.TOPSOCKET);
         super.setConnectionPoints(connectionPoints);
     }
 
-
+    /**
+     *
+     * @return action {ActionType} block's action
+     * @author Jesse Geens
+     */
+    public ActionType getAction(){
+        return this.action;
+    }
 
 
     /**
@@ -30,6 +41,14 @@ public class ModelMoveBlock extends ModelBlock{
      */
     public void setBottomPlug(ModelBlock blk) {
         this.bottomPlug = blk;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ModelActionBlock clone() {
+        return new ModelActionBlock(this.getPos(), this.getBlockType(), this.getAction());
     }
 
     /**

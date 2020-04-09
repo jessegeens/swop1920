@@ -20,7 +20,16 @@ public class ModelNotBlock extends ModelBlock{
         connectionPoints.add(ConnectionPoint.RIGHTSOCKET);
         super.setConnectionPoints(connectionPoints);
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ModelBlock clone() {
+        return new ModelNotBlock(this.getPos(), this.getBlockType());
+    }
+
+
     /**
      * {@inheritDoc}
      */

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class ModelControllerTest {
 
+    /*
     @Test
     public void getBlockStates(){
         ModelController MC = new ModelController();
@@ -19,7 +20,7 @@ public class ModelControllerTest {
         MC.release(new Location (420, 420));
         MC.select(new Location(40, 200));
         MC.release(new Location(420, 500));
-    }
+    }*/
 
 
 

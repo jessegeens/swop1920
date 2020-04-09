@@ -1,6 +1,11 @@
+package robotgameworld;
+
 import java.awt.*;
 import java.util.ArrayList;
 import gameworldapi.*;
+import robotgameworld.ActionExecutor;
+import robotgameworld.GridLocation;
+import robotgameworld.RobotGameWorldState;
 
 public class UIController {
 
@@ -13,8 +18,8 @@ public class UIController {
     /**
      *
      * @param g Graphics object to draw on
-     * @param state {RobotGameWorldState} state to draw
-     * @param leftTop {GridLocation} Top-left location of the grid on the CanvasWindow
+     * @param state {robotgameworld.RobotGameWorldState} state to draw
+     * @param leftTop {robotgameworld.GridLocation} Top-left location of the grid on the CanvasWindow
      * @author Jesse Geens
      */
     public void render(Graphics g, RobotGameWorldState state, GridLocation leftTop){

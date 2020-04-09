@@ -6,7 +6,7 @@ package utilities;
  */
 public enum BlockType {
 
-    IF, WHILE, MOVEFORWARD, TURNLEFT, TURNRIGHT, WALLINFRONT, NOT;
+    IF, WHILE, NOT, ACTION, PREDICATE;
 
     public String getTitle(){
         switch(this){
@@ -14,16 +14,12 @@ public enum BlockType {
                 return "if";
             case WHILE:
                 return "while";
-            case TURNLEFT:
-                return "turn left";
-            case TURNRIGHT:
-                return "turn right";
-            case MOVEFORWARD:
-                return "move forward";
+            case ACTION:
+                return "action";
             case NOT:
                 return "not";
-            case WALLINFRONT:
-                return "wall in front";
+            case PREDICATE:
+                return "predicate";
             default:
                 return "";
         }

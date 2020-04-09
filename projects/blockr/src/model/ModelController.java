@@ -1,10 +1,11 @@
 package model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
 import gameworldapi.ActionType;
+import gameworldapi.GameWorld;
+import gameworldapi.GameWorldType;
 import gameworldapi.PredicateType;
 import main.MyCanvasWindow;
 import model.blocks.ModelBlock;
@@ -21,19 +22,20 @@ public class ModelController{
 
     private ModelPalette palette;
     private ModelProgramArea PArea;
-    private ProgramState state;
     private ProgramRunner programRunner;
+    private GameWorld gameWorld;
 
     private ModelBlock active = null;
 
 
     // Constructor
-    public ModelController(ArrayList<ActionType> actions, ArrayList<PredicateType> predicates){
+    public ModelController(GameWorldType worldType){
         //palette left, program middle, grid right
-        palette = new ModelPalette(actions, predicates);
+        palette = new ModelPalette(worldType.getSupportedActions(), worldType.getSupportedPredicates());
         PArea = new ModelProgramArea();
-        state = ProgramState.getInitialState();
-        programRunner = new ProgramRunner();
+        this.gameWorld = worldType.newWorldInstance();
+        //state = ProgramState.getInitialState();
+        programRunner = new ProgramRunner(this.gameWorld);
     }
 
     /**
@@ -56,7 +58,7 @@ public class ModelController{
                 if (PArea.validExecutionState()){//Check if all blocks are connected, and if so execute.
                     if(programRunner.isRunning()){
                         System.out.println("executing on keypress, is already running");
-                        state = programRunner.execute(state);
+                        programRunner.execute();
                     } else {
                         programRunner.initialise(PArea.getFirstBlock());
                     }
@@ -135,7 +137,7 @@ public class ModelController{
         if(inPalette(eventLocation) ){
             System.out.println("Palette release");
             if(active != null){
-                palette.resetBlocks();
+                palette.populateBlocks();
             }
             /*if (active instanceof ModelWhileIfBlock){
                 for (ModelBlock block : ((ModelWhileIfBlock) active).getCavityBlocks()){
@@ -183,6 +185,14 @@ public class ModelController{
     }
 
     /**
+     *
+     * @return the game world
+     */
+    public GameWorld getGameWorld(){
+        return gameWorld;
+    }
+
+    /**
      * 
      * @return all the blocks that are currently in the palette
      */
@@ -211,7 +221,4 @@ public class ModelController{
         return blockStates;
     }
 
-    public ProgramState getState() {
-        return state;
-    }
 }

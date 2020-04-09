@@ -15,7 +15,6 @@ public class UIController {
     private final int wHeight; //window height
 
     UIBlock uiBlock;
-    UIGrid uiGrid;
 
     // Constructor
     public UIController(int windowWidth, int windowHeight){

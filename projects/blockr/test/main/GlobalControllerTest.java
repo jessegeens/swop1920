@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class GlobalControllerTests {
+public class GlobalControllerTest {
 /*
     @Test
     public void HandleMouseEventDragPerformance(){

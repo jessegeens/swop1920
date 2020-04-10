@@ -132,20 +132,20 @@ public class ActionExecutor {
         Location possibleWall = new GridLocation(current.getRobotLocation().getX(), current.getRobotLocation().getY());
         switch (current.getRobotDirection()) {
             case LEFT:
-                possibleWall.add(-1, 0);
+                possibleWall = possibleWall.add(-1, 0);
                 break;
             case RIGHT:
-                possibleWall.add(1, 0);
+                possibleWall = possibleWall.add(1, 0);
                 break;
             case UP:
-                possibleWall.add(0, 1);
+                possibleWall = possibleWall.add(0, -1);
                 break;
             case DOWN:
-                possibleWall.add(0, -1);
+                possibleWall = possibleWall.add(0, 1);
                 break;
         }
         for (Location currentWall : WALLS) {
-            if (currentWall == possibleWall) return true;
+            if (currentWall.equals(possibleWall)) return true;
         }
         return false;
     }

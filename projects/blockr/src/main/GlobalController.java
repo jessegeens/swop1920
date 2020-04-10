@@ -46,15 +46,12 @@ public class GlobalController {
             case 501: //MOUSE_PRESSED
                 //return the topmost active block if one is in the click location
                 //you remove it from the local list in PArea until mouseup
-                System.out.println("MOUSE PRESSED start");
                 this.modelController.select(eventWindowLocation);
                 break;
             case 502: //MOUSE RELEASED
-                System.out.println("MOUSE RELEASED start");
                 this.modelController.release(eventWindowLocation);
                 break;
             case 506: //MOUSE_DRAGGED
-            System.out.println("MOUSE MOVED start");
                 this.modelController.drag(eventWindowLocation);
                 break;
             default:

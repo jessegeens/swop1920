@@ -87,7 +87,8 @@ public class ModelProgramArea{
      */
     public void handleMouseUp(ProgramLocation eveWindowLocation, ModelBlock activeB){
         this.addPABlock(activeB);
-        LH.setLocationBlock(activeB, eveWindowLocation);
+        ProgramLocation location = LH.moveToInBounds(eveWindowLocation);
+        LH.setLocationBlock(activeB, location);
         ModelBlock closest = LH.findClosestBlock(activeB, blocks);
         if (closest != null){
             CH.connect(closest, activeB);

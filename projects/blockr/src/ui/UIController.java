@@ -32,7 +32,6 @@ public class UIController {
     public void render(Graphics g, ArrayList<BlockState> blocks){
         ProgramLocation gridLocation = new ProgramLocation(wWidth*2/3, 0);
         UIBlock uiBlock = new UIBlock();
-        System.out.println("Rendering UI, blocks and grid");
         this.renderUI(g);
         for (BlockState block : blocks){
             uiBlock.render(g, block);

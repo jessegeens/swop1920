@@ -1,4 +1,4 @@
-package model;
+package model.Actions;
 
 public interface Action {
 

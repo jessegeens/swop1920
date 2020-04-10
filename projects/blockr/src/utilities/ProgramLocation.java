@@ -15,6 +15,10 @@ public final class ProgramLocation implements Location {
         this.y = j;
     }
 
+    public ProgramLocation clone(){
+        return new ProgramLocation(this.getX(), this.getY());
+    }
+
 
     /**
      * {@inheritDoc}

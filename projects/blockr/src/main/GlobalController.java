@@ -114,8 +114,8 @@ public class GlobalController {
                 break;
             case 90: //Z
                 if(id == 401){
-                    if(this.ctrl == true){
-                        if(this.shift == false){
+                    if(this.ctrl){
+                        if(!this.shift){
                             this.modelController.undo();
                         }
                         else{

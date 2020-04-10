@@ -130,7 +130,7 @@ public class ModelController{
      * @author Bert
      */
     protected boolean inPalette(ProgramLocation location){
-        if(location.getX() > 0 && location.getX() < MyCanvasWindow.WIDTH/3 ){
+        if(location.getX() >= 0 && location.getX() < MyCanvasWindow.WIDTH/3 ){
             return true;
         }
         return false;

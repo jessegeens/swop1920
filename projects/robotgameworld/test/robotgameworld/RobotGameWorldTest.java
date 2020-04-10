@@ -22,11 +22,21 @@ public class RobotGameWorldTest {
      * @author Jesse Geens
      * */
     @Test
-    public void WallInFrontTest() {
+    public void WallInFrontTestUnder() {
         RobotGameWorld gameWorld = new RobotGameWorld();
         GameWorldState state = new RobotGameWorldState(Direction.DOWN, new GridLocation(0, 1));
         gameWorld.restore(state);
         assertTrue(gameWorld.evaluate(Predicate.WALL_IN_FRONT));
     }
 
+    /**
+     * @author Jesse Geens
+     * */
+    @Test
+    public void WallInFrontTestRight() {
+        RobotGameWorld gameWorld = new RobotGameWorld();
+        GameWorldState state = new RobotGameWorldState(Direction.RIGHT, new GridLocation(0, 1));
+        gameWorld.restore(state);
+        assertFalse(gameWorld.evaluate(Predicate.WALL_IN_FRONT));
+    }
 }

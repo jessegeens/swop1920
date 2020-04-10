@@ -60,7 +60,7 @@ public class ProgramRunner {
                 this.current.setUnHighlight();
             }
             ActionResult result = ActionResult.FAILURE;
-            if(current instanceof ModelActionBlock && gameWorld != null){ //The gameWorld != null is here for debugging purposes!
+            if(current instanceof ModelActionBlock && gameWorld != null){
                 result = gameWorld.perform(((ModelActionBlock) current).getAction());
             }
             while (current instanceof ModelWhileIfBlock) this.current = findNextBlock();
@@ -96,7 +96,6 @@ public class ProgramRunner {
     private ModelBlock findNextBlock(){
 
         if (current instanceof ModelWhileIfBlock){
-            if (gameWorld == null) ((ModelWhileIfBlock) current).getCavityPlug(); //this is here for debugging purposes!
             if (((ModelWhileIfBlock) current).isNegated()) {
                 if (!(gameWorld.evaluate(((ModelWhileIfBlock) current).getPredicate()))) {
                     return ((ModelWhileIfBlock) current).getCavityPlug();

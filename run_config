@@ -1,4 +1,4 @@
 Blockr
 -run
 -edit configurations
---Program arguments "dir path" [space] robotgameworld.RobotGameWorldType
+--Program arguments "path/swop1920/projects/robotgameworld/out/production/robotgameworld/" [space] robotgameworld.RobotGameWorldType

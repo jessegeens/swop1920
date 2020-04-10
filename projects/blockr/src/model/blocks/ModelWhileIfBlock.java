@@ -41,14 +41,42 @@ public class ModelWhileIfBlock extends ModelBlock{
         return new ModelWhileIfBlock(this.getPos(), false);
     }
 
-    //TODO
+    /**
+     * Finds out if the predicate in the while/if block is negated
+     * @return true if the predicate is negated, false otherwise
+     * @author Oberon Swings
+     */
     public boolean isNegated(){
-        return false;
+        boolean negated = false;
+        ModelBlock current = this.getRightSocket();
+        while (!(current instanceof ModelPredicateBlock)){
+            if (current instanceof ModelNotBlock){
+                negated = !negated;
+                current = current.getRightSocket();
+            }
+            else {
+                System.out.println("A non NOT or PREDICATE block was found in the rightsocket somewhere");
+                return false;
+            }
+        }
+        return negated;
     }
 
-    //TODO
+    /**
+     * Finds out the predicate of the while/if block
+     * @return the predicate which is coupled to this while/if block
+     * @author Oberon Swings
+     */
     public PredicateType getPredicate(){
-        return null;
+        ModelBlock current = this.getRightSocket();
+        while (!(current instanceof ModelPredicateBlock)){
+            if (current == null){
+                System.out.println("A null block was found while searching for the PREDICATE block");
+                return null;
+            }
+            current = current.getRightSocket();
+        }
+        return ((ModelPredicateBlock)current).getPredicate();
     }
 
     public boolean isIf(){

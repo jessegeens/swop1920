@@ -113,7 +113,7 @@ public class ProgramRunner {
             }
         }
         
-        if (current.getBottomPlug() != null && current.getBottomPlug().isIf()){
+        if (current.getBottomPlug() != null && current.getBottomPlug().isIf() && ((ModelWhileIfBlock)current.getBottomPlug()).getCavitySocket() == current){
             return current.getBottomPlug().getBottomPlug(); //If block should only be executed once.
         } 
         else return current.getBottomPlug();

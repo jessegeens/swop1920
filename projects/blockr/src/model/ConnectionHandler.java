@@ -18,6 +18,9 @@ public class ConnectionHandler {
      * @author Oberon Swings
      */
     public void disconnect(ModelBlock a) {
+        if (a.isInCavity()){
+            disconnectCavity(a);
+        }
         if (a.hasTopSocket() && a.getTopSocket() != null){
             a.getTopSocket().setBottomPlug(null);
             a.setTopSocket(null);
@@ -38,21 +41,21 @@ public class ConnectionHandler {
 
     /**
      * Disconnects block from the cavity and connects its upper and lower neighbour in the cavity to eachother.
-     * @param a The while if block
-     * @param b The cavityBlock
+     * @param a The cavityBlock
      * @author Oberon Swings
      */
-    public void disconnectCavity(ModelWhileIfBlock a, ModelActionBlock b){
-        ModelBlock plug = b.getBottomPlug();
-        ModelBlock socket = b.getTopSocket();
-        b.setBottomPlug(null);
-        b.setTopSocket(null);
-        if (plug == a){
-            a.setCavitySocket(socket);
+    public void disconnectCavity(ModelBlock a){
+        ModelWhileIfBlock b = a.getSurroundingWhileIfBlock();
+        ModelBlock plug = a.getBottomPlug();
+        ModelBlock socket = a.getTopSocket();
+        a.setBottomPlug(null);
+        a.setTopSocket(null);
+        if (plug == b){
+            b.setCavitySocket(socket);
         }
         else plug.setTopSocket(socket);
-        if (socket == a){
-            a.setCavityPlug(plug);
+        if (socket == b){
+            b.setCavityPlug(plug);
         }
         else socket.setBottomPlug(plug);
     }

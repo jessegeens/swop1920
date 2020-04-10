@@ -233,5 +233,20 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
     public boolean isIf(){
         return false;
     }
+
+    public String getTitle(){
+        if (this instanceof ModelWhileIfBlock) {
+            if (this.isIf()) return "If";
+            else return "While";
+        }
+        if (this instanceof ModelNotBlock) return "Not";
+        if (this instanceof ModelActionBlock){
+            return ((ModelActionBlock)this).getAction().toString();
+        }
+        if (this instanceof ModelPredicateBlock){
+            return ((ModelPredicateBlock)this).getPredicate().toString();
+        }
+        return "Block";
+    }
     
 }

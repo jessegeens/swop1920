@@ -12,6 +12,7 @@ public class BlockState {
     private ArrayList<ConnectionPoint> connectionPoints;
     private boolean highlighted;
     private int cavitySize;
+    private String title;
 
     /**
      * Constructor for the blockState
@@ -22,6 +23,7 @@ public class BlockState {
         this.blockLocation = block.getPos();
         this.highlighted = block.isHighlighted();
         this.connectionPoints = block.getConnectionPoints();
+        this.title = block.getTitle();
         if (block instanceof ModelWhileIfBlock){
             cavitySize = ((ModelWhileIfBlock)block).getCavityBlocks().size();
         }
@@ -63,4 +65,14 @@ public class BlockState {
     public int getCavitySize() {
         return cavitySize;
     }
+
+    /**
+     *
+     * @return the title of the block
+     * @author Oberon Swings
+     */
+    public String getTitle() {
+        return title;
+    }
+
 }

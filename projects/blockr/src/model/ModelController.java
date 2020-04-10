@@ -1,15 +1,13 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 
-import gameworldapi.ActionType;
 import gameworldapi.GameWorld;
 import gameworldapi.GameWorldType;
-import gameworldapi.PredicateType;
 import main.MyCanvasWindow;
 import model.blocks.ModelBlock;
-import model.blocks.ModelWhileIfBlock;
 import ui.BlockState;
 import utilities.*;
 
@@ -38,37 +36,7 @@ public class ModelController{
         programRunner = new ProgramRunner(this.gameWorld);
     }
 
-    /**
-     * This function handles key events by telling the model controller
-     * to either step through the execution or stop running the program
-     * 
-     * TODO: propagate to modelController
-     * 
-     * @param id id of the event
-     * @param keyCode keyCode of the pressed key: - 27  = ESC
-     *              see: http://keycode.info      - 65  = A
-     *                                            - 116 = F5 
-     * @param keyChar character of the pressed key
-     */
-    public void handleKeyEvent(int id, int keyCode, char keyChar){
-        System.out.println("key pressed");
-        switch(keyCode){
-            case 65: //A;
-            case 116: //F5;
-                if (PArea.validExecutionState()){//Check if all blocks are connected, and if so execute.
-                    if(programRunner.isRunning()){
-                        System.out.println("executing on keypress, is already running");
-                        programRunner.execute();
-                    } else {
-                        programRunner.initialise(PArea.getFirstBlock());
-                    }
-                } 
-                break;
-            case 27: //Esc
-                programRunner.reset();
-                break;
-        }        
-    }
+
 
     /**
      * Try to start the program or do the next step in program execution
@@ -98,13 +66,26 @@ public class ModelController{
         programRunner.reset();
     }
 
+
+
+
+
+    public Stack<Action> undoStack = new Stack();
     /**
      * Undo the block or game steps
      *
      * @author Bert
      *
+     * Still WIP
+     *
      */
     public void undo(){
+        if(!undoStack.empty()){
+            Action current = undoStack.pop();
+            current.undo();
+        }
+
+        //TODO add to redo stack
         System.out.println("UNDO");
 
     }
@@ -113,6 +94,8 @@ public class ModelController{
      * Redo the block or game steps
      *
      * @author Bert
+     *
+     * Still WIP
      *
      */
     public void redo(){
@@ -151,6 +134,8 @@ public class ModelController{
     }
 
 
+    ProgramLocation oldPos = null;
+
     /**
      * Handle a possible block selection (if the position is inbounds of a block)
      * 
@@ -169,7 +154,10 @@ public class ModelController{
         }
         else if(this.inProgramArea(eventLocation)){
             System.out.println("Programarea select");
-            active = PArea.handleMouseDown(eventLocation);
+            active = PArea.selectBlock(eventLocation);
+            if(active != null){
+                oldPos = active.getPos();
+            }
         }
 
     }
@@ -185,6 +173,7 @@ public class ModelController{
      * @author Bert
      */
 
+    //Each release is a state
     public void release(ProgramLocation eventLocation){
         if(inPalette(eventLocation) ){
             System.out.println("Palette release");
@@ -200,9 +189,12 @@ public class ModelController{
         }
         else if(this.inProgramArea(eventLocation)){
             System.out.println("Programarea release");
-            PArea.handleMouseUp(eventLocation, active);
+            PArea.findAndConnect(eventLocation, active);
+            undoStack.push(new MoveAction(active,this.oldPos, active.getPos()));
             active = null;
-            if (PArea.maxReached()) palette.removeBlocks();
+            if (PArea.maxReached()){
+                palette.removeBlocks();
+            }
         }
         
     }

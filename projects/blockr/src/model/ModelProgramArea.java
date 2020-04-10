@@ -68,7 +68,7 @@ public class ModelProgramArea{
      * @return block to be returned
      * @author Bert
      */
-    public ModelBlock handleMouseDown(ProgramLocation eventWindowLocation){
+    public ModelBlock selectBlock(ProgramLocation eventWindowLocation){
         for(int i = blocks.size() - 1; i >= 0; i--){
             if(blocks.get(i).inBoundsOfElement(eventWindowLocation)){
                 ModelBlock toBeReturned = blocks.get(i);
@@ -85,7 +85,7 @@ public class ModelProgramArea{
      * @param activeB activeBlock the current active block
      * @author Oberon Swings
      */
-    public void handleMouseUp(ProgramLocation eveWindowLocation, ModelBlock activeB){
+    public void findAndConnect(ProgramLocation eveWindowLocation, ModelBlock activeB){
         this.addPABlock(activeB);
         LH.setLocationBlock(activeB, eveWindowLocation);
         ModelBlock closest = LH.findClosestBlock(activeB, blocks);

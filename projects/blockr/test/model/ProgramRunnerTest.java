@@ -96,4 +96,22 @@ public class ProgramRunnerTest {
         PR.execute();
         assertTrue(finishBlock.isHighlighted());
     }
+
+    @Test
+    public void executeEnd(){
+        ProgramRunner PR = new ProgramRunner(GW);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), Actions.get(0));
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), Actions.get(0));
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(113, 303), Actions.get(0));
+        forwardBlock.setBottomPlug(leftBlock);
+        leftBlock.setTopSocket(forwardBlock);
+        leftBlock.setBottomPlug(rightBlock);
+        rightBlock.setTopSocket(leftBlock);
+        PR.initialise(forwardBlock);
+        PR.execute();
+        PR.execute();
+        PR.execute();
+        PR.execute();
+        assertFalse(PR.isRunning());
+    }
 }

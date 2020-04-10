@@ -33,23 +33,26 @@ class ModelPalette{
     }
 
     /**
-     * TODO make location generation dynamic
      * Fill the list of blocks with one of each type
      * @author Jesse Geens
      */
     public void populateBlocks(){
         this.blocks = new ArrayList<ModelBlock>();
+        int i = 0;
         for (ActionType action : actions){
-            ModelActionBlock actionBlock = new ModelActionBlock(new ProgramLocation(0, 0), action);
+            ModelActionBlock actionBlock = new ModelActionBlock(new ProgramLocation(180, 140 + 120*i), action);
             blocks.add(actionBlock);
+            i++;
         }
+        i = 0;
         for (PredicateType predicate : predicates){
-            ModelPredicateBlock predicateBlock = new ModelPredicateBlock(new ProgramLocation(0, 0), predicate);
+            ModelPredicateBlock predicateBlock = new ModelPredicateBlock(new ProgramLocation(20, 260 + 120*i), predicate);
             blocks.add(predicateBlock);
+            i++;
         }
-        blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 500), false));
-        blocks.add(new ModelWhileIfBlock(new ProgramLocation(180, 340), false));
-        blocks.add(new ModelNotBlock(new ProgramLocation(180, 180)));
+        blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 20), true));
+        blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 140), false));
+        blocks.add(new ModelNotBlock(new ProgramLocation(180, 20)));
 
     }
 

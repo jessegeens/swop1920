@@ -137,7 +137,6 @@ public class ProgramRunnerTest {
         PR.execute();
         PR.execute();
         PR.execute();
-        PR.execute();
         assertFalse(PR.isRunning());
     }
 }

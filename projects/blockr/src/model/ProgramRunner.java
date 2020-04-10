@@ -46,7 +46,7 @@ public class ProgramRunner {
             throw new IllegalStateException("tried executing the program without initialising it");
         }
 
-        ModelBlock next = findNextBlock();
+        ModelBlock next;
         if(this.current == null) {
             reset();
             return null;
@@ -54,6 +54,7 @@ public class ProgramRunner {
             //TODO: used to reset to initial state
         }
         else{
+            next = findNextBlock();
             if (next != null){
                 this.highlightNext();
             }

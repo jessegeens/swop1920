@@ -208,45 +208,6 @@ public class ModelWhileIfBlock extends ModelBlock{
     }
 
     /**
-     * Method which returns the condition that results from the blocks hanging to the right
-     * 
-     * @return the condition
-     * @throws NoSuchFieldException if the WHILEIF rightsocket or the chain of condition blocks has an empty right sockket
-     * (method should only be called when the blocks are in a valid state to run the program)
-     * 
-     * @author Bert De Vleeschouwer
-     */
-    public Condition getCondition() throws NoSuchFieldException {
-        boolean not = false;
-
-        ModelBlock current = this.getRightSocket();
-        if(current == null){
-            throw new NoSuchFieldException("the WHILEIF block socket is null");
-        }
-
-        while(!(current instanceof ModelPredicateBlock)){
-            if(current instanceof ModelNotBlock){
-                not = !not;
-            }
-            if (current.hasRightSocket()) current = current.getRightSocket();
-            if(current == null){
-                throw new NoSuchFieldException("the right socket of a condition block is null");
-            }
-        }
-
-        Condition toBeReturned;
-
-        if(not){
-            toBeReturned = Condition.NOT_WALL_IN_FRONT;
-        }
-        else{
-            toBeReturned = Condition.WALL_IN_FRONT;
-        }
-
-        return toBeReturned;
-    }
-
-    /**
      * Calculates the distance between cavityPlug and TopSocket
      * @param top the block with the topSocket
      * @return the distance form the cavityPlug to the topSocket of the top block

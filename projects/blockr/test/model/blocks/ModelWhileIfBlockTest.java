@@ -1,29 +1,27 @@
 package model.blocks;
 
 import static org.junit.Assert.*;
+
+import gameworldapi.PredicateType;
 import org.junit.Test;
 
 import utilities.*;
 
 public class ModelWhileIfBlockTest {
 
-    /*
+
     @Test
-    public void getCondition(){
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new Location(100,100), BlockType.WHILE);
-        ModelNotBlock notBlock = new ModelNotBlock(new Location(180,100), BlockType.NOT);
-        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new Location(260, 100), BlockType.WALLINFRONT);
+    public void getPredicate(){
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(180,100));
+        PredicateType pt = new PredicateType() {};
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(260, 100), pt);
         whileBlock.setRightSocket(notBlock);
         notBlock.setLeftPlug(whileBlock);
         notBlock.setRightSocket(wifBlock);
         wifBlock.setLeftPlug(notBlock);
-        Condition whileCondition = null;
-        try {
-            whileCondition = whileBlock.getCondition();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        }
-        assertEquals(Condition.NOT_WALL_IN_FRONT, whileCondition);
-    }*/
+        PredicateType whilePredicate = whileBlock.getPredicate();
+        assertEquals(pt, whilePredicate);
+    }
 
 }

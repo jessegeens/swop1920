@@ -199,10 +199,12 @@ public class ModelController{
             this.active = null;
         }
         else if(this.inProgramArea(eventLocation)){
-            System.out.println("Programarea release");
-            PArea.handleMouseUp(eventLocation, active);
-            active = null;
-            if (PArea.maxReached()) palette.removeBlocks();
+            if(active != null) {
+                System.out.println("Programarea release");
+                PArea.handleMouseUp(eventLocation, active);
+                active = null;
+                if (PArea.maxReached()) palette.removeBlocks();
+            }
         }
         
     }

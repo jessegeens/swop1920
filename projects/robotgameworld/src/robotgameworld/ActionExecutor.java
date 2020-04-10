@@ -1,6 +1,8 @@
 package robotgameworld;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import gameworldapi.*;
 
 /**
@@ -14,8 +16,8 @@ public class ActionExecutor {
     static ActionExecutor instance;
 
     //Parameters, TODO check whether these are at the correct location
-    private final GridLocation GOAL_CELL = new GridLocation(5, 5);
-    private final ArrayList<GridLocation> WALLS = new ArrayList<GridLocation>();
+    private final GridLocation GOAL_CELL = new GridLocation(4, 4);
+    private final ArrayList<GridLocation> WALLS = new ArrayList<GridLocation>(Arrays.asList(new GridLocation(0, 2), new GridLocation(1, 2), new GridLocation(4, 3)));
     private int GRID_WIDTH = 5;
     private int GRID_HEIGHT = 10;
 

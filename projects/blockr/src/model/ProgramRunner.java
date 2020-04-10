@@ -40,8 +40,9 @@ public class ProgramRunner {
      * 3. then it checks whether it is finished
      *  3a. if necessary, the program stops running
      *  3b. otherwise, the next block is highlighted
+     * @author Jesse Geens
      */
-    public ActionResult execute(){
+    public void execute(){
         if(!(isRunning())){
             throw new IllegalStateException("tried executing the program without initialising it");
         }
@@ -49,7 +50,6 @@ public class ProgramRunner {
         ModelBlock next;
         if(this.current == null) {
             reset();
-            return null;
             //return gameWorld.();
             //TODO: used to reset to initial state
         }
@@ -61,13 +61,21 @@ public class ProgramRunner {
             else{
                 this.current.setUnHighlight();
             }
-            ActionResult result = ActionResult.FAILURE;
             if(current instanceof ModelActionBlock && gameWorld != null){
-                result = gameWorld.perform(((ModelActionBlock) current).getAction());
+                ActionResult result = gameWorld.perform(((ModelActionBlock) current).getAction());
+                switch (result){
+                    case FAILURE:
+                        break;
+                    case SUCCESS:
+                        //TODO: Bert, hier moet ge de action aan de action stack toevoegen voor undo/redo
+                        break;
+                    case GAME_OVER:
+                        //TODO: bekijken wat we gaan doen als het game over is
+                        break;
+                }
             }
             this.current = next;
             while (current instanceof ModelWhileIfBlock) this.current = findNextBlock();
-            return result;
         }
     }
 

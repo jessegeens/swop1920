@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import gameworldapi.ActionType;
 import gameworldapi.PredicateType;
 import model.blocks.*;
-import utilities.BlockType;
 import utilities.ProgramLocation;
 
 /**
@@ -17,15 +16,6 @@ class ModelPalette{
     private final ArrayList<PredicateType> predicates;
     private ArrayList<ModelBlock> blocks;
 
-    /*private final ProgramLocation turnLeftWindowLocation = new ProgramLocation(20, 20);
-    private final ProgramLocation turnRightWindowLocation = new ProgramLocation(180, 20);
-    private final ProgramLocation forwardWindowLocation = new ProgramLocation(20, 180);
-    private final ProgramLocation notWindowLocation = new ProgramLocation(180, 180);
-    private final ProgramLocation wallInFrontWindowLocation = new ProgramLocation(20, 340);
-    private final ProgramLocation whileWindowLocation = new ProgramLocation(180, 340);
-    private final ProgramLocation ifWindowLocation = new ProgramLocation(20, 500);*/
-
-
     // Constructor
     public ModelPalette(ArrayList<ActionType> actions, ArrayList<PredicateType> predicates){
         this.actions = actions;
@@ -34,23 +24,26 @@ class ModelPalette{
     }
 
     /**
-     * TODO make location generation dynamic
      * Fill the list of blocks with one of each type
      * @author Jesse Geens
      */
     public void populateBlocks(){
         this.blocks = new ArrayList<ModelBlock>();
+        int i = 0;
         for (ActionType action : actions){
-            ModelActionBlock actionBlock = new ModelActionBlock(new ProgramLocation(0, 0), BlockType.ACTION, action);
+            ModelActionBlock actionBlock = new ModelActionBlock(new ProgramLocation(180, 140 + 120*i), action);
             blocks.add(actionBlock);
+            i++;
         }
+        i = 0;
         for (PredicateType predicate : predicates){
-            ModelPredicateBlock predicateBlock = new ModelPredicateBlock(new ProgramLocation(0, 0), BlockType.PREDICATE, predicate);
+            ModelPredicateBlock predicateBlock = new ModelPredicateBlock(new ProgramLocation(20, 260 + 120*i), predicate);
             blocks.add(predicateBlock);
+            i++;
         }
-        blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 500), BlockType.IF));
-        blocks.add(new ModelWhileIfBlock(new ProgramLocation(180, 340), BlockType.WHILE));
-        blocks.add(new ModelNotBlock(new ProgramLocation(180, 180), BlockType.NOT));
+        blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 20), true));
+        blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 140), false));
+        blocks.add(new ModelNotBlock(new ProgramLocation(180, 20)));
 
     }
 

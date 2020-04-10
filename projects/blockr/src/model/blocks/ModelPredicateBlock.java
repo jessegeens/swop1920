@@ -1,7 +1,6 @@
 package model.blocks;
 
 import gameworldapi.PredicateType;
-import ui.UIBlock;
 import utilities.*;
 
 import java.util.ArrayList;
@@ -14,8 +13,8 @@ public class ModelPredicateBlock extends ModelBlock{
     private PredicateType predicate;
 
     // Constructor
-    public ModelPredicateBlock(ProgramLocation pos, BlockType type, PredicateType predicate){
-        super(pos,type);
+    public ModelPredicateBlock(ProgramLocation pos, PredicateType predicate){
+        super(pos);
         this.setLeftPlug(null);
         this.predicate = predicate;
         ArrayList<ConnectionPoint> connectionPoints = new ArrayList<>();
@@ -36,7 +35,7 @@ public class ModelPredicateBlock extends ModelBlock{
      */
     @Override
     public ModelBlock clone() {
-        return new ModelPredicateBlock(this.getPos(), this.getBlockType(), this.getPredicate());
+        return new ModelPredicateBlock(this.getPos(), this.getPredicate());
     }
 
     /**

@@ -16,11 +16,12 @@ public class ModelWhileIfBlock extends ModelBlock{
     private ModelBlock rightSocket;
     private ModelBlock cavitySocket;
     private ModelBlock cavityPlug;
+    private boolean isIf;
 
     // Constructor
-    public ModelWhileIfBlock(ProgramLocation pos, BlockType type){
-        super(pos,type);
-
+    public ModelWhileIfBlock(ProgramLocation pos, boolean isIf){
+        super(pos);
+        this.isIf = isIf;
         this.setTopSocket(null);
         this.setBottomPlug(null);
         this.setRightSocket(null);
@@ -37,17 +38,49 @@ public class ModelWhileIfBlock extends ModelBlock{
 
     @Override
     public ModelWhileIfBlock clone() {
-        return new ModelWhileIfBlock(this.getPos(), this.getBlockType());
+        return new ModelWhileIfBlock(this.getPos(), false);
     }
 
-    //TODO
+    /**
+     * Finds out if the predicate in the while/if block is negated
+     * @return true if the predicate is negated, false otherwise
+     * @author Oberon Swings
+     */
     public boolean isNegated(){
-        return false;
+        boolean negated = false;
+        ModelBlock current = this.getRightSocket();
+        while (!(current instanceof ModelPredicateBlock)){
+            if (current instanceof ModelNotBlock){
+                negated = !negated;
+                current = current.getRightSocket();
+            }
+            else {
+                System.out.println("A non NOT or PREDICATE block was found in the rightsocket somewhere");
+                return false;
+            }
+        }
+        return negated;
     }
 
-    //TODO
+    /**
+     * Finds out the predicate of the while/if block
+     * @return the predicate which is coupled to this while/if block
+     * @author Oberon Swings
+     */
     public PredicateType getPredicate(){
-        return null;
+        ModelBlock current = this.getRightSocket();
+        while (!(current instanceof ModelPredicateBlock)){
+            if (current == null){
+                System.out.println("A null block was found while searching for the PREDICATE block");
+                return null;
+            }
+            current = current.getRightSocket();
+        }
+        return ((ModelPredicateBlock)current).getPredicate();
+    }
+
+    public boolean isIf(){
+        return isIf;
     }
 
     /**
@@ -172,45 +205,6 @@ public class ModelWhileIfBlock extends ModelBlock{
      */
     public ProgramLocation getCavityPlugPos() {
         return this.getPos().add(2*UIBlock.STD_WIDTH/3, 2*UIBlock.STD_HEIGHT/3);
-    }
-
-    /**
-     * Method which returns the condition that results from the blocks hanging to the right
-     * 
-     * @return the condition
-     * @throws NoSuchFieldException if the WHILEIF rightsocket or the chain of condition blocks has an empty right sockket
-     * (method should only be called when the blocks are in a valid state to run the program)
-     * 
-     * @author Bert De Vleeschouwer
-     */
-    public Condition getCondition() throws NoSuchFieldException {
-        boolean not = false;
-
-        ModelBlock current = this.getRightSocket();
-        if(current == null){
-            throw new NoSuchFieldException("the WHILEIF block socket is null");
-        }
-
-        while(!(current instanceof ModelPredicateBlock)){
-            if(current instanceof ModelNotBlock){
-                not = !not;
-            }
-            if (current.hasRightSocket()) current = current.getRightSocket();
-            if(current == null){
-                throw new NoSuchFieldException("the right socket of a condition block is null");
-            }
-        }
-
-        Condition toBeReturned;
-
-        if(not){
-            toBeReturned = Condition.NOT_WALL_IN_FRONT;
-        }
-        else{
-            toBeReturned = Condition.WALL_IN_FRONT;
-        }
-
-        return toBeReturned;
     }
 
     /**

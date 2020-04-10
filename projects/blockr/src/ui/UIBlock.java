@@ -1,5 +1,6 @@
 package ui;
 import java.awt.*;
+import java.util.ArrayList;
 
 
 import model.blocks.ModelBlock;
@@ -103,42 +104,20 @@ public class UIBlock{
      */
     public void render(Graphics g, BlockState blockState) {
         ProgramLocation blockLocation = blockState.getBlockLocation();
-        BlockType blockType = blockState.getBlockType();
+        ArrayList<ConnectionPoint> connectionPoints = blockState.getConnectionPoints();
         boolean highlighted = blockState.isHighlighted();
         int cavitySize = blockState.getCavitySize();
-        switch (blockType) {
-            case IF:
-            case WHILE:
-                this.renderInnerBlock(g,blockLocation,highlighted,cavitySize);
-                this.renderBottomPlug(g,blockLocation,highlighted,cavitySize);
-                this.renderTopSocket(g,blockLocation,highlighted);
-                this.renderRightSocket(g,blockLocation,highlighted,cavitySize);
-                this.renderCavityPlug(g,blockLocation);
-                this.renderCavitySocket(g,blockLocation,cavitySize);
-                break;
-            case ACTION:
-                this.renderInnerBlock(g,blockLocation,highlighted,cavitySize);
-                this.renderBottomPlug(g,blockLocation,highlighted,cavitySize);
-                this.renderTopSocket(g,blockLocation,highlighted);
-                this.renderNoRightSocket(g,blockLocation,highlighted,cavitySize);
-                break;
-            case NOT:
-                this.renderInnerBlock(g,blockLocation,highlighted,cavitySize);
-                this.renderNoTopSocket(g,blockLocation,highlighted);
-                this.renderRightSocket(g,blockLocation,highlighted,cavitySize);
-                this.renderLeftPlug(g,blockLocation,highlighted);
-                break;
-            case PREDICATE:
-                this.renderInnerBlock(g,blockLocation,highlighted,cavitySize);
-                this.renderLeftPlug(g,blockLocation,highlighted);
-                this.renderNoRightSocket(g,blockLocation,highlighted,cavitySize);
-                this.renderNoTopSocket(g,blockLocation,highlighted);
-                break;
-            default:
-                break;
-        }
+        renderInnerBlock(g, blockLocation, highlighted, cavitySize);
+        if (connectionPoints.contains(ConnectionPoint.TOPSOCKET)) this.renderTopSocket(g, blockLocation, highlighted);
+        else this.renderNoTopSocket(g, blockLocation, highlighted);
+        if (connectionPoints.contains(ConnectionPoint.BOTTOMPLUG)) this.renderBottomPlug(g, blockLocation, highlighted, cavitySize);
+        if (connectionPoints.contains(ConnectionPoint.RIGHTSOCKET)) this.renderRightSocket(g, blockLocation, highlighted, cavitySize);
+        else this.renderNoRightSocket(g, blockLocation, highlighted, cavitySize);
+        if (connectionPoints.contains(ConnectionPoint.LEFTPLUG)) this.renderLeftPlug(g, blockLocation, highlighted);
+        if (connectionPoints.contains(ConnectionPoint.CAVITYPLUG)) this.renderCavityPlug(g, blockLocation);
+        if (connectionPoints.contains(ConnectionPoint.CAVITYSOCKET)) this.renderCavitySocket(g, blockLocation, cavitySize);
         g.setColor(Color.WHITE);
-        g.drawString(blockType.getTitle(), blockLocation.getX() + 10, blockLocation.getY() + (STD_HEIGHT / 2));
+        g.drawString(blockState.getTitle(), blockLocation.getX() + 10, blockLocation.getY() + (STD_HEIGHT / 2));
     }
 
 

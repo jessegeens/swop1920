@@ -14,8 +14,8 @@ public class ConnectionHandlerTest {
     @Test
     public void disconnectTopSocket() {
         ConnectionHandler CC = new ConnectionHandler();
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100,20), BlockType.ACTION, null);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100,20), null);
         forwardBlock.setTopSocket(leftBlock);
         leftBlock.setBottomPlug(forwardBlock);
         CC.disconnect(forwardBlock);
@@ -25,8 +25,8 @@ public class ConnectionHandlerTest {
     @Test
     public void disconnectTopSocketInverse() {
         ConnectionHandler CC = new ConnectionHandler();
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100,20), BlockType.ACTION, null);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100,20), null);
         forwardBlock.setTopSocket(leftBlock);
         leftBlock.setBottomPlug(forwardBlock);
         CC.disconnect(leftBlock);
@@ -36,8 +36,8 @@ public class ConnectionHandlerTest {
     @Test
     public void disconnectBottomPlug() {
         ConnectionHandler CC = new ConnectionHandler();
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100,20), BlockType.ACTION, null);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100,20), null);
         forwardBlock.setBottomPlug(leftBlock);
         leftBlock.setTopSocket(forwardBlock);
         CC.disconnect(forwardBlock);
@@ -47,8 +47,8 @@ public class ConnectionHandlerTest {
     @Test
     public void disconnectBottomPlugInverse() {
         ConnectionHandler CC = new ConnectionHandler();
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100,20), BlockType.ACTION, null);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100,20), null);
         forwardBlock.setBottomPlug(leftBlock);
         leftBlock.setTopSocket(forwardBlock);
         CC.disconnect(leftBlock);
@@ -58,8 +58,8 @@ public class ConnectionHandlerTest {
     @Test
     public void disconnectRightSocket() {
         ConnectionHandler CC = new ConnectionHandler();
-        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(100,100), BlockType.NOT);
-        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(100,20), BlockType.PREDICATE, null);
+        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(100,100));
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(100,20), null);
         notBlock.setRightSocket(wifBlock);
         wifBlock.setLeftPlug(notBlock);
         CC.disconnect(notBlock);
@@ -69,8 +69,8 @@ public class ConnectionHandlerTest {
     @Test
     public void disconnectRightSocketInverse() {
         ConnectionHandler CC = new ConnectionHandler();
-        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(100,100), BlockType.NOT);
-        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(100,20), BlockType.PREDICATE, null);
+        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(100,100));
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(100,20), null);
         notBlock.setRightSocket(wifBlock);
         wifBlock.setLeftPlug(notBlock);
         CC.disconnect(wifBlock);
@@ -80,8 +80,8 @@ public class ConnectionHandlerTest {
     @Test
     public void disconnectLeftPlug() {
         ConnectionHandler CC = new ConnectionHandler();
-        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(100,100), BlockType.NOT);
-        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(100,20), BlockType.PREDICATE, null);
+        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(100,100));
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(100,20), null);
         notBlock.setRightSocket(wifBlock);
         wifBlock.setLeftPlug(notBlock);
         CC.disconnect(wifBlock);
@@ -91,8 +91,8 @@ public class ConnectionHandlerTest {
     @Test
     public void disconnectLeftPlugInverse() {
         ConnectionHandler CC = new ConnectionHandler();
-        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(100,100), BlockType.NOT);
-        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(100,20), BlockType.PREDICATE, null);
+        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(100,100));
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(100,20), null);
         notBlock.setRightSocket(wifBlock);
         wifBlock.setLeftPlug(notBlock);
         CC.disconnect(notBlock);
@@ -102,8 +102,8 @@ public class ConnectionHandlerTest {
     @Test
     public void disconnectCavity(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), BlockType.ACTION, null);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), null);
         whileBlock.setCavityPlug(forwardBlock);
         whileBlock.setCavitySocket(forwardBlock);
         forwardBlock.setTopSocket(whileBlock);
@@ -115,10 +115,10 @@ public class ConnectionHandlerTest {
     @Test
     public void disconnectOneCavityManySize(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(400,400), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(400, 550), BlockType.ACTION, null);
-        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(400, 700), BlockType.ACTION, null);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(400,400), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(400, 550), null);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(400, 700), null);
         forwardBlock.setTopSocket(whileBlock);
         whileBlock.setCavityPlug(forwardBlock);
         leftBlock.setTopSocket(forwardBlock);
@@ -134,10 +134,10 @@ public class ConnectionHandlerTest {
     @Test
     public void disconnectOneCavityManyTop(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(400,400), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(400, 550), BlockType.ACTION, null);
-        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(400, 700), BlockType.ACTION, null);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(400,400), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(400, 550), null);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(400, 700), null);
         forwardBlock.setTopSocket(whileBlock);
         whileBlock.setCavityPlug(forwardBlock);
         leftBlock.setTopSocket(forwardBlock);
@@ -153,10 +153,10 @@ public class ConnectionHandlerTest {
     @Test
     public void disconnectOneCavityManyBottom(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(400,400), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(400, 550), BlockType.ACTION, null);
-        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(400, 700), BlockType.ACTION, null);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(400,400), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(400, 550), null);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(400, 700), null);
         forwardBlock.setTopSocket(whileBlock);
         whileBlock.setCavityPlug(forwardBlock);
         leftBlock.setTopSocket(forwardBlock);
@@ -172,8 +172,8 @@ public class ConnectionHandlerTest {
     @Test
     public void connectTopBottom() {
         ConnectionHandler CC = new ConnectionHandler();
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100,20), BlockType.ACTION, null);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100,20), null);
         CC.connectTopBottom(leftBlock,forwardBlock);
         assertEquals(leftBlock, forwardBlock.getTopSocket());
     }
@@ -181,8 +181,8 @@ public class ConnectionHandlerTest {
     @Test
     public void generalConnectTopBottom() {
         ConnectionHandler CC = new ConnectionHandler();
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100,20), BlockType.ACTION, null);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100,20), null);
         CC.connect(leftBlock,forwardBlock);
         assertEquals(leftBlock, forwardBlock.getTopSocket());
     }
@@ -190,8 +190,8 @@ public class ConnectionHandlerTest {
     @Test
     public void connectTopBottomInverse() {
         ConnectionHandler CC = new ConnectionHandler();
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100,20), BlockType.ACTION, null);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100,20), null);
         CC.connectTopBottom(leftBlock,forwardBlock);
         assertEquals(forwardBlock, leftBlock.getBottomPlug());
     }
@@ -199,9 +199,9 @@ public class ConnectionHandlerTest {
     @Test
     public void connectTopBottomBetween() {
         ConnectionHandler CC = new ConnectionHandler();
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100,20), BlockType.ACTION, null);
-        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(100, 100), BlockType.ACTION, null);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100,20), null);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(100, 100), null);
         CC.connectTopBottom(leftBlock,forwardBlock);
         CC.connectTopBottom(leftBlock, rightBlock);
         assertEquals(forwardBlock, rightBlock.getBottomPlug());
@@ -210,8 +210,8 @@ public class ConnectionHandlerTest {
     @Test
     public void connectRightLeft(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(100,100), BlockType.NOT);
-        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(100,20), BlockType.PREDICATE, null);
+        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(100,100));
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(100,20), null);
         CC.connectRightLeft(wifBlock, notBlock);
         assertEquals(wifBlock, notBlock.getRightSocket());
     }
@@ -219,8 +219,8 @@ public class ConnectionHandlerTest {
     @Test
     public void generalConnectRightLeft(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(20,100), BlockType.NOT);
-        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(100,100), BlockType.PREDICATE, null);
+        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(20,100));
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(100,100), null);
         CC.connect(wifBlock, notBlock);
         assertEquals(wifBlock, notBlock.getRightSocket());
     }
@@ -228,8 +228,8 @@ public class ConnectionHandlerTest {
     @Test
     public void connectRightLeftInverse(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(100,100), BlockType.NOT);
-        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(100,20), BlockType.PREDICATE, null);
+        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(100,100));
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(100,20), null);
         CC.connectRightLeft(wifBlock, notBlock);
         assertEquals(notBlock, wifBlock.getLeftPlug());
     }
@@ -237,9 +237,9 @@ public class ConnectionHandlerTest {
     @Test
     public void connectRightLeftBetween(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(100,100), BlockType.NOT);
-        ModelNotBlock not2Block = new ModelNotBlock(new ProgramLocation(100,100), BlockType.NOT);
-        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(100,20), BlockType.PREDICATE, null);
+        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(100,100));
+        ModelNotBlock not2Block = new ModelNotBlock(new ProgramLocation(100,100));
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(100,20), null);
         CC.connectRightLeft(wifBlock, notBlock);
         CC.connectRightLeft(wifBlock, not2Block);
         assertEquals(notBlock, not2Block.getLeftPlug());
@@ -248,8 +248,8 @@ public class ConnectionHandlerTest {
     @Test
     public void connectCavityPlug(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(110,140), BlockType.ACTION, null);
+        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(110,140), null);
         CC.connectCavityPlug(ifBlock,forwardBlock);
         assertEquals(forwardBlock, ifBlock.getCavityPlug());
     }
@@ -257,8 +257,8 @@ public class ConnectionHandlerTest {
     @Test
     public void generalConnectCavityPlug(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(110,140), BlockType.ACTION, null);
+        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(110,140), null);
         CC.connect(ifBlock,forwardBlock);
         assertEquals(forwardBlock, ifBlock.getCavityPlug());
     }
@@ -266,8 +266,8 @@ public class ConnectionHandlerTest {
     @Test
     public void connectCavitySocket(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(110,60), BlockType.ACTION, null);
+        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(110,60), null);
         CC.connectCavitySocket(ifBlock,forwardBlock);
         assertEquals(forwardBlock, ifBlock.getCavitySocket());
     }
@@ -275,8 +275,8 @@ public class ConnectionHandlerTest {
     @Test
     public void generalConnectCavitySocket(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(110,60), BlockType.ACTION, null);
+        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(110,60), null);
         CC.connect(ifBlock,forwardBlock);
         assertEquals(forwardBlock, ifBlock.getCavitySocket());
     }
@@ -284,8 +284,8 @@ public class ConnectionHandlerTest {
     @Test
     public void connectCavityPlugConnectsSocket(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(110,140), BlockType.ACTION, null);
+        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(110,140), null);
         CC.connectCavitySocket(ifBlock,forwardBlock);
         assertEquals(forwardBlock, ifBlock.getCavitySocket());
     }
@@ -293,8 +293,8 @@ public class ConnectionHandlerTest {
     @Test
     public void connectCavitySocketConnectsPlug(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(110,60), BlockType.ACTION, null);
+        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(110,60), null);
         CC.connectCavityPlug(ifBlock,forwardBlock);
         assertEquals(forwardBlock, ifBlock.getCavityPlug());
     }
@@ -302,10 +302,10 @@ public class ConnectionHandlerTest {
     @Test
     public void connectIntoCavityTop(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(400,400), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(400, 550), BlockType.ACTION, null);
-        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(400, 700), BlockType.ACTION, null);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(400,400), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(400, 550), null);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(400, 700), null);
         forwardBlock.setTopSocket(whileBlock);
         whileBlock.setCavityPlug(forwardBlock);
         leftBlock.setTopSocket(forwardBlock);
@@ -319,10 +319,10 @@ public class ConnectionHandlerTest {
     @Test
     public void generalConnectIntoCavityTop(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), BlockType.ACTION, null);
-        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(113, 303), BlockType.ACTION, null);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), null);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(113, 303), null);
         forwardBlock.setTopSocket(whileBlock);
         whileBlock.setCavityPlug(forwardBlock);
         leftBlock.setTopSocket(forwardBlock);
@@ -336,10 +336,10 @@ public class ConnectionHandlerTest {
     @Test
     public void connectIntoCavityBottom(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(400,400), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(400, 550), BlockType.ACTION, null);
-        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(400, 700), BlockType.ACTION, null);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(400,400), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(400, 550), null);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(400, 700), null);
         forwardBlock.setTopSocket(whileBlock);
         whileBlock.setCavityPlug(forwardBlock);
         leftBlock.setTopSocket(forwardBlock);
@@ -353,10 +353,10 @@ public class ConnectionHandlerTest {
     @Test
     public void generalConnectIntoCavityBottom(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), BlockType.ACTION, null);
-        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(113, 223), BlockType.ACTION, null);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), null);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(113, 223), null);
         forwardBlock.setTopSocket(whileBlock);
         whileBlock.setCavityPlug(forwardBlock);
         leftBlock.setTopSocket(forwardBlock);
@@ -370,10 +370,10 @@ public class ConnectionHandlerTest {
     @Test
     public void isFullyConnected(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), BlockType.ACTION, null);
-        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(113, 223), BlockType.PREDICATE, null);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), null);
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(113, 223), null);
         CC.connectTopBottom(forwardBlock, whileBlock);
         CC.connectTopBottom(whileBlock, leftBlock);
         CC.connectRightLeft(wifBlock, whileBlock);
@@ -384,10 +384,10 @@ public class ConnectionHandlerTest {
     @Test
     public void allBlocksConnectedTrue(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), BlockType.ACTION, null);
-        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(113, 223), BlockType.PREDICATE, null);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), null);
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(113, 223), null);
         CC.connectTopBottom(forwardBlock, whileBlock);
         CC.connectTopBottom(whileBlock, leftBlock);
         CC.connectRightLeft(wifBlock, whileBlock);
@@ -403,11 +403,11 @@ public class ConnectionHandlerTest {
     @Test
     public void allBlocksConnectedFalse(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), BlockType.ACTION, null);
-        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(200,200), BlockType.ACTION, null);
-        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(113, 223), BlockType.PREDICATE, null);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), null);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(200,200), null);
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(113, 223), null);
         CC.connectTopBottom(forwardBlock, whileBlock);
         CC.connectTopBottom(whileBlock, leftBlock);
         CC.connectRightLeft(wifBlock, whileBlock);
@@ -424,11 +424,11 @@ public class ConnectionHandlerTest {
     @Test
     public void startBlocks(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), BlockType.ACTION, null);
-        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(200,200), BlockType.ACTION, null);
-        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(113, 223), BlockType.PREDICATE, null);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), null);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(200,200), null);
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(113, 223), null);
         CC.connectTopBottom(forwardBlock, whileBlock);
         CC.connectTopBottom(whileBlock, leftBlock);
         CC.connectRightLeft(wifBlock, whileBlock);
@@ -447,11 +447,11 @@ public class ConnectionHandlerTest {
     @Test
     public void finishBlocks(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), BlockType.ACTION, null);
-        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(200,200), BlockType.ACTION, null);
-        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(113, 223), BlockType.PREDICATE, null);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), null);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(200,200), null);
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(113, 223), null);
         CC.connectTopBottom(forwardBlock, whileBlock);
         CC.connectTopBottom(whileBlock, leftBlock);
         CC.connectRightLeft(wifBlock, whileBlock);
@@ -470,11 +470,11 @@ public class ConnectionHandlerTest {
     @Test
     public void getConnectedBlocks(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), BlockType.ACTION, null);
-        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(200,200), BlockType.ACTION, null);
-        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(113, 223), BlockType.PREDICATE, null);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), null);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(200,200), null);
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(113, 223), null);
         CC.connectTopBottom(forwardBlock, whileBlock);
         CC.connectTopBottom(whileBlock, leftBlock);
         CC.connectRightLeft(wifBlock, whileBlock);
@@ -493,11 +493,11 @@ public class ConnectionHandlerTest {
     @Test
     public void updateConnections(){
         ConnectionHandler CC = new ConnectionHandler();
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,180), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), BlockType.ACTION, null);
-        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(100,340), BlockType.ACTION, null);
-        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(180, 180), BlockType.PREDICATE, null);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,180), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), null);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(100,340), null);
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(180, 180), null);
         ArrayList<ModelBlock> blocks = new ArrayList<>();
         blocks.add(whileBlock);
         blocks.add(forwardBlock);

@@ -4,12 +4,15 @@ import model.blocks.ModelBlock;
 import model.blocks.ModelWhileIfBlock;
 import utilities.*;
 
+import java.util.ArrayList;
+
 public class BlockState {
 
     private ProgramLocation blockLocation;
-    private BlockType blockType;
+    private ArrayList<ConnectionPoint> connectionPoints;
     private boolean highlighted;
     private int cavitySize;
+    private String title;
 
     /**
      * Constructor for the blockState
@@ -18,9 +21,10 @@ public class BlockState {
      */
     public BlockState(ModelBlock block){
         this.blockLocation = block.getPos();
-        this.blockType = block.getBlockType();
         this.highlighted = block.isHighlighted();
-        if (blockType == BlockType.IF || blockType == BlockType.WHILE){
+        this.connectionPoints = block.getConnectionPoints();
+        this.title = block.getTitle();
+        if (block instanceof ModelWhileIfBlock){
             cavitySize = ((ModelWhileIfBlock)block).getCavityBlocks().size();
         }
         else cavitySize = 0;
@@ -37,11 +41,11 @@ public class BlockState {
 
     /**
      *
-     * @return the type of the block
+     * @return the list of connection points
      * @author Oberon Swings
      */
-    public BlockType getBlockType() {
-        return blockType;
+    public ArrayList<ConnectionPoint> getConnectionPoints() {
+        return connectionPoints;
     }
 
     /**
@@ -61,4 +65,14 @@ public class BlockState {
     public int getCavitySize() {
         return cavitySize;
     }
+
+    /**
+     *
+     * @return the title of the block
+     * @author Oberon Swings
+     */
+    public String getTitle() {
+        return title;
+    }
+
 }

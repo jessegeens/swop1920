@@ -93,7 +93,6 @@ public class ProgramRunnerTest {
         PR.execute();
         PR.execute();
         PR.execute();
-        PR.execute();
         assertTrue(finishBlock.isHighlighted());
     }
 }

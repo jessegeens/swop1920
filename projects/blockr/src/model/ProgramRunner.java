@@ -43,6 +43,7 @@ public class ProgramRunner {
             throw new IllegalStateException("tried executing the program without initialising it");
         }
 
+        ModelBlock next = findNextBlock();
         if(this.current == null) {
             reset();
             return null;
@@ -50,7 +51,7 @@ public class ProgramRunner {
             //TODO: used to reset to initial state
         }
         else{
-            if (this.findNextBlock() != null){
+            if (next != null){
                 this.highlightNext();
             }
             else{
@@ -60,6 +61,7 @@ public class ProgramRunner {
             if(current instanceof ModelActionBlock && gameWorld != null){
                 result = gameWorld.perform(((ModelActionBlock) current).getAction());
             }
+            this.current = next;
             while (current instanceof ModelWhileIfBlock) this.current = findNextBlock();
             return result;
         }

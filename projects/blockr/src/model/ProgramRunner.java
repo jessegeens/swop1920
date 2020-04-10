@@ -52,14 +52,7 @@ public class ProgramRunner {
             reset();
         }
         else{
-            next = findNextBlock(current);
-            while (next instanceof ModelWhileIfBlock) next = findNextBlock(next);
-            if (next != null){
-                this.highlightNext(next);
-            }
-            else{
-                this.current.setUnHighlight();
-            }
+
             if(current instanceof ModelActionBlock && gameWorld != null){
                 ActionResult result = gameWorld.perform(((ModelActionBlock) current).getAction());
                 switch (result){
@@ -72,6 +65,14 @@ public class ProgramRunner {
                         //TODO: bekijken wat we gaan doen als het game over is
                         break;
                 }
+            }
+            next = findNextBlock(current);
+            while (next instanceof ModelWhileIfBlock) next = findNextBlock(next);
+            if (next != null){
+                this.highlightNext(next);
+            }
+            else{
+                this.current.setUnHighlight();
             }
             this.current = next;
 

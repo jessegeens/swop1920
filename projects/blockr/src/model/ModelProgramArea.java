@@ -11,7 +11,7 @@ import model.blocks.*;
  */
 public class ModelProgramArea{
 
-    private final int MAX_BLOCKS = 10;
+    private final int MAX_BLOCKS = 15;
     private ArrayList<ModelBlock> blocks;
     private ConnectionHandler CH;
     private LocationHandler LH;

@@ -2,25 +2,51 @@ package model;
 
 import static org.junit.Assert.*;
 
+import gameworldapi.GameWorldType;
 import model.blocks.*;
+import org.junit.Before;
 import org.junit.Test;
 
 import ui.BlockState;
 import utilities.*;
 
+import java.io.File;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 
 public class ModelControllerTest {
 
-    /*
+    private GameWorldType GWT;
+
+    @Before
+    public void setUp() throws Exception {
+        try {
+            File file = new File("/home/oberon/Documents/Studies/SWOP/swop1920/projects/robotgameworld/out/production/robotgameworld/");
+            //convert the file to URL format
+            URL url = file.toURI().toURL();
+            URL[] urls = new URL[]{url};
+            //load this folder into Class loader
+            ClassLoader cl = new URLClassLoader(urls);
+            //load the Address class in 'c:\\other_classes\\'
+            Class cls = cl.loadClass("robotgameworld.RobotGameWorldType");
+            //GameWorldType worldType = ((GameWorldType) Class.forName(args[0]).newInstance());
+            GameWorldType worldType = (GameWorldType) cls.newInstance();
+            GWT = worldType;
+        }
+        catch (Exception ex){
+            System.out.println("Error: " + ex.getMessage().toString());
+        }
+    }
+
     @Test
     public void getBlockStates(){
-        ModelController MC = new ModelController();
-        MC.select(new Location (40, 40));
-        MC.release(new Location (420, 420));
-        MC.select(new Location(40, 200));
-        MC.release(new Location(420, 500));
-    }*/
+        ModelController MC = new ModelController(GWT);
+        MC.select(new ProgramLocation (40, 40));
+        MC.release(new ProgramLocation (420, 420));
+        MC.select(new ProgramLocation(40, 200));
+        MC.release(new ProgramLocation(420, 500));
+    }
 
 
 

@@ -2,7 +2,6 @@ package main;
 import gameworldapi.*;
 
 import java.io.File;
-import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.net.URLClassLoader;
 
@@ -24,8 +23,6 @@ class Main {
 
             //load the Address class in 'c:\\other_classes\\'
             Class cls = cl.loadClass(args[1]);
-
-            System.out.println(args[0]);
             //GameWorldType worldType = ((GameWorldType) Class.forName(args[0]).newInstance());
             GameWorldType worldType = (GameWorldType) cls.newInstance();
             java.awt.EventQueue.invokeLater(() -> {

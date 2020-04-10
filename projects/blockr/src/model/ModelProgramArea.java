@@ -11,7 +11,7 @@ import model.blocks.*;
  */
 public class ModelProgramArea{
 
-    private final int MAX_BLOCKS = 10;
+    private final int MAX_BLOCKS = 15;
     private ArrayList<ModelBlock> blocks;
     private ConnectionHandler CH;
     private LocationHandler LH;
@@ -87,7 +87,8 @@ public class ModelProgramArea{
      */
     public void findAndConnect(ProgramLocation eveWindowLocation, ModelBlock activeB){
         this.addPABlock(activeB);
-        LH.setLocationBlock(activeB, eveWindowLocation);
+        ProgramLocation location = LH.moveToInBounds(eveWindowLocation);
+        LH.setLocationBlock(activeB, location);
         ModelBlock closest = LH.findClosestBlock(activeB, blocks);
         if (closest != null){
             CH.connect(closest, activeB);

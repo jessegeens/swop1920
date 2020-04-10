@@ -1,5 +1,6 @@
 out/
 .vscode/
+.idea/
 diagrams/structural_overview/.SWOP_Structural_Overview.vpp.lck
 swop1920.iml
 projects/gameworldapi/out/

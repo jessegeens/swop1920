@@ -1,5 +1,6 @@
 package model;
 
+import main.MyCanvasWindow;
 import model.blocks.*;
 import ui.UIBlock;
 import utilities.*;
@@ -129,5 +130,11 @@ public class LocationHandler {
             }
         }
         return closest;
+    }
+
+    ProgramLocation moveToInBounds(ProgramLocation eveWindowLocation){
+        if(eveWindowLocation.getX() > (MyCanvasWindow.WIDTH *2/3 - UIBlock.STD_WIDTH)) return new ProgramLocation(MyCanvasWindow.WIDTH *2/3 - UIBlock.STD_WIDTH, eveWindowLocation.getY());
+        if(eveWindowLocation.getY() > (MyCanvasWindow.HEIGHT - UIBlock.STD_HEIGHT)) return new ProgramLocation(eveWindowLocation.getX(), MyCanvasWindow.HEIGHT - UIBlock.STD_HEIGHT);
+        return eveWindowLocation;
     }
 }

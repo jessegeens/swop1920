@@ -11,6 +11,8 @@ public final class ProgramLocation implements Location {
     private final int y;
 
     public ProgramLocation(int i, int j) {
+        if (i < 0) i = 0;
+        if (j < 0) j = 0;
         this.x = i;
         this.y = j;
     }

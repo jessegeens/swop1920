@@ -21,7 +21,6 @@ public class GlobalController {
     // Constructor
     public GlobalController(GameWorldType gameWorldType){
         this.modelController = new ModelController(gameWorldType);
-        //System.out.println(modelController.getModelBlocks());
         this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT);
     }
     
@@ -46,15 +45,12 @@ public class GlobalController {
             case 501: //MOUSE_PRESSED
                 //return the topmost active block if one is in the click location
                 //you remove it from the local list in PArea until mouseup
-                System.out.println("MOUSE PRESSED start");
                 this.modelController.select(eventWindowLocation);
                 break;
             case 502: //MOUSE RELEASED
-                System.out.println("MOUSE RELEASED start");
                 this.modelController.release(eventWindowLocation);
                 break;
             case 506: //MOUSE_DRAGGED
-            System.out.println("MOUSE MOVED start");
                 this.modelController.drag(eventWindowLocation);
                 break;
             default:
@@ -117,8 +113,8 @@ public class GlobalController {
                 break;
             case 90: //Z
                 if(id == 401){
-                    if(this.ctrl == true){
-                        if(this.shift == false){
+                    if(this.ctrl){
+                        if(!this.shift){
                             this.modelController.undo();
                         }
                         else{
@@ -131,9 +127,6 @@ public class GlobalController {
                 this.shift = false;
                 break;
         }
-        System.out.println("id");
-        System.out.println(id);
-
     }
 
     /**

@@ -1,6 +1,6 @@
 package main;
 
-import model.ProgramState;
+
 import model.blocks.*;
 import org.junit.Test;
 import utilities.*;
@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class GlobalControllerTests {
+public class GlobalControllerTest {
 /*
     @Test
     public void HandleMouseEventDragPerformance(){
@@ -79,16 +79,12 @@ public class GlobalControllerTests {
         ArrayList<Integer> list1 = new ArrayList<>();
         //list1.add(a1);
         //list1.add(b1);
-        //System.out.println(a1);
-        //System.out.println(b1);
         //gC.execute();
         //int a2 = gC.getModelController().getGrid().getRobotPos().getX();
         //int b2 = gC.getModelController().getGrid().getRobotPos().getY();
         ArrayList<Integer> list2 = new ArrayList<>();
         //list2.add(a2);
         //list2.add(b2);
-        //System.out.println(a2);
-        //System.out.println(b2);
         assertNotEquals(list1, list2);
     }
 

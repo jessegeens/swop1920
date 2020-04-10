@@ -33,11 +33,12 @@ public class UIController {
      * Render function for the grid without using class variables
      * @param g Graphics object
      * @param width the width of the grid
+     * @param width the width of the grid
      * @param height the height of the grid
      * @param gridPosition the location where the grid starts
      * @author Jesse Geens
      */
-    public void renderGrid(Graphics g, int width, int height, GridLocation gridPosition){
+    private void renderGrid(Graphics g, int width, int height, GridLocation gridPosition){
         g.setColor(Color.GRAY);
         for(int x = 0; x < width; x++){
             for(int y = 0; y < height; y++){
@@ -53,7 +54,7 @@ public class UIController {
      * @param gridPosition the position of the left top corner of the grid
      * @author Jesse Geens
      */
-    public void renderWalls(Graphics g, ArrayList<GridLocation> walls, Location gridPosition){
+    private void renderWalls(Graphics g, ArrayList<GridLocation> walls, Location gridPosition){
         g.setColor(Color.BLACK);
         for(GridLocation wall : walls){
             g.fillRect(gridPosition.getX() + wall.getX()*CELL_SIZE, gridPosition.getY() + wall.getY()*CELL_SIZE,CELL_SIZE, CELL_SIZE);
@@ -67,7 +68,7 @@ public class UIController {
      * @param gridPosition the position of the left top corner of the grid
      * @author Jesse Geens
      */
-    public void renderGoalCell(Graphics g, GridLocation goalCell, GridLocation gridPosition){
+    private void renderGoalCell(Graphics g, GridLocation goalCell, GridLocation gridPosition){
         g.setColor(Color.YELLOW);
         g.fillRect(gridPosition.getX() + goalCell.getX()*CELL_SIZE, gridPosition.getY() + goalCell.getY()*CELL_SIZE, CELL_SIZE, CELL_SIZE);
     }
@@ -80,7 +81,7 @@ public class UIController {
      * @param gridPosition the position of the left top corner of the grid
      * @author Oberon Swings
      */
-    public void renderRobot(Graphics g, Location robotLocation, Direction robotDirection, GridLocation gridPosition){
+    private void renderRobot(Graphics g, Location robotLocation, Direction robotDirection, GridLocation gridPosition){
         g.setColor(Color.RED);
         g.fillRect(gridPosition.getX() + robotLocation.getX()*CELL_SIZE, gridPosition.getY() + robotLocation.getY()*CELL_SIZE,CELL_SIZE, CELL_SIZE);
         g.setColor(Color.BLUE);

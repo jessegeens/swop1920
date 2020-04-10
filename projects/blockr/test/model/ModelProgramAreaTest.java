@@ -160,6 +160,11 @@ public class ModelProgramAreaTest {
         ModelActionBlock rightBlock2 = new ModelActionBlock(new ProgramLocation(113, 143), null);
         ModelActionBlock leftBlock2 = new ModelActionBlock(new ProgramLocation(100, 260), null);
         ModelPredicateBlock wifBlock2 = new ModelPredicateBlock(new ProgramLocation(180, 100), null);
+        ModelWhileIfBlock whileBlock3 = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock3 = new ModelActionBlock(new ProgramLocation(100,20), null);
+        ModelActionBlock rightBlock3 = new ModelActionBlock(new ProgramLocation(113, 143), null);
+        ModelActionBlock leftBlock3 = new ModelActionBlock(new ProgramLocation(100, 260), null);
+        ModelPredicateBlock wifBlock3 = new ModelPredicateBlock(new ProgramLocation(180, 100), null);
         area.addPABlock(forwardBlock);
         area.addPABlock(leftBlock);
         area.addPABlock(wifBlock);
@@ -170,6 +175,11 @@ public class ModelProgramAreaTest {
         area.addPABlock(wifBlock2);
         area.addPABlock(whileBlock2);
         area.addPABlock(rightBlock2);
+        area.addPABlock(forwardBlock3);
+        area.addPABlock(leftBlock3);
+        area.addPABlock(wifBlock3);
+        area.addPABlock(whileBlock3);
+        area.addPABlock(rightBlock3);
         assertTrue(area.maxReached());
     }
 

@@ -39,7 +39,39 @@ public class ModelController{
         programRunner = new ProgramRunner(this.gameWorld);
     }
 
+<<<<<<< HEAD
 
+=======
+    /**
+     * This function handles key events by telling the model controller
+     * to either step through the execution or stop running the program
+     * 
+     * TODO: propagate to modelController
+     * 
+     * @param id id of the event
+     * @param keyCode keyCode of the pressed key: - 27  = ESC
+     *              see: http://keycode.info      - 65  = A
+     *                                            - 116 = F5 
+     * @param keyChar character of the pressed key
+     */
+    public void handleKeyEvent(int id, int keyCode, char keyChar){
+        switch(keyCode){
+            case 65: //A;
+            case 116: //F5;
+                if (PArea.validExecutionState()){//Check if all blocks are connected, and if so execute.
+                    if(programRunner.isRunning()){
+                        programRunner.execute();
+                    } else {
+                        programRunner.initialise(PArea.getFirstBlock());
+                    }
+                } 
+                break;
+            case 27: //Esc
+                programRunner.reset();
+                break;
+        }        
+    }
+>>>>>>> 48309ce1a460dfe8b8fa2585cd7ceacb4f5d372d
 
     /**
      * Try to start the program or do the next step in program execution
@@ -50,7 +82,6 @@ public class ModelController{
     public void startOrExecuteProgram(){
         if (PArea.validExecutionState()){//Check if all blocks are connected, and if so execute.
             if(programRunner.isRunning()){
-                System.out.println("executing on keypress, is already running");
                 programRunner.execute();
             } else {
                 programRunner.initialise(PArea.getFirstBlock());
@@ -86,6 +117,7 @@ public class ModelController{
      *
      */
     public void undo(){
+<<<<<<< HEAD
         System.out.println("UNDO");
         if(!undoStack.empty()){
             Action current = undoStack.pop();
@@ -97,6 +129,9 @@ public class ModelController{
 
 
 
+=======
+        //System.out.println("UNDO");
+>>>>>>> 48309ce1a460dfe8b8fa2585cd7ceacb4f5d372d
 
     }
 
@@ -112,6 +147,7 @@ public class ModelController{
      *
      */
     public void redo(){
+<<<<<<< HEAD
         System.out.println("REDO");
         if(!redoStack.empty()){
             Action current = redoStack.pop();
@@ -120,6 +156,9 @@ public class ModelController{
             redoStack.push(current);
         }
 
+=======
+        //System.out.println("REDO");
+>>>>>>> 48309ce1a460dfe8b8fa2585cd7ceacb4f5d372d
 
     }
 
@@ -133,7 +172,7 @@ public class ModelController{
      * @author Bert
      */
     protected boolean inPalette(ProgramLocation location){
-        if(location.getX() > 0 && location.getX() < MyCanvasWindow.WIDTH/3 ){
+        if(location.getX() >= 0 && location.getX() < MyCanvasWindow.WIDTH/3 ){
             return true;
         }
         return false;
@@ -170,18 +209,20 @@ public class ModelController{
      */
     public void select(ProgramLocation eventLocation){
         if(this.inPalette(eventLocation)){
-            System.out.println("Palette select");
             active = palette.handleMouseDown(eventLocation);
             newBlockCreated = true;
 
         }
         else if(this.inProgramArea(eventLocation)){
+
             System.out.println("Programarea select");
             active = PArea.selectBlock(eventLocation);
             if(active != null){
                 oldPos = active.getPos().clone();
 
             }
+            
+
         }
 
     }
@@ -200,18 +241,13 @@ public class ModelController{
     //Each release is a state
     public void release(ProgramLocation eventLocation){
         if(inPalette(eventLocation) ){
-            System.out.println("Palette release");
             if(active != null){
                 palette.populateBlocks();
             }
-            /*if (active instanceof ModelWhileIfBlock){
-                for (ModelBlock block : ((ModelWhileIfBlock) active).getCavityBlocks()){
-                    block = null;
-                }
-            }*/
             this.active = null;
         }
         else if(this.inProgramArea(eventLocation)){
+<<<<<<< HEAD
             System.out.println("Programarea release");
             if(!newBlockCreated){
                 undoStack.push(new MoveAction(active,this.oldPos, active.getPos().clone()));
@@ -227,6 +263,12 @@ public class ModelController{
             active = null;
             if (PArea.maxReached()){
                 palette.removeBlocks();
+=======
+            if(active != null) {
+                PArea.handleMouseUp(eventLocation, active);
+                active = null;
+                if (PArea.maxReached()) palette.removeBlocks();
+>>>>>>> 48309ce1a460dfe8b8fa2585cd7ceacb4f5d372d
             }
         }
         

@@ -40,8 +40,7 @@ public class RobotGameWorld implements GameWorld {
         if (predicateType != null){
             switch ((Predicate)predicateType){
                 case WALL_IN_FRONT:
-                    if (actionExecutor.wallInFrontOfRobot()) return true;
-                    else return false;
+                    return actionExecutor.wallInFrontOfRobot();
                 default:
                     throw new IllegalStateException("Illegal predicate found");
             }

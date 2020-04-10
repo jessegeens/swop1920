@@ -43,7 +43,7 @@ public class ProgramRunnerTest {
 
     @Test
     public void reset() {
-        ProgramRunner PR = new ProgramRunner(null);
+        ProgramRunner PR = new ProgramRunner(GW);
         ModelBlock block = new ModelNotBlock(new ProgramLocation(100, 100));
         PR.initialise(block);
         PR.reset();
@@ -52,9 +52,9 @@ public class ProgramRunnerTest {
 
     @Test
     public void execute() {
-        ProgramRunner PR = new ProgramRunner(null);
-        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(100, 100), null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100 ,180), null);
+        ProgramRunner PR = new ProgramRunner(GW);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(100, 100), Actions.get(0));
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100 ,180), Actions.get(0));
         rightBlock.setBottomPlug(leftBlock);
         leftBlock.setTopSocket(rightBlock);
         PR.initialise(rightBlock);
@@ -79,20 +79,64 @@ public class ProgramRunnerTest {
         predicateBlock.setLeftPlug(ifBlock);
         startBlock.setBottomPlug(ifBlock);
         ifBlock.setTopSocket(startBlock);
-        forwardBlock.setTopSocket(ifBlock);
         ifBlock.setCavityPlug(forwardBlock);
-        leftBlock.setTopSocket(forwardBlock);
+        forwardBlock.setTopSocket(ifBlock);
         forwardBlock.setBottomPlug(leftBlock);
-        rightBlock.setTopSocket(leftBlock);
+        leftBlock.setTopSocket(forwardBlock);
         leftBlock.setBottomPlug(rightBlock);
-        ifBlock.setCavitySocket(leftBlock);
+        rightBlock.setTopSocket(leftBlock);
         rightBlock.setBottomPlug(ifBlock);
+        ifBlock.setCavitySocket(rightBlock);
         ifBlock.setBottomPlug(finishBlock);
         finishBlock.setTopSocket(ifBlock);
         PR.initialise(startBlock);
         PR.execute();
         PR.execute();
         PR.execute();
+        PR.execute();
         assertTrue(finishBlock.isHighlighted());
+    }
+
+    @Test
+    public void executeEnd(){
+        ProgramRunner PR = new ProgramRunner(GW);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), Actions.get(0));
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), Actions.get(0));
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(113, 303), Actions.get(0));
+        forwardBlock.setBottomPlug(leftBlock);
+        leftBlock.setTopSocket(forwardBlock);
+        leftBlock.setBottomPlug(rightBlock);
+        rightBlock.setTopSocket(leftBlock);
+        PR.initialise(forwardBlock);
+        PR.execute();
+        PR.execute();
+        PR.execute();
+        PR.execute();
+        assertFalse(PR.isRunning());
+    }
+
+    @Test
+    public void executeWhileNotWIF(){
+        ProgramRunner PR = new ProgramRunner(GW);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(100, 20), Actions.get(2));
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), Actions.get(0));
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(100, 260), Predicates.get(0));
+        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(100, 180));
+        rightBlock.setBottomPlug(whileBlock);
+        whileBlock.setTopSocket(rightBlock);
+        whileBlock.setCavityPlug(forwardBlock);
+        forwardBlock.setTopSocket(whileBlock);
+        forwardBlock.setBottomPlug(whileBlock);
+        whileBlock.setCavitySocket(whileBlock);
+        whileBlock.setRightSocket(notBlock);
+        notBlock.setLeftPlug(whileBlock);
+        notBlock.setRightSocket(wifBlock);
+        wifBlock.setLeftPlug(notBlock);
+        PR.initialise(rightBlock);
+        PR.execute();
+        PR.execute();
+        PR.execute();
+        assertFalse(PR.isRunning());
     }
 }

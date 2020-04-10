@@ -1,6 +1,8 @@
 package robotgameworld;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import gameworldapi.*;
 
 /**
@@ -14,15 +16,13 @@ public class ActionExecutor {
     static ActionExecutor instance;
 
     //Parameters, TODO check whether these are at the correct location
-    private final GridLocation GOAL_CELL = new GridLocation(5, 5);
-    private final ArrayList<GridLocation> WALLS = new ArrayList<GridLocation>();
+    private final GridLocation GOAL_CELL = new GridLocation(4, 4);
+    private final ArrayList<GridLocation> WALLS = new ArrayList<GridLocation>(Arrays.asList(new GridLocation(0, 2), new GridLocation(1, 2), new GridLocation(4, 3)));
     private int GRID_WIDTH = 5;
     private int GRID_HEIGHT = 10;
 
     private RobotGameWorldState current;
     private GameWorldStateFactory gameWorldStateFactory = GameWorldStateFactory.getInstance();
-    private ArrayList<Action> previous = new ArrayList<Action>();
-    private ArrayList<Action> next = new ArrayList<Action>();
 
     //Constructor
     private ActionExecutor(){
@@ -51,7 +51,6 @@ public class ActionExecutor {
                 RobotGameWorldState next = gameWorldStateFactory.createNew(current, action);
                 if (validState(next)){
                     current = next;
-                    previous.add(action);
                     if(gameFinished(current)) return ActionResult.GAME_OVER;
                     return ActionResult.SUCCESS;
                 }
@@ -59,7 +58,6 @@ public class ActionExecutor {
             case TURN_LEFT:
             case TURN_RIGHT:
                 current = gameWorldStateFactory.createNew(current, action);
-                previous.add(action);
                 return ActionResult.SUCCESS;
             default:
                 throw new IllegalStateException("An illegal action has been executed");
@@ -134,20 +132,20 @@ public class ActionExecutor {
         Location possibleWall = new GridLocation(current.getRobotLocation().getX(), current.getRobotLocation().getY());
         switch (current.getRobotDirection()) {
             case LEFT:
-                possibleWall.add(-1, 0);
+                possibleWall = possibleWall.add(-1, 0);
                 break;
             case RIGHT:
-                possibleWall.add(1, 0);
+                possibleWall = possibleWall.add(1, 0);
                 break;
             case UP:
-                possibleWall.add(0, 1);
+                possibleWall = possibleWall.add(0, -1);
                 break;
             case DOWN:
-                possibleWall.add(0, -1);
+                possibleWall = possibleWall.add(0, 1);
                 break;
         }
         for (Location currentWall : WALLS) {
-            if (currentWall == possibleWall) return true;
+            if (currentWall.equals(possibleWall)) return true;
         }
         return false;
     }

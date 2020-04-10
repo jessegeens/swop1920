@@ -40,33 +40,42 @@ public class ProgramRunner {
      * 3. then it checks whether it is finished
      *  3a. if necessary, the program stops running
      *  3b. otherwise, the next block is highlighted
+     * @author Jesse Geens
      */
-    public ActionResult execute(){
+    public void execute(){
         if(!(isRunning())){
             throw new IllegalStateException("tried executing the program without initialising it");
         }
 
-        ModelBlock next = findNextBlock();
+        ModelBlock next;
         if(this.current == null) {
             reset();
-            return null;
-            //return gameWorld.();
-            //TODO: used to reset to initial state
         }
         else{
+
+            if(current instanceof ModelActionBlock && gameWorld != null){
+                ActionResult result = gameWorld.perform(((ModelActionBlock) current).getAction());
+                switch (result){
+                    case FAILURE:
+                        break;
+                    case SUCCESS:
+                        //TODO: Bert, hier moet ge de action aan de action stack toevoegen voor undo/redo
+                        break;
+                    case GAME_OVER:
+                        //TODO: bekijken wat we gaan doen als het game over is
+                        break;
+                }
+            }
+            next = findNextBlock(current);
+            while (next instanceof ModelWhileIfBlock) next = findNextBlock(next);
             if (next != null){
-                this.highlightNext();
+                this.highlightNext(next);
             }
             else{
                 this.current.setUnHighlight();
             }
-            ActionResult result = ActionResult.FAILURE;
-            if(current instanceof ModelActionBlock && gameWorld != null){
-                result = gameWorld.perform(((ModelActionBlock) current).getAction());
-            }
             this.current = next;
-            while (current instanceof ModelWhileIfBlock) this.current = findNextBlock();
-            return result;
+
         }
     }
 
@@ -83,9 +92,9 @@ public class ProgramRunner {
     /**
      * Highlights the next block in the program and unhighlight the currrent one
      */
-    private void highlightNext(){
+    private void highlightNext(ModelBlock next){
         current.setUnHighlight();
-        findNextBlock().setHighlight();
+        next.setHighlight();
     }
 
     /**
@@ -95,7 +104,7 @@ public class ProgramRunner {
      * @return the next block that will be run in the program
      * @author Oberon Swings (debugged by Bert)
      */
-    private ModelBlock findNextBlock(){
+    private ModelBlock findNextBlock(ModelBlock current){
 
         if (current instanceof ModelWhileIfBlock){
             if (((ModelWhileIfBlock) current).isNegated()) {
@@ -113,7 +122,7 @@ public class ProgramRunner {
             }
         }
         
-        if (current.getBottomPlug() != null && current.getBottomPlug().isIf()){
+        if (current.getBottomPlug() != null && current.getBottomPlug().isIf() && ((ModelWhileIfBlock)current.getBottomPlug()).getCavitySocket() == current){
             return current.getBottomPlug().getBottomPlug(); //If block should only be executed once.
         } 
         else return current.getBottomPlug();

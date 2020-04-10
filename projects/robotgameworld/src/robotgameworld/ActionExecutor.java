@@ -21,8 +21,6 @@ public class ActionExecutor {
 
     private RobotGameWorldState current;
     private GameWorldStateFactory gameWorldStateFactory = GameWorldStateFactory.getInstance();
-    private ArrayList<Action> previous = new ArrayList<Action>();
-    private ArrayList<Action> next = new ArrayList<Action>();
 
     //Constructor
     private ActionExecutor(){
@@ -51,7 +49,6 @@ public class ActionExecutor {
                 RobotGameWorldState next = gameWorldStateFactory.createNew(current, action);
                 if (validState(next)){
                     current = next;
-                    previous.add(action);
                     if(gameFinished(current)) return ActionResult.GAME_OVER;
                     return ActionResult.SUCCESS;
                 }
@@ -59,7 +56,6 @@ public class ActionExecutor {
             case TURN_LEFT:
             case TURN_RIGHT:
                 current = gameWorldStateFactory.createNew(current, action);
-                previous.add(action);
                 return ActionResult.SUCCESS;
             default:
                 throw new IllegalStateException("An illegal action has been executed");

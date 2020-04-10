@@ -108,7 +108,7 @@ public class ConnectionHandlerTest {
         whileBlock.setCavitySocket(forwardBlock);
         forwardBlock.setTopSocket(whileBlock);
         forwardBlock.setBottomPlug(whileBlock);
-        CC.disconnectCavity(whileBlock,forwardBlock);
+        CC.disconnectCavity(forwardBlock);
         assertTrue(whileBlock.getCavityBlocks().isEmpty());
     }
 
@@ -127,7 +127,7 @@ public class ConnectionHandlerTest {
         leftBlock.setBottomPlug(rightBlock);
         whileBlock.setCavitySocket(leftBlock);
         rightBlock.setBottomPlug(whileBlock);
-        CC.disconnectCavity(whileBlock,rightBlock);
+        CC.disconnectCavity(rightBlock);
         assertEquals(2,whileBlock.getCavityBlocks().size());
     }
 
@@ -146,7 +146,7 @@ public class ConnectionHandlerTest {
         leftBlock.setBottomPlug(rightBlock);
         whileBlock.setCavitySocket(rightBlock);
         rightBlock.setBottomPlug(whileBlock);
-        CC.disconnectCavity(whileBlock,forwardBlock);
+        CC.disconnectCavity(forwardBlock);
         assertEquals(rightBlock,whileBlock.getCavitySocket());
     }
 
@@ -165,7 +165,7 @@ public class ConnectionHandlerTest {
         leftBlock.setBottomPlug(rightBlock);
         whileBlock.setCavitySocket(rightBlock);
         rightBlock.setBottomPlug(whileBlock);
-        CC.disconnectCavity(whileBlock,forwardBlock);
+        CC.disconnectCavity(forwardBlock);
         assertEquals(leftBlock,whileBlock.getCavityPlug());
     }
 

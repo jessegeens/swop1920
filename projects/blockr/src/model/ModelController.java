@@ -191,11 +191,6 @@ public class ModelController{
             if(active != null){
                 palette.populateBlocks();
             }
-            /*if (active instanceof ModelWhileIfBlock){
-                for (ModelBlock block : ((ModelWhileIfBlock) active).getCavityBlocks()){
-                    block = null;
-                }
-            }*/
             this.active = null;
         }
         else if(this.inProgramArea(eventLocation)){

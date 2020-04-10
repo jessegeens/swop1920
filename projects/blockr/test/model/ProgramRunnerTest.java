@@ -114,4 +114,30 @@ public class ProgramRunnerTest {
         PR.execute();
         assertFalse(PR.isRunning());
     }
+
+    @Test
+    public void executeWhileNotWIF(){
+        ProgramRunner PR = new ProgramRunner(GW);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(100, 20), Actions.get(2));
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), Actions.get(0));
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(100, 260), Predicates.get(0));
+        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(100, 180));
+        rightBlock.setBottomPlug(whileBlock);
+        whileBlock.setTopSocket(rightBlock);
+        whileBlock.setCavityPlug(forwardBlock);
+        forwardBlock.setTopSocket(whileBlock);
+        forwardBlock.setBottomPlug(whileBlock);
+        whileBlock.setCavitySocket(whileBlock);
+        whileBlock.setRightSocket(notBlock);
+        notBlock.setLeftPlug(whileBlock);
+        notBlock.setRightSocket(wifBlock);
+        wifBlock.setLeftPlug(notBlock);
+        PR.initialise(rightBlock);
+        PR.execute();
+        PR.execute();
+        PR.execute();
+        PR.execute();
+        assertFalse(PR.isRunning());
+    }
 }

@@ -71,6 +71,58 @@ public class ModelController{
     }
 
     /**
+     * Try to start the program or do the next step in program execution
+     *
+     * @author Bert (refactored from old handleKeyEvent)
+     *
+     */
+    public void startOrExecuteProgram(){
+        if (PArea.validExecutionState()){//Check if all blocks are connected, and if so execute.
+            if(programRunner.isRunning()){
+                System.out.println("executing on keypress, is already running");
+                programRunner.execute();
+            } else {
+                programRunner.initialise(PArea.getFirstBlock());
+            }
+        }
+
+    }
+
+    /**
+     * Stop program execution and reset the game (if the program was running)
+     *
+     * @author Bert (refactored from old handleKeyEvent)
+     *
+     */
+    public void exitExecution(){
+        programRunner.reset();
+    }
+
+    /**
+     * Undo the block or game steps
+     *
+     * @author Bert
+     *
+     */
+    public void undo(){
+        System.out.println("UNDO");
+
+    }
+
+    /**
+     * Redo the block or game steps
+     *
+     * @author Bert
+     *
+     */
+    public void redo(){
+        System.out.println("REDO");
+
+    }
+
+
+
+    /**
      * 
      * @param location
      * @return whether this event location is inside of the Palette

@@ -1,4 +1,8 @@
-Blockr
+eerst de API builden, 
+dan de andere twee projecten 
+en dan uw run configs van Blockr juist zetten en dan zou het moeten werken
+
+Blockr run configs
 -run
 -edit configurations
 --Program arguments "path/swop1920/projects/robotgameworld/out/production/robotgameworld/" [space] robotgameworld.RobotGameWorldType

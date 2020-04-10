@@ -65,17 +65,75 @@ public class GlobalController {
         //this.modelController.handleMouseEvent(id, eventWindowLocation, clickCount);
     }
 
+    boolean ctrl = false;
+    boolean shift = false;
+
     /**
-     * This function propagates 
-     * 
+     * This function handles key events by telling the model controller
+     * to either step through the execution or stop running the program
+     *
+     *
      * @param id id of the event
+     *                              400 pressed
+     *                              401 released
      * @param keyCode keyCode of the pressed key: - 27  = ESC
      *              see: http://keycode.info      - 65  = A
-     *                                            - 116 = F5 
+     *                                            - 116 = F5
+     *                                            - 17 = Ctrl
+     *                                            - 16 = Shift
+     *                                            - 90 = Z
      * @param keyChar character of the pressed key
+     *
+     * @autho
+     *
+     * @TODO for some reason shift and control have no keycode for mouseup so just pressing sequentially (with other keypresses in between) also triggers undo and redo
+     *
      */
     public void handleKeyEvent(int id, int keyCode, char keyChar){
-        this.modelController.handleKeyEvent(id, keyCode, keyChar);
+        switch(keyCode) {
+            case 65: //A;
+            case 116: //F5;
+                this.modelController.startOrExecuteProgram();
+                break;
+            case 27: //Esc
+                this.modelController.exitExecution();
+                break;
+            case 17: //Ctrl
+                if(id == 401){
+                    this.ctrl = true;
+                    this.shift = false;
+                }
+                else{
+                    this.ctrl = false;
+                }
+                break;
+            case 16: //Shift
+                if(id == 401){
+                    this.shift = true;
+                }
+                else{
+                    this.shift = false;
+                }
+                break;
+            case 90: //Z
+                if(id == 401){
+                    if(this.ctrl == true){
+                        if(this.shift == false){
+                            this.modelController.undo();
+                        }
+                        else{
+                            this.modelController.redo();
+                        }
+                    }
+
+                }
+                this.ctrl = false;
+                this.shift = false;
+                break;
+        }
+        System.out.println("id");
+        System.out.println(id);
+
     }
 
     /**

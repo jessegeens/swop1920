@@ -9,10 +9,12 @@ public class ProgramRunner {
     private boolean running;
     private ModelBlock current;
     private GameWorld gameWorld;
+    private GameWorldState initialState;
 
     //Constructor
     public ProgramRunner(GameWorld gameWorld){
         this.gameWorld = gameWorld;
+        this.initialState = gameWorld.getSnapshot();
         this.running = false;
     }
 
@@ -28,6 +30,7 @@ public class ProgramRunner {
         }
         this.running = false;
         this.current = null;
+        this.gameWorld.restore(initialState);
     }
 
     /**
@@ -43,6 +46,7 @@ public class ProgramRunner {
             throw new IllegalStateException("tried executing the program without initialising it");
         }
 
+        ModelBlock next = findNextBlock();
         if(this.current == null) {
             reset();
             return null;
@@ -50,16 +54,17 @@ public class ProgramRunner {
             //TODO: used to reset to initial state
         }
         else{
-            if (this.findNextBlock() != null){
+            if (next != null){
                 this.highlightNext();
             }
             else{
                 this.current.setUnHighlight();
             }
             ActionResult result = ActionResult.FAILURE;
-            if(current instanceof ModelActionBlock && gameWorld != null){ //The gameWorld != null is here for debugging purposes!
+            if(current instanceof ModelActionBlock && gameWorld != null){
                 result = gameWorld.perform(((ModelActionBlock) current).getAction());
             }
+            this.current = next;
             while (current instanceof ModelWhileIfBlock) this.current = findNextBlock();
             return result;
         }
@@ -93,7 +98,6 @@ public class ProgramRunner {
     private ModelBlock findNextBlock(){
 
         if (current instanceof ModelWhileIfBlock){
-            if (gameWorld == null) ((ModelWhileIfBlock) current).getCavityPlug(); //this is here for debugging purposes!
             if (((ModelWhileIfBlock) current).isNegated()) {
                 if (!(gameWorld.evaluate(((ModelWhileIfBlock) current).getPredicate()))) {
                     return ((ModelWhileIfBlock) current).getCavityPlug();

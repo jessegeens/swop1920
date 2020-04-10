@@ -51,13 +51,11 @@ public class ModelController{
      * @param keyChar character of the pressed key
      */
     public void handleKeyEvent(int id, int keyCode, char keyChar){
-        System.out.println("key pressed");
         switch(keyCode){
             case 65: //A;
             case 116: //F5;
                 if (PArea.validExecutionState()){//Check if all blocks are connected, and if so execute.
                     if(programRunner.isRunning()){
-                        System.out.println("executing on keypress, is already running");
                         programRunner.execute();
                     } else {
                         programRunner.initialise(PArea.getFirstBlock());
@@ -79,7 +77,6 @@ public class ModelController{
     public void startOrExecuteProgram(){
         if (PArea.validExecutionState()){//Check if all blocks are connected, and if so execute.
             if(programRunner.isRunning()){
-                System.out.println("executing on keypress, is already running");
                 programRunner.execute();
             } else {
                 programRunner.initialise(PArea.getFirstBlock());
@@ -105,7 +102,7 @@ public class ModelController{
      *
      */
     public void undo(){
-        System.out.println("UNDO");
+        //System.out.println("UNDO");
 
     }
 
@@ -116,7 +113,7 @@ public class ModelController{
      *
      */
     public void redo(){
-        System.out.println("REDO");
+        //System.out.println("REDO");
 
     }
 
@@ -164,11 +161,9 @@ public class ModelController{
      */
     public void select(ProgramLocation eventLocation){
         if(this.inPalette(eventLocation)){
-            System.out.println("Palette select");
             active = palette.handleMouseDown(eventLocation);
         }
         else if(this.inProgramArea(eventLocation)){
-            System.out.println("Programarea select");
             active = PArea.handleMouseDown(eventLocation);
         }
 
@@ -187,7 +182,6 @@ public class ModelController{
 
     public void release(ProgramLocation eventLocation){
         if(inPalette(eventLocation) ){
-            System.out.println("Palette release");
             if(active != null){
                 palette.populateBlocks();
             }
@@ -195,7 +189,6 @@ public class ModelController{
         }
         else if(this.inProgramArea(eventLocation)){
             if(active != null) {
-                System.out.println("Programarea release");
                 PArea.handleMouseUp(eventLocation, active);
                 active = null;
                 if (PArea.maxReached()) palette.removeBlocks();

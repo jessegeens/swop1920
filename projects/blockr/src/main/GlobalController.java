@@ -21,7 +21,6 @@ public class GlobalController {
     // Constructor
     public GlobalController(GameWorldType gameWorldType){
         this.modelController = new ModelController(gameWorldType);
-        //System.out.println(modelController.getModelBlocks());
         this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT);
     }
     
@@ -128,9 +127,6 @@ public class GlobalController {
                 this.shift = false;
                 break;
         }
-        System.out.println("id");
-        System.out.println(id);
-
     }
 
     /**

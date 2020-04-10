@@ -16,15 +16,6 @@ class ModelPalette{
     private final ArrayList<PredicateType> predicates;
     private ArrayList<ModelBlock> blocks;
 
-    /*private final ProgramLocation turnLeftWindowLocation = new ProgramLocation(20, 20);
-    private final ProgramLocation turnRightWindowLocation = new ProgramLocation(180, 20);
-    private final ProgramLocation forwardWindowLocation = new ProgramLocation(20, 180);
-    private final ProgramLocation notWindowLocation = new ProgramLocation(180, 180);
-    private final ProgramLocation wallInFrontWindowLocation = new ProgramLocation(20, 340);
-    private final ProgramLocation whileWindowLocation = new ProgramLocation(180, 340);
-    private final ProgramLocation ifWindowLocation = new ProgramLocation(20, 500);*/
-
-
     // Constructor
     public ModelPalette(ArrayList<ActionType> actions, ArrayList<PredicateType> predicates){
         this.actions = actions;

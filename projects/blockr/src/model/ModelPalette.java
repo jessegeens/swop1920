@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import gameworldapi.ActionType;
 import gameworldapi.PredicateType;
 import model.blocks.*;
-import utilities.BlockType;
 import utilities.ProgramLocation;
 
 /**
@@ -41,16 +40,16 @@ class ModelPalette{
     public void populateBlocks(){
         this.blocks = new ArrayList<ModelBlock>();
         for (ActionType action : actions){
-            ModelActionBlock actionBlock = new ModelActionBlock(new ProgramLocation(0, 0), BlockType.ACTION, action);
+            ModelActionBlock actionBlock = new ModelActionBlock(new ProgramLocation(0, 0), action);
             blocks.add(actionBlock);
         }
         for (PredicateType predicate : predicates){
-            ModelPredicateBlock predicateBlock = new ModelPredicateBlock(new ProgramLocation(0, 0), BlockType.PREDICATE, predicate);
+            ModelPredicateBlock predicateBlock = new ModelPredicateBlock(new ProgramLocation(0, 0), predicate);
             blocks.add(predicateBlock);
         }
-        blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 500), BlockType.IF));
-        blocks.add(new ModelWhileIfBlock(new ProgramLocation(180, 340), BlockType.WHILE));
-        blocks.add(new ModelNotBlock(new ProgramLocation(180, 180), BlockType.NOT));
+        blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 500), false));
+        blocks.add(new ModelWhileIfBlock(new ProgramLocation(180, 340), false));
+        blocks.add(new ModelNotBlock(new ProgramLocation(180, 180)));
 
     }
 

@@ -16,11 +16,12 @@ public class ModelWhileIfBlock extends ModelBlock{
     private ModelBlock rightSocket;
     private ModelBlock cavitySocket;
     private ModelBlock cavityPlug;
+    private boolean isIf;
 
     // Constructor
-    public ModelWhileIfBlock(ProgramLocation pos, BlockType type){
-        super(pos,type);
-
+    public ModelWhileIfBlock(ProgramLocation pos, boolean isIf){
+        super(pos);
+        this.isIf = isIf;
         this.setTopSocket(null);
         this.setBottomPlug(null);
         this.setRightSocket(null);
@@ -37,7 +38,7 @@ public class ModelWhileIfBlock extends ModelBlock{
 
     @Override
     public ModelWhileIfBlock clone() {
-        return new ModelWhileIfBlock(this.getPos(), this.getBlockType());
+        return new ModelWhileIfBlock(this.getPos(), false);
     }
 
     //TODO
@@ -48,6 +49,10 @@ public class ModelWhileIfBlock extends ModelBlock{
     //TODO
     public PredicateType getPredicate(){
         return null;
+    }
+
+    public boolean isIf(){
+        return isIf;
     }
 
     /**

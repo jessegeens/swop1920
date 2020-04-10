@@ -10,15 +10,13 @@ import utilities.*;
  */
 public abstract class ModelBlock extends ModelElement implements java.lang.Cloneable{
 
-    private final BlockType type;
     private ArrayList<ConnectionPoint> connectionPoints = new ArrayList<>();
 
     private boolean highlighted = false;
     
     // Constructor
-    public ModelBlock(ProgramLocation windowLocation, BlockType type){
+    public ModelBlock(ProgramLocation windowLocation){
         super(windowLocation);
-        this.type = type;
     }
 
     public void setHighlight(){
@@ -83,14 +81,6 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
      */
     public int getWidth() {
         return UIBlock.STD_WIDTH;
-    }
-    
-    /**
-     * 
-     * @return {Blocktype} the Blocktype of this block
-     */
-    public BlockType getBlockType() {
-		return this.type;
     }
 
     /**
@@ -167,6 +157,10 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
         this.connectionPoints = connectionPoints;
     }
 
+    public ArrayList<ConnectionPoint> getConnectionPoints() {
+        return connectionPoints;
+    }
+
     public ModelBlock getBottomPlug(){
         return null;
     }
@@ -234,6 +228,10 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
      */
     public int distanceTopBottom(ModelBlock bottom){
         return this.getBottomPlugPos().getDistance(bottom.getTopSocketPos());
+    }
+
+    public boolean isIf(){
+        return false;
     }
     
 }

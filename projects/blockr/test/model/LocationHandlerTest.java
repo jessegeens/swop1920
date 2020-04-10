@@ -14,7 +14,7 @@ public class LocationHandlerTest {
     @Test
     public void setLocationBlock(){
         LocationHandler LH = new LocationHandler();
-        ModelWhileIfBlock whileB = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
+        ModelWhileIfBlock whileB = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
         LH.setLocationBlock(whileB, new ProgramLocation(200,200));
         assertEquals(new ProgramLocation(200, 200), whileB.getPos());
     }
@@ -22,9 +22,9 @@ public class LocationHandlerTest {
     @Test
     public void updateLocationBlocksTop() {
         LocationHandler LH = new LocationHandler();
-        ModelBlock rightB = new ModelActionBlock(new ProgramLocation(100,100), BlockType.ACTION, null);
-        ModelBlock leftB = new ModelActionBlock(new ProgramLocation(200,200), BlockType.ACTION, null);
-        ModelBlock forwardB = new ModelActionBlock(new ProgramLocation(500,500), BlockType.ACTION, null);
+        ModelBlock rightB = new ModelActionBlock(new ProgramLocation(100,100), null);
+        ModelBlock leftB = new ModelActionBlock(new ProgramLocation(200,200), null);
+        ModelBlock forwardB = new ModelActionBlock(new ProgramLocation(500,500), null);
         rightB.setBottomPlug(leftB);
         leftB.setTopSocket(rightB);
         leftB.setBottomPlug(forwardB);
@@ -36,9 +36,9 @@ public class LocationHandlerTest {
     @Test
     public void updateLocationBlocksMiddle() {
         LocationHandler LH = new LocationHandler();
-        ModelBlock rightB = new ModelActionBlock(new ProgramLocation(100,100), BlockType.ACTION, null);
-        ModelBlock leftB = new ModelActionBlock(new ProgramLocation(200,200), BlockType.ACTION, null);
-        ModelBlock forwardB = new ModelActionBlock(new ProgramLocation(500,500), BlockType.ACTION, null);
+        ModelBlock rightB = new ModelActionBlock(new ProgramLocation(100,100), null);
+        ModelBlock leftB = new ModelActionBlock(new ProgramLocation(200,200), null);
+        ModelBlock forwardB = new ModelActionBlock(new ProgramLocation(500,500), null);
         rightB.setBottomPlug(leftB);
         leftB.setTopSocket(rightB);
         leftB.setBottomPlug(forwardB);
@@ -50,10 +50,10 @@ public class LocationHandlerTest {
     @Test
     public void updateLocationBlocksWhile() {
         LocationHandler LH = new LocationHandler();
-        ModelWhileIfBlock whileB = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelBlock rightB = new ModelActionBlock(new ProgramLocation(200,200), BlockType.ACTION, null);
-        ModelBlock leftB = new ModelActionBlock(new ProgramLocation(300,300), BlockType.ACTION, null);
-        ModelBlock forwardB = new ModelActionBlock(new ProgramLocation(500,500), BlockType.ACTION, null);
+        ModelWhileIfBlock whileB = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelBlock rightB = new ModelActionBlock(new ProgramLocation(200,200), null);
+        ModelBlock leftB = new ModelActionBlock(new ProgramLocation(300,300), null);
+        ModelBlock forwardB = new ModelActionBlock(new ProgramLocation(500,500), null);
         whileB.setCavityPlug(rightB);
         rightB.setTopSocket(whileB);
         rightB.setBottomPlug(leftB);
@@ -69,9 +69,9 @@ public class LocationHandlerTest {
     @Test
     public void updateCavityBlocksLocations() {
         LocationHandler LH = new LocationHandler();
-        ModelWhileIfBlock whileB = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelBlock rightB = new ModelActionBlock(new ProgramLocation(200,200), BlockType.ACTION, null);
-        ModelBlock leftB = new ModelActionBlock(new ProgramLocation(300,300), BlockType.ACTION, null);
+        ModelWhileIfBlock whileB = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelBlock rightB = new ModelActionBlock(new ProgramLocation(200,200), null);
+        ModelBlock leftB = new ModelActionBlock(new ProgramLocation(300,300), null);
         whileB.setCavityPlug(rightB);
         rightB.setTopSocket(whileB);
         rightB.setBottomPlug(leftB);
@@ -85,8 +85,8 @@ public class LocationHandlerTest {
     @Test
     public void setTopSocketLocation() {
         LocationHandler LH = new LocationHandler();
-        ModelBlock rightB = new ModelActionBlock(new ProgramLocation(100,100), BlockType.ACTION, null);
-        ModelBlock leftB = new ModelActionBlock(new ProgramLocation(300,300), BlockType.ACTION, null);
+        ModelBlock rightB = new ModelActionBlock(new ProgramLocation(100,100), null);
+        ModelBlock leftB = new ModelActionBlock(new ProgramLocation(300,300), null);
         rightB.setBottomPlug(leftB);
         leftB.setTopSocket(rightB);
         LH.setTopSocketLocation(leftB,rightB);
@@ -96,8 +96,8 @@ public class LocationHandlerTest {
     @Test
     public void setTopSocketLocationCavity() {
         LocationHandler LH = new LocationHandler();
-        ModelWhileIfBlock whileB = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelBlock rightB = new ModelActionBlock(new ProgramLocation(200,200), BlockType.ACTION, null);
+        ModelWhileIfBlock whileB = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelBlock rightB = new ModelActionBlock(new ProgramLocation(200,200), null);
         whileB.setCavityPlug(rightB);
         rightB.setTopSocket(whileB);
         rightB.setBottomPlug(whileB);
@@ -109,8 +109,8 @@ public class LocationHandlerTest {
     @Test
     public void setLeftPlugLocation() {
         LocationHandler LH = new LocationHandler();
-        ModelBlock notB = new ModelNotBlock(new ProgramLocation(100,100), BlockType.NOT);
-        ModelBlock wifB = new ModelPredicateBlock(new ProgramLocation (500, 500), BlockType.PREDICATE, null);
+        ModelBlock notB = new ModelNotBlock(new ProgramLocation(100,100));
+        ModelBlock wifB = new ModelPredicateBlock(new ProgramLocation (500, 500), null);
         notB.setRightSocket(wifB);
         wifB.setLeftPlug(notB);
         LH.setLeftPlugLocation(wifB, notB);
@@ -120,12 +120,12 @@ public class LocationHandlerTest {
     @Test
     public void findClosestBlock() {
         LocationHandler LH = new LocationHandler();
-        ModelBlock notB = new ModelNotBlock(new ProgramLocation(200,200), BlockType.NOT);
-        ModelBlock wifB = new ModelPredicateBlock(new ProgramLocation (300, 210), BlockType.PREDICATE, null);
-        ModelBlock rightB = new ModelActionBlock(new ProgramLocation(200,280), BlockType.ACTION, null);
-        ModelBlock leftB = new ModelActionBlock(new ProgramLocation(280,200), BlockType.ACTION, null);
-        ModelBlock forwardB = new ModelActionBlock(new ProgramLocation(180,120), BlockType.ACTION, null);
-        ModelWhileIfBlock whileB = new ModelWhileIfBlock(new ProgramLocation(110, 210), BlockType.WHILE);
+        ModelBlock notB = new ModelNotBlock(new ProgramLocation(200,200));
+        ModelBlock wifB = new ModelPredicateBlock(new ProgramLocation (300, 210), null);
+        ModelBlock rightB = new ModelActionBlock(new ProgramLocation(200,280), null);
+        ModelBlock leftB = new ModelActionBlock(new ProgramLocation(280,200), null);
+        ModelBlock forwardB = new ModelActionBlock(new ProgramLocation(180,120), null);
+        ModelWhileIfBlock whileB = new ModelWhileIfBlock(new ProgramLocation(110, 210), false);
         ArrayList<ModelBlock> blocks = new ArrayList<>();
         blocks.add(notB);
         blocks.add(wifB);

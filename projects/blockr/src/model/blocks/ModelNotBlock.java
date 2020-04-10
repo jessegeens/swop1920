@@ -11,8 +11,8 @@ public class ModelNotBlock extends ModelBlock{
     private ModelBlock rightSocket;
     private ModelBlock leftPlug;
 
-    public ModelNotBlock(ProgramLocation pos, BlockType type){
-        super(pos,type);
+    public ModelNotBlock(ProgramLocation pos){
+        super(pos);
         this.setRightSocket(null);
         this.setLeftPlug(null);
         ArrayList<ConnectionPoint> connectionPoints = new ArrayList<>();
@@ -26,7 +26,7 @@ public class ModelNotBlock extends ModelBlock{
      */
     @Override
     public ModelBlock clone() {
-        return new ModelNotBlock(this.getPos(), this.getBlockType());
+        return new ModelNotBlock(this.getPos());
     }
 
 

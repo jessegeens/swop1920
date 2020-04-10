@@ -3,7 +3,6 @@ package model.blocks;
 import gameworldapi.*;
 import utilities.*;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 /**
@@ -15,8 +14,8 @@ public class ModelActionBlock extends ModelBlock{
     private ModelBlock bottomPlug;
     private ActionType action;
     
-    public ModelActionBlock(ProgramLocation pos, BlockType type, ActionType action) {
-        super(pos,type);
+    public ModelActionBlock(ProgramLocation pos, ActionType action) {
+        super(pos);
         this.setTopSocket(null);
         this.setBottomPlug(null);
         this.action = action;
@@ -48,7 +47,7 @@ public class ModelActionBlock extends ModelBlock{
      */
     @Override
     public ModelActionBlock clone() {
-        return new ModelActionBlock(this.getPos(), this.getBlockType(), this.getAction());
+        return new ModelActionBlock(this.getPos(), this.getAction());
     }
 
     /**

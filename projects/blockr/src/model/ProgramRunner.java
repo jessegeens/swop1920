@@ -50,7 +50,6 @@ public class ProgramRunner {
             //TODO: used to reset to initial state
         }
         else{
-            System.out.println("now executing: " + current.getBlockType());
             if (this.findNextBlock() != null){
                 this.highlightNext();
             }
@@ -109,7 +108,7 @@ public class ProgramRunner {
             }
         }
         
-        if (current.getBottomPlug() != null && current.getBottomPlug().getBlockType() == BlockType.IF){
+        if (current.getBottomPlug() != null && current.getBottomPlug().isIf()){
             return current.getBottomPlug().getBottomPlug(); //If block should only be executed once.
         } 
         else return current.getBottomPlug();

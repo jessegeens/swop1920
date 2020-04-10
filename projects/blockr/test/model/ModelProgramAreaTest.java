@@ -12,9 +12,9 @@ public class ModelProgramAreaTest {
     @Test
     public void addPABlock(){
         ModelProgramArea area = new ModelProgramArea();
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(400, 550), BlockType.ACTION, null);
-        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(400, 700), BlockType.ACTION, null);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(400, 550), null);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(400, 700), null);
         forwardBlock.setBottomPlug(leftBlock);
         leftBlock.setTopSocket(forwardBlock);
         leftBlock.setBottomPlug(rightBlock);
@@ -28,9 +28,9 @@ public class ModelProgramAreaTest {
     @Test
     public void removePABlock(){
         ModelProgramArea area = new ModelProgramArea();
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(400,400), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(400, 480), BlockType.ACTION, null);
-        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(400, 560), BlockType.ACTION, null);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(400,400), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(400, 480), null);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(400, 560), null);
         area.addPABlock(forwardBlock);
         area.addPABlock(leftBlock);
         area.addPABlock(rightBlock);
@@ -45,9 +45,9 @@ public class ModelProgramAreaTest {
     @Test
     public void removeWhileBlockCavity(){
         ModelProgramArea area = new ModelProgramArea();
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(400,400), BlockType.WHILE);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(413, 443), BlockType.ACTION, null);
-        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(413, 523), BlockType.ACTION, null);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(400,400), false);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(413, 443), null);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(413, 523), null);
         area.addPABlock(whileBlock);
         area.addPABlock(leftBlock);
         area.addPABlock(rightBlock);
@@ -64,9 +64,9 @@ public class ModelProgramAreaTest {
     @Test
     public void addWhileBlockCavity(){
         ModelProgramArea area = new ModelProgramArea();
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(400,400), BlockType.WHILE);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(413, 443), BlockType.ACTION, null);
-        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(413, 523), BlockType.ACTION, null);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(400,400), false);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(413, 443), null);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(413, 523), null);
         whileBlock.setCavityPlug(leftBlock);
         leftBlock.setTopSocket(whileBlock);
         leftBlock.setBottomPlug(rightBlock);
@@ -80,9 +80,9 @@ public class ModelProgramAreaTest {
     @Test
     public void handleMouseDown(){
         ModelProgramArea area = new ModelProgramArea();
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), BlockType.ACTION, null);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), null);
         area.addPABlock(forwardBlock);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100, 100), BlockType.ACTION, null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100, 100), null);
         area.addPABlock(leftBlock);
         assertEquals(leftBlock,area.handleMouseDown(new ProgramLocation(140,140)));
     }
@@ -90,10 +90,10 @@ public class ModelProgramAreaTest {
     @Test
     public void handleMouseUp(){
         ModelProgramArea area = new ModelProgramArea();
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,20), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100, 180), BlockType.ACTION, null);
-        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(180, 100), BlockType.PREDICATE, null);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,20), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100, 180), null);
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(180, 100), null);
         area.addPABlock(forwardBlock);
         area.addPABlock(leftBlock);
         area.addPABlock(wifBlock);
@@ -104,10 +104,10 @@ public class ModelProgramAreaTest {
     @Test
     public void handleMouseUpWhileWithCavity(){
         ModelProgramArea area = new ModelProgramArea();
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(90,20), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 143), BlockType.ACTION, null);
-        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(180, 100), BlockType.PREDICATE, null);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(90,20), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 143), null);
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(180, 100), null);
         area.addPABlock(whileBlock);
         area.addPABlock(leftBlock);
         area.addPABlock(wifBlock);
@@ -124,11 +124,11 @@ public class ModelProgramAreaTest {
     @Test
     public void getFirstBlock(){
         ModelProgramArea area = new ModelProgramArea();
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,20), BlockType.ACTION, null);
-        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(113, 143), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100, 260), BlockType.ACTION, null);
-        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(180, 100), BlockType.PREDICATE, null);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,20), null);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(113, 143), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100, 260), null);
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(180, 100), null);
         area.addPABlock(forwardBlock);
         area.addPABlock(leftBlock);
         area.addPABlock(wifBlock);
@@ -150,16 +150,16 @@ public class ModelProgramAreaTest {
     @Test
     public void maxReached(){
         ModelProgramArea area = new ModelProgramArea();
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,20), BlockType.ACTION, null);
-        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(113, 143), BlockType.ACTION, null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100, 260), BlockType.ACTION, null);
-        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(180, 100), BlockType.PREDICATE, null);
-        ModelWhileIfBlock whileBlock2 = new ModelWhileIfBlock(new ProgramLocation(100,100), BlockType.WHILE);
-        ModelActionBlock forwardBlock2 = new ModelActionBlock(new ProgramLocation(100,20), BlockType.ACTION, null);
-        ModelActionBlock rightBlock2 = new ModelActionBlock(new ProgramLocation(113, 143), BlockType.ACTION, null);
-        ModelActionBlock leftBlock2 = new ModelActionBlock(new ProgramLocation(100, 260), BlockType.ACTION, null);
-        ModelPredicateBlock wifBlock2 = new ModelPredicateBlock(new ProgramLocation(180, 100), BlockType.PREDICATE, null);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,20), null);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(113, 143), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100, 260), null);
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(180, 100), null);
+        ModelWhileIfBlock whileBlock2 = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock2 = new ModelActionBlock(new ProgramLocation(100,20), null);
+        ModelActionBlock rightBlock2 = new ModelActionBlock(new ProgramLocation(113, 143), null);
+        ModelActionBlock leftBlock2 = new ModelActionBlock(new ProgramLocation(100, 260), null);
+        ModelPredicateBlock wifBlock2 = new ModelPredicateBlock(new ProgramLocation(180, 100), null);
         area.addPABlock(forwardBlock);
         area.addPABlock(leftBlock);
         area.addPABlock(wifBlock);
@@ -176,7 +176,7 @@ public class ModelProgramAreaTest {
     @Test
     public void dragBlock(){
         ModelProgramArea area = new ModelProgramArea();
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,20), BlockType.ACTION, null);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,20), null);
         area.addPABlock(forwardBlock);
         area.dragBlock(forwardBlock, new ProgramLocation(250, 300));
         assertEquals(new ProgramLocation(250, 300), forwardBlock.getPos());

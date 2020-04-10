@@ -9,10 +9,12 @@ public class ProgramRunner {
     private boolean running;
     private ModelBlock current;
     private GameWorld gameWorld;
+    private GameWorldState initialState;
 
     //Constructor
     public ProgramRunner(GameWorld gameWorld){
         this.gameWorld = gameWorld;
+        this.initialState = gameWorld.getSnapshot();
         this.running = false;
     }
 
@@ -28,6 +30,7 @@ public class ProgramRunner {
         }
         this.running = false;
         this.current = null;
+        this.gameWorld.restore(initialState);
     }
 
     /**

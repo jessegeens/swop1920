@@ -36,5 +36,4 @@ public class RobotGameWorldType implements GameWorldType {
         return new RobotGameWorld();
     }
 
-    public static void main(String[] args){}
 }

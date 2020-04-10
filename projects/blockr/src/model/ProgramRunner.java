@@ -50,13 +50,12 @@ public class ProgramRunner {
         ModelBlock next;
         if(this.current == null) {
             reset();
-            //return gameWorld.();
-            //TODO: used to reset to initial state
         }
         else{
-            next = findNextBlock();
+            next = findNextBlock(current);
+            while (next instanceof ModelWhileIfBlock) next = findNextBlock(next);
             if (next != null){
-                this.highlightNext();
+                this.highlightNext(next);
             }
             else{
                 this.current.setUnHighlight();
@@ -75,7 +74,7 @@ public class ProgramRunner {
                 }
             }
             this.current = next;
-            while (current instanceof ModelWhileIfBlock) this.current = findNextBlock();
+
         }
     }
 
@@ -92,9 +91,9 @@ public class ProgramRunner {
     /**
      * Highlights the next block in the program and unhighlight the currrent one
      */
-    private void highlightNext(){
+    private void highlightNext(ModelBlock next){
         current.setUnHighlight();
-        findNextBlock().setHighlight();
+        next.setHighlight();
     }
 
     /**
@@ -104,7 +103,7 @@ public class ProgramRunner {
      * @return the next block that will be run in the program
      * @author Oberon Swings (debugged by Bert)
      */
-    private ModelBlock findNextBlock(){
+    private ModelBlock findNextBlock(ModelBlock current){
 
         if (current instanceof ModelWhileIfBlock){
             if (((ModelWhileIfBlock) current).isNegated()) {

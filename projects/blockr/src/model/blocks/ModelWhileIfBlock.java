@@ -55,7 +55,6 @@ public class ModelWhileIfBlock extends ModelBlock{
                 current = current.getRightSocket();
             }
             else {
-                System.out.println("A non NOT or PREDICATE block was found in the rightsocket somewhere");
                 return false;
             }
         }
@@ -71,7 +70,6 @@ public class ModelWhileIfBlock extends ModelBlock{
         ModelBlock current = this.getRightSocket();
         while (!(current instanceof ModelPredicateBlock)){
             if (current == null){
-                System.out.println("A null block was found while searching for the PREDICATE block");
                 return null;
             }
             current = current.getRightSocket();
@@ -135,7 +133,7 @@ public class ModelWhileIfBlock extends ModelBlock{
         ModelBlock blk = this.getCavityPlug();
         while(!(blk.equals(this) || blk == null)){
             cav.add(blk);
-            if (blk == null) System.out.println("The cavity of the while/if block is not connected properly, got null somewhere in the link");
+            if (blk == null) return null;
             if(blk.hasBottomPlug()){
                 blk = blk.getBottomPlug();
             }

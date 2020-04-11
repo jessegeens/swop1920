@@ -9,6 +9,7 @@ import gameworldapi.GameWorldType;
 import main.MyCanvasWindow;
 import model.Actions.Action;
 import model.Actions.CreateAction;
+import model.Actions.DeleteAction;
 import model.Actions.MoveAction;
 import model.blocks.ModelBlock;
 import ui.BlockState;
@@ -242,7 +243,13 @@ public class ModelController{
             if (active != null) {
                 palette.populateBlocks();
             }
-            this.active = null;
+            if(this.active != null){
+                //TODO it gets repositioned to the last palette location
+                undoStack.push(new DeleteAction(this.active, this.PArea));
+                this.active = null;
+
+            }
+
         } else if (this.inProgramArea(eventLocation)) {
 
             System.out.println("Programarea release");
@@ -251,6 +258,7 @@ public class ModelController{
             }
             if (newBlockCreated) {
                 undoStack.push(new CreateAction(this.active, this.PArea));
+                //undoStack.push(new MoveAction(active, this.oldPos, active.getPos().clone()));
             }
             newBlockCreated = false;
             PArea.findAndConnect(eventLocation, active);

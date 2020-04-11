@@ -237,20 +237,19 @@ public class ModelController{
      */
 
     //Each release is a state
-    public void release(ProgramLocation eventLocation){
-        if(inPalette(eventLocation) ){
-            if(active != null){
+    public void release(ProgramLocation eventLocation) {
+        if (inPalette(eventLocation)) {
+            if (active != null) {
                 palette.populateBlocks();
             }
             this.active = null;
-        }
-        else if(this.inProgramArea(eventLocation)){
+        } else if (this.inProgramArea(eventLocation)) {
 
             System.out.println("Programarea release");
-            if(!newBlockCreated){
-                undoStack.push(new MoveAction(active,this.oldPos, active.getPos().clone()));
+            if (!newBlockCreated) {
+                undoStack.push(new MoveAction(active, this.oldPos, active.getPos().clone()));
             }
-            if(newBlockCreated){
+            if (newBlockCreated) {
                 undoStack.push(new CreateAction(this.active, this.PArea));
             }
             newBlockCreated = false;
@@ -259,17 +258,18 @@ public class ModelController{
 
 
             active = null;
-            if (PArea.maxReached()){
+            if (PArea.maxReached()) {
                 palette.removeBlocks();
 
-            if(active != null) {
-                PArea.handleMouseUp(eventLocation, active);
-                active = null;
-                if (PArea.maxReached()) palette.removeBlocks();
+                if (active != null) {
+                    PArea.handleMouseUp(eventLocation, active);
+                    active = null;
+                    if (PArea.maxReached()) palette.removeBlocks();
 
+                }
             }
+
         }
-        
     }
 
 

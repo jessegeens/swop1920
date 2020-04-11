@@ -2,7 +2,28 @@ eerst de API builden,
 dan de andere twee projecten 
 en dan uw run configs van Blockr juist zetten en dan zou het moeten werken
 
+Ga naar gameworldapi
+File => Project structer
+SDK naar 11 zetten
+Project language level naar 11 zetten
+klik op apply
+
+Build project
+
+Ga naar robotgameworld
+Zelfde stappen als bij gameworldapi
+
+
 Blockr run configs
+In project structure de gameworldapi jar toevoegen als library
+
 -run
 -edit configurations
 --Program arguments "path/swop1920/projects/robotgameworld/out/production/robotgameworld/" [space] robotgameworld.RobotGameWorldType
+voorbeeld 
+/home/bert_dvl/Desktop/swop1920/projects/robotgameworld/out/production/robotgameworld/robotgameworld
+
+Common issue => source folder not known
+=> invalidate cache en restart
+
+Error: robotgameword.RobotGameWorldType

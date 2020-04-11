@@ -39,19 +39,17 @@ public class ModelController{
         programRunner = new ProgramRunner(this.gameWorld);
     }
 
-<<<<<<< HEAD
 
-=======
     /**
      * This function handles key events by telling the model controller
      * to either step through the execution or stop running the program
-     * 
+     *
      * TODO: propagate to modelController
-     * 
+     *
      * @param id id of the event
      * @param keyCode keyCode of the pressed key: - 27  = ESC
      *              see: http://keycode.info      - 65  = A
-     *                                            - 116 = F5 
+     *                                            - 116 = F5
      * @param keyChar character of the pressed key
      */
     public void handleKeyEvent(int id, int keyCode, char keyChar){
@@ -64,14 +62,14 @@ public class ModelController{
                     } else {
                         programRunner.initialise(PArea.getFirstBlock());
                     }
-                } 
+                }
                 break;
             case 27: //Esc
                 programRunner.reset();
                 break;
-        }        
+        }
     }
->>>>>>> 48309ce1a460dfe8b8fa2585cd7ceacb4f5d372d
+
 
     /**
      * Try to start the program or do the next step in program execution
@@ -117,7 +115,7 @@ public class ModelController{
      *
      */
     public void undo(){
-<<<<<<< HEAD
+
         System.out.println("UNDO");
         if(!undoStack.empty()){
             Action current = undoStack.pop();
@@ -129,9 +127,9 @@ public class ModelController{
 
 
 
-=======
+
         //System.out.println("UNDO");
->>>>>>> 48309ce1a460dfe8b8fa2585cd7ceacb4f5d372d
+
 
     }
 
@@ -147,7 +145,7 @@ public class ModelController{
      *
      */
     public void redo(){
-<<<<<<< HEAD
+
         System.out.println("REDO");
         if(!redoStack.empty()){
             Action current = redoStack.pop();
@@ -156,9 +154,9 @@ public class ModelController{
             redoStack.push(current);
         }
 
-=======
+
         //System.out.println("REDO");
->>>>>>> 48309ce1a460dfe8b8fa2585cd7ceacb4f5d372d
+
 
     }
 
@@ -221,7 +219,7 @@ public class ModelController{
                 oldPos = active.getPos().clone();
 
             }
-            
+
 
         }
 
@@ -247,7 +245,7 @@ public class ModelController{
             this.active = null;
         }
         else if(this.inProgramArea(eventLocation)){
-<<<<<<< HEAD
+
             System.out.println("Programarea release");
             if(!newBlockCreated){
                 undoStack.push(new MoveAction(active,this.oldPos, active.getPos().clone()));
@@ -263,12 +261,12 @@ public class ModelController{
             active = null;
             if (PArea.maxReached()){
                 palette.removeBlocks();
-=======
+
             if(active != null) {
                 PArea.handleMouseUp(eventLocation, active);
                 active = null;
                 if (PArea.maxReached()) palette.removeBlocks();
->>>>>>> 48309ce1a460dfe8b8fa2585cd7ceacb4f5d372d
+
             }
         }
         

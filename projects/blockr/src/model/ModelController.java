@@ -262,7 +262,7 @@ public class ModelController{
                 palette.removeBlocks();
 
                 if (active != null) {
-                    PArea.handleMouseUp(eventLocation, active);
+                    PArea.findAndConnect(eventLocation, active);
                     active = null;
                     if (PArea.maxReached()) palette.removeBlocks();
 

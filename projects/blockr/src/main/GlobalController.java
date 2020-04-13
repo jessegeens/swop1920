@@ -18,10 +18,16 @@ public class GlobalController {
     private ModelController modelController;
     private UIController uiController;
 
+    //@Bert: u variabelen staan hier en worden in de constructor geinitialiseerd
+    private boolean ctrl;
+    private boolean shift;
+
     // Constructor
-    public GlobalController(GameWorldType gameWorldType){
+    GlobalController(GameWorldType gameWorldType){
         this.modelController = new ModelController(gameWorldType);
         this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT);
+        ctrl = false;
+        shift = false;
     }
     
     /**
@@ -47,7 +53,7 @@ public class GlobalController {
                 //you remove it from the local list in PArea until mouseup
                 this.modelController.select(eventWindowLocation);
                 break;
-            case 502: //MOUSE RELEASED
+            case 502: //MOUSE_RELEASED
                 this.modelController.release(eventWindowLocation);
                 break;
             case 506: //MOUSE_DRAGGED
@@ -60,9 +66,6 @@ public class GlobalController {
 
         //this.modelController.handleMouseEvent(id, eventWindowLocation, clickCount);
     }
-
-    boolean ctrl = false;
-    boolean shift = false;
 
     /**
      * This function handles key events by telling the model controller
@@ -80,9 +83,9 @@ public class GlobalController {
      *                                            - 90 = Z
      * @param keyChar character of the pressed key
      *
-     * @autho
+     * @author
      *
-     * @TODO for some reason shift and control have no keycode for mouseup so just pressing sequentially (with other keypresses in between) also triggers undo and redo
+     * TODO for some reason shift and control have no keycode for mouseup so just pressing sequentially (with other keypresses in between) also triggers undo and redo
      *
      */
     public void handleKeyEvent(int id, int keyCode, char keyChar){
@@ -139,5 +142,4 @@ public class GlobalController {
         modelController.getGameWorld().render(g, gridLocation.getX(), gridLocation.getY());
         uiController.render(g, modelController.getBlockStates());
     }
-
 }

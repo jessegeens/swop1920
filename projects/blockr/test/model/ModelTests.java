@@ -41,7 +41,7 @@ public class ModelTests {
     @Test
     public void testModelPalette2() {
         ModelPalette mP = new ModelPalette(200, 200);
-        assertNotNull(mP.handleMouseDown(mP.getForwardWindowLocation().add(5,5), false));
+        assertNotNull(mP.selectBlock(mP.getForwardWindowLocation().add(5,5), false));
     }
 
     @Test

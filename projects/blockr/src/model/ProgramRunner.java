@@ -46,13 +46,11 @@ public class ProgramRunner {
         if(!(isRunning())){
             throw new IllegalStateException("tried executing the program without initialising it");
         }
-
         ModelBlock next;
         if(this.current == null) {
             reset();
         }
         else{
-
             if(current instanceof ModelActionBlock && gameWorld != null){
                 ActionResult result = gameWorld.perform(((ModelActionBlock) current).getAction());
                 switch (result){
@@ -75,11 +73,8 @@ public class ProgramRunner {
                 this.current.setUnHighlight();
             }
             this.current = next;
-
         }
     }
-
-
 
     /**
      * 

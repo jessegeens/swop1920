@@ -84,7 +84,7 @@ public class ModelProgramAreaTest {
         area.addPABlock(forwardBlock);
         ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100, 100), null);
         area.addPABlock(leftBlock);
-        assertEquals(leftBlock,area.handleMouseDown(new ProgramLocation(140,140)));
+        assertEquals(leftBlock,area.selectBlock(new ProgramLocation(140,140)));
     }
 
     @Test
@@ -97,7 +97,7 @@ public class ModelProgramAreaTest {
         area.addPABlock(forwardBlock);
         area.addPABlock(leftBlock);
         area.addPABlock(wifBlock);
-        area.handleMouseUp(new ProgramLocation(100,100),whileBlock);
+        area.findAndConnect(new ProgramLocation(100,100),whileBlock);
         assertTrue(area.validExecutionState());
     }
 
@@ -117,7 +117,7 @@ public class ModelProgramAreaTest {
         leftBlock.setTopSocket(whileBlock);
         leftBlock.setBottomPlug(whileBlock);
         whileBlock.setCavitySocket(leftBlock);
-        area.handleMouseUp(new ProgramLocation(90,20),forwardBlock);
+        area.findAndConnect(new ProgramLocation(90,20),forwardBlock);
         assertEquals(new ProgramLocation(90, 100), whileBlock.getPos());
     }
 

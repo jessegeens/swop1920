@@ -1,15 +1,17 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 
-import gameworldapi.ActionType;
 import gameworldapi.GameWorld;
 import gameworldapi.GameWorldType;
-import gameworldapi.PredicateType;
 import main.MyCanvasWindow;
+import model.Actions.Action;
+import model.Actions.CreateAction;
+import model.Actions.DeleteAction;
+import model.Actions.MoveAction;
 import model.blocks.ModelBlock;
-import model.blocks.ModelWhileIfBlock;
 import ui.BlockState;
 import utilities.*;
 
@@ -27,6 +29,8 @@ public class ModelController{
 
     private ModelBlock active = null;
 
+    private Stack<Action> undoStack;
+    private Stack<Action> redoStack;
 
     // Constructor
     public ModelController(GameWorldType worldType){
@@ -36,36 +40,8 @@ public class ModelController{
         this.gameWorld = worldType.newWorldInstance();
         //state = ProgramState.getInitialState();
         programRunner = new ProgramRunner(this.gameWorld);
-    }
-
-    /**
-     * This function handles key events by telling the model controller
-     * to either step through the execution or stop running the program
-     * 
-     * TODO: propagate to modelController
-     * 
-     * @param id id of the event
-     * @param keyCode keyCode of the pressed key: - 27  = ESC
-     *              see: http://keycode.info      - 65  = A
-     *                                            - 116 = F5 
-     * @param keyChar character of the pressed key
-     */
-    public void handleKeyEvent(int id, int keyCode, char keyChar){
-        switch(keyCode){
-            case 65: //A;
-            case 116: //F5;
-                if (PArea.validExecutionState()){//Check if all blocks are connected, and if so execute.
-                    if(programRunner.isRunning()){
-                        programRunner.execute();
-                    } else {
-                        programRunner.initialise(PArea.getFirstBlock());
-                    }
-                } 
-                break;
-            case 27: //Esc
-                programRunner.reset();
-                break;
-        }        
+        undoStack = new Stack<>();
+        redoStack = new Stack<>();
     }
 
     /**
@@ -82,7 +58,6 @@ public class ModelController{
                 programRunner.initialise(PArea.getFirstBlock());
             }
         }
-
     }
 
     /**
@@ -100,20 +75,52 @@ public class ModelController{
      *
      * @author Bert
      *
+     * Still WIP
+     *
      */
     public void undo(){
+
+        System.out.println("UNDO");
+        if(!undoStack.empty()){
+            Action current = undoStack.pop();
+            current.undo();
+            System.out.println("current");
+            System.out.println(current);
+            redoStack.push(current);
+        }
+
+
+
+
         //System.out.println("UNDO");
 
+
     }
+
+    //sequentieel nieuwe blokken maken zorgt voor issues
+    //meer dan een verplaatsing reverten
 
     /**
      * Redo the block or game steps
      *
      * @author Bert
      *
+     * Still WIP
+     *
      */
     public void redo(){
+
+        System.out.println("REDO");
+        if(!redoStack.empty()){
+            Action current = redoStack.pop();
+            current.redo();
+            //TODO see below (necessary or not)
+            redoStack.push(current);
+        }
+
+
         //System.out.println("REDO");
+
 
     }
 
@@ -121,32 +128,28 @@ public class ModelController{
 
     /**
      * 
-     * @param location
+     * @param location the selected location
      * @return whether this event location is inside of the Palette
      * 
      * @author Bert
      */
     protected boolean inPalette(ProgramLocation location){
-        if(location.getX() >= 0 && location.getX() < MyCanvasWindow.WIDTH/3 ){
-            return true;
-        }
-        return false;
+        return (location.getX() >= 0 && location.getX() < MyCanvasWindow.WIDTH/3);
     }
 
     /**
      * 
-     * @param location
+     * @param location the selected location
      * @return whether this event location is inside of the ProgramArea
      * 
      * @author Bert
      */
     protected boolean inProgramArea(ProgramLocation location){
-        if(location.getX() > MyCanvasWindow.WIDTH/3 && location.getX() <  2 * MyCanvasWindow.WIDTH/3){
-            return true;
-        }
-        return false;
+        return (location.getX() > MyCanvasWindow.WIDTH/3 && location.getX() <  2 * MyCanvasWindow.WIDTH/3);
     }
 
+    private ProgramLocation oldPos = null;
+    private boolean newBlockCreated = false;
 
     /**
      * Handle a possible block selection (if the position is inbounds of a block)
@@ -162,9 +165,22 @@ public class ModelController{
     public void select(ProgramLocation eventLocation){
         if(this.inPalette(eventLocation)){
             active = palette.handleMouseDown(eventLocation);
+            if(active != null) {
+                newBlockCreated = true;
+            }
+
+
         }
         else if(this.inProgramArea(eventLocation)){
-            active = PArea.handleMouseDown(eventLocation);
+
+            System.out.println("Programarea select");
+            active = PArea.selectBlock(eventLocation);
+            if(active != null){
+                oldPos = active.getPos(); // does not need to be cloned, because it is immutable and will be overwritten if location of active is changed.
+                                          // Will be overwritten in active, not within position itself.
+            }
+
+
         }
 
     }
@@ -180,21 +196,44 @@ public class ModelController{
      * @author Bert
      */
 
-    public void release(ProgramLocation eventLocation){
-        if(inPalette(eventLocation) ){
-            if(active != null){
+    //Each release is a state
+    public void release(ProgramLocation eventLocation) {
+        if (inPalette(eventLocation)) {
+            if (this.active != null) {
                 palette.populateBlocks();
+
+                //TODO it gets repositioned to the last palette location
+                undoStack.push(new DeleteAction(this.active, this.PArea));
+                this.active = null;
             }
-            this.active = null;
-        }
-        else if(this.inProgramArea(eventLocation)){
-            if(active != null) {
-                PArea.handleMouseUp(eventLocation, active);
-                active = null;
-                if (PArea.maxReached()) palette.removeBlocks();
+        } else if (this.inProgramArea(eventLocation)) {
+
+            System.out.println("Programarea release");
+            if (!newBlockCreated) {
+                undoStack.push(new MoveAction(active, this.oldPos, active.getPos())); //see active.getPos comment in select method. Same applies here.
             }
+            if (newBlockCreated) {
+                undoStack.push(new CreateAction(this.active, this.PArea));
+                //undoStack.push(new MoveAction(active, this.oldPos, active.getPos().clone()));
+            }
+            newBlockCreated = false;
+            PArea.findAndConnect(eventLocation, active);
+            //TODO connection event here
+
+
+            active = null;
+            if (PArea.maxReached()) {
+                palette.removeBlocks();
+
+                if (active != null) {
+                    PArea.findAndConnect(eventLocation, active);
+                    active = null;
+                    if (PArea.maxReached()) palette.removeBlocks();
+
+                }
+            }
+
         }
-        
     }
 
 
@@ -261,6 +300,14 @@ public class ModelController{
             blockStates.add(new BlockState(block));
         }
         return blockStates;
+    }
+
+    /**
+     * Method just for testing
+     * @return active
+     */
+    ModelBlock getActiveBlock() {
+        return this.active;
     }
 
 }

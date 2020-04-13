@@ -62,8 +62,7 @@ class ModelPalette{
      * 2. If it is in bounds of a block it calls a function to create a new block
      * 3. The clicked block is returned
      * 
-     * @param {Location} eventLocation the location of the mouse
-     * @param {Boolean} maxReached signifies whether the max number of blocks has been reached
+     * @param {ProgramLocation} eventWindowLocation the location of the mouse
      * @return the block to return when the mouse is held down
      */
     protected ModelBlock handleMouseDown(ProgramLocation eventWindowLocation){

@@ -12,7 +12,6 @@ public class CreateAction implements  Action {
     public CreateAction(ModelBlock createdBlock, ModelProgramArea programArea){
         this.createdBlock = createdBlock;
         this.programArea = programArea;
-
     }
 
     //TODO setting it as active block necessary or not?

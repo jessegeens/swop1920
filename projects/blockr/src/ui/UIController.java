@@ -14,7 +14,7 @@ public class UIController {
     private final int wWidth;  //window width
     private final int wHeight; //window height
 
-    UIBlock uiBlock;
+    private UIBlock uiBlock;
 
     // Constructor
     public UIController(int windowWidth, int windowHeight){

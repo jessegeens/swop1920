@@ -128,35 +128,28 @@ public class ModelController{
 
     /**
      * 
-     * @param location
+     * @param location the selected location
      * @return whether this event location is inside of the Palette
      * 
      * @author Bert
      */
     protected boolean inPalette(ProgramLocation location){
-        if(location.getX() >= 0 && location.getX() < MyCanvasWindow.WIDTH/3 ){
-            return true;
-        }
-        return false;
+        return (location.getX() >= 0 && location.getX() < MyCanvasWindow.WIDTH/3);
     }
 
     /**
      * 
-     * @param location
+     * @param location the selected location
      * @return whether this event location is inside of the ProgramArea
      * 
      * @author Bert
      */
     protected boolean inProgramArea(ProgramLocation location){
-        if(location.getX() > MyCanvasWindow.WIDTH/3 && location.getX() <  2 * MyCanvasWindow.WIDTH/3){
-            return true;
-        }
-        return false;
+        return (location.getX() > MyCanvasWindow.WIDTH/3 && location.getX() <  2 * MyCanvasWindow.WIDTH/3);
     }
 
-
-    ProgramLocation oldPos = null;
-    boolean newBlockCreated = false;
+    private ProgramLocation oldPos = null;
+    private boolean newBlockCreated = false;
 
     /**
      * Handle a possible block selection (if the position is inbounds of a block)

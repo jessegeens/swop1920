@@ -66,7 +66,6 @@ public final class ProgramLocation implements Location {
     @Override
     public boolean equals(Object o){
         if (!(o instanceof Location)) return false;
-        if (((Location) o).getX() == this.getX() && ((Location) o).getY() == this.getY()) return true;
-        else return false;
+        return (((Location) o).getX() == this.getX() && ((Location) o).getY() == this.getY());
     }
 }

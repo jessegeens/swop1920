@@ -85,7 +85,7 @@ public class GlobalController {
      *
      * @author
      *
-     * @TODO for some reason shift and control have no keycode for mouseup so just pressing sequentially (with other keypresses in between) also triggers undo and redo
+     * TODO for some reason shift and control have no keycode for mouseup so just pressing sequentially (with other keypresses in between) also triggers undo and redo
      *
      */
     public void handleKeyEvent(int id, int keyCode, char keyChar){

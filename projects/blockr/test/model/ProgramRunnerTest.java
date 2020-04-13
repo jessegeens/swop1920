@@ -15,14 +15,14 @@ import static org.junit.Assert.*;
 
 public class ProgramRunnerTest {
 
-    GameWorld GW;
-    ArrayList<PredicateType> Predicates;
-    ArrayList<ActionType> Actions;
+    private GameWorld GW;
+    private ArrayList<PredicateType> Predicates;
+    private ArrayList<ActionType> Actions;
 
     @Before
     public void setUp() throws Exception {
         try {
-            File file = new File("/home/oberon/Documents/Studies/SWOP/swop1920/projects/robotgameworld/out/production/robotgameworld/");
+            File file = new File("C:" + File.separator + "Users" + File.separator + "Aram" + File.separator + "Desktop" + File.separator + "Informatica - Computerwetenschappen" + File.separator + "Ba Inf" + File.separator + "4ba informatica" + File.separator + "software-ontwerp" + File.separator + "swop1920" + File.separator + "projects" + File.separator + "robotgameworld" + File.separator + "out" + File.separator + "production" + File.separator + "robotgameworld");
             //convert the file to URL format
             URL url = file.toURI().toURL();
             URL[] urls = new URL[]{url};

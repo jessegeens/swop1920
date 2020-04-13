@@ -54,7 +54,7 @@ public class UtilitiesTests {
         ProgramLocation loc1 = new ProgramLocation(2, 3);
         ProgramLocation loc2 = new ProgramLocation(4, 1);
         ProgramLocation loc3 = new ProgramLocation(6, 4);
-        assertEquals(loc3.getX(), loc1.add(loc2).getX());
+        assertEquals(loc3, loc1.add(loc2));
     }
 
     @Test

@@ -22,7 +22,8 @@ public class ModelControllerTest {
     @Before
     public void setUp() throws Exception {
         try {
-            File file = new File("/home/oberon/Documents/Studies/SWOP/swop1920/projects/robotgameworld/out/production/robotgameworld/");
+            File file = new File("C:" + File.separator + "Users" + File.separator + "Aram" + File.separator + "Desktop" + File.separator + "Informatica - Computerwetenschappen" + File.separator + "Ba Inf" + File.separator + "4ba informatica" + File.separator + "software-ontwerp" + File.separator + "swop1920" + File.separator + "projects" + File.separator + "robotgameworld" + File.separator + "out" + File.separator + "production" + File.separator + "robotgameworld");
+            System.out.println(file.toString());
             //convert the file to URL format
             URL url = file.toURI().toURL();
             URL[] urls = new URL[]{url};
@@ -31,8 +32,7 @@ public class ModelControllerTest {
             //load the Address class in 'c:\\other_classes\\'
             Class cls = cl.loadClass("robotgameworld.RobotGameWorldType");
             //GameWorldType worldType = ((GameWorldType) Class.forName(args[0]).newInstance());
-            GameWorldType worldType = (GameWorldType) cls.newInstance();
-            GWT = worldType;
+            GWT = (GameWorldType) cls.newInstance();
         }
         catch (Exception ex){
             System.out.println("Error: " + ex.getMessage().toString());
@@ -50,91 +50,98 @@ public class ModelControllerTest {
 
 
 
-    /*
+
     @Test
-    public void handleKeyEventStart() {
-        ModelController controller = new ModelController();
-        ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(400,400), BlockType.MOVEFORWARD);
-        ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(400, 480), BlockType.TURNLEFT);
-        forwardBlock.connect(leftBlock);
-        controller.getPArea().addBlock(forwardBlock);
-        controller.getPArea().addBlock(leftBlock);
-        controller.handleKeyEvent(1, 116, 'a');
-        assertTrue(controller.getProgramRunner().isRunning());
+    public void startExecution() {
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(190, 150));
+        controller.release(new ProgramLocation(410, 410));
+        controller.select(new ProgramLocation(190, 270));
+        controller.release(new ProgramLocation(410, 490));
+        controller.startOrExecuteProgram();
+        assertTrue(controller.getProgramAreaBlocks().get(0).isHighlighted());
     }
 
     @Test
-    public void handleKeyEventStop() {
-        ModelController controller = new ModelController();
-        ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(400,400), BlockType.MOVEFORWARD);
-        ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(400, 480), BlockType.TURNLEFT);
-        forwardBlock.connect(leftBlock);
-        controller.getPArea().addBlock(forwardBlock);
-        controller.getPArea().addBlock(leftBlock);
-        controller.handleKeyEvent(1, 116, 'a');
-        controller.handleKeyEvent(1, 27, 'a');
-        assertFalse(controller.getProgramRunner().isRunning());
+    public void exitExecution() {
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(190, 150));
+        controller.release(new ProgramLocation(410, 410));
+        controller.select(new ProgramLocation(190, 270));
+        controller.release(new ProgramLocation(410, 490));
+        controller.startOrExecuteProgram();
+        controller.exitExecution();
+        assertFalse(controller.getProgramAreaBlocks().get(0).isHighlighted());
     }
 
     @Test
-    public void handlePaletteMouseDownEvent() {
-        ModelController controller = new ModelController();
-        controller.handleMouseEvent(501,new Location(40,40),1);
-        assertEquals(controller.getPalette().getTurnLeftBlock().getBlockType(), controller.getActiveBlock().getBlockType());
+    public void handlePaletteSelect() {
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(40, 40));
+        assertEquals(ModelWhileIfBlock.class, controller.getActiveBlock().getClass());
     }
 
     @Test
-    public void handlePaletteMouseUpEvent(){
-        ModelController controller = new ModelController();
-        controller.setActiveBlock(new ModelMoveBlock(new Location(120,120), BlockType.TURNLEFT));
-        controller.handleMouseEvent(502,new Location(120,120),1);
+    public void handlePaletteRelease(){
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(40,40));
+        controller.release(new ProgramLocation(120, 120));
         assertNull(controller.getActiveBlock());
     }
 
     @Test
-    public void handlePaletteMouseDragEvent(){
-        ModelController controller = new ModelController();
-        ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(120,120), BlockType.TURNLEFT);
-        controller.setActiveBlock(leftBlock);
-        controller.handleMouseEvent(506,new Location(170,170),1);
-        assertEquals(new Location(170,170), leftBlock.getPos());
+    public void handlePaletteDrag(){
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(40,40));
+        controller.drag(new ProgramLocation(120, 120));
+        assertEquals(new ProgramLocation(120,120), controller.getActiveBlock().getPos());
     }
 
     @Test
-    public void handleProgramAreaMouseDownEvent() {
-        ModelController controller = new ModelController();
-        ModelMoveBlock forwardBlock = new ModelMoveBlock(new Location(400,400), BlockType.MOVEFORWARD);
-        controller.getPArea().addBlock(forwardBlock);
-        controller.handleMouseEvent(501,new Location(420,420),1);
-        assertEquals(forwardBlock, controller.getActiveBlock());
+    public void handleProgramAreaSelect() {
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(190, 150));
+        controller.release(new ProgramLocation(410, 410));
+        controller.select(new ProgramLocation(420, 420));
+        assertEquals("MOVE_FORWARD", controller.getActiveBlock().getTitle());
     }
 
     @Test
-    public void handleProgramAreaMouseUpEvent(){
-        ModelController controller = new ModelController();
-        controller.setActiveBlock(new ModelMoveBlock(new Location(120,120), BlockType.TURNLEFT));
-        controller.handleMouseEvent(502,new Location(420,120),1);
-        assertNull(controller.getActiveBlock());
+    public void handleProgramAreaRelease(){
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(190, 150));
+        controller.release(new ProgramLocation(410, 410));
+        assertEquals(1, controller.getProgramAreaBlocks().size());
     }
 
     @Test
-    public void handleProgramAreaMouseDragEvent(){
-        ModelController controller = new ModelController();
-        ModelMoveBlock leftBlock = new ModelMoveBlock(new Location(120,120), BlockType.TURNLEFT);
-        controller.setActiveBlock(leftBlock);
-        controller.handleMouseEvent(506,new Location(470,170),1);
-        assertEquals(new Location(470,170), leftBlock.getPos());
+    public void handleProgramAreaDrag(){
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(40,40));
+        controller.drag(new ProgramLocation(420, 420));
+        assertEquals(new ProgramLocation(420,420), controller.getActiveBlock().getPos());
     }
-
 
     @Test
     public void wallInFrontBlockNullPointer(){
-        ModelController controller = new ModelController();
-        ModelWallInFrontBlock wallInFrontBlock = new ModelWallInFrontBlock(new Location(400,400), BlockType.WALLINFRONT);
-        controller.setActiveBlock(wallInFrontBlock);
-        controller.handleProgramAreaMouseEvent(502, new Location(420,420), 1);
-        controller.handleProgramAreaMouseEvent(501, new Location(440,440), 1);
-        assertEquals(wallInFrontBlock, controller.getActiveBlock());
-    }*/
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(30, 270));
+        controller.release(new ProgramLocation(420, 420));
+        controller.select(new ProgramLocation(430, 430));
+        assertEquals(ModelPredicateBlock.class, controller.getActiveBlock().getClass());
+    }
 
+    @Test
+    public void getModelBlocksSize() {
+        ModelController controller = new ModelController(GWT);
+        assertEquals(7, controller.getModelBlocks().size());
+    }
+
+    @Test
+    public void getGameWorld() {
+        ModelController controller = new ModelController(GWT);
+        assertNotNull(controller.getGameWorld());
+    }
+
+    //TODO: undo redo tests (Oberon zegt Bert)
 }

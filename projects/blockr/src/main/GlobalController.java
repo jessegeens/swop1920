@@ -47,7 +47,7 @@ public class GlobalController {
                 //you remove it from the local list in PArea until mouseup
                 this.modelController.select(eventWindowLocation);
                 break;
-            case 502: //MOUSE RELEASED
+            case 502: //MOUSE_RELEASED
                 this.modelController.release(eventWindowLocation);
                 break;
             case 506: //MOUSE_DRAGGED

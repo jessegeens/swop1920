@@ -29,6 +29,8 @@ public class ModelController{
 
     private ModelBlock active = null;
 
+    private Stack<Action> undoStack;
+    private Stack<Action> redoStack;
 
     // Constructor
     public ModelController(GameWorldType worldType){
@@ -38,39 +40,9 @@ public class ModelController{
         this.gameWorld = worldType.newWorldInstance();
         //state = ProgramState.getInitialState();
         programRunner = new ProgramRunner(this.gameWorld);
+        undoStack = new Stack<>();
+        redoStack = new Stack<>();
     }
-
-
-    /**
-     * This function handles key events by telling the model controller
-     * to either step through the execution or stop running the program
-     *
-     * TODO: propagate to modelController
-     *
-     * @param id id of the event
-     * @param keyCode keyCode of the pressed key: - 27  = ESC
-     *              see: http://keycode.info      - 65  = A
-     *                                            - 116 = F5
-     * @param keyChar character of the pressed key
-     */
-    public void handleKeyEvent(int id, int keyCode, char keyChar){
-        switch(keyCode){
-            case 65: //A;
-            case 116: //F5;
-                if (PArea.validExecutionState()){//Check if all blocks are connected, and if so execute.
-                    if(programRunner.isRunning()){
-                        programRunner.execute();
-                    } else {
-                        programRunner.initialise(PArea.getFirstBlock());
-                    }
-                }
-                break;
-            case 27: //Esc
-                programRunner.reset();
-                break;
-        }
-    }
-
 
     /**
      * Try to start the program or do the next step in program execution
@@ -86,7 +58,6 @@ public class ModelController{
                 programRunner.initialise(PArea.getFirstBlock());
             }
         }
-
     }
 
     /**
@@ -98,14 +69,6 @@ public class ModelController{
     public void exitExecution(){
         programRunner.reset();
     }
-
-
-
-
-
-    public Stack<Action> undoStack = new Stack();
-
-    public Stack<Action> redoStack = new Stack();
 
     /**
      * Undo the block or game steps
@@ -209,7 +172,10 @@ public class ModelController{
     public void select(ProgramLocation eventLocation){
         if(this.inPalette(eventLocation)){
             active = palette.handleMouseDown(eventLocation);
-            newBlockCreated = true;
+            if(active != null) {
+                newBlockCreated = true;
+            }
+
 
         }
         else if(this.inProgramArea(eventLocation)){
@@ -240,16 +206,13 @@ public class ModelController{
     //Each release is a state
     public void release(ProgramLocation eventLocation) {
         if (inPalette(eventLocation)) {
-            if (active != null) {
+            if (this.active != null) {
                 palette.populateBlocks();
-            }
-            if(this.active != null){
+
                 //TODO it gets repositioned to the last palette location
                 undoStack.push(new DeleteAction(this.active, this.PArea));
                 this.active = null;
-
             }
-
         } else if (this.inProgramArea(eventLocation)) {
 
             System.out.println("Programarea release");
@@ -344,6 +307,14 @@ public class ModelController{
             blockStates.add(new BlockState(block));
         }
         return blockStates;
+    }
+
+    /**
+     * Method just for testing
+     * @return active
+     */
+    ModelBlock getActiveBlock() {
+        return this.active;
     }
 
 }

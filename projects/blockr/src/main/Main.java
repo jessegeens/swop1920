@@ -32,5 +32,4 @@ class Main {
             System.out.println("Error: " + ex.getMessage().toString());
         }
     }
-
 }

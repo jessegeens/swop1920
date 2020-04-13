@@ -16,9 +16,8 @@ public class MoveAction implements Action {
 
     public MoveAction(ModelBlock movedBlock, ProgramLocation oldL, ProgramLocation newL){
         this.movedBlock = movedBlock;
-        this.oldL = oldL.clone();
-        this.newL = newL.clone();
-
+        this.oldL = oldL;
+        this.newL = newL;
     }
 
     public void execute(){

@@ -183,8 +183,8 @@ public class ModelController{
             System.out.println("Programarea select");
             active = PArea.selectBlock(eventLocation);
             if(active != null){
-                oldPos = active.getPos().clone();
-
+                oldPos = active.getPos(); // does not need to be cloned, because it is immutable and will be overwritten if location of active is changed.
+                                          // Will be overwritten in active, not within position itself.
             }
 
 
@@ -217,7 +217,7 @@ public class ModelController{
 
             System.out.println("Programarea release");
             if (!newBlockCreated) {
-                undoStack.push(new MoveAction(active, this.oldPos, active.getPos().clone()));
+                undoStack.push(new MoveAction(active, this.oldPos, active.getPos())); //see active.getPos comment in select method. Same applies here.
             }
             if (newBlockCreated) {
                 undoStack.push(new CreateAction(this.active, this.PArea));

@@ -1,87 +1,65 @@
 package utilities;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
+import gameworldapi.GameWorldType;
+import model.blocks.ModelWhileIfBlock;
 import org.junit.*;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.net.URL;
+import java.net.URLClassLoader;
 
 public class UtilitiesTests {
-/*
-    @Test
-    public void getRightType() {
-        BlockType blkt = BlockType.MOVEFORWARD;
-        assertEquals(BlockType.MOVEFORWARD, blkt);
+
+    private GameWorldType GWT;
+
+    @Before
+    public void setUp() throws Exception {
+        try {
+            File file = new File("C:" + File.separator + "Users" + File.separator + "Aram" + File.separator + "Desktop" + File.separator + "Informatica - Computerwetenschappen" + File.separator + "Ba Inf" + File.separator + "4ba informatica" + File.separator + "software-ontwerp" + File.separator + "swop1920" + File.separator + "projects" + File.separator + "robotgameworld" + File.separator + "out" + File.separator + "production" + File.separator + "robotgameworld");
+            System.out.println(file.toString());
+            //convert the file to URL format
+            URL url = file.toURI().toURL();
+            URL[] urls = new URL[]{url};
+            //load this folder into Class loader
+            ClassLoader cl = new URLClassLoader(urls);
+            //load the Address class in 'c:\\other_classes\\'
+            Class cls = cl.loadClass("robotgameworld.RobotGameWorldType");
+            //GameWorldType worldType = ((GameWorldType) Class.forName(args[0]).newInstance());
+            GWT = (GameWorldType) cls.newInstance();
+        }
+        catch (Exception ex){
+            System.out.println("Error: " + ex.getMessage().toString());
+        }
     }
 
     @Test
-    public void getRightTitle() {
-        BlockType blkt = BlockType.WALLINFRONT;
-        assertEquals("wall in front", blkt.getTitle());
+    public void connectionPoint() {
+        ModelWhileIfBlock mwif = new ModelWhileIfBlock(new ProgramLocation(10, 10), true);
+        assertTrue(mwif.getConnectionPoints().contains(ConnectionPoint.CAVITYPLUG));
     }
 
 
     @Test
     public void getDistanceIsZero() {
-        Location loc1 = new Location(1, 1);
-        Location loc2 = new Location(1, 1);
+        ProgramLocation loc1 = new ProgramLocation(1, 1);
+        ProgramLocation loc2 = new ProgramLocation(1, 1);
         assertEquals(0, loc1.getDistance(loc2));
-        assertEquals(0, loc2.getDistance(loc1));
     }
+
 
     @Test
     public void getVectorSum() {
-        Location loc1 = new Location(2, 3);
-        Location loc2 = new Location(0, 0);
-        Location loc3 = new Location(4, 1);
-        Location loc4 = new Location(6, 4);
-        assertEquals(loc4.getX(), loc1.add(loc3).getX());
-        assertEquals(loc4.getY(), loc1.add(loc3).getY());
-        assertEquals(loc1.getX(), loc1.add(loc2).getX());
-        assertEquals(loc1.getY(), loc1.add(loc2).getY());
+        ProgramLocation loc1 = new ProgramLocation(2, 3);
+        ProgramLocation loc2 = new ProgramLocation(4, 1);
+        ProgramLocation loc3 = new ProgramLocation(6, 4);
+        assertEquals(loc3.getX(), loc1.add(loc2).getX());
     }
 
     @Test
     public void getComponentSum() {
-        Location loc1 = new Location(2, 3);
-        assertEquals(4, loc1.add(2, 0).getX());
+        ProgramLocation loc1 = new ProgramLocation(2, 3);
         assertEquals(3, loc1.add(2, 0).getY());
     }
-
-    @Test
-    public void getRightDirection() {
-        //Direction dir = new Direction(2);
-        //assertEquals(2, dir.getDirection());
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void getWrongDirection() {
-        //Direction dir = new Direction(4);
-    }
-
-    @Test
-    public void turn() {
-        //Direction dir1 = new Direction(3);
-        //dir1.turnLeft();
-        //assertEquals(2, dir1.getDirection());
-        //Direction dir2 = new Direction(3);
-        //dir2.turnRight();
-        //assertEquals(0, dir2.getDirection());
-    }
-/*
-    @Test
-    public void gridInfoTest() {
-        int cellSize = 100;
-        GridLocation goal = new GridLocation(10, 15);
-        GridLocation rPos = new GridLocation(20, 25);
-        Direction rDir = Direction.RIGHT;
-        ArrayList<GridLocation> walls = new ArrayList<>();
-        ProgramState state = new ProgramState(rDir, rPos, walls, goal, 100);
-        ModelGrid grid = new ModelGrid(10, 10, state);
-        assertEquals(10, state.getGoalCell().getX());
-        assertEquals(25, state.getRobotLocation().getY());
-        assertNotNull(state.getRobotDirection());
-    }*/
-
-    //TODO fix test (mainly because utilities became truly immutable now)
 }

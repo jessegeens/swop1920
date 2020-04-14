@@ -7,8 +7,6 @@ import gameworldapi.*;
 
 /**
  * Singleton class that executes an robotgameworld.Action.
- * This class uses the Command (GoF) pattern
- * Executed actions will be saved on a stack for UNDO/REDO
  *
  * @author Jesse Geens
  */

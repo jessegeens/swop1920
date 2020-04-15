@@ -14,13 +14,11 @@ public class UIController {
     private final int wWidth;  //window width
     private final int wHeight; //window height
 
-    private UIBlock uiBlock;
 
     // Constructor
     public UIController(int windowWidth, int windowHeight){
         this.wWidth = windowWidth;
         this.wHeight = windowHeight;
-        uiBlock = new UIBlock();
     }
 
     /**
@@ -42,7 +40,7 @@ public class UIController {
      * Help method for the render method.
      * @param g graphics object where the rendering is done.
      */
-    public void renderUI(Graphics g){
+    private void renderUI(Graphics g){
         g.setColor(Color.BLACK);
         g.drawLine(this.wWidth/3, 0, this.wWidth/3, this.wHeight);
         g.drawLine(2*this.wWidth/3, 0, 2*this.wWidth/3, this.wHeight);

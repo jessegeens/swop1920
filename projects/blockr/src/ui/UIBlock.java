@@ -117,7 +117,8 @@ public class UIBlock{
         if (connectionPoints.contains(ConnectionPoint.CAVITYPLUG)) this.renderCavityPlug(g, blockLocation);
         if (connectionPoints.contains(ConnectionPoint.CAVITYSOCKET)) this.renderCavitySocket(g, blockLocation, cavitySize);
         g.setColor(Color.WHITE);
-        g.drawString(blockState.getTitle(), blockLocation.getX() + 10, blockLocation.getY() + (STD_HEIGHT / 2));
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 9));
+        g.drawString(blockState.getTitle(), blockLocation.getX() + 8, blockLocation.getY() + (STD_HEIGHT / 2));
     }
 
 

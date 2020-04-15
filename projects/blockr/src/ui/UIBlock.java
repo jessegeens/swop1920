@@ -17,9 +17,7 @@ public class UIBlock{
     public static final int STD_WIDTH = 80; //final standard width of blocks
     public static final int STD_HEIGHT = 80; //final standard height of blocks
 
-    UIBlock(){
-
-    }
+    UIBlock(){ }
 
     /**
      * Gives the color in which the blocks need to be rendered according to whether they are highlighted or not
@@ -120,7 +118,6 @@ public class UIBlock{
         g.setFont(new Font("TimesRoman", Font.PLAIN, 9));
         g.drawString(blockState.getTitle(), blockLocation.getX() + 8, blockLocation.getY() + (STD_HEIGHT / 2));
     }
-
 
     /**
      * @param blockLocation the location of the block

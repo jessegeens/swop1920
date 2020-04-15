@@ -35,7 +35,7 @@ public class BlockState {
      * @return the location of the block
      * @author Oberon Swings
      */
-    public ProgramLocation getBlockLocation() {
+    ProgramLocation getBlockLocation() {
         return blockLocation;
     }
 
@@ -44,7 +44,7 @@ public class BlockState {
      * @return the list of connection points
      * @author Oberon Swings
      */
-    public ArrayList<ConnectionPoint> getConnectionPoints() {
+    ArrayList<ConnectionPoint> getConnectionPoints() {
         return connectionPoints;
     }
 
@@ -53,7 +53,7 @@ public class BlockState {
      * @return if the block is highlighted or not
      * @author Oberon Swings
      */
-    public boolean isHighlighted() {
+    boolean isHighlighted() {
         return highlighted;
     }
 
@@ -62,7 +62,7 @@ public class BlockState {
      * @return the size of the cavity of the block
      * @author Oberon Swings
      */
-    public int getCavitySize() {
+    int getCavitySize() {
         return cavitySize;
     }
 
@@ -71,8 +71,7 @@ public class BlockState {
      * @return the title of the block
      * @author Oberon Swings
      */
-    public String getTitle() {
+    String getTitle() {
         return title;
     }
-
 }

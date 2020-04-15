@@ -24,7 +24,6 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
     }
 
     public void setUnHighlight(){
-        
         this.highlighted = false;
     }
 
@@ -40,12 +39,7 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
      */
     @Override
     public boolean inBoundsOfElement(ProgramLocation coordinate){
-        if(this.getPos().getX() < coordinate.getX() && this.getPos().getX() + getWidth() > coordinate.getX() && this.getPos().getY() < coordinate.getY() && this.getPos().getY() + getWidth() > coordinate.getY() ){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return (this.getPos().getX() < coordinate.getX() && this.getPos().getX() + getWidth() > coordinate.getX() && this.getPos().getY() < coordinate.getY() && this.getPos().getY() + getWidth() > coordinate.getY());
     }
 
     /**
@@ -67,7 +61,7 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
      * @return the height of the block.
      * @author Oberon Swings
      */
-    public int getHeight() {
+    int getHeight() {
 		if (this instanceof ModelWhileIfBlock){
             return (((ModelWhileIfBlock)this).getCavityHeight() + UIBlock.STD_HEIGHT);
         }
@@ -122,8 +116,7 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
      * @return {boolean} true if this block has a top socket, false otherwise
      */
     public boolean hasTopSocket(){
-        if (this.connectionPoints.contains(ConnectionPoint.TOPSOCKET)) return true;
-        else return false;
+        return (this.connectionPoints.contains(ConnectionPoint.TOPSOCKET));
     }
 
     /**
@@ -131,8 +124,7 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
      * @return {boolean} true if this block has a bottom plug, false otherwise
      */
     public boolean hasBottomPlug(){
-        if (this.connectionPoints.contains(ConnectionPoint.BOTTOMPLUG)) return true;
-        else return false;
+        return (this.connectionPoints.contains(ConnectionPoint.BOTTOMPLUG));
     }
 
     /**
@@ -140,8 +132,7 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
      * @return {boolean} true if this block has a right socket, false otherwise
      */
     public boolean hasRightSocket(){
-        if (this.connectionPoints.contains(ConnectionPoint.RIGHTSOCKET)) return true;
-        else return false;
+        return  (this.connectionPoints.contains(ConnectionPoint.RIGHTSOCKET));
     }
 
     /**
@@ -149,11 +140,10 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
      * @return {boolean} true if this block has a left plug, false otherwise
      */
     public boolean hasLeftPlug(){
-        if (this.connectionPoints.contains(ConnectionPoint.LEFTPLUG)) return true;
-        else return false;
+        return (this.connectionPoints.contains(ConnectionPoint.LEFTPLUG));
     }
 
-    protected void setConnectionPoints(ArrayList<ConnectionPoint> connectionPoints) {
+    void setConnectionPoints(ArrayList<ConnectionPoint> connectionPoints) {
         this.connectionPoints = connectionPoints;
     }
 
@@ -178,13 +168,13 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
     public void setLeftPlug(ModelBlock block){}
     public void setRightSocket(ModelBlock block){}
 
-    public ProgramLocation getTopSocketPos() {
+    ProgramLocation getTopSocketPos() {
         return super.getPos().add(UIBlock.STD_WIDTH / 2, + UIBlock.PLUGSIZE/2);
     }
     public ProgramLocation getBottomPlugPos() {
         return super.getPos().add(UIBlock.STD_WIDTH / 2, + this.getHeight() + UIBlock.PLUGSIZE/2);
     }
-    public ProgramLocation getLeftPlugPos() {
+    private ProgramLocation getLeftPlugPos() {
         return super.getPos().add(- UIBlock.PLUGSIZE / 2, + UIBlock.STD_HEIGHT / 2);
     }
     public ProgramLocation getRightSocketPos() {
@@ -198,8 +188,7 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
      * @return true if this has a rightSocket and right has a leftPlug
      */
     public boolean compatibleLeftRight(ModelBlock right){
-        if (this.hasRightSocket() && right.hasLeftPlug()) return true;
-        else return false;
+        return (this.hasRightSocket() && right.hasLeftPlug());
     }
 
     /**
@@ -208,8 +197,7 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
      * @return true if this has a bottomPlug and bottom has a topSocket
      */
     public boolean compatibleTopBottom(ModelBlock bottom){
-        if (this.hasBottomPlug() && bottom.hasTopSocket()) return true;
-        else return false;
+        return (this.hasBottomPlug() && bottom.hasTopSocket());
     }
 
     /**
@@ -248,5 +236,4 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
         }
         return "Block";
     }
-    
 }

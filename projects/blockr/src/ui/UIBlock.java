@@ -17,7 +17,7 @@ public class UIBlock{
     public static final int STD_WIDTH = 80; //final standard width of blocks
     public static final int STD_HEIGHT = 80; //final standard height of blocks
 
-    public UIBlock(){
+    UIBlock(){
 
     }
 
@@ -102,7 +102,7 @@ public class UIBlock{
      * @param blockState the state in which the block needs to be rendered
      * @author Bert De Vleeschouwer
      */
-    public void render(Graphics g, BlockState blockState) {
+    private void render(Graphics g, BlockState blockState) {
         ProgramLocation blockLocation = blockState.getBlockLocation();
         ArrayList<ConnectionPoint> connectionPoints = blockState.getConnectionPoints();
         boolean highlighted = blockState.isHighlighted();
@@ -128,7 +128,7 @@ public class UIBlock{
      * @return the position of the cavity socket in a WHILEIF block
      * @author Bert De Vleeschouwer
      */
-    public ProgramLocation getCavitySocketPos(ProgramLocation blockLocation, int cavitySize) {
+    private ProgramLocation getCavitySocketPos(ProgramLocation blockLocation, int cavitySize) {
         return blockLocation.add(2*STD_WIDTH/3 - PLUGSIZE/2, this.getHeight(cavitySize) - STD_HEIGHT/3 - PLUGSIZE/2);
     }
 
@@ -137,7 +137,7 @@ public class UIBlock{
      * @return the position of the cavity plug in a WHILEIF block
      * @author Bert De Vleeschouwer
      */
-    public ProgramLocation getCavityPlugPos(ProgramLocation blockLocation) {
+    private ProgramLocation getCavityPlugPos(ProgramLocation blockLocation) {
         return blockLocation.add(2*STD_WIDTH/3 - PLUGSIZE/2, 2*STD_HEIGHT/3 - PLUGSIZE/2);
     }
 
@@ -146,7 +146,7 @@ public class UIBlock{
      * @return the position of the topSocket
      * @author Oberon Swings
      */
-    public ProgramLocation getTopSocketPos(ProgramLocation blockLocation) {
+    private ProgramLocation getTopSocketPos(ProgramLocation blockLocation) {
         return blockLocation.add(this.getWidth()/2 - PLUGSIZE/2, 0);
     }
 
@@ -155,7 +155,7 @@ public class UIBlock{
      * @return the position of the rightSocket
      * @author Oberon Swings
      */
-    public ProgramLocation getRightSocketPos(ProgramLocation blockLocation) {
+    private ProgramLocation getRightSocketPos(ProgramLocation blockLocation) {
         return blockLocation.add(this.getWidth() - PLUGSIZE, STD_HEIGHT/2 -PLUGSIZE/2);
     }
 
@@ -165,7 +165,7 @@ public class UIBlock{
      * @return the position of the bottomPlug
      * @author Oberon Swings
      */
-    public ProgramLocation getBottomPlugPos(ProgramLocation blockLocation, int cavitySize) {
+    private ProgramLocation getBottomPlugPos(ProgramLocation blockLocation, int cavitySize) {
         return blockLocation.add(this.getWidth()/2 - PLUGSIZE/2, this.getHeight(cavitySize));
     }
 
@@ -174,14 +174,14 @@ public class UIBlock{
      * @return the position of the leftPlug
      * @author Oberon Swings
      */
-    public ProgramLocation getLeftPlugPos(ProgramLocation blockLocation) {
+    private ProgramLocation getLeftPlugPos(ProgramLocation blockLocation) {
         return blockLocation.add(0, STD_HEIGHT/2 - PLUGSIZE/2);
     }
 
     /**
      * @return the width of the modelBlock
      */
-    public int getWidth() {
+    private int getWidth() {
         return STD_WIDTH;
     }
 
@@ -190,7 +190,7 @@ public class UIBlock{
      * @param cavitySize the size of the cavity if the block has one, 0 if there is no cavity
      * @return the height that the rendered block gets
      */
-    public int getHeight(int cavitySize) {
+    private int getHeight(int cavitySize) {
         return (cavitySize + 1) * STD_HEIGHT;
     }
 }

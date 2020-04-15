@@ -110,21 +110,20 @@ public class LocationHandler {
         if(block == null || blocks == null){
             return null;
         }
-        for(int i = 0; i < blocks.size(); i++){
-            ModelBlock current = blocks.get(i);
-            if (current.compatibleTopBottom(block) && current.distanceTopBottom(block) < d){
+        for (ModelBlock current : blocks) {
+            if (current.compatibleTopBottom(block) && current.distanceTopBottom(block) < d) {
                 closest = current;
                 d = current.distanceTopBottom(block);
             }
-            if (block.compatibleTopBottom(current) && block.distanceTopBottom(current) < d){
+            if (block.compatibleTopBottom(current) && block.distanceTopBottom(current) < d) {
                 closest = current;
                 d = block.distanceTopBottom(current);
             }
-            if (block.compatibleLeftRight(current) && block.distanceLeftRight(current) < d){
+            if (block.compatibleLeftRight(current) && block.distanceLeftRight(current) < d) {
                 closest = current;
                 d = block.distanceLeftRight(current);
             }
-            if (current.compatibleLeftRight(block) && current.distanceLeftRight(block) < d){
+            if (current.compatibleLeftRight(block) && current.distanceLeftRight(block) < d) {
                 closest = current;
                 d = current.distanceLeftRight(block);
             }

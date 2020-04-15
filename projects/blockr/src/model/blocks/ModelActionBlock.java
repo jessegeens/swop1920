@@ -71,8 +71,4 @@ public class ModelActionBlock extends ModelBlock{
     public ModelBlock getTopSocket() {
         return this.topSocket;
     }
-
-
-
-
 }

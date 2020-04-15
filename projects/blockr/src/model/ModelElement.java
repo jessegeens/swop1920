@@ -9,7 +9,6 @@ public abstract class ModelElement{
 
     private ProgramLocation pos;
 
-
     public ModelElement(ProgramLocation pos){
         this.pos = pos;
     }
@@ -36,5 +35,4 @@ public abstract class ModelElement{
      * Function that declares if the position is a right position. 
      */
     public abstract boolean inBoundsOfElement(ProgramLocation pos);
-
 }

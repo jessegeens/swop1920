@@ -57,7 +57,4 @@ public class ModelNotBlock extends ModelBlock{
     public void setLeftPlug(ModelBlock leftPlug) {
         this.leftPlug = leftPlug;
     }
-
-
-
 }

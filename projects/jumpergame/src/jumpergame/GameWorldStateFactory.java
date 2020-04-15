@@ -21,7 +21,7 @@ public class GameWorldStateFactory {
      * Get the singleton instance
      *
      * @author Jesse Geens
-     * @return robotgameworld.GameWorldStateFactory instance
+     * @return GameWorldStateFactory instance
      */
     public static GameWorldStateFactory getInstance(){
         if(instance == null)
@@ -47,8 +47,8 @@ public class GameWorldStateFactory {
                 return new JumperGameWorldState(old.getPlayerLocation().add(-1, 0));
             case MOVE_RIGHT:
                 return new JumperGameWorldState(old.getPlayerLocation().add(1, 0));
-            case JUMP:
-                return new JumperGameWorldState(old.getPlayerLocation().add(0, 2));
+            case JUMP: //Player starts at the bottom of the grid, so Y should decrease to go up
+                return new JumperGameWorldState(old.getPlayerLocation().add(0, -2));
 
         }
         return null;

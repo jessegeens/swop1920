@@ -14,7 +14,7 @@ public class ActionExecutor {
     static ActionExecutor instance;
 
     //Parameters, TODO check whether these are at the correct location
-    private final GridLocation PRINCESS = new GridLocation(4, 4);
+    private final GridLocation PRINCESS = new GridLocation(3, 5);
     private final ArrayList<GridLocation> BLOCKS = new ArrayList<GridLocation>(Arrays.asList(new GridLocation(0, 2), new GridLocation(1, 2), new GridLocation(4, 3)));
     private int GRID_WIDTH = 5;
     private int GRID_HEIGHT = 15;
@@ -100,7 +100,6 @@ public class ActionExecutor {
         if(state.getPlayerLocation().getY() < 0) return false;
         if(state.getPlayerLocation().getX() >= GRID_WIDTH) return false;
         if(state.getPlayerLocation().getY() >= GRID_HEIGHT) return false;
-        //if(BLOCKS.contains(state.getPlayerLocation())) return false; //Not really an invalid state, just kills the player
         return true;
     }
 
@@ -114,6 +113,18 @@ public class ActionExecutor {
      */
     private boolean gameFinished(JumperGameWorldState state){
         return BLOCKS.contains(state.getPlayerLocation()) || state.getPlayerLocation() == PRINCESS;
+    }
+
+    /**
+     * Check if there is a wall in front of the robot in the current game world state
+     *
+     * @author Jesse Geens
+     *
+     * @return true if there is a block above the player
+     *         false otherwise
+     */
+    public boolean blockAbovePlayer() {
+        return BLOCKS.contains(current.getPlayerLocation().add(0, -1));
     }
 
 }

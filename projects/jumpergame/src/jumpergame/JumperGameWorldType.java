@@ -19,6 +19,6 @@ public class JumperGameWorldType implements GameWorldType{
 
     @Override
     public GameWorld newWorldInstance() {
-        return null;
+        return new JumperGameWorld();
     }
 }

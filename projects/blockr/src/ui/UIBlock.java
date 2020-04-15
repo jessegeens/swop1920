@@ -100,7 +100,7 @@ public class UIBlock{
      * @param blockState the state in which the block needs to be rendered
      * @author Bert De Vleeschouwer
      */
-    private void render(Graphics g, BlockState blockState) {
+    public void render(Graphics g, BlockState blockState) {
         ProgramLocation blockLocation = blockState.getBlockLocation();
         ArrayList<ConnectionPoint> connectionPoints = blockState.getConnectionPoints();
         boolean highlighted = blockState.isHighlighted();

@@ -38,6 +38,7 @@ public class ModelWhileIfBlock extends ModelBlock{
 
     @Override
     public ModelWhileIfBlock clone() {
+        if (this.isIf) { return new ModelWhileIfBlock(this.getPos(), true); }
         return new ModelWhileIfBlock(this.getPos(), false);
     }
 

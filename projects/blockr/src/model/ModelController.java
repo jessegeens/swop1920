@@ -7,10 +7,7 @@ import java.util.Stack;
 import gameworldapi.GameWorld;
 import gameworldapi.GameWorldType;
 import main.MyCanvasWindow;
-import model.Actions.Action;
-import model.Actions.CreateAction;
-import model.Actions.DeleteAction;
-import model.Actions.MoveAction;
+import model.Actions.*;
 import model.blocks.ModelBlock;
 import ui.BlockState;
 import utilities.*;
@@ -218,6 +215,7 @@ public class ModelController{
             }
             newBlockCreated = false;
             PArea.findAndConnect(eventLocation, active);
+            undoStack.push(new ConnectAction(this.active, eventLocation, this.PArea));
             //TODO connection event here
 
 

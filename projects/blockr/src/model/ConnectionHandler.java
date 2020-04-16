@@ -81,10 +81,22 @@ public class ConnectionHandler {
         }
         if (connect) return connect;
         else{
-            if (extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) < UIBlock.PLUGSIZE) this.connectTopBottom(extra, closest);
-            if (closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) < UIBlock.PLUGSIZE) this.connectTopBottom(closest, extra);
-            if (extra.compatibleLeftRight(closest) && extra.distanceLeftRight(closest) < UIBlock.PLUGSIZE) this.connectRightLeft(closest, extra);
-            if (closest.compatibleLeftRight(extra) && closest.distanceLeftRight(extra) < UIBlock.PLUGSIZE) this.connectRightLeft(extra, closest);
+            if (extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) < UIBlock.PLUGSIZE){
+                this.connectTopBottom(extra, closest);
+                connect = true;
+            }
+            if (closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) < UIBlock.PLUGSIZE){
+                this.connectTopBottom(closest, extra);
+                connect = true;
+            }
+            if (extra.compatibleLeftRight(closest) && extra.distanceLeftRight(closest) < UIBlock.PLUGSIZE){
+                this.connectRightLeft(closest, extra);
+                connect = true;
+            }
+            if (closest.compatibleLeftRight(extra) && closest.distanceLeftRight(extra) < UIBlock.PLUGSIZE){
+                this.connectRightLeft(extra, closest);
+                connect = true;
+            }
         }
         return connect;
     }

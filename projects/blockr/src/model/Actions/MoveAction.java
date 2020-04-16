@@ -4,8 +4,6 @@ package model.Actions;
 import model.blocks.ModelBlock;
 import utilities.ProgramLocation;
 
-//TODO what about connections
-//TODO do not forget to make everything static
 
 public class MoveAction implements Action {
 
@@ -16,26 +14,27 @@ public class MoveAction implements Action {
 
     public MoveAction(ModelBlock movedBlock, ProgramLocation oldL, ProgramLocation newL){
         this.movedBlock = movedBlock;
-        this.oldL = oldL;
-        this.newL = newL;
+        this.oldL = new ProgramLocation(oldL.getX(),oldL.getY());
+        this.newL = new ProgramLocation(newL.getX(), newL.getY());
     }
 
     public void execute(){
         movedBlock.setPos(newL);
-        //TODO
+
 
     }
 
     public void undo(){
         movedBlock.setPos(oldL);
+        /*
         System.out.println("from to");
         System.out.println(oldL.getX());
         System.out.println(newL.getX());
+        */
 
     }
 
     public void redo(){
         movedBlock.setPos(newL);
-        //TODO
     }
 }

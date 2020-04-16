@@ -4,7 +4,7 @@ import model.ModelProgramArea;
 import model.blocks.ModelBlock;
 
 public class CreateAction implements  Action {
-    private static ModelBlock createdBlock;
+    private ModelBlock createdBlock;
     private ModelProgramArea programArea;
 
 
@@ -14,11 +14,15 @@ public class CreateAction implements  Action {
         this.programArea = programArea;
     }
 
+
+    //TODO only the first create action gets undone
+
     //TODO setting it as active block necessary or not?
     //TODO activate deactivate palette
     //TODO block clones or not
     public void execute(){
-        this.programArea.addPABlock(this.createdBlock);
+        //TODO
+
     }
 
     public void undo(){
@@ -29,6 +33,7 @@ public class CreateAction implements  Action {
 
     public void redo(){
         this.programArea.addPABlock(this.createdBlock);
+
     }
 }
 

@@ -214,9 +214,11 @@ public class ModelController{
                 //undoStack.push(new MoveAction(active, this.oldPos, active.getPos().clone()));
             }
             newBlockCreated = false;
-            PArea.findAndConnect(eventLocation, active);
-            undoStack.push(new ConnectAction(this.active, eventLocation, this.PArea));
-            //TODO connection event here
+            if(PArea.findAndConnect(eventLocation, active)){
+                undoStack.push(new ConnectAction(this.active, eventLocation, this.PArea));
+            }
+
+            //TODO you only need to have a connectaction if something connects
 
 
             active = null;

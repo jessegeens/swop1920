@@ -32,7 +32,7 @@ public class ConnectAction implements Action {
         this.programArea.addPABlock(block);
     }
     public void redo(){
-
+        this.programArea.findAndConnect(this.location, this.block);
 
     }
 }

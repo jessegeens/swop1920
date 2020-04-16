@@ -6,7 +6,7 @@ import model.blocks.ModelBlock;
 
 public class DeleteAction implements Action {
 
-    private static ModelBlock deletedBlock;
+    private ModelBlock deletedBlock;
     private ModelProgramArea programArea;
 
 

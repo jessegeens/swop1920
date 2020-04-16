@@ -66,26 +66,27 @@ public class ConnectionHandler {
      * @param extra second block
      * @author Oberon Swings
      */
-    public void connect(ModelBlock closest, ModelBlock extra) {
+    public boolean connect(ModelBlock closest, ModelBlock extra) {
         boolean connect = false;
         if (closest instanceof ModelWhileIfBlock){
             if (extra.hasTopSocket() && ((ModelWhileIfBlock) closest).distanceCavityPlug(extra) < UIBlock.PLUGSIZE) connect = this.connectCavityPlug(((ModelWhileIfBlock)closest), extra);
             if (extra.hasBottomPlug() && ((ModelWhileIfBlock) closest).distanceCavitySocket(extra) < UIBlock.PLUGSIZE) connect = this.connectCavitySocket((ModelWhileIfBlock) closest, extra);
         }
-        if (connect) return;
+        if (connect) return connect;
         else{
             if (closest.isInCavity() && closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) < UIBlock.PLUGSIZE) connect = connectIntoCavityTop(extra, closest);
             if (closest.isInCavity() && extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) < UIBlock.PLUGSIZE) connect = connectIntoCavityBottom(extra, closest);
             if (extra.isInCavity() && extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) < UIBlock.PLUGSIZE) connect = connectIntoCavityTop(closest, extra);
             if (extra.isInCavity() && closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) < UIBlock.PLUGSIZE) connect = connectIntoCavityBottom(closest, extra);
         }
-        if (connect) return;
+        if (connect) return connect;
         else{
             if (extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) < UIBlock.PLUGSIZE) this.connectTopBottom(extra, closest);
             if (closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) < UIBlock.PLUGSIZE) this.connectTopBottom(closest, extra);
             if (extra.compatibleLeftRight(closest) && extra.distanceLeftRight(closest) < UIBlock.PLUGSIZE) this.connectRightLeft(closest, extra);
             if (closest.compatibleLeftRight(extra) && closest.distanceLeftRight(extra) < UIBlock.PLUGSIZE) this.connectRightLeft(extra, closest);
         }
+        return connect;
     }
 
     /**

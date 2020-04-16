@@ -85,17 +85,20 @@ public class ModelProgramArea{
      * @param activeB activeBlock the current active block
      * @author Oberon Swings
      */
-    public void findAndConnect(ProgramLocation eveWindowLocation, ModelBlock activeB){
+    public boolean findAndConnect(ProgramLocation eveWindowLocation, ModelBlock activeB){
         this.addPABlock(activeB);
         ProgramLocation location = LH.moveToInBounds(eveWindowLocation);
         LH.setLocationBlock(activeB, location);
         ModelBlock closest = LH.findClosestBlock(activeB, blocks);
+        boolean connection = false;
         if (closest != null){
-            CH.connect(closest, activeB);
+            connection = CH.connect(closest, activeB);
             LH.updateLocationBlock(activeB);
             CH.updateConnections(blocks);
             LH.updateLocationBlocks(CH.getStartBlocks(blocks));
+
         }
+        return connection;
     }
 
     /**

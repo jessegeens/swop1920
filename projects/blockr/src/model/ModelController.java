@@ -128,9 +128,48 @@ public class ModelController{
         System.out.println("REDO");
         if(!redoStack.empty()){
             Action current = redoStack.pop();
+            System.out.println(current);
             current.redo();
-            //TODO see below (necessary or not)
-            redoStack.push(current);
+            //TODO where stack clear?
+            try{
+                if(redoStack.peek() instanceof ConnectAction){
+                    this.redo();
+                }
+            }
+            catch(Exception e){}
+            if(current instanceof DisconnectAction){
+                this.undo();
+            }
+            //TODO delete
+
+
+
+            /*
+            if(current instanceof ConnectAction){
+                this.undo();
+            }
+            try{
+                if(undoStack.peek() instanceof DisconnectAction){
+                    this.undo();
+                }
+            }
+            catch(Exception e){}
+            if(current instanceof DeleteAction){
+
+                try {
+                    if(undoStack.peek() instanceof CreateAction){
+                        return;
+                    }
+                }
+                catch(Exception e){}
+                this.undo();
+            }
+             */
+
+
+
+
+
         }
 
 

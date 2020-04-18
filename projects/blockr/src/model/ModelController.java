@@ -130,7 +130,7 @@ public class ModelController{
             Action current = redoStack.pop();
             System.out.println(current);
             current.redo();
-            //TODO where stack clear?
+            //TODO when stack clear?
             try{
                 if(redoStack.peek() instanceof ConnectAction){
                     this.redo();
@@ -138,8 +138,19 @@ public class ModelController{
             }
             catch(Exception e){}
             if(current instanceof DisconnectAction){
-                this.undo();
+                this.redo();
             }
+
+            try{
+                if(redoStack.peek() instanceof DeleteAction){
+                    this.redo();
+                    //TODO check for similar issue as with undo
+                }
+            }
+            catch(Exception e){}
+
+
+
             //TODO delete
 
 

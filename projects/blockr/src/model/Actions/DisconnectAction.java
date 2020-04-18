@@ -4,7 +4,8 @@ import model.ModelProgramArea;
 import model.blocks.ModelBlock;
 import utilities.ProgramLocation;
 
-public class ConnectAction implements Action {
+public class DisconnectAction implements Action {
+
 
     private ModelBlock block;
     private ModelBlock closest;
@@ -16,7 +17,7 @@ public class ConnectAction implements Action {
 
 
 
-    public ConnectAction(ModelBlock block, ProgramLocation blockLocation, ModelProgramArea programArea){
+    public DisconnectAction(ModelBlock block, ProgramLocation blockLocation, ModelProgramArea programArea){
         this.block = block;
         this.location = new ProgramLocation(blockLocation.getX(),blockLocation.getY());
         //this.closest = closest;
@@ -27,12 +28,16 @@ public class ConnectAction implements Action {
 
     }
     public void undo(){
+        this.programArea.findAndConnect(this.location, this.block);
+
+
+    }
+    public void redo(){
+        //TODO is this ok?
         this.programArea.removePABlock(block);
         this.block.setPos(this.location);
         this.programArea.addPABlock(block);
-    }
-    public void redo(){
-        this.programArea.findAndConnect(this.location, this.block);
 
     }
+
 }

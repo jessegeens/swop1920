@@ -40,6 +40,32 @@ public class ConnectionHandler {
     }
 
     /**
+     * Checks if a block is connected with another block or not
+     *
+     * @param a the modelBlock which is checked
+     * @return true if the block is connected, false otherwise
+     * @author Bert
+     */
+
+    public boolean isConnected(ModelBlock a){
+        if (a.hasTopSocket() && a.getTopSocket() != null){
+            return true;
+        }
+        if (a.hasBottomPlug() && a.getBottomPlug() != null){
+            return true;
+        }
+        if (a.hasRightSocket() && a.getRightSocket() != null){
+            return true;
+        }
+        if (a.hasLeftPlug() && a.getLeftPlug() != null){
+            return true;
+        }
+
+        //TODO does cavity need to be checked as well?
+        return false;
+    }
+
+    /**
      * Disconnects block from the cavity and connects its upper and lower neighbour in the cavity to eachother.
      * @param a The cavityBlock
      * @author Oberon Swings

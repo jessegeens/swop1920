@@ -81,16 +81,35 @@ public class ModelController{
         if(!undoStack.empty()){
             Action current = undoStack.pop();
             current.undo();
-            System.out.println("current");
             System.out.println(current);
             redoStack.push(current);
+            if(current instanceof ConnectAction){
+                this.undo();
+            }
+            try{
+                if(undoStack.peek() instanceof DisconnectAction){
+                    this.undo();
+                }
+            }
+            catch(Exception e){}
+            if(current instanceof DeleteAction){
+                System.out.println("l0l0");
+                try {
+                    if(undoStack.peek() instanceof CreateAction){
+                        System.out.println("lala");
+                        return;
+                    }
+                }
+                catch(Exception e){}
+                this.undo();
+            }
+
+
+
+
+            // TODO  || undoStack.peek() instanceof CreateAction || un
+
         }
-
-
-
-
-        //System.out.println("UNDO");
-
 
     }
 
@@ -169,13 +188,18 @@ public class ModelController{
 
         }
         else if(this.inProgramArea(eventLocation)){
-
+            boolean isConnected = PArea.connectedBlockHere(eventLocation);
             System.out.println("Programarea select");
             active = PArea.selectBlock(eventLocation);
             if(active != null){
-                oldPos = active.getPos(); // does not need to be cloned, because it is immutable and will be overwritten if location of active is changed.
-                                          // Will be overwritten in active, not within position itself.
+                oldPos = active.getPos();
             }
+            if(isConnected){
+                undoStack.push(new DisconnectAction(active, active.getPos(), this.PArea));
+            }
+
+
+            //TODO trigger of disconnect event here
 
 
         }
@@ -244,6 +268,7 @@ public class ModelController{
      * @author Bert
      */
     public void drag(ProgramLocation eventLocation){
+
         if(active != null){
             if(2 * MyCanvasWindow.WIDTH / 3 - active.getWidth() > eventLocation.getX()){
                 PArea.dragBlock(active, eventLocation);

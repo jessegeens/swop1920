@@ -80,6 +80,35 @@ public class ModelProgramArea{
     }
 
     /**
+     * This methods returns whether a block in the given location is connected to other blocks
+     *
+     * @param eventWindowLocation location of the mouseDown event
+     * @return true if there is a block that is connected with at least one other block, false otherwise
+     * @author Bert
+     */
+    public boolean connectedBlockHere(ProgramLocation eventWindowLocation){
+        for(int i = blocks.size() - 1; i >= 0; i--){
+            if(blocks.get(i).inBoundsOfElement(eventWindowLocation)){
+                /*
+                ModelBlock toBeReturned = blocks.get(i);
+                if(CH.isConnected(blocks.get(i))){
+                    return true;
+                }
+                */
+                //TODO refactor so CH actually processes this?
+                if(blocks.get(i).getConnectionsNoCavity().size() > 0){
+                    //System.out.println("YES CONNECTION");
+                    return true;
+
+                }
+
+            }
+        }
+        //System.out.println("NO CONNECTION");
+        return false;
+    }
+
+    /**
      * This function handles the mouse up in the ProgramArea
      * @param eveWindowLocation the location of the mouseUp event
      * @param activeB activeBlock the current active block

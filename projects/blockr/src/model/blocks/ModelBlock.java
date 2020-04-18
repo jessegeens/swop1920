@@ -56,6 +56,20 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
         if (this instanceof ModelWhileIfBlock) connections.addAll(((ModelWhileIfBlock) this).getCavityBlocks());
         return connections; 
     }
+
+    /**
+     * A method that gives the connection from a block with all its neighbours without the cavity connections
+     * @return the list with all the connection of a block (except for cavity connections)
+     * @author Bert
+     */
+    public ArrayList<ModelBlock> getConnectionsNoCavity(){
+        ArrayList<ModelBlock> connections = new ArrayList<ModelBlock>();
+        if (this.hasBottomPlug() && this.getBottomPlug() != null) connections.add(this.getBottomPlug());
+        if (this.hasLeftPlug() && this.getLeftPlug() != null) connections.add(this.getLeftPlug());
+        if (this.hasTopSocket() && this.getTopSocket() != null) connections.add(this.getTopSocket());
+        if (this.hasRightSocket() && this.getRightSocket() != null) connections.add(this.getRightSocket());
+        return connections;
+    }
     
     /**
      * @return the height of the block.

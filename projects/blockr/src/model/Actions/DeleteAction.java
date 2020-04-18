@@ -14,10 +14,12 @@ public class DeleteAction implements Action {
 
 
 
-    public DeleteAction(ModelBlock createdBlock,   ModelProgramArea programArea){
+
+
+    public DeleteAction(ModelBlock createdBlock, ProgramLocation blockLocation,  ModelProgramArea programArea){
         this.deletedBlock = createdBlock;
         this.programArea = programArea;
-        //this.location = new ProgramLocation(blockLocation.getX(),blockLocation.getY());
+        this.location = new ProgramLocation(blockLocation.getX(),blockLocation.getY());
         //ProgramLocation blockLocation,
 
     }
@@ -34,7 +36,7 @@ public class DeleteAction implements Action {
 
 
         this.programArea.addPABlock(this.deletedBlock);
-        //this.deletedBlock.setPos(this.location);
+        this.deletedBlock.setPos(this.location);
 
 
 

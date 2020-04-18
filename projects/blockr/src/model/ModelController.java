@@ -93,10 +93,9 @@ public class ModelController{
             }
             catch(Exception e){}
             if(current instanceof DeleteAction){
-                System.out.println("l0l0");
+
                 try {
                     if(undoStack.peek() instanceof CreateAction){
-                        System.out.println("lala");
                         return;
                     }
                 }
@@ -224,7 +223,7 @@ public class ModelController{
                 palette.populateBlocks();
 
                 //TODO it gets repositioned to the last palette location
-                undoStack.push(new DeleteAction(this.active, this.PArea));
+                undoStack.push(new DeleteAction(this.active,this.oldPos, this.PArea));
                 this.active = null;
             }
         } else if (this.inProgramArea(eventLocation)) {

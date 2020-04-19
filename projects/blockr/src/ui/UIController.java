@@ -28,7 +28,6 @@ public class UIController {
      * @author Oberon Swings
      */
     public void render(Graphics g, ArrayList<BlockState> blocks){
-        ProgramLocation gridLocation = new ProgramLocation(wWidth*2/3, 0);
         UIBlock uiBlock = new UIBlock();
         this.renderUI(g);
         for (BlockState block : blocks){

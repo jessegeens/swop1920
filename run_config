@@ -23,6 +23,9 @@ In project structure de gameworldapi jar toevoegen als library
 voorbeeld 
 /home/bert_dvl/Desktop/swop1920/projects/robotgameworld/out/production/robotgameworld/robotgameworld
 
+
+runconfig pathname Oberon: "/home/oberon/Documents/Studies/SWOP/swop1920/projects/robotgameworld/out/production/robotgameworld/" 
+
 Common issue => source folder not known
 => invalidate cache en restart
 

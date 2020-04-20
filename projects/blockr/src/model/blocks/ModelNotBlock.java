@@ -16,8 +16,8 @@ public class ModelNotBlock extends ModelBlock{
         this.setRightSocket(null);
         this.setLeftPlug(null);
         ArrayList<ConnectionPoint> connectionPoints = new ArrayList<>();
-        connectionPoints.add(ConnectionPoint.LEFTPLUG);
-        connectionPoints.add(ConnectionPoint.RIGHTSOCKET);
+        connectionPoints.add(ConnectionPoint.LEFT_PLUG);
+        connectionPoints.add(ConnectionPoint.RIGHT_SOCKET);
         super.setConnectionPoints(connectionPoints);
     }
 

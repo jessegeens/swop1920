@@ -18,7 +18,7 @@ public class ModelPredicateBlock extends ModelBlock{
         this.setLeftPlug(null);
         this.predicate = predicate;
         ArrayList<ConnectionPoint> connectionPoints = new ArrayList<>();
-        connectionPoints.add(ConnectionPoint.LEFTPLUG);
+        connectionPoints.add(ConnectionPoint.LEFT_PLUG);
         super.setConnectionPoints(connectionPoints);
     }
 

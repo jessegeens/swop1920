@@ -20,8 +20,8 @@ public class ModelActionBlock extends ModelBlock{
         this.setBottomPlug(null);
         this.action = action;
         ArrayList<ConnectionPoint> connectionPoints = new ArrayList<>();
-        connectionPoints.add(ConnectionPoint.BOTTOMPLUG);
-        connectionPoints.add(ConnectionPoint.TOPSOCKET);
+        connectionPoints.add(ConnectionPoint.BOTTOM_PLUG);
+        connectionPoints.add(ConnectionPoint.TOP_SOCKET);
         super.setConnectionPoints(connectionPoints);
     }
 

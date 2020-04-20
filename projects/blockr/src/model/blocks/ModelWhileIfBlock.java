@@ -28,11 +28,11 @@ public class ModelWhileIfBlock extends ModelBlock{
         this.setCavityPlug(this);
         this.setCavitySocket(this);
         ArrayList<ConnectionPoint> connectionPoints = new ArrayList<>();
-        connectionPoints.add(ConnectionPoint.BOTTOMPLUG);
-        connectionPoints.add(ConnectionPoint.TOPSOCKET);
-        connectionPoints.add(ConnectionPoint.CAVITYPLUG);
-        connectionPoints.add(ConnectionPoint.CAVITYSOCKET);
-        connectionPoints.add(ConnectionPoint.RIGHTSOCKET);
+        connectionPoints.add(ConnectionPoint.BOTTOM_PLUG);
+        connectionPoints.add(ConnectionPoint.TOP_SOCKET);
+        connectionPoints.add(ConnectionPoint.CAVITY_PLUG);
+        connectionPoints.add(ConnectionPoint.CAVITY_SOCKET);
+        connectionPoints.add(ConnectionPoint.RIGHT_SOCKET);
         super.setConnectionPoints(connectionPoints);
     }
 

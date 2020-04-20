@@ -213,6 +213,7 @@ public class ModelController{
         return (location.getX() > MyCanvasWindow.WIDTH/3 && location.getX() <  2 * MyCanvasWindow.WIDTH/3);
     }
 
+    //TODO voor wat diene deze variabelen? mss vanboven zetten bij de rest van de vars.. -Jesse
     private ProgramLocation oldPos = null;
     private boolean newBlockCreated = false;
 

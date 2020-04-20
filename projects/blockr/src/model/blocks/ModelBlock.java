@@ -19,8 +19,7 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
         super(windowLocation);
     }
 
-    public void setHighlight(){
-        this.highlighted = true;
+    public void setHighlight(){  this.highlighted = true;
     }
 
     public void setUnHighlight(){
@@ -103,7 +102,7 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
                 plug = plug.getBottomPlug();
             }
             if (plug == null) return false;
-            else if (plug instanceof ModelWhileIfBlock && ((ModelWhileIfBlock) plug).getCavityBlocks().contains(this)) return true;
+            else return plug instanceof ModelWhileIfBlock && ((ModelWhileIfBlock) plug).getCavityBlocks().contains(this);
         }
         return false;
     }
@@ -130,7 +129,7 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
      * @return {boolean} true if this block has a top socket, false otherwise
      */
     public boolean hasTopSocket(){
-        return (this.connectionPoints.contains(ConnectionPoint.TOPSOCKET));
+        return (this.connectionPoints.contains(ConnectionPoint.TOP_SOCKET));
     }
 
     /**
@@ -138,7 +137,7 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
      * @return {boolean} true if this block has a bottom plug, false otherwise
      */
     public boolean hasBottomPlug(){
-        return (this.connectionPoints.contains(ConnectionPoint.BOTTOMPLUG));
+        return (this.connectionPoints.contains(ConnectionPoint.BOTTOM_PLUG));
     }
 
     /**
@@ -146,7 +145,7 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
      * @return {boolean} true if this block has a right socket, false otherwise
      */
     public boolean hasRightSocket(){
-        return  (this.connectionPoints.contains(ConnectionPoint.RIGHTSOCKET));
+        return  (this.connectionPoints.contains(ConnectionPoint.RIGHT_SOCKET));
     }
 
     /**
@@ -154,7 +153,7 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
      * @return {boolean} true if this block has a left plug, false otherwise
      */
     public boolean hasLeftPlug(){
-        return (this.connectionPoints.contains(ConnectionPoint.LEFTPLUG));
+        return (this.connectionPoints.contains(ConnectionPoint.LEFT_PLUG));
     }
 
     void setConnectionPoints(ArrayList<ConnectionPoint> connectionPoints) {

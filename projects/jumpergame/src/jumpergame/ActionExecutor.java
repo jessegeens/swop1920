@@ -14,10 +14,31 @@ public class ActionExecutor {
     static ActionExecutor instance;
 
     //Parameters, TODO check whether these are at the correct location
-    private final GridLocation PRINCESS = new GridLocation(3, 5);
-    private final ArrayList<GridLocation> BLOCKS = new ArrayList<GridLocation>(Arrays.asList(new GridLocation(0, 2), new GridLocation(1, 2), new GridLocation(4, 3)));
-    private int GRID_WIDTH = 5;
+    private int GRID_WIDTH = 6;
     private int GRID_HEIGHT = 15;
+    private final GridLocation PRINCESS = new GridLocation(GRID_WIDTH - 2, 0);
+    private final ArrayList<GridLocation> BLOCKS = new ArrayList<GridLocation>(Arrays.asList(
+            new GridLocation(4, 1),
+            new GridLocation(3, 1),
+            new GridLocation(1, 3),
+            new GridLocation(2, 3),
+            new GridLocation(5, 3),
+            new GridLocation(3, 5),
+            new GridLocation(4, 5),
+            new GridLocation(5, 5),
+            new GridLocation(0, 7),
+            new GridLocation(1, 7),
+            new GridLocation(2, 7),
+            new GridLocation(4, 7),
+            new GridLocation(5, 9),
+            new GridLocation(2, 9),
+            new GridLocation(0, 9),
+            new GridLocation(1, 11),
+            new GridLocation(2, 11),
+            new GridLocation(3, 11),
+            new GridLocation(4, 11),
+            new GridLocation(0, 13),
+            new GridLocation(4, 13)));
 
     private JumperGameWorldState current;
     private GameWorldStateFactory gameWorldStateFactory = GameWorldStateFactory.getInstance();

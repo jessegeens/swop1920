@@ -3,8 +3,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 
-import model.blocks.ModelBlock;
-import ui.BlockState;
 import utilities.*;
 
 /**
@@ -106,14 +104,14 @@ public class UIBlock{
         boolean highlighted = blockState.isHighlighted();
         int cavitySize = blockState.getCavitySize();
         renderInnerBlock(g, blockLocation, highlighted, cavitySize);
-        if (connectionPoints.contains(ConnectionPoint.TOPSOCKET)) this.renderTopSocket(g, blockLocation, highlighted);
+        if (connectionPoints.contains(ConnectionPoint.TOP_SOCKET)) this.renderTopSocket(g, blockLocation, highlighted);
         else this.renderNoTopSocket(g, blockLocation, highlighted);
-        if (connectionPoints.contains(ConnectionPoint.BOTTOMPLUG)) this.renderBottomPlug(g, blockLocation, highlighted, cavitySize);
-        if (connectionPoints.contains(ConnectionPoint.RIGHTSOCKET)) this.renderRightSocket(g, blockLocation, highlighted, cavitySize);
+        if (connectionPoints.contains(ConnectionPoint.BOTTOM_PLUG)) this.renderBottomPlug(g, blockLocation, highlighted, cavitySize);
+        if (connectionPoints.contains(ConnectionPoint.RIGHT_SOCKET)) this.renderRightSocket(g, blockLocation, highlighted, cavitySize);
         else this.renderNoRightSocket(g, blockLocation, highlighted, cavitySize);
-        if (connectionPoints.contains(ConnectionPoint.LEFTPLUG)) this.renderLeftPlug(g, blockLocation, highlighted);
-        if (connectionPoints.contains(ConnectionPoint.CAVITYPLUG)) this.renderCavityPlug(g, blockLocation);
-        if (connectionPoints.contains(ConnectionPoint.CAVITYSOCKET)) this.renderCavitySocket(g, blockLocation, cavitySize);
+        if (connectionPoints.contains(ConnectionPoint.LEFT_PLUG)) this.renderLeftPlug(g, blockLocation, highlighted);
+        if (connectionPoints.contains(ConnectionPoint.CAVITY_PLUG)) this.renderCavityPlug(g, blockLocation);
+        if (connectionPoints.contains(ConnectionPoint.CAVITY_SOCKET)) this.renderCavitySocket(g, blockLocation, cavitySize);
         g.setColor(Color.WHITE);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 9));
         g.drawString(blockState.getTitle(), blockLocation.getX() + 8, blockLocation.getY() + (STD_HEIGHT / 2));

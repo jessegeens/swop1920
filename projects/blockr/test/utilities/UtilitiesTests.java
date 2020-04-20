@@ -37,7 +37,7 @@ public class UtilitiesTests {
     @Test
     public void connectionPoint() {
         ModelWhileIfBlock mwif = new ModelWhileIfBlock(new ProgramLocation(10, 10), true);
-        assertTrue(mwif.getConnectionPoints().contains(ConnectionPoint.CAVITYPLUG));
+        assertTrue(mwif.getConnectionPoints().contains(ConnectionPoint.CAVITY_PLUG));
     }
 
 

@@ -30,7 +30,7 @@ public class UIController {
     }
 
     public void renderBlocks(Graphics g, ArrayList<GridLocation> blocks, GridLocation gridPosition){
-        g.setColor(Color.getHSBColor(20,70,60)); //Brown
+        g.setColor(new Color(100, 45, 0)); //Brown
         for(GridLocation block : blocks){
             g.fillRect(gridPosition.getX() + block.getX()*CELL_SIZE, gridPosition.getY() + block.getY()*CELL_SIZE,CELL_SIZE, CELL_SIZE);
         }

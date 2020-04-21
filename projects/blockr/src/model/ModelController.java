@@ -321,7 +321,7 @@ public class ModelController{
      * 
      * @return all the blocks that are currently in the palette
      */
-    protected ArrayList<ModelBlock> getPaletteBlocks(){
+    public ArrayList<ModelBlock> getPaletteBlocks(){
         return palette.getPaletteBlocks();
     }
 
@@ -329,7 +329,7 @@ public class ModelController{
      * 
      * @return all the blocks that are currently in the program area
      */
-    protected ArrayList<ModelBlock> getProgramAreaBlocks(){
+    public ArrayList<ModelBlock> getProgramAreaBlocks(){
         return PArea.getPABlocks();
     }
 
@@ -350,7 +350,7 @@ public class ModelController{
      * Method just for testing
      * @return active
      */
-    ModelBlock getActiveBlock() {
+    public ModelBlock getActiveBlock() {
         return this.active;
     }
 }

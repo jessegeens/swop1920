@@ -75,12 +75,17 @@ public class ModelController{
      * @author Bert
      */
     public void globalUndo(){
+        //TODO this is temporary for trying out the programrunner undo/redo without case checking in the modelcontroller
+        programRunner.undoProgramRunner();
+
+        /*
         if(this.programRunner.isRunning()){
 
         }
         else{
             this.undo();
         }
+        */
 
     }
 
@@ -88,12 +93,17 @@ public class ModelController{
      * @author Bert
      */
     public void globalRedo(){
+        //TODO this is temporary for trying out the programrunner undo/redo without case checking in the modelcontroller
+        programRunner.redoProgramrunner();
+
+        /*
         if(this.programRunner.isRunning()){
 
         }
         else{
             this.redo();
         }
+        */
 
     }
 

@@ -1,8 +1,12 @@
 package model;
 
+
 import utilities.*;
 import model.blocks.*;
 import gameworldapi.*;
+
+import java.util.ArrayList;
+import java.util.Stack;
 
 public class ProgramRunner {
 
@@ -11,17 +15,46 @@ public class ProgramRunner {
     private GameWorld gameWorld;
     private GameWorldState initialState;
 
+    private Stack<ModelBlock> undoHighlightStack;
+    private Stack<ModelBlock> redoHighlightStack;
+
+
+    private Stack<GameWorldState> undoStateStack;
+    private Stack<GameWorldState> redoStateStack;
+
+
     //Constructor
     public ProgramRunner(GameWorld gameWorld){
         this.gameWorld = gameWorld;
         this.initialState = gameWorld.getSnapshot();
         this.running = false;
+
+        undoHighlightStack = new Stack<>();
+        redoHighlightStack = new Stack<>();
+
+        undoStateStack = new Stack<>();
+        redoStateStack = new Stack<>();
     }
 
     public void initialise(ModelBlock start){
         this.running = true;
         this.current = start;
         this.current.setHighlight();
+
+        //because of this you can't have sequential games in undo redo
+        this.undoHighlightStack.clear();
+        this.redoHighlightStack.clear();
+
+        this.undoStateStack.clear();
+        this.redoStateStack.clear();
+
+        //TODO null or first block?
+        this.undoHighlightStack.push(null);
+        this.undoStateStack.push(initialState);
+
+
+
+
     }
 
     public void reset(){
@@ -45,6 +78,9 @@ public class ProgramRunner {
      * @author Jesse Geens
      */
     public void execute(){
+
+
+
         if(!(isRunning())){
             throw new IllegalStateException("tried executing the program without initialising it");
         }
@@ -55,6 +91,10 @@ public class ProgramRunner {
         else{
             if(current instanceof ModelActionBlock && gameWorld != null){
                 ActionResult result = gameWorld.perform(((ModelActionBlock) current).getAction());
+
+                this.undoHighlightStack.push(current);
+                this.undoStateStack.push(gameWorld.getSnapshot());
+
                 switch (result){
                     case FAILURE:
                         break;
@@ -95,6 +135,28 @@ public class ProgramRunner {
     }
 
     /**
+     *
+     * @param block
+     * @author Bert
+     */
+    private void setHighlight(ModelBlock block){
+        if(block != null){
+            block.setHighlight();
+        }
+    }
+
+    /**
+     *
+     * @param block
+     * @author Bert
+     */
+    private void setUnHighlight(ModelBlock block){
+        if(block != null){
+            block.setUnHighlight();
+        }
+    }
+
+    /**
      * Returns the bottomplug if it is a normal block (move block) or if the condition of a WhileIf block fails 
      * If the condition of a WhileIfBlock succeeds it gives the first cavity block of the WhileIf block.
      * //This should point to the next block that has to be executed, this is needed so that when we step we know what block to run but also this one needs to be highlighted.
@@ -125,11 +187,43 @@ public class ProgramRunner {
         else return current.getBottomPlug();
     }
 
+
+    /**
+     * @author Bert
+     */
     public void undoProgramRunner(){
+        this.setUnHighlight(current);
+
+        if(!undoHighlightStack.isEmpty()){
+            current = undoHighlightStack.pop();
+            this.redoHighlightStack.push(current);
+            this.setHighlight(current);
+
+
+
+            GameWorldState undoState = undoStateStack.pop();
+            this.redoStateStack.push(undoState);
+            if(undoState == gameWorld.getSnapshot()){
+                undoState = undoStateStack.pop();
+                this.redoStateStack.push(undoState);
+
+            }
+
+            this.gameWorld.restore(undoState);
+
+
+        }
+
+
+
+
 
     }
 
+    /**
+     * @author Bert
+     */
     public void redoProgramrunner(){
-        
+
     }
 }

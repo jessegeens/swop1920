@@ -4,6 +4,7 @@ import model.blocks.ModelBlock;
 import model.blocks.ModelWhileIfBlock;
 import utilities.*;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class BlockState {
@@ -50,15 +51,6 @@ public class BlockState {
 
     /**
      *
-     * @return if the block is highlighted or not
-     * @author Oberon Swings
-     */
-    boolean isHighlighted() {
-        return highlighted;
-    }
-
-    /**
-     *
      * @return the size of the cavity of the block
      * @author Oberon Swings
      */
@@ -73,5 +65,14 @@ public class BlockState {
      */
     String getTitle() {
         return title;
+    }
+
+    Color getColor(){
+        if (highlighted) return Color.YELLOW;
+        if (connectionPoints.contains(ConnectionPoint.CAVITY_PLUG)) return Color.BLUE;
+        if (connectionPoints.contains(ConnectionPoint.TOP_SOCKET)) return Color.ORANGE;
+        if (connectionPoints.contains(ConnectionPoint.RIGHT_SOCKET)) return Color.GREEN;
+        if (connectionPoints.contains(ConnectionPoint.LEFT_PLUG)) return Color.RED;
+        return Color.GRAY;
     }
 }

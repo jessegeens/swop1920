@@ -17,55 +17,41 @@ public class UIBlock{
 
     UIBlock(){ }
 
-    /**
-     * Gives the color in which the blocks need to be rendered according to whether they are highlighted or not
-     * @param highlighted the bool to know if the block is highlighted
-     * @return color green if highlighted, gray otherwise
-     * @author Oberon Swings
-     */
-    private Color getBlockColor(boolean highlighted) {
-        if (highlighted) {
-            return Color.GREEN;
-        } else {
-            return Color.GRAY;
-        }
-    }
-
-    private void renderTopSocket(Graphics g, ProgramLocation blockLocation, boolean highlighted) {
-        g.setColor(getBlockColor(highlighted));
+    private void renderTopSocket(Graphics g, ProgramLocation blockLocation, Color color) {
+        g.setColor(color);
         g.fillRect(blockLocation.getX(), blockLocation.getY(), this.getTopSocketPos(blockLocation).getX() - blockLocation.getX(), PLUGSIZE);
         g.fillRect(this.getTopSocketPos(blockLocation).getX() + PLUGSIZE, blockLocation.getY(), blockLocation.getX() + this.getWidth() - this.getTopSocketPos(blockLocation).getX() - PLUGSIZE, PLUGSIZE);
     }
 
-    private void renderBottomPlug(Graphics g, ProgramLocation blockLocation, boolean highlighted, int cavitySize) {
-        g.setColor(getBlockColor(highlighted));
+    private void renderBottomPlug(Graphics g, ProgramLocation blockLocation, Color color, int cavitySize) {
+        g.setColor(color);
         g.fillRect(this.getBottomPlugPos(blockLocation, cavitySize).getX(), this.getBottomPlugPos(blockLocation, cavitySize).getY(), PLUGSIZE, PLUGSIZE);
     }
 
-    private void renderLeftPlug(Graphics g, ProgramLocation blockLocation, boolean highlighted) {
-        g.setColor(getBlockColor(highlighted));
+    private void renderLeftPlug(Graphics g, ProgramLocation blockLocation, Color color) {
+        g.setColor(color);
         g.fillRect(this.getLeftPlugPos(blockLocation).getX() - PLUGSIZE, this.getLeftPlugPos(blockLocation).getY(), PLUGSIZE, PLUGSIZE);
     }
 
-    private void renderRightSocket(Graphics g, ProgramLocation blockLocation, boolean highlighted, int cavitySize) {
-        g.setColor(getBlockColor(highlighted));
+    private void renderRightSocket(Graphics g, ProgramLocation blockLocation, Color color, int cavitySize) {
+        g.setColor(color);
         g.fillRect(this.getRightSocketPos(blockLocation).getX(), blockLocation.getY(), PLUGSIZE, this.getRightSocketPos(blockLocation).getY() - blockLocation.getY());
         g.fillRect(this.getRightSocketPos(blockLocation).getX(), this.getRightSocketPos(blockLocation).getY() + PLUGSIZE, PLUGSIZE, blockLocation.getY() + this.getHeight(cavitySize) - this.getRightSocketPos(blockLocation).getY() - PLUGSIZE);
     }
 
-    private void renderNoRightSocket(Graphics g, ProgramLocation blockLocation, boolean highlighted, int cavitySize) {
-        g.setColor(getBlockColor(highlighted));
+    private void renderNoRightSocket(Graphics g, ProgramLocation blockLocation, Color color, int cavitySize) {
+        g.setColor(color);
         g.fillRect(blockLocation.getX() + this.getWidth() - PLUGSIZE, blockLocation.getY(), PLUGSIZE, this.getHeight(cavitySize));
     }
 
-    private void renderNoTopSocket(Graphics g, ProgramLocation blockLocation, boolean highlighted) {
-        g.setColor(getBlockColor(highlighted));
+    private void renderNoTopSocket(Graphics g, ProgramLocation blockLocation, Color color) {
+        g.setColor(color);
         g.fillRect(blockLocation.getX(), blockLocation.getY(), this.getWidth(), PLUGSIZE);
     }
 
 
-    private void renderInnerBlock(Graphics g, ProgramLocation blockLocation, boolean highlighted, int cavitySize) {
-        g.setColor(getBlockColor(highlighted));
+    private void renderInnerBlock(Graphics g, ProgramLocation blockLocation, Color color, int cavitySize) {
+        g.setColor(color);
         g.fillRect(blockLocation.getX(), blockLocation.getY() + PLUGSIZE, this.getWidth() - PLUGSIZE, this.getHeight(cavitySize) - PLUGSIZE);
     }
 
@@ -76,8 +62,8 @@ public class UIBlock{
      * @param g The Graphics object on which the block is rendered
      * @author Bert De Vleeschouwer
      */
-    private void renderCavitySocket(Graphics g, ProgramLocation blockLocation, int cavitySize) {
-        g.setColor(Color.GREEN);
+    private void renderCavitySocket(Graphics g, ProgramLocation blockLocation,Color color, int cavitySize) {
+        g.setColor(color);
         g.fillRect(this.getCavitySocketPos(blockLocation,cavitySize).getX(), this.getCavitySocketPos(blockLocation,cavitySize).getY(), PLUGSIZE, PLUGSIZE);
     }
 
@@ -87,8 +73,8 @@ public class UIBlock{
      * @param g The Graphics object on which the block is rendered
      * @author Bert De Vleeschouwer
      */
-    private void renderCavityPlug(Graphics g, ProgramLocation blockLocation) {
-        g.setColor(Color.GREEN);
+    private void renderCavityPlug(Graphics g, ProgramLocation blockLocation, Color color) {
+        g.setColor(color);
         g.fillRect(this.getCavityPlugPos(blockLocation).getX(), this.getCavityPlugPos(blockLocation).getY(), PLUGSIZE, PLUGSIZE);
     }
 
@@ -101,19 +87,19 @@ public class UIBlock{
     public void render(Graphics g, BlockState blockState) {
         ProgramLocation blockLocation = blockState.getBlockLocation();
         ArrayList<ConnectionPoint> connectionPoints = blockState.getConnectionPoints();
-        boolean highlighted = blockState.isHighlighted();
+        Color color = blockState.getColor();
         int cavitySize = blockState.getCavitySize();
-        renderInnerBlock(g, blockLocation, highlighted, cavitySize);
-        if (connectionPoints.contains(ConnectionPoint.TOP_SOCKET)) this.renderTopSocket(g, blockLocation, highlighted);
-        else this.renderNoTopSocket(g, blockLocation, highlighted);
-        if (connectionPoints.contains(ConnectionPoint.BOTTOM_PLUG)) this.renderBottomPlug(g, blockLocation, highlighted, cavitySize);
-        if (connectionPoints.contains(ConnectionPoint.RIGHT_SOCKET)) this.renderRightSocket(g, blockLocation, highlighted, cavitySize);
-        else this.renderNoRightSocket(g, blockLocation, highlighted, cavitySize);
-        if (connectionPoints.contains(ConnectionPoint.LEFT_PLUG)) this.renderLeftPlug(g, blockLocation, highlighted);
-        if (connectionPoints.contains(ConnectionPoint.CAVITY_PLUG)) this.renderCavityPlug(g, blockLocation);
-        if (connectionPoints.contains(ConnectionPoint.CAVITY_SOCKET)) this.renderCavitySocket(g, blockLocation, cavitySize);
-        g.setColor(Color.WHITE);
-        g.setFont(new Font("TimesRoman", Font.PLAIN, 9));
+        renderInnerBlock(g, blockLocation, color, cavitySize);
+        if (connectionPoints.contains(ConnectionPoint.TOP_SOCKET)) this.renderTopSocket(g, blockLocation, color);
+        else this.renderNoTopSocket(g, blockLocation, color);
+        if (connectionPoints.contains(ConnectionPoint.BOTTOM_PLUG)) this.renderBottomPlug(g, blockLocation, color, cavitySize);
+        if (connectionPoints.contains(ConnectionPoint.RIGHT_SOCKET)) this.renderRightSocket(g, blockLocation, color, cavitySize);
+        else this.renderNoRightSocket(g, blockLocation, color, cavitySize);
+        if (connectionPoints.contains(ConnectionPoint.LEFT_PLUG)) this.renderLeftPlug(g, blockLocation, color);
+        if (connectionPoints.contains(ConnectionPoint.CAVITY_PLUG)) this.renderCavityPlug(g, blockLocation, color);
+        if (connectionPoints.contains(ConnectionPoint.CAVITY_SOCKET)) this.renderCavitySocket(g, blockLocation, color, cavitySize);
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 8));
         g.drawString(blockState.getTitle(), blockLocation.getX() + 8, blockLocation.getY() + (STD_HEIGHT / 2));
     }
 

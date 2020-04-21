@@ -1,4 +1,4 @@
-package gameworldapi;
+package robotgameworld;
 
 /**
  * Enum representing the direction of an element.

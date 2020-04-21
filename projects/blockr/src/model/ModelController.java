@@ -117,43 +117,35 @@ public class ModelController{
      */
     public void undo(){
         System.out.println("UNDO");
-        if(!undoStack.empty()){
+        if(!undoStack.empty()) {
             Action current = undoStack.pop();
             current.undo();
             System.out.println(current);
 
             redoStack.push(current);
 
-            if(current instanceof ConnectAction){
-                this.undo();
-            }
-            try{
-                if(undoStack.peek() instanceof DisconnectAction){
+            if (!(undoStack.empty())) {
+                Action peekedAction = undoStack.peek();
+                if (current instanceof ConnectAction) {
                     this.undo();
                 }
-            }
-            catch(Exception e){}
-            if(current instanceof DeleteAction){
-
                 try {
-                    if(undoStack.peek() instanceof CreateAction){
-                        return;
+                    if (peekedAction instanceof DisconnectAction) {
+                        this.undo();
                     }
-                    if(undoStack.peek() instanceof DeleteAction) {
-                        return;
+                } catch (Exception e) {
+                }
+                if (current instanceof DeleteAction) {
+
+                    try {
+                        if (peekedAction instanceof MoveAction) {
+                            this.undo();
+                        }
+                    } catch (Exception e) {
                     }
                 }
-                catch(Exception e){}
-                this.undo();
             }
-
-
-
-
-
-
         }
-
     }
 
     //sequentieel nieuwe blokken maken zorgt voor issues
@@ -167,10 +159,10 @@ public class ModelController{
      * Still WIP
      *
      */
-    public void redo(){
+    public void redo() {
 
         System.out.println("REDO");
-        if(!redoStack.empty()){
+        if (!redoStack.empty()) {
             Action current = redoStack.pop();
             System.out.println(current);
             current.redo();
@@ -179,24 +171,25 @@ public class ModelController{
 
             undoStack.push(current);
             //TODO when stack clear?
-
-            try{
-                if(redoStack.peek() instanceof ConnectAction){
+            if (!(redoStack.empty())) {
+                Action peekedAction = redoStack.peek();
+                try {
+                    if (peekedAction instanceof ConnectAction) {
+                        this.redo();
+                    }
+                } catch (Exception e) {
+                }
+                if (current instanceof DisconnectAction) {
                     this.redo();
                 }
-            }
-            catch(Exception e){}
-            if(current instanceof DisconnectAction){
-                this.redo();
-            }
-
-            try{
-                if(redoStack.peek() instanceof DeleteAction){
-                    this.redo();
-                    //check for similar issue as with undo
+                try {
+                    if (peekedAction instanceof DeleteAction) {
+                        this.redo();
+                        //check for similar issue as with undo
+                    }
+                } catch (Exception e) {
                 }
             }
-            catch(Exception e){}
         }
     }
 
@@ -208,7 +201,6 @@ public class ModelController{
     public void clearRedoStack(){
         this.redoStack.clear();
     }
-
 
 
     /**
@@ -378,7 +370,7 @@ public class ModelController{
      * 
      * @return all the blocks that are currently in the palette
      */
-    protected ArrayList<ModelBlock> getPaletteBlocks(){
+    public ArrayList<ModelBlock> getPaletteBlocks(){
         return palette.getPaletteBlocks();
     }
 
@@ -386,7 +378,7 @@ public class ModelController{
      * 
      * @return all the blocks that are currently in the program area
      */
-    protected ArrayList<ModelBlock> getProgramAreaBlocks(){
+    public ArrayList<ModelBlock> getProgramAreaBlocks(){
         return PArea.getPABlocks();
     }
 
@@ -407,7 +399,7 @@ public class ModelController{
      * Method just for testing
      * @return active
      */
-    ModelBlock getActiveBlock() {
+    public ModelBlock getActiveBlock() {
         return this.active;
     }
 }

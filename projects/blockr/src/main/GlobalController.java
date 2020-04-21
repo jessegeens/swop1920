@@ -23,7 +23,7 @@ public class GlobalController {
     private boolean shift;
 
     // Constructor
-    GlobalController(GameWorldType gameWorldType){
+    public GlobalController(GameWorldType gameWorldType){
         this.modelController = new ModelController(gameWorldType);
         this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT);
         ctrl = false;

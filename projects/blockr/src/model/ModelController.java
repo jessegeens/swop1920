@@ -113,7 +113,7 @@ public class ModelController{
 
 
 
-            // TODO  || undoStack.peek() instanceof CreateAction || un
+
 
         }
 
@@ -152,48 +152,11 @@ public class ModelController{
             try{
                 if(redoStack.peek() instanceof DeleteAction){
                     this.redo();
-                    //TODO check for similar issue as with undo
+                    //check for similar issue as with undo
                 }
             }
             catch(Exception e){}
-
-
-            //TODO delete
-
-
-
-            /*
-            if(current instanceof ConnectAction){
-                this.undo();
-            }
-            try{
-                if(undoStack.peek() instanceof DisconnectAction){
-                    this.undo();
-                }
-            }
-            catch(Exception e){}
-            if(current instanceof DeleteAction){
-
-                try {
-                    if(undoStack.peek() instanceof CreateAction){
-                        return;
-                    }
-                }
-                catch(Exception e){}
-                this.undo();
-            }
-             */
-
-
-
-
-
         }
-
-
-        //System.out.println("REDO");
-
-
     }
 
 
@@ -257,7 +220,7 @@ public class ModelController{
             }
 
 
-            //TODO trigger of disconnect event here
+
 
 
         }
@@ -281,7 +244,7 @@ public class ModelController{
             if (this.active != null) {
                 palette.populateBlocks();
 
-                //TODO it gets repositioned to the last palette location
+
                 undoStack.push(new DeleteAction(this.active,this.oldPos, this.PArea));
                 this.active = null;
             }
@@ -302,7 +265,7 @@ public class ModelController{
                 undoStack.push(new ConnectAction(this.active, eventLocation, this.PArea));
             }
 
-            //TODO you only need to have a connectaction if something connects
+
 
 
             active = null;

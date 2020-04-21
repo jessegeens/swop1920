@@ -188,4 +188,18 @@ public class ModelControllerTest {
         controller.undo();
         assertEquals(2, controller.getProgramAreaBlocks().size());
     }
+
+    @Test
+    public void redoDeleteTest() {
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(30, 30));
+        controller.release(new ProgramLocation(420, 420));
+        controller.select(new ProgramLocation(30, 30));
+        controller.release(new ProgramLocation(420, 500));
+        controller.select(new ProgramLocation(430, 430));
+        controller.release(new ProgramLocation(30, 30));
+        controller.undo();
+        controller.redo();
+        assertTrue(controller.getProgramAreaBlocks().get(0).getConnections().isEmpty());
+    }
 }

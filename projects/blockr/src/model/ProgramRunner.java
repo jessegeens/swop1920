@@ -192,11 +192,13 @@ public class ProgramRunner {
      * @author Bert
      */
     public void undoProgramRunner(){
+        //ifwhile wordt niet gehighlight bij undo
         this.setUnHighlight(current);
 
-        if(!undoHighlightStack.isEmpty()){
+        if(!(undoHighlightStack.isEmpty() || undoStateStack.isEmpty())){
+            redoHighlightStack.push(current);
             current = undoHighlightStack.pop();
-            this.redoHighlightStack.push(current);
+            //this.redoHighlightStack.push(current);
             this.setHighlight(current);
 
 
@@ -214,6 +216,10 @@ public class ProgramRunner {
 
         }
 
+        System.out.println("empty");
+
+
+
 
 
 
@@ -224,6 +230,31 @@ public class ProgramRunner {
      * @author Bert
      */
     public void redoProgramrunner(){
+        //TODO where clear redo stack
+
+        this.setUnHighlight(current);
+
+        if(!(redoHighlightStack.isEmpty() || redoStateStack.isEmpty())){
+            current = redoHighlightStack.pop();
+
+
+            this.undoHighlightStack.push(current);
+            this.setHighlight(current);
+
+
+
+            GameWorldState redoState = redoStateStack.pop();
+            this.undoStateStack.push(redoState);
+            if(redoState == gameWorld.getSnapshot()){
+                redoState = redoStateStack.pop();
+                this.undoStateStack.push(redoState);
+
+            }
+
+            this.gameWorld.restore(redoState);
+
+
+        }
 
     }
 }

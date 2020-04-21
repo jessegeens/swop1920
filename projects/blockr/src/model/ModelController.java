@@ -29,6 +29,8 @@ public class ModelController{
     private Stack<Action> undoStack;
     private Stack<Action> redoStack;
 
+    private boolean isCreateConnect;
+
     // Constructor
     public ModelController(GameWorldType worldType){
         //palette left, program middle, grid right
@@ -39,6 +41,7 @@ public class ModelController{
         programRunner = new ProgramRunner(this.gameWorld);
         undoStack = new Stack<>();
         redoStack = new Stack<>();
+        isCreateConnect = false;
     }
 
     /**
@@ -76,13 +79,14 @@ public class ModelController{
      *
      */
     public void undo(){
-
         System.out.println("UNDO");
         if(!undoStack.empty()){
             Action current = undoStack.pop();
             current.undo();
             System.out.println(current);
-            redoStack.push(current);
+            if (!(current instanceof CreateAction)) {
+                redoStack.push(current);
+            }
             if(current instanceof ConnectAction){
                 this.undo();
             }
@@ -96,6 +100,9 @@ public class ModelController{
 
                 try {
                     if(undoStack.peek() instanceof CreateAction){
+                        return;
+                    }
+                    if(undoStack.peek() instanceof DeleteAction) {
                         return;
                     }
                 }
@@ -130,6 +137,7 @@ public class ModelController{
             Action current = redoStack.pop();
             System.out.println(current);
             current.redo();
+            undoStack.push(current);
             //TODO when stack clear?
             try{
                 if(redoStack.peek() instanceof ConnectAction){
@@ -148,7 +156,6 @@ public class ModelController{
                 }
             }
             catch(Exception e){}
-
 
 
             //TODO delete
@@ -232,6 +239,7 @@ public class ModelController{
         if(this.inPalette(eventLocation)){
             active = palette.handleMouseDown(eventLocation);
             if(active != null) {
+                oldPos = active.getPos();
                 newBlockCreated = true;
             }
 
@@ -278,7 +286,9 @@ public class ModelController{
                 this.active = null;
             }
         } else if (this.inProgramArea(eventLocation)) {
-
+            if(active == null) {
+                return;
+            }
             System.out.println("Programarea release");
             if (!newBlockCreated) {
                 undoStack.push(new MoveAction(active, this.oldPos, active.getPos())); //see active.getPos comment in select method. Same applies here.

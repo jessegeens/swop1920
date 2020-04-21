@@ -132,7 +132,7 @@ public class ModelController{
             Action current = redoStack.pop();
             System.out.println(current);
             current.redo();
-            //TODO when stack clear?
+            //TODO when stack clear? =>
             try{
                 if(redoStack.peek() instanceof ConnectAction){
                     this.redo();

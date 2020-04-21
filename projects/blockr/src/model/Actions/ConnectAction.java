@@ -37,9 +37,11 @@ public class ConnectAction implements Action {
         for (ModelBlock listBlock : blocks) {
             if (listBlock.equals(this.block)) {
                 this.programArea.findAndConnect(this.location, listBlock);
+                System.out.println("NICE");
                 return;
             }
         }
+        System.out.println("NOTNICE");
         this.programArea.findAndConnect(this.location, this.block);
     }
 }

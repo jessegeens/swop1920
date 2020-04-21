@@ -84,9 +84,9 @@ public class ModelController{
             Action current = undoStack.pop();
             current.undo();
             System.out.println(current);
-            if (!(current instanceof CreateAction)) {
-                redoStack.push(current);
-            }
+
+            redoStack.push(current);
+
             if(current instanceof ConnectAction){
                 this.undo();
             }

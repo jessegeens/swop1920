@@ -118,10 +118,10 @@ public class GlobalController {
                 if(id == 401){
                     if(this.ctrl){
                         if(!this.shift){
-                            this.modelController.undo();
+                            this.modelController.globalUndo();
                         }
                         else{
-                            this.modelController.redo();
+                            this.modelController.globalRedo();
                         }
                     }
 

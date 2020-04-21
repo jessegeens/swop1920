@@ -70,6 +70,33 @@ public class ModelController{
         programRunner.reset();
     }
 
+
+    /**
+     * @author Bert
+     */
+    public void globalUndo(){
+        if(this.programRunner.isRunning()){
+
+        }
+        else{
+            this.undo();
+        }
+
+    }
+
+    /**
+     * @author Bert
+     */
+    public void globalRedo(){
+        if(this.programRunner.isRunning()){
+
+        }
+        else{
+            this.redo();
+        }
+
+    }
+
     /**
      * Undo the block or game steps
      *
@@ -163,6 +190,15 @@ public class ModelController{
         }
     }
 
+    /**
+     * Clears the redo stack
+     *
+     * @author Bert
+     */
+    public void clearRedoStack(){
+        this.redoStack.clear();
+    }
+
 
 
     /**
@@ -203,6 +239,7 @@ public class ModelController{
      * @author Bert
      */
     public void select(ProgramLocation eventLocation){
+        this.clearRedoStack();
         if(this.inPalette(eventLocation)){
             active = palette.handleMouseDown(eventLocation);
             if(active != null) {
@@ -244,6 +281,7 @@ public class ModelController{
 
     //Each release is a state
     public void release(ProgramLocation eventLocation) {
+        this.clearRedoStack();
         if (inPalette(eventLocation)) {
             if (this.active != null) {
                 palette.populateBlocks();
@@ -295,6 +333,7 @@ public class ModelController{
      * @author Bert
      */
     public void drag(ProgramLocation eventLocation){
+        this.clearRedoStack();
 
         if(active != null){
             if(2 * MyCanvasWindow.WIDTH / 3 - active.getWidth() > eventLocation.getX()){

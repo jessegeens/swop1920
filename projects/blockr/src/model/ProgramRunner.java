@@ -31,6 +31,8 @@ public class ProgramRunner {
         this.running = false;
         this.current = null;
         this.gameWorld.restore(initialState);
+
+
     }
 
     /**
@@ -121,5 +123,13 @@ public class ProgramRunner {
             return current.getBottomPlug().getBottomPlug(); //If block should only be executed once.
         } 
         else return current.getBottomPlug();
+    }
+
+    public void undoProgramRunner(){
+
+    }
+
+    public void redoProgramrunner(){
+        
     }
 }

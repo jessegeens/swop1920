@@ -14,7 +14,7 @@ public interface GameWorld {
 
     ActionResult perform(ActionType action);
 
-    Boolean evaluate(PredicateType predicateType);
+    Boolean evaluate(PredicateType predicate);
 
     GameWorldState getSnapshot();
 

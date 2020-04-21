@@ -115,7 +115,9 @@ public class ModelProgramArea{
      * @author Oberon Swings
      */
     public boolean findAndConnect(ProgramLocation eveWindowLocation, ModelBlock activeB){
-        this.addPABlock(activeB);
+        if (!(this.getPABlocks().contains(activeB))) {
+            this.addPABlock(activeB);
+        }
         ProgramLocation location = LH.moveToInBounds(eveWindowLocation);
         LH.setLocationBlock(activeB, location);
         ModelBlock closest = LH.findClosestBlock(activeB, blocks);

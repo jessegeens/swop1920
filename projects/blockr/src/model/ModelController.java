@@ -29,6 +29,8 @@ public class ModelController{
     private Stack<Action> undoStack;
     private Stack<Action> redoStack;
 
+    private boolean isCreateConnect;
+
     // Constructor
     public ModelController(GameWorldType worldType){
         //palette left, program middle, grid right
@@ -39,6 +41,7 @@ public class ModelController{
         programRunner = new ProgramRunner(this.gameWorld);
         undoStack = new Stack<>();
         redoStack = new Stack<>();
+        isCreateConnect = false;
     }
 
     /**
@@ -76,42 +79,36 @@ public class ModelController{
      *
      */
     public void undo(){
-
-        //TODO figure out in which edge cases recursion should and shouldn't happen
-        //probably with sth that checks if the block of the subsequent action is the same
         System.out.println("UNDO");
-        if(!undoStack.empty()){
+        if(!undoStack.empty()) {
             Action current = undoStack.pop();
             current.undo();
             System.out.println(current);
+
             redoStack.push(current);
-            if(current instanceof ConnectAction){
-                this.undo();
-            }
-            try{
-                if(undoStack.peek() instanceof DisconnectAction){
+
+            if (!(undoStack.empty())) {
+                Action peekedAction = undoStack.peek();
+                if (current instanceof ConnectAction) {
                     this.undo();
                 }
-            }
-            catch(Exception e){}
-            if(current instanceof DeleteAction){
-
                 try {
-                    if(undoStack.peek() instanceof CreateAction){
-                        return;
+                    if (peekedAction instanceof DisconnectAction) {
+                        this.undo();
+                    }
+                } catch (Exception e) {
+                }
+                if (current instanceof DeleteAction) {
+
+                    try {
+                        if (peekedAction instanceof MoveAction) {
+                            this.undo();
+                        }
+                    } catch (Exception e) {
                     }
                 }
-                catch(Exception e){}
-                this.undo();
             }
-
-
-
-
-
-
         }
-
     }
 
     //sequentieel nieuwe blokken maken zorgt voor issues
@@ -125,47 +122,39 @@ public class ModelController{
      * Still WIP
      *
      */
-    public void redo(){
+    public void redo() {
 
         System.out.println("REDO");
-        if(!redoStack.empty()){
+        if (!redoStack.empty()) {
             Action current = redoStack.pop();
             System.out.println(current);
             current.redo();
+
+            //TODO when stack clear? =>
+
+            undoStack.push(current);
             //TODO when stack clear?
-            try{
-                if(redoStack.peek() instanceof ConnectAction){
+            if (!(redoStack.empty())) {
+                Action peekedAction = redoStack.peek();
+                try {
+                    if (peekedAction instanceof ConnectAction) {
+                        this.redo();
+                    }
+                } catch (Exception e) {
+                }
+                if (current instanceof DisconnectAction) {
                     this.redo();
                 }
-            }
-            catch(Exception e){}
-            if(current instanceof DisconnectAction){
-                this.redo();
-            }
-
-            try{
-                if(redoStack.peek() instanceof DeleteAction){
-                    this.redo();
-                    //check for similar issue as with undo
+                try {
+                    if (peekedAction instanceof DeleteAction) {
+                        this.redo();
+                        //check for similar issue as with undo
+                    }
+                } catch (Exception e) {
                 }
             }
-            catch(Exception e){}
-
-
-            //delete?
-
-
-
-
-
-
         }
-
-
-
-
     }
-
 
 
     /**
@@ -209,6 +198,7 @@ public class ModelController{
         if(this.inPalette(eventLocation)){
             active = palette.handleMouseDown(eventLocation);
             if(active != null) {
+                oldPos = active.getPos();
                 newBlockCreated = true;
             }
 
@@ -255,7 +245,9 @@ public class ModelController{
                 this.active = null;
             }
         } else if (this.inProgramArea(eventLocation)) {
-
+            if(active == null) {
+                return;
+            }
             System.out.println("Programarea release");
             if (!newBlockCreated) {
                 undoStack.push(new MoveAction(active, this.oldPos, active.getPos())); //see active.getPos comment in select method. Same applies here.

@@ -46,10 +46,8 @@ public class ModelControllerTest {
         MC.release(new ProgramLocation (420, 420));
         MC.select(new ProgramLocation(40, 200));
         MC.release(new ProgramLocation(420, 500));
+        assertEquals(9, MC.getBlockStates().size());
     }
-
-
-
 
     @Test
     public void startExecution() {
@@ -143,5 +141,65 @@ public class ModelControllerTest {
         assertNotNull(controller.getGameWorld());
     }
 
-    //TODO: undo redo tests (Oberon zegt Bert)
+    @Test
+    public void undoCreateTest() {
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(30, 270));
+        controller.release(new ProgramLocation(420, 420));
+        controller.undo();
+        assertTrue(controller.getProgramAreaBlocks().isEmpty());
+    }
+
+    @Test
+    public void undoMoveTest() {
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(30, 30));
+        controller.release(new ProgramLocation(420, 420));
+        controller.select(new ProgramLocation(440, 440));
+        controller.release(new ProgramLocation(320, 600));
+        controller.undo();
+        assertEquals(new ProgramLocation(420, 420), controller.getProgramAreaBlocks().get(0).getPos());
+    }
+
+    @Test
+    public void undoConnectTest() {
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(30, 30));
+        controller.release(new ProgramLocation(420, 420));
+        controller.select(new ProgramLocation(30, 30));
+        controller.release(new ProgramLocation(420, 500));
+        controller.undo();
+        assertTrue(controller.getProgramAreaBlocks().get(0).getConnections().isEmpty());
+    }
+
+    @Test
+    public void redoRightBlockTest() {
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(30, 30));
+        controller.release(new ProgramLocation(420, 420));
+        controller.select(new ProgramLocation(30, 30));
+        controller.release(new ProgramLocation(420, 500));
+        controller.select(new ProgramLocation(30, 30));
+        controller.release(new ProgramLocation(420, 580));
+        controller.undo();
+        controller.undo();
+        controller.redo();
+        controller.redo();
+        controller.undo();
+        assertEquals(2, controller.getProgramAreaBlocks().size());
+    }
+
+    @Test
+    public void redoDeleteTest() {
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(30, 30));
+        controller.release(new ProgramLocation(420, 420));
+        controller.select(new ProgramLocation(30, 30));
+        controller.release(new ProgramLocation(420, 500));
+        controller.select(new ProgramLocation(430, 430));
+        controller.release(new ProgramLocation(30, 30));
+        controller.undo();
+        controller.redo();
+        assertTrue(controller.getProgramAreaBlocks().get(0).getConnections().isEmpty());
+    }
 }

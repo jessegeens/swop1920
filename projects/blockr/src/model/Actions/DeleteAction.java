@@ -9,7 +9,6 @@ public class DeleteAction implements Action {
 
     private ModelBlock deletedBlock;
     private ModelProgramArea programArea;
-    //TODO static or not
     private ProgramLocation location;
 
 
@@ -19,18 +18,11 @@ public class DeleteAction implements Action {
     public DeleteAction(ModelBlock createdBlock, ProgramLocation blockLocation,  ModelProgramArea programArea){
         this.deletedBlock = createdBlock;
         this.programArea = programArea;
-        this.location = new ProgramLocation(blockLocation.getX(),blockLocation.getY());
+        this.location = blockLocation;
         //ProgramLocation blockLocation,
 
     }
 
-    //TODO setting it as active block necessary or not?
-    //TODO activate deactivate palette
-    //TODO block clones or not
-    public void execute(){
-        //TODO
-
-    }
 
     public void undo(){
 

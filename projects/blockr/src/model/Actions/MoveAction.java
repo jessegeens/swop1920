@@ -14,23 +14,15 @@ public class MoveAction implements Action {
 
     public MoveAction(ModelBlock movedBlock, ProgramLocation oldL, ProgramLocation newL){
         this.movedBlock = movedBlock;
-        this.oldL = new ProgramLocation(oldL.getX(),oldL.getY());
-        this.newL = new ProgramLocation(newL.getX(), newL.getY());
+        this.oldL = oldL;
+        this.newL = newL;
     }
 
-    public void execute(){
-        movedBlock.setPos(newL);
 
-
-    }
 
     public void undo(){
         movedBlock.setPos(oldL);
-        /*
-        System.out.println("from to");
-        System.out.println(oldL.getX());
-        System.out.println(newL.getX());
-        */
+
 
     }
 

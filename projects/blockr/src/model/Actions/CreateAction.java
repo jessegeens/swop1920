@@ -15,15 +15,8 @@ public class CreateAction implements  Action {
     }
 
 
-    //TODO only the first create action gets undone
 
-    //TODO setting it as active block necessary or not?
-    //TODO activate deactivate palette
-    //TODO block clones or not
-    public void execute(){
-        //TODO
 
-    }
 
     public void undo(){
         this.programArea.removePABlock(this.createdBlock);

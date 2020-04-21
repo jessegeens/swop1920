@@ -4,6 +4,8 @@ import model.ModelProgramArea;
 import model.blocks.ModelBlock;
 import utilities.ProgramLocation;
 
+import java.util.ArrayList;
+
 public class ConnectAction implements Action {
 
     private ModelBlock block;
@@ -30,7 +32,14 @@ public class ConnectAction implements Action {
         this.programArea.addPABlock(block);
     }
     public void redo(){
+        ArrayList<ModelBlock> blocks = new ArrayList<>();
+        blocks = this.programArea.getPABlocks();
+        for (ModelBlock listBlock : blocks) {
+            if (listBlock.equals(this.block)) {
+                this.programArea.findAndConnect(this.location, listBlock);
+                return;
+            }
+        }
         this.programArea.findAndConnect(this.location, this.block);
-
     }
 }

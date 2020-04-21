@@ -20,13 +20,10 @@ public class CreateAction implements  Action {
 
     public void undo(){
         this.programArea.removePABlock(this.createdBlock);
-
-
     }
 
     public void redo(){
         this.programArea.addPABlock(this.createdBlock);
-
     }
 }
 

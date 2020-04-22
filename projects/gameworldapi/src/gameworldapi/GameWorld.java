@@ -10,6 +10,7 @@ import java.awt.*;
 
  @author Jesse Geens
  */
+
 public interface GameWorld {
 
     /**
@@ -35,7 +36,7 @@ public interface GameWorld {
      * This function evaluates a predicate
      * in the given gameworldstate
      * and subsequently returns a boolean
-     * indicating the evaluation in the
+     * indicating the evaluation of the
      * predicate.
      *
      * @author Jesse Geens

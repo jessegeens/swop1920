@@ -88,7 +88,12 @@ public class GlobalController {
      * TODO for some reason shift and control have no keycode for mouseup so just pressing sequentially (with other keypresses in between) also triggers undo and redo
      *
      */
-    public void handleKeyEvent(int id, int keyCode, char keyChar){
+    public void handleKeyEvent(int id, int keyCode, char keyChar, boolean isControlDown, boolean isShiftDown){
+        System.out.println("KEYEVENT");
+        System.out.println(keyCode);
+        System.out.println(keyChar);
+        System.out.println(id);
+        System.out.println(isControlDown);
         switch(keyCode) {
             case 65: //A;
             case 116: //F5;

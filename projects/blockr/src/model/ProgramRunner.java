@@ -100,6 +100,7 @@ public class ProgramRunner {
                         break;
                     case SUCCESS:
                         //TODO: Bert, hier moet ge de action aan de action stack toevoegen voor undo/redo
+                        //Heb het hierboven gezet, op zich moet je een snapshot bijhouden los van of de state al dan niet verandert want anders is er een imbalans tussen uw geprocessde blokken en uw state stacks
                         break;
                     case GAME_OVER:
                         //TODO: bekijken wat we gaan doen als het game over is
@@ -110,6 +111,7 @@ public class ProgramRunner {
             while (next instanceof ModelWhileIfBlock) next = findNextBlock(next);
             if (next != null){
                 this.highlightNext(next);
+                //TODO this causes ifwhile to be highlighted
             }
             else{
                 this.current.setUnHighlight();

@@ -193,11 +193,12 @@ public class ProgramRunner {
      */
     public void undoProgramRunner(){
         //ifwhile wordt niet gehighlight bij undo
+        //highlighten in het algemeen doet (mogelijks) louche bij sequentiële undo redo
         this.setUnHighlight(current);
 
         if(!(undoHighlightStack.isEmpty() || undoStateStack.isEmpty())){
             redoHighlightStack.push(current);
-            current = undoHighlightStack.pop();
+            this.current = undoHighlightStack.pop();
             //this.redoHighlightStack.push(current);
             this.setHighlight(current);
 
@@ -235,10 +236,12 @@ public class ProgramRunner {
         this.setUnHighlight(current);
 
         if(!(redoHighlightStack.isEmpty() || redoStateStack.isEmpty())){
+            this.undoHighlightStack.push(current);
+
             current = redoHighlightStack.pop();
 
 
-            this.undoHighlightStack.push(current);
+
             this.setHighlight(current);
 
 

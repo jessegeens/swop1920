@@ -39,7 +39,24 @@ public class ProgramRunner {
     public void initialise(ModelBlock start){
         this.running = true;
         this.current = start;
+
+        //TODO code for highlight issue with whileif
+        /*
+        if(current instanceof ModelWhileIfBlock){
+            this.setUnHighlight(current);
+            if(findNextBlock(current) != null){
+                this.highlightNext(findNextBlock(current));
+            }
+
+        }
+        else{
+            this.current.setHighlight();
+        }
+        */
+
+        //this would need to be commented out for whileif highlight stuff
         this.current.setHighlight();
+
 
         //because of this you can't have sequential games in undo redo
         this.undoHighlightStack.clear();
@@ -111,11 +128,24 @@ public class ProgramRunner {
             while (next instanceof ModelWhileIfBlock) next = findNextBlock(next);
             if (next != null){
                 this.highlightNext(next);
-                //TODO this causes ifwhile to be highlighted
+                //TODO whileif highlight code
+
+                /*
+                if(next instanceof ModelWhileIfBlock){
+                    this.setUnHighlight(next);
+                    if(findNextBlock(next) != null){
+                        this.highlightNext(findNextBlock(next));
+                    }
+
+                }
+*/
+
             }
             else{
                 this.current.setUnHighlight();
             }
+
+
             this.current = next;
         }
     }

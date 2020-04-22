@@ -22,7 +22,7 @@ package gameworldapi;
  *       end of a game in a negative way,
  *       e.g. the player has died. The next
  *       execution, the gameworld should be
- *       reset
+ *       reset.
  *
  *   - GAME_SUCCESS: this means that the game
  *       has ended successfully; the player won

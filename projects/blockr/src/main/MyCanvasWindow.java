@@ -36,9 +36,9 @@ public class MyCanvasWindow extends CanvasWindow {
     }
     
     @Override
-    protected void handleKeyEvent(int id, int keyCode, char keyChar) {
+    protected void handleKeyEvent(int id, int keyCode, char keyChar, boolean isControlDown, boolean isShiftDown) {
         super.handleKeyEvent(id, keyCode, keyChar);
-        globalController.handleKeyEvent(id, keyCode, keyChar);
+        globalController.handleKeyEvent(id, keyCode, keyChar, isControlDown, isShiftDown);
         super.repaint();
     }
 }

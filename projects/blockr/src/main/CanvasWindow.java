@@ -299,12 +299,22 @@ public class CanvasWindow {
 		//System.out.println(e);
 		if (recording != null)
 			recording.items.add(new KeyEventItem(e.getID(), e.getKeyCode(), e.getKeyChar()));
-		handleKeyEvent(e.getID(), e.getKeyCode(), e.getKeyChar());
+		handleKeyEvent(e.getID(), e.getKeyCode(), e.getKeyChar(), e.isControlDown(), e.isShiftDown());
 	}
 	
 	/**
 	 * Called when the user presses a key (id == KeyEvent.KEY_PRESSED) or enters a character (id == KeyEvent.KEY_TYPED).
 	 * 
+	 * @param id
+	 * @param keyCode
+	 * @param keyChar
+	 */
+	protected void handleKeyEvent(int id, int keyCode, char keyChar, boolean isControlDown, boolean isShiftDown) {
+	}
+
+	/**
+	 * Called when the user presses a key (id == KeyEvent.KEY_PRESSED) or enters a character (id == KeyEvent.KEY_TYPED).
+	 *
 	 * @param id
 	 * @param keyCode
 	 * @param keyChar

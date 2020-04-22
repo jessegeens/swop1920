@@ -23,6 +23,7 @@ as your Main Class.
 
 Next, go to Build &rarr; Build Artifacts... &rarr; gameworldapi:jar &rarr; Build
 and build the JAR file. It will be located in 
+
 > gameworldapi/out/artifacts/gameworldapi_jar/gameworldapi.jar
 
 ### Including the API in the game world project
@@ -30,6 +31,7 @@ To start implementing the API in your game world project, open the project and
 go to File &rarr; Project Structure &rarr; Libraries &rarr; + &rarr; Java and
 select the _gameworldapi.jar_ file. You will now need to implement the following
 interfaces in the project to fulfill the API requirements:
+
 1. GameWorldType
 2. ActionType
 3. PredicateType
@@ -74,14 +76,14 @@ demonstrate an implementation of the class loading:
 ```
 
 The class can then be loaded by passing two arguments:
+
 1. The path of the class file, excluding the package
 2. The class file, in the format of `package.ClassName`
 
 For example:
 
-```
-/home/jesse/projects/gameworld/out/production/gameworld gameworld.GameWorldType
-```
+> /home/jesse/project/gameworld/out/production/gameworld
+> gameworld.GameWorldType
 
 ## Implementation requirements
 
@@ -92,6 +94,7 @@ The GameWorldType interface acts as a Facade to the controlling application. Its
 implementation is the class that will be passed on to the controlling 
 application as an argument. The GameWorldType class that implements the 
 GameWorldType interface must have three methods:
+
 1. `public ArrayList<ActionType> getSupportedActions();`
    This function should return an ArrayList containing all the supported 
    Actions. An Action is an implementation of an ActionType, and is specified
@@ -135,6 +138,7 @@ The GameWorld class that implements the GameWorld interface is arguably the most
 important class of your project. It represents the whole game world and is used
 to interface with the game. The GameWorld class must have at least the following
 methods in its body:
+
 1. `ActionResult perform(ActionType action);`
     This function takes an ActionType as an argument and performs the action on
     the current gameworldstate. It returns an ActionResult indicating whether 
@@ -165,6 +169,7 @@ methods in its body:
 #### ActionResult
 The ActionResult is an enum that represents the four possible outcomes of 
 performing an Action in the GameWorld:
+
 1. **SUCCESS**
    this means that the action was performed successfully and that the
    GameWorldState has been updated to reflect the action. The game is thus 
@@ -184,7 +189,45 @@ performing an Action in the GameWorld:
    The gameworldstate should be reset after this.
 
 #### GameWorldState
+The GameWorldState class that implements the GameWorldState interface represents
+the state of the game world at a certain point in time. It must be an
+**immutable** class. It should contain everything that can change during 
+gameplay, like a player's location or direction. It is advised that this
+class is created by a special Factory class. 
+
+#### Location
+The Location interface is an optional interface that can be implemented by a
+Location class if you need a way to use two-dimensional coordinates in your
+program. It is very important that, if you decide to use this interface,
+you implement it as an immutable class.
 
 ### Controlling application
+In the section above, you have seen how to include the API in your project and
+how to load the game world dynamically. In order for all this to function
+properly, there are some requirements that must be fulfilled.
 
+On startup, the controlling application will receive an instance of a 
+GameWorldType class. The controlling applications should poll the game world for
+its supported actions and predicates, and should then offer the user the 
+necessary controls for executing these actions and evaluating the predicates.
+This can be done with the `ActionResult perform(ActionType action)` and
+`Boolean evaluate(PredicateType predicate)` functions in the game world.
 
+It should also ask for a new GameWorld instance **once**, on startup. It should
+store the GameWorld object in a logical way so that it can be used throughout
+the program.
+
+It is advised that, on startup, the controlling application asks the game world
+for its current state as this is its initial state. This allows the controlling
+application to reset the game when it deems this necessary, by calling the
+`void restore(GameWorldState state)` function in the GameWorld class, and then
+passing the initial GameWorldState as its argument.
+
+Furthermore, when the user interacts with the program and triggers a UI update,
+the controlling application should call the 
+`void render(Graphics g, int x, int y)` function in the game world to trigger
+repainting the game world.
+
+Just as the game world, you can also choose to implement the Location interface
+in your controlling application. Once again, this must be done as an immutable
+class.

@@ -10,6 +10,7 @@ import java.awt.*;
 
  @author Jesse Geens
  */
+
 public interface GameWorld {
 
     /**

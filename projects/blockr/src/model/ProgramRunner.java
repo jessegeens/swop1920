@@ -219,7 +219,16 @@ public class ProgramRunner {
 
         }
 
+        if((undoHighlightStack.isEmpty() || undoStateStack.isEmpty())){
+            this.running = false;
+            this.setUnHighlight(current);
+            //TODO check undo after game end
+
+
+        }
+
         System.out.println("empty");
+        System.out.println(this.isRunning());
 
 
 
@@ -261,5 +270,7 @@ public class ProgramRunner {
 
         }
 
+        System.out.println(this.isRunning());
     }
+
 }

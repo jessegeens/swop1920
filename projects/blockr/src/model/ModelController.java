@@ -76,16 +76,16 @@ public class ModelController{
      */
     public void globalUndo(){
         //TODO this is temporary for trying out the programrunner undo/redo without case checking in the modelcontroller
-        programRunner.undoProgramRunner();
 
-        /*
+
+
         if(this.programRunner.isRunning()){
-
+            programRunner.undoProgramRunner();
         }
         else{
             this.undo();
         }
-        */
+
 
     }
 

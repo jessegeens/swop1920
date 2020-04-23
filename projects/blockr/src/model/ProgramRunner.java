@@ -117,8 +117,6 @@ public class ProgramRunner {
                     case FAILURE:
                         break;
                     case SUCCESS:
-                        //TODO: Bert, hier moet ge de action aan de action stack toevoegen voor undo/redo
-                        //Heb het hierboven gezet, op zich moet je een snapshot bijhouden los van of de state al dan niet verandert want anders is er een imbalans tussen uw geprocessde blokken en uw state stacks
                         break;
                     case GAME_OVER:
                         JOptionPane.showMessageDialog(null, "Too bad, you lost!", "Game lost", JOptionPane.INFORMATION_MESSAGE);

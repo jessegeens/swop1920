@@ -1,6 +1,5 @@
 package robotgameworld;
 
-import gameworldapi.Direction;
 import gameworldapi.GameWorldState;
 import org.junit.Test;
 

@@ -11,7 +11,7 @@ public class GameWorldStateFactory {
     private static GameWorldStateFactory instance;
 
 
-    private static final GridLocation PLAYER_START_LOCATION = new GridLocation( 0, ActionExecutor.getInstance().getGridHeight() - 1);
+    private static final GridLocation PLAYER_START_LOCATION = new GridLocation( 1, ActionExecutor.getInstance().getGridHeight() - 1);
 
 
     //Constructor

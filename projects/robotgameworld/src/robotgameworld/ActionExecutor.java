@@ -49,7 +49,7 @@ public class ActionExecutor {
                 RobotGameWorldState next = gameWorldStateFactory.createNew(current, action);
                 if (validState(next)){
                     current = next;
-                    if(gameFinished(current)) return ActionResult.GAME_OVER;
+                    if(gameFinished(current)) return ActionResult.GAME_SUCCESS;
                     return ActionResult.SUCCESS;
                 }
                 else return ActionResult.FAILURE;
@@ -114,7 +114,7 @@ public class ActionExecutor {
      *         false otherwise
      */
     private boolean gameFinished(RobotGameWorldState state){
-        if(state.getRobotLocation() == GOAL_CELL) return true;
+        if(state.getRobotLocation().getX() == GOAL_CELL.getX() && state.getRobotLocation().getY() == GOAL_CELL.getY()) return true;
         return false;
     }
 

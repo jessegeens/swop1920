@@ -57,8 +57,8 @@ public class ProgramRunner {
         //this would need to be commented out for whileif highlight stuff
         this.current.setHighlight();
 
-
         /*
+
         //because of this you can't have sequential games in undo redo
         this.undoHighlightStack.clear();
         this.redoHighlightStack.clear();
@@ -66,6 +66,7 @@ public class ProgramRunner {
         this.undoStateStack.clear();
         this.redoStateStack.clear();
         */
+
 
         //TODO null or first block?
         this.undoHighlightStack.push(null);
@@ -84,8 +85,14 @@ public class ProgramRunner {
         this.current = null;
         this.gameWorld.restore(initialState);
 
-        this.undoStateStack.clear();
+        /*
         this.undoHighlightStack.clear();
+        this.redoHighlightStack.clear();
+
+        this.undoStateStack.clear();
+        this.redoStateStack.clear();
+
+        */
 
         this.redoStateStack.clear();
         this.redoHighlightStack.clear();
@@ -105,6 +112,8 @@ public class ProgramRunner {
      * @author Jesse Geens
      */
     public boolean execute(){
+        this.redoStateStack.clear();
+        this.redoHighlightStack.clear();
 
 
 
@@ -129,15 +138,15 @@ public class ProgramRunner {
                     case FAILURE:
                         break;
                     case SUCCESS:
-                        //TODO: Bert, hier moet ge de action aan de action stack toevoegen voor undo/redo
-                        //Heb het hierboven gezet, op zich moet je een snapshot bijhouden los van of de state al dan niet verandert want anders is er een imbalans tussen uw geprocessde blokken en uw state stacks
                         break;
                     case GAME_OVER:
                         JOptionPane.showMessageDialog(null, "Too bad, you lost!", "Game lost", JOptionPane.INFORMATION_MESSAGE);
                         break;
+                        //TODO Temporarily commmented this out so I could continue working
+                        /*
                     case GAME_SUCCESS:
                         JOptionPane.showMessageDialog(null, "Congratulations! You won!", "Game won", JOptionPane.INFORMATION_MESSAGE);
-                        break;
+                        break;*/
                 }
             }
             next = findNextBlock(current);
@@ -243,11 +252,25 @@ public class ProgramRunner {
         return (this.undoHighlightStack.isEmpty() || this.undoStateStack.isEmpty());
     }
 
+    /**
+     * @author bert_dvl
+     */
+    public boolean redoFinished(){
+        return (this.redoHighlightStack.isEmpty() || this.redoStateStack.isEmpty());
+    }
+
 
     /**
      * @author Bert
      */
     public void undoProgramRunner(){
+        System.out.println("undostack PR undo");
+        System.out.println(undoStateStack.toString());
+        System.out.println(undoHighlightStack.toString());
+        System.out.println("redostack PR undo");
+        System.out.println(redoStateStack.toString());
+        System.out.println(redoHighlightStack.toString());
+
         //ifwhile wordt niet gehighlight bij undo
         //highlighten in het algemeen doet (mogelijks) louche bij sequentiële undo redo
         this.setUnHighlight(current);
@@ -299,8 +322,15 @@ public class ProgramRunner {
     /**
      * @author Bert
      */
-    public void redoProgramrunner(){
+    public void redoProgramRunner(){
         //TODO where clear redo stack
+
+        System.out.println("undostack PR redo ");
+        System.out.println(undoStateStack.toString());
+        System.out.println(undoHighlightStack.toString());
+        System.out.println("redostack PR redo");
+        System.out.println(redoStateStack.toString());
+        System.out.println(redoHighlightStack.toString());
 
         this.setUnHighlight(current);
 

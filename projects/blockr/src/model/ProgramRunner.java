@@ -122,6 +122,8 @@ public class ProgramRunner {
                     case GAME_OVER:
                         //TODO: bekijken wat we gaan doen als het game over is
                         break;
+                    case GAME_SUCCESS:
+                        break;
                 }
             }
             next = findNextBlock(current);

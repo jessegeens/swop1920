@@ -80,17 +80,12 @@ public class GlobalController {
      *                                            - 90 = Z
      * @param keyChar character of the pressed key
      *
-     * @author
+     * @author Bert
      *
      *
      *
      */
     public void handleKeyEvent(int id, int keyCode, char keyChar, boolean isControlDown, boolean isShiftDown){
-        System.out.println("KEYEVENT");
-        System.out.println(keyCode);
-        System.out.println(keyChar);
-        System.out.println(id);
-        System.out.println(isControlDown);
         switch(keyCode) {
             case 65: //A;
             case 116: //F5;

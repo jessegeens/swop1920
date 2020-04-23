@@ -58,12 +58,14 @@ public class ProgramRunner {
         this.current.setHighlight();
 
 
+        /*
         //because of this you can't have sequential games in undo redo
         this.undoHighlightStack.clear();
         this.redoHighlightStack.clear();
 
         this.undoStateStack.clear();
         this.redoStateStack.clear();
+        */
 
         //TODO null or first block?
         this.undoHighlightStack.push(null);
@@ -82,6 +84,14 @@ public class ProgramRunner {
         this.current = null;
         this.gameWorld.restore(initialState);
 
+        this.undoStateStack.clear();
+        this.undoHighlightStack.clear();
+
+        this.redoStateStack.clear();
+        this.redoHighlightStack.clear();
+
+        System.out.println("RESET");
+
 
     }
 
@@ -94,7 +104,7 @@ public class ProgramRunner {
      *  3b. otherwise, the next block is highlighted
      * @author Jesse Geens
      */
-    public void execute(){
+    public boolean execute(){
 
 
 
@@ -104,6 +114,8 @@ public class ProgramRunner {
         ModelBlock next;
         if(this.current == null) {
             reset();
+            return true;
+
         }
         else{
             if(current instanceof ModelActionBlock && gameWorld != null){
@@ -150,6 +162,7 @@ public class ProgramRunner {
 
             this.current = next;
         }
+        return false;
     }
 
     /**
@@ -221,6 +234,13 @@ public class ProgramRunner {
         else return current.getBottomPlug();
     }
 
+    /**
+     * @author bert_dvl
+     */
+    public boolean undoFinished(){
+        return (this.undoHighlightStack.isEmpty() || this.undoStateStack.isEmpty());
+    }
+
 
     /**
      * @author Bert
@@ -240,7 +260,8 @@ public class ProgramRunner {
 
             GameWorldState undoState = undoStateStack.pop();
             this.redoStateStack.push(undoState);
-            if(undoState == gameWorld.getSnapshot()){
+            if(undoState == gameWorld.getSnapshot() && !undoStateStack.isEmpty()){
+
                 undoState = undoStateStack.pop();
                 this.redoStateStack.push(undoState);
 
@@ -256,11 +277,14 @@ public class ProgramRunner {
             this.setUnHighlight(current);
             //TODO check undo after game end
 
+            System.out.println("empty");
+
+
 
         }
 
-        System.out.println("empty");
-        System.out.println(this.isRunning());
+
+
 
 
 

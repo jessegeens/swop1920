@@ -51,7 +51,7 @@ public class GlobalControllerTest {
     @Test
     public void HandleKeyEvent() {
         GlobalController GC = new GlobalController(GWT);
-        GC.handleKeyEvent(1, 27, 'e');
+        GC.handleKeyEvent(1, 27, 'e', false, false);
         assertTrue(true);
     }
 }

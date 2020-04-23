@@ -1,6 +1,6 @@
 package model;
 
-
+import javax.swing.JOptionPane;
 import utilities.*;
 import model.blocks.*;
 import gameworldapi.*;
@@ -111,8 +111,9 @@ public class ProgramRunner {
 
                 this.undoHighlightStack.push(current);
                 this.undoStateStack.push(gameWorld.getSnapshot());
-
+                System.out.println(result.toString());
                 switch (result){
+
                     case FAILURE:
                         break;
                     case SUCCESS:
@@ -120,9 +121,10 @@ public class ProgramRunner {
                         //Heb het hierboven gezet, op zich moet je een snapshot bijhouden los van of de state al dan niet verandert want anders is er een imbalans tussen uw geprocessde blokken en uw state stacks
                         break;
                     case GAME_OVER:
-                        //TODO: bekijken wat we gaan doen als het game over is
+                        JOptionPane.showMessageDialog(null, "Too bad, you lost!", "Game lost", JOptionPane.INFORMATION_MESSAGE);
                         break;
                     case GAME_SUCCESS:
+                        JOptionPane.showMessageDialog(null, "Congratulations! You won!", "Game won", JOptionPane.INFORMATION_MESSAGE);
                         break;
                 }
             }

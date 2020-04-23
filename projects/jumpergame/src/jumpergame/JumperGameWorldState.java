@@ -1,6 +1,5 @@
 package jumpergame;
 
-import gameworldapi.Direction;
 import gameworldapi.GameWorldState;
 
 public class JumperGameWorldState implements GameWorldState {

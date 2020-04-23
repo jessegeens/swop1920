@@ -15,8 +15,8 @@ public class ActionExecutor {
 
     //Parameters, TODO check whether these are at the correct location
     private int GRID_WIDTH = 6;
-    private int GRID_HEIGHT = 15;
-    private final GridLocation PRINCESS = new GridLocation(GRID_WIDTH - 2, 0);
+    private int GRID_HEIGHT = 11;
+    private final GridLocation PRINCESS = new GridLocation(GRID_WIDTH - 3, 0);
     private final ArrayList<GridLocation> BLOCKS = new ArrayList<GridLocation>(Arrays.asList(
             new GridLocation(4, 1),
             new GridLocation(3, 1),
@@ -32,13 +32,7 @@ public class ActionExecutor {
             new GridLocation(4, 7),
             new GridLocation(5, 9),
             new GridLocation(2, 9),
-            new GridLocation(0, 9),
-            new GridLocation(1, 11),
-            new GridLocation(2, 11),
-            new GridLocation(3, 11),
-            new GridLocation(4, 11),
-            new GridLocation(0, 13),
-            new GridLocation(4, 13)));
+            new GridLocation(0, 9)));
 
     private JumperGameWorldState current;
     private GameWorldStateFactory gameWorldStateFactory = GameWorldStateFactory.getInstance();
@@ -65,17 +59,23 @@ public class ActionExecutor {
      *         ActionResult.GAME_OVER if the robot has reached the goal cell
      */
     public ActionResult execute(Action action){
+        JumperGameWorldState next = gameWorldStateFactory.createNew(current, action);
         switch (action){
             case MOVE_LEFT:
             case MOVE_RIGHT:
-            case JUMP:
-                JumperGameWorldState next = gameWorldStateFactory.createNew(current, action);
-                if(gameFinished(next)) return ActionResult.GAME_OVER;
+                if(gameFinished(next)) return ActionResult.GAME_SUCCESS;
                 if(validState(next)){
                     current = next;
                     return ActionResult.SUCCESS;
                 }
                 return ActionResult.FAILURE;
+            case JUMP:
+                if(gameFinished(next)) return ActionResult.GAME_SUCCESS;
+                if(validJumpState(next)){
+                    current = next;
+                    return ActionResult.SUCCESS;
+                }
+                return ActionResult.GAME_OVER;
             default:
                 throw new IllegalStateException("An illegal action has been executed");
         }
@@ -124,6 +124,16 @@ public class ActionExecutor {
         return true;
     }
 
+    private boolean validJumpState(JumperGameWorldState state){
+        if(state.getPlayerLocation().getX() < 0) return false;
+        if(state.getPlayerLocation().getY() < 0) return false;
+        if(state.getPlayerLocation().getX() >= GRID_WIDTH) return false;
+        if(state.getPlayerLocation().getY() >= GRID_HEIGHT) return false;
+        GridLocation location = state.getPlayerLocation().add(0, 1);
+        if (BLOCKS.contains(location)) return false;
+        return true;
+    }
+
     /**
      * @author Jesse Geens
      *
@@ -133,7 +143,7 @@ public class ActionExecutor {
      *         false otherwise
      */
     private boolean gameFinished(JumperGameWorldState state){
-        return BLOCKS.contains(state.getPlayerLocation()) || state.getPlayerLocation() == PRINCESS;
+        return BLOCKS.contains(state.getPlayerLocation()) || state.getPlayerLocation().equals(PRINCESS);
     }
 
     /**

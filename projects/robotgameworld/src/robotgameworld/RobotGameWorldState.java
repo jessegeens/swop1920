@@ -1,6 +1,6 @@
 package robotgameworld;
 
-import gameworldapi.*;
+import gameworldapi.GameWorldState;
 import robotgameworld.GridLocation;
 
 /**

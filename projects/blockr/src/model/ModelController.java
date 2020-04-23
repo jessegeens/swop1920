@@ -53,9 +53,26 @@ public class ModelController{
     public void startOrExecuteProgram(){
         if (PArea.validExecutionState()){//Check if all blocks are connected, and if so execute.
             if(programRunner.isRunning()){
-                programRunner.execute();
+                boolean resetTriggered = programRunner.execute();
+                if(resetTriggered){
+                    undoStack.push(new GameEndAction());
+                }
+
             } else {
                 programRunner.initialise(PArea.getFirstBlock());
+
+                ArrayList<Action> toRemove = new ArrayList<>();
+                for (Action current : undoStack){
+                    if(current instanceof GameStartAction || current instanceof GameEndAction){
+                        toRemove.add(current);
+                    }
+                }
+                for(Action current : toRemove){
+                    undoStack.remove(current);
+                }
+
+
+                undoStack.push(new GameStartAction());
             }
         }
     }
@@ -68,6 +85,7 @@ public class ModelController{
      */
     public void exitExecution(){
         programRunner.reset();
+        undoStack.push(new GameEndAction());
     }
 
 
@@ -76,14 +94,42 @@ public class ModelController{
      */
     public void globalUndo(){
         //TODO this is temporary for trying out the programrunner undo/redo without case checking in the modelcontroller
+        if(this.undoStack.peek() instanceof GameStartAction){
+            System.out.println("gamestart on top of stack");
 
+        }
+        System.out.println("PEEK undostack");
+        System.out.println(undoStack.toString());
+
+        if(programRunner.undoFinished()){
+            System.out.println("undo finished");
+        }
+
+        if(this.undoStack.peek() instanceof GameStartAction && programRunner.undoFinished()){
+            System.out.println("exitececution");
+            this.exitExecution();
+            redoStack.push(undoStack.pop());
+            //this.undo();
+
+        }
+        if(this.undoStack.peek() instanceof GameEndAction && !programRunner.isRunning()){
+            System.out.println("CALLTHIS");
+            //startorexecute creates a new gameend?
+            this.startOrExecuteProgram();
+            System.out.println(undoStack.toString());
+            Action popThis = undoStack.pop();
+            redoStack.push(popThis);
+            System.out.println(undoStack.toString());
+        }
 
 
         if(this.programRunner.isRunning()){
             programRunner.undoProgramRunner();
+            System.out.println("programrunner undo is triggered");
         }
         else{
             this.undo();
+            System.out.println("blockr undo is triggered");
         }
 
 
@@ -241,6 +287,7 @@ public class ModelController{
      * @author Bert
      */
     public void select(ProgramLocation eventLocation){
+        //TODO checker for whether or not the game is running
         this.clearRedoStack();
         if(this.inPalette(eventLocation)){
             active = palette.handleMouseDown(eventLocation);

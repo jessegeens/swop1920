@@ -18,16 +18,13 @@ public class GlobalController {
     private ModelController modelController;
     private UIController uiController;
 
-    //@Bert: u variabelen staan hier en worden in de constructor geinitialiseerd
-    private boolean ctrl;
-    private boolean shift;
+
 
     // Constructor
     public GlobalController(GameWorldType gameWorldType){
         this.modelController = new ModelController(gameWorldType);
         this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT);
-        ctrl = false;
-        shift = false;
+
     }
     
     /**
@@ -85,7 +82,7 @@ public class GlobalController {
      *
      * @author
      *
-     * TODO for some reason shift and control have no keycode for mouseup so just pressing sequentially (with other keypresses in between) also triggers undo and redo
+     *
      *
      */
     public void handleKeyEvent(int id, int keyCode, char keyChar, boolean isControlDown, boolean isShiftDown){
@@ -102,37 +99,15 @@ public class GlobalController {
             case 27: //Esc
                 this.modelController.exitExecution();
                 break;
-            case 17: //Ctrl
-                if(id == 401){
-                    this.ctrl = true;
-                    this.shift = false;
-                }
-                else{
-                    this.ctrl = false;
-                }
-                break;
-            case 16: //Shift
-                if(id == 401){
-                    this.shift = true;
-                }
-                else{
-                    this.shift = false;
-                }
-                break;
             case 90: //Z
-                if(id == 401){
-                    if(this.ctrl){
-                        if(!this.shift){
-                            this.modelController.globalUndo();
-                        }
-                        else{
-                            this.modelController.globalRedo();
-                        }
+                if(isControlDown){
+                    if(isShiftDown){
+                        this.modelController.globalRedo();
                     }
-
+                    else{
+                        this.modelController.globalUndo();
+                    }
                 }
-                this.ctrl = false;
-                this.shift = false;
                 break;
         }
     }

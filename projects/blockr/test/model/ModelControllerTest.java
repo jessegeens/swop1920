@@ -22,7 +22,7 @@ public class ModelControllerTest {
     @Before
     public void setUp() throws Exception {
         try {
-            File file = new File("C:" + File.separator + "Users" + File.separator + "Aram" + File.separator + "Desktop" + File.separator + "Informatica - Computerwetenschappen" + File.separator + "Ba Inf" + File.separator + "4ba informatica" + File.separator + "software-ontwerp" + File.separator + "swop1920" + File.separator + "projects" + File.separator + "robotgameworld" + File.separator + "out" + File.separator + "production" + File.separator + "robotgameworld");
+            File file = new File("/home/oberon/Documents/Studies/SWOP/swop1920/projects/robotgameworld/out/production/robotgameworld/" );
             System.out.println(file.toString());
             //convert the file to URL format
             URL url = file.toURI().toURL();
@@ -201,5 +201,15 @@ public class ModelControllerTest {
         controller.undo();
         controller.redo();
         assertTrue(controller.getProgramAreaBlocks().get(0).getConnections().isEmpty());
+    }
+
+    @Test
+    public void ifBlockInsideIfBlock() {
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(30, 30));
+        controller.release(new ProgramLocation(420, 420));
+        controller.select(new ProgramLocation(30, 30));
+        controller.release(new ProgramLocation(443, 453));
+        assertEquals(new ProgramLocation(433, 463), controller.getProgramAreaBlocks().get(1).getPos());
     }
 }

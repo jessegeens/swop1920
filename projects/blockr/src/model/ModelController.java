@@ -381,8 +381,6 @@ public class ModelController{
         if (inPalette(eventLocation)) {
             if (this.active != null) {
                 palette.populateBlocks();
-
-
                 undoStack.push(new DeleteAction(this.active,this.oldPos, this.PArea));
                 this.active = null;
             }
@@ -402,10 +400,6 @@ public class ModelController{
             if(PArea.findAndConnect(eventLocation, active)){
                 undoStack.push(new ConnectAction(this.active, eventLocation, this.PArea));
             }
-
-
-
-
             active = null;
             if (PArea.maxReached()) {
                 palette.removeBlocks();

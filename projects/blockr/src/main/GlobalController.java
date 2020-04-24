@@ -79,7 +79,8 @@ public class GlobalController {
      *                                            - 16 = Shift
      *                                            - 90 = Z
      * @param keyChar character of the pressed key
-     *
+     * @param isControlDown true if ctrl is down
+     * @param isShiftDown true if shift is down
      * @author Bert
      *
      *

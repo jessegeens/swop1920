@@ -22,8 +22,8 @@ public class RobotGameWorld implements GameWorld {
     /**
      *
      * @author Jesse Geens
-     * @param actionType
-     * @return
+     * @param actionType the type of the action
+     * @return the result of the action
      */
     @Override
     public ActionResult perform(ActionType actionType) {
@@ -32,8 +32,8 @@ public class RobotGameWorld implements GameWorld {
 
     /**
      * @author Jesse Geens
-     * @param predicateType
-     * @return
+     * @param predicateType the type of the predicate
+     * @return the result of the evaluation
      */
     @Override
     public Boolean evaluate(PredicateType predicateType) {

@@ -149,6 +149,7 @@ public class ProgramRunner {
      * 3. then it checks whether it is finished
      *  3a. if necessary, the program stops running
      *  3b. otherwise, the next block is highlighted
+     * @return  true of executed
      * @author Jesse Geens
      */
     public boolean execute(){
@@ -288,7 +289,7 @@ public class ProgramRunner {
 
     /**
      * Checks wheter the undo stacks are empty
-     *
+     * @return true if finished
      * @author bert_dvl
      */
     public boolean undoFinished(){
@@ -297,7 +298,7 @@ public class ProgramRunner {
 
     /**
      * Checks whether the redo stacks are empty
-     *
+     * @return true if finished
      * @author bert_dvl
      */
     public boolean redoFinished(){

@@ -64,6 +64,7 @@ public class ConnectionHandler {
      * Connects block extra to the connectionPoint p of block closest.
      * @param closest first block
      * @param extra second block
+     * @return true if connected
      * @author Oberon Swings
      */
     public boolean connect(ModelBlock closest, ModelBlock extra) {
@@ -135,6 +136,7 @@ public class ConnectionHandler {
 
     /**
      *
+     * @param a the block to connect to
      * @param b the block that possible needs to be connected in the cavity
      * @return true if and only if block is connected within the cavity, false otherwise
      * @author Oberon Swings
@@ -158,6 +160,7 @@ public class ConnectionHandler {
 
     /**
      *
+     * @param a the block to connect to
      * @param b the block that possible needs to be connected in the cavity
      * @return true if and only if block is connected within the cavity, false otherwise
      * @author Oberon Swings
@@ -184,6 +187,7 @@ public class ConnectionHandler {
      * This function makes sure the extra block is connected correctly to the closest block and is also taken account for within the cavity
      * @param extra the newly added block
      * @param closest the block closest to the new block
+     * @return true of connected into top of the cavity
      * @author Oberon Swings
      */
     public boolean connectIntoCavityTop(ModelBlock extra, ModelBlock closest){
@@ -207,6 +211,7 @@ public class ConnectionHandler {
      * This function makes sure the extra block is connected correctly to the closest block and is also taken account for within the cavity
      * @param extra the newly added block
      * @param closest the block closest to the new block
+     * @return true of connected into bottom of cavity
      * @author Oberon Swings
      */
     public boolean connectIntoCavityBottom(ModelBlock extra, ModelBlock closest){
@@ -239,7 +244,7 @@ public class ConnectionHandler {
     }
 
     /**
-     *
+     * @param blocks list of blocks to check
      * @return true if all the blocks in the ProgramArea are connected
      * @author Oberon Swings
      */
@@ -271,7 +276,7 @@ public class ConnectionHandler {
     }
 
     /**
-     *
+     * @param blocks list of blocks to check
      * @return the starting blocks of the program, should be only one to be a valid start state
      * @author Oberon Swings
      */
@@ -284,7 +289,7 @@ public class ConnectionHandler {
     }
 
     /**
-     *
+     * @param blocks list of blocks to check
      * @return the finishing blocks of the program, should be only one to be a valid start state
      * @author Oberon Swings
      */
@@ -297,7 +302,7 @@ public class ConnectionHandler {
     }
 
     /**
-     *
+     * @param blk the block to connect
      * @return a list of all the blocks that are connected
      * @author Oberon Swings
      */
@@ -317,6 +322,7 @@ public class ConnectionHandler {
     /**
      * Checks if a pair of blocks has corresponding TopSocketPos and BottomPlugPos or RightSocketPos and LeftPlugPos
      * If so they connect, otherwise they don't
+     * @param blocks the list of blocks to check
      * @author Oberon Swings
      */
     public void updateConnections(ArrayList<ModelBlock> blocks){

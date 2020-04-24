@@ -9,6 +9,7 @@ public enum Direction{
 
     /**
      * Method to turn left.
+     * @return the direction
      * @author Oberon Swings
      */
     public Direction turnLeft(){
@@ -29,6 +30,7 @@ public enum Direction{
     /**
      * Method to turn right.
      * @author Oberon Swings
+     * @return the direction
      */
     public Direction turnRight(){
         switch (this){

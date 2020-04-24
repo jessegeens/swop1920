@@ -305,9 +305,11 @@ public class CanvasWindow {
 	/**
 	 * Called when the user presses a key (id == KeyEvent.KEY_PRESSED) or enters a character (id == KeyEvent.KEY_TYPED).
 	 * 
-	 * @param id
-	 * @param keyCode
-	 * @param keyChar
+	 * @param id id
+	 * @param keyCode keycode
+	 * @param keyChar keychar
+	 * @param isControlDown true if ctrl is down
+	 * @param isShiftDown true if shift is down
 	 */
 	protected void handleKeyEvent(int id, int keyCode, char keyChar, boolean isControlDown, boolean isShiftDown) {
 	}
@@ -315,9 +317,9 @@ public class CanvasWindow {
 	/**
 	 * Called when the user presses a key (id == KeyEvent.KEY_PRESSED) or enters a character (id == KeyEvent.KEY_TYPED).
 	 *
-	 * @param id
-	 * @param keyCode
-	 * @param keyChar
+	 * @param id id
+	 * @param keyCode keycode
+	 * @param keyChar keychar
 	 */
 	protected void handleKeyEvent(int id, int keyCode, char keyChar) {
 	}

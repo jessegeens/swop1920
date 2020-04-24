@@ -9,7 +9,7 @@ package gameworldapi;
  * predicates. These predicates should then all be returned
  * by GameWorldType.getSupportedPredicates();
  *
- * @auther Jesse Geens
+ * @author Jesse Geens
  */
 public interface PredicateType {
 

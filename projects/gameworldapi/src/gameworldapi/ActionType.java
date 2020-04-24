@@ -9,7 +9,7 @@ package gameworldapi;
  * actions. These actions should then all be returned
  * by GameWorldType.getSupportedActions();
  *
- * @auther Jesse Geens
+ * @author Jesse Geens
  */
 public interface ActionType {
 

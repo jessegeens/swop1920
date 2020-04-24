@@ -5,12 +5,19 @@ import gameworldapi.GameWorldType;
 import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.Arrays;
 
 public class Main {
 
     public static void main(String[] args) {
         try{
-            File file = new File(args[0]);
+            String className = args[0].split("/")[args[0].split("/").length - 1];
+            String[] remaining = Arrays.copyOf(args[0].split("/"), args[0].split("/").length-1);
+            String path = "";
+            for(String str : remaining){
+                path = path + str + "/";
+            }
+            File file = new File(path);
 
             //convert the file to URL format
             URL url = file.toURI().toURL();
@@ -20,7 +27,7 @@ public class Main {
             ClassLoader cl = new URLClassLoader(urls);
 
             //load the Address class in 'c:\\other_classes\\'
-            Class cls = cl.loadClass(args[1]);
+            Class cls = cl.loadClass(className);
             //GameWorldType worldType = ((GameWorldType) Class.forName(args[0]).newInstance());
             GameWorldType worldType = (GameWorldType) cls.newInstance();
             java.awt.EventQueue.invokeLater(() -> {

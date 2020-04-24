@@ -52,27 +52,36 @@ argument to the controlling application. Here is some example code to
 demonstrate an implementation of the class loading:
 
 ```java
- public static void main(String[] args) {
-    try{
-        File file = new File(args[0]);
+   public static void main(String[] args) {
+       try{
+           String className = args[0].split("/")[args[0].split("/").length - 1];
+           String[] remaining = Arrays.copyOf(args[0].split("/"), 
+                                              args[0].split("/").length-1);
+           String path = "";
+           for(String str : remaining){
+               path = path + str + "/";
+           }
+           File file = new File(path);
+           
+            //convert the file to URL format
+           URL url = file.toURI().toURL();
+           URL[] urls = new URL[]{url};
 
-        //convert the file to URL format
-        URL url = file.toURI().toURL();
-        URL[] urls = new URL[]{url};
+           //load this folder into Class loader
+           ClassLoader cl = new URLClassLoader(urls);
 
-        //load this folder into Class loader
-        ClassLoader cl = new URLClassLoader(urls);
-
-        //load the class passed as a second argument
-        Class cls = cl.loadClass(args[1]);
-        GameWorldType worldType = (GameWorldType) cls.newInstance();
-        java.awt.EventQueue.invokeLater(() -> {
-            new MyCanvasWindow("Window title", worldType).show();
-        }); }
-    catch (Exception ex){
-        System.out.println("Error: " + ex.getMessage().toString());
+           //load the Address class in 'c:\\other_classes\\'
+           Class cls = cl.loadClass(className);
+           //GameWorldType worldType = ((GameWorldType) 
+                                          Class.forName(args[0]).newInstance());
+           GameWorldType worldType = (GameWorldType) cls.newInstance();
+           java.awt.EventQueue.invokeLater(() -> {
+               new MyCanvasWindow("Blockr Group 5", worldType).show();
+           }); }
+       catch (Exception ex){
+           System.out.println("Error: " + ex.getMessage().toString());
+       }
     }
- }
 ```
 
 The class can then be loaded by passing two arguments:

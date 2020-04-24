@@ -183,11 +183,9 @@ public class ProgramRunner {
                     case GAME_OVER:
                         JOptionPane.showMessageDialog(null, "Too bad, you lost!", "Game lost", JOptionPane.INFORMATION_MESSAGE);
                         break;
-                        //TODO Temporarily commmented this out so I could continue working
-                        /*
                     case GAME_SUCCESS:
                         JOptionPane.showMessageDialog(null, "Congratulations! You won!", "Game won", JOptionPane.INFORMATION_MESSAGE);
-                        break;*/
+                        break;
                 }
             }
             next = findNextBlock(current);

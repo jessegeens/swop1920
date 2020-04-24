@@ -54,30 +54,31 @@ demonstrate an implementation of the class loading:
 ```java
    public static void main(String[] args) {
        try{
-           String className = args[0].split("/")[args[0].split("/").length - 1];
-           String[] remaining = Arrays.copyOf(args[0].split("/"), 
-                                              args[0].split("/").length-1);
-           String path = "";
-           for(String str : remaining){
-               path = path + str + "/";
-           }
-           File file = new File(path);
-           
+           String className = args[0].split(File.separator)[args[0]
+                                             .split(File.separator).length - 1];
+            String[] remaining = Arrays.copyOf(args[0].split(File.separator), 
+                                        args[0].split(File.separator).length-1);
+            String path = "";
+            for(String str : remaining){
+                path = path + str + File.separator;
+            }
+            File file = new File(path);
+
             //convert the file to URL format
-           URL url = file.toURI().toURL();
-           URL[] urls = new URL[]{url};
+            URL url = file.toURI().toURL();
+            URL[] urls = new URL[]{url};
 
-           //load this folder into Class loader
-           ClassLoader cl = new URLClassLoader(urls);
+            //load this folder into Class loader
+            ClassLoader cl = new URLClassLoader(urls);
 
-           //load the Address class in 'c:\\other_classes\\'
-           Class cls = cl.loadClass(className);
-           //GameWorldType worldType = ((GameWorldType) 
+            //load the Address class in 'c:\\other_classes\\'
+            Class cls = cl.loadClass(className);
+            //GameWorldType worldType = ((GameWorldType) 
                                           Class.forName(args[0]).newInstance());
-           GameWorldType worldType = (GameWorldType) cls.newInstance();
-           java.awt.EventQueue.invokeLater(() -> {
-               new MyCanvasWindow("Blockr Group 5", worldType).show();
-           }); }
+            GameWorldType worldType = (GameWorldType) cls.newInstance();
+            java.awt.EventQueue.invokeLater(() -> {
+                new MyCanvasWindow("Blockr Group 5", worldType).show();
+            }); }
        catch (Exception ex){
            System.out.println("Error: " + ex.getMessage().toString());
        }

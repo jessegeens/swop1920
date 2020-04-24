@@ -36,13 +36,18 @@ public class ProgramRunner {
         redoStateStack = new Stack<>();
     }
 
+    /**
+     * Initialises a game
+     *
+     * @param start the first block in the program
+     */
     public void initialise(ModelBlock start){
 
         this.running = true;
         this.current = start;
         while (current instanceof ModelWhileIfBlock) this.current = findNextBlock(current);
 
-        //TODO code for highlight issue with whileif
+        //code for highlight issue with whileif
         /*
         if(current instanceof ModelWhileIfBlock){
             this.setUnHighlight(current);
@@ -70,10 +75,11 @@ public class ProgramRunner {
         */
 
 
-        //TODO double push due to imbalance in stacks otherwise
+
         current.setHighlight();
         this.undoHighlightStack.push(current);
         this.undoStateStack.push(initialState);
+        //double push due to imbalance in stacks otherwise
         //this.undoStateStack.push(initialState);
 
 
@@ -81,12 +87,22 @@ public class ProgramRunner {
 
     }
 
+    /**
+     * When undo happens, the game only needs to be activated, currentblock does not need to be reset
+     *
+     * @author Bert
+     */
     public void initialiseForUndo(){
         this.running = true;
 
 
     }
 
+    /**
+     * Clears all undo and redo stacks
+     *
+     * @author Bert
+     */
     public void clearStacks(){
         this.undoHighlightStack.clear();
         this.redoHighlightStack.clear();
@@ -96,6 +112,10 @@ public class ProgramRunner {
 
     }
 
+    /**
+     * Resets the game to its original state
+     *
+     */
     public void reset(){
 
         if (this.current != null){
@@ -214,6 +234,7 @@ public class ProgramRunner {
     }
 
     /**
+     *  Highlights a block
      *
      * @param block
      * @author Bert
@@ -225,6 +246,7 @@ public class ProgramRunner {
     }
 
     /**
+     *  Unhighlights a block
      *
      * @param block
      * @author Bert
@@ -267,6 +289,8 @@ public class ProgramRunner {
     }
 
     /**
+     * Checks wheter the undo stacks are empty
+     *
      * @author bert_dvl
      */
     public boolean undoFinished(){
@@ -274,6 +298,8 @@ public class ProgramRunner {
     }
 
     /**
+     * Checks whether the redo stacks are empty
+     *
      * @author bert_dvl
      */
     public boolean redoFinished(){
@@ -282,11 +308,13 @@ public class ProgramRunner {
 
 
     /**
+     * Undoes the programrunner by taking the previous gamestate and previously highlighted block and setting these as the current state
+     * The popped states get pushed to their respective redo stacks
+     *
      * @author Bert
      */
-
-
     public void undoProgramRunner(){
+        /*
         System.out.println("undostack PR undo");
         System.out.println(undoStateStack.size());
         System.out.println(undoHighlightStack.size());
@@ -295,6 +323,7 @@ public class ProgramRunner {
         System.out.println("redostack PR undo");
         System.out.println(redoStateStack.toString());
         System.out.println(redoHighlightStack.toString());
+        */
 
         //ifwhile wordt niet gehighlight bij undo
         //highlighten in het algemeen doet (mogelijks) louche bij sequentiële undo redo
@@ -316,7 +345,7 @@ public class ProgramRunner {
                 undoState = undoStateStack.pop();
                 this.redoStateStack.push(undoState);
 
-                System.out.println("THISCALLED");
+
                 /*
                 this.setUnHighlight(current);
                 redoHighlightStack.push(current);
@@ -355,11 +384,14 @@ public class ProgramRunner {
     }
 
     /**
+     * Redoes the programrunner by taking the next gamestate and previously highlighted block and setting these as the current state
+     * The popped states get pushed to their respective undo stacks
+     *
      * @author Bert
      */
     public void redoProgramRunner(){
 
-        //TODO where clear redo stack
+        /*
 
         System.out.println("undostack PR redo ");
         System.out.println(undoStateStack.toString());
@@ -367,6 +399,8 @@ public class ProgramRunner {
         System.out.println("redostack PR redo");
         System.out.println(redoStateStack.toString());
         System.out.println(redoHighlightStack.toString());
+
+        */
 
         this.setUnHighlight(current);
 

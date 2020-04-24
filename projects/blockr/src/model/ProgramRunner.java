@@ -40,6 +40,7 @@ public class ProgramRunner {
 
         this.running = true;
         this.current = start;
+        while (start instanceof ModelWhileIfBlock) this.current = findNextBlock(current);
 
         //TODO code for highlight issue with whileif
         /*
@@ -70,7 +71,8 @@ public class ProgramRunner {
 
 
         //TODO double push due to imbalance in stacks otherwise
-        this.undoHighlightStack.push(start);
+        current.setHighlight();
+        this.undoHighlightStack.push(current);
         this.undoStateStack.push(initialState);
         //this.undoStateStack.push(initialState);
 

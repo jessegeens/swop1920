@@ -86,7 +86,7 @@ demonstrate an implementation of the class loading:
 
 The class can then be loaded by passing one arguments:
 The path of the class file, excluding the package, followed with a `/`,
-followd with the class file, in the format of `package.ClassName`
+followed with the class file, in the format of `package.ClassName`
 
 For example:
 

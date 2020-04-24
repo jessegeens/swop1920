@@ -67,7 +67,6 @@ public class ProgramRunnerTest {
         ProgramRunner PR = new ProgramRunner(GW);
         ModelPredicateBlock predicateBlock = new ModelPredicateBlock(new ProgramLocation(100, 260), Predicates.get(0));
         ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(100, 180));
-        ModelActionBlock startBlock = new ModelActionBlock(new ProgramLocation(20, 100), Actions.get(0));
         ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), true);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), Actions.get(0));
         ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), Actions.get(0));
@@ -77,8 +76,6 @@ public class ProgramRunnerTest {
         notBlock.setLeftPlug(ifBlock);
         notBlock.setRightSocket(predicateBlock);
         predicateBlock.setLeftPlug(ifBlock);
-        startBlock.setBottomPlug(ifBlock);
-        ifBlock.setTopSocket(startBlock);
         ifBlock.setCavityPlug(forwardBlock);
         forwardBlock.setTopSocket(ifBlock);
         forwardBlock.setBottomPlug(leftBlock);
@@ -89,8 +86,7 @@ public class ProgramRunnerTest {
         ifBlock.setCavitySocket(rightBlock);
         ifBlock.setBottomPlug(finishBlock);
         finishBlock.setTopSocket(ifBlock);
-        PR.initialise(startBlock);
-        PR.execute();
+        PR.initialise(ifBlock);
         PR.execute();
         PR.execute();
         PR.execute();

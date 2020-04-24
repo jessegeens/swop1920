@@ -40,7 +40,7 @@ public class ProgramRunner {
 
         this.running = true;
         this.current = start;
-        while (start instanceof ModelWhileIfBlock) this.current = findNextBlock(current);
+        while (current instanceof ModelWhileIfBlock) this.current = findNextBlock(current);
 
         //TODO code for highlight issue with whileif
         /*

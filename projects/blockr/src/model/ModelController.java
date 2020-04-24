@@ -31,6 +31,9 @@ public class ModelController{
 
     private boolean isCreateConnect;
 
+    private ProgramLocation oldPos;
+    private boolean newBlockCreated;
+
     // Constructor
     public ModelController(GameWorldType worldType){
         //palette left, program middle, grid right
@@ -42,6 +45,8 @@ public class ModelController{
         undoStack = new Stack<>();
         redoStack = new Stack<>();
         isCreateConnect = false;
+        oldPos = null;
+        newBlockCreated = false;
     }
 
     /**
@@ -94,10 +99,11 @@ public class ModelController{
 
 
     /**
+     * Checks whether or not a game is running, if it is, undo is called on the game, otherwise undo is called on the blocks
+     *
      * @author Bert
      */
     public void globalUndo(){
-        //TODO if you have multiple games, the stacks do net get emptied so they will all run sequentially
         if(!undoStack.isEmpty()) {
 
 
@@ -132,7 +138,6 @@ public class ModelController{
             if (this.programRunner.isRunning()) {
                 programRunner.undoProgramRunner();
 
-                System.out.println("programRunner.undoProgramRunner();");
 
             } else {
                 this.undo();
@@ -145,31 +150,32 @@ public class ModelController{
     }
 
     /**
+     * Checks whether or not a game is running, if it is, redo is called on the game, otherwise undo is called on the blocks
+     *
      * @author Bert
      */
     public void globalRedo(){
-        //TODO is emptying duplicate gamestart and gameend necessary?
+        //is emptying duplicate gamestart and gameend necessary?
 
-        System.out.println("REDOSTACK before");
-        System.out.println(redoStack.toString());
+
         if(!redoStack.isEmpty()) {
 
             //bij redo start, start je het spel
             if (redoStack.peek() instanceof GameStartAction) {
 
-                //TODO do you have to use initialiseforundo here as well?
+                //do you have to use initialiseforundo here as well?
 
                 this.startOrExecuteProgram();
                 undoStack.push(redoStack.pop());
             }
 
 
-            //bij redo end, check je de redostack om te zien of de execution gestopt moet worden
+            //at redo end you check the redostack to see if execution needs to be stopped
             try{
                 if (this.redoStack.peek() instanceof GameEndAction && programRunner.redoFinished()) {
                     System.out.println("REDO DONE");
 
-                    //TODO when it was exitexcution it caused unexpedted behaviour in undo so I changed it here in case
+                    //when it was exitexcution it caused unexpedted behaviour in undo so I changed it here in case
                     this.programRunner.reset();
                     undoStack.push(redoStack.pop());
                     //this.undo();
@@ -183,7 +189,7 @@ public class ModelController{
 
             if (this.programRunner.isRunning()) {
                 programRunner.redoProgramRunner();
-                System.out.println("programRunner.undoProgramRunner();");
+
 
             } else {
                 this.redo();
@@ -191,8 +197,7 @@ public class ModelController{
             }
         }
 
-        System.out.println("REDOSTACK after");
-        System.out.println(redoStack.toString());
+
     }
 
     /**
@@ -204,11 +209,11 @@ public class ModelController{
      *
      */
     public void undo(){
-        System.out.println("UNDO");
+        //System.out.println("UNDO");
         if(!undoStack.empty()) {
             Action current = undoStack.pop();
             current.undo();
-            System.out.println(current);
+            //System.out.println(current);
 
             redoStack.push(current);
 
@@ -248,16 +253,16 @@ public class ModelController{
      */
     public void redo() {
 
-        System.out.println("REDO");
+        //System.out.println("REDO");
         if (!redoStack.empty()) {
             Action current = redoStack.pop();
-            System.out.println(current);
+            //System.out.println(current);
             current.redo();
 
-            //TODO when stack clear? =>
+
 
             undoStack.push(current);
-            //TODO when stack clear?
+
             if (!(redoStack.empty())) {
                 Action peekedAction = redoStack.peek();
                 try {
@@ -272,7 +277,7 @@ public class ModelController{
                 try {
                     if (peekedAction instanceof DeleteAction) {
                         this.redo();
-                        //check for similar issue as with undo
+
                     }
                 } catch (Exception e) {
                 }
@@ -312,9 +317,7 @@ public class ModelController{
         return (location.getX() > MyCanvasWindow.WIDTH/3 && location.getX() <  2 * MyCanvasWindow.WIDTH/3);
     }
 
-    //TODO voor wat diene deze variabelen? mss vanboven zetten bij de rest van de vars.. -Jesse
-    private ProgramLocation oldPos = null;
-    private boolean newBlockCreated = false;
+
 
     /**
      * Handle a possible block selection (if the position is inbounds of a block)

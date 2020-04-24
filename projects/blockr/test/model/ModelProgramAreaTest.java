@@ -191,5 +191,4 @@ public class ModelProgramAreaTest {
         area.dragBlock(forwardBlock, new ProgramLocation(250, 300));
         assertEquals(new ProgramLocation(250, 300), forwardBlock.getPos());
     }
-
 }

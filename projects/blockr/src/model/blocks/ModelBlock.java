@@ -96,13 +96,13 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
      * @author Oberon Swings
      */
     public boolean isInCavity(){
-        ModelBlock plug = this;
-        if (this.hasBottomPlug()){
-            while (!(plug instanceof ModelWhileIfBlock || plug == null)){
-                plug = plug.getBottomPlug();
+        if (this.hasTopSocket()){
+            ModelBlock socket = this.getTopSocket();
+            while (!(socket instanceof ModelWhileIfBlock || socket == null)){
+                socket = socket.getTopSocket();
             }
-            if (plug == null) return false;
-            else return plug instanceof ModelWhileIfBlock && ((ModelWhileIfBlock) plug).getCavityBlocks().contains(this);
+            if (socket == null) return false;
+            else return socket instanceof ModelWhileIfBlock && ((ModelWhileIfBlock) socket).getCavityBlocks().contains(this);
         }
         return false;
     }
@@ -113,13 +113,13 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
      * @author Oberon Swings
      */
     public ModelWhileIfBlock getSurroundingWhileIfBlock(){
-        ModelBlock plug = this;
-        if (this.hasBottomPlug()){
-            while (!(plug instanceof ModelWhileIfBlock || plug == null)){
-                plug = plug.getBottomPlug();
+        if (this.hasTopSocket()){
+            ModelBlock socket = this.getTopSocket();
+            while (!(socket instanceof ModelWhileIfBlock || socket == null)){
+                socket = socket.getTopSocket();
             }
-            if (plug == null) return null;
-            else if (plug instanceof ModelWhileIfBlock && ((ModelWhileIfBlock) plug).getCavityBlocks().contains(this)) return ((ModelWhileIfBlock)plug);
+            if (socket == null) return null;
+            else if (socket instanceof ModelWhileIfBlock && ((ModelWhileIfBlock) socket).getCavityBlocks().contains(this)) return ((ModelWhileIfBlock)socket);
         }
         return null;
     }

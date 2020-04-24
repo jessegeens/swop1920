@@ -43,7 +43,9 @@ public class LocationHandler {
             setTopSocketLocation(block, block.getTopSocket());
         }
         if (block.hasBottomPlug() && block.getBottomPlug() != null){
-            updateLocationBlock(block.getBottomPlug());
+            if (block.isInCavity() && !block.getSurroundingWhileIfBlock().equals(block.getBottomPlug()) || !block.isInCavity()){
+                updateLocationBlock(block.getBottomPlug());
+            }
         }
         if (block.hasLeftPlug() && block.getLeftPlug() != null){
             setLeftPlugLocation(block, block.getLeftPlug());

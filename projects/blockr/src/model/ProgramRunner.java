@@ -37,6 +37,7 @@ public class ProgramRunner {
     }
 
     public void initialise(ModelBlock start){
+
         this.running = true;
         this.current = start;
 
@@ -55,7 +56,7 @@ public class ProgramRunner {
         */
 
         //this would need to be commented out for whileif highlight stuff
-        this.current.setHighlight();
+        //this.current.setHighlight();
 
         /*
 
@@ -68,16 +69,24 @@ public class ProgramRunner {
         */
 
 
-        //TODO null or first block?
-        this.undoHighlightStack.push(null);
+        //TODO double push due to imbalance in stacks otherwise
+        this.undoHighlightStack.push(start);
         this.undoStateStack.push(initialState);
+        //this.undoStateStack.push(initialState);
 
 
 
 
     }
 
+    public void initialiseForUndo(){
+        this.running = true;
+
+
+    }
+
     public void reset(){
+
         if (this.current != null){
             this.current.setUnHighlight();
         }
@@ -114,6 +123,7 @@ public class ProgramRunner {
     public boolean execute(){
         this.redoStateStack.clear();
         this.redoHighlightStack.clear();
+
 
 
 
@@ -263,8 +273,12 @@ public class ProgramRunner {
     /**
      * @author Bert
      */
+
+
     public void undoProgramRunner(){
         System.out.println("undostack PR undo");
+        System.out.println(undoStateStack.size());
+        System.out.println(undoHighlightStack.size());
         System.out.println(undoStateStack.toString());
         System.out.println(undoHighlightStack.toString());
         System.out.println("redostack PR undo");
@@ -278,6 +292,7 @@ public class ProgramRunner {
         if(!(undoHighlightStack.isEmpty() || undoStateStack.isEmpty())){
             redoHighlightStack.push(current);
             this.current = undoHighlightStack.pop();
+
             //this.redoHighlightStack.push(current);
             this.setHighlight(current);
 
@@ -285,10 +300,18 @@ public class ProgramRunner {
 
             GameWorldState undoState = undoStateStack.pop();
             this.redoStateStack.push(undoState);
-            if(undoState == gameWorld.getSnapshot() && !undoStateStack.isEmpty()){
+            if(undoState == gameWorld.getSnapshot() && !undoStateStack.isEmpty() ){
 
                 undoState = undoStateStack.pop();
                 this.redoStateStack.push(undoState);
+
+                System.out.println("THISCALLED");
+                /*
+                this.setUnHighlight(current);
+                redoHighlightStack.push(current);
+                this.current = undoHighlightStack.pop();
+                this.setHighlight(current);
+                */
 
             }
 
@@ -323,6 +346,7 @@ public class ProgramRunner {
      * @author Bert
      */
     public void redoProgramRunner(){
+
         //TODO where clear redo stack
 
         System.out.println("undostack PR redo ");
@@ -347,7 +371,7 @@ public class ProgramRunner {
 
             GameWorldState redoState = redoStateStack.pop();
             this.undoStateStack.push(redoState);
-            if(redoState == gameWorld.getSnapshot()){
+            if(redoState == gameWorld.getSnapshot() && !redoStateStack.isEmpty()){
                 redoState = redoStateStack.pop();
                 this.undoStateStack.push(redoState);
 

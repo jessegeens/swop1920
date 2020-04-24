@@ -116,7 +116,13 @@ public class ModelController{
                 if (this.undoStack.peek() instanceof GameEndAction && !programRunner.isRunning()) {
                     //startorexecute creates a new gameend?
                     redoStack.push(undoStack.pop());
-                    this.startOrExecuteProgram();
+
+                    //using this method causes the issue that the first block gets highlighted in the programrunner.initialise method
+                    //this.startOrExecuteProgram();
+
+                    //TODO This way of doing it causes the first block to not get highlighted in regular execution
+                    this.programRunner.initialiseForUndo();
+
 
                 }
             }
@@ -150,6 +156,9 @@ public class ModelController{
 
             //bij redo start, start je het spel
             if (redoStack.peek() instanceof GameStartAction) {
+
+                //TODO do you have to use initialiseforundo here as well?
+
                 this.startOrExecuteProgram();
                 undoStack.push(redoStack.pop());
             }

@@ -84,15 +84,13 @@ demonstrate an implementation of the class loading:
     }
 ```
 
-The class can then be loaded by passing two arguments:
-
-1. The path of the class file, excluding the package
-2. The class file, in the format of `package.ClassName`
+The class can then be loaded by passing one arguments:
+The path of the class file, excluding the package, followed with a `/`,
+followd with the class file, in the format of `package.ClassName`
 
 For example:
 
-> /home/jesse/project/gameworld/out/production/gameworld
-> gameworld.GameWorldType
+> /home/jesse/project/gameworld/out/production/gameworld/gameworld.GameWorldType
 
 ## Implementation requirements
 

@@ -328,7 +328,7 @@ public class ModelController{
      * @author Bert
      */
     public void select(ProgramLocation eventLocation){
-        if(!programRunner.isRunning()){
+        //if(!programRunner.isRunning()){
             this.clearRedoStack();
             if(this.inPalette(eventLocation)){
                 active = palette.handleMouseDown(eventLocation);
@@ -345,6 +345,9 @@ public class ModelController{
                 active = PArea.selectBlock(eventLocation);
                 if(active != null){
                     oldPos = active.getPos();
+
+                    this.programRunner.clearStacks();
+                    this.programRunner.reset();
                 }
                 if(isConnected){
                     undoStack.push(new DisconnectAction(active, active.getPos(), this.PArea));
@@ -355,7 +358,7 @@ public class ModelController{
 
 
             }
-        }
+        //}
 
 
 

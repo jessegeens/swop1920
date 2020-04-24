@@ -85,6 +85,15 @@ public class ProgramRunner {
 
     }
 
+    public void clearStacks(){
+        this.undoHighlightStack.clear();
+        this.redoHighlightStack.clear();
+
+        this.undoStateStack.clear();
+        this.redoStateStack.clear();
+
+    }
+
     public void reset(){
 
         if (this.current != null){

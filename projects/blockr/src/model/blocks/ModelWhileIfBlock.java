@@ -134,6 +134,7 @@ public class ModelWhileIfBlock extends ModelBlock{
         ModelBlock blk = this.getCavityPlug();
         while(!(blk.equals(this) || blk == null)){
             cav.add(blk);
+            if (blk instanceof ModelWhileIfBlock) cav.addAll(((ModelWhileIfBlock) blk).getCavityBlocks());
             if (blk == null) return null;
             if(blk.hasBottomPlug()){
                 blk = blk.getBottomPlug();

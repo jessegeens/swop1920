@@ -13,11 +13,11 @@ class Main {
      */
     public static void main(String[] args) {
         try{
-            String className = args[0].split("/")[args[0].split("/").length - 1];
-            String[] remaining = Arrays.copyOf(args[0].split("/"), args[0].split("/").length-1);
+            String className = args[0].split(File.separator)[args[0].split(File.separator).length - 1];
+            String[] remaining = Arrays.copyOf(args[0].split(File.separator), args[0].split(File.separator).length-1);
             String path = "";
             for(String str : remaining){
-                path = path + str + "/";
+                path = path + str + File.separator;
             }
             File file = new File(path);
 

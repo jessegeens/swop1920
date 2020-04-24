@@ -22,7 +22,7 @@ public class ProgramRunnerTest {
     @Before
     public void setUp() throws Exception {
         try {
-            File file = new File("/home/oberon/Documents/Studies/SWOP/swop1920/projects/robotgameworld/out/production/robotgameworld/");
+            File file = new File("C:" + File.separator + "Users" + File.separator + "Aram" + File.separator + "Desktop" + File.separator + "Informatica - Computerwetenschappen" + File.separator + "Ba Inf" + File.separator + "4ba informatica" + File.separator + "software-ontwerp" + File.separator + "swop1920" + File.separator + "projects" + File.separator + "robotgameworld" + File.separator + "out" + File.separator + "production" + File.separator + "robotgameworld");
             //convert the file to URL format
             URL url = file.toURI().toURL();
             URL[] urls = new URL[]{url};
@@ -134,5 +134,36 @@ public class ProgramRunnerTest {
         PR.execute();
         PR.execute();
         assertFalse(PR.isRunning());
+    }
+
+    @Test
+    public void undoBlock() {
+        ProgramRunner pR = new ProgramRunner(GW);
+        ModelActionBlock forwardBlock1 = new ModelActionBlock(new ProgramLocation(100,140), Actions.get(0));
+        ModelActionBlock forwardBlock2 = new ModelActionBlock(new ProgramLocation(100,180), Actions.get(0));
+        forwardBlock1.setBottomPlug(forwardBlock2);
+        forwardBlock2.setTopSocket(forwardBlock1);
+        pR.initialise(forwardBlock1);
+        pR.execute();
+        pR.execute();
+        pR.undoProgramRunner();
+        pR.undoProgramRunner();
+        assertTrue(forwardBlock1.isHighlighted());
+    }
+
+    @Test
+    public void redoBlock() {
+        ProgramRunner pR = new ProgramRunner(GW);
+        ModelActionBlock forwardBlock1 = new ModelActionBlock(new ProgramLocation(100,140), Actions.get(0));
+        ModelActionBlock forwardBlock2 = new ModelActionBlock(new ProgramLocation(100,180), Actions.get(0));
+        forwardBlock1.setBottomPlug(forwardBlock2);
+        forwardBlock2.setTopSocket(forwardBlock1);
+        pR.initialise(forwardBlock1);
+        pR.execute();
+        pR.execute();
+        pR.undoProgramRunner();
+        pR.undoProgramRunner();
+        pR.redoProgramRunner();
+        assertTrue(forwardBlock2.isHighlighted());
     }
 }

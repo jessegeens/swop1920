@@ -72,7 +72,7 @@ public class ProgramRunner {
 
         //TODO double push due to imbalance in stacks otherwise
         current.setHighlight();
-        this.undoHighlightStack.push(current);
+        //this.undoHighlightStack.push(current);
         this.undoStateStack.push(initialState);
         //this.undoStateStack.push(initialState);
 
@@ -333,7 +333,9 @@ public class ProgramRunner {
 
         if((undoHighlightStack.isEmpty() || undoStateStack.isEmpty())){
             this.running = false;
-            this.setUnHighlight(current);
+            if (!(undoHighlightStack.isEmpty())) {
+                this.setUnHighlight(current);
+            }
             //TODO check undo after game end
 
             System.out.println("empty");

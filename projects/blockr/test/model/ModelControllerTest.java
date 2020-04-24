@@ -22,7 +22,7 @@ public class ModelControllerTest {
     @Before
     public void setUp() throws Exception {
         try {
-            File file = new File("/home/oberon/Documents/Studies/SWOP/swop1920/projects/robotgameworld/out/production/robotgameworld/" );
+            File file = new File("C:" + File.separator + "Users" + File.separator + "Aram" + File.separator + "Desktop" + File.separator + "Informatica - Computerwetenschappen" + File.separator + "Ba Inf" + File.separator + "4ba informatica" + File.separator + "software-ontwerp" + File.separator + "swop1920" + File.separator + "projects" + File.separator + "robotgameworld" + File.separator + "out" + File.separator + "production" + File.separator + "robotgameworld");
             System.out.println(file.toString());
             //convert the file to URL format
             URL url = file.toURI().toURL();
@@ -181,11 +181,11 @@ public class ModelControllerTest {
         controller.release(new ProgramLocation(420, 500));
         controller.select(new ProgramLocation(30, 30));
         controller.release(new ProgramLocation(420, 580));
-        controller.undo();
-        controller.undo();
-        controller.redo();
-        controller.redo();
-        controller.undo();
+        controller.globalUndo();
+        controller.globalUndo();
+        controller.globalRedo();
+        controller.globalRedo();
+        controller.globalUndo();
         assertEquals(2, controller.getProgramAreaBlocks().size());
     }
 
@@ -198,8 +198,8 @@ public class ModelControllerTest {
         controller.release(new ProgramLocation(420, 500));
         controller.select(new ProgramLocation(430, 430));
         controller.release(new ProgramLocation(30, 30));
-        controller.undo();
-        controller.redo();
+        controller.globalUndo();
+        controller.globalRedo();
         assertTrue(controller.getProgramAreaBlocks().get(0).getConnections().isEmpty());
     }
 

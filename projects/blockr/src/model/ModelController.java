@@ -328,6 +328,7 @@ public class ModelController{
      * @author Bert
      */
     public void select(ProgramLocation eventLocation){
+        this.programRunner.clearStacks();
         //if(!programRunner.isRunning()){
             this.clearRedoStack();
             if(this.inPalette(eventLocation)){
@@ -346,7 +347,7 @@ public class ModelController{
                 if(active != null){
                     oldPos = active.getPos();
 
-                    this.programRunner.clearStacks();
+
                     this.programRunner.reset();
                 }
                 if(isConnected){

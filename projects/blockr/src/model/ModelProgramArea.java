@@ -112,6 +112,7 @@ public class ModelProgramArea{
      * This function handles the mouse up in the ProgramArea
      * @param eveWindowLocation the location of the mouseUp event
      * @param activeB activeBlock the current active block
+     * @return true if connected
      * @author Oberon Swings
      */
     public boolean findAndConnect(ProgramLocation eveWindowLocation, ModelBlock activeB){
@@ -162,7 +163,7 @@ public class ModelProgramArea{
 
     /**
      * Tests if the maximum amount of blocks in the program area is reached
-     * @return true if blocks.size >= MAX_BLOCKS
+     * @return true if blocks.size bigger than or equal to MAX_BLOCKS
      * @author Oberon Swings
      */
     public boolean maxReached(){

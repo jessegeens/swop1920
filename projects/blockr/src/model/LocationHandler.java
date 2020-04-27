@@ -138,7 +138,7 @@ public class LocationHandler {
      * should not update but be restricted to the CanvasWindow and not
      * the game world
      *
-     * @param eveWindowLocation
+     * @param eveWindowLocation the event window
      * @author Jesse Geens
      * @return ProgramLocation in bounds
      */

@@ -26,7 +26,8 @@ public interface GameWorld {
      * If performing the action was successful,
      * the gameworldstate should be updated
      * accordingly.
-     *
+     * @param action the action to perform
+     * @return the action result
      * @author Jesse Geens
      */
 
@@ -38,7 +39,8 @@ public interface GameWorld {
      * and subsequently returns a boolean
      * indicating the evaluation of the
      * predicate.
-     *
+     * @param predicate the predicate
+     * @return true if evaluated correctly
      * @author Jesse Geens
      */
     Boolean evaluate(PredicateType predicate);
@@ -48,7 +50,7 @@ public interface GameWorld {
      * of the current gameworldstate.
      *
      * This snapshot is immutable.
-     *
+     * @return the snapshot of the game world.
      * @author Jesse Geens
      */
     GameWorldState getSnapshot();
@@ -58,7 +60,7 @@ public interface GameWorld {
      * of a gameworldstate as an argument
      * and updates the gameworld so that
      * the current state is set to the argument.
-     *
+     * @param gameWorldState the state of the world.
      * @author Jesse Geens
      */
     void restore(GameWorldState gameWorldState);
@@ -70,7 +72,9 @@ public interface GameWorld {
      * denote the pixel location of the top
      * left corner in the canvas window where
      * the drawing should begin.
-     *
+     * @param g the graphic
+     * @param x the x coordinate
+     * @param y the y coordinate
      * @author Jesse Geens
      */
     void render(Graphics g, int x, int y);

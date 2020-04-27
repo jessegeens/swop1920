@@ -32,7 +32,9 @@ public abstract class ModelElement{
     }
 
     /**
-     * Function that declares if the position is a right position. 
+     * Function that declares if the position is a right position.
+     * @param pos the position.
+     * @return true if in bounds
      */
     public abstract boolean inBoundsOfElement(ProgramLocation pos);
 }

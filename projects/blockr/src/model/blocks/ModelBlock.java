@@ -112,6 +112,7 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
      * @return the while/if block that has this block in it's cavity, null if this block is within no cavity
      * @author Oberon Swings
      */
+    //TODO getSurroundingWhileIF of function block
     public ModelWhileIfBlock getSurroundingWhileIfBlock(){
         if (this.hasTopSocket()){
             ModelBlock socket = this.getTopSocket();
@@ -231,7 +232,15 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
         return this.getBottomPlugPos().getDistance(bottom.getTopSocketPos());
     }
 
+
     public boolean isIf(){
+        /*
+        if (this instanceof ModelWhileIfBlock) {
+            if (this.isIf()) return true;
+            else return false;
+        }
+
+        */
         return false;
     }
 

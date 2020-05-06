@@ -12,6 +12,10 @@ import utilities.ProgramLocation;
  */
 class ModelPalette{
 
+    //TODO dynamically adding function call blocks
+    //dynamically removing as well (how do you do this with undo redo?)
+    //just add a function definition block to predicates
+
     private final ArrayList<ActionType> actions;
     private final ArrayList<PredicateType> predicates;
     private ArrayList<ModelBlock> blocks;
@@ -64,6 +68,7 @@ class ModelPalette{
      * @param {ProgramLocation} eventWindowLocation the location of the mouse
      * @return the block to return when the mouse is held down
      */
+    //TODO not just clone but increment id in case of function definition
     protected ModelBlock handleMouseDown(ProgramLocation eventWindowLocation){
         for(ModelBlock block : blocks){
             if(block.inBoundsOfElement(eventWindowLocation)){

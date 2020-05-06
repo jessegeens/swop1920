@@ -25,6 +25,7 @@ public class BlockState {
         this.highlighted = block.isHighlighted();
         this.connectionPoints = block.getConnectionPoints();
         this.title = block.getTitle();
+        //TODO if block insteanceof functiondefinition
         if (block instanceof ModelWhileIfBlock){
             cavitySize = ((ModelWhileIfBlock)block).getCavityBlocks().size();
         }

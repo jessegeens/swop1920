@@ -70,8 +70,9 @@ class ModelPalette{
      * 
      * @param {ProgramLocation} eventWindowLocation the location of the mouse
      * @return the block to return when the mouse is held down
+     *
+     * @author Bert
      */
-    //TODO not just clone but increment id in case of function definition
     protected ModelBlock handleMouseDown(ProgramLocation eventWindowLocation){
         for(ModelBlock block : blocks){
             if(block.inBoundsOfElement(eventWindowLocation)){
@@ -80,6 +81,7 @@ class ModelPalette{
                     ModelFunctionDefinitionBlock paletteReplacement = new ModelFunctionDefinitionBlock(block.getPos(), this.functionCounter);
                     this.blocks.remove(block);
                     this.blocks.add(paletteReplacement);
+                    //TODO generate function call block
 
 
                     return block;
@@ -92,6 +94,15 @@ class ModelPalette{
         }
         return null;
     }
+
+    /**
+     * Add a function call block to the palette
+     *
+     * @author bert_dvl
+     */
+    //TODO what about removal? and repositioning after removal
+    //Add it to the blocks list
+
 
     /**
      * Return all the blocks in the palette

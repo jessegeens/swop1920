@@ -41,13 +41,14 @@ class ModelPalette{
         }
         i = 0;
         for (PredicateType predicate : predicates){
-            ModelPredicateBlock predicateBlock = new ModelPredicateBlock(new ProgramLocation(20, 260 + 120*i), predicate);
+            ModelPredicateBlock predicateBlock = new ModelPredicateBlock(new ProgramLocation(20, 380 + 120*i), predicate);
             blocks.add(predicateBlock);
             i++;
         }
         blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 20), true));
         blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 140), false));
         blocks.add(new ModelNotBlock(new ProgramLocation(180, 20)));
+        blocks.add(new ModelFunctionDefinitionBlock(new ProgramLocation(20, 260)));
     }
 
     /**

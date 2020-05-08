@@ -6,12 +6,12 @@ import utilities.ProgramLocation;
 
 import java.util.ArrayList;
 
-public class FunctionDefinitionBlock extends ModelBlock {
+public class ModelFunctionDefinitionBlock extends ModelBlock {
 
     private ModelBlock cavitySocket;
     private ModelBlock cavityPlug;
 
-    public FunctionDefinitionBlock(ProgramLocation pos){
+    public ModelFunctionDefinitionBlock(ProgramLocation pos){
         super(pos);
         this.setTopSocket(null);
         this.setBottomPlug(null);
@@ -25,8 +25,8 @@ public class FunctionDefinitionBlock extends ModelBlock {
 
 
     @Override
-    public FunctionDefinitionBlock clone(){
-        return new FunctionDefinitionBlock(super.getPos());
+    public ModelFunctionDefinitionBlock clone(){
+        return new ModelFunctionDefinitionBlock(super.getPos());
     }
 
     /**

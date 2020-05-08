@@ -28,7 +28,7 @@ public class ModelPaletteTest {
     @Test
     public void handleMouseDownIf() {
         ModelPalette palette = new ModelPalette(new ArrayList<>(), new ArrayList<>());
-        assertTrue(palette.handleMouseDown(new ProgramLocation(60,60)) instanceof ModelWhileIfBlock);
+        assertTrue(palette.returnSelectedBlock(new ProgramLocation(60,60)) instanceof ModelWhileIfBlock);
     }
 
     @Test

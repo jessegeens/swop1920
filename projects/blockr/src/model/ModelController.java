@@ -335,7 +335,7 @@ public class ModelController{
         //if(!programRunner.isRunning()){
             this.clearRedoStack();
             if(this.inPalette(eventLocation)){
-                active = palette.handleMouseDown(eventLocation);
+                active = palette.returnSelectedBlock(eventLocation);
                 if(active != null) {
                     oldPos = active.getPos();
                     newBlockCreated = true;
@@ -384,7 +384,8 @@ public class ModelController{
         this.clearRedoStack();
         if (inPalette(eventLocation)) {
             if (this.active != null) {
-                palette.populateBlocks();
+                //TODO blocks gone when max is reached
+                //palette.populateBlocks();
                 undoStack.push(new DeleteAction(this.active,this.oldPos, this.PArea));
                 this.active = null;
             }

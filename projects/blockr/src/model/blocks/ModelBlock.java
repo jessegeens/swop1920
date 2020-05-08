@@ -259,6 +259,9 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
         if (this instanceof ModelFunctionDefinitionBlock){
             return "FUNC DEF " + ((ModelFunctionDefinitionBlock) this).getId();
         }
+        if (this instanceof ModelFunctionCallBlock){
+            return "FUNC CALL " + ((ModelFunctionCallBlock) this).getId();
+        }
         //TODO in the case of func call block "FUNC CALL" + block.getId()
         return "Block";
     }

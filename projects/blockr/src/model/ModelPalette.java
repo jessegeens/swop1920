@@ -20,6 +20,8 @@ class ModelPalette{
     private final ArrayList<PredicateType> predicates;
     private ArrayList<ModelBlock> blocks;
     private int functionCounter;
+    private int maxColumnHeight;
+
 
     // Constructor
     public ModelPalette(ArrayList<ActionType> actions, ArrayList<PredicateType> predicates){
@@ -33,6 +35,7 @@ class ModelPalette{
      * Fill the list of blocks with one of each type
      * @author Jesse Geens
      */
+    //TODO This method might cause issues with when you reach the max blocks and undo this since the function call blocks won't appear
     public void populateBlocks(){
         this.blocks = new ArrayList<ModelBlock>();
         int i = 0;
@@ -41,12 +44,14 @@ class ModelPalette{
             blocks.add(actionBlock);
             i++;
         }
-        i = 0;
+        int j = 0;
         for (PredicateType predicate : predicates){
-            ModelPredicateBlock predicateBlock = new ModelPredicateBlock(new ProgramLocation(20, 380 + 120*i), predicate);
+            ModelPredicateBlock predicateBlock = new ModelPredicateBlock(new ProgramLocation(20, 380 + 120*j), predicate);
             blocks.add(predicateBlock);
-            i++;
+            j++;
+
         }
+        this.maxColumnHeight = Math.max(140 + 120 * (i), 380 + 120 *(j));
         blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 20), true));
         blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 140), false));
         blocks.add(new ModelNotBlock(new ProgramLocation(180, 20)));
@@ -73,16 +78,15 @@ class ModelPalette{
      *
      * @author Bert
      */
-    protected ModelBlock handleMouseDown(ProgramLocation eventWindowLocation){
+    protected ModelBlock returnSelectedBlock(ProgramLocation eventWindowLocation){
         for(ModelBlock block : blocks){
             if(block.inBoundsOfElement(eventWindowLocation)){
                 if(block instanceof ModelFunctionDefinitionBlock){
+                    this.addFunctionCallBlock(this.functionCounter);
                     this.functionCounter++;
                     ModelFunctionDefinitionBlock paletteReplacement = new ModelFunctionDefinitionBlock(block.getPos(), this.functionCounter);
                     this.blocks.remove(block);
                     this.blocks.add(paletteReplacement);
-                    //TODO generate function call block
-
 
                     return block;
                 }
@@ -101,7 +105,15 @@ class ModelPalette{
      * @author bert_dvl
      */
     //TODO what about removal? and repositioning after removal
+    //TODO you could refactor the paletter to work with grid coordinates that coordinate their position afterwards
+    //would be a pain in the ass for undo redo though
     //Add it to the blocks list
+    private void addFunctionCallBlock(int id){
+        int Xpos = id%2 == 0 ? (20) : (180);
+        int Ypos = (int) (Math.floor(id/2) * 120 + this.maxColumnHeight);
+        this.blocks.add(new ModelFunctionCallBlock(new ProgramLocation(Xpos, Ypos), id));
+
+    }
 
 
     /**

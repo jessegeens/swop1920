@@ -19,11 +19,13 @@ class ModelPalette{
     private final ArrayList<ActionType> actions;
     private final ArrayList<PredicateType> predicates;
     private ArrayList<ModelBlock> blocks;
+    private int functionCounter;
 
     // Constructor
     public ModelPalette(ArrayList<ActionType> actions, ArrayList<PredicateType> predicates){
         this.actions = actions;
         this.predicates = predicates;
+        functionCounter = 0;
         populateBlocks();
     }
 
@@ -48,7 +50,7 @@ class ModelPalette{
         blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 20), true));
         blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 140), false));
         blocks.add(new ModelNotBlock(new ProgramLocation(180, 20)));
-        blocks.add(new ModelFunctionDefinitionBlock(new ProgramLocation(20, 260)));
+        blocks.add(new ModelFunctionDefinitionBlock(new ProgramLocation(20, 260),functionCounter));
     }
 
     /**
@@ -73,7 +75,19 @@ class ModelPalette{
     protected ModelBlock handleMouseDown(ProgramLocation eventWindowLocation){
         for(ModelBlock block : blocks){
             if(block.inBoundsOfElement(eventWindowLocation)){
-                return block.clone();
+                if(block instanceof ModelFunctionDefinitionBlock){
+                    this.functionCounter++;
+                    ModelFunctionDefinitionBlock paletteReplacement = new ModelFunctionDefinitionBlock(block.getPos(), this.functionCounter);
+                    this.blocks.remove(block);
+                    this.blocks.add(paletteReplacement);
+
+
+                    return block;
+                }
+                else{
+                    return block.clone();
+                }
+
             }
         }
         return null;

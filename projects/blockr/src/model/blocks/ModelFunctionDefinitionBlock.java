@@ -10,8 +10,9 @@ public class ModelFunctionDefinitionBlock extends ModelBlock {
 
     private ModelBlock cavitySocket;
     private ModelBlock cavityPlug;
+    private final int identifier;
 
-    public ModelFunctionDefinitionBlock(ProgramLocation pos){
+    public ModelFunctionDefinitionBlock(ProgramLocation pos, int id){
         super(pos);
         this.setTopSocket(null);
         this.setBottomPlug(null);
@@ -21,12 +22,18 @@ public class ModelFunctionDefinitionBlock extends ModelBlock {
         connectionPoints.add(ConnectionPoint.CAVITY_PLUG);
         connectionPoints.add(ConnectionPoint.CAVITY_SOCKET);
         super.setConnectionPoints(connectionPoints);
+
+        this.identifier = id;
+    }
+
+    public int getId(){
+        return this.identifier;
     }
 
 
     @Override
     public ModelFunctionDefinitionBlock clone(){
-        return new ModelFunctionDefinitionBlock(super.getPos());
+        return new ModelFunctionDefinitionBlock(super.getPos(), this.getId());
     }
 
     /**

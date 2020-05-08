@@ -65,14 +65,16 @@ public class ConnectionHandler {
      * @param closest first block
      * @param extra second block
      * @return true if connected
-     * @author Oberon Swings
+     * @author Oberon Swings (modified by Bert)
      */
     public boolean connect(ModelBlock closest, ModelBlock extra) {
         boolean connect = false;
-        if (closest instanceof ModelWhileIfBlock){
+        //TODO connecting with cavity plugs does not work for function def block
+        if (closest instanceof ModelWhileIfBlock  || closest instanceof ModelFunctionDefinitionBlock){
             if (extra.hasTopSocket() && ((ModelWhileIfBlock) closest).distanceCavityPlug(extra) < UIBlock.PLUGSIZE) connect = this.connectCavityPlug(((ModelWhileIfBlock)closest), extra);
             if (extra.hasBottomPlug() && ((ModelWhileIfBlock) closest).distanceCavitySocket(extra) < UIBlock.PLUGSIZE) connect = this.connectCavitySocket((ModelWhileIfBlock) closest, extra);
         }
+        //TODO are these if connect return connect methods needed?
         if (connect) return connect;
         else{
             if (closest.isInCavity() && closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) < UIBlock.PLUGSIZE) connect = connectIntoCavityTop(extra, closest);

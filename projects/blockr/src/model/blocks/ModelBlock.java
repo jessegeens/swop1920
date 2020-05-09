@@ -75,8 +75,8 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
      * @author Oberon Swings
      */
     int getHeight() {
-		if (this instanceof ModelWhileIfBlock){
-            return (((ModelWhileIfBlock)this).getCavityHeight() + UIBlock.STD_HEIGHT);
+		if (this instanceof ModelCavityBlock){
+            return (((ModelCavityBlock)this).getCavityHeight() + UIBlock.STD_HEIGHT);
         }
         else return UIBlock.STD_HEIGHT;
 
@@ -98,29 +98,28 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
     public boolean isInCavity(){
         if (this.hasTopSocket()){
             ModelBlock socket = this.getTopSocket();
-            while (!(socket instanceof ModelWhileIfBlock || socket == null)){
+            while (!(socket instanceof ModelCavityBlock || socket == null)){
                 socket = socket.getTopSocket();
             }
             if (socket == null) return false;
-            else return socket instanceof ModelWhileIfBlock && ((ModelWhileIfBlock) socket).getCavityBlocks().contains(this);
+            else return socket instanceof ModelCavityBlock && ((ModelCavityBlock) socket).getCavityBlocks().contains(this);
         }
         return false;
     }
 
     /**
      *
-     * @return the while/if block that has this block in it's cavity, null if this block is within no cavity
+     * @return the cavity block that has this block in it's cavity, null if this block is within no cavity
      * @author Oberon Swings
      */
-    //TODO getSurroundingWhileIF of function block
-    public ModelWhileIfBlock getSurroundingWhileIfBlock(){
+    public ModelCavityBlock getSurroundingCavityBlock(){
         if (this.hasTopSocket()){
             ModelBlock socket = this.getTopSocket();
-            while (!(socket instanceof ModelWhileIfBlock || socket == null)){
+            while (!(socket instanceof ModelCavityBlock || socket == null)){
                 socket = socket.getTopSocket();
             }
             if (socket == null) return null;
-            else if (socket instanceof ModelWhileIfBlock && ((ModelWhileIfBlock) socket).getCavityBlocks().contains(this)) return ((ModelWhileIfBlock)socket);
+            else if (socket instanceof ModelCavityBlock && ((ModelCavityBlock) socket).getCavityBlocks().contains(this)) return ((ModelCavityBlock)socket);
         }
         return null;
     }

@@ -45,7 +45,7 @@ public class ConnectionHandler {
      * @author Oberon Swings
      */
     public void disconnectCavity(ModelBlock a){
-        ModelWhileIfBlock b = a.getSurroundingWhileIfBlock();
+        ModelCavityBlock b = a.getSurroundingCavityBlock();
         ModelBlock plug = a.getBottomPlug();
         ModelBlock socket = a.getTopSocket();
         a.setBottomPlug(null);
@@ -69,10 +69,9 @@ public class ConnectionHandler {
      */
     public boolean connect(ModelBlock closest, ModelBlock extra) {
         boolean connect = false;
-        //TODO connecting with cavity plugs does not work for function def block
-        if (closest instanceof ModelWhileIfBlock  || closest instanceof ModelFunctionDefinitionBlock){
-            if (extra.hasTopSocket() && ((ModelWhileIfBlock) closest).distanceCavityPlug(extra) < UIBlock.PLUGSIZE) connect = this.connectCavityPlug(((ModelWhileIfBlock)closest), extra);
-            if (extra.hasBottomPlug() && ((ModelWhileIfBlock) closest).distanceCavitySocket(extra) < UIBlock.PLUGSIZE) connect = this.connectCavitySocket((ModelWhileIfBlock) closest, extra);
+        if (closest instanceof ModelCavityBlock){
+            if (extra.hasTopSocket() && ((ModelCavityBlock) closest).distanceCavityPlug(extra) < UIBlock.PLUGSIZE) connect = this.connectCavityPlug(((ModelCavityBlock)closest), extra);
+            if (extra.hasBottomPlug() && ((ModelCavityBlock) closest).distanceCavitySocket(extra) < UIBlock.PLUGSIZE) connect = this.connectCavitySocket((ModelCavityBlock) closest, extra);
         }
         if (connect) return connect; //Yes these are needed
         else{
@@ -142,7 +141,7 @@ public class ConnectionHandler {
      * @return true if and only if block is connected within the cavity, false otherwise
      * @author Oberon Swings
      */
-    public boolean connectCavitySocket(ModelWhileIfBlock a, ModelBlock b){
+    public boolean connectCavitySocket(ModelCavityBlock a, ModelBlock b){
         if (b.hasBottomPlug()){
             ModelBlock cavityPrevious = a.getCavitySocket(); //The previous block that was connected to the cavity
             a.setCavitySocket(b);
@@ -166,7 +165,7 @@ public class ConnectionHandler {
      * @return true if and only if block is connected within the cavity, false otherwise
      * @author Oberon Swings
      */
-    public boolean connectCavityPlug(ModelWhileIfBlock a, ModelBlock b){
+    public boolean connectCavityPlug(ModelCavityBlock a, ModelBlock b){
         if (b.hasTopSocket()){
             ModelBlock cavityNext = a.getCavityPlug();
             a.setCavityPlug(b);
@@ -192,7 +191,7 @@ public class ConnectionHandler {
      * @author Oberon Swings
      */
     public boolean connectIntoCavityTop(ModelBlock extra, ModelBlock closest){
-        ModelWhileIfBlock a = closest.getSurroundingWhileIfBlock();
+        ModelCavityBlock a = closest.getSurroundingCavityBlock();
         if (closest.compatibleTopBottom(extra)){
             ModelBlock next = closest.getBottomPlug();
             extra.setTopSocket(closest);
@@ -216,7 +215,7 @@ public class ConnectionHandler {
      * @author Oberon Swings
      */
     public boolean connectIntoCavityBottom(ModelBlock extra, ModelBlock closest){
-        ModelWhileIfBlock a = closest.getSurroundingWhileIfBlock();
+        ModelCavityBlock a = closest.getSurroundingCavityBlock();
         if (extra.compatibleTopBottom(closest)){
             ModelBlock next = closest.getTopSocket();
             extra.setBottomPlug(closest);
@@ -336,11 +335,11 @@ public class ConnectionHandler {
                     if (blk.compatibleTopBottom(blk1) && blk.distanceTopBottom(blk1) == 0){
                         connectTopBottom(blk,blk1);
                     }
-                    if (blk instanceof ModelWhileIfBlock && blk1.hasTopSocket() && ((ModelWhileIfBlock) blk).distanceCavityPlug(blk1) == 0){
-                        connectCavityPlug((ModelWhileIfBlock) blk,blk1);
+                    if (blk instanceof ModelCavityBlock && blk1.hasTopSocket() && ((ModelCavityBlock) blk).distanceCavityPlug(blk1) == 0){
+                        connectCavityPlug((ModelCavityBlock) blk,blk1);
                     }
-                    if (blk instanceof ModelWhileIfBlock && blk1.hasBottomPlug() && ((ModelWhileIfBlock) blk).distanceCavitySocket(blk1) == 0){
-                        connectCavitySocket((ModelWhileIfBlock) blk, blk1);
+                    if (blk instanceof ModelCavityBlock && blk1.hasBottomPlug() && ((ModelCavityBlock) blk).distanceCavitySocket(blk1) == 0){
+                        connectCavitySocket((ModelCavityBlock) blk, blk1);
                     }
                 }
             }

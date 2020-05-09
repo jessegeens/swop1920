@@ -39,8 +39,8 @@ public class ModelProgramArea{
     public void removePABlock(ModelBlock toBeRemoved){
         CH.disconnect(toBeRemoved);
         blocks.remove(toBeRemoved);
-        if(toBeRemoved instanceof ModelWhileIfBlock){
-            for (ModelBlock block : ((ModelWhileIfBlock) toBeRemoved).getCavityBlocks()){
+        if(toBeRemoved instanceof ModelCavityBlock){
+            for (ModelBlock block : ((ModelCavityBlock) toBeRemoved).getCavityBlocks()){
                 blocks.remove(block);
             }
         }
@@ -53,8 +53,8 @@ public class ModelProgramArea{
     public void addPABlock(ModelBlock toBeAdded){
         if(toBeAdded != null){
             this.blocks.add(toBeAdded);
-            if (toBeAdded instanceof ModelWhileIfBlock) {
-                this.blocks.addAll(((ModelWhileIfBlock) toBeAdded).getCavityBlocks());
+            if (toBeAdded instanceof ModelCavityBlock) {
+                this.blocks.addAll(((ModelCavityBlock) toBeAdded).getCavityBlocks());
             }
         }
     }

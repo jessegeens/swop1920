@@ -16,8 +16,8 @@ public class LocationHandler {
 
     public void setLocationBlock(ModelBlock block, ProgramLocation location){
         block.setPos(location);
-        if (block instanceof ModelWhileIfBlock){
-            updateCavityBlocksLocations((ModelWhileIfBlock) block);
+        if (block instanceof ModelCavityBlock){
+            updateCavityBlocksLocations((ModelCavityBlock) block);
         }
     }
 
@@ -53,7 +53,7 @@ public class LocationHandler {
         if (block.hasRightSocket() && block.getRightSocket() != null){
             updateLocationBlock(block.getRightSocket());
         }
-        if (block instanceof ModelWhileIfBlock) updateCavityBlocksLocations((ModelWhileIfBlock) block);
+        if (block instanceof ModelCavityBlock) updateCavityBlocksLocations((ModelCavityBlock) block);
     }
 
     /**
@@ -62,7 +62,7 @@ public class LocationHandler {
      * @param block the while/if block for which the location of the cavity blocks need to be updated
      * @author Oberon Swings
      */
-    public void updateCavityBlocksLocations(ModelWhileIfBlock block){
+    public void updateCavityBlocksLocations(ModelCavityBlock block){
         ModelBlock next = block.getCavityPlug();
         while (next != block && next != null){
             if (next.getTopSocket() == block){
@@ -81,8 +81,8 @@ public class LocationHandler {
      */
     public void setTopSocketLocation(ModelBlock toBeMoved, ModelBlock reference){
         ProgramLocation referenceLocation;
-        if (toBeMoved.isInCavity() && reference instanceof ModelWhileIfBlock){
-            referenceLocation = ((ModelWhileIfBlock) reference).getCavityPlugPos();
+        if (toBeMoved.isInCavity() && reference instanceof ModelCavityBlock){
+            referenceLocation = ((ModelCavityBlock) reference).getCavityPlugPos();
         }
         else referenceLocation = reference.getBottomPlugPos();
         toBeMoved.setPos(referenceLocation.add(-UIBlock.STD_WIDTH/2, -UIBlock.PLUGSIZE/2));
@@ -113,6 +113,16 @@ public class LocationHandler {
             return null;
         }
         for (ModelBlock current : blocks) {
+            if (current instanceof ModelCavityBlock) {
+                if (((ModelCavityBlock) current).distanceCavitySocket(block) < d) {
+                    closest = current;
+                    d = ((ModelCavityBlock) current).distanceCavitySocket(block);
+                }
+                if (((ModelCavityBlock) current).distanceCavityPlug(block) < d) {
+                    closest = current;
+                    d = ((ModelCavityBlock) current).distanceCavityPlug(block);
+                }
+            }
             if (current.compatibleTopBottom(block) && current.distanceTopBottom(block) < d) {
                 closest = current;
                 d = current.distanceTopBottom(block);

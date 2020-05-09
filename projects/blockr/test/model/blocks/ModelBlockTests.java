@@ -47,7 +47,7 @@ public class ModelBlockTests {
         leftBlock.setTopSocket(forwardBlock);
         leftBlock.setBottomPlug(whileBlock);
         whileBlock.setCavitySocket(leftBlock);
-        assertEquals(whileBlock, forwardBlock.getSurroundingWhileIfBlock());
+        assertEquals(whileBlock, forwardBlock.getSurroundingCavityBlock());
     }
 
     @Test

@@ -1,6 +1,7 @@
 package ui;
 
 import model.blocks.ModelBlock;
+import model.blocks.ModelCavityBlock;
 import model.blocks.ModelWhileIfBlock;
 import utilities.*;
 
@@ -25,9 +26,8 @@ public class BlockState {
         this.highlighted = block.isHighlighted();
         this.connectionPoints = block.getConnectionPoints();
         this.title = block.getTitle();
-        //TODO if block insteanceof functiondefinition
-        if (block instanceof ModelWhileIfBlock){
-            cavitySize = ((ModelWhileIfBlock)block).getCavityBlocks().size();
+        if (block instanceof ModelCavityBlock){
+            cavitySize = ((ModelCavityBlock)block).getCavityBlocks().size();
         }
         else cavitySize = 0;
     }

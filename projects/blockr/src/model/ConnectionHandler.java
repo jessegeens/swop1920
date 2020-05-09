@@ -279,6 +279,38 @@ public class ConnectionHandler {
 
     /**
      * @param blocks list of blocks to check
+     * @return true if all the blocks in the ProgramArea are connected
+     * @author Oberon Swings
+     */
+    public Boolean allBlocksConnected_(ArrayList<ModelBlock> blocks){
+        if (blocks.isEmpty()) return true;
+        if (this.getStartBlocks(blocks).size() > 1) return false;
+        ArrayList<ModelBlock> connectedB = getConnectedBlocks(blocks.get(0));
+        for (ModelBlock blk : blocks){
+            if (!(connectedB.contains(blk))) return false;
+            if (!(blk.equals(getFinishBlocks(blocks).get(0))||(blk.equals(getStartBlocks(blocks).get(0))))){
+                return isFullyConnected(blk);
+            }
+            else if (blk.equals(this.getStartBlocks(blocks).get(0)) && blk.equals(this.getFinishBlocks(blocks).get(0))){
+                if(blk.hasRightSocket() && blk.getRightSocket() == null) return false;
+                if(blk.hasLeftPlug() && blk.getLeftPlug() == null) return false;
+            }
+            else if(blk.equals(this.getFinishBlocks(blocks).get(0))) {
+                if(blk.hasTopSocket() && blk.getTopSocket() == null) return false;
+                if(blk.hasRightSocket() && blk.getRightSocket() == null) return false;
+                if(blk.hasLeftPlug() && blk.getLeftPlug() == null) return false;
+            }
+            else if(blk.equals(this.getStartBlocks(blocks).get(0))){
+                if(blk.hasBottomPlug() && blk.getBottomPlug() == null) return false;
+                if(blk.hasRightSocket() && blk.getRightSocket() == null) return false;
+                if(blk.hasLeftPlug() && blk.getLeftPlug() == null) return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * @param blocks list of blocks to check
      * @return the starting blocks of the program, should be only one to be a valid start state
      * @author Oberon Swings
      */

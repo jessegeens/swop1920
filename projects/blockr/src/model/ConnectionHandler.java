@@ -74,8 +74,7 @@ public class ConnectionHandler {
             if (extra.hasTopSocket() && ((ModelWhileIfBlock) closest).distanceCavityPlug(extra) < UIBlock.PLUGSIZE) connect = this.connectCavityPlug(((ModelWhileIfBlock)closest), extra);
             if (extra.hasBottomPlug() && ((ModelWhileIfBlock) closest).distanceCavitySocket(extra) < UIBlock.PLUGSIZE) connect = this.connectCavitySocket((ModelWhileIfBlock) closest, extra);
         }
-        //TODO are these if connect return connect methods needed?
-        if (connect) return connect;
+        if (connect) return connect; //Yes these are needed
         else{
             if (closest.isInCavity() && closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) < UIBlock.PLUGSIZE) connect = connectIntoCavityTop(extra, closest);
             if (closest.isInCavity() && extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) < UIBlock.PLUGSIZE) connect = connectIntoCavityBottom(extra, closest);

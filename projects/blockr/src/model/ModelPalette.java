@@ -22,7 +22,7 @@ class ModelPalette{
     private int functionCounter;
     private int maxColumnHeight;
 
-
+    //TODO also keep ids
     // Constructor
     public ModelPalette(ArrayList<ActionType> actions, ArrayList<PredicateType> predicates){
         this.actions = actions;
@@ -57,6 +57,8 @@ class ModelPalette{
         blocks.add(new ModelNotBlock(new ProgramLocation(180, 20)));
         blocks.add(new ModelFunctionDefinitionBlock(new ProgramLocation(20, 260),functionCounter));
     }
+
+
 
     /**
      * removes all the blocks from the palette, when the maximum in the program area is reached for instance

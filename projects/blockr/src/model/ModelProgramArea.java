@@ -95,7 +95,7 @@ public class ModelProgramArea{
                     return true;
                 }
                 */
-                //TODO refactor so CH actually processes this?
+                //refactor so CH actually processes this?
                 if(blocks.get(i).getConnectionsNoCavity().size() > 0){
                     //System.out.println("YES CONNECTION");
                     return true;
@@ -169,5 +169,52 @@ public class ModelProgramArea{
     public boolean maxReached(){
         return (blocks.size() >= MAX_BLOCKS);
     }
-   
+
+    /**
+     * Returns the function definition by id or null if the function definition
+     *
+     * @param id The requested id
+     * @return the requested block or null if no block with this ide has been founc
+     * @author bert_dvl
+     */
+    public ModelFunctionDefinitionBlock getFuncDefBlockById(int id){
+
+        for(ModelBlock block : blocks){
+            if(block instanceof ModelFunctionDefinitionBlock){
+                if(((ModelFunctionDefinitionBlock) block).getId() == id){
+                    return (ModelFunctionDefinitionBlock) block;
+                }
+            }
+
+        }
+        return null;
+    }
+
+    /**
+     * Deletes the ModelFunctionCallBlocks with a certain id when the ModelFunctionDefinitionBlock has been removed
+     *
+     * @param id the id of the functioncallblocks
+     * @return an arraylist with the removed ModelFunctionCallblocks
+     * @author Bert
+     */
+    public ArrayList<ModelFunctionCallBlock> deleteFunctionCallsById(int id){
+        ArrayList<ModelFunctionCallBlock> toBeReturned = new ArrayList<>();
+        for(ModelBlock block : blocks){
+            if(block instanceof ModelFunctionDefinitionBlock){
+                if(((ModelFunctionDefinitionBlock) block).getId() == id){
+                    
+                    toBeReturned.add( (ModelFunctionCallBlock) block);
+                    removePABlock(block);
+                }
+            }
+
+        }
+        return toBeReturned;
+
+
+
+    }
+
+
+
 }

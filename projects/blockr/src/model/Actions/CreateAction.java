@@ -23,7 +23,7 @@ public class CreateAction implements  Action {
     public void undo(){
         this.programArea.removePABlock(this.createdBlock);
 
-        //TODO remove similar
+        //remove similar
         ArrayList<ModelBlock> blocks = new ArrayList<>();
         blocks = this.programArea.getPABlocks();
         for (ModelBlock listBlock : blocks) {

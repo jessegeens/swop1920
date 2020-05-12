@@ -9,6 +9,8 @@ import gameworldapi.GameWorldType;
 import main.MyCanvasWindow;
 import model.Actions.*;
 import model.blocks.ModelBlock;
+import model.blocks.ModelFunctionCallBlock;
+import model.blocks.ModelFunctionDefinitionBlock;
 import ui.BlockState;
 import utilities.*;
 
@@ -384,9 +386,18 @@ public class ModelController{
         this.clearRedoStack();
         if (inPalette(eventLocation)) {
             if (this.active != null) {
-                //TODO blocks gone when max is reached
+                if(this.active instanceof ModelFunctionDefinitionBlock){
+                    ArrayList<ModelFunctionCallBlock> deletedList = PArea.deleteFunctionCallsById( ((ModelFunctionDefinitionBlock) this.active).getId());
+
+
+                    //TODO DeleteMFB action in undostack (and register the currently active block as well)
+
+                }
                 //palette.populateBlocks();
-                undoStack.push(new DeleteAction(this.active,this.oldPos, this.PArea));
+                else{
+                    undoStack.push(new DeleteAction(this.active,this.oldPos, this.PArea));
+                }
+
                 this.active = null;
             }
         } else if (this.inProgramArea(eventLocation)) {

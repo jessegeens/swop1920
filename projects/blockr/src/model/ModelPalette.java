@@ -12,7 +12,7 @@ import utilities.ProgramLocation;
  */
 class ModelPalette{
 
-    //TODO dynamically adding function call blocks
+
     //dynamically removing as well (how do you do this with undo redo?)
     //just add a function definition block to predicates
 
@@ -23,8 +23,7 @@ class ModelPalette{
     private int functionCounter;
     private int maxColumnHeight;
 
-    //TODO also keep ids
-    // Constructor
+
     public ModelPalette(ArrayList<ActionType> actions, ArrayList<PredicateType> predicates){
         this.actions = actions;
         this.predicates = predicates;
@@ -36,7 +35,7 @@ class ModelPalette{
      * Fill the list of blocks with one of each type
      * @author Jesse Geens
      */
-    //TODO This method might cause issues with when you reach the max blocks and undo this since the function call blocks won't appear
+
     public void populateBlocks(){
         this.blocks = new ArrayList<ModelBlock>();
         int i = 0;
@@ -125,24 +124,6 @@ class ModelPalette{
         }
         return null;
     }
-
-    /**
-     * Add a function call block to the palette
-     *
-     * @author bert_dvl
-     */
-    //TODO what about removal? and repositioning after removal
-    //TODO you could refactor the paletter to work with grid coordinates that coordinate their position afterwards
-    //would be a pain in the ass for undo redo though
-    //Add it to the blocks list
-    private void addFunctionCallBlock(int id){
-        int Xpos = id%2 == 0 ? (20) : (180);
-        int Ypos = (int) (Math.floor(id/2) * 120 + this.maxColumnHeight);
-        this.blocks.add(new ModelFunctionCallBlock(new ProgramLocation(Xpos, Ypos), id));
-
-    }
-
-
 
 
     /**

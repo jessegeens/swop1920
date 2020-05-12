@@ -22,6 +22,9 @@ public class ProgramRunner {
     private Stack<GameWorldState> undoStateStack;
     private Stack<GameWorldState> redoStateStack;
 
+    private Stack<ModelFunctionCallBlock> callStack;
+    ArrayList<ModelFunctionDefinitionBlock> definitions;
+
 
     //Constructor
     public ProgramRunner(GameWorld gameWorld){
@@ -41,11 +44,13 @@ public class ProgramRunner {
      *
      * @param start the first block in the program
      */
-    public void initialise(ModelBlock start){
+    public void initialise(ModelBlock start, ArrayList<ModelFunctionDefinitionBlock> definitions){
+        //TODO arraylist
 
         this.running = true;
         this.current = start;
         while (current instanceof ModelWhileIfBlock) this.current = findNextBlock(current);
+        this.definitions = definitions;
 
         //code for highlight issue with whileif
         /*
@@ -188,6 +193,11 @@ public class ProgramRunner {
                         JOptionPane.showMessageDialog(null, "Congratulations! You won!", "Game won", JOptionPane.INFORMATION_MESSAGE);
                         break;
                 }
+            }
+            if(current instanceof ModelFunctionCallBlock){
+                this.callStack.push((ModelFunctionCallBlock) current);
+
+
             }
             next = findNextBlock(current);
             while (next instanceof ModelWhileIfBlock) next = findNextBlock(next);
@@ -429,5 +439,26 @@ public class ProgramRunner {
 
         System.out.println(this.isRunning());
     }
+
+    /**
+     * Returns the function definition by id or null if the function definition
+     *
+     * @param id The requested id
+     * @return the requested block or null if no block with this ide has been founc
+     * @author bert_dvl
+     */
+    public ModelFunctionDefinitionBlock getFuncDefBlockById(int id){
+
+        for(ModelBlock block : this.definitions){
+            if(block instanceof ModelFunctionDefinitionBlock){
+                if(((ModelFunctionDefinitionBlock) block).getId() == id){
+                    return (ModelFunctionDefinitionBlock) block;
+                }
+            }
+
+        }
+        return null;
+    }
+
 
 }

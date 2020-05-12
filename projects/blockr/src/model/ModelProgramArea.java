@@ -191,6 +191,24 @@ public class ModelProgramArea{
     }
 
     /**
+     * Returns the all of the function definition blocks in the PA
+     *
+     * @return an arraylist of all function def blocks
+     * @author bert_dvl
+     */
+    public ArrayList<ModelFunctionDefinitionBlock> getAllModelFunctionDefinitionBlock(){
+        ArrayList<ModelFunctionDefinitionBlock> toBeReturned = new ArrayList<>();
+
+        for(ModelBlock block : blocks){
+            if(block instanceof ModelFunctionDefinitionBlock){
+                toBeReturned.add((ModelFunctionDefinitionBlock) block);
+            }
+
+        }
+        return toBeReturned;
+    }
+
+    /**
      * Deletes the ModelFunctionCallBlocks with a certain id when the ModelFunctionDefinitionBlock has been removed
      *
      * @param id the id of the functioncallblocks

@@ -68,7 +68,7 @@ public class ModelController{
                 }
 
             } else {
-                programRunner.initialise(PArea.getFirstBlock());
+                programRunner.initialise(PArea.getFirstBlock(), PArea.getAllModelFunctionDefinitionBlock());
 
                 ArrayList<Action> toRemove = new ArrayList<>();
                 for (Action current : undoStack){

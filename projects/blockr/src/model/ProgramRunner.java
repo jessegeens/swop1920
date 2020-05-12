@@ -62,7 +62,7 @@ public class ProgramRunner {
         this.running = true;
         this.current = start;
         this.start = start;
-        while (current instanceof ModelWhileIfBlock) this.current = findNextBlock(current);
+        //while (current instanceof ModelWhileIfBlock) this.current = findNextBlock(current);
         this.definitions = definitions;
 
          callStack = new Stack<>();
@@ -154,9 +154,14 @@ public class ProgramRunner {
         this.redoStateStack.clear();
 
         */
+        /*
 
         this.redoStateStack.clear();
         this.redoHighlightStack.clear();
+        */
+
+        this.programUndoStateStack.clear();
+        this.programRedoStateStack.clear();
 
         System.out.println("RESET");
 
@@ -218,7 +223,7 @@ public class ProgramRunner {
             }
 
             next = findNextBlock(current);
-            while (next instanceof ModelCavityBlock) next = findNextBlock(next);
+
             if (next != null){
                 this.highlightNext(next);
                 //TODO whileif highlight code
@@ -293,18 +298,20 @@ public class ProgramRunner {
      */
     private ModelBlock findNextBlock(ModelBlock current){
 
+        ModelBlock next = null;
+
         if (current instanceof ModelWhileIfBlock){
             if (((ModelWhileIfBlock) current).isNegated()) {
                 if (!(gameWorld.evaluate(((ModelWhileIfBlock) current).getPredicate()))) {
-                    return ((ModelWhileIfBlock) current).getCavityPlug();
+                    next =  ((ModelWhileIfBlock) current).getCavityPlug();
                 } else {
-                    return current.getBottomPlug();
+                    next =  current.getBottomPlug();
                 }
             } else {
                 if((gameWorld.evaluate(((ModelWhileIfBlock) current).getPredicate()))){
-                    return ((ModelWhileIfBlock) current).getCavityPlug();
+                    next = ((ModelWhileIfBlock) current).getCavityPlug();
                 } else {
-                    return current.getBottomPlug();
+                    next = current.getBottomPlug();
                 }
             }
         }
@@ -312,19 +319,24 @@ public class ProgramRunner {
             this.callStack.add((ModelFunctionCallBlock) current);
 
             ModelFunctionDefinitionBlock def = this.getFuncDefBlockById(((ModelFunctionCallBlock) current).getId());
-            return def.getCavityPlug();
+            next =  def.getCavityPlug();
 
 
         }
 
         if (current instanceof ModelFunctionDefinitionBlock){
-            return callStack.pop().getBottomPlug();
+            next =  callStack.pop().getBottomPlug();
         }
         
         if (current.getBottomPlug() != null && current.getBottomPlug().isIf() && ((ModelWhileIfBlock)current.getBottomPlug()).getCavitySocket() == current){
-            return current.getBottomPlug().getBottomPlug(); //If block should only be executed once.
-        } 
-        else return current.getBottomPlug();
+            next =  current.getBottomPlug().getBottomPlug(); //If block should only be executed once.
+        }
+
+        else next =  current.getBottomPlug();
+
+        while (next instanceof ModelCavityBlock) next = findNextBlock(next);
+
+        return next;
     }
 
     /**
@@ -367,19 +379,34 @@ public class ProgramRunner {
 
     }
 
+
     public void undoProgramRunner(){
-        if(this.programUndoStateStack.isEmpty()){
+        //TODO make sure this works
+        if(this.programUndoStateStack.size() == 1){
             this.running = false;
         }
         else{
-            ProgramState pastState = this.programUndoStateStack.pop();
+            programRedoStateStack.push(programUndoStateStack.pop());
+            ProgramState pastState = this.programUndoStateStack.peek();
+            this.setState(pastState);
+
+        }
+
+    }
+
+    public void redoProgramRunner(){
+        if(this.programRedoStateStack.isEmpty()){
+            //this.running = false;
+        }
+        else{
+            ProgramState pastState = this.programRedoStateStack.pop();
 
             if(pastState.getBlock() == current && pastState.getGameState() == gameWorld.getSnapshot()){
-                programRedoStateStack.push(pastState);
-                pastState = this.programUndoStateStack.pop();
+                programUndoStateStack.push(pastState);
+                pastState = this.programRedoStateStack.pop();
             }
             this.setState(pastState);
-            programRedoStateStack.push(pastState);
+            programUndoStateStack.push(pastState);
         }
 
     }
@@ -461,9 +488,7 @@ public class ProgramRunner {
 
     }
 
-    public void redoProgramRunner(){
 
-    }
 
     /**
      * Redoes the programrunner by taking the next gamestate and previously highlighted block and setting these as the current state

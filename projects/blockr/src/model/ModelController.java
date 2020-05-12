@@ -109,7 +109,15 @@ public class ModelController{
      * @author Bert
      */
     public void globalUndo(){
-        if(!undoStack.isEmpty()) {
+        if (this.programRunner.isRunning()) {
+
+            this.PArea.unHighlightAll();
+            programRunner.undoProgramRunner();
+
+
+
+        }
+        else if(!undoStack.isEmpty()) {
             /*
 
             try{
@@ -142,17 +150,10 @@ public class ModelController{
             */
 
 
-            if (this.programRunner.isRunning()) {
-                System.out.println("lalalalalalalalal");
-                this.PArea.unHighlightAll();
-                programRunner.undoProgramRunner();
 
-
-
-            } else {
                 this.undo();
 
-            }
+
         }
 
 
@@ -167,9 +168,16 @@ public class ModelController{
     public void globalRedo(){
         //is emptying duplicate gamestart and gameend necessary?
 
+        if (this.programRunner.isRunning()) {
+            this.PArea.unHighlightAll();
+            programRunner.redoProgramRunner();
 
-        if(!redoStack.isEmpty()) {
 
+        }
+
+        else if(!redoStack.isEmpty()) {
+
+            /*
             //bij redo start, start je het spel
             if (redoStack.peek() instanceof GameStartAction) {
 
@@ -194,17 +202,14 @@ public class ModelController{
                 }
             }
             catch(Exception e){}
+            */
 
 
 
-            if (this.programRunner.isRunning()) {
-                programRunner.redoProgramRunner();
 
-
-            } else {
                 this.redo();
 
-            }
+
         }
 
 
@@ -219,6 +224,10 @@ public class ModelController{
      *
      */
     public void undo(){
+
+        //TODO acties verlopen niet dubbel meer (waarschijnlijk toch wel ik heb gewoon brak geplaatst)
+        //TODO blokken hebben spatie bij disconnect
+        //=> gewoon plugs en sockets setten van het deleted block bij de connections
         //System.out.println("UNDO");
         if(!undoStack.empty()) {
             Action current = undoStack.pop();

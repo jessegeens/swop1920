@@ -37,6 +37,8 @@ public class ProgramRunner {
 
         undoStateStack = new Stack<>();
         redoStateStack = new Stack<>();
+
+
     }
 
     /**
@@ -51,6 +53,9 @@ public class ProgramRunner {
         this.current = start;
         while (current instanceof ModelWhileIfBlock) this.current = findNextBlock(current);
         this.definitions = definitions;
+
+         callStack = new Stack<>();
+
 
         //code for highlight issue with whileif
         /*
@@ -200,7 +205,7 @@ public class ProgramRunner {
 
             }
             next = findNextBlock(current);
-            while (next instanceof ModelWhileIfBlock) next = findNextBlock(next);
+            while (next instanceof ModelCavityBlock) next = findNextBlock(next);
             if (next != null){
                 this.highlightNext(next);
                 //TODO whileif highlight code
@@ -289,6 +294,18 @@ public class ProgramRunner {
                     return current.getBottomPlug();
                 }
             }
+        }
+        if (current instanceof ModelFunctionCallBlock){
+            this.callStack.add((ModelFunctionCallBlock) current);
+
+            ModelFunctionDefinitionBlock def = this.getFuncDefBlockById(((ModelFunctionCallBlock) current).getId());
+            return def.getCavityPlug();
+
+
+        }
+
+        if (current instanceof ModelFunctionDefinitionBlock){
+            return callStack.pop().getBottomPlug();
         }
         
         if (current.getBottomPlug() != null && current.getBottomPlug().isIf() && ((ModelWhileIfBlock)current.getBottomPlug()).getCavitySocket() == current){

@@ -253,7 +253,7 @@ public class ConnectionHandler {
         if (this.getStartBlocks(blocks).size() > 1) return false;
         ArrayList<ModelBlock> connectedB = getConnectedBlocks(blocks.get(0));
         for (ModelBlock blk : blocks){
-            if (!(connectedB.contains(blk))) return false;
+            //if (!(connectedB.contains(blk))) return false;
             if (!(blk.equals(getFinishBlocks(blocks).get(0))||(blk.equals(getStartBlocks(blocks).get(0))))){
                 return isFullyConnected(blk);
             }

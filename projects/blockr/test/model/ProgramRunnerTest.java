@@ -45,7 +45,7 @@ public class ProgramRunnerTest {
     public void reset() {
         ProgramRunner PR = new ProgramRunner(GW);
         ModelBlock block = new ModelNotBlock(new ProgramLocation(100, 100));
-        PR.initialise(block);
+        //PR.initialise(block);
         PR.reset();
         assertFalse(block.isHighlighted());
     }
@@ -57,7 +57,7 @@ public class ProgramRunnerTest {
         ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100 ,180), Actions.get(0));
         rightBlock.setBottomPlug(leftBlock);
         leftBlock.setTopSocket(rightBlock);
-        PR.initialise(rightBlock);
+        //PR.initialise(rightBlock);
         PR.execute();
         assertTrue(leftBlock.isHighlighted());
     }
@@ -86,7 +86,8 @@ public class ProgramRunnerTest {
         ifBlock.setCavitySocket(rightBlock);
         ifBlock.setBottomPlug(finishBlock);
         finishBlock.setTopSocket(ifBlock);
-        PR.initialise(ifBlock);
+        ArrayList<ModelFunctionDefinitionBlock> empty = new ArrayList<>();
+        PR.initialise(ifBlock, empty);
         PR.execute();
         PR.execute();
         PR.execute();
@@ -103,7 +104,8 @@ public class ProgramRunnerTest {
         leftBlock.setTopSocket(forwardBlock);
         leftBlock.setBottomPlug(rightBlock);
         rightBlock.setTopSocket(leftBlock);
-        PR.initialise(forwardBlock);
+        ArrayList<ModelFunctionDefinitionBlock> empty = new ArrayList<>();
+        PR.initialise(forwardBlock, empty);
         PR.execute();
         PR.execute();
         PR.execute();
@@ -129,7 +131,8 @@ public class ProgramRunnerTest {
         notBlock.setLeftPlug(whileBlock);
         notBlock.setRightSocket(wifBlock);
         wifBlock.setLeftPlug(notBlock);
-        PR.initialise(rightBlock);
+        ArrayList<ModelFunctionDefinitionBlock> empty = new ArrayList<>();
+        PR.initialise(rightBlock, empty);
         PR.execute();
         PR.execute();
         PR.execute();
@@ -143,7 +146,8 @@ public class ProgramRunnerTest {
         ModelActionBlock forwardBlock2 = new ModelActionBlock(new ProgramLocation(100,180), Actions.get(0));
         forwardBlock1.setBottomPlug(forwardBlock2);
         forwardBlock2.setTopSocket(forwardBlock1);
-        pR.initialise(forwardBlock1);
+        ArrayList<ModelFunctionDefinitionBlock> empty = new ArrayList<>();
+        pR.initialise(forwardBlock1, empty);
         pR.execute();
         pR.execute();
         pR.undoProgramRunner();
@@ -158,7 +162,8 @@ public class ProgramRunnerTest {
         ModelActionBlock forwardBlock2 = new ModelActionBlock(new ProgramLocation(100,180), Actions.get(0));
         forwardBlock1.setBottomPlug(forwardBlock2);
         forwardBlock2.setTopSocket(forwardBlock1);
-        pR.initialise(forwardBlock1);
+        ArrayList<ModelFunctionDefinitionBlock> empty = new ArrayList<>();
+        pR.initialise(forwardBlock1, empty);
         pR.execute();
         pR.execute();
         pR.undoProgramRunner();

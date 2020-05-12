@@ -149,6 +149,7 @@ public class ModelProgramArea{
      * @author Oberon Swings
      */
     public boolean validExecutionState(){
+
         return CH.allBlocksConnected(blocks);
     }
 

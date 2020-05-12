@@ -1,7 +1,7 @@
 package model;
 
 import javax.swing.JOptionPane;
-import utilities.*;
+
 import model.blocks.*;
 import gameworldapi.*;
 
@@ -12,8 +12,10 @@ public class ProgramRunner {
 
     private boolean running;
     private ModelBlock current;
+    private ModelBlock start;
     private GameWorld gameWorld;
     private GameWorldState initialState;
+
 
     private Stack<ModelBlock> undoHighlightStack;
     private Stack<ModelBlock> redoHighlightStack;
@@ -25,18 +27,26 @@ public class ProgramRunner {
     private Stack<ModelFunctionCallBlock> callStack;
     ArrayList<ModelFunctionDefinitionBlock> definitions;
 
+    private Stack<ProgramState> programUndoStateStack;
+    private Stack<ProgramState> programRedoStateStack;
+
 
     //Constructor
     public ProgramRunner(GameWorld gameWorld){
         this.gameWorld = gameWorld;
         this.initialState = gameWorld.getSnapshot();
         this.running = false;
+        /*
 
         undoHighlightStack = new Stack<>();
         redoHighlightStack = new Stack<>();
 
         undoStateStack = new Stack<>();
         redoStateStack = new Stack<>();
+        */
+
+        programUndoStateStack = new Stack<>();
+        programRedoStateStack = new Stack<>();
 
 
     }
@@ -51,10 +61,13 @@ public class ProgramRunner {
 
         this.running = true;
         this.current = start;
+        this.start = start;
         while (current instanceof ModelWhileIfBlock) this.current = findNextBlock(current);
         this.definitions = definitions;
 
          callStack = new Stack<>();
+
+         programUndoStateStack.push(new ProgramState(null, gameWorld.getSnapshot()));
 
 
         //code for highlight issue with whileif
@@ -87,12 +100,13 @@ public class ProgramRunner {
 
 
         current.setHighlight();
+
+        /*
         this.undoHighlightStack.push(current);
         this.undoStateStack.push(initialState);
+        */
         //double push due to imbalance in stacks otherwise
         //this.undoStateStack.push(initialState);
-
-
 
 
     }
@@ -114,11 +128,8 @@ public class ProgramRunner {
      * @author Bert
      */
     public void clearStacks(){
-        this.undoHighlightStack.clear();
-        this.redoHighlightStack.clear();
-
-        this.undoStateStack.clear();
-        this.redoStateStack.clear();
+        this.programUndoStateStack.clear();
+        this.programRedoStateStack.clear();
 
     }
 
@@ -163,8 +174,7 @@ public class ProgramRunner {
      * @author Jesse Geens
      */
     public boolean execute(){
-        this.redoStateStack.clear();
-        this.redoHighlightStack.clear();
+        //this.clearStacks();
 
 
 
@@ -181,10 +191,12 @@ public class ProgramRunner {
         else{
             if(current instanceof ModelActionBlock && gameWorld != null){
                 ActionResult result = gameWorld.perform(((ModelActionBlock) current).getAction());
-
+                programUndoStateStack.push(new ProgramState(current, gameWorld.getSnapshot()));
+                /*
                 this.undoHighlightStack.push(current);
                 this.undoStateStack.push(gameWorld.getSnapshot());
                 System.out.println(result.toString());
+                */
                 switch (result){
 
                     case FAILURE:
@@ -204,6 +216,7 @@ public class ProgramRunner {
 
 
             }
+
             next = findNextBlock(current);
             while (next instanceof ModelCavityBlock) next = findNextBlock(next);
             if (next != null){
@@ -333,13 +346,52 @@ public class ProgramRunner {
     }
 
 
+
+    public void setState(ProgramState toBeSet){
+        //this.setHighlight(findNextBlock(current));
+
+        if(toBeSet.getBlock() == null){
+            this.setHighlight(start);
+            this.gameWorld.restore(toBeSet.getGameState());
+        }
+        else{
+            this.current = toBeSet.getBlock();
+            this.gameWorld.restore(toBeSet.getGameState());
+            this.setHighlight(findNextBlock(current));
+        }
+
+
+
+        //highlight
+
+
+    }
+
+    public void undoProgramRunner(){
+        if(this.programUndoStateStack.isEmpty()){
+            this.running = false;
+        }
+        else{
+            ProgramState pastState = this.programUndoStateStack.pop();
+
+            if(pastState.getBlock() == current && pastState.getGameState() == gameWorld.getSnapshot()){
+                programRedoStateStack.push(pastState);
+                pastState = this.programUndoStateStack.pop();
+            }
+            this.setState(pastState);
+            programRedoStateStack.push(pastState);
+        }
+
+    }
+
+
     /**
      * Undoes the programrunner by taking the previous gamestate and previously highlighted block and setting these as the current state
      * The popped states get pushed to their respective redo stacks
      *
      * @author Bert
      */
-    public void undoProgramRunner(){
+    public void undoProgramRunner_(){
         /*
         System.out.println("undostack PR undo");
         System.out.println(undoStateStack.size());
@@ -409,13 +461,17 @@ public class ProgramRunner {
 
     }
 
+    public void redoProgramRunner(){
+
+    }
+
     /**
      * Redoes the programrunner by taking the next gamestate and previously highlighted block and setting these as the current state
      * The popped states get pushed to their respective undo stacks
      *
      * @author Bert
      */
-    public void redoProgramRunner(){
+    public void redoProgramRunner_(){
 
         /*
 

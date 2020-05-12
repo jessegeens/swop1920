@@ -252,6 +252,17 @@ public class ModelProgramArea{
         return toBeReturned;
     }
 
+    /**
+     * Unhighlights all blocks
+     *
+     * @author Bert
+     */
+    public void unHighlightAll(){
+        for (ModelBlock block : this.blocks){
+            block.setUnHighlight();
+        }
+    }
+
 
 
 }

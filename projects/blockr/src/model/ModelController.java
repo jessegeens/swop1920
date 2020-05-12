@@ -58,6 +58,7 @@ public class ModelController{
      *
      */
     public void startOrExecuteProgram(){
+        this.PArea.unHighlightAll();
 
 
         if (PArea.validExecutionState()){//Check if all blocks are connected, and if so execute.
@@ -81,12 +82,14 @@ public class ModelController{
                 }
 
 
-                undoStack.push(new GameStartAction());
+                //undoStack.push(new GameStartAction());
             }
 
 
         }
     }
+
+
 
     /**
      * Stop program execution and reset the game (if the program was running)
@@ -96,7 +99,7 @@ public class ModelController{
      */
     public void exitExecution(){
         programRunner.reset();
-        undoStack.push(new GameEndAction());
+        //undoStack.push(new GameEndAction());
     }
 
 
@@ -107,7 +110,7 @@ public class ModelController{
      */
     public void globalUndo(){
         if(!undoStack.isEmpty()) {
-
+            /*
 
             try{
                 if (this.undoStack.peek() instanceof GameStartAction && programRunner.undoFinished()) {
@@ -136,9 +139,14 @@ public class ModelController{
             }
             catch (Exception e){}
 
+            */
+
 
             if (this.programRunner.isRunning()) {
+                System.out.println("lalalalalalalalal");
+                this.PArea.unHighlightAll();
                 programRunner.undoProgramRunner();
+
 
 
             } else {

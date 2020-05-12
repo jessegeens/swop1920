@@ -200,19 +200,19 @@ public class ModelProgramArea{
     public ArrayList<ModelFunctionCallBlock> deleteFunctionCallsById(int id){
         ArrayList<ModelFunctionCallBlock> toBeReturned = new ArrayList<>();
         for(ModelBlock block : blocks){
-            if(block instanceof ModelFunctionDefinitionBlock){
-                if(((ModelFunctionDefinitionBlock) block).getId() == id){
-                    
+
+            if(block instanceof ModelFunctionCallBlock){
+                if(((ModelFunctionCallBlock) block).getId() == id){
                     toBeReturned.add( (ModelFunctionCallBlock) block);
-                    removePABlock(block);
                 }
             }
-
         }
+        for(ModelBlock block: toBeReturned){
+            removePABlock(block);
+        }
+
         return toBeReturned;
-
-
-
+        
     }
 
 

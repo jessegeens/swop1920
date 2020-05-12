@@ -16,16 +16,8 @@ public class ProgramRunner {
     private GameWorld gameWorld;
     private GameWorldState initialState;
 
-
-    private Stack<ModelBlock> undoHighlightStack;
-    private Stack<ModelBlock> redoHighlightStack;
-
-
-    private Stack<GameWorldState> undoStateStack;
-    private Stack<GameWorldState> redoStateStack;
-
     private Stack<ModelFunctionCallBlock> callStack;
-    ArrayList<ModelFunctionDefinitionBlock> definitions;
+    private ArrayList<ModelFunctionDefinitionBlock> definitions;
 
     private Stack<ProgramState> programUndoStateStack;
     private Stack<ProgramState> programRedoStateStack;
@@ -36,19 +28,9 @@ public class ProgramRunner {
         this.gameWorld = gameWorld;
         this.initialState = gameWorld.getSnapshot();
         this.running = false;
-        /*
-
-        undoHighlightStack = new Stack<>();
-        redoHighlightStack = new Stack<>();
-
-        undoStateStack = new Stack<>();
-        redoStateStack = new Stack<>();
-        */
 
         programUndoStateStack = new Stack<>();
         programRedoStateStack = new Stack<>();
-
-
     }
 
     /**
@@ -62,53 +44,14 @@ public class ProgramRunner {
         this.running = true;
         this.current = start;
         this.start = start;
-        //while (current instanceof ModelWhileIfBlock) this.current = findNextBlock(current);
+
         this.definitions = definitions;
 
-         callStack = new Stack<>();
+        callStack = new Stack<>();
 
-         programUndoStateStack.push(new ProgramState(null, gameWorld.getSnapshot()));
+        programUndoStateStack.push(new ProgramState(null, gameWorld.getSnapshot()));
 
-
-        //code for highlight issue with whileif
-        /*
-        if(current instanceof ModelWhileIfBlock){
-            this.setUnHighlight(current);
-            if(findNextBlock(current) != null){
-                this.highlightNext(findNextBlock(current));
-            }
-
-        }
-        else{
-            this.current.setHighlight();
-        }
-        */
-
-        //this would need to be commented out for whileif highlight stuff
-        //this.current.setHighlight();
-
-        /*
-
-        //because of this you can't have sequential games in undo redo
-        this.undoHighlightStack.clear();
-        this.redoHighlightStack.clear();
-
-        this.undoStateStack.clear();
-        this.redoStateStack.clear();
-        */
-
-
-
-        current.setHighlight();
-
-        /*
-        this.undoHighlightStack.push(current);
-        this.undoStateStack.push(initialState);
-        */
-        //double push due to imbalance in stacks otherwise
-        //this.undoStateStack.push(initialState);
-
-
+        setHighlight(current);
     }
 
     /**
@@ -118,8 +61,6 @@ public class ProgramRunner {
      */
     public void initialiseForUndo(){
         this.running = true;
-
-
     }
 
     /**
@@ -146,26 +87,10 @@ public class ProgramRunner {
         this.current = null;
         this.gameWorld.restore(initialState);
 
-        /*
-        this.undoHighlightStack.clear();
-        this.redoHighlightStack.clear();
-
-        this.undoStateStack.clear();
-        this.redoStateStack.clear();
-
-        */
-        /*
-
-        this.redoStateStack.clear();
-        this.redoHighlightStack.clear();
-        */
-
         this.programUndoStateStack.clear();
         this.programRedoStateStack.clear();
 
         System.out.println("RESET");
-
-
     }
 
     /**
@@ -180,10 +105,6 @@ public class ProgramRunner {
      */
     public boolean execute(){
         //this.clearStacks();
-
-
-
-
         if(!(isRunning())){
             throw new IllegalStateException("tried executing the program without initialising it");
         }
@@ -226,24 +147,10 @@ public class ProgramRunner {
 
             if (next != null){
                 this.highlightNext(next);
-                //TODO whileif highlight code
-
-                /*
-                if(next instanceof ModelWhileIfBlock){
-                    this.setUnHighlight(next);
-                    if(findNextBlock(next) != null){
-                        this.highlightNext(findNextBlock(next));
-                    }
-
-                }
-*/
-
             }
             else{
                 this.current.setUnHighlight();
             }
-
-
             this.current = next;
         }
         return false;
@@ -272,6 +179,7 @@ public class ProgramRunner {
      * @author Bert
      */
     private void setHighlight(ModelBlock block){
+        while (block instanceof ModelCavityBlock) block = findNextBlock(block); //still important
         if(block != null){
             block.setHighlight();
         }
@@ -297,8 +205,7 @@ public class ProgramRunner {
      * @author Oberon Swings (debugged by Bert)
      */
     private ModelBlock findNextBlock(ModelBlock current){
-
-        ModelBlock next = null;
+        ModelBlock next;
 
         if (current instanceof ModelWhileIfBlock){
             if (((ModelWhileIfBlock) current).isNegated()) {
@@ -315,7 +222,7 @@ public class ProgramRunner {
                 }
             }
         }
-        if (current instanceof ModelFunctionCallBlock){
+        else if (current instanceof ModelFunctionCallBlock){
             this.callStack.add((ModelFunctionCallBlock) current);
 
             ModelFunctionDefinitionBlock def = this.getFuncDefBlockById(((ModelFunctionCallBlock) current).getId());
@@ -323,15 +230,12 @@ public class ProgramRunner {
 
 
         }
-
-        if (current instanceof ModelFunctionDefinitionBlock){
+        else if (current instanceof ModelFunctionDefinitionBlock){
             next =  callStack.pop().getBottomPlug();
         }
-        
-        if (current.getBottomPlug() != null && current.getBottomPlug().isIf() && ((ModelWhileIfBlock)current.getBottomPlug()).getCavitySocket() == current){
+        else if (current.getBottomPlug() != null && current.getBottomPlug().isIf() && ((ModelWhileIfBlock)current.getBottomPlug()).getCavitySocket() == current){
             next =  current.getBottomPlug().getBottomPlug(); //If block should only be executed once.
         }
-
         else next =  current.getBottomPlug();
 
         while (next instanceof ModelCavityBlock) next = findNextBlock(next);
@@ -339,29 +243,7 @@ public class ProgramRunner {
         return next;
     }
 
-    /**
-     * Checks wheter the undo stacks are empty
-     * @return true if finished
-     * @author bert_dvl
-     */
-    public boolean undoFinished(){
-        return (this.undoHighlightStack.isEmpty() || this.undoStateStack.isEmpty());
-    }
-
-    /**
-     * Checks whether the redo stacks are empty
-     * @return true if finished
-     * @author bert_dvl
-     */
-    public boolean redoFinished(){
-        return (this.redoHighlightStack.isEmpty() || this.redoStateStack.isEmpty());
-    }
-
-
-
     public void setState(ProgramState toBeSet){
-        //this.setHighlight(findNextBlock(current));
-
         if(toBeSet.getBlock() == null){
             this.setHighlight(start);
             this.gameWorld.restore(toBeSet.getGameState());
@@ -371,12 +253,6 @@ public class ProgramRunner {
             this.gameWorld.restore(toBeSet.getGameState());
             this.setHighlight(findNextBlock(current));
         }
-
-
-
-        //highlight
-
-
     }
 
 
@@ -389,9 +265,7 @@ public class ProgramRunner {
             programRedoStateStack.push(programUndoStateStack.pop());
             ProgramState pastState = this.programUndoStateStack.peek();
             this.setState(pastState);
-
         }
-
     }
 
     public void redoProgramRunner(){
@@ -408,134 +282,6 @@ public class ProgramRunner {
             this.setState(pastState);
             programUndoStateStack.push(pastState);
         }
-
-    }
-
-
-    /**
-     * Undoes the programrunner by taking the previous gamestate and previously highlighted block and setting these as the current state
-     * The popped states get pushed to their respective redo stacks
-     *
-     * @author Bert
-     */
-    public void undoProgramRunner_(){
-        /*
-        System.out.println("undostack PR undo");
-        System.out.println(undoStateStack.size());
-        System.out.println(undoHighlightStack.size());
-        System.out.println(undoStateStack.toString());
-        System.out.println(undoHighlightStack.toString());
-        System.out.println("redostack PR undo");
-        System.out.println(redoStateStack.toString());
-        System.out.println(redoHighlightStack.toString());
-        */
-
-        //ifwhile wordt niet gehighlight bij undo
-        //highlighten in het algemeen doet (mogelijks) louche bij sequentiële undo redo
-        this.setUnHighlight(current);
-
-        if(!(undoHighlightStack.isEmpty() || undoStateStack.isEmpty())){
-            redoHighlightStack.push(current);
-            this.current = undoHighlightStack.pop();
-
-            //this.redoHighlightStack.push(current);
-            this.setHighlight(current);
-
-
-
-            GameWorldState undoState = undoStateStack.pop();
-            this.redoStateStack.push(undoState);
-            if(undoState == gameWorld.getSnapshot() && !undoStateStack.isEmpty() ){
-
-                undoState = undoStateStack.pop();
-                this.redoStateStack.push(undoState);
-
-
-                /*
-                this.setUnHighlight(current);
-                redoHighlightStack.push(current);
-                this.current = undoHighlightStack.pop();
-                this.setHighlight(current);
-                */
-
-            }
-
-            this.gameWorld.restore(undoState);
-
-
-        }
-
-        if((undoHighlightStack.isEmpty() || undoStateStack.isEmpty())){
-            this.running = false;
-            this.setUnHighlight(current);
-
-            //TODO check undo after game end
-
-            System.out.println("empty");
-
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-    }
-
-
-
-    /**
-     * Redoes the programrunner by taking the next gamestate and previously highlighted block and setting these as the current state
-     * The popped states get pushed to their respective undo stacks
-     *
-     * @author Bert
-     */
-    public void redoProgramRunner_(){
-
-        /*
-
-        System.out.println("undostack PR redo ");
-        System.out.println(undoStateStack.toString());
-        System.out.println(undoHighlightStack.toString());
-        System.out.println("redostack PR redo");
-        System.out.println(redoStateStack.toString());
-        System.out.println(redoHighlightStack.toString());
-
-        */
-
-        this.setUnHighlight(current);
-
-        if(!(redoHighlightStack.isEmpty() || redoStateStack.isEmpty())){
-            this.undoHighlightStack.push(current);
-
-            current = redoHighlightStack.pop();
-
-
-
-            this.setHighlight(current);
-
-
-
-            GameWorldState redoState = redoStateStack.pop();
-            this.undoStateStack.push(redoState);
-            if(redoState == gameWorld.getSnapshot() && !redoStateStack.isEmpty()){
-                redoState = redoStateStack.pop();
-                this.undoStateStack.push(redoState);
-
-            }
-
-            this.gameWorld.restore(redoState);
-
-
-        }
-
-        System.out.println(this.isRunning());
     }
 
     /**
@@ -553,7 +299,6 @@ public class ProgramRunner {
                     return (ModelFunctionDefinitionBlock) block;
                 }
             }
-
         }
         return null;
     }

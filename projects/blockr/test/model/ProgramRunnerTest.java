@@ -22,7 +22,7 @@ public class ProgramRunnerTest {
     @Before
     public void setUp() throws Exception {
         try {
-            File file = new File("C:" + File.separator + "Users" + File.separator + "Aram" + File.separator + "Desktop" + File.separator + "Informatica - Computerwetenschappen" + File.separator + "Ba Inf" + File.separator + "4ba informatica" + File.separator + "software-ontwerp" + File.separator + "swop1920" + File.separator + "projects" + File.separator + "robotgameworld" + File.separator + "out" + File.separator + "production" + File.separator + "robotgameworld");
+            File file = new File("/home/oberon/Documents/Studies/SWOP/swop1920/projects/robotgameworld/out/production/robotgameworld/");
             //convert the file to URL format
             URL url = file.toURI().toURL();
             URL[] urls = new URL[]{url};
@@ -170,5 +170,31 @@ public class ProgramRunnerTest {
         pR.undoProgramRunner();
         pR.redoProgramRunner();
         assertTrue(forwardBlock2.isHighlighted());
+    }
+
+    @Test
+    public void redoWhileBlock() {
+        ProgramRunner PR = new ProgramRunner(GW);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(100, 20), Actions.get(2));
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), Actions.get(0));
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(100, 260), Predicates.get(0));
+        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(100, 180));
+        rightBlock.setBottomPlug(whileBlock);
+        whileBlock.setTopSocket(rightBlock);
+        whileBlock.setCavityPlug(forwardBlock);
+        forwardBlock.setTopSocket(whileBlock);
+        forwardBlock.setBottomPlug(whileBlock);
+        whileBlock.setCavitySocket(whileBlock);
+        whileBlock.setRightSocket(notBlock);
+        notBlock.setLeftPlug(whileBlock);
+        notBlock.setRightSocket(wifBlock);
+        wifBlock.setLeftPlug(notBlock);
+        ArrayList<ModelFunctionDefinitionBlock> empty = new ArrayList<>();
+        PR.initialise(rightBlock, empty);
+        PR.execute();
+        PR.execute();
+        PR.undoProgramRunner();
+        assertTrue(forwardBlock.isHighlighted());
     }
 }

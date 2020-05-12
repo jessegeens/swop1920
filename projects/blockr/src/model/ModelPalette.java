@@ -19,6 +19,7 @@ class ModelPalette{
     private final ArrayList<ActionType> actions;
     private final ArrayList<PredicateType> predicates;
     private ArrayList<ModelBlock> blocks;
+
     private int functionCounter;
     private int maxColumnHeight;
 
@@ -58,6 +59,24 @@ class ModelPalette{
         blocks.add(new ModelFunctionDefinitionBlock(new ProgramLocation(20, 260),functionCounter));
     }
 
+    /**
+     * Fill the list of blocks with one of each type and the required function call blocks as well
+     *
+     * @param idList List of functioncallblock ids
+     * @author Bert
+     */
+    public void populateBlocks(ArrayList<Integer> idList){
+
+        this.populateBlocks();
+
+        for(int i = 0; i<idList.size(); i++){
+            int Xpos = i%2 == 0 ? (20) : (180);
+            int Ypos = (int) (Math.floor(i/2) * 120 + this.maxColumnHeight);
+            this.blocks.add(new ModelFunctionCallBlock(new ProgramLocation(Xpos, Ypos), idList.get(i)));
+
+        }
+    }
+
 
 
     /**
@@ -84,11 +103,17 @@ class ModelPalette{
         for(ModelBlock block : blocks){
             if(block.inBoundsOfElement(eventWindowLocation)){
                 if(block instanceof ModelFunctionDefinitionBlock){
-                    this.addFunctionCallBlock(this.functionCounter);
                     this.functionCounter++;
-                    ModelFunctionDefinitionBlock paletteReplacement = new ModelFunctionDefinitionBlock(block.getPos(), this.functionCounter);
+                    //ModelFunctionDefinitionBlock paletteReplacement = new ModelFunctionDefinitionBlock(block.getPos(), this.functionCounter);
+
+
+                    /*
+                    this.addFunctionCallBlock(this.functionCounter);
+
+
                     this.blocks.remove(block);
                     this.blocks.add(paletteReplacement);
+                    */
 
                     return block;
                 }
@@ -116,6 +141,8 @@ class ModelPalette{
         this.blocks.add(new ModelFunctionCallBlock(new ProgramLocation(Xpos, Ypos), id));
 
     }
+
+
 
 
     /**

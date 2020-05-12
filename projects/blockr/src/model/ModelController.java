@@ -341,6 +341,12 @@ public class ModelController{
                 if(active != null) {
                     oldPos = active.getPos();
                     newBlockCreated = true;
+                    if(active instanceof ModelFunctionDefinitionBlock){
+                        ArrayList<Integer> idsForPalette = PArea.getActiveFunctionDefinitions();
+                        idsForPalette.add(((ModelFunctionDefinitionBlock) active).getId());
+                        palette.populateBlocks(idsForPalette);
+
+                    }
                 }
 
 
@@ -388,6 +394,10 @@ public class ModelController{
             if (this.active != null) {
                 if(this.active instanceof ModelFunctionDefinitionBlock){
                     ArrayList<ModelFunctionCallBlock> deletedList = PArea.deleteFunctionCallsById( ((ModelFunctionDefinitionBlock) this.active).getId());
+                    palette.populateBlocks(PArea.getActiveFunctionDefinitions());
+
+
+
 
 
                     //TODO DeleteMFB action in undostack (and register the currently active block as well)

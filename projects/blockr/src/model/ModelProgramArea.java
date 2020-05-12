@@ -212,7 +212,25 @@ public class ModelProgramArea{
         }
 
         return toBeReturned;
-        
+
+    }
+
+    /**
+     * gets an arraylist of the ids of function definition blocks that are currently in the PA
+     *
+     * @return the arraylist of ints
+     * @author Bert
+     */
+    public ArrayList<Integer> getActiveFunctionDefinitions(){
+        ArrayList<Integer> toBeReturned = new ArrayList<>();
+        for(ModelBlock block : blocks){
+            if(block instanceof ModelFunctionDefinitionBlock){
+                toBeReturned.add(((ModelFunctionDefinitionBlock) block).getId());
+            }
+
+
+        }
+        return toBeReturned;
     }
 
 

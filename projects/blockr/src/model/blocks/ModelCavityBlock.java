@@ -6,7 +6,7 @@ import utilities.ProgramLocation;
 
 import java.util.ArrayList;
 
-public class ModelCavityBlock extends ModelBlock{
+public abstract class ModelCavityBlock extends ModelBlock{
 
     private ModelBlock cavitySocket;
     private ModelBlock cavityPlug;

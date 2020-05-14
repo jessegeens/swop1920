@@ -258,6 +258,7 @@ public class ModelController{
                 }
             }
         }
+        palette.populateBlocks(PArea.getActiveFunctionDefinitions());
     }
 
 
@@ -302,6 +303,7 @@ public class ModelController{
                 }
             }
         }
+        palette.populateBlocks(PArea.getActiveFunctionDefinitions());
     }
 
     /**
@@ -459,6 +461,7 @@ public class ModelController{
             }
 
         }
+
     }
 
 

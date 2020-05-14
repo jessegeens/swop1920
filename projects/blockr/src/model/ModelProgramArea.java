@@ -244,7 +244,9 @@ public class ModelProgramArea{
         ArrayList<Integer> toBeReturned = new ArrayList<>();
         for(ModelBlock block : blocks){
             if(block instanceof ModelFunctionDefinitionBlock){
-                toBeReturned.add(((ModelFunctionDefinitionBlock) block).getId());
+                if(!(toBeReturned.contains(((ModelFunctionDefinitionBlock) block).getId()))){
+                    toBeReturned.add(((ModelFunctionDefinitionBlock) block).getId());
+                }
             }
 
 

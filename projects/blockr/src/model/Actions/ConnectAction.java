@@ -28,7 +28,8 @@ public class ConnectAction implements Action {
 
     public void undo(){
         this.programArea.removePABlock(block);
-        this.block.setPos(this.location);
+        this.programArea.dragBlock(this.block, this.location);
+        //this.block.setPos(this.location);
         this.programArea.addPABlock(block);
     }
     public void redo(){

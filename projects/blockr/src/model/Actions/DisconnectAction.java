@@ -44,7 +44,8 @@ public class DisconnectAction implements Action {
     }
     public void redo(){
         this.programArea.removePABlock(block);
-        this.block.setPos(this.location);
+        this.programArea.dragBlock(this.block, this.location);
+        //this.block.setPos(this.location);
         this.programArea.addPABlock(block);
 
     }

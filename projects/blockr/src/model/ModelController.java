@@ -412,6 +412,7 @@ public class ModelController{
                 if(this.active instanceof ModelFunctionDefinitionBlock){
                     ArrayList<ModelFunctionCallBlock> deletedList = PArea.deleteFunctionCallsById( ((ModelFunctionDefinitionBlock) this.active).getId());
                     palette.populateBlocks(PArea.getActiveFunctionDefinitions());
+                    undoStack.push(new DeleteFunctionDefinitionAction(this.active,this.oldPos, this.PArea, deletedList));
 
 
 
@@ -423,7 +424,9 @@ public class ModelController{
                 //palette.populateBlocks();
                 else{
                     undoStack.push(new DeleteAction(this.active,this.oldPos, this.PArea));
+
                 }
+
 
                 this.active = null;
             }

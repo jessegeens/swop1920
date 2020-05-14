@@ -17,8 +17,8 @@ public class DeleteAction implements Action {
 
 
 
-    public DeleteAction(ModelBlock createdBlock, ProgramLocation blockLocation,  ModelProgramArea programArea){
-        this.deletedBlock = createdBlock;
+    public DeleteAction(ModelBlock deletededBlock, ProgramLocation blockLocation,  ModelProgramArea programArea){
+        this.deletedBlock = deletededBlock;
         this.programArea = programArea;
         this.location = blockLocation;
         //ProgramLocation blockLocation,

@@ -65,12 +65,12 @@ public class ModelController{
             if(programRunner.isRunning()){
                 boolean resetTriggered = programRunner.execute();
                 if(resetTriggered){
-                    undoStack.push(new GameEndAction());
+                    //undoStack.push(new GameEndAction());
                 }
 
             } else {
                 programRunner.initialise(PArea.getFirstBlock(), PArea.getAllModelFunctionDefinitionBlock());
-
+                /*
                 ArrayList<Action> toRemove = new ArrayList<>();
                 for (Action current : undoStack){
                     if(current instanceof GameStartAction || current instanceof GameEndAction){
@@ -80,6 +80,7 @@ public class ModelController{
                 for(Action current : toRemove){
                     undoStack.remove(current);
                 }
+                */
 
 
                 //undoStack.push(new GameStartAction());
@@ -438,7 +439,7 @@ public class ModelController{
             }
             System.out.println("Programarea release");
             if (!newBlockCreated) {
-                undoStack.push(new MoveAction(active, this.oldPos, active.getPos())); //see active.getPos comment in select method. Same applies here.
+                undoStack.push(new MoveAction(active, this.oldPos, active.getPos(), this.PArea)); //see active.getPos comment in select method. Same applies here.
             }
             if (newBlockCreated) {
                 undoStack.push(new CreateAction(this.active, this.PArea));

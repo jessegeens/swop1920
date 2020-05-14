@@ -28,7 +28,8 @@ public class DeleteAction implements Action {
 
     public void undo(){
         this.programArea.addPABlock(this.deletedBlock);
-        this.deletedBlock.setPos(this.location);
+        programArea.dragBlock(deletedBlock, this.location);
+        //this.deletedBlock.setPos(this.location);
     }
 
     public void redo(){

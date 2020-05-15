@@ -55,15 +55,6 @@ public class ProgramRunner {
     }
 
     /**
-     * When undo happens, the game only needs to be activated, currentblock does not need to be reset
-     *
-     * @author Bert
-     */
-    public void initialiseForUndo(){
-        this.running = true;
-    }
-
-    /**
      * Clears all undo and redo stacks
      *
      * @author Bert
@@ -115,6 +106,7 @@ public class ProgramRunner {
 
         }
         else{
+            ProgramState currentState = programUndoStateStack.peek();
             if(current instanceof ModelActionBlock && gameWorld != null){
                 ActionResult result = gameWorld.perform(((ModelActionBlock) current).getAction());
                 programUndoStateStack.push(new ProgramState(current, gameWorld.getSnapshot()));
@@ -138,11 +130,13 @@ public class ProgramRunner {
                 }
             }
             if(current instanceof ModelFunctionCallBlock){
-                this.callStack.push((ModelFunctionCallBlock) current);
-
+                //this.callStack.push((ModelFunctionCallBlock) current);
+                programUndoStateStack.push(new ProgramState(current, gameWorld.getSnapshot()));
 
             }
 
+            ProgramState nextState = programUndoStateStack.peek();
+            callStackUpdate(currentState, nextState);
             next = findNextBlock(current);
 
             if (next != null){
@@ -186,18 +180,6 @@ public class ProgramRunner {
     }
 
     /**
-     *  Unhighlights a block
-     *
-     * @param block
-     * @author Bert
-     */
-    private void setUnHighlight(ModelBlock block){
-        if(block != null){
-            block.setUnHighlight();
-        }
-    }
-
-    /**
      * Returns the bottomplug if it is a normal block (move block) or if the condition of a WhileIf block fails 
      * If the condition of a WhileIfBlock succeeds it gives the first cavity block of the WhileIf block.
      * //This should point to the next block that has to be executed, this is needed so that when we step we know what block to run but also this one needs to be highlighted.
@@ -223,7 +205,6 @@ public class ProgramRunner {
             }
         }
         else if (current instanceof ModelFunctionCallBlock){
-            this.callStack.add((ModelFunctionCallBlock) current);
 
             ModelFunctionDefinitionBlock def = this.getFuncDefBlockById(((ModelFunctionCallBlock) current).getId());
             next =  def.getCavityPlug();
@@ -231,7 +212,7 @@ public class ProgramRunner {
 
         }
         else if (current instanceof ModelFunctionDefinitionBlock){
-            next =  callStack.pop().getBottomPlug();
+            next =  callStack.peek().getBottomPlug();
         }
         else if (current.getBottomPlug() != null && current.getBottomPlug().isIf() && ((ModelWhileIfBlock)current.getBottomPlug()).getCavitySocket() == current){
             next =  current.getBottomPlug().getBottomPlug(); //If block should only be executed once.
@@ -255,6 +236,30 @@ public class ProgramRunner {
         }
     }
 
+    public void callStackUpdate(ProgramState current, ProgramState next) {
+        if (current.getBlock() == null || next.getBlock() == null) return;
+        if (current.getBlock().getSurroundingCavityBlock() instanceof ModelFunctionDefinitionBlock) {
+            if (next.getBlock().getSurroundingCavityBlock() instanceof ModelFunctionDefinitionBlock) {
+                if (!current.getBlock().getSurroundingCavityBlock().equals(next.getBlock().getSurroundingCavityBlock())) {
+                    if (current.getBlock() instanceof ModelFunctionCallBlock) {
+                        callStack.push((ModelFunctionCallBlock) current.getBlock());
+                    }
+                    else callStack.pop();
+                }
+            }
+            else callStack.pop();
+        }
+        else
+        if (next.getBlock().getSurroundingCavityBlock() instanceof ModelFunctionDefinitionBlock) {
+            if (current.getBlock() instanceof ModelFunctionCallBlock) {
+                callStack.push((ModelFunctionCallBlock) current.getBlock());
+            }
+            if (current.getBlock().getTopSocket() instanceof  ModelFunctionCallBlock) {
+                callStack.push((ModelFunctionCallBlock) current.getBlock().getTopSocket());
+            }
+        }
+    }
+
 
     public void undoProgramRunner(){
         //TODO make sure this works
@@ -264,6 +269,7 @@ public class ProgramRunner {
         else{
             programRedoStateStack.push(programUndoStateStack.pop());
             ProgramState pastState = this.programUndoStateStack.peek();
+            callStackUpdate(programRedoStateStack.peek(), pastState);
             this.setState(pastState);
         }
     }
@@ -274,12 +280,8 @@ public class ProgramRunner {
         }
         else{
             ProgramState pastState = this.programRedoStateStack.pop();
-
-            if(pastState.getBlock() == current && pastState.getGameState() == gameWorld.getSnapshot()){
-                programUndoStateStack.push(pastState);
-                pastState = this.programRedoStateStack.pop();
-            }
             this.setState(pastState);
+            callStackUpdate(programUndoStateStack.peek(), pastState);
             programUndoStateStack.push(pastState);
         }
     }

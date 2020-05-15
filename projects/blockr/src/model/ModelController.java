@@ -63,10 +63,7 @@ public class ModelController{
 
         if (PArea.validExecutionState()){//Check if all blocks are connected, and if so execute.
             if(programRunner.isRunning()){
-                boolean resetTriggered = programRunner.execute();
-                if(resetTriggered){
-                    //undoStack.push(new GameEndAction());
-                }
+                programRunner.execute();
 
             } else {
                 programRunner.initialise(PArea.getFirstBlock(), PArea.getAllModelFunctionDefinitionBlock());

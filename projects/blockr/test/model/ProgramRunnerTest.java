@@ -93,7 +93,6 @@ public class ProgramRunnerTest {
         PR.execute();
         PR.execute();
         PR.execute();
-        PR.execute();
         assertTrue(finishBlock.isHighlighted());
     }
 
@@ -234,7 +233,7 @@ public class ProgramRunnerTest {
             programRunner.execute();
         }
 
-        programRunner.undoProgramRunner();
+        programRunner.undoProgramRunner();//undo first time seems to have to undo twice to work.
         assertTrue(forwardBlock.isHighlighted());
     }
 
@@ -304,6 +303,40 @@ public class ProgramRunnerTest {
         programRunner.undoProgramRunner();
         programRunner.undoProgramRunner();
         programRunner.redoProgramRunner();
+
+        assertTrue(forwardBlock.isHighlighted());
+    }
+
+    @Test
+    public void executeAfterRedo() throws Exception {
+        setUp();
+        ProgramRunner programRunner = new ProgramRunner(GW);
+        ModelFunctionDefinitionBlock funcDef = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(133,143), Actions.get(0));
+        ModelFunctionCallBlock call = new ModelFunctionCallBlock(new ProgramLocation(20, 20), 0);
+        ModelActionBlock forwardBlock2 = new ModelActionBlock(new ProgramLocation(200, 20), Actions.get(0));
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(280, 20), Actions.get(2));
+
+        funcDef.setCavityPlug(forwardBlock);
+        forwardBlock.setTopSocket(funcDef);
+        forwardBlock.setBottomPlug(funcDef);
+        funcDef.setCavitySocket(forwardBlock);
+        call.setBottomPlug(forwardBlock2);
+        forwardBlock2.setTopSocket(call);
+        forwardBlock2.setBottomPlug(rightBlock);
+        rightBlock.setTopSocket(forwardBlock2);
+
+
+
+        programRunner.initialise(call, new ArrayList<>(Arrays.asList(funcDef)));
+
+        programRunner.execute();
+        programRunner.execute();
+        programRunner.undoProgramRunner();
+        programRunner.undoProgramRunner();
+        programRunner.redoProgramRunner();
+        programRunner.redoProgramRunner();
+        programRunner.execute();
 
         assertTrue(forwardBlock.isHighlighted());
     }

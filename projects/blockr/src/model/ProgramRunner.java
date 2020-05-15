@@ -11,7 +11,7 @@ import java.util.Stack;
 public class ProgramRunner {
 
     private boolean running;
-    private ModelBlock current;
+    //private ModelBlock current;
     private ModelBlock start;
     private GameWorld gameWorld;
     private GameWorldState initialState;
@@ -42,16 +42,16 @@ public class ProgramRunner {
         //TODO arraylist
 
         this.running = true;
-        this.current = start;
         this.start = start;
 
         this.definitions = definitions;
 
         callStack = new Stack<>();
-
-        programUndoStateStack.push(new ProgramState(null, gameWorld.getSnapshot()));
-
-        setHighlight(current);
+        while (this.start instanceof ModelCavityBlock) {
+            this.start = findNextBlock(this.start);
+        }
+        programUndoStateStack.push(new ProgramState(this.start, gameWorld.getSnapshot()));
+        highlightNext(null, this.start);
     }
 
     /**
@@ -70,12 +70,8 @@ public class ProgramRunner {
      *
      */
     public void reset(){
-
-        if (this.current != null){
-            this.current.setUnHighlight();
-        }
+        highlightNext(programUndoStateStack.peek().getBlock(), null);
         this.running = false;
-        this.current = null;
         this.gameWorld.restore(initialState);
 
         this.programUndoStateStack.clear();
@@ -91,30 +87,24 @@ public class ProgramRunner {
      * 3. then it checks whether it is finished
      *  3a. if necessary, the program stops running
      *  3b. otherwise, the next block is highlighted
-     * @return  true of executed
      * @author Jesse Geens
      */
-    public boolean execute(){
-        //this.clearStacks();
+    public void execute(){
         if(!(isRunning())){
             throw new IllegalStateException("tried executing the program without initialising it");
         }
-        ModelBlock next;
-        if(this.current == null) {
-            reset();
-            return true;
+        ModelBlock current = programUndoStateStack.peek().getBlock();
+        ModelBlock next = findNextBlock(current);
 
+        if (current == null) {
+            reset();
         }
         else{
             ProgramState currentState = programUndoStateStack.peek();
             if(current instanceof ModelActionBlock && gameWorld != null){
                 ActionResult result = gameWorld.perform(((ModelActionBlock) current).getAction());
-                programUndoStateStack.push(new ProgramState(current, gameWorld.getSnapshot()));
-                /*
-                this.undoHighlightStack.push(current);
-                this.undoStateStack.push(gameWorld.getSnapshot());
-                System.out.println(result.toString());
-                */
+                programUndoStateStack.push(new ProgramState(next, gameWorld.getSnapshot()));
+
                 switch (result){
 
                     case FAILURE:
@@ -130,24 +120,13 @@ public class ProgramRunner {
                 }
             }
             if(current instanceof ModelFunctionCallBlock){
-                //this.callStack.push((ModelFunctionCallBlock) current);
-                programUndoStateStack.push(new ProgramState(current, gameWorld.getSnapshot()));
+                programUndoStateStack.push(new ProgramState(next, gameWorld.getSnapshot()));
 
             }
-
             ProgramState nextState = programUndoStateStack.peek();
             callStackUpdate(currentState, nextState);
-            next = findNextBlock(current);
-
-            if (next != null){
-                this.highlightNext(next);
-            }
-            else{
-                this.current.setUnHighlight();
-            }
-            this.current = next;
         }
-        return false;
+        this.highlightNext(current, next);
     }
 
     /**
@@ -161,9 +140,11 @@ public class ProgramRunner {
     /**
      * Highlights the next block in the program and unhighlight the currrent one
      */
-    private void highlightNext(ModelBlock next){
-        current.setUnHighlight();
-        next.setHighlight();
+    private void highlightNext(ModelBlock current, ModelBlock next){
+        if (current != null)
+            current.setUnHighlight();
+        if (next != null)
+            next.setHighlight();
     }
 
     /**
@@ -188,6 +169,8 @@ public class ProgramRunner {
      */
     private ModelBlock findNextBlock(ModelBlock current){
         ModelBlock next;
+
+        if (current == null) return start;
 
         if (current instanceof ModelWhileIfBlock){
             if (((ModelWhileIfBlock) current).isNegated()) {
@@ -230,9 +213,10 @@ public class ProgramRunner {
             this.gameWorld.restore(toBeSet.getGameState());
         }
         else{
-            this.current = toBeSet.getBlock();
             this.gameWorld.restore(toBeSet.getGameState());
-            this.setHighlight(findNextBlock(current));
+            ModelBlock current = programUndoStateStack.peek().getBlock();
+            ModelBlock next = findNextBlock(current);
+            highlightNext(current, next);
         }
     }
 
@@ -262,7 +246,6 @@ public class ProgramRunner {
 
 
     public void undoProgramRunner(){
-        //TODO make sure this works
         if(this.programUndoStateStack.size() == 1){
             this.running = false;
         }
@@ -275,13 +258,10 @@ public class ProgramRunner {
     }
 
     public void redoProgramRunner(){
-        if(this.programRedoStateStack.isEmpty()){
-            //this.running = false;
-        }
-        else{
+        if(!this.programRedoStateStack.isEmpty()){
             ProgramState pastState = this.programRedoStateStack.pop();
-            this.setState(pastState);
             callStackUpdate(programUndoStateStack.peek(), pastState);
+            this.setState(pastState);
             programUndoStateStack.push(pastState);
         }
     }

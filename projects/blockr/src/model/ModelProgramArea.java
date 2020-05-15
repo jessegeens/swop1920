@@ -172,26 +172,6 @@ public class ModelProgramArea{
     }
 
     /**
-     * Returns the function definition by id or null if the function definition
-     *
-     * @param id The requested id
-     * @return the requested block or null if no block with this ide has been founc
-     * @author bert_dvl
-     */
-    public ModelFunctionDefinitionBlock getFuncDefBlockById(int id){
-
-        for(ModelBlock block : blocks){
-            if(block instanceof ModelFunctionDefinitionBlock){
-                if(((ModelFunctionDefinitionBlock) block).getId() == id){
-                    return (ModelFunctionDefinitionBlock) block;
-                }
-            }
-
-        }
-        return null;
-    }
-
-    /**
      * Returns the all of the function definition blocks in the PA
      *
      * @return an arraylist of all function def blocks

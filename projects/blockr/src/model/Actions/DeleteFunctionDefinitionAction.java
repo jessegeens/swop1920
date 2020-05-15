@@ -19,11 +19,8 @@ public class DeleteFunctionDefinitionAction extends DeleteAction implements Acti
         for(ModelFunctionCallBlock block : callBlocks){
             functionCallDeletes.add(new DisconnectAction(block, block.getPos(), programArea));
             functionCallDeletes.add(new DeleteAction(block, block.getPos(), programArea));
-
-
+            
         }
-
-
     }
 
     @Override

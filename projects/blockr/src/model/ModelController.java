@@ -99,6 +99,11 @@ public class ModelController{
      *
      */
     public void exitExecution(){
+        if (this.programRunner.isRunning()) {
+
+            this.PArea.unHighlightAll();
+        }
+
         programRunner.reset();
         //undoStack.push(new GameEndAction());
     }

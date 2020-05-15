@@ -10,6 +10,7 @@ import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
@@ -22,7 +23,8 @@ public class ProgramRunnerTest {
     @Before
     public void setUp() throws Exception {
         try {
-            File file = new File("/home/oberon/Documents/Studies/SWOP/swop1920/projects/robotgameworld/out/production/robotgameworld/");
+            //File file = new File("/home/oberon/Documents/Studies/SWOP/swop1920/projects/robotgameworld/out/production/robotgameworld/");
+            File file = new File("/home/jesse/Code/School/3ba/swop1920/projects/robotgameworld/out/production/robotgameworld/");
             //convert the file to URL format
             URL url = file.toURI().toURL();
             URL[] urls = new URL[]{url};
@@ -197,5 +199,43 @@ public class ProgramRunnerTest {
         PR.execute();
         PR.undoProgramRunner();
         assertTrue(forwardBlock.isHighlighted());
+    }
+
+    @Test
+    public void undoHighlightFunction() throws Exception {
+        setUp();
+        ProgramRunner programRunner = new ProgramRunner(GW);
+        ModelFunctionDefinitionBlock funcDef = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(133,143), Actions.get(0));
+        ModelActionBlock forwardBlock2 = new ModelActionBlock(new ProgramLocation(133,223), Actions.get(0));
+        ModelActionBlock forwardBlock3 = new ModelActionBlock(new ProgramLocation(133,303), Actions.get(0));
+        funcDef.setCavityPlug(forwardBlock);
+        forwardBlock.setTopSocket(funcDef);
+        forwardBlock.setBottomPlug(forwardBlock2);
+        forwardBlock2.setTopSocket(forwardBlock);
+        forwardBlock.setBottomPlug(forwardBlock3);
+        forwardBlock3.setTopSocket(forwardBlock2);
+        forwardBlock3.setBottomPlug(funcDef);
+        funcDef.setCavitySocket(forwardBlock3);
+        ModelFunctionCallBlock call = new ModelFunctionCallBlock(new ProgramLocation(20, 20), 0);
+        ModelActionBlock turnright = new ModelActionBlock(new ProgramLocation(20,100), Actions.get(2));
+        call.setBottomPlug(turnright);
+        turnright.setTopSocket(call);
+        ModelFunctionCallBlock call2 = new ModelFunctionCallBlock(new ProgramLocation(20, 180), 0);
+        turnright.setBottomPlug(call2);
+        call2.setTopSocket(turnright);
+        ModelActionBlock forwardBlock4 = new ModelActionBlock(new ProgramLocation(20,260), Actions.get(0));
+        call2.setBottomPlug(forwardBlock4);
+        forwardBlock4.setTopSocket(call2);
+
+        programRunner.initialise(call, new ArrayList<>(Arrays.asList(funcDef)));
+
+        for(int i = 0; i < 8; i++){
+            programRunner.execute();
+        }
+
+        programRunner.undoProgramRunner();
+        assertTrue(forwardBlock.isHighlighted());
+        assertFalse(call2.isHighlighted());
     }
 }

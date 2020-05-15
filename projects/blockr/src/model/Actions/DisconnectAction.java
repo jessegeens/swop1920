@@ -33,18 +33,19 @@ public class DisconnectAction implements Action {
         for (ModelBlock listBlock : blocks) {
             if (listBlock.equals(this.block)) {
                 this.programArea.findAndConnect(this.location, listBlock);
-                System.out.println("NICE2");
+                //System.out.println("NICE2");
                 return;
             }
         }
-        System.out.println("NOTNICE2");
+        //System.out.println("NOTNICE2");
         this.programArea.findAndConnect(this.location, this.block);
 
 
     }
     public void redo(){
         this.programArea.removePABlock(block);
-        this.block.setPos(this.location);
+        this.programArea.dragBlock(this.block, this.location);
+        //this.block.setPos(this.location);
         this.programArea.addPABlock(block);
 
     }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class DeleteFunctionDefinitionAction extends DeleteAction implements Action  {
 
-    ArrayList<DeleteAction> functionCallDeletes;
+    ArrayList<Action> functionCallDeletes;
 
 
     public DeleteFunctionDefinitionAction(ModelBlock deletedBlock, ProgramLocation blockLocation, ModelProgramArea programArea, ArrayList<ModelFunctionCallBlock> callBlocks){
@@ -17,27 +17,26 @@ public class DeleteFunctionDefinitionAction extends DeleteAction implements Acti
         functionCallDeletes = new ArrayList<>();
 
         for(ModelFunctionCallBlock block : callBlocks){
+            functionCallDeletes.add(new DisconnectAction(block, block.getPos(), programArea));
             functionCallDeletes.add(new DeleteAction(block, block.getPos(), programArea));
-
+            
         }
-
-
     }
 
     @Override
     public void undo() {
         super.undo();
 
-        for(DeleteAction deleteAction : functionCallDeletes){
-            deleteAction.undo();
+        for(Action action : functionCallDeletes){
+            action.undo();
         }
     }
 
     @Override
     public void redo() {
-        super.undo();
-        for(DeleteAction deleteAction : functionCallDeletes){
-            deleteAction.redo();
+        super.redo();
+        for(Action action : functionCallDeletes){
+            action.redo();
         }
     }
 }

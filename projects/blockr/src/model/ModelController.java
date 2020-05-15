@@ -58,7 +58,7 @@ public class ModelController{
      *
      */
     public void startOrExecuteProgram(){
-        this.PArea.unHighlightAll();
+        //this.PArea.unHighlightAll();
 
 
         if (PArea.validExecutionState()){//Check if all blocks are connected, and if so execute.
@@ -98,7 +98,7 @@ public class ModelController{
     public void exitExecution(){
         if (this.programRunner.isRunning()) {
 
-            this.PArea.unHighlightAll();
+            //this.PArea.unHighlightAll();
         }
 
         programRunner.reset();
@@ -114,7 +114,7 @@ public class ModelController{
     public void globalUndo(){
         if (this.programRunner.isRunning()) {
 
-            this.PArea.unHighlightAll();
+            //this.PArea.unHighlightAll();
             programRunner.undoProgramRunner();
 
 
@@ -172,7 +172,7 @@ public class ModelController{
         //is emptying duplicate gamestart and gameend necessary?
 
         if (this.programRunner.isRunning()) {
-            this.PArea.unHighlightAll();
+            //this.PArea.unHighlightAll();
             programRunner.redoProgramRunner();
 
 
@@ -211,8 +211,6 @@ public class ModelController{
 
 
                 this.redo();
-
-
         }
 
 
@@ -281,8 +279,6 @@ public class ModelController{
             Action current = redoStack.pop();
             //System.out.println(current);
             current.redo();
-
-
 
             undoStack.push(current);
 
@@ -355,7 +351,7 @@ public class ModelController{
      * @author Bert
      */
     public void select(ProgramLocation eventLocation){
-        this.programRunner.clearStacks();
+        this.programRunner.reset();
         //if(!programRunner.isRunning()){
             this.clearRedoStack();
             if(this.inPalette(eventLocation)){
@@ -367,11 +363,8 @@ public class ModelController{
                         ArrayList<Integer> idsForPalette = PArea.getActiveFunctionDefinitions();
                         idsForPalette.add(((ModelFunctionDefinitionBlock) active).getId());
                         palette.populateBlocks(idsForPalette);
-
                     }
                 }
-
-
             }
             else if(this.inProgramArea(eventLocation)){
                 boolean isConnected = PArea.connectedBlockHere(eventLocation);
@@ -386,16 +379,7 @@ public class ModelController{
                 if(isConnected){
                     undoStack.push(new DisconnectAction(active, active.getPos(), this.PArea));
                 }
-
-
-
-
-
             }
-        //}
-
-
-
     }
 
     /**
@@ -418,10 +402,6 @@ public class ModelController{
                     ArrayList<ModelFunctionCallBlock> deletedList = PArea.deleteFunctionCallsById( ((ModelFunctionDefinitionBlock) this.active).getId());
                     palette.populateBlocks(PArea.getActiveFunctionDefinitions());
                     undoStack.push(new DeleteFunctionDefinitionAction(this.active,this.oldPos, this.PArea, deletedList));
-
-
-
-
 
                     //TODO DeleteMFB action in undostack (and register the currently active block as well)
 

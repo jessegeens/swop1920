@@ -39,7 +39,6 @@ public class ProgramRunner {
      * @param start the first block in the program
      */
     public void initialise(ModelBlock start, ArrayList<ModelFunctionDefinitionBlock> definitions){
-        //TODO arraylist
 
         this.running = true;
         this.start = start;
@@ -51,7 +50,7 @@ public class ProgramRunner {
             this.start = findNextBlock(this.start);
         }
         programUndoStateStack.push(new ProgramState(this.start, gameWorld.getSnapshot()));
-        highlightNext(null, this.start);
+        updateHighlight(null, this.start);
     }
 
     /**
@@ -70,13 +69,14 @@ public class ProgramRunner {
      *
      */
     public void reset(){
-        highlightNext(programUndoStateStack.peek().getBlock(), null);
-        this.running = false;
-        this.gameWorld.restore(initialState);
+        if (isRunning()){
+            updateHighlight(programUndoStateStack.peek().getBlock(), null);
+            this.running = false;
+            this.gameWorld.restore(initialState);
 
-        this.programUndoStateStack.clear();
-        this.programRedoStateStack.clear();
-
+            this.programUndoStateStack.clear();
+            this.programRedoStateStack.clear();
+        }
         System.out.println("RESET");
     }
 
@@ -94,8 +94,6 @@ public class ProgramRunner {
             throw new IllegalStateException("tried executing the program without initialising it");
         }
         ModelBlock current = programUndoStateStack.peek().getBlock();
-        ModelBlock next = findNextBlock(current);
-
         if (current == null) {
             reset();
         }
@@ -103,7 +101,6 @@ public class ProgramRunner {
             ProgramState currentState = programUndoStateStack.peek();
             if(current instanceof ModelActionBlock && gameWorld != null){
                 ActionResult result = gameWorld.perform(((ModelActionBlock) current).getAction());
-                programUndoStateStack.push(new ProgramState(next, gameWorld.getSnapshot()));
 
                 switch (result){
 
@@ -119,14 +116,12 @@ public class ProgramRunner {
                         break;
                 }
             }
-            if(current instanceof ModelFunctionCallBlock){
-                programUndoStateStack.push(new ProgramState(next, gameWorld.getSnapshot()));
-
-            }
+            ModelBlock next = findNextBlock(current);
+            programUndoStateStack.push(new ProgramState(next, gameWorld.getSnapshot()));
             ProgramState nextState = programUndoStateStack.peek();
             callStackUpdate(currentState, nextState);
+            this.updateHighlight(current, next);
         }
-        this.highlightNext(current, next);
     }
 
     /**
@@ -138,26 +133,13 @@ public class ProgramRunner {
     }
 
     /**
-     * Highlights the next block in the program and unhighlight the currrent one
+     * Highlights the next block in the program and unhighlight the current one
      */
-    private void highlightNext(ModelBlock current, ModelBlock next){
+    private void updateHighlight(ModelBlock current, ModelBlock next){
         if (current != null)
             current.setUnHighlight();
         if (next != null)
             next.setHighlight();
-    }
-
-    /**
-     *  Highlights a block
-     *
-     * @param block
-     * @author Bert
-     */
-    private void setHighlight(ModelBlock block){
-        while (block instanceof ModelCavityBlock) block = findNextBlock(block); //still important
-        if(block != null){
-            block.setHighlight();
-        }
     }
 
     /**
@@ -207,16 +189,12 @@ public class ProgramRunner {
         return next;
     }
 
-    public void setState(ProgramState toBeSet){
-        if(toBeSet.getBlock() == null){
-            this.setHighlight(start);
-            this.gameWorld.restore(toBeSet.getGameState());
-        }
-        else{
-            this.gameWorld.restore(toBeSet.getGameState());
-            ModelBlock current = programUndoStateStack.peek().getBlock();
-            ModelBlock next = findNextBlock(current);
-            highlightNext(current, next);
+    public void updateState(ProgramState current, ProgramState next){
+        if(next.getBlock() != null){
+            this.gameWorld.restore(next.getGameState());
+            ModelBlock currentB = current.getBlock();
+            ModelBlock nextB = next.getBlock();
+            updateHighlight(currentB, nextB);
         }
     }
 
@@ -253,7 +231,7 @@ public class ProgramRunner {
             programRedoStateStack.push(programUndoStateStack.pop());
             ProgramState pastState = this.programUndoStateStack.peek();
             callStackUpdate(programRedoStateStack.peek(), pastState);
-            this.setState(pastState);
+            this.updateState(programRedoStateStack.peek(), pastState);
         }
     }
 
@@ -261,7 +239,7 @@ public class ProgramRunner {
         if(!this.programRedoStateStack.isEmpty()){
             ProgramState pastState = this.programRedoStateStack.pop();
             callStackUpdate(programUndoStateStack.peek(), pastState);
-            this.setState(pastState);
+            this.updateState(programUndoStateStack.peek() ,pastState);
             programUndoStateStack.push(pastState);
         }
     }

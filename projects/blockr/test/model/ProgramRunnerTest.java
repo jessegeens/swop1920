@@ -272,7 +272,6 @@ public class ProgramRunnerTest {
 
         programRunner.undoProgramRunner();
         programRunner.undoProgramRunner();
-        programRunner.undoProgramRunner();
 
         assertTrue(call2.isHighlighted());
     }
@@ -326,8 +325,6 @@ public class ProgramRunnerTest {
         forwardBlock2.setBottomPlug(rightBlock);
         rightBlock.setTopSocket(forwardBlock2);
 
-
-
         programRunner.initialise(call, new ArrayList<>(Arrays.asList(funcDef)));
 
         programRunner.execute();
@@ -338,6 +335,6 @@ public class ProgramRunnerTest {
         programRunner.redoProgramRunner();
         programRunner.execute();
 
-        assertTrue(forwardBlock.isHighlighted());
+        assertTrue(rightBlock.isHighlighted());
     }
 }

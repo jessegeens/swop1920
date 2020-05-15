@@ -45,7 +45,7 @@ public class ProgramRunnerTest {
     public void reset() {
         ProgramRunner PR = new ProgramRunner(GW);
         ModelBlock block = new ModelNotBlock(new ProgramLocation(100, 100));
-        //PR.initialise(block);
+        PR.initialise(block, new ArrayList<>());
         PR.reset();
         assertFalse(block.isHighlighted());
     }
@@ -57,7 +57,7 @@ public class ProgramRunnerTest {
         ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100 ,180), Actions.get(0));
         rightBlock.setBottomPlug(leftBlock);
         leftBlock.setTopSocket(rightBlock);
-        //PR.initialise(rightBlock);
+        PR.initialise(rightBlock, new ArrayList<>());
         PR.execute();
         assertTrue(leftBlock.isHighlighted());
     }
@@ -88,6 +88,7 @@ public class ProgramRunnerTest {
         finishBlock.setTopSocket(ifBlock);
         ArrayList<ModelFunctionDefinitionBlock> empty = new ArrayList<>();
         PR.initialise(ifBlock, empty);
+        PR.execute();
         PR.execute();
         PR.execute();
         PR.execute();

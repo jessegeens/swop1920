@@ -11,11 +11,12 @@ public class Main {
 
     public static void main(String[] args) {
         try{
-            String className = args[0].split(File.separator)[args[0].split(File.separator).length - 1];
-            String[] remaining = Arrays.copyOf(args[0].split(File.separator), args[0].split(File.separator).length-1);
+            String splitter = File.separator.replace("\\","\\\\");
+            String className = args[0].split(splitter)[args[0].split(splitter).length - 1];
+            String[] remaining = Arrays.copyOf(args[0].split(splitter), args[0].split(splitter).length-1);
             String path = "";
             for(String str : remaining){
-                path = path + str + File.separator;
+                path = path + str + splitter;
             }
             File file = new File(path);
 

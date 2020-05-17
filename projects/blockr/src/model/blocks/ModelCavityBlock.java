@@ -50,10 +50,9 @@ public abstract class ModelCavityBlock extends ModelBlock{
     public ArrayList<ModelBlock> getCavityBlocks() {
         ArrayList<ModelBlock> cav = new ArrayList<ModelBlock>();
         ModelBlock blk = this.getCavityPlug();
-        while(!(blk.equals(this) || blk == null)){
+        while(blk != null && !(blk.equals(this)) ){
             cav.add(blk);
             if (blk instanceof ModelCavityBlock) cav.addAll(((ModelCavityBlock) blk).getCavityBlocks());
-            if (blk == null) return null;
             if(blk.hasBottomPlug()){
                 blk = blk.getBottomPlug();
             }

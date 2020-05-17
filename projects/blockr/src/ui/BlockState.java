@@ -27,7 +27,9 @@ public class BlockState {
         this.connectionPoints = block.getConnectionPoints();
         this.title = block.getTitle();
         if (block instanceof ModelCavityBlock){
-            cavitySize = ((ModelCavityBlock)block).getCavityBlocks().size();
+            if (((ModelCavityBlock)block).getCavityBlocks() != null)
+                cavitySize = ((ModelCavityBlock)block).getCavityBlocks().size();
+            else cavitySize = 0;
         }
         else cavitySize = 0;
     }

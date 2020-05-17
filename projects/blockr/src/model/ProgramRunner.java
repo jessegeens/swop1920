@@ -190,12 +190,10 @@ public class ProgramRunner {
     }
 
     public void updateState(ProgramState current, ProgramState next){
-        if(next.getBlock() != null){
-            this.gameWorld.restore(next.getGameState());
-            ModelBlock currentB = current.getBlock();
-            ModelBlock nextB = next.getBlock();
-            updateHighlight(currentB, nextB);
-        }
+        this.gameWorld.restore(next.getGameState());
+        ModelBlock currentB = current.getBlock();
+        ModelBlock nextB = next.getBlock();
+        updateHighlight(currentB, nextB);
     }
 
     public void callStackUpdate(ProgramState current, ProgramState next) {

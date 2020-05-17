@@ -3,6 +3,7 @@ package ui;
 import java.util.ArrayList;
 import java.awt.*;
 
+import main.MyCanvasWindow;
 import utilities.*;
 import model.*;
 
@@ -11,14 +12,21 @@ import model.*;
  */
 public class UIController {
 
-    private final int wWidth;  //window width
-    private final int wHeight; //window height
+    private static UIController instance;
+
+    private final static int PALETTEWIDTH = MyCanvasWindow.WIDTH/3;
+    private final static int PROGRAMAREAWIDTH = MyCanvasWindow.WIDTH/3;
 
 
     // Constructor
-    public UIController(int windowWidth, int windowHeight){
-        this.wWidth = windowWidth;
-        this.wHeight = windowHeight;
+    private UIController(){
+    }
+
+    public static UIController getInstance() {
+        if (instance == null) {
+            instance = new UIController();
+        }
+        return instance;
     }
 
     /**
@@ -41,7 +49,7 @@ public class UIController {
      */
     private void renderUI(Graphics g){
         g.setColor(Color.BLACK);
-        g.drawLine(this.wWidth/3, 0, this.wWidth/3, this.wHeight);
-        g.drawLine(2*this.wWidth/3, 0, 2*this.wWidth/3, this.wHeight);
+        g.drawLine(PALETTEWIDTH, 0, PALETTEWIDTH, MyCanvasWindow.HEIGHT);
+        g.drawLine(PALETTEWIDTH + PROGRAMAREAWIDTH, 0, PALETTEWIDTH + PROGRAMAREAWIDTH, MyCanvasWindow.HEIGHT);
     }
 }

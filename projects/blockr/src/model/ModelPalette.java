@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import gameworldapi.ActionType;
 import gameworldapi.PredicateType;
 import model.blocks.*;
+import ui.UIBlock;
 import utilities.ProgramLocation;
 
 /**
@@ -36,21 +37,21 @@ class ModelPalette{
         this.blocks = new ArrayList<ModelBlock>();
         int i = 0;
         for (ActionType action : actions){
-            ModelActionBlock actionBlock = new ModelActionBlock(new ProgramLocation(180, 140 + 120*i), action);
+            ModelActionBlock actionBlock = new ModelActionBlock(new ProgramLocation(180, 20 + (int)(UIBlock.STD_HEIGHT * 1.5f * (i + 1))), action);
             blocks.add(actionBlock);
             i++;
         }
         int j = 0;
         for (PredicateType predicate : predicates){
-            ModelPredicateBlock predicateBlock = new ModelPredicateBlock(new ProgramLocation(20, 380 + 120*j), predicate);
+            ModelPredicateBlock predicateBlock = new ModelPredicateBlock(new ProgramLocation(20, 20 + (int)(UIBlock.STD_HEIGHT * 1.5f * (j + 3))), predicate);
             blocks.add(predicateBlock);
             j++;
         }
-        this.maxColumnHeight = Math.max(140 + 120 * (i), 380 + 120 *(j));
+        this.maxColumnHeight = Math.max(20 + (int)(UIBlock.STD_HEIGHT * 1.5f * (i + 1)), 20 + (int)(UIBlock.STD_HEIGHT * 1.5f * (j + 2)));
         blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 20), true));
-        blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 140), false));
+        blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 20 + (int)(UIBlock.STD_HEIGHT * 1.5f)), false));
         blocks.add(new ModelNotBlock(new ProgramLocation(180, 20)));
-        blocks.add(new ModelFunctionDefinitionBlock(new ProgramLocation(20, 260),functionCounter));
+        blocks.add(new ModelFunctionDefinitionBlock(new ProgramLocation(20, 20 + (int)(UIBlock.STD_HEIGHT * 1.5f * 2)),functionCounter));
     }
 
     /**

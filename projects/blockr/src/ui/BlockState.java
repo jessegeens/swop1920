@@ -81,24 +81,3 @@ public class BlockState {
         return Color.GRAY;
     }
 }
-
-/*
-if (this instanceof ModelWhileIfBlock) {
-            if (this.isIf()) return "IF";
-            else return "WHILE";
-        }
-        if (this instanceof ModelNotBlock) return "NOT";
-        if (this instanceof ModelActionBlock){
-            return ((ModelActionBlock)this).getAction().toString();
-        }
-        if (this instanceof ModelPredicateBlock){
-            return ((ModelPredicateBlock)this).getPredicate().toString();
-        }
-        if (this instanceof ModelFunctionDefinitionBlock){
-            return "FUNC DEF " + ((ModelFunctionDefinitionBlock) this).getId();
-        }
-        if (this instanceof ModelFunctionCallBlock){
-            return "FUNC CALL " + ((ModelFunctionCallBlock) this).getId();
-        }
-        return "Block";
- */

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class LocationHandler {
 
+    public static final int CLOSESTDISTANCE = 100;
     private static LocationHandler instance;
 
     private LocationHandler() {
@@ -124,7 +125,7 @@ public class LocationHandler {
      */
     public ModelBlock findClosestBlock(ModelBlock block, ArrayList<ModelBlock> blocks){
         ModelBlock closest = null;
-        int d = UIBlock.STD_HEIGHT;
+        int d = CLOSESTDISTANCE;
         if(block == null || blocks == null){
             return null;
         }

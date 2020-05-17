@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 public class ConnectionHandler {
 
+    public static final int CONNECTIONDISTANCE = 60;
+
     private static ConnectionHandler instance;
 
 
@@ -75,31 +77,31 @@ public class ConnectionHandler {
     public boolean connect(ModelBlock closest, ModelBlock extra) {
         boolean connect = false;
         if (closest instanceof ModelCavityBlock){
-            if (extra.hasTopSocket() && ((ModelCavityBlock) closest).distanceCavityPlug(extra) < UIBlock.PLUGSIZE) connect = this.connectCavityPlug(((ModelCavityBlock)closest), extra);
-            if (extra.hasBottomPlug() && ((ModelCavityBlock) closest).distanceCavitySocket(extra) < UIBlock.PLUGSIZE) connect = this.connectCavitySocket((ModelCavityBlock) closest, extra);
+            if (extra.hasTopSocket() && ((ModelCavityBlock) closest).distanceCavityPlug(extra) < CONNECTIONDISTANCE) connect = this.connectCavityPlug(((ModelCavityBlock)closest), extra);
+            if (extra.hasBottomPlug() && ((ModelCavityBlock) closest).distanceCavitySocket(extra) < CONNECTIONDISTANCE) connect = this.connectCavitySocket((ModelCavityBlock) closest, extra);
         }
         if (connect) return connect; //Yes these are needed
         else{
-            if (closest.isInCavity() && closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) < UIBlock.PLUGSIZE) connect = connectIntoCavityTop(extra, closest);
-            if (closest.isInCavity() && extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) < UIBlock.PLUGSIZE) connect = connectIntoCavityBottom(extra, closest);
-            if (extra.isInCavity() && extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) < UIBlock.PLUGSIZE) connect = connectIntoCavityTop(closest, extra);
-            if (extra.isInCavity() && closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) < UIBlock.PLUGSIZE) connect = connectIntoCavityBottom(closest, extra);
+            if (closest.isInCavity() && closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) < CONNECTIONDISTANCE) connect = connectIntoCavityTop(extra, closest);
+            if (closest.isInCavity() && extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) < CONNECTIONDISTANCE) connect = connectIntoCavityBottom(extra, closest);
+            if (extra.isInCavity() && extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) < CONNECTIONDISTANCE) connect = connectIntoCavityTop(closest, extra);
+            if (extra.isInCavity() && closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) < CONNECTIONDISTANCE) connect = connectIntoCavityBottom(closest, extra);
         }
         if (connect) return connect;
         else{
-            if (extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) < UIBlock.PLUGSIZE){
+            if (extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) < CONNECTIONDISTANCE){
                 this.connectTopBottom(extra, closest);
                 connect = true;
             }
-            if (closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) < UIBlock.PLUGSIZE){
+            if (closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) < CONNECTIONDISTANCE){
                 this.connectTopBottom(closest, extra);
                 connect = true;
             }
-            if (extra.compatibleLeftRight(closest) && extra.distanceLeftRight(closest) < UIBlock.PLUGSIZE){
+            if (extra.compatibleLeftRight(closest) && extra.distanceLeftRight(closest) < CONNECTIONDISTANCE){
                 this.connectRightLeft(closest, extra);
                 connect = true;
             }
-            if (closest.compatibleLeftRight(extra) && closest.distanceLeftRight(extra) < UIBlock.PLUGSIZE){
+            if (closest.compatibleLeftRight(extra) && closest.distanceLeftRight(extra) < CONNECTIONDISTANCE){
                 this.connectRightLeft(extra, closest);
                 connect = true;
             }
@@ -256,9 +258,7 @@ public class ConnectionHandler {
     public Boolean allBlocksConnected(ArrayList<ModelBlock> blocks){
         if (blocks.isEmpty()) return true;
         if (this.getStartBlocks(blocks).size() > 1) return false;
-        ArrayList<ModelBlock> connectedB = getConnectedBlocks(blocks.get(0));
         for (ModelBlock blk : blocks){
-            //if (!(connectedB.contains(blk))) return false;
             if (!(blk.equals(getFinishBlocks(blocks).get(0))||(blk.equals(getStartBlocks(blocks).get(0))))){
                 return isFullyConnected(blk);
             }

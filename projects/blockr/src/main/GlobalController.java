@@ -16,15 +16,12 @@ public class GlobalController {
 
     //Controllers
     private ModelController modelController;
-    private UIController uiController;
 
 
 
     // Constructor
     public GlobalController(GameWorldType gameWorldType){
         this.modelController = new ModelController(gameWorldType);
-        this.uiController = new UIController(MyCanvasWindow.WIDTH, MyCanvasWindow.HEIGHT);
-
     }
     
     /**
@@ -43,7 +40,6 @@ public class GlobalController {
      */
     public void handleMouseEvent(int id, int x, int y, int clickCount){
         ProgramLocation eventWindowLocation = new ProgramLocation(x,y);
-
         switch(id){
             case 501: //MOUSE_PRESSED
                 //return the topmost active block if one is in the click location
@@ -117,6 +113,6 @@ public class GlobalController {
     public void render(Graphics g){
         ProgramLocation gridLocation = new ProgramLocation(MyCanvasWindow.WIDTH*2/3, 0);
         modelController.getGameWorld().render(g, gridLocation.getX(), gridLocation.getY());
-        uiController.render(g, modelController.getBlockStates());
+        UIController.getInstance().render(g, modelController.getBlockStates());
     }
 }

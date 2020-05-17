@@ -160,6 +160,32 @@ public class LocationHandler {
         return closest;
     }
 
+    public Integer getClosestdistance(ModelBlock current, ModelBlock closest) {
+        if (current == null || closest == null) return null;
+        int d = CLOSESTDISTANCE;
+        if (closest instanceof ModelCavityBlock) {
+            if (((ModelCavityBlock) closest).distanceCavitySocket(current) < d) {
+                d = ((ModelCavityBlock) closest).distanceCavitySocket(current);
+            }
+            if (((ModelCavityBlock) closest).distanceCavityPlug(current) < d) {
+                d = ((ModelCavityBlock) closest).distanceCavityPlug(current);
+            }
+        }
+        if (current.compatibleTopBottom(closest) && current.distanceTopBottom(closest) < d) {
+            d = current.distanceTopBottom(closest);
+        }
+        if (closest.compatibleTopBottom(current) && closest.distanceTopBottom(current) < d) {
+            d = closest.distanceTopBottom(current);
+        }
+        if (closest.compatibleLeftRight(current) && closest.distanceLeftRight(current) < d) {
+            d = closest.distanceLeftRight(current);
+        }
+        if (current.compatibleLeftRight(closest) && current.distanceLeftRight(closest) < d) {
+            d = current.distanceLeftRight(closest);
+        }
+        return d;
+    }
+
     /**
      * If a block is dragged outside of the ProgramArea/Palette, its location
      * should not update but be restricted to the CanvasWindow and not

@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 public class ConnectionHandler {
 
-    public static final int CONNECTIONDISTANCE = 20;
-
     private static ConnectionHandler instance;
 
 
@@ -68,7 +66,7 @@ public class ConnectionHandler {
     }
 
     /**
-     * Connects block extra to the connectionPoint p of block closest.
+     * Connects block extra to block closest.
      * @param closest first block
      * @param extra second block
      * @return true if connected
@@ -76,35 +74,28 @@ public class ConnectionHandler {
      */
     public boolean connect(ModelBlock closest, ModelBlock extra) {
         boolean connect = false;
-        if (closest instanceof ModelCavityBlock){
-            if (extra.hasTopSocket() && ((ModelCavityBlock) closest).distanceCavityPlug(extra) < CONNECTIONDISTANCE) connect = this.connectCavityPlug(((ModelCavityBlock)closest), extra);
-            if (extra.hasBottomPlug() && ((ModelCavityBlock) closest).distanceCavitySocket(extra) < CONNECTIONDISTANCE) connect = this.connectCavitySocket((ModelCavityBlock) closest, extra);
+        int d = LocationHandler.getInstance().getClosestdistance(extra, closest);
+        if (closest instanceof ModelCavityBlock && extra.hasTopSocket() && ((ModelCavityBlock) closest).distanceCavityPlug(extra) == d) connect = this.connectCavityPlug(((ModelCavityBlock)closest), extra);
+        else if (closest instanceof ModelCavityBlock && extra.hasBottomPlug() && ((ModelCavityBlock) closest).distanceCavitySocket(extra) == d) connect = this.connectCavitySocket((ModelCavityBlock) closest, extra);
+        else if (closest.isInCavity() && closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) == d) connect = connectIntoCavityTop(extra, closest);
+        else if (closest.isInCavity() && extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) == d) connect = connectIntoCavityBottom(extra, closest);
+        else if (extra.isInCavity() && extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) == d) connect = connectIntoCavityTop(closest, extra);
+        else if (extra.isInCavity() && closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) == d) connect = connectIntoCavityBottom(closest, extra);
+        else if (extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) == d){
+            this.connectTopBottom(extra, closest);
+            connect = true;
         }
-        if (connect) return connect; //Yes these are needed
-        else{
-            if (closest.isInCavity() && closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) < CONNECTIONDISTANCE) connect = connectIntoCavityTop(extra, closest);
-            if (closest.isInCavity() && extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) < CONNECTIONDISTANCE) connect = connectIntoCavityBottom(extra, closest);
-            if (extra.isInCavity() && extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) < CONNECTIONDISTANCE) connect = connectIntoCavityTop(closest, extra);
-            if (extra.isInCavity() && closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) < CONNECTIONDISTANCE) connect = connectIntoCavityBottom(closest, extra);
+        else if (closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) == d){
+            this.connectTopBottom(closest, extra);
+            connect = true;
         }
-        if (connect) return connect;
-        else{
-            if (extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) < CONNECTIONDISTANCE){
-                this.connectTopBottom(extra, closest);
-                connect = true;
-            }
-            if (closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) < CONNECTIONDISTANCE){
-                this.connectTopBottom(closest, extra);
-                connect = true;
-            }
-            if (extra.compatibleLeftRight(closest) && extra.distanceLeftRight(closest) < CONNECTIONDISTANCE){
-                this.connectRightLeft(closest, extra);
-                connect = true;
-            }
-            if (closest.compatibleLeftRight(extra) && closest.distanceLeftRight(extra) < CONNECTIONDISTANCE){
-                this.connectRightLeft(extra, closest);
-                connect = true;
-            }
+        else if (extra.compatibleLeftRight(closest) && extra.distanceLeftRight(closest) == d){
+            this.connectRightLeft(closest, extra);
+            connect = true;
+        }
+        else if (closest.compatibleLeftRight(extra) && closest.distanceLeftRight(extra) == d){
+            this.connectRightLeft(extra, closest);
+            connect = true;
         }
         return connect;
     }

@@ -199,11 +199,14 @@ public class ProgramRunner {
     }
 
     public void callStackUpdate(ProgramState current, ProgramState next) {
-        if (current.getBlock() == null) return;
-        if (next.getBlock() == null && !callStack.empty()) callStack.pop();
-        else if (current.getBlock().getSurroundingCavityBlock() instanceof ModelFunctionDefinitionBlock) {
-            if (next.getBlock().getSurroundingCavityBlock() instanceof ModelFunctionDefinitionBlock) {
-                if (!current.getBlock().getSurroundingCavityBlock().equals(next.getBlock().getSurroundingCavityBlock())) {
+        if (current.getBlock() == null || next.getBlock() == null) return;
+//        if (next.getBlock() == null) {
+//            if (!callStack.empty()) callStack.pop();
+//            return;
+//        }
+        if (current.getBlock().getSurroundingDefinitionBlock() != null) {
+            if (next.getBlock().getSurroundingDefinitionBlock() != null) {
+                if (!current.getBlock().getSurroundingDefinitionBlock().equals(next.getBlock().getSurroundingDefinitionBlock())) {
                     if (current.getBlock() instanceof ModelFunctionCallBlock) {
                         callStack.push((ModelFunctionCallBlock) current.getBlock());
                     }
@@ -213,7 +216,7 @@ public class ProgramRunner {
             else callStack.pop();
         }
         else
-        if (next.getBlock().getSurroundingCavityBlock() instanceof ModelFunctionDefinitionBlock) {
+        if (next.getBlock().getSurroundingDefinitionBlock() != null) {
             if (current.getBlock() instanceof ModelFunctionCallBlock) {
                 callStack.push((ModelFunctionCallBlock) current.getBlock());
             }

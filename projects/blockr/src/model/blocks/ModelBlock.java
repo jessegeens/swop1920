@@ -125,6 +125,23 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
     }
 
     /**
+     *
+     * @return the function block that has this block in it's cavity, null if this block is within no cavity
+     * @author Oberon Swings
+     */
+    public ModelFunctionDefinitionBlock getSurroundingDefinitionBlock(){
+        if (this.hasTopSocket()){
+            ModelBlock socket = this.getTopSocket();
+            while (!(socket instanceof ModelFunctionDefinitionBlock || socket == null)){
+                socket = socket.getTopSocket();
+            }
+            if (socket == null) return null;
+            else if (socket instanceof ModelFunctionDefinitionBlock && ((ModelFunctionDefinitionBlock) socket).getCavityBlocks().contains(this)) return ((ModelFunctionDefinitionBlock)socket);
+        }
+        return null;
+    }
+
+    /**
      * 
      * @return {boolean} true if this block has a top socket, false otherwise
      */

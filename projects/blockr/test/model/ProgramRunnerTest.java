@@ -358,6 +358,56 @@ public class ProgramRunnerTest {
 
     @Test
     public void whileInDefinition() {
-        
+        ProgramRunner pr = new ProgramRunner(GW);
+        ModelFunctionDefinitionBlock definitionBlock = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(20, 20), Actions.get(2));
+        ModelFunctionCallBlock callBlock = new ModelFunctionCallBlock(new ProgramLocation(20, 100), 0);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(133, 63), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(146, 106), Actions.get(0));
+        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(213, 63));
+        ModelPredicateBlock predicateBlock = new ModelPredicateBlock(new ProgramLocation(293, 63), Predicates.get(0));
+        rightBlock.setBottomPlug(callBlock);
+        callBlock.setTopSocket(rightBlock);
+        definitionBlock.setCavityPlug(whileBlock);
+        whileBlock.setTopSocket(definitionBlock);
+        whileBlock.setCavityPlug(forwardBlock);
+        forwardBlock.setTopSocket(whileBlock);
+        forwardBlock.setBottomPlug(whileBlock);
+        whileBlock.setCavitySocket(forwardBlock);
+        whileBlock.setRightSocket(notBlock);
+        notBlock.setLeftPlug(whileBlock);
+        notBlock.setRightSocket(predicateBlock);
+        predicateBlock.setLeftPlug(notBlock);
+        whileBlock.setBottomPlug(definitionBlock);
+        definitionBlock.setCavitySocket(whileBlock);
+        pr.initialise(rightBlock, new ArrayList<>(Arrays.asList(definitionBlock)));
+        pr.execute();
+        pr.execute();
+        pr.execute();
+        pr.execute();
+        assertFalse(pr.isRunning());
+    }
+
+    @Test
+    public void programEndCall() {
+        ProgramRunner pr = new ProgramRunner(GW);
+        ModelFunctionDefinitionBlock definitionBlock = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(20, 20), Actions.get(2));
+        ModelFunctionCallBlock callBlock = new ModelFunctionCallBlock(new ProgramLocation(20, 100), 0);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(133, 63), Actions.get(0));
+        rightBlock.setBottomPlug(callBlock);
+        callBlock.setTopSocket(rightBlock);
+        definitionBlock.setCavityPlug(forwardBlock);
+        forwardBlock.setTopSocket(definitionBlock);
+        forwardBlock.setBottomPlug(definitionBlock);
+        definitionBlock.setCavitySocket(forwardBlock);
+        pr.initialise(rightBlock, new ArrayList<>(Arrays.asList(definitionBlock)));
+        pr.execute();
+        pr.execute();
+        pr.execute();
+        pr.undoProgramRunner();
+        pr.undoProgramRunner();
+        pr.undoProgramRunner();
+        assertTrue(rightBlock.isHighlighted());
     }
 }

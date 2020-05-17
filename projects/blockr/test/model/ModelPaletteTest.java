@@ -15,7 +15,7 @@ public class ModelPaletteTest {
     public void populateBlocks() {
         ModelPalette palette = new ModelPalette(new ArrayList<>(), new ArrayList<>());
         palette.populateBlocks();
-        assertEquals(3, palette.getPaletteBlocks().size());
+        assertEquals(4, palette.getPaletteBlocks().size());
     }
 
     @Test
@@ -34,6 +34,6 @@ public class ModelPaletteTest {
     @Test
     public void getPaletteBlocks() {
         ModelPalette palette = new ModelPalette(new ArrayList<>(), new ArrayList<>());
-        assertEquals(3, palette.getPaletteBlocks().size());
+        assertEquals(4, palette.getPaletteBlocks().size());
     }
 }

@@ -47,13 +47,17 @@ public class LocationHandler {
                 updateLocationBlock(block.getBottomPlug());
             }
         }
+        updatePredicateBlocksLocations(block);
+        if (block instanceof ModelCavityBlock) updateCavityBlocksLocations((ModelCavityBlock) block);
+    }
+
+    public void updatePredicateBlocksLocations(ModelBlock block){
         if (block.hasLeftPlug() && block.getLeftPlug() != null){
             setLeftPlugLocation(block, block.getLeftPlug());
         }
         if (block.hasRightSocket() && block.getRightSocket() != null){
             updateLocationBlock(block.getRightSocket());
         }
-        if (block instanceof ModelCavityBlock) updateCavityBlocksLocations((ModelCavityBlock) block);
     }
 
     /**
@@ -64,13 +68,18 @@ public class LocationHandler {
      */
     public void updateCavityBlocksLocations(ModelCavityBlock block){
         ModelBlock next = block.getCavityPlug();
-        while (next != block && next != null){
-            if (next.getTopSocket() == block){
+        while (next != block && next != null) {
+            if (next instanceof ModelCavityBlock) {
+                updateCavityBlocksLocations((ModelCavityBlock) next);
+                updatePredicateBlocksLocations(next);
+            }
+            if (next.getTopSocket() == block) {
                 setTopSocketLocation(next, block);
             }
             else setTopSocketLocation(next, next.getTopSocket());
             next = next.getBottomPlug();
         }
+        updatePredicateBlocksLocations(block);
     }
 
     /**

@@ -13,9 +13,9 @@ import javax.xml.stream.events.StartDocument;
 public class UIBlock{
 
 
-    public static final int PLUGSIZE = 10; //final standard size of plugs and sockets
+    public static final int PLUGSIZE = 20; //final standard size of plugs and sockets
     public static final int STD_WIDTH = 80; //final standard width of blocks
-    public static final int STD_HEIGHT = 40; //final standard height of blocks
+    public static final int STD_HEIGHT = 80; //final standard height of blocks
 
     UIBlock(){ }
 

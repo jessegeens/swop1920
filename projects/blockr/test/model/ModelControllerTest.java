@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ui.BlockState;
+import ui.UIBlock;
 import utilities.*;
 
 import java.io.File;
@@ -45,7 +46,7 @@ public class ModelControllerTest {
         MC.select(new ProgramLocation (40, 40));
         MC.release(new ProgramLocation (420, 420));
         MC.select(new ProgramLocation(40, 200));
-        MC.release(new ProgramLocation(420, 500));
+        MC.release(new ProgramLocation(420, 420 + UIBlock.STD_HEIGHT));
         assertEquals(10, MC.getBlockStates().size());
     }
 

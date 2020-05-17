@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import model.blocks.*;
 import org.junit.Test;
 
+import ui.UIBlock;
 import utilities.*;
 
 import java.util.ArrayList;
@@ -324,9 +325,9 @@ public class ConnectionHandlerTest {
     @Test
     public void generalConnectIntoCavityBottom(){
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
-        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), null);
-        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(113, 223), null);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100 + UIBlock.STD_WIDTH/6,100 + UIBlock.STD_HEIGHT*2/3 - UIBlock.PLUGSIZE/2), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100 + UIBlock.STD_WIDTH/6, 100 + UIBlock.STD_HEIGHT*5/3 - UIBlock.PLUGSIZE/2), null);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(100 + UIBlock.STD_WIDTH/6, 100 + UIBlock.STD_HEIGHT*8/3 - UIBlock.PLUGSIZE/2), null);
         forwardBlock.setTopSocket(whileBlock);
         whileBlock.setCavityPlug(forwardBlock);
         leftBlock.setTopSocket(forwardBlock);
@@ -334,7 +335,7 @@ public class ConnectionHandlerTest {
         leftBlock.setBottomPlug(whileBlock);
         whileBlock.setCavitySocket(leftBlock);
         ConnectionHandler.getInstance().connect(rightBlock,leftBlock);
-        assertEquals(leftBlock, whileBlock.getCavitySocket());
+        assertEquals(rightBlock, whileBlock.getCavitySocket());
     }
 
     @Test
@@ -456,11 +457,11 @@ public class ConnectionHandlerTest {
 
     @Test
     public void updateConnections(){
-        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,180), false);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100 + UIBlock.STD_HEIGHT), false);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), null);
-        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), null);
-        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(100,340), null);
-        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(180, 180), null);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100 + UIBlock.STD_WIDTH/6, 100 + UIBlock.STD_HEIGHT + UIBlock.STD_HEIGHT*2/3 - UIBlock.PLUGSIZE/2), null);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(100,100 + UIBlock.STD_HEIGHT * 3), null);
+        ModelPredicateBlock wifBlock = new ModelPredicateBlock(new ProgramLocation(100 + UIBlock.STD_WIDTH, 100 + UIBlock.STD_HEIGHT), null);
         ArrayList<ModelBlock> blocks = new ArrayList<>();
         blocks.add(whileBlock);
         blocks.add(forwardBlock);

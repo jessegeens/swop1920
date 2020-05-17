@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class LocationHandler {
 
-    public static final int CLOSESTDISTANCE = 100;
+    public static final int CLOSESTDISTANCE = 80;
     private static LocationHandler instance;
 
     private LocationHandler() {

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class ConnectionHandler {
 
-    public static final int CONNECTIONDISTANCE = 60;
+    public static final int CONNECTIONDISTANCE = 20;
 
     private static ConnectionHandler instance;
 

@@ -55,9 +55,6 @@ public class GlobalController {
             default:
                 break;
         }
-
-
-        //this.modelController.handleMouseEvent(id, eventWindowLocation, clickCount);
     }
 
     /**
@@ -82,7 +79,6 @@ public class GlobalController {
      *
      *
      */
-    //TODO fritz mentioned something about having to use a different key combination for redo?
     public void handleKeyEvent(int id, int keyCode, char keyChar, boolean isControlDown, boolean isShiftDown){
         switch(keyCode) {
             case 65: //A;

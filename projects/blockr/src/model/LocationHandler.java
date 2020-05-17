@@ -8,9 +8,16 @@ import java.util.ArrayList;
 
 public class LocationHandler {
 
-    private ArrayList<ModelBlock> blocks;
+    private static LocationHandler instance;
 
-    public LocationHandler() {
+    private LocationHandler() {
+    }
+
+    public static LocationHandler getInstance() {
+        if (instance == null) {
+            instance = new LocationHandler();
+        }
+        return instance;
     }
 
 

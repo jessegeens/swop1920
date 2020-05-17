@@ -7,8 +7,17 @@ import java.util.ArrayList;
 
 public class ConnectionHandler {
 
+    private static ConnectionHandler instance;
 
-    public ConnectionHandler() {
+
+    private ConnectionHandler() {
+    }
+
+    public static ConnectionHandler getInstance() {
+        if (instance == null) {
+            instance = new ConnectionHandler();
+        }
+        return instance;
     }
 
     /**

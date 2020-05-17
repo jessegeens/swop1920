@@ -58,7 +58,7 @@ public class ConnectionHandlerTest {
         notBlock.setRightSocket(wifBlock);
         wifBlock.setLeftPlug(notBlock);
         ConnectionHandler.getInstance().disconnect(notBlock);
-        assertEquals(null, notBlock.getRightSocket());
+        assertEquals(wifBlock, notBlock.getRightSocket());
     }
 
     @Test
@@ -88,7 +88,7 @@ public class ConnectionHandlerTest {
         notBlock.setRightSocket(wifBlock);
         wifBlock.setLeftPlug(notBlock);
         ConnectionHandler.getInstance().disconnect(notBlock);
-        assertEquals(null, wifBlock.getLeftPlug());
+        assertEquals(notBlock, wifBlock.getLeftPlug());
     }
 
     @Test

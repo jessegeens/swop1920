@@ -38,10 +38,6 @@ public class ConnectionHandler {
             a.getBottomPlug().setTopSocket(null);
             a.setBottomPlug(null);
         }
-        if (a.hasRightSocket() && a.getRightSocket() != null){
-            a.getRightSocket().setLeftPlug(null);
-            a.setRightSocket(null);
-        }
         if (a.hasLeftPlug() && a.getLeftPlug() != null){
             a.getLeftPlug().setRightSocket(null);
             a.setLeftPlug(null);

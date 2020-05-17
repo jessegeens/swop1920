@@ -212,4 +212,24 @@ public class ModelControllerTest {
         controller.release(new ProgramLocation(443, 453));
         assertEquals(new ProgramLocation(433, 463), controller.getProgramAreaBlocks().get(1).getPos());
     }
+
+    @Test
+    public void moveWhileBlockWithConnectedBlocks() {
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(30, 150));
+        controller.release(new ProgramLocation(320, 20));
+        controller.select(new ProgramLocation(190, 30));
+        controller.release(new ProgramLocation(400, 20));
+        controller.select(new ProgramLocation(30, 390));
+        controller.release(new ProgramLocation(480, 20));
+        controller.select(new ProgramLocation(190, 150));
+        controller.release(new ProgramLocation(333, 63));
+        controller.select(new ProgramLocation(330, 30));
+        controller.release(new ProgramLocation(320, 420));
+        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(0, 0));
+        for (ModelBlock block : controller.getProgramAreaBlocks()) {
+            if (block instanceof ModelNotBlock) notBlock = (ModelNotBlock) block;
+        }
+        assertEquals(new ProgramLocation(400, 420), notBlock.getPos());
+    }
 }

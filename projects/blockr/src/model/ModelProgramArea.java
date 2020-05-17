@@ -34,12 +34,18 @@ public class ModelProgramArea{
      */
     public void removePABlock(ModelBlock toBeRemoved){
         ConnectionHandler.getInstance().disconnect(toBeRemoved);
-        blocks.remove(toBeRemoved);
-        if(toBeRemoved instanceof ModelCavityBlock){
-            for (ModelBlock block : ((ModelCavityBlock) toBeRemoved).getCavityBlocks()){
-                blocks.remove(block);
+        ArrayList<ModelBlock> toRemoveBlocks = new ArrayList<>();
+        toRemoveBlocks.add(toBeRemoved);
+        int i = 0;
+        while (toRemoveBlocks.size() > i) {
+            for (ModelBlock block : toRemoveBlocks.get(i).getConnectionsCavityRight()) {
+                if (!toRemoveBlocks.contains(block)) {
+                    toRemoveBlocks.add(block);
+                }
             }
+            i ++;
         }
+        blocks.removeAll(toRemoveBlocks);
     }
 
     /**
@@ -47,12 +53,18 @@ public class ModelProgramArea{
      * @param toBeAdded the block which should be added
      */
     public void addPABlock(ModelBlock toBeAdded){
-        if(toBeAdded != null){
-            this.blocks.add(toBeAdded);
-            if (toBeAdded instanceof ModelCavityBlock) {
-                this.blocks.addAll(((ModelCavityBlock) toBeAdded).getCavityBlocks());
+        ArrayList<ModelBlock> toAddBlocks = new ArrayList<>();
+        toAddBlocks.add(toBeAdded);
+        int i = 0;
+        while (toAddBlocks.size() > i) {
+            for (ModelBlock block : toAddBlocks.get(i).getConnectionsCavityRight()) {
+                if (!toAddBlocks.contains(block)) {
+                    toAddBlocks.add(block);
+                }
             }
+            i ++;
         }
+        blocks.addAll(toAddBlocks);
     }
 
     /**
@@ -85,13 +97,6 @@ public class ModelProgramArea{
     public boolean connectedBlockHere(ProgramLocation eventWindowLocation){
         for(int i = blocks.size() - 1; i >= 0; i--){
             if(blocks.get(i).inBoundsOfElement(eventWindowLocation)){
-                /*
-                ModelBlock toBeReturned = blocks.get(i);
-                if(CH.isConnected(blocks.get(i))){
-                    return true;
-                }
-                */
-                //refactor so CH actually processes this?
                 if(blocks.get(i).getConnectionsNoCavity().size() > 0){
                     return true;
                 }
@@ -108,12 +113,12 @@ public class ModelProgramArea{
      * @author Oberon Swings
      */
     public boolean findAndConnect(ProgramLocation eveWindowLocation, ModelBlock activeB){
-        if (!(this.getPABlocks().contains(activeB))) {
-            this.addPABlock(activeB);
-        }
         ProgramLocation location = LocationHandler.getInstance().moveToInBounds(eveWindowLocation);
         LocationHandler.getInstance().setLocationBlock(activeB, location);
         ModelBlock closest = LocationHandler.getInstance().findClosestBlock(activeB, blocks);
+        if (!(this.getPABlocks().contains(activeB))) {
+            this.addPABlock(activeB);
+        }
         boolean connection = false;
         if (closest != null){
             connection = ConnectionHandler.getInstance().connect(closest, activeB);

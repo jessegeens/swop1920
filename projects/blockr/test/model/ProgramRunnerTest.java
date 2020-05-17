@@ -23,8 +23,8 @@ public class ProgramRunnerTest {
     @Before
     public void setUp() throws Exception {
         try {
-            //File file = new File("/home/oberon/Documents/Studies/SWOP/swop1920/projects/robotgameworld/out/production/robotgameworld/");
-            File file = new File("/home/jesse/Code/School/3ba/swop1920/projects/robotgameworld/out/production/robotgameworld/");
+            File file = new File("/home/oberon/Documents/Studies/SWOP/swop1920/projects/robotgameworld/out/production/robotgameworld/");
+            //File file = new File("/home/jesse/Code/School/3ba/swop1920/projects/robotgameworld/out/production/robotgameworld/");
             //convert the file to URL format
             URL url = file.toURI().toURL();
             URL[] urls = new URL[]{url};
@@ -201,8 +201,7 @@ public class ProgramRunnerTest {
     }
 
     @Test
-    public void undoHighlightFunction() throws Exception {
-        setUp();
+    public void undoHighlightFunction() {
         ProgramRunner programRunner = new ProgramRunner(GW);
         ModelFunctionDefinitionBlock funcDef = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(133,143), Actions.get(0));
@@ -238,8 +237,7 @@ public class ProgramRunnerTest {
     }
 
     @Test
-    public void findNextBlockEmptyCallStack() throws Exception {
-        setUp();
+    public void findNextBlockEmptyCallStack() {
         ProgramRunner programRunner = new ProgramRunner(GW);
         ModelFunctionDefinitionBlock funcDef = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(133,143), Actions.get(0));
@@ -277,8 +275,7 @@ public class ProgramRunnerTest {
     }
 
     @Test
-    public void undoSkippingBlock() throws Exception {
-        setUp();
+    public void undoSkippingBlock() {
         ProgramRunner programRunner = new ProgramRunner(GW);
         ModelFunctionDefinitionBlock funcDef = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(133,143), Actions.get(0));
@@ -307,8 +304,7 @@ public class ProgramRunnerTest {
     }
 
     @Test
-    public void executeAfterRedo() throws Exception {
-        setUp();
+    public void executeAfterRedo() {
         ProgramRunner programRunner = new ProgramRunner(GW);
         ModelFunctionDefinitionBlock funcDef = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(133,143), Actions.get(0));
@@ -336,5 +332,32 @@ public class ProgramRunnerTest {
         programRunner.execute();
 
         assertTrue(rightBlock.isHighlighted());
+    }
+
+    @Test
+    public void doubleCallBlock() {
+        ProgramRunner pr = new ProgramRunner(GW);
+        ModelFunctionDefinitionBlock funcDef = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
+        ModelFunctionCallBlock call1 = new ModelFunctionCallBlock(new ProgramLocation(20, 20), 0);
+        ModelFunctionCallBlock call2 = new ModelFunctionCallBlock(new ProgramLocation(20, 100), 0);
+        ModelActionBlock forward = new ModelActionBlock(new ProgramLocation(133, 63), Actions.get(0));
+        funcDef.setCavityPlug(forward);
+        funcDef.setCavitySocket(forward);
+        forward.setTopSocket(funcDef);
+        forward.setBottomPlug(funcDef);
+        call1.setBottomPlug(call2);
+        call2.setTopSocket(call1);
+        pr.initialise(call1, new ArrayList<>(Arrays.asList(funcDef)));
+        pr.execute();
+        pr.execute();
+        pr.execute();
+        pr.execute();
+        pr.execute();
+        assertFalse(pr.isRunning());
+    }
+
+    @Test
+    public void whileInDefinition() {
+        
     }
 }

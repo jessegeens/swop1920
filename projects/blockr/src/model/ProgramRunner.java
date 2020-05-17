@@ -199,8 +199,9 @@ public class ProgramRunner {
     }
 
     public void callStackUpdate(ProgramState current, ProgramState next) {
-        if (current.getBlock() == null || next.getBlock() == null) return;
-        if (current.getBlock().getSurroundingCavityBlock() instanceof ModelFunctionDefinitionBlock) {
+        if (current.getBlock() == null) return;
+        if (next.getBlock() == null && !callStack.empty()) callStack.pop();
+        else if (current.getBlock().getSurroundingCavityBlock() instanceof ModelFunctionDefinitionBlock) {
             if (next.getBlock().getSurroundingCavityBlock() instanceof ModelFunctionDefinitionBlock) {
                 if (!current.getBlock().getSurroundingCavityBlock().equals(next.getBlock().getSurroundingCavityBlock())) {
                     if (current.getBlock() instanceof ModelFunctionCallBlock) {
@@ -216,7 +217,7 @@ public class ProgramRunner {
             if (current.getBlock() instanceof ModelFunctionCallBlock) {
                 callStack.push((ModelFunctionCallBlock) current.getBlock());
             }
-            if (current.getBlock().getTopSocket() instanceof  ModelFunctionCallBlock) {
+            else if (current.getBlock().getTopSocket() instanceof  ModelFunctionCallBlock) {
                 callStack.push((ModelFunctionCallBlock) current.getBlock().getTopSocket());
             }
         }

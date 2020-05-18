@@ -16,8 +16,6 @@ public class GlobalController {
     //Controllers
     private ModelController modelController;
 
-
-
     // Constructor
     public GlobalController(GameWorldType gameWorldType){
         this.modelController = new ModelController(gameWorldType);
@@ -44,11 +42,11 @@ public class GlobalController {
                 //return the topmost active block if one is in the click location
                 //you remove it from the local list in PArea until mouseup
                 //this.modelController.select(eventWindowLocation);
-                modelController.newSelect(eventWindowLocation);
+                modelController.select(eventWindowLocation);
                 break;
             case 502: //MOUSE_RELEASED
                 //this.modelController.release(eventWindowLocation);
-                modelController.newRelease(eventWindowLocation);
+                modelController.release(eventWindowLocation);
                 break;
             case 506: //MOUSE_DRAGGED
                 this.modelController.drag(eventWindowLocation);
@@ -93,11 +91,11 @@ public class GlobalController {
                 if(isControlDown){
                     if(isShiftDown){
                         //this.modelController.globalRedo();
-                        modelController.newRedo();
+                        modelController.redo();
                     }
                     else{
                         //this.modelController.globalUndo();
-                        modelController.newUndo();
+                        modelController.undo();
                     }
                 }
                 break;

@@ -17,13 +17,6 @@ public class ProgramState {
     private final Stack<ModelFunctionCallBlock> callStack;
     private final GameWorldState gameState;
 
-    public ProgramState(ModelBlock current, GameWorldState gameState) {
-        this.current = current;
-        this.gameState = gameState;
-        this.highlight = null;
-        this.callStack = null;
-    }
-
     public ProgramState(ModelBlock current, ModelBlock highlight, Stack<ModelFunctionCallBlock> callStack, GameWorldState gameState){
         this.current = current;
         this.highlight = highlight;
@@ -46,5 +39,4 @@ public class ProgramState {
     public GameWorldState getGameState(){
         return gameState;
     }
-
 }

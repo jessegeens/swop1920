@@ -1,10 +1,8 @@
 package model;
 
 import javax.swing.JOptionPane;
-
 import model.blocks.*;
 import gameworldapi.*;
-
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -13,16 +11,10 @@ public class ProgramRunner {
     private ProgramState current;
 
     private boolean running;
-    //private ModelBlock start;
     private GameWorld gameWorld;
     private GameWorldState initialState;
 
     //private Stack<ModelFunctionCallBlock> callStack;
-    //private ArrayList<ModelFunctionDefinitionBlock> definitions;
-
-    //private Stack<ProgramState> programUndoStateStack;
-    //private Stack<ProgramState> programRedoStateStack;
-
 
     //Constructor
     public ProgramRunner(GameWorld gameWorld){
@@ -30,8 +22,6 @@ public class ProgramRunner {
         this.initialState = gameWorld.getSnapshot();
         this.running = false;
         UndoRedoHandler.reset();
-        //programUndoStateStack = new Stack<>();
-        //programRedoStateStack = new Stack<>();
     }
 
     /**
@@ -41,19 +31,14 @@ public class ProgramRunner {
      */
     public void initialise(ModelBlock start, ArrayList<ModelFunctionDefinitionBlock> definitions){
         this.running = true;
-        //this.start = start;
         ModelBlock thisstart = start;
-        //this.definitions = definitions;
         //callStack = new Stack<>();
         if (thisstart instanceof ModelCavityBlock) {
-            //this.start = findNextBlock(this.start);
             thisstart = newFindNextBlock(thisstart);
         }
         current = new ProgramState(null, thisstart, new Stack<>(), gameWorld.getSnapshot());
         UndoRedoHandler.getInstance().executeRunner(current);
         current.getHighlight().setHighlight();
-        //programUndoStateStack.push(new ProgramState(this.start, gameWorld.getSnapshot()));
-        //updateHighlight(null, this.start);
     }
 
     /**
@@ -62,13 +47,10 @@ public class ProgramRunner {
      */
     public void reset(){
         if (isRunning()){
-            //updateHighlight(programUndoStateStack.peek().getCurrent(), null);
             this.running = false;
             this.gameWorld.restore(initialState);
             UndoRedoHandler.getInstance().clearRunnerStacks();
             current = null;
-            //this.programUndoStateStack.clear();
-            //this.programRedoStateStack.clear();
         }
     }
 
@@ -132,16 +114,6 @@ public class ProgramRunner {
         return this.running;
     }
 
-//    /**
-//     * Highlights the next block in the program and unhighlight the current one
-//     */
-//    private void updateHighlight(ModelBlock current, ModelBlock next){
-//        if (current != null)
-//            current.setUnHighlight();
-//        if (next != null)
-//            next.setHighlight();
-//    }
-
     public void setState(ProgramState state) {
         if (current.getHighlight() != null) current.getHighlight().setUnHighlight();
         current = state;
@@ -151,47 +123,6 @@ public class ProgramRunner {
         }
         else running = false;
     }
-
-//    /**
-//     * Returns the bottomplug if it is a normal block (move block) or if the condition of a WhileIf block fails
-//     * If the condition of a WhileIfBlock succeeds it gives the first cavity block of the WhileIf block.
-//     * //This should point to the next block that has to be executed, this is needed so that when we step we know what block to run but also this one needs to be highlighted.
-//     * @return the next block that will be run in the program
-//     * @author Oberon Swings (debugged by Bert)
-//     */
-//    private ModelBlock findNextBlock(ModelBlock currentBlock){
-//        ModelBlock nextBlock;
-//        if (currentBlock == null) return start;
-//        if (currentBlock instanceof ModelWhileIfBlock){
-//            if (((ModelWhileIfBlock) currentBlock).isNegated()) {
-//                if (!(gameWorld.evaluate(((ModelWhileIfBlock) currentBlock).getPredicate()))) {
-//                    nextBlock =  ((ModelWhileIfBlock) currentBlock).getCavityPlug();
-//                } else {
-//                    nextBlock =  currentBlock.getBottomPlug();
-//                }
-//            } else {
-//                if((gameWorld.evaluate(((ModelWhileIfBlock) currentBlock).getPredicate()))){
-//                    nextBlock = ((ModelWhileIfBlock) currentBlock).getCavityPlug();
-//                } else {
-//                    nextBlock = currentBlock.getBottomPlug();
-//                }
-//            }
-//        }
-//        else if (currentBlock instanceof ModelFunctionCallBlock){
-//            ModelFunctionDefinitionBlock def = this.getFuncDefBlockById(((ModelFunctionCallBlock) currentBlock).getId());
-//            nextBlock =  def.getCavityPlug();
-//        }
-//        else if (currentBlock instanceof ModelFunctionDefinitionBlock){
-//            //next =  callStack.peek().getBottomPlug();
-//            nextBlock = current.getCallStack().peek().getBottomPlug();
-//        }
-//        else if (currentBlock.getBottomPlug() != null && currentBlock.getBottomPlug().isIf() && ((ModelWhileIfBlock)currentBlock.getBottomPlug()).getCavitySocket() == currentBlock){
-//            nextBlock =  currentBlock.getBottomPlug().getBottomPlug(); //If block should only be executed once.
-//        }
-//        else nextBlock =  currentBlock.getBottomPlug();
-//        while (nextBlock instanceof ModelCavityBlock) nextBlock = findNextBlock(nextBlock);
-//        return nextBlock;
-//    }
 
     public ModelBlock newFindNextBlock(ModelBlock block) {
         ModelBlock nextBlock = block.findNextBlock();
@@ -205,77 +136,4 @@ public class ProgramRunner {
         }
         return nextBlock;
     }
-
-//    public void updateState(ProgramState current, ProgramState next){
-//        this.gameWorld.restore(next.getGameState());
-//        ModelBlock currentB = current.getCurrent();
-//        ModelBlock nextB = next.getCurrent();
-//        updateHighlight(currentB, nextB);
-//    }
-
-//    public void callStackUpdate(ProgramState current, ProgramState next) {
-//        if (current.getCurrent() == null || next.getCurrent() == null) return;
-//        if (current.getCurrent().getSurroundingDefinitionBlock() != null) {
-//            if (next.getCurrent().getSurroundingDefinitionBlock() != null) {
-//                if (!current.getCurrent().getSurroundingDefinitionBlock().equals(next.getCurrent().getSurroundingDefinitionBlock())) {
-//                    if (current.getCurrent() instanceof ModelFunctionCallBlock) {
-//                        callStack.push((ModelFunctionCallBlock) current.getCurrent());
-//                    }
-//                    else callStack.pop();
-//                }
-//            }
-//            else callStack.pop();
-//        }
-//        else
-//        if (next.getCurrent().getSurroundingDefinitionBlock() != null) {
-//            if (current.getCurrent() instanceof ModelFunctionCallBlock) {
-//                callStack.push((ModelFunctionCallBlock) current.getCurrent());
-//            }
-//            else if (current.getCurrent().getTopSocket() instanceof  ModelFunctionCallBlock) {
-//                callStack.push((ModelFunctionCallBlock) current.getCurrent().getTopSocket());
-//            }
-//        }
-//    }
-//
-//
-//    public void undoProgramRunner(){
-//        if(this.programUndoStateStack.size() == 1){
-//            this.running = false;
-//        }
-//        else{
-//            programRedoStateStack.push(programUndoStateStack.pop());
-//            ProgramState pastState = this.programUndoStateStack.peek();
-//            callStackUpdate(programRedoStateStack.peek(), pastState);
-//            this.updateState(programRedoStateStack.peek(), pastState);
-//        }
-//    }
-//
-//    public void redoProgramRunner(){
-//        if(!this.programRedoStateStack.isEmpty()){
-//            ProgramState pastState = this.programRedoStateStack.pop();
-//            callStackUpdate(programUndoStateStack.peek(), pastState);
-//            this.updateState(programUndoStateStack.peek() ,pastState);
-//            programUndoStateStack.push(pastState);
-//        }
-//    }
-
-//    /**
-//     * Returns the function definition by id or null if the function definition
-//     *
-//     * @param id The requested id
-//     * @return the requested block or null if no block with this ide has been founc
-//     * @author bert_dvl
-//     */
-//    public ModelFunctionDefinitionBlock getFuncDefBlockById(int id){
-//        for(ModelBlock block : this.definitions){
-//            if(block instanceof ModelFunctionDefinitionBlock){
-//                if(((ModelFunctionDefinitionBlock) block).getId() == id){
-//                    return (ModelFunctionDefinitionBlock) block;
-//                }
-//            }
-//        }
-//        return null;
-//    }
-
-
 }

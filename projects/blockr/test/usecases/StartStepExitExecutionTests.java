@@ -40,20 +40,20 @@ public class StartStepExitExecutionTests {
 
     @Test
     public void startExecution() {
-        mC.newSelect(new ProgramLocation(190,150));
-        mC.newRelease(new ProgramLocation(420, 420));
-        mC.newSelect(new ProgramLocation(190,150));
-        mC.newRelease(new ProgramLocation(420, 500));
+        mC.select(new ProgramLocation(190,150));
+        mC.release(new ProgramLocation(420, 420));
+        mC.select(new ProgramLocation(190,150));
+        mC.release(new ProgramLocation(420, 500));
         mC.startOrExecuteProgram();
         assertTrue(mC.getProgramAreaBlocks().get(0).isHighlighted());
     }
 
     @Test
     public void stepExecution() {
-        mC.newSelect(new ProgramLocation(190,150));
-        mC.newRelease(new ProgramLocation(420, 420));
-        mC.newSelect(new ProgramLocation(190,150));
-        mC.newRelease(new ProgramLocation(420, 500));
+        mC.select(new ProgramLocation(190,150));
+        mC.release(new ProgramLocation(420, 420));
+        mC.select(new ProgramLocation(190,150));
+        mC.release(new ProgramLocation(420, 500));
         mC.startOrExecuteProgram();
         mC.startOrExecuteProgram();
         assertTrue(mC.getProgramAreaBlocks().get(1).isHighlighted());
@@ -61,10 +61,10 @@ public class StartStepExitExecutionTests {
 
     @Test
     public void stopExecution() {
-        mC.newSelect(new ProgramLocation(190,150));
-        mC.newRelease(new ProgramLocation(420, 420));
-        mC.newSelect(new ProgramLocation(190,150));
-        mC.newRelease(new ProgramLocation(420, 500));
+        mC.select(new ProgramLocation(190,150));
+        mC.release(new ProgramLocation(420, 420));
+        mC.select(new ProgramLocation(190,150));
+        mC.release(new ProgramLocation(420, 500));
         mC.startOrExecuteProgram();
         mC.startOrExecuteProgram();
         mC.startOrExecuteProgram();

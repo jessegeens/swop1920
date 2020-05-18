@@ -1,7 +1,5 @@
 package model;
 
-import model.Actions.OberonAction;
-
 import java.util.Stack;
 
 public class UndoRedoHandler {
@@ -13,7 +11,6 @@ public class UndoRedoHandler {
 
     private Stack<OberonAction> actionUndoStack;
     private Stack<OberonAction> actionRedoStack;
-
 
     private UndoRedoHandler() {
         runnerUndoStack = new Stack<>();

@@ -34,7 +34,6 @@ public class ModelActionBlock extends ModelBlock{
         return this.action;
     }
 
-
     /**
      * {@inheritDoc}
      */
@@ -56,7 +55,6 @@ public class ModelActionBlock extends ModelBlock{
     public ModelBlock getBottomPlug() {
         return this.bottomPlug;
     }
-
 
     /**
      * {@inheritDoc}

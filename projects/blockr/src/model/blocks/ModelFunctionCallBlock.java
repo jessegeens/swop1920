@@ -1,6 +1,5 @@
 package model.blocks;
 
-import gameworldapi.ActionType;
 import utilities.ConnectionPoint;
 import utilities.ProgramLocation;
 
@@ -10,7 +9,6 @@ public class ModelFunctionCallBlock extends ModelBlock {
 
     private ModelBlock topSocket;
     private ModelBlock bottomPlug;
-    //private final int id;
     private ModelFunctionDefinitionBlock definitionBlock;
 
     /**
@@ -24,10 +22,7 @@ public class ModelFunctionCallBlock extends ModelBlock {
         super(pos);
         this.setTopSocket(null);
         this.setBottomPlug(null);
-
-        //this.id = id;
         this.definitionBlock = block;
-
         ArrayList<ConnectionPoint> connectionPoints = new ArrayList<>();
         connectionPoints.add(ConnectionPoint.BOTTOM_PLUG);
         connectionPoints.add(ConnectionPoint.TOP_SOCKET);
@@ -60,7 +55,6 @@ public class ModelFunctionCallBlock extends ModelBlock {
         return this.bottomPlug;
     }
 
-
     /**
      * {@inheritDoc}
      */
@@ -79,6 +73,4 @@ public class ModelFunctionCallBlock extends ModelBlock {
     public ModelBlock getTopSocket() {
         return this.topSocket;
     }
-
-
 }

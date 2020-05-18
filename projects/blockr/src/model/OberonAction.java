@@ -1,4 +1,4 @@
-package model.Actions;
+package model;
 
 import model.blocks.ModelBlock;
 import utilities.ProgramLocation;

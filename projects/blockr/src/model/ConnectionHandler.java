@@ -9,7 +9,6 @@ public class ConnectionHandler {
 
     private static ConnectionHandler instance;
 
-
     private ConnectionHandler() {
     }
 
@@ -72,32 +71,26 @@ public class ConnectionHandler {
      * @return true if connected
      * @author Oberon Swings (modified by Bert)
      */
-    public boolean connect(ModelBlock closest, ModelBlock extra) {
-        boolean connect = false;
+    public void connect(ModelBlock closest, ModelBlock extra) {
         int d = LocationHandler.getInstance().getClosestdistance(extra, closest);
-        if (closest instanceof ModelCavityBlock && extra.hasTopSocket() && ((ModelCavityBlock) closest).distanceCavityPlug(extra) == d) connect = this.connectCavityPlug(((ModelCavityBlock)closest), extra);
-        else if (closest instanceof ModelCavityBlock && extra.hasBottomPlug() && ((ModelCavityBlock) closest).distanceCavitySocket(extra) == d) connect = this.connectCavitySocket((ModelCavityBlock) closest, extra);
-        else if (closest.isInCavity() && closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) == d) connect = connectIntoCavityTop(extra, closest);
-        else if (closest.isInCavity() && extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) == d) connect = connectIntoCavityBottom(extra, closest);
-        else if (extra.isInCavity() && extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) == d) connect = connectIntoCavityTop(closest, extra);
-        else if (extra.isInCavity() && closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) == d) connect = connectIntoCavityBottom(closest, extra);
+        if (closest instanceof ModelCavityBlock && extra.hasTopSocket() && ((ModelCavityBlock) closest).distanceCavityPlug(extra) == d) connectCavityPlug(((ModelCavityBlock)closest), extra);
+        else if (closest instanceof ModelCavityBlock && extra.hasBottomPlug() && ((ModelCavityBlock) closest).distanceCavitySocket(extra) == d) connectCavitySocket((ModelCavityBlock) closest, extra);
+        else if (closest.isInCavity() && closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) == d) connectIntoCavityTop(extra, closest);
+        else if (closest.isInCavity() && extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) == d) connectIntoCavityBottom(extra, closest);
+        else if (extra.isInCavity() && extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) == d) connectIntoCavityTop(closest, extra);
+        else if (extra.isInCavity() && closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) == d) connectIntoCavityBottom(closest, extra);
         else if (extra.compatibleTopBottom(closest) && extra.distanceTopBottom(closest) == d){
             this.connectTopBottom(extra, closest);
-            connect = true;
         }
         else if (closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) == d){
             this.connectTopBottom(closest, extra);
-            connect = true;
         }
         else if (extra.compatibleLeftRight(closest) && extra.distanceLeftRight(closest) == d){
             this.connectRightLeft(closest, extra);
-            connect = true;
         }
         else if (closest.compatibleLeftRight(extra) && closest.distanceLeftRight(extra) == d){
             this.connectRightLeft(extra, closest);
-            connect = true;
         }
-        return connect;
     }
 
     /**
@@ -136,10 +129,9 @@ public class ConnectionHandler {
      *
      * @param a the block to connect to
      * @param b the block that possible needs to be connected in the cavity
-     * @return true if and only if block is connected within the cavity, false otherwise
      * @author Oberon Swings
      */
-    public boolean connectCavitySocket(ModelCavityBlock a, ModelBlock b){
+    public void connectCavitySocket(ModelCavityBlock a, ModelBlock b){
         if (b.hasBottomPlug()){
             ModelBlock cavityPrevious = a.getCavitySocket(); //The previous block that was connected to the cavity
             a.setCavitySocket(b);
@@ -151,19 +143,16 @@ public class ConnectionHandler {
                 }
                 else cavityPrevious.setBottomPlug(b);
             }
-            return true;
         }
-        return false;
     }
 
     /**
      *
      * @param a the block to connect to
      * @param b the block that possible needs to be connected in the cavity
-     * @return true if and only if block is connected within the cavity, false otherwise
      * @author Oberon Swings
      */
-    public boolean connectCavityPlug(ModelCavityBlock a, ModelBlock b){
+    public void connectCavityPlug(ModelCavityBlock a, ModelBlock b){
         if (b.hasTopSocket()){
             ModelBlock cavityNext = a.getCavityPlug();
             a.setCavityPlug(b);
@@ -175,9 +164,7 @@ public class ConnectionHandler {
                 }
                 else cavityNext.setTopSocket(b);
             }
-            return true;
         }
-        return false;
     }
 
     /**
@@ -185,10 +172,9 @@ public class ConnectionHandler {
      * This function makes sure the extra block is connected correctly to the closest block and is also taken account for within the cavity
      * @param extra the newly added block
      * @param closest the block closest to the new block
-     * @return true of connected into top of the cavity
      * @author Oberon Swings
      */
-    public boolean connectIntoCavityTop(ModelBlock extra, ModelBlock closest){
+    public void connectIntoCavityTop(ModelBlock extra, ModelBlock closest){
         ModelCavityBlock a = closest.getSurroundingCavityBlock();
         if (closest.compatibleTopBottom(extra)){
             ModelBlock next = closest.getBottomPlug();
@@ -199,9 +185,7 @@ public class ConnectionHandler {
                 if (!(next.equals(a))) next.setTopSocket(extra);
                 else a.setCavitySocket(extra);
             }
-            return true;
         }
-        return false;
     }
 
     /**
@@ -209,10 +193,9 @@ public class ConnectionHandler {
      * This function makes sure the extra block is connected correctly to the closest block and is also taken account for within the cavity
      * @param extra the newly added block
      * @param closest the block closest to the new block
-     * @return true of connected into bottom of cavity
      * @author Oberon Swings
      */
-    public boolean connectIntoCavityBottom(ModelBlock extra, ModelBlock closest){
+    public void connectIntoCavityBottom(ModelBlock extra, ModelBlock closest){
         ModelCavityBlock a = closest.getSurroundingCavityBlock();
         if (extra.compatibleTopBottom(closest)){
             ModelBlock next = closest.getTopSocket();
@@ -223,9 +206,7 @@ public class ConnectionHandler {
                 if (!(next.equals(a))) next.setBottomPlug(extra);
                 else a.setCavityPlug(extra);
             }
-            return true;
         }
-        return false;
     }
 
     /**

@@ -112,21 +112,19 @@ public class ModelProgramArea{
      * @return true if connected
      * @author Oberon Swings
      */
-    public boolean findAndConnect(ProgramLocation eveWindowLocation, ModelBlock activeB){
+    public void findAndConnect(ProgramLocation eveWindowLocation, ModelBlock activeB){
         ProgramLocation location = LocationHandler.getInstance().moveToInBounds(eveWindowLocation);
         LocationHandler.getInstance().setLocationBlock(activeB, location);
         ModelBlock closest = LocationHandler.getInstance().findClosestBlock(activeB, blocks);
         if (!(this.getPABlocks().contains(activeB))) {
             this.addPABlock(activeB);
         }
-        boolean connection = false;
         if (closest != null){
-            connection = ConnectionHandler.getInstance().connect(closest, activeB);
+            ConnectionHandler.getInstance().connect(closest, activeB);
             LocationHandler.getInstance().updateLocationBlock(activeB);
             ConnectionHandler.getInstance().updateConnections(blocks);
             LocationHandler.getInstance().updateLocationBlocks(ConnectionHandler.getInstance().getStartBlocks(blocks));
         }
-        return connection;
     }
 
     public ModelBlock findClosestBlock(ProgramLocation location, ModelBlock active) {
@@ -146,8 +144,6 @@ public class ModelProgramArea{
             LocationHandler.getInstance().updateLocationBlocks(ConnectionHandler.getInstance().getStartBlocks(blocks));
         }
     }
-
-
 
     /**
      * Moves a block to the location to which it is dragged
@@ -209,7 +205,7 @@ public class ModelProgramArea{
      * @return an arraylist with the removed ModelFunctionCallblocks
      * @author Bert
      */
-    public ArrayList<ModelFunctionCallBlock> deleteFunctionCallsById(int id){
+    public void deleteFunctionCallsById(int id){
         ArrayList<ModelFunctionCallBlock> toBeReturned = new ArrayList<>();
         for(ModelBlock block : blocks){
             if(block instanceof ModelFunctionCallBlock){
@@ -221,24 +217,5 @@ public class ModelProgramArea{
         for(ModelBlock block: toBeReturned){
             removePABlock(block);
         }
-        return toBeReturned;
-    }
-
-    /**
-     * gets an arraylist of the ids of function definition blocks that are currently in the PA
-     *
-     * @return the arraylist of ints
-     * @author Bert
-     */
-    public ArrayList<Integer> getActiveFunctionDefinitions(){
-        ArrayList<Integer> toBeReturned = new ArrayList<>();
-        for(ModelBlock block : blocks){
-            if(block instanceof ModelFunctionDefinitionBlock){
-                if(!(toBeReturned.contains(((ModelFunctionDefinitionBlock) block).getId()))){
-                    toBeReturned.add(((ModelFunctionDefinitionBlock) block).getId());
-                }
-            }
-        }
-        return toBeReturned;
     }
 }

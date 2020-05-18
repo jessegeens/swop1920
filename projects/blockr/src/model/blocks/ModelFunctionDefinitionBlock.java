@@ -1,13 +1,8 @@
 package model.blocks;
 
-import model.Actions.OberonAction;
 import model.ProgramState;
 import model.UndoRedoHandler;
-import ui.UIBlock;
-import utilities.ConnectionPoint;
 import utilities.ProgramLocation;
-
-import java.util.ArrayList;
 
 public class ModelFunctionDefinitionBlock extends ModelCavityBlock {
 
@@ -15,14 +10,12 @@ public class ModelFunctionDefinitionBlock extends ModelCavityBlock {
 
     public ModelFunctionDefinitionBlock(ProgramLocation pos, int id){
         super(pos);
-
         this.identifier = id;
     }
 
     public int getId(){
         return this.identifier;
     }
-
 
     @Override
     public ModelFunctionDefinitionBlock clone(){

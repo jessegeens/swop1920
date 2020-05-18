@@ -218,7 +218,6 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
         return super.getPos().add(this.getWidth() - UIBlock.PLUGSIZE/2, + UIBlock.STD_HEIGHT / 2);
     }
 
-
     /**
      * Finds out if this block is compatible with the right block
      * @param right the block which this block is checked against
@@ -255,15 +254,7 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
         return this.getBottomPlugPos().getDistance(bottom.getTopSocketPos());
     }
 
-
     public boolean isIf(){
-        /*
-        if (this instanceof ModelWhileIfBlock) {
-            if (this.isIf()) return true;
-            else return false;
-        }
-
-        */
         return false;
     }
 

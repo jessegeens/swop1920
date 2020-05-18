@@ -49,6 +49,7 @@ public class ProgramRunner {
         if (isRunning()){
             this.running = false;
             this.gameWorld.restore(initialState);
+            if (current.getHighlight() != null) current.getHighlight().setUnHighlight();
             UndoRedoHandler.getInstance().clearRunnerStacks();
             current = null;
         }

@@ -31,7 +31,6 @@ public class UndoRedoHandler {
     }
 
     public void clearRunnerStacks() {
-        if (runnerUndoStack.peek().getHighlight() != null) runnerUndoStack.peek().getHighlight().setUnHighlight();
         runnerUndoStack.clear();
         runnerRedoStack.clear();
     }
@@ -63,8 +62,8 @@ public class UndoRedoHandler {
     }
 
     public Object getState() {
-        if (!actionUndoStack.empty()) return actionUndoStack.peek();
-        else if (!runnerUndoStack.empty()) return runnerUndoStack.peek();
+        if (!runnerUndoStack.empty()) return runnerUndoStack.peek();
+        else if (!actionUndoStack.empty()) return actionUndoStack.peek();
         else return null;
     }
 

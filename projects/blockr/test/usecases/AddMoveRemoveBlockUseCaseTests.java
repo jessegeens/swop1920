@@ -37,48 +37,49 @@ public class AddMoveRemoveBlockUseCaseTests {
         }
     }
 
+
     @Test
     public void addBlock() {
-        mC.select(new ProgramLocation(30,30));
-        mC.release(new ProgramLocation(420, 420));
+        mC.newSelect(new ProgramLocation(30,30));
+        mC.newRelease(new ProgramLocation(420, 420));
         assertEquals(1,mC.getProgramAreaBlocks().size());
     }
 
     @Test
     public void moveBlock() {
-        mC.select(new ProgramLocation(30,30));
-        mC.release(new ProgramLocation(420, 420));
-        mC.select(new ProgramLocation(430,430));
+        mC.newSelect(new ProgramLocation(30,30));
+        mC.newRelease(new ProgramLocation(420, 420));
+        mC.newSelect(new ProgramLocation(430,430));
         mC.drag(new ProgramLocation(450, 450));
         assertEquals(new ProgramLocation(450,450), mC.getActiveBlock().getPos());
     }
 
     @Test
     public void connectBlock() {
-        mC.select(new ProgramLocation(30,30));
-        mC.release(new ProgramLocation(420, 420));
-        mC.select(new ProgramLocation(30,30));
-        mC.release(new ProgramLocation(420, 500));
+        mC.newSelect(new ProgramLocation(30,30));
+        mC.newRelease(new ProgramLocation(420, 420));
+        mC.newSelect(new ProgramLocation(30,30));
+        mC.newRelease(new ProgramLocation(420, 500));
         assertEquals(mC.getProgramAreaBlocks().get(0), mC.getProgramAreaBlocks().get(1).getConnections().get(0));
     }
 
     @Test
     public void disconnectBlock() {
-        mC.select(new ProgramLocation(30,30));
-        mC.release(new ProgramLocation(420, 420));
-        mC.select(new ProgramLocation(30,30));
-        mC.release(new ProgramLocation(420, 500));
-        mC.select(new ProgramLocation(430,510));
-        mC.release(new ProgramLocation(600, 600));
+        mC.newSelect(new ProgramLocation(30,30));
+        mC.newRelease(new ProgramLocation(420, 420));
+        mC.newSelect(new ProgramLocation(30,30));
+        mC.newRelease(new ProgramLocation(420, 500));
+        mC.newSelect(new ProgramLocation(430,510));
+        mC.newRelease(new ProgramLocation(600, 600));
         assertTrue(mC.getProgramAreaBlocks().get(0).getConnections().isEmpty());
     }
 
     @Test
     public void removeBlock() {
-        mC.select(new ProgramLocation(30,30));
-        mC.release(new ProgramLocation(420, 420));
-        mC.select(new ProgramLocation(460,460));
-        mC.release(new ProgramLocation(30, 30));
+        mC.newSelect(new ProgramLocation(30,30));
+        mC.newRelease(new ProgramLocation(420, 420));
+        mC.newSelect(new ProgramLocation(460,460));
+        mC.newRelease(new ProgramLocation(30, 30));
         assertTrue(mC.getProgramAreaBlocks().isEmpty());
     }
 

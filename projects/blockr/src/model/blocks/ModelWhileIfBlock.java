@@ -75,6 +75,17 @@ public class ModelWhileIfBlock extends ModelCavityBlock{
         return isIf;
     }
 
+    @Override
+    public ModelBlock findNextBlock() {
+        return findNextBlock(false);
+    }
+
+    public ModelBlock findNextBlock(Boolean evaluated) {
+        if (isNegated() && evaluated) return getBottomPlug();
+        if (isNegated() || evaluated) return getCavityPlug();
+        return getBottomPlug();
+    }
+
     /**
      * {@inheritDoc}
      */

@@ -14,8 +14,8 @@ public class UIController {
 
     private static UIController instance;
 
-    private final static int PALETTEWIDTH = MyCanvasWindow.WIDTH/3;
-    private final static int PROGRAMAREAWIDTH = MyCanvasWindow.WIDTH/3;
+    public final static int PALETTEWIDTH = MyCanvasWindow.WIDTH/3;
+    public final static int PROGRAMAREAWIDTH = MyCanvasWindow.WIDTH/3;
 
 
     // Constructor

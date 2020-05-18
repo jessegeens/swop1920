@@ -80,7 +80,7 @@ public class ModelProgramArea{
         for(int i = blocks.size() - 1; i >= 0; i--){
             if(blocks.get(i).inBoundsOfElement(eventWindowLocation)){
                 ModelBlock toBeReturned = blocks.get(i);
-                removePABlock(toBeReturned);
+                //removePABlock(toBeReturned);
                 return toBeReturned;
             }
         }
@@ -128,6 +128,26 @@ public class ModelProgramArea{
         }
         return connection;
     }
+
+    public ModelBlock findClosestBlock(ProgramLocation location, ModelBlock active) {
+        ProgramLocation newlocation = LocationHandler.getInstance().moveToInBounds(location);
+        LocationHandler.getInstance().setLocationBlock(active, newlocation);
+        return LocationHandler.getInstance().findClosestBlock(active, blocks);
+    }
+
+    public void addAndConnectBlock(ModelBlock active, ModelBlock closest) {
+        if (!(this.getPABlocks().contains(active))) {
+            this.addPABlock(active);
+        }
+        if (closest != null){
+            ConnectionHandler.getInstance().connect(closest, active);
+            LocationHandler.getInstance().updateLocationBlock(active);
+            ConnectionHandler.getInstance().updateConnections(blocks);
+            LocationHandler.getInstance().updateLocationBlocks(ConnectionHandler.getInstance().getStartBlocks(blocks));
+        }
+    }
+
+
 
     /**
      * Moves a block to the location to which it is dragged

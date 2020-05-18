@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 
 import gameworldapi.GameWorld;
@@ -9,7 +8,6 @@ import gameworldapi.GameWorldType;
 import main.MyCanvasWindow;
 import model.Actions.*;
 import model.blocks.ModelBlock;
-import model.blocks.ModelFunctionCallBlock;
 import model.blocks.ModelFunctionDefinitionBlock;
 import ui.BlockState;
 import utilities.*;
@@ -28,13 +26,15 @@ public class ModelController{
 
     private ModelBlock active = null;
 
-    private Stack<Action> undoStack;
-    private Stack<Action> redoStack;
+//    private Stack<Action> undoStack;
+//    private Stack<Action> redoStack;
+//
+//    private boolean isCreateConnect;
+//
+//    private ProgramLocation oldPos;
+//    private boolean newBlockCreated;
 
-    private boolean isCreateConnect;
-
-    private ProgramLocation oldPos;
-    private boolean newBlockCreated;
+    private ProgramLocation selectPosition;
 
     // Constructor
     public ModelController(GameWorldType worldType){
@@ -44,11 +44,11 @@ public class ModelController{
         this.gameWorld = worldType.newWorldInstance();
         //state = ProgramState.getInitialState();
         programRunner = new ProgramRunner(this.gameWorld);
-        undoStack = new Stack<>();
-        redoStack = new Stack<>();
-        isCreateConnect = false;
-        oldPos = null;
-        newBlockCreated = false;
+//        undoStack = new Stack<>();
+//        redoStack = new Stack<>();
+//        isCreateConnect = false;
+//        oldPos = null;
+//        newBlockCreated = false;
     }
 
     /**
@@ -61,26 +61,9 @@ public class ModelController{
         if (PArea.validExecutionState()){//Check if all blocks are connected, and if so execute.
             if(programRunner.isRunning()){
                 programRunner.execute();
-
             } else {
                 programRunner.initialise(PArea.getFirstBlock(), PArea.getAllModelFunctionDefinitionBlock());
-                /*
-                ArrayList<Action> toRemove = new ArrayList<>();
-                for (Action current : undoStack){
-                    if(current instanceof GameStartAction || current instanceof GameEndAction){
-                        toRemove.add(current);
-                    }
-                }
-                for(Action current : toRemove){
-                    undoStack.remove(current);
-                }
-                */
-
-
-                //undoStack.push(new GameStartAction());
             }
-
-
         }
     }
 
@@ -93,13 +76,7 @@ public class ModelController{
      *
      */
     public void exitExecution(){
-        if (this.programRunner.isRunning()) {
-
-            //this.PArea.unHighlightAll();
-        }
-
         programRunner.reset();
-        //undoStack.push(new GameEndAction());
     }
 
 
@@ -108,334 +85,315 @@ public class ModelController{
      *
      * @author Bert
      */
-    public void globalUndo(){
-        if (this.programRunner.isRunning()) {
-
-            //this.PArea.unHighlightAll();
-            programRunner.undoProgramRunner();
-
-
-
-        }
-        else if(!undoStack.isEmpty()) {
-            /*
-
-            try{
-                if (this.undoStack.peek() instanceof GameStartAction && programRunner.undoFinished()) {
-                    redoStack.push(undoStack.pop());
-                    this.programRunner.reset();
-                    System.out.println("EXIT");
-
-                    //this.undo();
-                }
-            }
-            catch(Exception e){}
-
-            try {
-                if (this.undoStack.peek() instanceof GameEndAction && !programRunner.isRunning()) {
-                    //startorexecute creates a new gameend?
-                    redoStack.push(undoStack.pop());
-
-                    //using this method causes the issue that the first block gets highlighted in the programrunner.initialise method
-                    //this.startOrExecuteProgram();
-
-                    //TODO This way of doing it causes the first block to not get highlighted in regular execution
-                    this.programRunner.initialiseForUndo();
-
-
-                }
-            }
-            catch (Exception e){}
-
-            */
-
-
-
-                this.undo();
-
-
-        }
-
-
-
-    }
+//    public void globalUndo(){
+//        if (this.programRunner.isRunning()) {
+//            programRunner.undoProgramRunner();
+//        }
+//        else if(!undoStack.isEmpty()) {
+//            this.undo();
+//        }
+//    }
 
     /**
      * Checks whether or not a game is running, if it is, redo is called on the game, otherwise undo is called on the blocks
      *
      * @author Bert
      */
-    public void globalRedo(){
-        //is emptying duplicate gamestart and gameend necessary?
+//    public void globalRedo(){
+//        if (this.programRunner.isRunning()) {
+//            programRunner.redoProgramRunner();
+//        }
+//        else if(!redoStack.isEmpty()) {
+//            this.redo();
+//        }
+//    }
 
-        if (this.programRunner.isRunning()) {
-            //this.PArea.unHighlightAll();
-            programRunner.redoProgramRunner();
+//    /**
+//     * Undo the block or game steps
+//     *
+//     * @author Bert
+//     *
+//     * Still WIP
+//     *
+//     */
+//    public void undo(){
+//        //TODO acties verlopen niet dubbel meer (waarschijnlijk toch wel ik heb gewoon brak geplaatst)
+//        //TODO blokken hebben spatie bij disconnect
+//        //=> gewoon plugs en sockets setten van het deleted block bij de connections
+//        //System.out.println("UNDO");
+//        if(!undoStack.empty()) {
+//            Action current = undoStack.pop();
+//            current.undo();
+//            redoStack.push(current);
+//            if (!(undoStack.empty())) {
+//                Action peekedAction = undoStack.peek();
+//                if (current instanceof ConnectAction) {
+//                    this.undo();
+//                }
+//                try {
+//                    if (peekedAction instanceof DisconnectAction) {
+//                        this.undo();
+//                    }
+//                } catch (Exception e) {
+//                }
+//                if (current instanceof DeleteAction) {
+//
+//                    try {
+//                        if (peekedAction instanceof MoveAction) {
+//                            this.undo();
+//                        }
+//                    } catch (Exception e) {
+//                    }
+//                }
+//            }
+//        }
+//        palette.populateBlocks(PArea.getActiveFunctionDefinitions());
+//    }
 
 
+
+//    /**
+//     * Redo the block or game steps
+//     *
+//     * @author Bert
+//     *
+//     * Still WIP
+//     *
+//     */
+//    public void redo() {
+//        if (!redoStack.empty()) {
+//            Action current = redoStack.pop();
+//            current.redo();
+//            undoStack.push(current);
+//            if (!(redoStack.empty())) {
+//                Action peekedAction = redoStack.peek();
+//                try {
+//                    if (peekedAction instanceof ConnectAction) {
+//                        this.redo();
+//                    }
+//                } catch (Exception e) {
+//                }
+//                if (current instanceof DisconnectAction) {
+//                    this.redo();
+//                }
+//                try {
+//                    if (peekedAction instanceof DeleteAction) {
+//                        this.redo();
+//                    }
+//                } catch (Exception e) {
+//                }
+//            }
+//        }
+//        palette.populateBlocks(PArea.getActiveFunctionDefinitions());
+//    }
+
+//    /**
+//     * Clears the redo stack
+//     *
+//     * @author Bert
+//     */
+//    public void clearRedoStack(){
+//        this.redoStack.clear();
+//    }
+//
+//
+//    /**
+//     *
+//     * @param location the selected location
+//     * @return whether this event location is inside of the Palette
+//     *
+//     * @author Bert
+//     */
+//    protected boolean inPalette(ProgramLocation location){
+//        return (location.getX() >= 0 && location.getX() < MyCanvasWindow.WIDTH/3);
+//    }
+//
+//    /**
+//     *
+//     * @param location the selected location
+//     * @return whether this event location is inside of the ProgramArea
+//     *
+//     * @author Bert
+//     */
+//    protected boolean inProgramArea(ProgramLocation location){
+//        return (location.getX() > MyCanvasWindow.WIDTH/3 && location.getX() <  2 * MyCanvasWindow.WIDTH/3);
+//    }
+
+
+
+//    /**
+//     * Handle a possible block selection (if the position is inbounds of a block)
+//     *
+//     * If it's selected in the palette, a new block gets selected and a new block of this type gets created in the palette
+//     * If it's selected in the programarea, the active block gets set to this block
+//     *
+//     *
+//     * @param eventLocation location of the event
+//     *
+//     * @author Bert
+//     */
+//    public void select(ProgramLocation eventLocation){
+//        this.clearRedoStack();
+//        if(this.inPalette(eventLocation)){
+//            active = palette.returnSelectedBlock(eventLocation);
+//            if(active != null) {
+//                oldPos = active.getPos();
+//                newBlockCreated = true;
+//                if(active instanceof ModelFunctionDefinitionBlock){
+//                    ArrayList<Integer> idsForPalette = PArea.getActiveFunctionDefinitions();
+//                    idsForPalette.add(((ModelFunctionDefinitionBlock) active).getId());
+//                    palette.populateBlocks(idsForPalette);
+//                }
+//            }
+//        }
+//        else if(this.inProgramArea(eventLocation)){
+//            boolean isConnected = PArea.connectedBlockHere(eventLocation);
+//            active = PArea.selectBlock(eventLocation);
+//            if(active != null){
+//                oldPos = active.getPos();
+//                this.programRunner.reset();
+//            }
+//            if(isConnected){
+//                undoStack.push(new DisconnectAction(active, active.getPos(), this.PArea));
+//            }
+//        }
+//    }
+
+    public void newSelect(ProgramLocation location) {
+        newSelectHelp(location);
+        if (active != null && LocationHandler.isInProgramArea(location)) PArea.removePABlock(active);
+    }
+
+    private void newSelectHelp(ProgramLocation location) {
+        if (LocationHandler.isInPalette(location)) {
+            active = palette.returnSelectedBlock(location);
         }
-
-        else if(!redoStack.isEmpty()) {
-
-            /*
-            //bij redo start, start je het spel
-            if (redoStack.peek() instanceof GameStartAction) {
-
-                //do you have to use initialiseforundo here as well?
-
-                this.startOrExecuteProgram();
-                undoStack.push(redoStack.pop());
-            }
-
-
-            //at redo end you check the redostack to see if execution needs to be stopped
-            try{
-                if (this.redoStack.peek() instanceof GameEndAction && programRunner.redoFinished()) {
-                    System.out.println("REDO DONE");
-
-                    //when it was exitexcution it caused unexpedted behaviour in undo so I changed it here in case
-                    this.programRunner.reset();
-                    undoStack.push(redoStack.pop());
-                    //this.undo();
-
-
-                }
-            }
-            catch(Exception e){}
-            */
-
-
-
-
-                this.redo();
+        else if (LocationHandler.isInProgramArea(location)) {
+            active = PArea.selectBlock(location);
+            this.programRunner.reset();
         }
-
-
+        if (active != null) selectPosition = active.getPos();
     }
 
-    /**
-     * Undo the block or game steps
-     *
-     * @author Bert
-     *
-     * Still WIP
-     *
-     */
-    public void undo(){
+//    /**
+//     * Handle a selected block being released (if there is one)
+//     *
+//     * If it's released in the palette, the block gets deleted
+//     * If it's released in the programarea, it gets checked whether the block needs to get connected to another block
+//     *
+//     * @param eventLocation location of the event
+//     *
+//     * @author Bert
+//     */
+//
+//    //Each release is a state
+//    public void release(ProgramLocation eventLocation) {
+//        this.clearRedoStack();
+//        if (inPalette(eventLocation)) {
+//            if (this.active != null) {
+//                if(this.active instanceof ModelFunctionDefinitionBlock){
+//                    ArrayList<ModelFunctionCallBlock> deletedList = PArea.deleteFunctionCallsById( ((ModelFunctionDefinitionBlock) this.active).getId());
+//                    palette.populateBlocks(PArea.getActiveFunctionDefinitions());
+//                    undoStack.push(new DeleteFunctionDefinitionAction(this.active,this.oldPos, this.PArea, deletedList));
+//                    //TODO DeleteMFB action in undostack (and register the currently active block as well)
+//                }
+//                else{
+//                    undoStack.push(new DeleteAction(this.active,this.oldPos, this.PArea));
+//                }
+//                this.active = null;
+//            }
+//        } else if (this.inProgramArea(eventLocation)) {
+//            if(active == null) {
+//                return;
+//            }
+//            programRunner.reset();
+//            System.out.println("Programarea release");
+//            if (!newBlockCreated) {
+//                undoStack.push(new MoveAction(active, this.oldPos, active.getPos(), this.PArea)); //see active.getPos comment in select method. Same applies here.
+//            }
+//            if (newBlockCreated) {
+//                undoStack.push(new CreateAction(this.active, this.PArea));
+//            }
+//            newBlockCreated = false;
+//            if(PArea.findAndConnect(eventLocation, active)){
+//                undoStack.push(new ConnectAction(this.active, eventLocation, this.PArea));
+//            }
+//            active = null;
+//            if (PArea.maxReached()) {
+//                palette.removeBlocks();
+//                if (active != null) {
+//                    PArea.findAndConnect(eventLocation, active);
+//                    active = null;
+//                    if (PArea.maxReached()) palette.removeBlocks();
+//                }
+//            }
+//        }
+//    }
 
-        //TODO acties verlopen niet dubbel meer (waarschijnlijk toch wel ik heb gewoon brak geplaatst)
-        //TODO blokken hebben spatie bij disconnect
-        //=> gewoon plugs en sockets setten van het deleted block bij de connections
-        //System.out.println("UNDO");
-        if(!undoStack.empty()) {
-            Action current = undoStack.pop();
-            current.undo();
-            //System.out.println(current);
+    public void newRelease(ProgramLocation location) {
+        addAction(location);
+        newReleaseHelp(location);
+        UndoRedoHandler.getInstance().removeRedoActions();
+    }
 
-            redoStack.push(current);
-
-            if (!(undoStack.empty())) {
-                Action peekedAction = undoStack.peek();
-                if (current instanceof ConnectAction) {
-                    this.undo();
+    private void newReleaseHelp(ProgramLocation location) {
+        if (LocationHandler.isInPalette(location)) {
+            if (active != null) {
+                if (active instanceof ModelFunctionDefinitionBlock) {
+                    PArea.deleteFunctionCallsById(((ModelFunctionDefinitionBlock) active).getId());
+                    //palette.populateBlocks(PArea.getActiveFunctionDefinitions());
+                    palette.populateBlocks(PArea.getAllModelFunctionDefinitionBlock());
                 }
-                try {
-                    if (peekedAction instanceof DisconnectAction) {
-                        this.undo();
-                    }
-                } catch (Exception e) {
-                }
-                if (current instanceof DeleteAction) {
-
-                    try {
-                        if (peekedAction instanceof MoveAction) {
-                            this.undo();
-                        }
-                    } catch (Exception e) {
-                    }
-                }
+                PArea.removePABlock(active);
+                active = null;
             }
         }
-        palette.populateBlocks(PArea.getActiveFunctionDefinitions());
-    }
-
-
-
-    /**
-     * Redo the block or game steps
-     *
-     * @author Bert
-     *
-     * Still WIP
-     *
-     */
-    public void redo() {
-
-        //System.out.println("REDO");
-        if (!redoStack.empty()) {
-            Action current = redoStack.pop();
-            //System.out.println(current);
-            current.redo();
-
-            undoStack.push(current);
-
-            if (!(redoStack.empty())) {
-                Action peekedAction = redoStack.peek();
-                try {
-                    if (peekedAction instanceof ConnectAction) {
-                        this.redo();
-                    }
-                } catch (Exception e) {
+        else if (LocationHandler.isInProgramArea(location)) {
+            if (active != null) {
+                programRunner.reset();
+                PArea.addAndConnectBlock(active, PArea.findClosestBlock(location, active));
+                if (active instanceof ModelFunctionDefinitionBlock) {
+                    palette.populateBlocks(PArea.getAllModelFunctionDefinitionBlock());
                 }
-                if (current instanceof DisconnectAction) {
-                    this.redo();
-                }
-                try {
-                    if (peekedAction instanceof DeleteAction) {
-                        this.redo();
-
-                    }
-                } catch (Exception e) {
-                }
+                active = null;
             }
-        }
-        palette.populateBlocks(PArea.getActiveFunctionDefinitions());
-    }
-
-    /**
-     * Clears the redo stack
-     *
-     * @author Bert
-     */
-    public void clearRedoStack(){
-        this.redoStack.clear();
-    }
-
-
-    /**
-     * 
-     * @param location the selected location
-     * @return whether this event location is inside of the Palette
-     * 
-     * @author Bert
-     */
-    protected boolean inPalette(ProgramLocation location){
-        return (location.getX() >= 0 && location.getX() < MyCanvasWindow.WIDTH/3);
-    }
-
-    /**
-     * 
-     * @param location the selected location
-     * @return whether this event location is inside of the ProgramArea
-     * 
-     * @author Bert
-     */
-    protected boolean inProgramArea(ProgramLocation location){
-        return (location.getX() > MyCanvasWindow.WIDTH/3 && location.getX() <  2 * MyCanvasWindow.WIDTH/3);
-    }
-
-
-
-    /**
-     * Handle a possible block selection (if the position is inbounds of a block)
-     * 
-     * If it's selected in the palette, a new block gets selected and a new block of this type gets created in the palette
-     * If it's selected in the programarea, the active block gets set to this block
-     * 
-     * 
-     * @param eventLocation location of the event
-     * 
-     * @author Bert
-     */
-    public void select(ProgramLocation eventLocation){
-        this.clearRedoStack();
-        if(this.inPalette(eventLocation)){
-            active = palette.returnSelectedBlock(eventLocation);
-            if(active != null) {
-                oldPos = active.getPos();
-                newBlockCreated = true;
-                if(active instanceof ModelFunctionDefinitionBlock){
-                    ArrayList<Integer> idsForPalette = PArea.getActiveFunctionDefinitions();
-                    idsForPalette.add(((ModelFunctionDefinitionBlock) active).getId());
-                    palette.populateBlocks(idsForPalette);
-                }
-            }
-        }
-        else if(this.inProgramArea(eventLocation)){
-            boolean isConnected = PArea.connectedBlockHere(eventLocation);
-            active = PArea.selectBlock(eventLocation);
-            if(active != null){
-                oldPos = active.getPos();
-                this.programRunner.reset();
-            }
-            if(isConnected){
-                undoStack.push(new DisconnectAction(active, active.getPos(), this.PArea));
-            }
-        }
-    }
-
-    /**
-     * Handle a selected block being released (if there is one)
-     * 
-     * If it's released in the palette, the block gets deleted
-     * If it's released in the programarea, it gets checked whether the block needs to get connected to another block
-     * 
-     * @param eventLocation location of the event
-     * 
-     * @author Bert
-     */
-
-    //Each release is a state
-    public void release(ProgramLocation eventLocation) {
-        this.clearRedoStack();
-        if (inPalette(eventLocation)) {
-            if (this.active != null) {
-                if(this.active instanceof ModelFunctionDefinitionBlock){
-                    ArrayList<ModelFunctionCallBlock> deletedList = PArea.deleteFunctionCallsById( ((ModelFunctionDefinitionBlock) this.active).getId());
-                    palette.populateBlocks(PArea.getActiveFunctionDefinitions());
-                    undoStack.push(new DeleteFunctionDefinitionAction(this.active,this.oldPos, this.PArea, deletedList));
-
-                    //TODO DeleteMFB action in undostack (and register the currently active block as well)
-
-                }
-                //palette.populateBlocks();
-                else{
-                    undoStack.push(new DeleteAction(this.active,this.oldPos, this.PArea));
-
-                }
-
-
-                this.active = null;
-            }
-        } else if (this.inProgramArea(eventLocation)) {
-            if(active == null) {
-                return;
-            }
-            programRunner.reset();
-            System.out.println("Programarea release");
-            if (!newBlockCreated) {
-                undoStack.push(new MoveAction(active, this.oldPos, active.getPos(), this.PArea)); //see active.getPos comment in select method. Same applies here.
-            }
-            if (newBlockCreated) {
-                undoStack.push(new CreateAction(this.active, this.PArea));
-                //undoStack.push(new MoveAction(active, this.oldPos, active.getPos().clone()));
-            }
-            newBlockCreated = false;
-            if(PArea.findAndConnect(eventLocation, active)){
-                undoStack.push(new ConnectAction(this.active, eventLocation, this.PArea));
-            }
-            active = null;
             if (PArea.maxReached()) {
                 palette.removeBlocks();
-                if (active != null) {
-                    PArea.findAndConnect(eventLocation, active);
-                    active = null;
-                    if (PArea.maxReached()) palette.removeBlocks();
-                }
             }
         }
     }
 
+    private void addAction(ProgramLocation location) {
+        UndoRedoHandler.getInstance().executeAction(new OberonAction(selectPosition, location, active));
+    }
+
+    public void newUndo() {
+        UndoRedoHandler.getInstance().undo();
+        Object state = UndoRedoHandler.getInstance().getState();
+        if (state instanceof OberonAction) {
+            newSelectHelp(((OberonAction) state).getRelease());
+            active = ((OberonAction) state).getBlock();
+            PArea.removePABlock(active);
+            newReleaseHelp(((OberonAction) state).getSelect());
+        }
+        else if (state instanceof ProgramState) {
+            programRunner.setState((ProgramState) state);
+        }
+    }
+
+    public void newRedo() {
+        UndoRedoHandler.getInstance().redo();
+        Object state = UndoRedoHandler.getInstance().getState();
+        if (state instanceof OberonAction) {
+            newSelectHelp(((OberonAction) state).getSelect());
+            active = ((OberonAction) state).getBlock();
+            PArea.removePABlock(active);
+            newReleaseHelp(((OberonAction) state).getRelease());
+        }
+        else if (state instanceof ProgramState) {
+            programRunner.setState((ProgramState) state);
+        }
+    }
 
     /**
      * handle block moving, relocate an active block if there is one
@@ -444,7 +402,6 @@ public class ModelController{
      * @author Bert
      */
     public void drag(ProgramLocation eventLocation){
-        this.clearRedoStack();
         if(active != null){
             if(2 * MyCanvasWindow.WIDTH / 3 - active.getWidth() > eventLocation.getX()){
                 PArea.dragBlock(active, eventLocation);

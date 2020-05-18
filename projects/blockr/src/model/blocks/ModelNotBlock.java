@@ -44,6 +44,11 @@ public class ModelNotBlock extends ModelBlock{
         this.rightSocket = rightSocket;
     }
 
+    @Override
+    public ModelBlock findNextBlock() {
+        return null;
+    }
+
     /**
      * {@inheritDoc}
      */

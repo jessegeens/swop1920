@@ -1,5 +1,8 @@
 package model.blocks;
 
+import model.Actions.OberonAction;
+import model.ProgramState;
+import model.UndoRedoHandler;
 import ui.UIBlock;
 import utilities.ConnectionPoint;
 import utilities.ProgramLocation;
@@ -24,6 +27,13 @@ public class ModelFunctionDefinitionBlock extends ModelCavityBlock {
     @Override
     public ModelFunctionDefinitionBlock clone(){
         return new ModelFunctionDefinitionBlock(super.getPos(), this.getId());
+    }
+
+    @Override
+    public ModelBlock findNextBlock() {
+        Object state = UndoRedoHandler.getInstance().getState();
+        if (state instanceof ProgramState) return ((ProgramState) state).getCallStack().peek().getBottomPlug();
+        else return null;
     }
 
 }

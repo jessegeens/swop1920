@@ -2,6 +2,9 @@ package model;
 
 import gameworldapi.GameWorldState;
 import model.blocks.ModelBlock;
+import model.blocks.ModelFunctionCallBlock;
+
+import java.util.Stack;
 
 /**
  * Class which keeps a ProgramRunner game state
@@ -9,20 +12,39 @@ import model.blocks.ModelBlock;
  * @author bert_dvl
  */
 public class ProgramState {
-    private final ModelBlock block;
+    private final ModelBlock current;
+    private final ModelBlock highlight;
+    private final Stack<ModelFunctionCallBlock> callStack;
     private final GameWorldState gameState;
 
-    public ProgramState(ModelBlock block, GameWorldState gameState){
-        this.block = block;
+    public ProgramState(ModelBlock current, GameWorldState gameState) {
+        this.current = current;
+        this.gameState = gameState;
+        this.highlight = null;
+        this.callStack = null;
+    }
+
+    public ProgramState(ModelBlock current, ModelBlock highlight, Stack<ModelFunctionCallBlock> callStack, GameWorldState gameState){
+        this.current = current;
+        this.highlight = highlight;
+        this.callStack = callStack;
         this.gameState = gameState;
     }
 
-    public ModelBlock getBlock(){
-        return this.block;
+    public ModelBlock getCurrent(){
+        return current;
+    }
+
+    public ModelBlock getHighlight() {
+        return highlight;
+    }
+
+    public Stack<ModelFunctionCallBlock> getCallStack() {
+        return callStack;
     }
 
     public GameWorldState getGameState(){
-        return this.gameState;
+        return gameState;
     }
 
 }

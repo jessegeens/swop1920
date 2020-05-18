@@ -54,13 +54,22 @@ class ModelPalette{
         blocks.add(new ModelFunctionDefinitionBlock(new ProgramLocation(20, 20 + (int)(UIBlock.STD_HEIGHT * 1.5f * 2)),functionCounter));
     }
 
-    /**
-     * Fill the list of blocks with one of each type and the required function call blocks as well
-     *
-     * @param idList List of functioncallblock ids
-     * @author Bert
-     */
-    public void populateBlocks(ArrayList<Integer> idList){
+//    /**
+//     * Fill the list of blocks with one of each type and the required function call blocks as well
+//     *
+//     * @param idList List of functioncallblock ids
+//     * @author Bert
+//     */
+//    public void populateBlocks(ArrayList<Integer> idList){
+//        this.populateBlocks();
+//        for(int i = 0; i<idList.size(); i++){
+//            int Xpos = i%2 == 0 ? (20) : (180);
+//            int Ypos = (int) (Math.floor(i/2) * 120 + this.maxColumnHeight);
+//            this.blocks.add(new ModelFunctionCallBlock(new ProgramLocation(Xpos, Ypos), idList.get(i)));
+//        }
+//    }
+
+    public void populateBlocks(ArrayList<ModelFunctionDefinitionBlock> idList){
         this.populateBlocks();
         for(int i = 0; i<idList.size(); i++){
             int Xpos = i%2 == 0 ? (20) : (180);

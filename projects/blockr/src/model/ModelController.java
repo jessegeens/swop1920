@@ -109,17 +109,17 @@ public class ModelController{
     }
 
     private void addAction(ProgramLocation location) {
-        UndoRedoHandler.getInstance().executeAction(new OberonAction(selectPosition, location, active));
+        UndoRedoHandler.getInstance().executeAction(new BlockAction(selectPosition, location, active));
     }
 
     public void undo() {
         UndoRedoHandler.getInstance().undo();
         Object state = UndoRedoHandler.getInstance().getState();
-        if (state instanceof OberonAction) {
-            selectHelp(((OberonAction) state).getRelease());
-            active = ((OberonAction) state).getBlock();
+        if (state instanceof BlockAction) {
+            selectHelp(((BlockAction) state).getRelease());
+            active = ((BlockAction) state).getBlock();
             PArea.removePABlock(active);
-            releaseHelp(((OberonAction) state).getSelect());
+            releaseHelp(((BlockAction) state).getSelect());
         }
         else if (state instanceof ProgramState) {
             programRunner.setState((ProgramState) state);
@@ -129,11 +129,11 @@ public class ModelController{
     public void redo() {
         UndoRedoHandler.getInstance().redo();
         Object state = UndoRedoHandler.getInstance().getState();
-        if (state instanceof OberonAction) {
-            selectHelp(((OberonAction) state).getSelect());
-            active = ((OberonAction) state).getBlock();
+        if (state instanceof BlockAction) {
+            selectHelp(((BlockAction) state).getSelect());
+            active = ((BlockAction) state).getBlock();
             PArea.removePABlock(active);
-            releaseHelp(((OberonAction) state).getRelease());
+            releaseHelp(((BlockAction) state).getRelease());
         }
         else if (state instanceof ProgramState) {
             programRunner.setState((ProgramState) state);

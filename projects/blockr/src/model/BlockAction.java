@@ -3,13 +3,13 @@ package model;
 import model.blocks.ModelBlock;
 import utilities.ProgramLocation;
 
-public class OberonAction {
+public class BlockAction {
 
     private final ProgramLocation select;
     private final ProgramLocation release;
     private final ModelBlock block;
 
-    public OberonAction(ProgramLocation select, ProgramLocation release, ModelBlock block) {
+    public BlockAction(ProgramLocation select, ProgramLocation release, ModelBlock block) {
         this.select = select;
         this.release = release;
         this.block = block;

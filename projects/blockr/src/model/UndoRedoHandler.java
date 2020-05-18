@@ -9,14 +9,14 @@ public class UndoRedoHandler {
     private Stack<ProgramState> runnerUndoStack;
     private Stack<ProgramState> runnerRedoStack;
 
-    private Stack<OberonAction> actionUndoStack;
-    private Stack<OberonAction> actionRedoStack;
+    private Stack<BlockAction> blockActionUndoStack;
+    private Stack<BlockAction> blockActionRedoStack;
 
     private UndoRedoHandler() {
         runnerUndoStack = new Stack<>();
         runnerRedoStack = new Stack<>();
-        actionUndoStack = new Stack<>();
-        actionRedoStack = new Stack<>();
+        blockActionUndoStack = new Stack<>();
+        blockActionRedoStack = new Stack<>();
     }
 
     public static UndoRedoHandler getInstance() {
@@ -44,11 +44,11 @@ public class UndoRedoHandler {
     }
 
     public void undoAction() {
-        if (!actionUndoStack.empty()) actionRedoStack.push(actionUndoStack.pop());
+        if (!blockActionUndoStack.empty()) blockActionRedoStack.push(blockActionUndoStack.pop());
     }
 
     public void redoAction() {
-        if (!actionRedoStack.empty()) actionUndoStack.push(actionRedoStack.pop());
+        if (!blockActionRedoStack.empty()) blockActionUndoStack.push(blockActionRedoStack.pop());
     }
 
     public void undo() {
@@ -57,23 +57,23 @@ public class UndoRedoHandler {
     }
 
     public void redo() {
-        if (actionRedoStack.empty()) redoRunner();
+        if (blockActionRedoStack.empty()) redoRunner();
         else redoAction();
     }
 
     public Object getState() {
         if (!runnerUndoStack.empty()) return runnerUndoStack.peek();
-        else if (!actionUndoStack.empty()) return actionUndoStack.peek();
+        else if (!blockActionUndoStack.empty()) return blockActionUndoStack.peek();
         else return null;
     }
 
-    public void executeAction(OberonAction action) {
-        actionUndoStack.push(action);
+    public void executeAction(BlockAction blockAction) {
+        blockActionUndoStack.push(blockAction);
         runnerUndoStack.clear();
     }
 
     public void removeRedoActions() {
-        actionRedoStack.clear();
+        blockActionRedoStack.clear();
     }
 
     public void executeRunner(ProgramState state) {

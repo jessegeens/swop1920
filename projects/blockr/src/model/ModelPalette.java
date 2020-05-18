@@ -5,16 +5,13 @@ import java.util.ArrayList;
 import gameworldapi.ActionType;
 import gameworldapi.PredicateType;
 import model.blocks.*;
+import ui.UIBlock;
 import utilities.ProgramLocation;
 
 /**
  * Class representing the palette. Blocks will be dragged from the palette int the program area.
  */
 class ModelPalette{
-
-
-    //dynamically removing as well (how do you do this with undo redo?)
-    //just add a function definition block to predicates
 
     private final ArrayList<ActionType> actions;
     private final ArrayList<PredicateType> predicates;
@@ -40,22 +37,21 @@ class ModelPalette{
         this.blocks = new ArrayList<ModelBlock>();
         int i = 0;
         for (ActionType action : actions){
-            ModelActionBlock actionBlock = new ModelActionBlock(new ProgramLocation(180, 140 + 120*i), action);
+            ModelActionBlock actionBlock = new ModelActionBlock(new ProgramLocation(180, 20 + (int)(UIBlock.STD_HEIGHT * 1.5f * (i + 1))), action);
             blocks.add(actionBlock);
             i++;
         }
         int j = 0;
         for (PredicateType predicate : predicates){
-            ModelPredicateBlock predicateBlock = new ModelPredicateBlock(new ProgramLocation(20, 380 + 120*j), predicate);
+            ModelPredicateBlock predicateBlock = new ModelPredicateBlock(new ProgramLocation(20, 20 + (int)(UIBlock.STD_HEIGHT * 1.5f * (j + 3))), predicate);
             blocks.add(predicateBlock);
             j++;
-
         }
-        this.maxColumnHeight = Math.max(140 + 120 * (i), 380 + 120 *(j));
+        this.maxColumnHeight = Math.max(20 + (int)(UIBlock.STD_HEIGHT * 1.5f * (i + 1)), 20 + (int)(UIBlock.STD_HEIGHT * 1.5f * (j + 2)));
         blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 20), true));
-        blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 140), false));
+        blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 20 + (int)(UIBlock.STD_HEIGHT * 1.5f)), false));
         blocks.add(new ModelNotBlock(new ProgramLocation(180, 20)));
-        blocks.add(new ModelFunctionDefinitionBlock(new ProgramLocation(20, 260),functionCounter));
+        blocks.add(new ModelFunctionDefinitionBlock(new ProgramLocation(20, 20 + (int)(UIBlock.STD_HEIGHT * 1.5f * 2)),functionCounter));
     }
 
     /**
@@ -65,14 +61,11 @@ class ModelPalette{
      * @author Bert
      */
     public void populateBlocks(ArrayList<Integer> idList){
-
         this.populateBlocks();
-
         for(int i = 0; i<idList.size(); i++){
             int Xpos = i%2 == 0 ? (20) : (180);
             int Ypos = (int) (Math.floor(i/2) * 120 + this.maxColumnHeight);
             this.blocks.add(new ModelFunctionCallBlock(new ProgramLocation(Xpos, Ypos), idList.get(i)));
-
         }
     }
 
@@ -103,23 +96,11 @@ class ModelPalette{
             if(block.inBoundsOfElement(eventWindowLocation)){
                 if(block instanceof ModelFunctionDefinitionBlock){
                     this.functionCounter++;
-                    //ModelFunctionDefinitionBlock paletteReplacement = new ModelFunctionDefinitionBlock(block.getPos(), this.functionCounter);
-
-
-                    /*
-                    this.addFunctionCallBlock(this.functionCounter);
-
-
-                    this.blocks.remove(block);
-                    this.blocks.add(paletteReplacement);
-                    */
-
                     return block;
                 }
                 else{
                     return block.clone();
                 }
-
             }
         }
         return null;

@@ -11,7 +11,6 @@ import java.util.Stack;
 public class ProgramRunner {
 
     private boolean running;
-    //private ModelBlock current;
     private ModelBlock start;
     private GameWorld gameWorld;
     private GameWorldState initialState;
@@ -28,7 +27,6 @@ public class ProgramRunner {
         this.gameWorld = gameWorld;
         this.initialState = gameWorld.getSnapshot();
         this.running = false;
-
         programUndoStateStack = new Stack<>();
         programRedoStateStack = new Stack<>();
     }
@@ -39,29 +37,15 @@ public class ProgramRunner {
      * @param start the first block in the program
      */
     public void initialise(ModelBlock start, ArrayList<ModelFunctionDefinitionBlock> definitions){
-
         this.running = true;
         this.start = start;
-
         this.definitions = definitions;
-
         callStack = new Stack<>();
         while (this.start instanceof ModelCavityBlock) {
             this.start = findNextBlock(this.start);
         }
         programUndoStateStack.push(new ProgramState(this.start, gameWorld.getSnapshot()));
         updateHighlight(null, this.start);
-    }
-
-    /**
-     * Clears all undo and redo stacks
-     *
-     * @author Bert
-     */
-    public void clearStacks(){
-        this.programUndoStateStack.clear();
-        this.programRedoStateStack.clear();
-
     }
 
     /**
@@ -73,11 +57,9 @@ public class ProgramRunner {
             updateHighlight(programUndoStateStack.peek().getBlock(), null);
             this.running = false;
             this.gameWorld.restore(initialState);
-
             this.programUndoStateStack.clear();
             this.programRedoStateStack.clear();
         }
-        System.out.println("RESET");
     }
 
     /**
@@ -101,9 +83,7 @@ public class ProgramRunner {
             ProgramState currentState = programUndoStateStack.peek();
             if(current instanceof ModelActionBlock && gameWorld != null){
                 ActionResult result = gameWorld.perform(((ModelActionBlock) current).getAction());
-
                 switch (result){
-
                     case FAILURE:
                         break;
                     case SUCCESS:
@@ -151,9 +131,7 @@ public class ProgramRunner {
      */
     private ModelBlock findNextBlock(ModelBlock current){
         ModelBlock next;
-
         if (current == null) return start;
-
         if (current instanceof ModelWhileIfBlock){
             if (((ModelWhileIfBlock) current).isNegated()) {
                 if (!(gameWorld.evaluate(((ModelWhileIfBlock) current).getPredicate()))) {
@@ -170,11 +148,8 @@ public class ProgramRunner {
             }
         }
         else if (current instanceof ModelFunctionCallBlock){
-
             ModelFunctionDefinitionBlock def = this.getFuncDefBlockById(((ModelFunctionCallBlock) current).getId());
             next =  def.getCavityPlug();
-
-
         }
         else if (current instanceof ModelFunctionDefinitionBlock){
             next =  callStack.peek().getBottomPlug();
@@ -183,27 +158,19 @@ public class ProgramRunner {
             next =  current.getBottomPlug().getBottomPlug(); //If block should only be executed once.
         }
         else next =  current.getBottomPlug();
-
         while (next instanceof ModelCavityBlock) next = findNextBlock(next);
-
         return next;
     }
 
     public void updateState(ProgramState current, ProgramState next){
-        if(next.getBlock() != null){
-            this.gameWorld.restore(next.getGameState());
-            ModelBlock currentB = current.getBlock();
-            ModelBlock nextB = next.getBlock();
-            updateHighlight(currentB, nextB);
-        }
+        this.gameWorld.restore(next.getGameState());
+        ModelBlock currentB = current.getBlock();
+        ModelBlock nextB = next.getBlock();
+        updateHighlight(currentB, nextB);
     }
 
     public void callStackUpdate(ProgramState current, ProgramState next) {
         if (current.getBlock() == null || next.getBlock() == null) return;
-//        if (next.getBlock() == null) {
-//            if (!callStack.empty()) callStack.pop();
-//            return;
-//        }
         if (current.getBlock().getSurroundingDefinitionBlock() != null) {
             if (next.getBlock().getSurroundingDefinitionBlock() != null) {
                 if (!current.getBlock().getSurroundingDefinitionBlock().equals(next.getBlock().getSurroundingDefinitionBlock())) {
@@ -256,7 +223,6 @@ public class ProgramRunner {
      * @author bert_dvl
      */
     public ModelFunctionDefinitionBlock getFuncDefBlockById(int id){
-
         for(ModelBlock block : this.definitions){
             if(block instanceof ModelFunctionDefinitionBlock){
                 if(((ModelFunctionDefinitionBlock) block).getId() == id){

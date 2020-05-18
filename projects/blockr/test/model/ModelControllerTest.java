@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ui.BlockState;
+import ui.UIBlock;
 import utilities.*;
 
 import java.io.File;
@@ -45,7 +46,7 @@ public class ModelControllerTest {
         MC.select(new ProgramLocation (40, 40));
         MC.release(new ProgramLocation (420, 420));
         MC.select(new ProgramLocation(40, 200));
-        MC.release(new ProgramLocation(420, 500));
+        MC.release(new ProgramLocation(420, 420 + UIBlock.STD_HEIGHT));
         assertEquals(10, MC.getBlockStates().size());
     }
 
@@ -211,5 +212,25 @@ public class ModelControllerTest {
         controller.select(new ProgramLocation(30, 30));
         controller.release(new ProgramLocation(443, 453));
         assertEquals(new ProgramLocation(433, 463), controller.getProgramAreaBlocks().get(1).getPos());
+    }
+
+    @Test
+    public void moveWhileBlockWithConnectedBlocks() {
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(30, 150));
+        controller.release(new ProgramLocation(320, 20));
+        controller.select(new ProgramLocation(190, 30));
+        controller.release(new ProgramLocation(400, 20));
+        controller.select(new ProgramLocation(30, 390));
+        controller.release(new ProgramLocation(480, 20));
+        controller.select(new ProgramLocation(190, 150));
+        controller.release(new ProgramLocation(333, 63));
+        controller.select(new ProgramLocation(330, 30));
+        controller.release(new ProgramLocation(320, 420));
+        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(0, 0));
+        for (ModelBlock block : controller.getProgramAreaBlocks()) {
+            if (block instanceof ModelNotBlock) notBlock = (ModelNotBlock) block;
+        }
+        assertEquals(new ProgramLocation(400, 420), notBlock.getPos());
     }
 }

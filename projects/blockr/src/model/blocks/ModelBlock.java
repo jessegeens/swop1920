@@ -52,7 +52,7 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
         if (this.hasLeftPlug() && this.getLeftPlug() != null) connections.add(this.getLeftPlug());
         if (this.hasTopSocket() && this.getTopSocket() != null) connections.add(this.getTopSocket());
         if (this.hasRightSocket() && this.getRightSocket() != null) connections.add(this.getRightSocket());
-        if (this instanceof ModelWhileIfBlock) connections.addAll(((ModelWhileIfBlock) this).getCavityBlocks());
+        if (this instanceof ModelCavityBlock) connections.addAll(((ModelCavityBlock) this).getCavityBlocks());
         return connections; 
     }
 
@@ -67,6 +67,13 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
         if (this.hasLeftPlug() && this.getLeftPlug() != null) connections.add(this.getLeftPlug());
         if (this.hasTopSocket() && this.getTopSocket() != null) connections.add(this.getTopSocket());
         if (this.hasRightSocket() && this.getRightSocket() != null) connections.add(this.getRightSocket());
+        return connections;
+    }
+
+    public ArrayList<ModelBlock> getConnectionsCavityRight() {
+        ArrayList<ModelBlock> connections = new ArrayList<ModelBlock>();
+        if (this.hasRightSocket() && this.getRightSocket() != null) connections.add(this.getRightSocket());
+        if (this instanceof ModelCavityBlock) connections.addAll(((ModelCavityBlock) this).getCavityBlocks());
         return connections;
     }
     

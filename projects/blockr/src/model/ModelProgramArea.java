@@ -13,14 +13,10 @@ public class ModelProgramArea{
 
     private final int MAX_BLOCKS = 15;
     private ArrayList<ModelBlock> blocks;
-    private ConnectionHandler CH;
-    private LocationHandler LH;
 
     // Constructor
     public ModelProgramArea(){
         blocks = new ArrayList<ModelBlock>();
-        CH = new ConnectionHandler();
-        LH = new LocationHandler();
     }
 
     /**
@@ -37,13 +33,19 @@ public class ModelProgramArea{
      * @param toBeRemoved block that should be removed
      */
     public void removePABlock(ModelBlock toBeRemoved){
-        CH.disconnect(toBeRemoved);
-        blocks.remove(toBeRemoved);
-        if(toBeRemoved instanceof ModelCavityBlock){
-            for (ModelBlock block : ((ModelCavityBlock) toBeRemoved).getCavityBlocks()){
-                blocks.remove(block);
+        ConnectionHandler.getInstance().disconnect(toBeRemoved);
+        ArrayList<ModelBlock> toRemoveBlocks = new ArrayList<>();
+        toRemoveBlocks.add(toBeRemoved);
+        int i = 0;
+        while (toRemoveBlocks.size() > i) {
+            for (ModelBlock block : toRemoveBlocks.get(i).getConnectionsCavityRight()) {
+                if (!toRemoveBlocks.contains(block)) {
+                    toRemoveBlocks.add(block);
+                }
             }
+            i ++;
         }
+        blocks.removeAll(toRemoveBlocks);
     }
 
     /**
@@ -51,12 +53,18 @@ public class ModelProgramArea{
      * @param toBeAdded the block which should be added
      */
     public void addPABlock(ModelBlock toBeAdded){
-        if(toBeAdded != null){
-            this.blocks.add(toBeAdded);
-            if (toBeAdded instanceof ModelCavityBlock) {
-                this.blocks.addAll(((ModelCavityBlock) toBeAdded).getCavityBlocks());
+        ArrayList<ModelBlock> toAddBlocks = new ArrayList<>();
+        toAddBlocks.add(toBeAdded);
+        int i = 0;
+        while (toAddBlocks.size() > i) {
+            for (ModelBlock block : toAddBlocks.get(i).getConnectionsCavityRight()) {
+                if (!toAddBlocks.contains(block)) {
+                    toAddBlocks.add(block);
+                }
             }
+            i ++;
         }
+        blocks.addAll(toAddBlocks);
     }
 
     /**
@@ -89,22 +97,11 @@ public class ModelProgramArea{
     public boolean connectedBlockHere(ProgramLocation eventWindowLocation){
         for(int i = blocks.size() - 1; i >= 0; i--){
             if(blocks.get(i).inBoundsOfElement(eventWindowLocation)){
-                /*
-                ModelBlock toBeReturned = blocks.get(i);
-                if(CH.isConnected(blocks.get(i))){
-                    return true;
-                }
-                */
-                //refactor so CH actually processes this?
                 if(blocks.get(i).getConnectionsNoCavity().size() > 0){
-                    //System.out.println("YES CONNECTION");
                     return true;
-
                 }
-
             }
         }
-        //System.out.println("NO CONNECTION");
         return false;
     }
 
@@ -116,19 +113,18 @@ public class ModelProgramArea{
      * @author Oberon Swings
      */
     public boolean findAndConnect(ProgramLocation eveWindowLocation, ModelBlock activeB){
+        ProgramLocation location = LocationHandler.getInstance().moveToInBounds(eveWindowLocation);
+        LocationHandler.getInstance().setLocationBlock(activeB, location);
+        ModelBlock closest = LocationHandler.getInstance().findClosestBlock(activeB, blocks);
         if (!(this.getPABlocks().contains(activeB))) {
             this.addPABlock(activeB);
         }
-        ProgramLocation location = LH.moveToInBounds(eveWindowLocation);
-        LH.setLocationBlock(activeB, location);
-        ModelBlock closest = LH.findClosestBlock(activeB, blocks);
         boolean connection = false;
         if (closest != null){
-            connection = CH.connect(closest, activeB);
-            LH.updateLocationBlock(activeB);
-            CH.updateConnections(blocks);
-            LH.updateLocationBlocks(CH.getStartBlocks(blocks));
-
+            connection = ConnectionHandler.getInstance().connect(closest, activeB);
+            LocationHandler.getInstance().updateLocationBlock(activeB);
+            ConnectionHandler.getInstance().updateConnections(blocks);
+            LocationHandler.getInstance().updateLocationBlocks(ConnectionHandler.getInstance().getStartBlocks(blocks));
         }
         return connection;
     }
@@ -140,7 +136,7 @@ public class ModelProgramArea{
      * @author Oberon Swings
      */
     public void dragBlock(ModelBlock block, ProgramLocation location){
-        LH.setLocationBlock(block, location);
+        LocationHandler.getInstance().setLocationBlock(block, location);
     }
 
     /**
@@ -149,8 +145,7 @@ public class ModelProgramArea{
      * @author Oberon Swings
      */
     public boolean validExecutionState(){
-
-        return CH.allBlocksConnected(blocks);
+        return ConnectionHandler.getInstance().allBlocksConnected(blocks);
     }
 
     /**
@@ -159,7 +154,7 @@ public class ModelProgramArea{
      * @author Oberon Swings
      */
     public ModelBlock getFirstBlock(){
-        return CH.getStartBlocks(blocks).get(0);
+        return ConnectionHandler.getInstance().getStartBlocks(blocks).get(0);
     }
 
     /**
@@ -179,12 +174,10 @@ public class ModelProgramArea{
      */
     public ArrayList<ModelFunctionDefinitionBlock> getAllModelFunctionDefinitionBlock(){
         ArrayList<ModelFunctionDefinitionBlock> toBeReturned = new ArrayList<>();
-
         for(ModelBlock block : blocks){
             if(block instanceof ModelFunctionDefinitionBlock){
                 toBeReturned.add((ModelFunctionDefinitionBlock) block);
             }
-
         }
         return toBeReturned;
     }
@@ -199,7 +192,6 @@ public class ModelProgramArea{
     public ArrayList<ModelFunctionCallBlock> deleteFunctionCallsById(int id){
         ArrayList<ModelFunctionCallBlock> toBeReturned = new ArrayList<>();
         for(ModelBlock block : blocks){
-
             if(block instanceof ModelFunctionCallBlock){
                 if(((ModelFunctionCallBlock) block).getId() == id){
                     toBeReturned.add( (ModelFunctionCallBlock) block);
@@ -209,9 +201,7 @@ public class ModelProgramArea{
         for(ModelBlock block: toBeReturned){
             removePABlock(block);
         }
-
         return toBeReturned;
-
     }
 
     /**
@@ -228,23 +218,7 @@ public class ModelProgramArea{
                     toBeReturned.add(((ModelFunctionDefinitionBlock) block).getId());
                 }
             }
-
-
         }
         return toBeReturned;
     }
-
-    /**
-     * Unhighlights all blocks
-     *
-     * @author Bert
-     */
-    public void unHighlightAll(){
-        for (ModelBlock block : this.blocks){
-            block.setUnHighlight();
-        }
-    }
-
-
-
 }

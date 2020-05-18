@@ -58,9 +58,6 @@ public class ModelController{
      *
      */
     public void startOrExecuteProgram(){
-        //this.PArea.unHighlightAll();
-
-
         if (PArea.validExecutionState()){//Check if all blocks are connected, and if so execute.
             if(programRunner.isRunning()){
                 programRunner.execute();
@@ -351,35 +348,30 @@ public class ModelController{
      * @author Bert
      */
     public void select(ProgramLocation eventLocation){
-        this.programRunner.reset();
-        //if(!programRunner.isRunning()){
-            this.clearRedoStack();
-            if(this.inPalette(eventLocation)){
-                active = palette.returnSelectedBlock(eventLocation);
-                if(active != null) {
-                    oldPos = active.getPos();
-                    newBlockCreated = true;
-                    if(active instanceof ModelFunctionDefinitionBlock){
-                        ArrayList<Integer> idsForPalette = PArea.getActiveFunctionDefinitions();
-                        idsForPalette.add(((ModelFunctionDefinitionBlock) active).getId());
-                        palette.populateBlocks(idsForPalette);
-                    }
+        this.clearRedoStack();
+        if(this.inPalette(eventLocation)){
+            active = palette.returnSelectedBlock(eventLocation);
+            if(active != null) {
+                oldPos = active.getPos();
+                newBlockCreated = true;
+                if(active instanceof ModelFunctionDefinitionBlock){
+                    ArrayList<Integer> idsForPalette = PArea.getActiveFunctionDefinitions();
+                    idsForPalette.add(((ModelFunctionDefinitionBlock) active).getId());
+                    palette.populateBlocks(idsForPalette);
                 }
             }
-            else if(this.inProgramArea(eventLocation)){
-                boolean isConnected = PArea.connectedBlockHere(eventLocation);
-                System.out.println("Programarea select");
-                active = PArea.selectBlock(eventLocation);
-                if(active != null){
-                    oldPos = active.getPos();
-
-
-                    this.programRunner.reset();
-                }
-                if(isConnected){
-                    undoStack.push(new DisconnectAction(active, active.getPos(), this.PArea));
-                }
+        }
+        else if(this.inProgramArea(eventLocation)){
+            boolean isConnected = PArea.connectedBlockHere(eventLocation);
+            active = PArea.selectBlock(eventLocation);
+            if(active != null){
+                oldPos = active.getPos();
+                this.programRunner.reset();
             }
+            if(isConnected){
+                undoStack.push(new DisconnectAction(active, active.getPos(), this.PArea));
+            }
+        }
     }
 
     /**
@@ -419,6 +411,7 @@ public class ModelController{
             if(active == null) {
                 return;
             }
+            programRunner.reset();
             System.out.println("Programarea release");
             if (!newBlockCreated) {
                 undoStack.push(new MoveAction(active, this.oldPos, active.getPos(), this.PArea)); //see active.getPos comment in select method. Same applies here.
@@ -434,17 +427,13 @@ public class ModelController{
             active = null;
             if (PArea.maxReached()) {
                 palette.removeBlocks();
-
                 if (active != null) {
                     PArea.findAndConnect(eventLocation, active);
                     active = null;
                     if (PArea.maxReached()) palette.removeBlocks();
-
                 }
             }
-
         }
-
     }
 
 
@@ -456,7 +445,6 @@ public class ModelController{
      */
     public void drag(ProgramLocation eventLocation){
         this.clearRedoStack();
-
         if(active != null){
             if(2 * MyCanvasWindow.WIDTH / 3 - active.getWidth() > eventLocation.getX()){
                 PArea.dragBlock(active, eventLocation);

@@ -408,6 +408,10 @@ public class ProgramRunnerTest {
         pr.undoProgramRunner();
         pr.undoProgramRunner();
         pr.undoProgramRunner();
-        assertTrue(rightBlock.isHighlighted());
+        pr.redoProgramRunner();
+        pr.redoProgramRunner();
+        pr.redoProgramRunner();
+        pr.execute();
+        assertFalse(forwardBlock.isHighlighted());
     }
 }

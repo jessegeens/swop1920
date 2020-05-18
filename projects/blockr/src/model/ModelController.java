@@ -113,16 +113,18 @@ public class ModelController{
     }
 
     public void undo() {
-        UndoRedoHandler.getInstance().undo();
         Object state = UndoRedoHandler.getInstance().getState();
-        if (state instanceof BlockAction) {
+        UndoRedoHandler.getInstance().undo();
+        if (state instanceof ProgramState) {
+            state = UndoRedoHandler.getInstance().getState();
+            if (state instanceof ProgramState) programRunner.setState((ProgramState) state);
+            else programRunner.setState(null);
+        }
+        else if (state instanceof BlockAction) {
             selectHelp(((BlockAction) state).getRelease());
             active = ((BlockAction) state).getBlock();
             PArea.removePABlock(active);
             releaseHelp(((BlockAction) state).getSelect());
-        }
-        else if (state instanceof ProgramState) {
-            programRunner.setState((ProgramState) state);
         }
     }
 

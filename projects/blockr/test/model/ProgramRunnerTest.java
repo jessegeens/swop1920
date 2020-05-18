@@ -447,12 +447,12 @@ public class ProgramRunnerTest {
         pr.execute();
         pr.execute();
         pr.execute();
-        UndoRedoHandler.getInstance().undo();
         pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
         UndoRedoHandler.getInstance().undo();
         pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
         UndoRedoHandler.getInstance().undo();
         pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
+        UndoRedoHandler.getInstance().undo();
         UndoRedoHandler.getInstance().redo();
         pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
         UndoRedoHandler.getInstance().redo();

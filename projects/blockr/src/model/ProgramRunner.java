@@ -121,6 +121,7 @@ public class ProgramRunner {
         if (current != null) {
             gameWorld.restore(current.getGameState());
             if (current.getHighlight() != null) current.getHighlight().setHighlight();
+            running = true;
         }
         else running = false;
     }

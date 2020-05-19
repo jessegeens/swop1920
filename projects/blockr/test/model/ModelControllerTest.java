@@ -277,4 +277,22 @@ public class ModelControllerTest {
         controller.redo();
         assertTrue(controller.getProgramAreaBlocks().get(0).isHighlighted());
     }
+
+    @Test
+    public void executeAfterRedoTransitionExecutionBlockAction() {
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(190, 150));
+        controller.release(new ProgramLocation(420, 420));
+        controller.select(new ProgramLocation(190, 270));
+        controller.release(new ProgramLocation(420, 500));
+        controller.startOrExecuteProgram();
+        controller.startOrExecuteProgram();
+        controller.undo();
+        controller.undo();
+        controller.undo();
+        controller.redo();
+        controller.redo();
+        controller.startOrExecuteProgram();
+        assertTrue(controller.getProgramAreaBlocks().get(1).isHighlighted());
+    }
 }

@@ -69,6 +69,7 @@ public class ModelController{
     private void selectHelp(ProgramLocation location) {
         if (LocationHandler.isInPalette(location)) {
             active = palette.returnSelectedBlock(location);
+            palette.populateBlocks(PArea.getAllModelFunctionDefinitionBlock());
         }
         else if (LocationHandler.isInProgramArea(location)) {
             active = PArea.selectBlock(location);

@@ -77,6 +77,7 @@ public class UndoRedoHandler {
     }
 
     public void executeRunner(ProgramState state) {
+        runnerRedoStack.clear();
         runnerUndoStack.push(state);
     }
 }

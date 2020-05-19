@@ -87,6 +87,7 @@ class ModelPalette{
             if(block.inBoundsOfElement(eventWindowLocation)){
                 if(block instanceof ModelFunctionDefinitionBlock){
                     this.functionCounter++;
+
                     return block;
                 }
                 else{

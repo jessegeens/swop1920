@@ -74,7 +74,7 @@ public class BlockState {
         if (highlighted) return Color.YELLOW;
         if(this.title.contains("FUNC DEF")) return Color.PINK;
         if(this.title.contains("FUNC CALL")) return Color.MAGENTA;
-        if (connectionPoints.contains(ConnectionPoint.CAVITY_PLUG)) return Color.BLUE;
+        if (connectionPoints.contains(ConnectionPoint.CAVITY_PLUG)) return Color.CYAN;
         if (connectionPoints.contains(ConnectionPoint.TOP_SOCKET)) return Color.ORANGE;
         if (connectionPoints.contains(ConnectionPoint.RIGHT_SOCKET)) return Color.GREEN;
         if (connectionPoints.contains(ConnectionPoint.LEFT_PLUG)) return Color.RED;

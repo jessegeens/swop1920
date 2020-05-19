@@ -88,6 +88,7 @@ public class ProgramRunner {
             if(current.getHighlight() instanceof ModelFunctionCallBlock) newCallStack.push((ModelFunctionCallBlock) current.getHighlight());
             else if(leftFunctionDefinition()) newCallStack.pop();
             ModelBlock nextBlock = newFindNextBlock(current.getHighlight());
+            if (nextBlock != null && nextBlock.getTopSocket().equals(newCallStack.peek())) newCallStack.pop();
             ProgramState nextState = new ProgramState(current.getHighlight(), nextBlock, newCallStack, gameWorld.getSnapshot());
             UndoRedoHandler.getInstance().executeRunner(nextState);
             setState(nextState);

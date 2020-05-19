@@ -170,7 +170,10 @@ public class ModelProgramArea{
      * @author Oberon Swings
      */
     public ModelBlock getFirstBlock(){
-        return ConnectionHandler.getInstance().getStartBlocks(blocks).get(0);
+        if (ConnectionHandler.getInstance().getStartBlocks(blocks).size() > 0)
+            return ConnectionHandler.getInstance().getStartBlocks(blocks).get(0);
+        else
+            return null;
     }
 
     /**

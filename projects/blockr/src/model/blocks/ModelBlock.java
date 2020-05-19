@@ -38,7 +38,7 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
      */
     @Override
     public boolean inBoundsOfElement(ProgramLocation coordinate){
-        return (this.getPos().getX() <= coordinate.getX() && this.getPos().getX() + getWidth() >= coordinate.getX() && this.getPos().getY() <= coordinate.getY() && this.getPos().getY() + getWidth() >= coordinate.getY());
+        return (this.getPos().getX() <= coordinate.getX() && this.getPos().getX() + getWidth() >= coordinate.getX() && this.getPos().getY() <= coordinate.getY() && this.getPos().getY() + getHeight() >= coordinate.getY());
     }
 
     /**

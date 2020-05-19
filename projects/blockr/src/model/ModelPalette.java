@@ -46,7 +46,7 @@ class ModelPalette{
             blocks.add(predicateBlock);
             j++;
         }
-        this.maxColumnHeight = Math.max(20 + (int)(UIBlock.STD_HEIGHT * 1.5f * (i + 1)), 20 + (int)(UIBlock.STD_HEIGHT * 1.5f * (j + 2)));
+        this.maxColumnHeight = Math.max(20 + (int)(UIBlock.STD_HEIGHT * 1.5f * (i + 1)), 20 + (int)(UIBlock.STD_HEIGHT * 1.5f * (j + 3)));
         blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 20), true));
         blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 20 + (int)(UIBlock.STD_HEIGHT * 1.5f)), false));
         blocks.add(new ModelNotBlock(new ProgramLocation(180, 20)));
@@ -57,7 +57,7 @@ class ModelPalette{
         this.populateBlocks();
         for(int i = 0; i<idList.size(); i++){
             int Xpos = i%2 == 0 ? (20) : (180);
-            int Ypos = (int) (Math.floor(i/2f) * 120 + this.maxColumnHeight);
+            int Ypos = (int) (Math.floor(i/2f) * (int)(UIBlock.STD_HEIGHT * 1.5f) + this.maxColumnHeight);
             this.blocks.add(new ModelFunctionCallBlock(new ProgramLocation(Xpos, Ypos), idList.get(i)));
         }
     }

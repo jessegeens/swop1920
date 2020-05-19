@@ -64,6 +64,7 @@ public class ModelController{
     public void select(ProgramLocation location) {
         selectHelp(location);
         if (active != null && LocationHandler.isInProgramArea(location)) PArea.removePABlock(active);
+        LocationHandler.getInstance().updateLocationBlocks(PArea.getPABlocks());
     }
 
     private void selectHelp(ProgramLocation location) {

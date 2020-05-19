@@ -3,10 +3,7 @@ package model;
 import static org.junit.Assert.*;
 
 import gameworldapi.GameWorldType;
-import model.blocks.ModelBlock;
-import model.blocks.ModelNotBlock;
-import model.blocks.ModelPredicateBlock;
-import model.blocks.ModelWhileIfBlock;
+import model.blocks.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -314,5 +311,25 @@ public class ModelControllerTest {
         controller.select(new ProgramLocation(20, 500));
         controller.release(new ProgramLocation(520, 420));
         assertTrue(ConnectionHandler.getInstance().allBlocksConnected(controller.getProgramAreaBlocks()));
+    }
+
+    @Test
+    public void ifBlockInWhileBlockReplaceBottomPlugIfUpdateLocation() {
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(20, 140));
+        controller.release(new ProgramLocation(320, 20));
+        controller.select(new ProgramLocation(20, 20));
+        controller.release(new ProgramLocation(333, 63));
+        controller.select(new ProgramLocation(180, 140));
+        controller.release(new ProgramLocation(346, 106));
+        controller.select(new ProgramLocation(180, 260));
+        controller.release(new ProgramLocation(333, 223));
+        controller.select(new ProgramLocation(340, 70));
+        controller.release(new ProgramLocation(420, 420));
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(0, 0), null);
+        for (ModelBlock block : controller.getProgramAreaBlocks()) {
+            if (block instanceof ModelActionBlock && block.getTitle() == "TURN_LEFT") leftBlock = (ModelActionBlock) block;
+        }
+        assertEquals(new ProgramLocation(333, 63), leftBlock.getPos());
     }
 }

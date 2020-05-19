@@ -45,7 +45,7 @@ public class ModelController{
             if(programRunner.isRunning()){
                 programRunner.execute();
             } else {
-                programRunner.initialise(PArea.getFirstBlock(), PArea.getAllModelFunctionDefinitionBlock());
+                programRunner.initialise(PArea.getFirstBlock());
             }
         }
     }

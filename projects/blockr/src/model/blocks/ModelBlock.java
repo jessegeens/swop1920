@@ -105,11 +105,11 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
     public boolean isInCavity(){
         if (this.hasTopSocket()){
             ModelBlock socket = this.getTopSocket();
-            while (!(socket instanceof ModelCavityBlock || socket == null)){
+            while (socket != null){
+                if (socket instanceof ModelCavityBlock && ((ModelCavityBlock) socket).getCavityBlocks().contains(this)) return true;
                 socket = socket.getTopSocket();
             }
-            if (socket == null) return false;
-            else return socket instanceof ModelCavityBlock && ((ModelCavityBlock) socket).getCavityBlocks().contains(this);
+            return false;
         }
         return false;
     }
@@ -122,11 +122,11 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
     public ModelCavityBlock getSurroundingCavityBlock(){
         if (this.hasTopSocket()){
             ModelBlock socket = this.getTopSocket();
-            while (!(socket instanceof ModelCavityBlock || socket == null)){
+            while (socket != null){
+                if (socket instanceof ModelCavityBlock && ((ModelCavityBlock) socket).getCavityBlocks().contains(this)) return ((ModelCavityBlock)socket);
                 socket = socket.getTopSocket();
             }
-            if (socket == null) return null;
-            else if (socket instanceof ModelCavityBlock && ((ModelCavityBlock) socket).getCavityBlocks().contains(this)) return ((ModelCavityBlock)socket);
+            return null;
         }
         return null;
     }
@@ -139,11 +139,11 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
     public ModelFunctionDefinitionBlock getSurroundingDefinitionBlock(){
         if (this.hasTopSocket()){
             ModelBlock socket = this.getTopSocket();
-            while (!(socket instanceof ModelFunctionDefinitionBlock || socket == null)){
+            while (socket != null){
+                if (socket instanceof ModelFunctionDefinitionBlock && ((ModelFunctionDefinitionBlock) socket).getCavityBlocks().contains(this)) return ((ModelFunctionDefinitionBlock)socket);
                 socket = socket.getTopSocket();
             }
-            if (socket == null) return null;
-            else if (socket instanceof ModelFunctionDefinitionBlock && ((ModelFunctionDefinitionBlock) socket).getCavityBlocks().contains(this)) return ((ModelFunctionDefinitionBlock)socket);
+            return null;
         }
         return null;
     }

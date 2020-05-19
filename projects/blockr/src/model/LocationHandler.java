@@ -99,7 +99,7 @@ public class LocationHandler {
      */
     public void setTopSocketLocation(ModelBlock toBeMoved, ModelBlock reference){
         ProgramLocation referenceLocation;
-        if (toBeMoved.isInCavity() && reference instanceof ModelCavityBlock){
+        if (reference.equals(toBeMoved.getSurroundingCavityBlock()) && reference instanceof ModelCavityBlock){
             referenceLocation = ((ModelCavityBlock) reference).getCavityPlugPos();
         }
         else referenceLocation = reference.getBottomPlugPos();

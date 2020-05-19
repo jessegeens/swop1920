@@ -56,6 +56,7 @@ public abstract class ModelCavityBlock extends ModelBlock{
             if(blk.hasBottomPlug()){
                 blk = blk.getBottomPlug();
             }
+            else blk = null;
         }
         return cav;
     }

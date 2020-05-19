@@ -13,9 +13,9 @@ import javax.xml.stream.events.StartDocument;
 public class UIBlock{
 
 
-    public static final int PLUGSIZE = 20; //final standard size of plugs and sockets
-    public static final int STD_WIDTH = 80; //final standard width of blocks
-    public static final int STD_HEIGHT = 80; //final standard height of blocks
+    public static final int PLUGSIZE = 10; //final standard size of plugs and sockets
+    public static final int STD_WIDTH = 100; //final standard width of blocks
+    public static final int STD_HEIGHT = 40; //final standard height of blocks
 
     UIBlock(){ }
 
@@ -101,7 +101,7 @@ public class UIBlock{
         if (connectionPoints.contains(ConnectionPoint.CAVITY_PLUG)) this.renderCavityPlug(g, blockLocation, color);
         if (connectionPoints.contains(ConnectionPoint.CAVITY_SOCKET)) this.renderCavitySocket(g, blockLocation, color, cavitySize);
         g.setColor(Color.BLACK);
-        g.setFont(new Font("TimesRoman", Font.PLAIN, 8));
+        g.setFont(new Font("Arial", Font.PLAIN, 10));
         g.drawString(blockState.getTitle(), blockLocation.getX() + 8, blockLocation.getY() + (STD_HEIGHT / 2));
     }
 

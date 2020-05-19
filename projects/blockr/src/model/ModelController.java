@@ -130,6 +130,7 @@ public class ModelController{
             active = ((BlockAction) state).getBlock();
             PArea.removePABlock(active);
             releaseHelp(((BlockAction) state).getSelect());
+            LocationHandler.getInstance().updateLocationBlocks(PArea.getPABlocks());
         }
     }
 
@@ -139,9 +140,9 @@ public class ModelController{
         if (state instanceof BlockAction) {
             selectHelp(((BlockAction) state).getSelect());
             active = ((BlockAction) state).getBlock();
-            if(active != null)
-                PArea.removePABlock(active);
+            if(active != null) PArea.removePABlock(active);
             releaseHelp(((BlockAction) state).getRelease());
+            LocationHandler.getInstance().updateLocationBlocks(PArea.getPABlocks());
         }
         else if (state instanceof ProgramState) {
             programRunner.setState((ProgramState) state);

@@ -2,12 +2,14 @@
 package main;
 
 import gameworldapi.*;
+import ui.UIController;
+
 import java.awt.Graphics;
 
 public class MyCanvasWindow extends CanvasWindow {
 
-    public static final int WIDTH = 900;
-    public static final int HEIGHT = 900;
+    public static final int WIDTH = UIController.PALETTEWIDTH + UIController.PROGRAMAREAWIDTH + 250;
+    public static final int HEIGHT = 1000;
 
     private GlobalController globalController;
 

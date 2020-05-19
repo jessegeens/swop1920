@@ -226,8 +226,8 @@ public class CanvasWindow {
 	
 
 	//default width and length
-	int width = 900;
-	int height = 900;
+	int width = MyCanvasWindow.WIDTH;
+	int height = MyCanvasWindow.HEIGHT;
 	String title;
 	Panel panel;
 	private Frame frame;

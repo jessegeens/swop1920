@@ -328,7 +328,7 @@ public class ModelControllerTest {
         controller.release(new ProgramLocation(420, 420));
         ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(0, 0), null);
         for (ModelBlock block : controller.getProgramAreaBlocks()) {
-            if (block instanceof ModelActionBlock && block.getTitle() == "TURN_LEFT") leftBlock = (ModelActionBlock) block;
+            if (block instanceof ModelActionBlock && block.getTitle().equals("TURN_LEFT")) leftBlock = (ModelActionBlock) block;
         }
         assertEquals(new ProgramLocation(333, 63), leftBlock.getPos());
     }

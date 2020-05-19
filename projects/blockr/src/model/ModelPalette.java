@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import gameworldapi.ActionType;
 import gameworldapi.PredicateType;
@@ -55,6 +56,7 @@ class ModelPalette{
 
     public void populateBlocks(ArrayList<ModelFunctionDefinitionBlock> idList){
         this.populateBlocks();
+        idList.sort(Comparator.comparingInt(ModelFunctionDefinitionBlock::getId));
         for(int i = 0; i<idList.size(); i++){
             int Xpos = i%2 == 0 ? (20) : (180);
             int Ypos = (int) (Math.floor(i/2f) * (int)(UIBlock.STD_HEIGHT * 1.5f) + this.maxColumnHeight);

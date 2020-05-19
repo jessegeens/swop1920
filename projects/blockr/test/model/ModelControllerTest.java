@@ -295,4 +295,24 @@ public class ModelControllerTest {
         controller.startOrExecuteProgram();
         assertTrue(controller.getProgramAreaBlocks().get(1).isHighlighted());
     }
+
+    @Test
+    public void whileBlockInDefinitionBlockWithBottomPlugConnect() {
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(20, 260));
+        controller.release(new ProgramLocation(320, 20));
+        controller.select(new ProgramLocation(20, 20));
+        controller.release(new ProgramLocation(333, 63));
+        controller.select(new ProgramLocation(180, 140));
+        controller.release(new ProgramLocation(346, 106));
+        controller.select(new ProgramLocation(20, 380));
+        controller.release(new ProgramLocation(400, 20));
+        controller.select(new ProgramLocation(180, 260));
+        controller.release(new ProgramLocation(320, 260));
+        controller.select(new ProgramLocation(340, 260));
+        controller.release(new ProgramLocation(320, 260));
+        controller.select(new ProgramLocation(20, 500));
+        controller.release(new ProgramLocation(520, 420));
+        assertTrue(ConnectionHandler.getInstance().allBlocksConnected(controller.getProgramAreaBlocks()));
+    }
 }

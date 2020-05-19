@@ -57,7 +57,7 @@ class ModelPalette{
         this.populateBlocks();
         for(int i = 0; i<idList.size(); i++){
             int Xpos = i%2 == 0 ? (20) : (180);
-            int Ypos = (int) (Math.floor(i/2) * 120 + this.maxColumnHeight);
+            int Ypos = (int) (Math.floor(i/2f) * 120 + this.maxColumnHeight);
             this.blocks.add(new ModelFunctionCallBlock(new ProgramLocation(Xpos, Ypos), idList.get(i)));
         }
     }

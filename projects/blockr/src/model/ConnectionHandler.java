@@ -229,7 +229,7 @@ public class ConnectionHandler {
      */
     public Boolean allBlocksConnected(ArrayList<ModelBlock> blocks){
         if (blocks.isEmpty()) return true;
-        if (this.getStartBlocks(blocks).size() > 1) return false;
+        if (this.getStartBlocks(blocks).size() > 1 || this.getStartBlocks(blocks).size() == 0) return false;
         for (ModelBlock blk : blocks){
             if (!(blk.equals(getFinishBlocks(blocks).get(0))||(blk.equals(getStartBlocks(blocks).get(0))))){
                 return isFullyConnected(blk);

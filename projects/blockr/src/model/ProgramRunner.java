@@ -14,8 +14,6 @@ public class ProgramRunner {
     private GameWorld gameWorld;
     private GameWorldState initialState;
 
-    //private Stack<ModelFunctionCallBlock> callStack;
-
     //Constructor
     public ProgramRunner(GameWorld gameWorld){
         this.gameWorld = gameWorld;
@@ -29,10 +27,9 @@ public class ProgramRunner {
      *
      * @param start the first block in the program
      */
-    public void initialise(ModelBlock start, ArrayList<ModelFunctionDefinitionBlock> definitions){
+    public void initialise(ModelBlock start){
         this.running = true;
         ModelBlock thisstart = start;
-        //callStack = new Stack<>();
         if (thisstart instanceof ModelCavityBlock) {
             thisstart = newFindNextBlock(thisstart);
         }

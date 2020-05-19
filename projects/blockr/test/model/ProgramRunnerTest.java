@@ -456,4 +456,44 @@ public class ProgramRunnerTest {
         assertFalse(forwardBlock.isHighlighted());
     }
 
+    @Test
+    public void falseWhileInDefinitionAndCallRightAfter() {
+        ProgramRunner pr = new ProgramRunner(GW);
+        ModelFunctionDefinitionBlock definitionBlock1 = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
+        ModelFunctionCallBlock call1Block = new ModelFunctionCallBlock(new ProgramLocation(20, 100), definitionBlock1);
+        ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(133, 63), false);
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(146, 106), Actions.get(0));
+        ModelPredicateBlock predicateBlock = new ModelPredicateBlock(new ProgramLocation(213, 63), Predicates.get(0));
+        ModelFunctionDefinitionBlock definitionBlock2 = new ModelFunctionDefinitionBlock(new ProgramLocation(420, 420), 1);
+        ModelFunctionCallBlock call2Block = new ModelFunctionCallBlock(new ProgramLocation(20, 180), definitionBlock2);
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(433, 463), Actions.get(1));
+        ModelFunctionDefinitionBlock definitionBlock3 = new ModelFunctionDefinitionBlock(new ProgramLocation(7, 57), 2);
+        ModelFunctionCallBlock call3Block = new ModelFunctionCallBlock(new ProgramLocation(420, 20), definitionBlock3);
+        definitionBlock3.setCavityPlug(call1Block);
+        call1Block.setTopSocket(definitionBlock3);
+        call1Block.setBottomPlug(call2Block);
+        call2Block.setTopSocket(call1Block);
+        call2Block.setBottomPlug(definitionBlock3);
+        definitionBlock1.setCavityPlug(whileBlock);
+        whileBlock.setTopSocket(definitionBlock1);
+        whileBlock.setCavityPlug(forwardBlock);
+        forwardBlock.setTopSocket(whileBlock);
+        forwardBlock.setBottomPlug(whileBlock);
+        whileBlock.setCavitySocket(forwardBlock);
+        whileBlock.setRightSocket(predicateBlock);
+        predicateBlock.setLeftPlug(whileBlock);
+        whileBlock.setBottomPlug(definitionBlock1);
+        definitionBlock1.setCavitySocket(whileBlock);
+        definitionBlock2.setCavityPlug(leftBlock);
+        leftBlock.setTopSocket(definitionBlock2);
+        leftBlock.setBottomPlug(definitionBlock2);
+        definitionBlock2.setCavitySocket(leftBlock);
+        pr.initialise(call3Block);
+        pr.execute();
+        pr.execute();
+        pr.execute();
+        pr.execute();
+        pr.execute();
+        assertFalse(pr.isRunning());
+    }
 }

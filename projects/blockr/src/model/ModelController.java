@@ -110,7 +110,9 @@ public class ModelController{
     }
 
     private void addAction(ProgramLocation location) {
-        UndoRedoHandler.getInstance().executeAction(new BlockAction(selectPosition, location, active));
+        if (active != null) {
+            UndoRedoHandler.getInstance().executeAction(new BlockAction(selectPosition, location, active));
+        }
     }
 
     public void undo() {

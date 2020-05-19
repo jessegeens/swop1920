@@ -85,10 +85,9 @@ public class ProgramRunner {
                         break;
                 }
             }
+            if(leftFunctionDefinition()) newCallStack.pop();
             if(current.getHighlight() instanceof ModelFunctionCallBlock) newCallStack.push((ModelFunctionCallBlock) current.getHighlight());
-            else if(leftFunctionDefinition()) newCallStack.pop();
             ModelBlock nextBlock = newFindNextBlock(current.getHighlight());
-            if (nextBlock != null && !newCallStack.empty() && nextBlock.getTopSocket().equals(newCallStack.peek())) newCallStack.pop();
             ProgramState nextState = new ProgramState(current.getHighlight(), nextBlock, newCallStack, gameWorld.getSnapshot());
             UndoRedoHandler.getInstance().executeRunner(nextState);
             setState(nextState);
@@ -97,6 +96,7 @@ public class ProgramRunner {
 
     private boolean leftFunctionDefinition(){
         if (current.getCurrent() == null || current.getHighlight() == null) return false;
+        if (!current.getCallStack().empty() && current.getHighlight().getTopSocket().equals(current.getCallStack().peek())) return true;
         if (current.getCurrent().getSurroundingDefinitionBlock() != null) {
             if (!current.getCurrent().getSurroundingDefinitionBlock().equals(current.getHighlight().getSurroundingDefinitionBlock())) {
                 return true;

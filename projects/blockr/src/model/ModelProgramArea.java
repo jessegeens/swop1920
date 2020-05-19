@@ -80,33 +80,10 @@ public class ModelProgramArea{
         for(int i = blocks.size() - 1; i >= 0; i--){
             if(blocks.get(i).inBoundsOfElement(eventWindowLocation)){
                 ModelBlock toBeReturned = blocks.get(i);
-                //removePABlock(toBeReturned);
                 return toBeReturned;
             }
         }
         return null;
-    }
-
-    /**
-     * This function handles the mouse up in the ProgramArea
-     * @param eveWindowLocation the location of the mouseUp event
-     * @param activeB activeBlock the current active block
-     * @return true if connected
-     * @author Oberon Swings
-     */
-    public void findAndConnect(ProgramLocation eveWindowLocation, ModelBlock activeB){
-        ProgramLocation location = LocationHandler.getInstance().moveToInBounds(eveWindowLocation);
-        LocationHandler.getInstance().setLocationBlock(activeB, location);
-        ModelBlock closest = LocationHandler.getInstance().findClosestBlock(activeB, blocks);
-        if (!(this.getPABlocks().contains(activeB))) {
-            this.addPABlock(activeB);
-        }
-        if (closest != null){
-            ConnectionHandler.getInstance().connect(closest, activeB);
-            LocationHandler.getInstance().updateLocationBlock(activeB);
-            ConnectionHandler.getInstance().updateConnections(blocks);
-            LocationHandler.getInstance().updateLocationBlocks(ConnectionHandler.getInstance().getStartBlocks(blocks));
-        }
     }
 
     public ModelBlock findClosestBlock(ProgramLocation location, ModelBlock active) {

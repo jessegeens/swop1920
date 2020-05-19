@@ -97,7 +97,7 @@ public class ModelProgramAreaTest {
         area.addPABlock(forwardBlock);
         area.addPABlock(leftBlock);
         area.addPABlock(wifBlock);
-        area.findAndConnect(new ProgramLocation(100,100),whileBlock);
+        area.addAndConnectBlock(whileBlock, area.findClosestBlock(new ProgramLocation(100, 100), whileBlock));
         assertTrue(area.validExecutionState());
     }
 
@@ -117,7 +117,7 @@ public class ModelProgramAreaTest {
         leftBlock.setTopSocket(whileBlock);
         leftBlock.setBottomPlug(whileBlock);
         whileBlock.setCavitySocket(leftBlock);
-        area.findAndConnect(new ProgramLocation(90,20),forwardBlock);
+        area.addAndConnectBlock(forwardBlock, area.findClosestBlock(new ProgramLocation(90, 20), forwardBlock));
         assertEquals(new ProgramLocation(90, 100), whileBlock.getPos());
     }
 

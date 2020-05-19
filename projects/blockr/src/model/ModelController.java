@@ -64,6 +64,7 @@ public class ModelController{
     public void select(ProgramLocation location) {
         selectHelp(location);
         if (active != null && LocationHandler.isInProgramArea(location)) PArea.removePABlock(active);
+        LocationHandler.getInstance().updateLocationBlocks(PArea.getPABlocks());
     }
 
     private void selectHelp(ProgramLocation location) {
@@ -89,10 +90,10 @@ public class ModelController{
             if (active != null) {
                 if (active instanceof ModelFunctionDefinitionBlock) {
                     PArea.deleteFunctionCallsById(((ModelFunctionDefinitionBlock) active).getId());
-                    palette.populateBlocks(PArea.getAllModelFunctionDefinitionBlock());
                 }
                 PArea.removePABlock(active);
                 active = null;
+                palette.populateBlocks(PArea.getAllModelFunctionDefinitionBlock());
             }
         }
         else if (LocationHandler.isInProgramArea(location)) {
@@ -129,6 +130,7 @@ public class ModelController{
             active = ((BlockAction) state).getBlock();
             PArea.removePABlock(active);
             releaseHelp(((BlockAction) state).getSelect());
+            LocationHandler.getInstance().updateLocationBlocks(PArea.getPABlocks());
         }
     }
 
@@ -138,9 +140,9 @@ public class ModelController{
         if (state instanceof BlockAction) {
             selectHelp(((BlockAction) state).getSelect());
             active = ((BlockAction) state).getBlock();
-            if(active != null)
-                PArea.removePABlock(active);
+            if(active != null) PArea.removePABlock(active);
             releaseHelp(((BlockAction) state).getRelease());
+            LocationHandler.getInstance().updateLocationBlocks(PArea.getPABlocks());
         }
         else if (state instanceof ProgramState) {
             programRunner.setState((ProgramState) state);

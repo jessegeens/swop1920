@@ -12,7 +12,7 @@ import javax.xml.stream.events.StartDocument;
  */
 public class UIBlock{
 
-
+    //To run tests PLUGSIZE = 20, WIDTH & HEIGHT = 80, too much work to make tests dynamic.
     public static final int PLUGSIZE = 10; //final standard size of plugs and sockets
     public static final int STD_WIDTH = 100; //final standard width of blocks
     public static final int STD_HEIGHT = 40; //final standard height of blocks

@@ -116,7 +116,7 @@ public class ProgramRunner {
     }
 
     public void setState(ProgramState state) {
-        if (current.getHighlight() != null) current.getHighlight().setUnHighlight();
+        if (current != null && current.getHighlight() != null) current.getHighlight().setUnHighlight();
         current = state;
         if (current != null) {
             gameWorld.restore(current.getGameState());

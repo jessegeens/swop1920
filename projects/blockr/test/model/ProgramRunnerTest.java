@@ -44,7 +44,7 @@ public class ProgramRunnerTest {
     }
 
     @Test
-    public void reset() {
+    public void resetTest() {
         ProgramRunner pr = new ProgramRunner(GW);
         ModelBlock block = new ModelNotBlock(new ProgramLocation(100, 100));
         pr.initialise(block);
@@ -53,7 +53,7 @@ public class ProgramRunnerTest {
     }
 
     @Test
-    public void execute() {
+    public void executeTest() {
         ProgramRunner pr = new ProgramRunner(GW);
         ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(100, 100), Actions.get(0));
         ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100 ,180), Actions.get(0));
@@ -65,7 +65,7 @@ public class ProgramRunnerTest {
     }
 
     @Test
-    public void executeIf(){
+    public void executeIfTest(){
         ProgramRunner pr = new ProgramRunner(GW);
         ModelPredicateBlock predicateBlock = new ModelPredicateBlock(new ProgramLocation(100, 260), Predicates.get(0));
         ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(100, 180));
@@ -96,7 +96,7 @@ public class ProgramRunnerTest {
     }
 
     @Test
-    public void executeEnd(){
+    public void executeEndTest(){
         ProgramRunner pr = new ProgramRunner(GW);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), Actions.get(0));
         ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), Actions.get(0));
@@ -114,7 +114,7 @@ public class ProgramRunnerTest {
     }
 
     @Test
-    public void executeWhileNotWIF(){
+    public void executeWhileNotWIFTest(){
         ProgramRunner pr = new ProgramRunner(GW);
         ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(100, 20), Actions.get(2));
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
@@ -139,7 +139,7 @@ public class ProgramRunnerTest {
     }
 
     @Test
-    public void undoBlock() {
+    public void undoBlockTest() {
         ProgramRunner pr = new ProgramRunner(GW);
         ModelActionBlock forwardBlock1 = new ModelActionBlock(new ProgramLocation(100,140), Actions.get(0));
         ModelActionBlock forwardBlock2 = new ModelActionBlock(new ProgramLocation(100,180), Actions.get(0));
@@ -156,7 +156,7 @@ public class ProgramRunnerTest {
     }
 
     @Test
-    public void undoInitialisation() {
+    public void undoInitialisationTest() {
         ProgramRunner pr = new ProgramRunner(GW);
         ModelActionBlock forwardBlock1 = new ModelActionBlock(new ProgramLocation(100,140), Actions.get(0));
         ModelActionBlock forwardBlock2 = new ModelActionBlock(new ProgramLocation(100,180), Actions.get(0));
@@ -175,7 +175,7 @@ public class ProgramRunnerTest {
     }
 
     @Test
-    public void redoBlock() {
+    public void redoBlockTest() {
         ProgramRunner pr = new ProgramRunner(GW);
         ModelActionBlock forwardBlock1 = new ModelActionBlock(new ProgramLocation(100,140), Actions.get(0));
         ModelActionBlock forwardBlock2 = new ModelActionBlock(new ProgramLocation(100,180), Actions.get(0));
@@ -194,7 +194,7 @@ public class ProgramRunnerTest {
     }
 
     @Test
-    public void redoWhileBlock() {
+    public void redoWhileBlockTest() {
         ProgramRunner pr = new ProgramRunner(GW);
         ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(100, 20), Actions.get(2));
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
@@ -220,7 +220,7 @@ public class ProgramRunnerTest {
     }
 
     @Test
-    public void undoHighlightFunction() {
+    public void undoHighlightFunctionTest() {
         ProgramRunner pr = new ProgramRunner(GW);
         ModelFunctionDefinitionBlock funcDef = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(133,143), Actions.get(0));
@@ -257,7 +257,7 @@ public class ProgramRunnerTest {
     }
 
     @Test
-    public void findNextBlockEmptyCallStack() {
+    public void findNextBlockEmptyCallStackTest() {
         ProgramRunner pr = new ProgramRunner(GW);
         ModelFunctionDefinitionBlock funcDef = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(133,143), Actions.get(0));
@@ -297,7 +297,7 @@ public class ProgramRunnerTest {
     }
 
     @Test
-    public void undoSkippingBlock() {
+    public void undoSkippingBlockTest() {
         ProgramRunner pr = new ProgramRunner(GW);
         ModelFunctionDefinitionBlock funcDef = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(133,143), Actions.get(0));
@@ -331,7 +331,7 @@ public class ProgramRunnerTest {
     }
 
     @Test
-    public void executeAfterRedo() {
+    public void executeAfterRedoTest() {
         ProgramRunner pr = new ProgramRunner(GW);
         ModelFunctionDefinitionBlock funcDef = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(133,143), Actions.get(0));
@@ -366,7 +366,7 @@ public class ProgramRunnerTest {
     }
 
     @Test
-    public void doubleCallBlock() {
+    public void doubleCallBlockTest() {
         ProgramRunner pr = new ProgramRunner(GW);
         ModelFunctionDefinitionBlock funcDef = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
         ModelFunctionCallBlock call1 = new ModelFunctionCallBlock(new ProgramLocation(20, 20), funcDef);
@@ -388,7 +388,7 @@ public class ProgramRunnerTest {
     }
 
     @Test
-    public void whileInDefinition() {
+    public void whileInDefinitionTest() {
         ProgramRunner pr = new ProgramRunner(GW);
         ModelFunctionDefinitionBlock definitionBlock = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
         ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(20, 20), Actions.get(2));
@@ -424,7 +424,7 @@ public class ProgramRunnerTest {
     }
 
     @Test
-    public void programEndCall() {
+    public void programEndCallTest() {
         ProgramRunner pr = new ProgramRunner(GW);
         ModelFunctionDefinitionBlock definitionBlock = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
         ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(20, 20), Actions.get(2));
@@ -455,4 +455,5 @@ public class ProgramRunnerTest {
         pr.execute();
         assertFalse(forwardBlock.isHighlighted());
     }
+
 }

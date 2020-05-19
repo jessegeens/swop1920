@@ -45,7 +45,8 @@ public class ModelController{
             if(programRunner.isRunning()){
                 programRunner.execute();
             } else {
-                programRunner.initialise(PArea.getFirstBlock());
+                if(PArea.getFirstBlock() != null)
+                    programRunner.initialise(PArea.getFirstBlock());
             }
         }
     }
@@ -136,7 +137,8 @@ public class ModelController{
         if (state instanceof BlockAction) {
             selectHelp(((BlockAction) state).getSelect());
             active = ((BlockAction) state).getBlock();
-            PArea.removePABlock(active);
+            if(active != null)
+                PArea.removePABlock(active);
             releaseHelp(((BlockAction) state).getRelease());
         }
         else if (state instanceof ProgramState) {

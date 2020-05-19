@@ -34,7 +34,6 @@ public class ModelActionBlock extends ModelBlock{
         return this.action;
     }
 
-
     /**
      * {@inheritDoc}
      */
@@ -57,12 +56,16 @@ public class ModelActionBlock extends ModelBlock{
         return this.bottomPlug;
     }
 
-
     /**
      * {@inheritDoc}
      */
     public void setTopSocket(ModelBlock blk) {
         this.topSocket = blk;
+    }
+
+    @Override
+    public ModelBlock findNextBlock() {
+        return getBottomPlug();
     }
 
     /**

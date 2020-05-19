@@ -56,6 +56,7 @@ public abstract class ModelCavityBlock extends ModelBlock{
             if(blk.hasBottomPlug()){
                 blk = blk.getBottomPlug();
             }
+            else blk = null;
         }
         return cav;
     }
@@ -127,6 +128,4 @@ public abstract class ModelCavityBlock extends ModelBlock{
     public int distanceCavitySocket(ModelBlock bottom){
         return this.getCavitySocketPos().getDistance(bottom.getBottomPlugPos());
     }
-
-
 }

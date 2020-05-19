@@ -38,7 +38,7 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
      */
     @Override
     public boolean inBoundsOfElement(ProgramLocation coordinate){
-        return (this.getPos().getX() < coordinate.getX() && this.getPos().getX() + getWidth() > coordinate.getX() && this.getPos().getY() < coordinate.getY() && this.getPos().getY() + getWidth() > coordinate.getY());
+        return (this.getPos().getX() <= coordinate.getX() && this.getPos().getX() + getWidth() >= coordinate.getX() && this.getPos().getY() <= coordinate.getY() && this.getPos().getY() + getWidth() >= coordinate.getY());
     }
 
     /**
@@ -105,11 +105,11 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
     public boolean isInCavity(){
         if (this.hasTopSocket()){
             ModelBlock socket = this.getTopSocket();
-            while (!(socket instanceof ModelCavityBlock || socket == null)){
+            while (socket != null){
+                if (socket instanceof ModelCavityBlock && ((ModelCavityBlock) socket).getCavityBlocks().contains(this)) return true;
                 socket = socket.getTopSocket();
             }
-            if (socket == null) return false;
-            else return socket instanceof ModelCavityBlock && ((ModelCavityBlock) socket).getCavityBlocks().contains(this);
+            return false;
         }
         return false;
     }
@@ -122,11 +122,11 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
     public ModelCavityBlock getSurroundingCavityBlock(){
         if (this.hasTopSocket()){
             ModelBlock socket = this.getTopSocket();
-            while (!(socket instanceof ModelCavityBlock || socket == null)){
+            while (socket != null){
+                if (socket instanceof ModelCavityBlock && ((ModelCavityBlock) socket).getCavityBlocks().contains(this)) return ((ModelCavityBlock)socket);
                 socket = socket.getTopSocket();
             }
-            if (socket == null) return null;
-            else if (socket instanceof ModelCavityBlock && ((ModelCavityBlock) socket).getCavityBlocks().contains(this)) return ((ModelCavityBlock)socket);
+            return null;
         }
         return null;
     }
@@ -139,11 +139,11 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
     public ModelFunctionDefinitionBlock getSurroundingDefinitionBlock(){
         if (this.hasTopSocket()){
             ModelBlock socket = this.getTopSocket();
-            while (!(socket instanceof ModelFunctionDefinitionBlock || socket == null)){
+            while (socket != null){
+                if (socket instanceof ModelFunctionDefinitionBlock && ((ModelFunctionDefinitionBlock) socket).getCavityBlocks().contains(this)) return ((ModelFunctionDefinitionBlock)socket);
                 socket = socket.getTopSocket();
             }
-            if (socket == null) return null;
-            else if (socket instanceof ModelFunctionDefinitionBlock && ((ModelFunctionDefinitionBlock) socket).getCavityBlocks().contains(this)) return ((ModelFunctionDefinitionBlock)socket);
+            return null;
         }
         return null;
     }
@@ -218,7 +218,6 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
         return super.getPos().add(this.getWidth() - UIBlock.PLUGSIZE/2, + UIBlock.STD_HEIGHT / 2);
     }
 
-
     /**
      * Finds out if this block is compatible with the right block
      * @param right the block which this block is checked against
@@ -255,15 +254,7 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
         return this.getBottomPlugPos().getDistance(bottom.getTopSocketPos());
     }
 
-
     public boolean isIf(){
-        /*
-        if (this instanceof ModelWhileIfBlock) {
-            if (this.isIf()) return true;
-            else return false;
-        }
-
-        */
         return false;
     }
 
@@ -287,4 +278,6 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
         }
         return "Block";
     }
+
+    public abstract ModelBlock findNextBlock();
 }

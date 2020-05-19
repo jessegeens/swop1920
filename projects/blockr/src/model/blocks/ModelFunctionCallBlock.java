@@ -1,6 +1,5 @@
 package model.blocks;
 
-import gameworldapi.ActionType;
 import utilities.ConnectionPoint;
 import utilities.ProgramLocation;
 
@@ -10,22 +9,20 @@ public class ModelFunctionCallBlock extends ModelBlock {
 
     private ModelBlock topSocket;
     private ModelBlock bottomPlug;
-    private final int id;
+    private ModelFunctionDefinitionBlock definitionBlock;
 
     /**
      *
      * @param pos
-     * @param id
+     * @param
      *
      * @author Bert_DVL
      */
-    public ModelFunctionCallBlock(ProgramLocation pos, int id) {
+    public ModelFunctionCallBlock(ProgramLocation pos, ModelFunctionDefinitionBlock block) {
         super(pos);
         this.setTopSocket(null);
         this.setBottomPlug(null);
-
-        this.id = id;
-
+        this.definitionBlock = block;
         ArrayList<ConnectionPoint> connectionPoints = new ArrayList<>();
         connectionPoints.add(ConnectionPoint.BOTTOM_PLUG);
         connectionPoints.add(ConnectionPoint.TOP_SOCKET);
@@ -33,7 +30,7 @@ public class ModelFunctionCallBlock extends ModelBlock {
     }
 
     public int getId(){
-        return this.id;
+        return definitionBlock.getId();
     }
 
     /**
@@ -41,7 +38,7 @@ public class ModelFunctionCallBlock extends ModelBlock {
      */
     @Override
     public ModelFunctionCallBlock clone() {
-        return new ModelFunctionCallBlock(this.getPos(), this.getId());
+        return new ModelFunctionCallBlock(this.getPos(), this.definitionBlock);
     }
 
     /**
@@ -58,12 +55,16 @@ public class ModelFunctionCallBlock extends ModelBlock {
         return this.bottomPlug;
     }
 
-
     /**
      * {@inheritDoc}
      */
     public void setTopSocket(ModelBlock blk) {
         this.topSocket = blk;
+    }
+
+    @Override
+    public ModelBlock findNextBlock() {
+        return definitionBlock.getCavityPlug();
     }
 
     /**
@@ -72,6 +73,4 @@ public class ModelFunctionCallBlock extends ModelBlock {
     public ModelBlock getTopSocket() {
         return this.topSocket;
     }
-
-
 }

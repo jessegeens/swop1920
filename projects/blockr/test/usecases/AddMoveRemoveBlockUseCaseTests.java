@@ -37,6 +37,7 @@ public class AddMoveRemoveBlockUseCaseTests {
         }
     }
 
+
     @Test
     public void addBlock() {
         mC.select(new ProgramLocation(30,30));

@@ -3,25 +3,26 @@ package model;
 import static org.junit.Assert.*;
 
 import gameworldapi.GameWorldType;
-import model.blocks.*;
+import model.blocks.ModelBlock;
+import model.blocks.ModelNotBlock;
+import model.blocks.ModelPredicateBlock;
+import model.blocks.ModelWhileIfBlock;
 import org.junit.Before;
 import org.junit.Test;
 
-import ui.BlockState;
 import ui.UIBlock;
 import utilities.*;
 
 import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
 
 public class ModelControllerTest {
 
     private GameWorldType GWT;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         try {
             File file = new File("/home/oberon/Documents/Studies/SWOP/swop1920/projects/robotgameworld/out/production/robotgameworld/");
             System.out.println(file.toString());
@@ -182,11 +183,11 @@ public class ModelControllerTest {
         controller.release(new ProgramLocation(420, 500));
         controller.select(new ProgramLocation(30, 30));
         controller.release(new ProgramLocation(420, 580));
-        controller.globalUndo();
-        controller.globalUndo();
-        controller.globalRedo();
-        controller.globalRedo();
-        controller.globalUndo();
+        controller.undo();
+        controller.undo();
+        controller.undo();
+        controller.redo();
+        controller.redo();
         assertEquals(2, controller.getProgramAreaBlocks().size());
     }
 
@@ -199,8 +200,8 @@ public class ModelControllerTest {
         controller.release(new ProgramLocation(420, 500));
         controller.select(new ProgramLocation(430, 430));
         controller.release(new ProgramLocation(30, 30));
-        controller.globalUndo();
-        controller.globalRedo();
+        controller.undo();
+        controller.redo();
         assertTrue(controller.getProgramAreaBlocks().get(0).getConnections().isEmpty());
     }
 
@@ -232,5 +233,86 @@ public class ModelControllerTest {
             if (block instanceof ModelNotBlock) notBlock = (ModelNotBlock) block;
         }
         assertEquals(new ProgramLocation(400, 420), notBlock.getPos());
+    }
+
+    @Test
+    public void redoRemoveBlockWithinCavityBlock() {
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(30, 30));
+        controller.release(new ProgramLocation(420, 420));
+        controller.select(new ProgramLocation(190, 150));
+        controller.release(new ProgramLocation(433, 443));
+        controller.undo();
+        assertEquals(1, controller.getProgramAreaBlocks().size());
+    }
+
+    @Test
+    public void undoTransitionExecutionBlockAction() {
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(190, 150));
+        controller.release(new ProgramLocation(420, 420));
+        controller.select(new ProgramLocation(190, 270));
+        controller.release(new ProgramLocation(420, 500));
+        controller.startOrExecuteProgram();
+        controller.startOrExecuteProgram();
+        controller.undo();
+        controller.undo();
+        controller.undo();
+        assertEquals(1 , controller.getProgramAreaBlocks().size());
+    }
+
+    @Test
+    public void redoTransitionExecutionBlockAction() {
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(190, 150));
+        controller.release(new ProgramLocation(420, 420));
+        controller.select(new ProgramLocation(190, 270));
+        controller.release(new ProgramLocation(420, 500));
+        controller.startOrExecuteProgram();
+        controller.startOrExecuteProgram();
+        controller.undo();
+        controller.undo();
+        controller.undo();
+        controller.redo();
+        controller.redo();
+        assertTrue(controller.getProgramAreaBlocks().get(0).isHighlighted());
+    }
+
+    @Test
+    public void executeAfterRedoTransitionExecutionBlockAction() {
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(190, 150));
+        controller.release(new ProgramLocation(420, 420));
+        controller.select(new ProgramLocation(190, 270));
+        controller.release(new ProgramLocation(420, 500));
+        controller.startOrExecuteProgram();
+        controller.startOrExecuteProgram();
+        controller.undo();
+        controller.undo();
+        controller.undo();
+        controller.redo();
+        controller.redo();
+        controller.startOrExecuteProgram();
+        assertTrue(controller.getProgramAreaBlocks().get(1).isHighlighted());
+    }
+
+    @Test
+    public void whileBlockInDefinitionBlockWithBottomPlugConnect() {
+        ModelController controller = new ModelController(GWT);
+        controller.select(new ProgramLocation(20, 260));
+        controller.release(new ProgramLocation(320, 20));
+        controller.select(new ProgramLocation(20, 20));
+        controller.release(new ProgramLocation(333, 63));
+        controller.select(new ProgramLocation(180, 140));
+        controller.release(new ProgramLocation(346, 106));
+        controller.select(new ProgramLocation(20, 380));
+        controller.release(new ProgramLocation(400, 20));
+        controller.select(new ProgramLocation(180, 260));
+        controller.release(new ProgramLocation(320, 260));
+        controller.select(new ProgramLocation(340, 260));
+        controller.release(new ProgramLocation(320, 260));
+        controller.select(new ProgramLocation(20, 500));
+        controller.release(new ProgramLocation(520, 420));
+        assertTrue(ConnectionHandler.getInstance().allBlocksConnected(controller.getProgramAreaBlocks()));
     }
 }

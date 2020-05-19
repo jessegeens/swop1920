@@ -1,7 +1,6 @@
 package main;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 import ui.*;
 import utilities.*;
@@ -16,8 +15,6 @@ public class GlobalController {
 
     //Controllers
     private ModelController modelController;
-
-
 
     // Constructor
     public GlobalController(GameWorldType gameWorldType){
@@ -44,10 +41,12 @@ public class GlobalController {
             case 501: //MOUSE_PRESSED
                 //return the topmost active block if one is in the click location
                 //you remove it from the local list in PArea until mouseup
-                this.modelController.select(eventWindowLocation);
+                //this.modelController.select(eventWindowLocation);
+                modelController.select(eventWindowLocation);
                 break;
             case 502: //MOUSE_RELEASED
-                this.modelController.release(eventWindowLocation);
+                //this.modelController.release(eventWindowLocation);
+                modelController.release(eventWindowLocation);
                 break;
             case 506: //MOUSE_DRAGGED
                 this.modelController.drag(eventWindowLocation);
@@ -91,10 +90,12 @@ public class GlobalController {
             case 90: //Z
                 if(isControlDown){
                     if(isShiftDown){
-                        this.modelController.globalRedo();
+                        //this.modelController.globalRedo();
+                        modelController.redo();
                     }
                     else{
-                        this.modelController.globalUndo();
+                        //this.modelController.globalUndo();
+                        modelController.undo();
                     }
                 }
                 break;

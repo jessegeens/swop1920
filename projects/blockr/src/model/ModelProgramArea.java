@@ -80,29 +80,11 @@ public class ModelProgramArea{
         for(int i = blocks.size() - 1; i >= 0; i--){
             if(blocks.get(i).inBoundsOfElement(eventWindowLocation)){
                 ModelBlock toBeReturned = blocks.get(i);
-                removePABlock(toBeReturned);
+                //removePABlock(toBeReturned);
                 return toBeReturned;
             }
         }
         return null;
-    }
-
-    /**
-     * This methods returns whether a block in the given location is connected to other blocks
-     *
-     * @param eventWindowLocation location of the mouseDown event
-     * @return true if there is a block that is connected with at least one other block, false otherwise
-     * @author Bert
-     */
-    public boolean connectedBlockHere(ProgramLocation eventWindowLocation){
-        for(int i = blocks.size() - 1; i >= 0; i--){
-            if(blocks.get(i).inBoundsOfElement(eventWindowLocation)){
-                if(blocks.get(i).getConnectionsNoCavity().size() > 0){
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     /**
@@ -112,21 +94,37 @@ public class ModelProgramArea{
      * @return true if connected
      * @author Oberon Swings
      */
-    public boolean findAndConnect(ProgramLocation eveWindowLocation, ModelBlock activeB){
+    public void findAndConnect(ProgramLocation eveWindowLocation, ModelBlock activeB){
         ProgramLocation location = LocationHandler.getInstance().moveToInBounds(eveWindowLocation);
         LocationHandler.getInstance().setLocationBlock(activeB, location);
         ModelBlock closest = LocationHandler.getInstance().findClosestBlock(activeB, blocks);
         if (!(this.getPABlocks().contains(activeB))) {
             this.addPABlock(activeB);
         }
-        boolean connection = false;
         if (closest != null){
-            connection = ConnectionHandler.getInstance().connect(closest, activeB);
+            ConnectionHandler.getInstance().connect(closest, activeB);
             LocationHandler.getInstance().updateLocationBlock(activeB);
             ConnectionHandler.getInstance().updateConnections(blocks);
             LocationHandler.getInstance().updateLocationBlocks(ConnectionHandler.getInstance().getStartBlocks(blocks));
         }
-        return connection;
+    }
+
+    public ModelBlock findClosestBlock(ProgramLocation location, ModelBlock active) {
+        ProgramLocation newlocation = LocationHandler.getInstance().moveToInBounds(location);
+        LocationHandler.getInstance().setLocationBlock(active, newlocation);
+        return LocationHandler.getInstance().findClosestBlock(active, blocks);
+    }
+
+    public void addAndConnectBlock(ModelBlock active, ModelBlock closest) {
+        if (!(this.getPABlocks().contains(active))) {
+            this.addPABlock(active);
+        }
+        if (closest != null){
+            ConnectionHandler.getInstance().connect(closest, active);
+            LocationHandler.getInstance().updateLocationBlock(active);
+            ConnectionHandler.getInstance().updateConnections(blocks);
+            LocationHandler.getInstance().updateLocationBlocks(ConnectionHandler.getInstance().getStartBlocks(blocks));
+        }
     }
 
     /**
@@ -189,7 +187,7 @@ public class ModelProgramArea{
      * @return an arraylist with the removed ModelFunctionCallblocks
      * @author Bert
      */
-    public ArrayList<ModelFunctionCallBlock> deleteFunctionCallsById(int id){
+    public void deleteFunctionCallsById(int id){
         ArrayList<ModelFunctionCallBlock> toBeReturned = new ArrayList<>();
         for(ModelBlock block : blocks){
             if(block instanceof ModelFunctionCallBlock){
@@ -201,24 +199,5 @@ public class ModelProgramArea{
         for(ModelBlock block: toBeReturned){
             removePABlock(block);
         }
-        return toBeReturned;
-    }
-
-    /**
-     * gets an arraylist of the ids of function definition blocks that are currently in the PA
-     *
-     * @return the arraylist of ints
-     * @author Bert
-     */
-    public ArrayList<Integer> getActiveFunctionDefinitions(){
-        ArrayList<Integer> toBeReturned = new ArrayList<>();
-        for(ModelBlock block : blocks){
-            if(block instanceof ModelFunctionDefinitionBlock){
-                if(!(toBeReturned.contains(((ModelFunctionDefinitionBlock) block).getId()))){
-                    toBeReturned.add(((ModelFunctionDefinitionBlock) block).getId());
-                }
-            }
-        }
-        return toBeReturned;
     }
 }

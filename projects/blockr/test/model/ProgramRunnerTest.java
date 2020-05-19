@@ -45,28 +45,28 @@ public class ProgramRunnerTest {
 
     @Test
     public void reset() {
-        ProgramRunner PR = new ProgramRunner(GW);
+        ProgramRunner pr = new ProgramRunner(GW);
         ModelBlock block = new ModelNotBlock(new ProgramLocation(100, 100));
-        PR.initialise(block, new ArrayList<>());
-        PR.reset();
+        pr.initialise(block);
+        pr.reset();
         assertFalse(block.isHighlighted());
     }
 
     @Test
     public void execute() {
-        ProgramRunner PR = new ProgramRunner(GW);
+        ProgramRunner pr = new ProgramRunner(GW);
         ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(100, 100), Actions.get(0));
         ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100 ,180), Actions.get(0));
         rightBlock.setBottomPlug(leftBlock);
         leftBlock.setTopSocket(rightBlock);
-        PR.initialise(rightBlock, new ArrayList<>());
-        PR.execute();
+        pr.initialise(rightBlock);
+        pr.execute();
         assertTrue(leftBlock.isHighlighted());
     }
 
     @Test
     public void executeIf(){
-        ProgramRunner PR = new ProgramRunner(GW);
+        ProgramRunner pr = new ProgramRunner(GW);
         ModelPredicateBlock predicateBlock = new ModelPredicateBlock(new ProgramLocation(100, 260), Predicates.get(0));
         ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(100, 180));
         ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), true);
@@ -88,17 +88,16 @@ public class ProgramRunnerTest {
         ifBlock.setCavitySocket(rightBlock);
         ifBlock.setBottomPlug(finishBlock);
         finishBlock.setTopSocket(ifBlock);
-        ArrayList<ModelFunctionDefinitionBlock> empty = new ArrayList<>();
-        PR.initialise(ifBlock, empty);
-        PR.execute();
-        PR.execute();
-        PR.execute();
+        pr.initialise(ifBlock);
+        pr.execute();
+        pr.execute();
+        pr.execute();
         assertTrue(finishBlock.isHighlighted());
     }
 
     @Test
     public void executeEnd(){
-        ProgramRunner PR = new ProgramRunner(GW);
+        ProgramRunner pr = new ProgramRunner(GW);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), Actions.get(0));
         ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 223), Actions.get(0));
         ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(113, 303), Actions.get(0));
@@ -106,18 +105,17 @@ public class ProgramRunnerTest {
         leftBlock.setTopSocket(forwardBlock);
         leftBlock.setBottomPlug(rightBlock);
         rightBlock.setTopSocket(leftBlock);
-        ArrayList<ModelFunctionDefinitionBlock> empty = new ArrayList<>();
-        PR.initialise(forwardBlock, empty);
-        PR.execute();
-        PR.execute();
-        PR.execute();
-        PR.execute();
-        assertFalse(PR.isRunning());
+        pr.initialise(forwardBlock);
+        pr.execute();
+        pr.execute();
+        pr.execute();
+        pr.execute();
+        assertFalse(pr.isRunning());
     }
 
     @Test
     public void executeWhileNotWIF(){
-        ProgramRunner PR = new ProgramRunner(GW);
+        ProgramRunner pr = new ProgramRunner(GW);
         ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(100, 20), Actions.get(2));
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), Actions.get(0));
@@ -133,50 +131,71 @@ public class ProgramRunnerTest {
         notBlock.setLeftPlug(whileBlock);
         notBlock.setRightSocket(wifBlock);
         wifBlock.setLeftPlug(notBlock);
-        ArrayList<ModelFunctionDefinitionBlock> empty = new ArrayList<>();
-        PR.initialise(rightBlock, empty);
-        PR.execute();
-        PR.execute();
-        PR.execute();
-        assertFalse(PR.isRunning());
+        pr.initialise(rightBlock);
+        pr.execute();
+        pr.execute();
+        pr.execute();
+        assertFalse(pr.isRunning());
     }
 
     @Test
     public void undoBlock() {
-        ProgramRunner pR = new ProgramRunner(GW);
+        ProgramRunner pr = new ProgramRunner(GW);
         ModelActionBlock forwardBlock1 = new ModelActionBlock(new ProgramLocation(100,140), Actions.get(0));
         ModelActionBlock forwardBlock2 = new ModelActionBlock(new ProgramLocation(100,180), Actions.get(0));
         forwardBlock1.setBottomPlug(forwardBlock2);
         forwardBlock2.setTopSocket(forwardBlock1);
-        ArrayList<ModelFunctionDefinitionBlock> empty = new ArrayList<>();
-        pR.initialise(forwardBlock1, empty);
-        pR.execute();
-        pR.execute();
-        pR.undoProgramRunner();
-        pR.undoProgramRunner();
+        pr.initialise(forwardBlock1);
+        pr.execute();
+        pr.execute();
+        UndoRedoHandler.getInstance().undo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
+        UndoRedoHandler.getInstance().undo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
         assertTrue(forwardBlock1.isHighlighted());
     }
 
     @Test
-    public void redoBlock() {
-        ProgramRunner pR = new ProgramRunner(GW);
+    public void undoInitialisation() {
+        ProgramRunner pr = new ProgramRunner(GW);
         ModelActionBlock forwardBlock1 = new ModelActionBlock(new ProgramLocation(100,140), Actions.get(0));
         ModelActionBlock forwardBlock2 = new ModelActionBlock(new ProgramLocation(100,180), Actions.get(0));
         forwardBlock1.setBottomPlug(forwardBlock2);
         forwardBlock2.setTopSocket(forwardBlock1);
-        ArrayList<ModelFunctionDefinitionBlock> empty = new ArrayList<>();
-        pR.initialise(forwardBlock1, empty);
-        pR.execute();
-        pR.execute();
-        pR.undoProgramRunner();
-        pR.undoProgramRunner();
-        pR.redoProgramRunner();
+        pr.initialise(forwardBlock1);
+        pr.execute();
+        pr.execute();
+        UndoRedoHandler.getInstance().undo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
+        UndoRedoHandler.getInstance().undo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
+        UndoRedoHandler.getInstance().undo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
+        assertFalse(pr.isRunning());
+    }
+
+    @Test
+    public void redoBlock() {
+        ProgramRunner pr = new ProgramRunner(GW);
+        ModelActionBlock forwardBlock1 = new ModelActionBlock(new ProgramLocation(100,140), Actions.get(0));
+        ModelActionBlock forwardBlock2 = new ModelActionBlock(new ProgramLocation(100,180), Actions.get(0));
+        forwardBlock1.setBottomPlug(forwardBlock2);
+        forwardBlock2.setTopSocket(forwardBlock1);
+        pr.initialise(forwardBlock1);
+        pr.execute();
+        pr.execute();
+        UndoRedoHandler.getInstance().undo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
+        UndoRedoHandler.getInstance().undo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
+        UndoRedoHandler.getInstance().redo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
         assertTrue(forwardBlock2.isHighlighted());
     }
 
     @Test
     public void redoWhileBlock() {
-        ProgramRunner PR = new ProgramRunner(GW);
+        ProgramRunner pr = new ProgramRunner(GW);
         ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(100, 20), Actions.get(2));
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(113,143), Actions.get(0));
@@ -192,17 +211,17 @@ public class ProgramRunnerTest {
         notBlock.setLeftPlug(whileBlock);
         notBlock.setRightSocket(wifBlock);
         wifBlock.setLeftPlug(notBlock);
-        ArrayList<ModelFunctionDefinitionBlock> empty = new ArrayList<>();
-        PR.initialise(rightBlock, empty);
-        PR.execute();
-        PR.execute();
-        PR.undoProgramRunner();
+        pr.initialise(rightBlock);
+        pr.execute();
+        pr.execute();
+        UndoRedoHandler.getInstance().undo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
         assertTrue(forwardBlock.isHighlighted());
     }
 
     @Test
     public void undoHighlightFunction() {
-        ProgramRunner programRunner = new ProgramRunner(GW);
+        ProgramRunner pr = new ProgramRunner(GW);
         ModelFunctionDefinitionBlock funcDef = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(133,143), Actions.get(0));
         ModelActionBlock forwardBlock2 = new ModelActionBlock(new ProgramLocation(133,223), Actions.get(0));
@@ -215,30 +234,31 @@ public class ProgramRunnerTest {
         forwardBlock3.setTopSocket(forwardBlock2);
         forwardBlock3.setBottomPlug(funcDef);
         funcDef.setCavitySocket(forwardBlock3);
-        ModelFunctionCallBlock call = new ModelFunctionCallBlock(new ProgramLocation(20, 20), 0);
+        ModelFunctionCallBlock call = new ModelFunctionCallBlock(new ProgramLocation(20, 20), funcDef);
         ModelActionBlock turnright = new ModelActionBlock(new ProgramLocation(20,100), Actions.get(2));
         call.setBottomPlug(turnright);
         turnright.setTopSocket(call);
-        ModelFunctionCallBlock call2 = new ModelFunctionCallBlock(new ProgramLocation(20, 180), 0);
+        ModelFunctionCallBlock call2 = new ModelFunctionCallBlock(new ProgramLocation(20, 180), funcDef);
         turnright.setBottomPlug(call2);
         call2.setTopSocket(turnright);
         ModelActionBlock forwardBlock4 = new ModelActionBlock(new ProgramLocation(20,260), Actions.get(0));
         call2.setBottomPlug(forwardBlock4);
         forwardBlock4.setTopSocket(call2);
 
-        programRunner.initialise(call, new ArrayList<>(Arrays.asList(funcDef)));
+        pr.initialise(call);
 
         for(int i = 0; i < 7; i++){
-            programRunner.execute();
+            pr.execute();
         }
 
-        programRunner.undoProgramRunner();//undo first time seems to have to undo twice to work.
+        UndoRedoHandler.getInstance().undo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
         assertTrue(forwardBlock.isHighlighted());
     }
 
     @Test
     public void findNextBlockEmptyCallStack() {
-        ProgramRunner programRunner = new ProgramRunner(GW);
+        ProgramRunner pr = new ProgramRunner(GW);
         ModelFunctionDefinitionBlock funcDef = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(133,143), Actions.get(0));
         ModelActionBlock forwardBlock2 = new ModelActionBlock(new ProgramLocation(133,223), Actions.get(0));
@@ -251,32 +271,34 @@ public class ProgramRunnerTest {
         forwardBlock3.setTopSocket(forwardBlock2);
         forwardBlock3.setBottomPlug(funcDef);
         funcDef.setCavitySocket(forwardBlock3);
-        ModelFunctionCallBlock call = new ModelFunctionCallBlock(new ProgramLocation(20, 20), 0);
+        ModelFunctionCallBlock call = new ModelFunctionCallBlock(new ProgramLocation(20, 20), funcDef);
         ModelActionBlock turnright = new ModelActionBlock(new ProgramLocation(20,100), Actions.get(2));
         call.setBottomPlug(turnright);
         turnright.setTopSocket(call);
-        ModelFunctionCallBlock call2 = new ModelFunctionCallBlock(new ProgramLocation(20, 180), 0);
+        ModelFunctionCallBlock call2 = new ModelFunctionCallBlock(new ProgramLocation(20, 180), funcDef);
         turnright.setBottomPlug(call2);
         call2.setTopSocket(turnright);
         ModelActionBlock forwardBlock4 = new ModelActionBlock(new ProgramLocation(20,260), Actions.get(1));
         call2.setBottomPlug(forwardBlock4);
         forwardBlock4.setTopSocket(call2);
 
-        programRunner.initialise(call, new ArrayList<>(Arrays.asList(funcDef)));
+        pr.initialise(call);
 
         for(int i = 0; i < 7; i++){
-            programRunner.execute();
+            pr.execute();
         }
 
-        programRunner.undoProgramRunner();
-        programRunner.undoProgramRunner();
+        UndoRedoHandler.getInstance().undo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
+        UndoRedoHandler.getInstance().undo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
 
         assertTrue(call2.isHighlighted());
     }
 
     @Test
     public void undoSkippingBlock() {
-        ProgramRunner programRunner = new ProgramRunner(GW);
+        ProgramRunner pr = new ProgramRunner(GW);
         ModelFunctionDefinitionBlock funcDef = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(133,143), Actions.get(0));
         ModelActionBlock forwardBlock2 = new ModelActionBlock(new ProgramLocation(133,223), Actions.get(0));
@@ -289,26 +311,31 @@ public class ProgramRunnerTest {
         forwardBlock3.setTopSocket(forwardBlock2);
         forwardBlock3.setBottomPlug(funcDef);
         funcDef.setCavitySocket(forwardBlock3);
-        ModelFunctionCallBlock call = new ModelFunctionCallBlock(new ProgramLocation(20, 20), 0);
+        ModelFunctionCallBlock call = new ModelFunctionCallBlock(new ProgramLocation(20, 20), funcDef);
 
 
-        programRunner.initialise(call, new ArrayList<>(Arrays.asList(funcDef)));
+        pr.initialise(call);
 
-        programRunner.execute();
-        programRunner.execute();
-        programRunner.undoProgramRunner();
-        programRunner.undoProgramRunner();
-        programRunner.redoProgramRunner();
+        pr.execute();
+        pr.execute();
+        UndoRedoHandler.getInstance().undo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
+        UndoRedoHandler.getInstance().undo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
+        UndoRedoHandler.getInstance().redo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
+        UndoRedoHandler.getInstance().redo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
 
-        assertTrue(forwardBlock.isHighlighted());
+        assertTrue(forwardBlock2.isHighlighted());
     }
 
     @Test
     public void executeAfterRedo() {
-        ProgramRunner programRunner = new ProgramRunner(GW);
+        ProgramRunner pr = new ProgramRunner(GW);
         ModelFunctionDefinitionBlock funcDef = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(133,143), Actions.get(0));
-        ModelFunctionCallBlock call = new ModelFunctionCallBlock(new ProgramLocation(20, 20), 0);
+        ModelFunctionCallBlock call = new ModelFunctionCallBlock(new ProgramLocation(20, 20), funcDef);
         ModelActionBlock forwardBlock2 = new ModelActionBlock(new ProgramLocation(200, 20), Actions.get(0));
         ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(280, 20), Actions.get(2));
 
@@ -321,15 +348,19 @@ public class ProgramRunnerTest {
         forwardBlock2.setBottomPlug(rightBlock);
         rightBlock.setTopSocket(forwardBlock2);
 
-        programRunner.initialise(call, new ArrayList<>(Arrays.asList(funcDef)));
+        pr.initialise(call);
 
-        programRunner.execute();
-        programRunner.execute();
-        programRunner.undoProgramRunner();
-        programRunner.undoProgramRunner();
-        programRunner.redoProgramRunner();
-        programRunner.redoProgramRunner();
-        programRunner.execute();
+        pr.execute();
+        pr.execute();
+        UndoRedoHandler.getInstance().undo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
+        UndoRedoHandler.getInstance().undo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
+        UndoRedoHandler.getInstance().redo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
+        UndoRedoHandler.getInstance().redo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
+        pr.execute();
 
         assertTrue(rightBlock.isHighlighted());
     }
@@ -338,8 +369,8 @@ public class ProgramRunnerTest {
     public void doubleCallBlock() {
         ProgramRunner pr = new ProgramRunner(GW);
         ModelFunctionDefinitionBlock funcDef = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
-        ModelFunctionCallBlock call1 = new ModelFunctionCallBlock(new ProgramLocation(20, 20), 0);
-        ModelFunctionCallBlock call2 = new ModelFunctionCallBlock(new ProgramLocation(20, 100), 0);
+        ModelFunctionCallBlock call1 = new ModelFunctionCallBlock(new ProgramLocation(20, 20), funcDef);
+        ModelFunctionCallBlock call2 = new ModelFunctionCallBlock(new ProgramLocation(20, 100), funcDef);
         ModelActionBlock forward = new ModelActionBlock(new ProgramLocation(133, 63), Actions.get(0));
         funcDef.setCavityPlug(forward);
         funcDef.setCavitySocket(forward);
@@ -347,7 +378,7 @@ public class ProgramRunnerTest {
         forward.setBottomPlug(funcDef);
         call1.setBottomPlug(call2);
         call2.setTopSocket(call1);
-        pr.initialise(call1, new ArrayList<>(Arrays.asList(funcDef)));
+        pr.initialise(call1);
         pr.execute();
         pr.execute();
         pr.execute();
@@ -361,13 +392,16 @@ public class ProgramRunnerTest {
         ProgramRunner pr = new ProgramRunner(GW);
         ModelFunctionDefinitionBlock definitionBlock = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
         ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(20, 20), Actions.get(2));
-        ModelFunctionCallBlock callBlock = new ModelFunctionCallBlock(new ProgramLocation(20, 100), 0);
+        ModelFunctionCallBlock callBlock = new ModelFunctionCallBlock(new ProgramLocation(20, 100), definitionBlock);
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(133, 63), false);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(146, 106), Actions.get(0));
         ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(213, 63));
         ModelPredicateBlock predicateBlock = new ModelPredicateBlock(new ProgramLocation(293, 63), Predicates.get(0));
+        ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(20, 180), Actions.get(1));
         rightBlock.setBottomPlug(callBlock);
         callBlock.setTopSocket(rightBlock);
+        callBlock.setBottomPlug(leftBlock);
+        leftBlock.setTopSocket(callBlock);
         definitionBlock.setCavityPlug(whileBlock);
         whileBlock.setTopSocket(definitionBlock);
         whileBlock.setCavityPlug(forwardBlock);
@@ -380,7 +414,8 @@ public class ProgramRunnerTest {
         predicateBlock.setLeftPlug(notBlock);
         whileBlock.setBottomPlug(definitionBlock);
         definitionBlock.setCavitySocket(whileBlock);
-        pr.initialise(rightBlock, new ArrayList<>(Arrays.asList(definitionBlock)));
+        pr.initialise(rightBlock);
+        pr.execute();
         pr.execute();
         pr.execute();
         pr.execute();
@@ -393,7 +428,7 @@ public class ProgramRunnerTest {
         ProgramRunner pr = new ProgramRunner(GW);
         ModelFunctionDefinitionBlock definitionBlock = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
         ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(20, 20), Actions.get(2));
-        ModelFunctionCallBlock callBlock = new ModelFunctionCallBlock(new ProgramLocation(20, 100), 0);
+        ModelFunctionCallBlock callBlock = new ModelFunctionCallBlock(new ProgramLocation(20, 100), definitionBlock);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(133, 63), Actions.get(0));
         rightBlock.setBottomPlug(callBlock);
         callBlock.setTopSocket(rightBlock);
@@ -401,16 +436,22 @@ public class ProgramRunnerTest {
         forwardBlock.setTopSocket(definitionBlock);
         forwardBlock.setBottomPlug(definitionBlock);
         definitionBlock.setCavitySocket(forwardBlock);
-        pr.initialise(rightBlock, new ArrayList<>(Arrays.asList(definitionBlock)));
+        pr.initialise(rightBlock);
         pr.execute();
         pr.execute();
         pr.execute();
-        pr.undoProgramRunner();
-        pr.undoProgramRunner();
-        pr.undoProgramRunner();
-        pr.redoProgramRunner();
-        pr.redoProgramRunner();
-        pr.redoProgramRunner();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
+        UndoRedoHandler.getInstance().undo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
+        UndoRedoHandler.getInstance().undo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
+        UndoRedoHandler.getInstance().undo();
+        UndoRedoHandler.getInstance().redo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
+        UndoRedoHandler.getInstance().redo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
+        UndoRedoHandler.getInstance().redo();
+        pr.setState((ProgramState) UndoRedoHandler.getInstance().getState());
         pr.execute();
         assertFalse(forwardBlock.isHighlighted());
     }

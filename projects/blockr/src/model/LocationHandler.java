@@ -3,6 +3,7 @@ package model;
 import main.MyCanvasWindow;
 import model.blocks.*;
 import ui.UIBlock;
+import ui.UIController;
 import utilities.*;
 import java.util.ArrayList;
 
@@ -98,7 +99,7 @@ public class LocationHandler {
      */
     public void setTopSocketLocation(ModelBlock toBeMoved, ModelBlock reference){
         ProgramLocation referenceLocation;
-        if (toBeMoved.isInCavity() && reference instanceof ModelCavityBlock){
+        if (reference.equals(toBeMoved.getSurroundingCavityBlock()) && reference instanceof ModelCavityBlock){
             referenceLocation = ((ModelCavityBlock) reference).getCavityPlugPos();
         }
         else referenceLocation = reference.getBottomPlugPos();
@@ -160,6 +161,13 @@ public class LocationHandler {
         return closest;
     }
 
+    /**
+     *
+     * @param current
+     * @param closest
+     * @return the distance of the closest connectable pair of plugs or sockets of the given blocks
+     * @author Oberon Swings
+     */
     public Integer getClosestdistance(ModelBlock current, ModelBlock closest) {
         if (current == null || closest == null) return null;
         int d = CLOSESTDISTANCE;
@@ -199,5 +207,13 @@ public class LocationHandler {
         if(eveWindowLocation.getX() > (MyCanvasWindow.WIDTH *2/3 - UIBlock.STD_WIDTH)) return new ProgramLocation(MyCanvasWindow.WIDTH *2/3 - UIBlock.STD_WIDTH, eveWindowLocation.getY());
         if(eveWindowLocation.getY() > (MyCanvasWindow.HEIGHT - UIBlock.STD_HEIGHT)) return new ProgramLocation(eveWindowLocation.getX(), MyCanvasWindow.HEIGHT - UIBlock.STD_HEIGHT);
         return eveWindowLocation;
+    }
+
+    public static boolean isInProgramArea(ProgramLocation location) {
+        return (location.getX() < UIController.PALETTEWIDTH + UIController.PROGRAMAREAWIDTH && location.getX() > UIController.PALETTEWIDTH);
+    }
+
+    public static boolean isInPalette(ProgramLocation location) {
+        return (location.getX() >= 0 && location.getX() < UIController.PALETTEWIDTH);
     }
 }

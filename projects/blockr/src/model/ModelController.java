@@ -89,10 +89,10 @@ public class ModelController{
             if (active != null) {
                 if (active instanceof ModelFunctionDefinitionBlock) {
                     PArea.deleteFunctionCallsById(((ModelFunctionDefinitionBlock) active).getId());
-                    palette.populateBlocks(PArea.getAllModelFunctionDefinitionBlock());
                 }
                 PArea.removePABlock(active);
                 active = null;
+                palette.populateBlocks(PArea.getAllModelFunctionDefinitionBlock());
             }
         }
         else if (LocationHandler.isInProgramArea(location)) {

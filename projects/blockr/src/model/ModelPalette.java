@@ -19,7 +19,6 @@ class ModelPalette{
     private ArrayList<ModelBlock> blocks;
 
     private int functionCounter;
-    private int maxColumnHeight;
 
 
     public ModelPalette(ArrayList<ActionType> actions, ArrayList<PredicateType> predicates){
@@ -47,7 +46,6 @@ class ModelPalette{
             blocks.add(predicateBlock);
             j++;
         }
-        this.maxColumnHeight = Math.max(20 + (int)(UIBlock.STD_HEIGHT * 1.5f * (i + 1)), 20 + (int)(UIBlock.STD_HEIGHT * 1.5f * (j + 3)));
         blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 20), true));
         blocks.add(new ModelWhileIfBlock(new ProgramLocation(20, 20 + (int)(UIBlock.STD_HEIGHT * 1.5f)), false));
         blocks.add(new ModelNotBlock(new ProgramLocation(180, 20)));
@@ -59,9 +57,13 @@ class ModelPalette{
         idList.sort(Comparator.comparingInt(ModelFunctionDefinitionBlock::getId));
         for(int i = 0; i<idList.size(); i++){
             int Xpos = i%2 == 0 ? (20) : (180);
-            int Ypos = (int) (Math.floor(i/2f) * (int)(UIBlock.STD_HEIGHT * 1.5f) + this.maxColumnHeight);
+            int Ypos = (int) (Math.floor(i/2f) * (int)(UIBlock.STD_HEIGHT * 1.5f) + getMaxColumnHeight());
             this.blocks.add(new ModelFunctionCallBlock(new ProgramLocation(Xpos, Ypos), idList.get(i)));
         }
+    }
+
+    private int getMaxColumnHeight() {
+        return Math.max(20 + (int)(UIBlock.STD_HEIGHT * 1.5f * (actions.size() + 1)), 20 + (int)(UIBlock.STD_HEIGHT * 1.5f * (predicates.size() + 3)));
     }
 
     /**
@@ -70,6 +72,14 @@ class ModelPalette{
      */
     public void removeBlocks(){
         this.blocks = new ArrayList<ModelBlock>();
+    }
+
+    public void updateFunctionCounter(ArrayList<ModelFunctionDefinitionBlock> ids) {
+        int highestId = -1;
+        for (ModelFunctionDefinitionBlock id : ids) {
+            if (id.getId() > highestId) highestId = id.getId();
+        }
+        functionCounter = highestId + 1;
     }
 
     /**
@@ -89,7 +99,6 @@ class ModelPalette{
             if(block.inBoundsOfElement(eventWindowLocation)){
                 if(block instanceof ModelFunctionDefinitionBlock){
                     this.functionCounter++;
-
                     return block;
                 }
                 else{

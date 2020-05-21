@@ -5,12 +5,12 @@ import model.blocks.*;
 import org.junit.Before;
 import org.junit.Test;
 import utilities.ProgramLocation;
+import utilities.ProgramState;
 
 import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
@@ -489,6 +489,50 @@ public class ProgramRunnerTest {
         leftBlock.setBottomPlug(definitionBlock2);
         definitionBlock2.setCavitySocket(leftBlock);
         pr.initialise(call3Block);
+        pr.execute();
+        pr.execute();
+        pr.execute();
+        pr.execute();
+        pr.execute();
+        assertFalse(pr.isRunning());
+    }
+
+    @Test
+    public void ifInDefinitionWithRecursiveCallTest() {
+        ProgramRunner pr = new ProgramRunner(GW);
+        ModelFunctionDefinitionBlock definitionBlock = new ModelFunctionDefinitionBlock(new ProgramLocation(120, 20), 0);
+        ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(133, 223), Actions.get(2));
+        ModelFunctionCallBlock callBlock = new ModelFunctionCallBlock(new ProgramLocation(20, 100), definitionBlock);
+        ModelWhileIfBlock ifBlock = new ModelWhileIfBlock(new ProgramLocation(133, 143), true);
+        ModelFunctionCallBlock callBlock2 = new ModelFunctionCallBlock(new ProgramLocation(146, 106), definitionBlock);
+        ModelNotBlock notBlock = new ModelNotBlock(new ProgramLocation(213, 63));
+        ModelPredicateBlock predicateBlock = new ModelPredicateBlock(new ProgramLocation(293, 63), Predicates.get(0));
+        ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(133, 63), Actions.get(0));
+        definitionBlock.setCavityPlug(forwardBlock);
+        forwardBlock.setTopSocket(definitionBlock);
+        forwardBlock.setBottomPlug(ifBlock);
+        ifBlock.setTopSocket(forwardBlock);
+        ifBlock.setCavityPlug(callBlock2);
+        callBlock2.setTopSocket(ifBlock);
+        callBlock2.setBottomPlug(ifBlock);
+        ifBlock.setCavitySocket(callBlock2);
+        ifBlock.setRightSocket(notBlock);
+        notBlock.setLeftPlug(ifBlock);
+        notBlock.setRightSocket(predicateBlock);
+        predicateBlock.setLeftPlug(notBlock);
+        ifBlock.setBottomPlug(rightBlock);
+        rightBlock.setTopSocket(ifBlock);
+        rightBlock.setBottomPlug(definitionBlock);
+        definitionBlock.setCavitySocket(rightBlock);
+        pr.initialise(callBlock);
+        pr.execute();
+        pr.execute();
+        pr.execute();
+        pr.execute();
+        pr.execute();
+        pr.execute();
+        pr.execute();
+        pr.execute();
         pr.execute();
         pr.execute();
         pr.execute();

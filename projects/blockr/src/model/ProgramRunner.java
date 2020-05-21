@@ -3,7 +3,8 @@ package model;
 import javax.swing.JOptionPane;
 import model.blocks.*;
 import gameworldapi.*;
-import java.util.ArrayList;
+import utilities.ProgramState;
+
 import java.util.Stack;
 
 public class ProgramRunner {
@@ -97,6 +98,7 @@ public class ProgramRunner {
     private boolean leftFunctionDefinition(){
         if (current.getCurrent() == null || current.getHighlight() == null) return false;
         if (!current.getCallStack().empty() && current.getHighlight().getTopSocket().equals(current.getCallStack().peek())) return true;
+        if (!current.getCallStack().empty() && current.getCurrent().getSurroundingDefinitionBlock() != null && current.getCurrent().getSurroundingDefinitionBlock().equals(current.getCurrent().getBottomPlug())) return true;
         if (current.getCurrent().getSurroundingDefinitionBlock() != null) {
             if (!current.getCurrent().getSurroundingDefinitionBlock().equals(current.getHighlight().getSurroundingDefinitionBlock())) {
                 return true;
@@ -129,7 +131,7 @@ public class ProgramRunner {
         if (nextBlock == null) return null;
         while (nextBlock instanceof ModelCavityBlock) {
             if (nextBlock instanceof ModelWhileIfBlock) {
-                if (nextBlock.equals(block.getSurroundingCavityBlock()) && nextBlock.isIf()) nextBlock = nextBlock.getBottomPlug();
+                if (nextBlock.equals(block.getSurroundingCavityBlock()) || !nextBlock.equals(current.getHighlight().getBottomPlug()) && nextBlock.isIf()) nextBlock = nextBlock.getBottomPlug();
                 else nextBlock = ((ModelWhileIfBlock) nextBlock).findNextBlock(gameWorld.evaluate(((ModelWhileIfBlock) nextBlock).getPredicate()));
             }
             else nextBlock = nextBlock.findNextBlock();

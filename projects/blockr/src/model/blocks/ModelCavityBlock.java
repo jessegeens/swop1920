@@ -23,6 +23,9 @@ public abstract class ModelCavityBlock extends ModelBlock{
         super.setConnectionPoints(connectionPoints);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ModelBlock clone() {
         return null;

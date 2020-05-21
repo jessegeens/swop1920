@@ -63,6 +63,9 @@ public class ModelActionBlock extends ModelBlock{
         this.topSocket = blk;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ModelBlock findNextBlock() {
         return getBottomPlug();

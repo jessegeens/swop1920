@@ -61,12 +61,20 @@ public class ModelController{
         programRunner.reset();
     }
 
+    /**
+     * selects a block when it is clicked.
+     * @param location
+     */
     public void select(ProgramLocation location) {
         selectHelp(location);
         if (active != null && LocationHandler.isInProgramArea(location)) PArea.removePABlock(active);
         LocationHandler.getInstance().updateLocationBlocks(PArea.getPABlocks());
     }
 
+    /**
+     * Helper function for select so this function can be reused for undo and redo purpose.
+     * @param location
+     */
     private void selectHelp(ProgramLocation location) {
         if (LocationHandler.isInPalette(location)) {
             active = palette.returnSelectedBlock(location);
@@ -79,12 +87,20 @@ public class ModelController{
         if (active != null) selectPosition = active.getPos();
     }
 
+    /**
+     * release function when a block is released.
+     * @param location
+     */
     public void release(ProgramLocation location) {
         addAction(location);
         releaseHelp(location);
         UndoRedoHandler.getInstance().removeRedoActions();
     }
 
+    /**
+     * helper function for the release so this one can be reused for undo and redo.
+     * @param location
+     */
     private void releaseHelp(ProgramLocation location) {
         if (LocationHandler.isInPalette(location)) {
             if (active != null) {
@@ -112,12 +128,19 @@ public class ModelController{
         }
     }
 
+    /**
+     * Adds the action to the undostack in the undoRedoHandler
+     * @param location
+     */
     private void addAction(ProgramLocation location) {
         if (active != null) {
             UndoRedoHandler.getInstance().executeAction(new BlockAction(selectPosition, location, active));
         }
     }
 
+    /**
+     * Undo the last action execution (ProgramState or BlockAction)
+     */
     public void undo() {
         Object state = UndoRedoHandler.getInstance().getState();
         UndoRedoHandler.getInstance().undo();
@@ -135,6 +158,9 @@ public class ModelController{
         }
     }
 
+    /**
+     * Redo the last undone action (ProgramState or BlockAction)
+     */
     public void redo() {
         UndoRedoHandler.getInstance().redo();
         Object state = UndoRedoHandler.getInstance().getState();

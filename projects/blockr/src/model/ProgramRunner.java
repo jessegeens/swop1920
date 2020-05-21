@@ -32,7 +32,7 @@ public class ProgramRunner {
         this.running = true;
         ModelBlock thisstart = start;
         if (thisstart instanceof ModelCavityBlock) {
-            thisstart = newFindNextBlock(thisstart);
+            thisstart = findNextBlock(thisstart);
         }
         current = new ProgramState(null, thisstart, new Stack<>(), gameWorld.getSnapshot());
         UndoRedoHandler.getInstance().executeRunner(current);
@@ -88,13 +88,17 @@ public class ProgramRunner {
             }
             if(leftFunctionDefinition()) newCallStack.pop();
             if(current.getHighlight() instanceof ModelFunctionCallBlock) newCallStack.push((ModelFunctionCallBlock) current.getHighlight());
-            ModelBlock nextBlock = newFindNextBlock(current.getHighlight());
+            ModelBlock nextBlock = findNextBlock(current.getHighlight());
             ProgramState nextState = new ProgramState(current.getHighlight(), nextBlock, newCallStack, gameWorld.getSnapshot());
             UndoRedoHandler.getInstance().executeRunner(nextState);
             setState(nextState);
         }
     }
 
+    /**
+     *
+     * @return true if the execution got out of a function definition.
+     */
     private boolean leftFunctionDefinition(){
         if (current.getCurrent() == null || current.getHighlight() == null) return false;
         if (!current.getCallStack().empty() && current.getHighlight().getTopSocket().equals(current.getCallStack().peek())) return true;
@@ -126,7 +130,12 @@ public class ProgramRunner {
         else running = false;
     }
 
-    public ModelBlock newFindNextBlock(ModelBlock block) {
+    /**
+     *
+     * @param block
+     * @return the next block in the execution
+     */
+    public ModelBlock findNextBlock(ModelBlock block) {
         ModelBlock nextBlock = block.findNextBlock();
         if (nextBlock == null) return null;
         while (nextBlock instanceof ModelCavityBlock) {

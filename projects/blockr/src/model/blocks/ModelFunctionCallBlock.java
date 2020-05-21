@@ -29,6 +29,10 @@ public class ModelFunctionCallBlock extends ModelBlock {
         super.setConnectionPoints(connectionPoints);
     }
 
+    /**
+     *
+     * @return the id of the definition block this block is linked with.
+     */
     public int getId(){
         return definitionBlock.getId();
     }

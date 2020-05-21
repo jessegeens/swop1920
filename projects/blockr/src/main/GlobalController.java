@@ -74,9 +74,6 @@ public class GlobalController {
      * @param isControlDown true if ctrl is down
      * @param isShiftDown true if shift is down
      * @author Bert
-     *
-     *
-     *
      */
     public void handleKeyEvent(int id, int keyCode, char keyChar, boolean isControlDown, boolean isShiftDown){
         switch(keyCode) {
@@ -90,11 +87,9 @@ public class GlobalController {
             case 90: //Z
                 if(isControlDown){
                     if(isShiftDown){
-                        //this.modelController.globalRedo();
                         modelController.redo();
                     }
                     else{
-                        //this.modelController.globalUndo();
                         modelController.undo();
                     }
                 }

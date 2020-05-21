@@ -62,6 +62,10 @@ class ModelPalette{
         }
     }
 
+    /**
+     * check for the columnHeight for populating the palette.
+     * @return
+     */
     private int getMaxColumnHeight() {
         return Math.max(20 + (int)(UIBlock.STD_HEIGHT * 1.5f * (actions.size() + 1)), 20 + (int)(UIBlock.STD_HEIGHT * 1.5f * (predicates.size() + 3)));
     }
@@ -74,6 +78,10 @@ class ModelPalette{
         this.blocks = new ArrayList<ModelBlock>();
     }
 
+    /**
+     * Updates the function counter according to the active defenitionBlocks.
+     * @param ids
+     */
     public void updateFunctionCounter(ArrayList<ModelFunctionDefinitionBlock> ids) {
         int highestId = -1;
         for (ModelFunctionDefinitionBlock id : ids) {

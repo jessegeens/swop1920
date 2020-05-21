@@ -30,6 +30,9 @@ public class ModelWhileIfBlock extends ModelCavityBlock{
         super.setConnectionPoints(connectionPoints);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ModelWhileIfBlock clone() {
         return new ModelWhileIfBlock(this.getPos(), isIf);
@@ -71,19 +74,32 @@ public class ModelWhileIfBlock extends ModelCavityBlock{
         return ((ModelPredicateBlock)current).getPredicate();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean isIf(){
         return isIf;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ModelBlock findNextBlock() {
         return findNextBlock(false);
     }
 
+    /**
+     * Help function for the findNextBlock.
+     * @param evaluated the result of the predicate evaluation in the gameworld
+     */
     public ModelBlock findNextBlock(Boolean evaluated) {
         if (getCavityBlocks().size() == 0) return getBottomPlug();
         if (isNegated() && evaluated) return getBottomPlug();
-        if (isNegated() || evaluated) return getCavityPlug();
+        if (isNegated() || evaluated) {
+            return getCavityPlug();
+        }
         return getBottomPlug();
     }
 

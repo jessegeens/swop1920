@@ -86,12 +86,23 @@ public class ModelProgramArea{
         return null;
     }
 
+    /**
+     *
+     * @param location
+     * @param active
+     * @return the closest block in the programArea
+     */
     public ModelBlock findClosestBlock(ProgramLocation location, ModelBlock active) {
         ProgramLocation newlocation = LocationHandler.getInstance().moveToInBounds(location);
         LocationHandler.getInstance().setLocationBlock(active, newlocation);
         return LocationHandler.getInstance().findClosestBlock(active, blocks);
     }
 
+    /**
+     * adds the block to the programArea and connects it if possible.
+     * @param active
+     * @param closest
+     */
     public void addAndConnectBlock(ModelBlock active, ModelBlock closest) {
         if (!(this.getPABlocks().contains(active))) {
             this.addPABlock(active);

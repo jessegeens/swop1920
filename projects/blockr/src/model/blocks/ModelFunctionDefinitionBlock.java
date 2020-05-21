@@ -13,15 +13,25 @@ public class ModelFunctionDefinitionBlock extends ModelCavityBlock {
         this.identifier = id;
     }
 
+    /**
+     *
+     * @return the id this block has
+     */
     public int getId(){
         return this.identifier;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ModelFunctionDefinitionBlock clone(){
         return new ModelFunctionDefinitionBlock(super.getPos(), this.getId());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ModelBlock findNextBlock() {
         Object state = UndoRedoHandler.getInstance().getState();

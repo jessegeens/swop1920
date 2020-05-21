@@ -22,7 +22,11 @@ public class LocationHandler {
         return instance;
     }
 
-
+    /**
+     * sets the location of a block.
+     * @param block
+     * @param location
+     */
     public void setLocationBlock(ModelBlock block, ProgramLocation location){
         block.setPos(location);
         if (block instanceof ModelCavityBlock){
@@ -60,6 +64,10 @@ public class LocationHandler {
         if (block instanceof ModelCavityBlock) updateCavityBlocksLocations((ModelCavityBlock) block);
     }
 
+    /**
+     * Updates the locations of the horizontally connected blocks
+     * @param block
+     */
     public void updatePredicateBlocksLocations(ModelBlock block){
         if (block.hasLeftPlug() && block.getLeftPlug() != null){
             setLeftPlugLocation(block, block.getLeftPlug());
@@ -209,10 +217,20 @@ public class LocationHandler {
         return eveWindowLocation;
     }
 
+    /**
+     *
+     * @param location
+     * @return true if the location is within the programArea
+     */
     public static boolean isInProgramArea(ProgramLocation location) {
         return (location.getX() < UIController.PALETTEWIDTH + UIController.PROGRAMAREAWIDTH && location.getX() > UIController.PALETTEWIDTH);
     }
 
+    /**
+     *
+     * @param location
+     * @return true if the location is within the Palette.
+     */
     public static boolean isInPalette(ProgramLocation location) {
         return (location.getX() >= 0 && location.getX() < UIController.PALETTEWIDTH);
     }

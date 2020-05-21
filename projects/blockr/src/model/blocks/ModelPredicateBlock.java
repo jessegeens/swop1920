@@ -52,6 +52,9 @@ public class ModelPredicateBlock extends ModelBlock{
         this.leftPlug = leftPlug;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ModelBlock findNextBlock() {
         return null;

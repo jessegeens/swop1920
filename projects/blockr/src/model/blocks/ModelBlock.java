@@ -19,13 +19,23 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
         super(windowLocation);
     }
 
+    /**
+     * highlights the block.
+     */
     public void setHighlight(){  this.highlighted = true;
     }
 
+    /**
+     * unhighlights the block.
+     */
     public void setUnHighlight(){
         this.highlighted = false;
     }
 
+    /**
+     *
+     * @return true if the block is highlighted, false otherwise.
+     */
     public boolean isHighlighted(){
         return this.highlighted;
     }
@@ -57,19 +67,9 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
     }
 
     /**
-     * A method that gives the connection from a block with all its neighbours without the cavity connections
-     * @return the list with all the connection of a block (except for cavity connections)
-     * @author Bert
+     *
+     * @return all connections except bottomPlug and topSocket
      */
-    public ArrayList<ModelBlock> getConnectionsNoCavity(){
-        ArrayList<ModelBlock> connections = new ArrayList<ModelBlock>();
-        if (this.hasBottomPlug() && this.getBottomPlug() != null) connections.add(this.getBottomPlug());
-        if (this.hasLeftPlug() && this.getLeftPlug() != null) connections.add(this.getLeftPlug());
-        if (this.hasTopSocket() && this.getTopSocket() != null) connections.add(this.getTopSocket());
-        if (this.hasRightSocket() && this.getRightSocket() != null) connections.add(this.getRightSocket());
-        return connections;
-    }
-
     public ArrayList<ModelBlock> getConnectionsCavityRight() {
         ArrayList<ModelBlock> connections = new ArrayList<ModelBlock>();
         if (this.hasRightSocket() && this.getRightSocket() != null) connections.add(this.getRightSocket());
@@ -180,40 +180,106 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
         return (this.connectionPoints.contains(ConnectionPoint.LEFT_PLUG));
     }
 
+    /**
+     * Sets the connection points this block has.
+     * @param connectionPoints
+     */
     void setConnectionPoints(ArrayList<ConnectionPoint> connectionPoints) {
         this.connectionPoints = connectionPoints;
     }
 
+    /**
+     *
+     * @return the connection points this block has.
+     */
     public ArrayList<ConnectionPoint> getConnectionPoints() {
         return connectionPoints;
     }
 
+    /**
+     *
+     * @return the block connected to this block's bottom plug.
+     */
     public ModelBlock getBottomPlug(){
         return null;
     }
+
+    /**
+     *
+     * @return the block connected to this block's top socket.
+     */
     public ModelBlock getTopSocket(){
         return null;
     }
+
+    /**
+     *
+     * @return the block connected to this block's left plug.
+     */
     public ModelBlock getLeftPlug(){
         return null;
     }
+
+    /**
+     *
+     * @return the block connected to this block's right socket.
+     */
     public ModelBlock getRightSocket(){
         return null;
     }
+
+    /**
+     * set the bottomPlug connection of this block to the given block.
+     * @param block
+     */
     public void setBottomPlug(ModelBlock block){}
+
+    /**
+     * set the topSocket connection of this block to the given block.
+     * @param block
+     */
     public void setTopSocket(ModelBlock block){}
+
+    /**
+     * set the leftPlug connection of this block to the given block.
+     * @param block
+     */
     public void setLeftPlug(ModelBlock block){}
+
+    /**
+     * set the rightSocket connection of this block to the given block.
+     * @param block
+     */
     public void setRightSocket(ModelBlock block){}
 
-    ProgramLocation getTopSocketPos() {
+    /**
+     *
+     * @return the location of the topSocket of this block.
+     */
+    public ProgramLocation getTopSocketPos() {
         return super.getPos().add(UIBlock.STD_WIDTH / 2, + UIBlock.PLUGSIZE/2);
     }
+
+    /**
+     *
+     * @return the location of the bottomPlug of this block.
+     */
     public ProgramLocation getBottomPlugPos() {
         return super.getPos().add(UIBlock.STD_WIDTH / 2, + this.getHeight() + UIBlock.PLUGSIZE/2);
     }
+
+    /**
+     *
+     * @return the location of the leftPlug of this block.
+     */
     private ProgramLocation getLeftPlugPos() {
         return super.getPos().add(- UIBlock.PLUGSIZE / 2, + UIBlock.STD_HEIGHT / 2);
     }
+
+    /**
+     *
+     * @return the location of the rightSocket of this block.
+     */
     public ProgramLocation getRightSocketPos() {
         return super.getPos().add(this.getWidth() - UIBlock.PLUGSIZE/2, + UIBlock.STD_HEIGHT / 2);
     }
@@ -254,10 +320,18 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
         return this.getBottomPlugPos().getDistance(bottom.getTopSocketPos());
     }
 
+    /**
+     *
+     * @return true if the block is an IFBlock
+     */
     public boolean isIf(){
         return false;
     }
 
+    /**
+     *
+     * @return the title of the block
+     */
     public String getTitle(){
         if (this instanceof ModelWhileIfBlock) {
             if (this.isIf()) return "IF";
@@ -279,5 +353,9 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
         return "Block";
     }
 
+    /**
+     * Finds the next block in the program execution according to the gamestate and the block connections.
+     * @return One of its connections or a block that is linked to this block in another way (definition and call blocks)
+     */
     public abstract ModelBlock findNextBlock();
 }

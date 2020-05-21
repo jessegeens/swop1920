@@ -1,4 +1,4 @@
-package model;
+package utilities;
 
 import gameworldapi.GameWorldState;
 import model.blocks.ModelBlock;

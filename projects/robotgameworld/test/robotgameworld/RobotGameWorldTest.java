@@ -56,4 +56,12 @@ public class RobotGameWorldTest {
         gameWorld.perform(Action.TURN_RIGHT);
         assertEquals(Direction.DOWN, ((RobotGameWorldState) gameWorld.getSnapshot()).getRobotDirection());
     }
+
+    @Test
+    public void edgeGridWallInFront() {
+        RobotGameWorld gameWorld = new RobotGameWorld();
+        GameWorldState state = new RobotGameWorldState(Direction.RIGHT, new GridLocation(4, 0));
+        gameWorld.restore(state);
+        assertTrue(gameWorld.evaluate(Predicate.WALL_IN_FRONT));
+    }
 }

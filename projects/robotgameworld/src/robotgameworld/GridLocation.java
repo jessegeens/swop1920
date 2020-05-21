@@ -61,4 +61,8 @@ public final class GridLocation implements Location{
         if (((Location) o).getX() == this.getX() && ((Location) o).getY() == this.getY()) return true;
         else return false;
     }
+
+    public boolean isInGrid() {
+        return (x < ActionExecutor.GRID_WIDTH && x >= 0 && y >= 0 && y < ActionExecutor.GRID_HEIGHT);
+    }
 }

@@ -90,6 +90,7 @@ public class ModelController{
             if (active != null) {
                 if (active instanceof ModelFunctionDefinitionBlock) {
                     PArea.deleteFunctionCallsById(((ModelFunctionDefinitionBlock) active).getId());
+                    palette.updateFunctionCounter(PArea.getAllModelFunctionDefinitionBlock());
                 }
                 PArea.removePABlock(active);
                 active = null;

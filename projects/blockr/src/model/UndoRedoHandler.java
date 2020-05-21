@@ -1,5 +1,8 @@
 package model;
 
+import utilities.BlockAction;
+import utilities.ProgramState;
+
 import java.util.Stack;
 
 public class UndoRedoHandler {

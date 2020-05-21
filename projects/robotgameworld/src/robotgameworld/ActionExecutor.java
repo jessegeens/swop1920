@@ -16,8 +16,8 @@ public class ActionExecutor {
     //Parameters, TODO check whether these are at the correct location
     private final GridLocation GOAL_CELL = new GridLocation(4, 4);
     private final ArrayList<GridLocation> WALLS = new ArrayList<GridLocation>(Arrays.asList(new GridLocation(0, 2), new GridLocation(1, 2), new GridLocation(4, 3)));
-    private int GRID_WIDTH = 5;
-    private int GRID_HEIGHT = 10;
+    public static final int GRID_WIDTH = 5;
+    public static final int GRID_HEIGHT = 10;
 
     private RobotGameWorldState current;
     private GameWorldStateFactory gameWorldStateFactory = GameWorldStateFactory.getInstance();
@@ -98,10 +98,7 @@ public class ActionExecutor {
      * @return true if the state is valid, false otherwise
      */
     private boolean validState(RobotGameWorldState state){
-        if(state.getRobotLocation().getX() < 0) return false;
-        if(state.getRobotLocation().getY() < 0) return false;
-        if(state.getRobotLocation().getX() >= GRID_WIDTH) return false;
-        if(state.getRobotLocation().getY() >= GRID_HEIGHT) return false;
+        if (!state.getRobotLocation().isInGrid()) return false;
         if(WALLS.contains(state.getRobotLocation())) return false;
         return true;
     }
@@ -127,7 +124,7 @@ public class ActionExecutor {
      *         false otherwise
      */
     public boolean wallInFrontOfRobot() {
-        Location possibleWall = new GridLocation(current.getRobotLocation().getX(), current.getRobotLocation().getY());
+        GridLocation possibleWall = new GridLocation(current.getRobotLocation().getX(), current.getRobotLocation().getY());
         switch (current.getRobotDirection()) {
             case LEFT:
                 possibleWall = possibleWall.add(-1, 0);
@@ -142,6 +139,7 @@ public class ActionExecutor {
                 possibleWall = possibleWall.add(0, 1);
                 break;
         }
+        if (!possibleWall.isInGrid()) return true;
         for (Location currentWall : WALLS) {
             if (currentWall.equals(possibleWall)) return true;
         }

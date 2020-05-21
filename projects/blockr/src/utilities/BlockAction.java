@@ -1,7 +1,6 @@
-package model;
+package utilities;
 
 import model.blocks.ModelBlock;
-import utilities.ProgramLocation;
 
 public class BlockAction {
 

@@ -1,6 +1,6 @@
 package model.blocks;
 
-import model.ProgramState;
+import utilities.ProgramState;
 import model.UndoRedoHandler;
 import utilities.ProgramLocation;
 

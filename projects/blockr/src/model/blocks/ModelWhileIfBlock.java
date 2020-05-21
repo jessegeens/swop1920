@@ -97,7 +97,9 @@ public class ModelWhileIfBlock extends ModelCavityBlock{
     public ModelBlock findNextBlock(Boolean evaluated) {
         if (getCavityBlocks().size() == 0) return getBottomPlug();
         if (isNegated() && evaluated) return getBottomPlug();
-        if (isNegated() || evaluated) return getCavityPlug();
+        if (isNegated() || evaluated) {
+            return getCavityPlug();
+        }
         return getBottomPlug();
     }
 

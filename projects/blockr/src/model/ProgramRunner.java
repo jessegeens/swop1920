@@ -140,7 +140,8 @@ public class ProgramRunner {
         if (nextBlock == null) return null;
         while (nextBlock instanceof ModelCavityBlock) {
             if (nextBlock instanceof ModelWhileIfBlock) {
-                if (nextBlock.equals(block.getSurroundingCavityBlock()) || !nextBlock.equals(current.getHighlight().getBottomPlug()) && nextBlock.isIf()) nextBlock = nextBlock.getBottomPlug();
+                if (nextBlock.isIf() && nextBlock.equals(block.getSurroundingCavityBlock())) nextBlock = nextBlock.getBottomPlug();
+                else if (nextBlock.isIf() && block.findNextBlock() instanceof ModelFunctionDefinitionBlock && ((ModelWhileIfBlock) nextBlock).getCavitySocket() instanceof ModelFunctionCallBlock && ((ModelFunctionDefinitionBlock) block.findNextBlock()).getId() == ((ModelFunctionCallBlock)((ModelWhileIfBlock) nextBlock).getCavitySocket()).getId()) nextBlock = nextBlock.getBottomPlug();
                 else nextBlock = ((ModelWhileIfBlock) nextBlock).findNextBlock(gameWorld.evaluate(((ModelWhileIfBlock) nextBlock).getPredicate()));
             }
             else nextBlock = nextBlock.findNextBlock();

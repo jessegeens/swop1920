@@ -230,25 +230,25 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
 
     /**
      * set the bottomPlug connection of this block to the given block.
-     * @param block
+     * @param block block to be connected
      */
     public void setBottomPlug(ModelBlock block){}
 
     /**
      * set the topSocket connection of this block to the given block.
-     * @param block
+     * @param block block to be connected
      */
     public void setTopSocket(ModelBlock block){}
 
     /**
      * set the leftPlug connection of this block to the given block.
-     * @param block
+     * @param block block to be connected
      */
     public void setLeftPlug(ModelBlock block){}
 
     /**
      * set the rightSocket connection of this block to the given block.
-     * @param block
+     * @param block block to be connected
      */
     public void setRightSocket(ModelBlock block){}
 

@@ -63,7 +63,7 @@ public class ModelController{
 
     /**
      * selects a block when it is clicked.
-     * @param location
+     * @param location location of the selection
      */
     public void select(ProgramLocation location) {
         selectHelp(location);
@@ -73,7 +73,7 @@ public class ModelController{
 
     /**
      * Helper function for select so this function can be reused for undo and redo purpose.
-     * @param location
+     * @param location location of the selection
      */
     private void selectHelp(ProgramLocation location) {
         if (LocationHandler.isInPalette(location)) {
@@ -89,7 +89,7 @@ public class ModelController{
 
     /**
      * release function when a block is released.
-     * @param location
+     * @param location location of the release
      */
     public void release(ProgramLocation location) {
         addAction(location);
@@ -99,7 +99,7 @@ public class ModelController{
 
     /**
      * helper function for the release so this one can be reused for undo and redo.
-     * @param location
+     * @param location location of the release
      */
     private void releaseHelp(ProgramLocation location) {
         if (LocationHandler.isInPalette(location)) {

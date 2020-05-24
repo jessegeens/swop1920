@@ -92,7 +92,8 @@ public class ModelWhileIfBlock extends ModelCavityBlock{
 
     /**
      * Help function for the findNextBlock.
-     * @param evaluated the result of the predicate evaluation in the gameworld
+     * @param evaluated the result of the predicate evaluation in the gameWorld
+     * @return the next block
      */
     public ModelBlock findNextBlock(Boolean evaluated) {
         if (getCavityBlocks().size() == 0) return getBottomPlug();

@@ -12,9 +12,9 @@ public class ModelFunctionCallBlock extends ModelBlock {
     private ModelFunctionDefinitionBlock definitionBlock;
 
     /**
-     *
-     * @param pos
-     * @param
+     * The representation of the function call block
+     * @param pos position of the block
+     * @param block the definition block it is connected to
      *
      * @author Bert_DVL
      */

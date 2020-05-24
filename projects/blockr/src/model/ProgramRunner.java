@@ -132,7 +132,7 @@ public class ProgramRunner {
 
     /**
      *
-     * @param block
+     * @param block the block to find the next block of
      * @return the next block in the execution
      */
     public ModelBlock findNextBlock(ModelBlock block) {

@@ -1,7 +1,6 @@
 package model;
 
 import model.blocks.*;
-import ui.UIBlock;
 
 import java.util.ArrayList;
 
@@ -68,11 +67,10 @@ public class ConnectionHandler {
      * Connects block extra to block closest.
      * @param closest first block
      * @param extra second block
-     * @return true if connected
      * @author Oberon Swings (modified by Bert)
      */
     public void connect(ModelBlock closest, ModelBlock extra) {
-        int d = LocationHandler.getInstance().getClosestdistance(extra, closest);
+        int d = LocationHandler.getInstance().getClosestDistance(extra, closest);
         if (closest instanceof ModelCavityBlock && extra.hasTopSocket() && ((ModelCavityBlock) closest).distanceCavityPlug(extra) == d) connectCavityPlug(((ModelCavityBlock)closest), extra);
         else if (closest instanceof ModelCavityBlock && extra.hasBottomPlug() && ((ModelCavityBlock) closest).distanceCavitySocket(extra) == d) connectCavitySocket((ModelCavityBlock) closest, extra);
         else if (closest.isInCavity() && closest.compatibleTopBottom(extra) && closest.distanceTopBottom(extra) == d) connectIntoCavityTop(extra, closest);

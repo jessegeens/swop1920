@@ -24,8 +24,8 @@ public class LocationHandler {
 
     /**
      * sets the location of a block.
-     * @param block
-     * @param location
+     * @param block the block whose location is to be set
+     * @param location the location to be set
      */
     public void setLocationBlock(ModelBlock block, ProgramLocation location){
         block.setPos(location);
@@ -35,8 +35,8 @@ public class LocationHandler {
     }
 
     /**
-     * This functionupdates the location of blocks. Can be usefull when a while if block has to resize, but should be used on every update.
-     * @param startBlocks the blocks where a blockcluster starts so the top left block
+     * This function updates the location of blocks. Can be useful when a while if block has to resize, but should be used on every update.
+     * @param startBlocks the blocks where a block cluster starts so the top left block
      * @author Oberon Swings
      */
     public void updateLocationBlocks(ArrayList<ModelBlock> startBlocks){
@@ -66,7 +66,7 @@ public class LocationHandler {
 
     /**
      * Updates the locations of the horizontally connected blocks
-     * @param block
+     * @param block the block to be updated
      */
     public void updatePredicateBlocksLocations(ModelBlock block){
         if (block.hasLeftPlug() && block.getLeftPlug() != null){
@@ -171,12 +171,12 @@ public class LocationHandler {
 
     /**
      *
-     * @param current
-     * @param closest
+     * @param current the current block
+     * @param closest the closest block
      * @return the distance of the closest connectable pair of plugs or sockets of the given blocks
      * @author Oberon Swings
      */
-    public Integer getClosestdistance(ModelBlock current, ModelBlock closest) {
+    public Integer getClosestDistance(ModelBlock current, ModelBlock closest) {
         if (current == null || closest == null) return null;
         int d = CLOSESTDISTANCE;
         if (closest instanceof ModelCavityBlock) {
@@ -219,7 +219,7 @@ public class LocationHandler {
 
     /**
      *
-     * @param location
+     * @param location location to be checked
      * @return true if the location is within the programArea
      */
     public static boolean isInProgramArea(ProgramLocation location) {
@@ -228,7 +228,7 @@ public class LocationHandler {
 
     /**
      *
-     * @param location
+     * @param location location to be checked
      * @return true if the location is within the Palette.
      */
     public static boolean isInPalette(ProgramLocation location) {

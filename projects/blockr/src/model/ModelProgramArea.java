@@ -88,20 +88,20 @@ public class ModelProgramArea{
 
     /**
      *
-     * @param location
-     * @param active
+     * @param location the location of the block
+     * @param active the block that is active
      * @return the closest block in the programArea
      */
     public ModelBlock findClosestBlock(ProgramLocation location, ModelBlock active) {
-        ProgramLocation newlocation = LocationHandler.getInstance().moveToInBounds(location);
-        LocationHandler.getInstance().setLocationBlock(active, newlocation);
+        ProgramLocation newLocation = LocationHandler.getInstance().moveToInBounds(location);
+        LocationHandler.getInstance().setLocationBlock(active, newLocation);
         return LocationHandler.getInstance().findClosestBlock(active, blocks);
     }
 
     /**
      * adds the block to the programArea and connects it if possible.
-     * @param active
-     * @param closest
+     * @param active the block that is active
+     * @param closest the closest block to check
      */
     public void addAndConnectBlock(ModelBlock active, ModelBlock closest) {
         if (!(this.getPABlocks().contains(active))) {
@@ -174,8 +174,7 @@ public class ModelProgramArea{
     /**
      * Deletes the ModelFunctionCallBlocks with a certain id when the ModelFunctionDefinitionBlock has been removed
      *
-     * @param id the id of the functioncallblocks
-     * @return an arraylist with the removed ModelFunctionCallblocks
+     * @param id the id of the functionCallBlocks
      * @author Bert
      */
     public void deleteFunctionCallsById(int id){

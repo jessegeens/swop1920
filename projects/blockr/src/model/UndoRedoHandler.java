@@ -100,7 +100,7 @@ public class UndoRedoHandler {
 
     /**
      * adds action when this is executed for the first time.
-     * @param blockAction
+     * @param blockAction the action associated with the block
      */
     public void executeAction(BlockAction blockAction) {
         blockActionUndoStack.push(blockAction);
@@ -116,7 +116,7 @@ public class UndoRedoHandler {
 
     /**
      * adds state when this is executed for the first time.
-     * @param state
+     * @param state the state to be added
      */
     public void executeRunner(ProgramState state) {
         runnerRedoStack.clear();

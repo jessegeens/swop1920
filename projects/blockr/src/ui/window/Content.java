@@ -4,4 +4,6 @@ public interface Content {
 
     int getHeight();
 
+    void handleMouseEvent();
+
 }

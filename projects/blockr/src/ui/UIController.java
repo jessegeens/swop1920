@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.awt.*;
 
 import main.MyCanvasWindow;
+import ui.window.Content;
+import ui.window.VerticalScrollbarDecorator;
 import utilities.*;
 import model.*;
 
@@ -13,6 +15,8 @@ import model.*;
 public class UIController {
 
     private static UIController instance;
+    private VerticalScrollbarDecorator palette;
+    private VerticalScrollbarDecorator programArea;
 
     public final static int PALETTEWIDTH = 300;
     public final static int PROGRAMAREAWIDTH = 500;
@@ -51,5 +55,10 @@ public class UIController {
         g.setColor(Color.BLACK);
         g.drawLine(PALETTEWIDTH, 0, PALETTEWIDTH, MyCanvasWindow.HEIGHT);
         g.drawLine(PALETTEWIDTH + PROGRAMAREAWIDTH, 0, PALETTEWIDTH + PROGRAMAREAWIDTH, MyCanvasWindow.HEIGHT);
+    }
+
+    public ArrayList<Content> getContent(){
+        ArrayList<Content> contents = new ArrayList<>();
+        return contents;
     }
 }

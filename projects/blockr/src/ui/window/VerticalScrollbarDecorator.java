@@ -9,6 +9,10 @@ public class VerticalScrollbarDecorator implements Window {
     private Window windowToDecorate;
     private int verticaleOffset;
 
+    public VerticalScrollbarDecorator(Window windowToDecorate) {
+        this.windowToDecorate = windowToDecorate;
+    }
+
     public int getVerticaleOffset(){
         return verticaleOffset;
     }

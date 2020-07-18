@@ -4,6 +4,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import ui.*;
+import ui.window.VerticalScrollbarDecorator;
 import utilities.*;
 import model.*;
 import gameworldapi.*;
@@ -15,8 +16,8 @@ import gameworldapi.*;
 public class GlobalController {
 
     //Controllers
-    private ModelController modelController;
-    private UIController uiController;
+    private final ModelController modelController;
+    private final UIController uiController;
 
     // Constructor
     public GlobalController(GameWorldType gameWorldType){
@@ -39,20 +40,21 @@ public class GlobalController {
      * @author Bert
      */
     public void handleMouseEvent(int id, int x, int y, int clickCount){
+        uiController.handleMouseEvent(id, x, y);
         ProgramLocation eventWindowLocation = new ProgramLocation(x,y);
         switch(id){
             case 501: //MOUSE_PRESSED
                 //return the topmost active block if one is in the click location
                 //you remove it from the local list in PArea until mouseup
                 //this.modelController.select(eventWindowLocation);
-                modelController.select(eventWindowLocation);
+                //modelController.select(eventWindowLocation);
                 break;
             case 502: //MOUSE_RELEASED
                 //this.modelController.release(eventWindowLocation);
-                modelController.release(eventWindowLocation);
+                //modelController.release(eventWindowLocation);
                 break;
             case 506: //MOUSE_DRAGGED
-                this.modelController.drag(eventWindowLocation);
+                //this.modelController.drag(eventWindowLocation);
                 break;
             default:
                 break;
@@ -106,9 +108,9 @@ public class GlobalController {
      * @param g the graphics object which the rendering uses
      */
     public void render(Graphics g){
-        ProgramLocation gridLocation = new ProgramLocation(UIController.PALETTEWIDTH + UIController.PROGRAMAREAWIDTH, 0);
+        ProgramLocation gridLocation = new ProgramLocation(UIController.PALETTEWIDTH + UIController.PROGRAMAREAWIDTH + 2* VerticalScrollbarDecorator.SCROLLBARWIDTH, 0);
         modelController.getGameWorld().render(g, gridLocation.getX(), gridLocation.getY());
         //uiController.render(g, modelController.getBlockStates());
-        uiController.render(g, new BlockState(modelController.getActiveBlock()));
+        uiController.render(g, modelController.getActiveBlock());
     }
 }

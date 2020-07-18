@@ -20,7 +20,9 @@ public class SimpleWindow implements Window {
 
     @Override
     public void render(Graphics g) {
-
+        g.drawLine(leftEdge, topEdge, leftEdge, height);
+        g.drawLine(leftEdge + width, topEdge, leftEdge + width, height);
+        content.render(g);
     }
 
     @Override

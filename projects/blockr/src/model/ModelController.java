@@ -28,7 +28,7 @@ public class ModelController{
     public ModelController(GameWorldType worldType){
         //palette left, program middle, grid right
         palette = new ModelPalette(worldType.getSupportedActions(), worldType.getSupportedPredicates(), this);
-        pArea = new ModelProgramArea(null);
+        pArea = new ModelProgramArea(this);
         this.gameWorld = worldType.newWorldInstance();
         programRunner = new ProgramRunner(this.gameWorld);
     }

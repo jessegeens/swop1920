@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.awt.*;
 
 import main.MyCanvasWindow;
+import model.blocks.ModelBlock;
 import ui.window.Content;
 import ui.window.SimpleWindow;
 import ui.window.VerticalScrollbarDecorator;
@@ -20,13 +21,13 @@ public class UIController {
 
     public final static int PALETTEWIDTH = 300;
     public final static int PROGRAMAREAWIDTH = 500;
-    public final static int WINDOWHEIGHT = 900;
+    public final static int WINDOWHEIGHT = 1000;
 
 
     // Constructor
     public UIController(ModelProgramArea pArea, ModelPalette palette){
         this.palette = new VerticalScrollbarDecorator(new SimpleWindow(0,0, PALETTEWIDTH, WINDOWHEIGHT, palette));
-        this.programArea = new VerticalScrollbarDecorator(new SimpleWindow(PALETTEWIDTH, 0, PROGRAMAREAWIDTH, WINDOWHEIGHT, pArea));
+        this.programArea = new VerticalScrollbarDecorator(new SimpleWindow(PALETTEWIDTH + VerticalScrollbarDecorator.SCROLLBARWIDTH, 0, PALETTEWIDTH + PROGRAMAREAWIDTH + VerticalScrollbarDecorator.SCROLLBARWIDTH, WINDOWHEIGHT, pArea));
     }
 
     /**
@@ -35,11 +36,13 @@ public class UIController {
      * @param active the block states that need to be rendered
      * @author Oberon Swings
      */
-    public void render(Graphics g, BlockState active){
+    public void render(Graphics g, ModelBlock active){
         palette.render(g);
         programArea.render(g);
-        UIBlock.render(g, active);
-        this.renderUI(g);
+        if (active != null){
+            UIBlock.render(g, new BlockState(active));
+        }
+        //this.renderUI(g);
 //        for (BlockState block : blocks){
 //            uiBlock.render(g, block);
 //        }
@@ -55,8 +58,8 @@ public class UIController {
         g.drawLine(PALETTEWIDTH + PROGRAMAREAWIDTH, 0, PALETTEWIDTH + PROGRAMAREAWIDTH, MyCanvasWindow.HEIGHT);
     }
 
-    public ArrayList<Content> getContent(){
-        ArrayList<Content> contents = new ArrayList<>();
-        return contents;
+    public void handleMouseEvent(int id, int x, int y){
+        if (x < PALETTEWIDTH + VerticalScrollbarDecorator.SCROLLBARWIDTH) palette.handleMouseEvent(id, x, y);
+        else programArea.handleMouseEvent(id, x, y);
     }
 }

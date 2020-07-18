@@ -1,5 +1,7 @@
 package ui.window;
 
+import ui.UIController;
+
 import java.awt.*;
 
 public class VerticalScrollbarDecorator implements Window {
@@ -14,6 +16,7 @@ public class VerticalScrollbarDecorator implements Window {
 
     public VerticalScrollbarDecorator(Window windowToDecorate) {
         this.windowToDecorate = windowToDecorate;
+        this.verticaleOffset = 0;
     }
 
     private boolean onScrollBar(int x, int y){
@@ -41,6 +44,7 @@ public class VerticalScrollbarDecorator implements Window {
     }
 
     public float getRelativeHeight(){
+        if (contentFitsWindow()) return 1;
         return (float)(windowToDecorate.getHeigth()/(windowToDecorate.getContent().getHeight() + Content.MARGE));
     }
 
@@ -90,7 +94,7 @@ public class VerticalScrollbarDecorator implements Window {
 
     @Override
     public void handleMouseEvent(int id, int x, int y) {
-        if(x > windowToDecorate.getLeftEdge() + windowToDecorate.getWidth()){
+        if(x > windowToDecorate.getLeftEdge() + windowToDecorate.getWidth() && scrollActive){
             switch(id){
                 case 501: //MOUSE_PRESSED
                     if (onScrollBar(x, y)) {

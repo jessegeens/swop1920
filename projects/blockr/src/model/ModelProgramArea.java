@@ -212,8 +212,8 @@ public class ModelProgramArea implements Content {
     }
 
     @Override
-    public void onDrag(int x1, int y1, int x2, int y2) {
-        ProgramLocation location = new ProgramLocation(x2, y2);
+    public void onDrag(int x, int y) {
+        ProgramLocation location = new ProgramLocation(x, y);
         modelController.drag(location);
     }
 

@@ -11,6 +11,8 @@ public interface Window {
     int getHeigth();
     int getWidth();
 
+    Content getContent();
+
     void handleMouseEvent(int id, int x, int y);
 
 

@@ -18,10 +18,6 @@ public class SimpleWindow implements Window {
         this.content = content;
     }
 
-    public boolean contentFitsWindow(){
-        return content.getHeight() + Content.MARGE < height;
-    }
-
     @Override
     public void render(Graphics g) {
 
@@ -48,7 +44,24 @@ public class SimpleWindow implements Window {
     }
 
     @Override
-    public void handleMouseEvent(int id, int x, int y) {
+    public Content getContent() {
+        return content;
+    }
 
+    @Override
+    public void handleMouseEvent(int id, int x, int y) {
+        switch(id){
+            case 501: //MOUSE_PRESSED
+                content.onClick(x, y);
+                break;
+            case 502: //MOUSE_RELEASED
+                content.onRelease(x, y);
+                break;
+            case 506: //MOUSE_DRAGGED
+                content.onDrag(x, y);
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -15,7 +15,6 @@ import model.*;
  */
 public class UIController {
 
-    private static UIController instance;
     private VerticalScrollbarDecorator palette;
     private VerticalScrollbarDecorator programArea;
 

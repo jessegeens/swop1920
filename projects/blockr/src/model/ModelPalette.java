@@ -1,11 +1,13 @@
 package model;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 
 import gameworldapi.ActionType;
 import gameworldapi.PredicateType;
 import model.blocks.*;
+import ui.BlockState;
 import ui.UIBlock;
 import ui.window.Content;
 import utilities.ProgramLocation;
@@ -155,5 +157,13 @@ public class ModelPalette implements Content {
     public void onRelease(int x, int y) {
         ProgramLocation location = new ProgramLocation(x, y);
         modelController.releasePalette(location);
+    }
+
+    @Override
+    public void render(Graphics g) {
+        for (ModelBlock block : blocks){
+            BlockState blockState = new BlockState(block);
+            UIBlock.render(g, blockState);
+        }
     }
 }

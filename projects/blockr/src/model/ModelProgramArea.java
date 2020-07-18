@@ -1,7 +1,10 @@
 package model;
 
+import java.awt.*;
 import java.util.ArrayList;
 
+import ui.BlockState;
+import ui.UIBlock;
 import ui.window.Content;
 import utilities.*;
 import model.blocks.*;
@@ -221,5 +224,13 @@ public class ModelProgramArea implements Content {
     public void onRelease(int x, int y) {
         ProgramLocation location = new ProgramLocation(x, y);
         modelController.releaseProgramArea(location);
+    }
+
+    @Override
+    public void render(Graphics g) {
+        for (ModelBlock block : blocks){
+            BlockState blockState = new BlockState(block);
+            UIBlock.render(g, blockState);
+        }
     }
 }

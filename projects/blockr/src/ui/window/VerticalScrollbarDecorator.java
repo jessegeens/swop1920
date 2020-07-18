@@ -50,7 +50,9 @@ public class VerticalScrollbarDecorator implements Window {
         g.fillRect(getLeftEdgeScrollBar(), getTopEdge(), SCROLLBARWIDTH, getHeigth());
         g.setColor(Color.DARK_GRAY);
         g.fillRect(getLeftEdgeScrollBar(), verticaleOffset, SCROLLBARWIDTH, getScrollbarHeight());
+        g.translate(0, -verticaleOffset); //I hope this makes the windowToDecorate render it's content according to the scrolled distance.
         windowToDecorate.render(g);
+        g.translate(0 , verticaleOffset); //This resets the graphics translation to normal, again I hope so.
     }
 
     private int getLeftEdgeScrollBar(){

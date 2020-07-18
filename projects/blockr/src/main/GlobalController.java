@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 import ui.*;
 import utilities.*;
@@ -107,6 +108,7 @@ public class GlobalController {
     public void render(Graphics g){
         ProgramLocation gridLocation = new ProgramLocation(UIController.PALETTEWIDTH + UIController.PROGRAMAREAWIDTH, 0);
         modelController.getGameWorld().render(g, gridLocation.getX(), gridLocation.getY());
-        uiController.render(g, modelController.getBlockStates());
+        //uiController.render(g, modelController.getBlockStates());
+        uiController.render(g, new BlockState(modelController.getActiveBlock()));
     }
 }

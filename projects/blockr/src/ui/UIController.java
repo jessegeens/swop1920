@@ -32,17 +32,17 @@ public class UIController {
     /**
      * Method to render the UI elements
      * @param g Graphics object
-     * @param blocks the block states that need to be rendered
+     * @param active the block states that need to be rendered
      * @author Oberon Swings
      */
-    public void render(Graphics g, ArrayList<BlockState> blocks){
+    public void render(Graphics g, BlockState active){
         palette.render(g);
         programArea.render(g);
-        UIBlock uiBlock = new UIBlock();
+        UIBlock.render(g, active);
         this.renderUI(g);
-        for (BlockState block : blocks){
-            uiBlock.render(g, block);
-        }
+//        for (BlockState block : blocks){
+//            uiBlock.render(g, block);
+//        }
     }
 
     /**

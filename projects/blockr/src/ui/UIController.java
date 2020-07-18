@@ -5,6 +5,7 @@ import java.awt.*;
 
 import main.MyCanvasWindow;
 import ui.window.Content;
+import ui.window.SimpleWindow;
 import ui.window.VerticalScrollbarDecorator;
 import utilities.*;
 import model.*;
@@ -20,17 +21,13 @@ public class UIController {
 
     public final static int PALETTEWIDTH = 300;
     public final static int PROGRAMAREAWIDTH = 500;
+    public final static int WINDOWHEIGHT = 900;
 
 
     // Constructor
-    private UIController(){
-    }
-
-    public static UIController getInstance() {
-        if (instance == null) {
-            instance = new UIController();
-        }
-        return instance;
+    public UIController(ModelProgramArea pArea, ModelPalette palette){
+        this.palette = new VerticalScrollbarDecorator(new SimpleWindow(0,0, PALETTEWIDTH, WINDOWHEIGHT, palette));
+        this.programArea = new VerticalScrollbarDecorator(new SimpleWindow(PALETTEWIDTH, 0, PROGRAMAREAWIDTH, WINDOWHEIGHT, pArea));
     }
 
     /**
@@ -40,6 +37,8 @@ public class UIController {
      * @author Oberon Swings
      */
     public void render(Graphics g, ArrayList<BlockState> blocks){
+        palette.render(g);
+        programArea.render(g);
         UIBlock uiBlock = new UIBlock();
         this.renderUI(g);
         for (BlockState block : blocks){

@@ -16,7 +16,7 @@ import utilities.*;
 public class ModelController{
 
     private ModelPalette palette;
-    private ModelProgramArea PArea;
+    private ModelProgramArea pArea;
     private ProgramRunner programRunner;
     private GameWorld gameWorld;
 
@@ -28,7 +28,7 @@ public class ModelController{
     public ModelController(GameWorldType worldType){
         //palette left, program middle, grid right
         palette = new ModelPalette(worldType.getSupportedActions(), worldType.getSupportedPredicates(), this);
-        PArea = new ModelProgramArea(null);
+        pArea = new ModelProgramArea(null);
         this.gameWorld = worldType.newWorldInstance();
         programRunner = new ProgramRunner(this.gameWorld);
     }
@@ -40,12 +40,12 @@ public class ModelController{
      *
      */
     public void startOrExecuteProgram(){
-        if (PArea.validExecutionState()){//Check if all blocks are connected, and if so execute.
+        if (pArea.validExecutionState()){//Check if all blocks are connected, and if so execute.
             if(programRunner.isRunning()){
                 programRunner.execute();
             } else {
-                if(PArea.getFirstBlock() != null)
-                    programRunner.initialise(PArea.getFirstBlock());
+                if(pArea.getFirstBlock() != null)
+                    programRunner.initialise(pArea.getFirstBlock());
             }
         }
     }
@@ -62,17 +62,17 @@ public class ModelController{
 
     public void selectPalette(ProgramLocation location) {
         active = palette.returnSelectedBlock(location);
-        palette.populateBlocks(PArea.getAllModelFunctionDefinitionBlock());
+        palette.populateBlocks(pArea.getAllModelFunctionDefinitionBlock());
         if (active != null) selectPosition = active.getPos();
     }
 
     public void selectProgramArea(ProgramLocation location) {
-        active = PArea.selectBlock(location);
+        active = pArea.selectBlock(location);
         this.programRunner.reset();
         if (active != null){
             selectPosition = active.getPos();
-            PArea.removePABlock(active);
-            LocationHandler.getInstance().updateLocationBlocks(PArea.getPABlocks());
+            pArea.removePABlock(active);
+            LocationHandler.getInstance().updateLocationBlocks(pArea.getPABlocks());
         }
     }
 
@@ -82,8 +82,8 @@ public class ModelController{
      */
     public void select(ProgramLocation location) {
         selectHelp(location);
-        if (active != null && LocationHandler.isInProgramArea(location)) PArea.removePABlock(active);
-        LocationHandler.getInstance().updateLocationBlocks(PArea.getPABlocks());
+        if (active != null && LocationHandler.isInProgramArea(location)) pArea.removePABlock(active);
+        LocationHandler.getInstance().updateLocationBlocks(pArea.getPABlocks());
     }
 
     /**
@@ -93,10 +93,10 @@ public class ModelController{
     private void selectHelp(ProgramLocation location) {
         if (LocationHandler.isInPalette(location)) {
             active = palette.returnSelectedBlock(location);
-            palette.populateBlocks(PArea.getAllModelFunctionDefinitionBlock());
+            palette.populateBlocks(pArea.getAllModelFunctionDefinitionBlock());
         }
         else if (LocationHandler.isInProgramArea(location)) {
-            active = PArea.selectBlock(location);
+            active = pArea.selectBlock(location);
             this.programRunner.reset();
         }
         if (active != null) selectPosition = active.getPos();
@@ -106,12 +106,12 @@ public class ModelController{
         addAction(location);
         if (active != null) {
             if (active instanceof ModelFunctionDefinitionBlock) {
-                PArea.deleteFunctionCallsById(((ModelFunctionDefinitionBlock) active).getId());
-                palette.updateFunctionCounter(PArea.getAllModelFunctionDefinitionBlock());
+                pArea.deleteFunctionCallsById(((ModelFunctionDefinitionBlock) active).getId());
+                palette.updateFunctionCounter(pArea.getAllModelFunctionDefinitionBlock());
             }
-            PArea.removePABlock(active);
+            pArea.removePABlock(active);
             active = null;
-            palette.populateBlocks(PArea.getAllModelFunctionDefinitionBlock());
+            palette.populateBlocks(pArea.getAllModelFunctionDefinitionBlock());
         }
         UndoRedoHandler.getInstance().removeRedoActions();
     }
@@ -120,13 +120,13 @@ public class ModelController{
         addAction(location);
         if (active != null) {
             programRunner.reset();
-            PArea.addAndConnectBlock(active, PArea.findClosestBlock(location, active));
+            pArea.addAndConnectBlock(active, pArea.findClosestBlock(location, active));
             if (active instanceof ModelFunctionDefinitionBlock) {
-                palette.populateBlocks(PArea.getAllModelFunctionDefinitionBlock());
+                palette.populateBlocks(pArea.getAllModelFunctionDefinitionBlock());
             }
             active = null;
         }
-        if (PArea.maxReached()) {
+        if (pArea.maxReached()) {
             palette.removeBlocks();
         }
         UndoRedoHandler.getInstance().removeRedoActions();
@@ -150,24 +150,24 @@ public class ModelController{
         if (LocationHandler.isInPalette(location)) {
             if (active != null) {
                 if (active instanceof ModelFunctionDefinitionBlock) {
-                    PArea.deleteFunctionCallsById(((ModelFunctionDefinitionBlock) active).getId());
-                    palette.updateFunctionCounter(PArea.getAllModelFunctionDefinitionBlock());
+                    pArea.deleteFunctionCallsById(((ModelFunctionDefinitionBlock) active).getId());
+                    palette.updateFunctionCounter(pArea.getAllModelFunctionDefinitionBlock());
                 }
-                PArea.removePABlock(active);
+                pArea.removePABlock(active);
                 active = null;
-                palette.populateBlocks(PArea.getAllModelFunctionDefinitionBlock());
+                palette.populateBlocks(pArea.getAllModelFunctionDefinitionBlock());
             }
         }
         else if (LocationHandler.isInProgramArea(location)) {
             if (active != null) {
                 programRunner.reset();
-                PArea.addAndConnectBlock(active, PArea.findClosestBlock(location, active));
+                pArea.addAndConnectBlock(active, pArea.findClosestBlock(location, active));
                 if (active instanceof ModelFunctionDefinitionBlock) {
-                    palette.populateBlocks(PArea.getAllModelFunctionDefinitionBlock());
+                    palette.populateBlocks(pArea.getAllModelFunctionDefinitionBlock());
                 }
                 active = null;
             }
-            if (PArea.maxReached()) {
+            if (pArea.maxReached()) {
                 palette.removeBlocks();
             }
         }
@@ -197,9 +197,9 @@ public class ModelController{
         else if (state instanceof BlockAction) {
             selectHelp(((BlockAction) state).getRelease());
             active = ((BlockAction) state).getBlock();
-            PArea.removePABlock(active);
+            pArea.removePABlock(active);
             releaseHelp(((BlockAction) state).getSelect());
-            LocationHandler.getInstance().updateLocationBlocks(PArea.getPABlocks());
+            LocationHandler.getInstance().updateLocationBlocks(pArea.getPABlocks());
         }
     }
 
@@ -212,9 +212,9 @@ public class ModelController{
         if (state instanceof BlockAction) {
             selectHelp(((BlockAction) state).getSelect());
             active = ((BlockAction) state).getBlock();
-            if(active != null) PArea.removePABlock(active);
+            if(active != null) pArea.removePABlock(active);
             releaseHelp(((BlockAction) state).getRelease());
-            LocationHandler.getInstance().updateLocationBlocks(PArea.getPABlocks());
+            LocationHandler.getInstance().updateLocationBlocks(pArea.getPABlocks());
         }
         else if (state instanceof ProgramState) {
             programRunner.setState((ProgramState) state);
@@ -268,7 +268,7 @@ public class ModelController{
      * @return all the blocks that are currently in the program area
      */
     public ArrayList<ModelBlock> getProgramAreaBlocks(){
-        return PArea.getPABlocks();
+        return pArea.getPABlocks();
     }
 
     /**
@@ -292,6 +292,12 @@ public class ModelController{
         return this.active;
     }
 
+    public ModelPalette getPalette(){
+        return this.palette;
+    }
 
+    public ModelProgramArea getPArea(){
+        return this.pArea;
+    }
 
 }

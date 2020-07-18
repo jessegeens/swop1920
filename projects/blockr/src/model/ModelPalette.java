@@ -13,7 +13,7 @@ import utilities.ProgramLocation;
 /**
  * Class representing the palette. Blocks will be dragged from the palette int the program area.
  */
-class ModelPalette implements Content {
+public class ModelPalette implements Content {
 
     private final ModelController modelController;
 

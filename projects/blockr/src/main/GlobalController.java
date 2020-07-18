@@ -15,10 +15,12 @@ public class GlobalController {
 
     //Controllers
     private ModelController modelController;
+    private UIController uiController;
 
     // Constructor
     public GlobalController(GameWorldType gameWorldType){
         this.modelController = new ModelController(gameWorldType);
+        this.uiController = new UIController(modelController.getPArea(), modelController.getPalette());
     }
     
     /**
@@ -105,6 +107,6 @@ public class GlobalController {
     public void render(Graphics g){
         ProgramLocation gridLocation = new ProgramLocation(UIController.PALETTEWIDTH + UIController.PROGRAMAREAWIDTH, 0);
         modelController.getGameWorld().render(g, gridLocation.getX(), gridLocation.getY());
-        UIController.getInstance().render(g, modelController.getBlockStates());
+        uiController.render(g, modelController.getBlockStates());
     }
 }

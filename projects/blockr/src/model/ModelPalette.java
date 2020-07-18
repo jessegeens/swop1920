@@ -7,12 +7,15 @@ import gameworldapi.ActionType;
 import gameworldapi.PredicateType;
 import model.blocks.*;
 import ui.UIBlock;
+import ui.window.Content;
 import utilities.ProgramLocation;
 
 /**
  * Class representing the palette. Blocks will be dragged from the palette int the program area.
  */
-class ModelPalette{
+class ModelPalette implements Content {
+
+    private final ModelController modelController;
 
     private final ArrayList<ActionType> actions;
     private final ArrayList<PredicateType> predicates;
@@ -21,9 +24,10 @@ class ModelPalette{
     private int functionCounter;
 
 
-    public ModelPalette(ArrayList<ActionType> actions, ArrayList<PredicateType> predicates){
+    public ModelPalette(ArrayList<ActionType> actions, ArrayList<PredicateType> predicates, ModelController modelController){
         this.actions = actions;
         this.predicates = predicates;
+        this.modelController = modelController;
         functionCounter = 0;
         populateBlocks();
     }
@@ -123,5 +127,33 @@ class ModelPalette{
     protected ArrayList<ModelBlock> getPaletteBlocks(){
         return blocks;
     }
-    
+
+    @Override
+    public int getHeight() {
+        int minY = 0;
+        int maxY = Integer.MIN_VALUE;
+        for (ModelBlock block : blocks){
+            if (block.getPos().getY() < minY) minY = block.getPos().getY();
+            if (block.getPos().getY() + block.getHeight() > maxY) maxY = block.getPos().getY() + block.getHeight();
+        }
+        return maxY - minY;
+    }
+
+    @Override
+    public void onClick(int x, int y) {
+        ProgramLocation location = new ProgramLocation(x, y);
+        modelController.selectPalette(location);
+    }
+
+    @Override
+    public void onDrag(int x1, int y1, int x2, int y2) {
+        ProgramLocation location = new ProgramLocation(x2, y2);
+        modelController.drag(location);
+    }
+
+    @Override
+    public void onRelease(int x, int y) {
+        ProgramLocation location = new ProgramLocation(x, y);
+        modelController.releasePalette(location);
+    }
 }

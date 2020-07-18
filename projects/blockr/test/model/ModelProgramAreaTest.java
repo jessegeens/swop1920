@@ -11,7 +11,7 @@ public class ModelProgramAreaTest {
 
     @Test
     public void addPABlock(){
-        ModelProgramArea area = new ModelProgramArea();
+        ModelProgramArea area = new ModelProgramArea(null);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), null);
         ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(400, 550), null);
         ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(400, 700), null);
@@ -27,7 +27,7 @@ public class ModelProgramAreaTest {
 
     @Test
     public void removePABlock(){
-        ModelProgramArea area = new ModelProgramArea();
+        ModelProgramArea area = new ModelProgramArea(null);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(400,400), null);
         ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(400, 480), null);
         ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(400, 560), null);
@@ -44,7 +44,7 @@ public class ModelProgramAreaTest {
 
     @Test
     public void removeWhileBlockCavity(){
-        ModelProgramArea area = new ModelProgramArea();
+        ModelProgramArea area = new ModelProgramArea(null);
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(400,400), false);
         ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(413, 443), null);
         ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(413, 523), null);
@@ -63,7 +63,7 @@ public class ModelProgramAreaTest {
 
     @Test
     public void addWhileBlockCavity(){
-        ModelProgramArea area = new ModelProgramArea();
+        ModelProgramArea area = new ModelProgramArea(null);
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(400,400), false);
         ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(413, 443), null);
         ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(413, 523), null);
@@ -79,7 +79,7 @@ public class ModelProgramAreaTest {
 
     @Test
     public void handleMouseDown(){
-        ModelProgramArea area = new ModelProgramArea();
+        ModelProgramArea area = new ModelProgramArea(null);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,100), null);
         area.addPABlock(forwardBlock);
         ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100, 100), null);
@@ -89,7 +89,7 @@ public class ModelProgramAreaTest {
 
     @Test
     public void handleMouseUp(){
-        ModelProgramArea area = new ModelProgramArea();
+        ModelProgramArea area = new ModelProgramArea(null);
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,20), null);
         ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(100, 180), null);
@@ -103,7 +103,7 @@ public class ModelProgramAreaTest {
 
     @Test
     public void handleMouseUpWhileWithCavity(){
-        ModelProgramArea area = new ModelProgramArea();
+        ModelProgramArea area = new ModelProgramArea(null);
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(90,20), null);
         ModelActionBlock leftBlock = new ModelActionBlock(new ProgramLocation(113, 143), null);
@@ -123,7 +123,7 @@ public class ModelProgramAreaTest {
 
     @Test
     public void getFirstBlock(){
-        ModelProgramArea area = new ModelProgramArea();
+        ModelProgramArea area = new ModelProgramArea(null);
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,20), null);
         ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(113, 143), null);
@@ -149,7 +149,7 @@ public class ModelProgramAreaTest {
 
     @Test
     public void maxReached(){
-        ModelProgramArea area = new ModelProgramArea();
+        ModelProgramArea area = new ModelProgramArea(null);
         ModelWhileIfBlock whileBlock = new ModelWhileIfBlock(new ProgramLocation(100,100), false);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,20), null);
         ModelActionBlock rightBlock = new ModelActionBlock(new ProgramLocation(113, 143), null);
@@ -185,7 +185,7 @@ public class ModelProgramAreaTest {
 
     @Test
     public void dragBlock(){
-        ModelProgramArea area = new ModelProgramArea();
+        ModelProgramArea area = new ModelProgramArea(null);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,20), null);
         area.addPABlock(forwardBlock);
         area.dragBlock(forwardBlock, new ProgramLocation(250, 300));

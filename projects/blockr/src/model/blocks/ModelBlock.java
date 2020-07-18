@@ -81,7 +81,7 @@ public abstract class ModelBlock extends ModelElement implements java.lang.Clone
      * @return the height of the block.
      * @author Oberon Swings
      */
-    int getHeight() {
+    public int getHeight() {
 		if (this instanceof ModelCavityBlock){
             return (((ModelCavityBlock)this).getCavityHeight() + UIBlock.STD_HEIGHT);
         }

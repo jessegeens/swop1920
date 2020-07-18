@@ -19,7 +19,7 @@ public class SimpleWindow implements Window {
     }
 
     public boolean contentFitsWindow(){
-        return content.getHeight() < height;
+        return content.getHeight() + Content.MARGE < height;
     }
 
     @Override

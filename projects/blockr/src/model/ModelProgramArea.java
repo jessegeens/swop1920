@@ -2,20 +2,23 @@ package model;
 
 import java.util.ArrayList;
 
-import ui.UIBlock;
+import ui.window.Content;
 import utilities.*;
 import model.blocks.*;
 
 /**
  * Class representing the Program Window where the blocks will be set.
  */
-public class ModelProgramArea{
+public class ModelProgramArea implements Content {
+
+    private final ModelController modelController;
 
     private final int MAX_BLOCKS = 15;
     private ArrayList<ModelBlock> blocks;
 
     // Constructor
-    public ModelProgramArea(){
+    public ModelProgramArea(ModelController modelController){
+        this.modelController = modelController;
         blocks = new ArrayList<ModelBlock>();
     }
 
@@ -189,5 +192,34 @@ public class ModelProgramArea{
         for(ModelBlock block: toBeReturned){
             removePABlock(block);
         }
+    }
+
+    @Override
+    public int getHeight() {
+        int minY = 0;
+        int maxY = Integer.MIN_VALUE;
+        for (ModelBlock block : blocks){
+            if (block.getPos().getY() < minY) minY = block.getPos().getY();
+            if (block.getPos().getY() + block.getHeight() > maxY) maxY = block.getPos().getY() + block.getHeight();
+        }
+        return maxY - minY;
+    }
+
+    @Override
+    public void onClick(int x, int y) {
+        ProgramLocation location = new ProgramLocation(x, y);
+        modelController.selectProgramArea(location);
+    }
+
+    @Override
+    public void onDrag(int x1, int y1, int x2, int y2) {
+        ProgramLocation location = new ProgramLocation(x2, y2);
+        modelController.drag(location);
+    }
+
+    @Override
+    public void onRelease(int x, int y) {
+        ProgramLocation location = new ProgramLocation(x, y);
+        modelController.releaseProgramArea(location);
     }
 }

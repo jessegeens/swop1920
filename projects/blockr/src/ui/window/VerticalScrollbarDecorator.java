@@ -18,35 +18,64 @@ public class VerticalScrollbarDecorator implements Window {
         this.verticaleOffset = 0;
     }
 
+    /**
+     * @param x coordinate of location
+     * @param y coordinate of location
+     * @return true if location is not left of scrollbar, not above and not below scrollbar, false otherwise.
+     */
     private boolean onScrollBar(int x, int y){
         if (leftOfScrollBar(x, y)) return false;
         if (contentFitsWindow()) return true;
         return (!(underScrollBar(x, y) || aboveScrollBar(x, y)));
     }
 
+    /**
+     * @param x coordinate of location
+     * @param y coordinate of location
+     * @return true if not left of scrollbar and location is above the scrollbar, false otherwise
+     */
     private boolean aboveScrollBar(int x, int y){
         if (leftOfScrollBar(x, y)) return false;
         return y < verticaleOffset * getRelativeFraction();
     }
 
+    /**
+     * @param x coordinate of location
+     * @param y coordinate of location
+     * @return true if not left of scrollbar and location is underneath the scrollbar, false otherwise
+     */
     private boolean underScrollBar(int x, int y){
         if (leftOfScrollBar(x, y)) return false;
         return y > (verticaleOffset + getHeight()) * getRelativeFraction();
     }
 
+    /**
+     * @param x coordinate of location
+     * @param y coordinate of location
+     * @return true if location is left of scrollbar, false otherwise
+     */
     private boolean leftOfScrollBar(int x, int y){
         return (x < windowToDecorate.getX() + windowToDecorate.getWidth());
     }
 
+    /**
+     * @return true if the content height is smaller than the window height, false otherwise
+     */
     public boolean contentFitsWindow(){
         return windowToDecorate.getContent().getHeight() + MARGE < windowToDecorate.getHeight();
     }
 
+    /**
+     * @return the fraction of the window height divided by the content height
+     */
     public float getRelativeFraction(){
         if (contentFitsWindow()) return 1;
         return ((float)windowToDecorate.getHeight()/(windowToDecorate.getContent().getHeight() + MARGE));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void render(Graphics g) {
         g.setColor(Color.LIGHT_GRAY);
@@ -58,39 +87,63 @@ public class VerticalScrollbarDecorator implements Window {
         g.translate(0 , verticaleOffset); //This resets the graphics translation to normal, again I hope so.
     }
 
+    /**
+     * @return x coordinate of the left edge of the scrollbar
+     */
     private int getLeftEdgeScrollBar(){
         return getX() + getWidth() - SCROLLBARWIDTH;
     }
 
+    /**
+     * @return height of scrollbar
+     */
     private int getScrollbarHeight(){
         return (int)(getHeight() * getRelativeFraction());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getY() {
         return windowToDecorate.getY();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getX() {
         return windowToDecorate.getX();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getHeight() {
         return windowToDecorate.getHeight();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getWidth() {
         return windowToDecorate.getWidth() + SCROLLBARWIDTH;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Content getContent() {
         return windowToDecorate.getContent();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void handleMouseEvent(int id, int x, int y) {
         if(x > windowToDecorate.getX() + windowToDecorate.getWidth() || scrollActive){
@@ -123,6 +176,9 @@ public class VerticalScrollbarDecorator implements Window {
         }
     }
 
+    /**
+     * deactives the scroll functionality
+     */
     public void deactivateScroll(){
         scrollActive = false;
     }

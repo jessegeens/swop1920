@@ -39,6 +39,12 @@ public class UIController {
         programArea.render(g);
     }
 
+    /**
+     * Delegates the contents of the controller to handle their own events.
+     * @param id of the mouseEvent
+     * @param x coordinate of the event
+     * @param y coordinate of the event
+     */
     public void handleMouseEvent(int id, int x, int y){
         if (x < PALETTEWIDTH + VerticalScrollbarDecorator.SCROLLBARWIDTH) {
             palette.handleMouseEvent(id, x, y);

@@ -62,12 +62,20 @@ public class ModelController{
         programRunner.reset();
     }
 
+    /**
+     * Select event in the palette
+     * @param location where the select event in the palette happened
+     */
     public void selectPalette(ProgramLocation location) {
         active = palette.returnSelectedBlock(location);
         palette.populateBlocks(pArea.getAllModelFunctionDefinitionBlock());
         if (active != null) selectPosition = active.getPos();
     }
 
+    /**
+     * Select event in the programArea
+     * @param location where the select event in the programArea happened
+     */
     public void selectProgramArea(ProgramLocation location) {
         active = pArea.selectBlock(location);
         this.programRunner.reset();
@@ -104,6 +112,10 @@ public class ModelController{
         if (active != null) selectPosition = active.getPos();
     }
 
+    /**
+     * Release event in the palette
+     * @param location where the release event in the palette happened
+     */
     public void releasePalette(ProgramLocation location) {
         addAction(location);
         if (active != null) {
@@ -118,6 +130,10 @@ public class ModelController{
         UndoRedoHandler.getInstance().removeRedoActions();
     }
 
+    /**
+     * Release event in the programArea
+     * @param location The location where the release event happened
+     */
     public void releaseProgramArea(ProgramLocation location){
         addAction(location);
         if (active != null) {
@@ -287,13 +303,16 @@ public class ModelController{
     }
 
     /**
-     * Method just for testing
      * @return active
      */
     public ModelBlock getActiveBlock() {
         return this.active;
     }
 
+    /**
+     *
+     * @return an Arraylist of contents that the controller controls.
+     */
     public ArrayList<Content> getContent(){
         ArrayList<Content> contents = new ArrayList<Content>();
         contents.add(palette);

@@ -197,6 +197,9 @@ public class ModelProgramArea implements Content {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getHeight() {
         int minY = 0;
@@ -208,24 +211,36 @@ public class ModelProgramArea implements Content {
         return maxY - minY;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onClick(int x, int y) {
         ProgramLocation location = new ProgramLocation(x, y);
         modelController.selectProgramArea(location);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onDrag(int x, int y) {
         ProgramLocation location = new ProgramLocation(x, y);
         modelController.drag(location);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onRelease(int x, int y) {
         ProgramLocation location = new ProgramLocation(x, y);
         modelController.releaseProgramArea(location);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void render(Graphics g) {
         if (modelController.getActiveBlock() != null && LocationHandler.isInProgramArea(modelController.getActiveBlock().getPos())){

@@ -130,6 +130,9 @@ public class ModelPalette implements Content {
         return blocks;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getHeight() {
         int minY = 0;
@@ -141,24 +144,36 @@ public class ModelPalette implements Content {
         return maxY - minY;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onClick(int x, int y) {
         ProgramLocation location = new ProgramLocation(x, y);
         modelController.selectPalette(location);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onDrag(int x, int y) {
         ProgramLocation location = new ProgramLocation(x, y);
         modelController.drag(location);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onRelease(int x, int y) {
         ProgramLocation location = new ProgramLocation(x, y);
         modelController.releasePalette(location);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void render(Graphics g) {
         if (modelController.getActiveBlock() != null && LocationHandler.isInPalette(modelController.getActiveBlock().getPos())){

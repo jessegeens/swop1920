@@ -162,7 +162,7 @@ public class VerticalScrollbarDecorator implements Window {
                     break;
                 case 506: //MOUSE_DRAGGED
                     if(scrollActive){
-                        verticaleOffset += y - prevY;
+                        verticaleOffset += (y - prevY)/getRelativeFraction();
                         prevY = y;
                     }
                     break;

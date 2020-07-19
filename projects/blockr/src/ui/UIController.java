@@ -25,8 +25,8 @@ public class UIController {
 
     // Constructor
     public UIController(ArrayList<Content> content){
-        this.palette = new VerticalScrollbarDecorator(new SimpleWindow(0,0, PALETTEWIDTH, WINDOWHEIGHT, content.get(0)));
-        this.programArea = new VerticalScrollbarDecorator(new SimpleWindow(PALETTEWIDTH + VerticalScrollbarDecorator.SCROLLBARWIDTH, 0, PROGRAMAREAWIDTH, WINDOWHEIGHT, content.get(1)));
+        this.palette = new VerticalScrollbarDecorator(new SimpleWindow(0,0, PALETTEWIDTH - VerticalScrollbarDecorator.SCROLLBARWIDTH, WINDOWHEIGHT, content.get(0)));
+        this.programArea = new VerticalScrollbarDecorator(new SimpleWindow(PALETTEWIDTH, 0, PROGRAMAREAWIDTH - VerticalScrollbarDecorator.SCROLLBARWIDTH, WINDOWHEIGHT, content.get(1)));
     }
 
     /**

@@ -89,7 +89,7 @@ public class GlobalController {
      * @param g the graphics object which the rendering uses
      */
     public void render(Graphics g){
-        ProgramLocation gridLocation = new ProgramLocation(UIController.PALETTEWIDTH + UIController.PROGRAMAREAWIDTH + 2* VerticalScrollbarDecorator.SCROLLBARWIDTH, 0);
+        ProgramLocation gridLocation = new ProgramLocation(UIController.PALETTEWIDTH + UIController.PROGRAMAREAWIDTH, 0);
         modelController.getGameWorld().render(g, gridLocation.getX(), gridLocation.getY());
         uiController.render(g);
     }

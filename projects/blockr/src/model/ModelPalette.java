@@ -161,6 +161,10 @@ public class ModelPalette implements Content {
 
     @Override
     public void render(Graphics g) {
+        if (modelController.getActiveBlock() != null && LocationHandler.isInPalette(modelController.getActiveBlock().getPos())){
+            BlockState blockState = new BlockState(modelController.getActiveBlock());
+            UIBlock.render(g, blockState);
+        }
         for (ModelBlock block : blocks){
             BlockState blockState = new BlockState(block);
             UIBlock.render(g, blockState);

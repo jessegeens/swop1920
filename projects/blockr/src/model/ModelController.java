@@ -1,11 +1,13 @@
 package model;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import gameworldapi.GameWorld;
 import gameworldapi.GameWorldType;
 import model.blocks.ModelBlock;
 import model.blocks.ModelFunctionDefinitionBlock;
 import ui.BlockState;
+import ui.window.Content;
 import utilities.*;
 
 
@@ -292,12 +294,10 @@ public class ModelController{
         return this.active;
     }
 
-    public ModelPalette getPalette(){
-        return this.palette;
+    public ArrayList<Content> getContent(){
+        ArrayList<Content> contents = new ArrayList<Content>();
+        contents.add(palette);
+        contents.add(pArea);
+        return contents;
     }
-
-    public ModelProgramArea getPArea(){
-        return this.pArea;
-    }
-
 }

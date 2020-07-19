@@ -1,16 +1,15 @@
 package ui.window;
 
-import ui.UIController;
-
 import java.awt.*;
 
 public class VerticalScrollbarDecorator implements Window {
 
     public static final int SCROLLBARWIDTH = 20;
     public static final int PAGESIZE = 30;
+    public static final int MARGE = 50;
 
     private Window windowToDecorate;
-    private int verticaleOffset;
+    private int verticaleOffset; //The amount of vertical pixels of the content that are above the top edge of the window.
     private boolean scrollActive;
     private int prevY;
 
@@ -27,59 +26,59 @@ public class VerticalScrollbarDecorator implements Window {
 
     private boolean aboveScrollBar(int x, int y){
         if (leftOfScrollBar(x, y)) return false;
-        return y < verticaleOffset;
+        return y < verticaleOffset * getRelativeFraction();
     }
 
     private boolean underScrollBar(int x, int y){
         if (leftOfScrollBar(x, y)) return false;
-        return y > verticaleOffset + getHeigth()*getRelativeHeight();
+        return y > (verticaleOffset + getHeight()) * getRelativeFraction();
     }
 
     private boolean leftOfScrollBar(int x, int y){
-        return (x < windowToDecorate.getLeftEdge() + windowToDecorate.getWidth());
+        return (x < windowToDecorate.getX() + windowToDecorate.getWidth());
     }
 
     public boolean contentFitsWindow(){
-        return windowToDecorate.getContent().getHeight() + Content.MARGE < windowToDecorate.getHeigth();
+        return windowToDecorate.getContent().getHeight() + MARGE < windowToDecorate.getHeight();
     }
 
-    public float getRelativeHeight(){
+    public float getRelativeFraction(){
         if (contentFitsWindow()) return 1;
-        return (float)(windowToDecorate.getHeigth()/(windowToDecorate.getContent().getHeight() + Content.MARGE));
+        return ((float)windowToDecorate.getHeight()/(windowToDecorate.getContent().getHeight() + MARGE));
     }
 
     @Override
     public void render(Graphics g) {
         g.setColor(Color.LIGHT_GRAY);
-        g.fillRect(getLeftEdgeScrollBar(), getTopEdge(), SCROLLBARWIDTH, getHeigth());
+        g.fillRect(getLeftEdgeScrollBar(), getY(), SCROLLBARWIDTH, getHeight());
         g.setColor(Color.DARK_GRAY);
-        g.fillRect(getLeftEdgeScrollBar(), verticaleOffset, SCROLLBARWIDTH, getScrollbarHeight());
+        g.fillRect(getLeftEdgeScrollBar(), (int)(verticaleOffset * getRelativeFraction()), SCROLLBARWIDTH, getScrollbarHeight());
         g.translate(0, -verticaleOffset); //I hope this makes the windowToDecorate render it's content according to the scrolled distance.
         windowToDecorate.render(g);
         g.translate(0 , verticaleOffset); //This resets the graphics translation to normal, again I hope so.
     }
 
     private int getLeftEdgeScrollBar(){
-        return getLeftEdge() + getWidth() - SCROLLBARWIDTH;
+        return getX() + getWidth() - SCROLLBARWIDTH;
     }
 
     private int getScrollbarHeight(){
-        return (int)(getHeigth()*getRelativeHeight());
+        return (int)(getHeight() * getRelativeFraction());
     }
 
     @Override
-    public int getTopEdge() {
-        return windowToDecorate.getTopEdge();
+    public int getY() {
+        return windowToDecorate.getY();
     }
 
     @Override
-    public int getLeftEdge() {
-        return windowToDecorate.getLeftEdge();
+    public int getX() {
+        return windowToDecorate.getX();
     }
 
     @Override
-    public int getHeigth() {
-        return windowToDecorate.getHeigth();
+    public int getHeight() {
+        return windowToDecorate.getHeight();
     }
 
     @Override
@@ -94,7 +93,7 @@ public class VerticalScrollbarDecorator implements Window {
 
     @Override
     public void handleMouseEvent(int id, int x, int y) {
-        if(x > windowToDecorate.getLeftEdge() + windowToDecorate.getWidth() && scrollActive){
+        if(x > windowToDecorate.getX() + windowToDecorate.getWidth() || scrollActive){
             switch(id){
                 case 501: //MOUSE_PRESSED
                     if (onScrollBar(x, y)) {
@@ -117,7 +116,14 @@ public class VerticalScrollbarDecorator implements Window {
                 default:
                     break;
             }
+            verticaleOffset = Math.max(0, Math.min(getContent().getHeight() - getHeight() + MARGE,verticaleOffset));
         }
-        else windowToDecorate.handleMouseEvent(id, x, y);
+        else{
+            windowToDecorate.handleMouseEvent(id, x, y + verticaleOffset); //The event is translated according to the scrolled distance.
+        }
+    }
+
+    public void deactivateScroll(){
+        scrollActive = false;
     }
 }

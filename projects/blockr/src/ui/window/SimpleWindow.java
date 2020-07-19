@@ -4,15 +4,15 @@ import java.awt.*;
 
 public class SimpleWindow implements Window {
 
-    private int topEdge;
-    private int leftEdge;
+    private int y;
+    private int x;
     private int width;
     private int height;
     private Content content;
 
     public SimpleWindow(int x, int y, int width, int height, Content content) {
-        this.topEdge = x;
-        this.leftEdge = y;
+        this.y = y;
+        this.x = x;
         this.width = width;
         this.height = height;
         this.content = content;
@@ -20,23 +20,23 @@ public class SimpleWindow implements Window {
 
     @Override
     public void render(Graphics g) {
-        g.drawLine(leftEdge, topEdge, leftEdge, height);
-        g.drawLine(leftEdge + width, topEdge, leftEdge + width, height);
+        g.drawLine(x, y, x, height);
+        g.drawLine(x + width, y, x + width, height);
         content.render(g);
     }
 
     @Override
-    public int getTopEdge() {
-        return topEdge;
+    public int getY() {
+        return y;
     }
 
     @Override
-    public int getLeftEdge() {
-        return leftEdge;
+    public int getX() {
+        return x;
     }
 
     @Override
-    public int getHeigth() {
+    public int getHeight() {
         return height;
     }
 

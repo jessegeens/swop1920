@@ -1,7 +1,6 @@
 package main;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 import ui.*;
 import ui.window.VerticalScrollbarDecorator;
@@ -22,7 +21,7 @@ public class GlobalController {
     // Constructor
     public GlobalController(GameWorldType gameWorldType){
         this.modelController = new ModelController(gameWorldType);
-        this.uiController = new UIController(modelController.getPArea(), modelController.getPalette());
+        this.uiController = new UIController(modelController.getContent());
     }
     
     /**
@@ -41,24 +40,6 @@ public class GlobalController {
      */
     public void handleMouseEvent(int id, int x, int y, int clickCount){
         uiController.handleMouseEvent(id, x, y);
-        ProgramLocation eventWindowLocation = new ProgramLocation(x,y);
-        switch(id){
-            case 501: //MOUSE_PRESSED
-                //return the topmost active block if one is in the click location
-                //you remove it from the local list in PArea until mouseup
-                //this.modelController.select(eventWindowLocation);
-                //modelController.select(eventWindowLocation);
-                break;
-            case 502: //MOUSE_RELEASED
-                //this.modelController.release(eventWindowLocation);
-                //modelController.release(eventWindowLocation);
-                break;
-            case 506: //MOUSE_DRAGGED
-                //this.modelController.drag(eventWindowLocation);
-                break;
-            default:
-                break;
-        }
     }
 
     /**
@@ -110,7 +91,6 @@ public class GlobalController {
     public void render(Graphics g){
         ProgramLocation gridLocation = new ProgramLocation(UIController.PALETTEWIDTH + UIController.PROGRAMAREAWIDTH + 2* VerticalScrollbarDecorator.SCROLLBARWIDTH, 0);
         modelController.getGameWorld().render(g, gridLocation.getX(), gridLocation.getY());
-        //uiController.render(g, modelController.getBlockStates());
-        uiController.render(g, modelController.getActiveBlock());
+        uiController.render(g);
     }
 }

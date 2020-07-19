@@ -6,9 +6,9 @@ public interface Window {
 
     void render(Graphics g);
 
-    int getTopEdge();
-    int getLeftEdge();
-    int getHeigth();
+    int getY();
+    int getX();
+    int getHeight();
     int getWidth();
 
     Content getContent();

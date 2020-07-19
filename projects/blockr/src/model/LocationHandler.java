@@ -212,8 +212,7 @@ public class LocationHandler {
      * @return ProgramLocation in bounds
      */
     public ProgramLocation moveToInBounds(ProgramLocation eveWindowLocation){
-        if(eveWindowLocation.getX() > (MyCanvasWindow.WIDTH *2/3 - UIBlock.STD_WIDTH)) return new ProgramLocation(MyCanvasWindow.WIDTH *2/3 - UIBlock.STD_WIDTH, eveWindowLocation.getY());
-        if(eveWindowLocation.getY() > (MyCanvasWindow.HEIGHT - UIBlock.STD_HEIGHT)) return new ProgramLocation(eveWindowLocation.getX(), MyCanvasWindow.HEIGHT - UIBlock.STD_HEIGHT);
+        if(eveWindowLocation.getX() > (UIController.PALETTEWIDTH + UIController.PROGRAMAREAWIDTH - UIBlock.STD_WIDTH)) return new ProgramLocation(UIController.PALETTEWIDTH + UIController.PROGRAMAREAWIDTH - UIBlock.STD_WIDTH, eveWindowLocation.getY());
         return eveWindowLocation;
     }
 

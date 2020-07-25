@@ -9,13 +9,13 @@ import gameworldapi.PredicateType;
 import model.blocks.*;
 import ui.BlockState;
 import ui.UIBlock;
-import ui.window.Content;
+import ui.window.WindowContent;
 import utilities.ProgramLocation;
 
 /**
  * Class representing the palette. Blocks will be dragged from the palette int the program area.
  */
-public class ModelPalette implements Content {
+public class ModelPalette implements WindowContent {
 
     private final ModelController modelController;
 
@@ -126,7 +126,7 @@ public class ModelPalette implements Content {
     /**
      * Return all the blocks in the palette
      */
-    protected ArrayList<ModelBlock> getPaletteBlocks(){
+    protected ArrayList<ModelBlock> getBlocks(){
         return blocks;
     }
 
@@ -136,7 +136,7 @@ public class ModelPalette implements Content {
     @Override
     public int getHeight() {
         int minY = 0;
-        int maxY = Integer.MIN_VALUE;
+        int maxY = 0;
         for (ModelBlock block : blocks){
             if (block.getPos().getY() < minY) minY = block.getPos().getY();
             if (block.getPos().getY() + block.getHeight() > maxY) maxY = block.getPos().getY() + block.getHeight();
@@ -175,14 +175,16 @@ public class ModelPalette implements Content {
      * {@inheritDoc}
      */
     @Override
-    public void render(Graphics g) {
+    public ArrayList<Object> getDrawables() {
+        ArrayList<Object> drawables = new ArrayList<>();
         if (modelController.getActiveBlock() != null && LocationHandler.isInPalette(modelController.getActiveBlock().getPos())){
             BlockState blockState = new BlockState(modelController.getActiveBlock());
-            UIBlock.render(g, blockState);
+            drawables.add(blockState);
         }
         for (ModelBlock block : blocks){
             BlockState blockState = new BlockState(block);
-            UIBlock.render(g, blockState);
+            drawables.add(blockState);
         }
+        return drawables;
     }
 }

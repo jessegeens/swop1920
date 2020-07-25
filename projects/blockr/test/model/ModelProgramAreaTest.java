@@ -22,7 +22,7 @@ public class ModelProgramAreaTest {
         area.addPABlock(forwardBlock);
         area.addPABlock(leftBlock);
         area.addPABlock(rightBlock);
-        assertEquals(3, area.getPABlocks().size());
+        assertEquals(3, area.getBlocks().size());
     }
 
     @Test
@@ -58,7 +58,7 @@ public class ModelProgramAreaTest {
         rightBlock.setBottomPlug(whileBlock);
         whileBlock.setCavitySocket(rightBlock);
         area.removePABlock(whileBlock);
-        assertEquals(0,area.getPABlocks().size());
+        assertEquals(0,area.getBlocks().size());
     }
 
     @Test
@@ -74,7 +74,7 @@ public class ModelProgramAreaTest {
         rightBlock.setBottomPlug(whileBlock);
         whileBlock.setCavitySocket(rightBlock);
         area.addPABlock(whileBlock);
-        assertEquals(3,area.getPABlocks().size());
+        assertEquals(3,area.getBlocks().size());
     }
 
     @Test
@@ -188,7 +188,7 @@ public class ModelProgramAreaTest {
         ModelProgramArea area = new ModelProgramArea(null);
         ModelActionBlock forwardBlock = new ModelActionBlock(new ProgramLocation(100,20), null);
         area.addPABlock(forwardBlock);
-        area.dragBlock(forwardBlock, new ProgramLocation(250, 300));
+        //area.dragBlock(forwardBlock, new ProgramLocation(250, 300));
         assertEquals(new ProgramLocation(250, 300), forwardBlock.getPos());
     }
 }

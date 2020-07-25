@@ -1,6 +1,13 @@
 package ui.window;
 
+import gameworldapi.GameWorld;
+import ui.BlockState;
+import ui.UIBlock;
+import ui.UIController;
+import utilities.ProgramLocation;
+
 import java.awt.*;
+import java.util.ArrayList;
 
 public class SimpleWindow implements Window {
 
@@ -8,7 +15,7 @@ public class SimpleWindow implements Window {
     private int x;
     private int width;
     private int height;
-    private Content content;
+    private WindowContent windowContent;
 
     /**
      * Constructor
@@ -16,14 +23,14 @@ public class SimpleWindow implements Window {
      * @param y coordinate of window
      * @param width of window
      * @param height of window
-     * @param content of window
+     * @param windowContent of window
      */
-    public SimpleWindow(int x, int y, int width, int height, Content content) {
+    public SimpleWindow(int x, int y, int width, int height, WindowContent windowContent) {
         this.y = y;
         this.x = x;
         this.width = width;
         this.height = height;
-        this.content = content;
+        this.windowContent = windowContent;
     }
 
     /**
@@ -31,9 +38,16 @@ public class SimpleWindow implements Window {
      */
     @Override
     public void render(Graphics g) {
-        g.drawLine(x, y, x, height);
-        g.drawLine(x + width, y, x + width, height);
-        content.render(g);
+        ArrayList<Object> drawables = windowContent.getDrawables();
+        if (drawables.isEmpty()) return;
+        if (drawables.get(0) instanceof GameWorld){
+            ((GameWorld) drawables.get(0)).render(g);
+        }
+        else if (drawables.get(0) instanceof BlockState){
+            for (Object blockState : drawables){
+                if (blockState instanceof BlockState) UIBlock.render(g, (BlockState) blockState);
+            }
+        }
     }
 
     /**
@@ -72,8 +86,8 @@ public class SimpleWindow implements Window {
      * {@inheritDoc}
      */
     @Override
-    public Content getContent() {
-        return content;
+    public WindowContent getWindowContent() {
+        return windowContent;
     }
 
     /**
@@ -83,13 +97,13 @@ public class SimpleWindow implements Window {
     public void handleMouseEvent(int id, int x, int y) {
         switch(id){
             case 501: //MOUSE_PRESSED
-                content.onClick(x, y);
+                windowContent.onClick(x, y);
                 break;
             case 502: //MOUSE_RELEASED
-                content.onRelease(x, y);
+                windowContent.onRelease(x, y);
                 break;
             case 506: //MOUSE_DRAGGED
-                content.onDrag(x, y);
+                windowContent.onDrag(x, y);
                 break;
             default:
                 break;

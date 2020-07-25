@@ -1,13 +1,13 @@
 package model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import gameworldapi.GameWorld;
 import gameworldapi.GameWorldType;
 import model.blocks.ModelBlock;
 import model.blocks.ModelFunctionDefinitionBlock;
 import ui.BlockState;
-import ui.window.Content;
+import ui.window.SimpleContent;
+import ui.window.WindowContent;
 import utilities.*;
 
 
@@ -82,7 +82,7 @@ public class ModelController{
         if (active != null){
             selectPosition = active.getPos();
             pArea.removePABlock(active);
-            LocationHandler.getInstance().updateLocationBlocks(pArea.getPABlocks());
+            LocationHandler.getInstance().updateLocationBlocks(pArea.getBlocks());
         }
     }
 
@@ -93,7 +93,7 @@ public class ModelController{
     public void select(ProgramLocation location) {
         selectHelp(location);
         if (active != null && LocationHandler.isInProgramArea(location)) pArea.removePABlock(active);
-        LocationHandler.getInstance().updateLocationBlocks(pArea.getPABlocks());
+        LocationHandler.getInstance().updateLocationBlocks(pArea.getBlocks());
     }
 
     /**
@@ -217,7 +217,7 @@ public class ModelController{
             active = ((BlockAction) state).getBlock();
             pArea.removePABlock(active);
             releaseHelp(((BlockAction) state).getSelect());
-            LocationHandler.getInstance().updateLocationBlocks(pArea.getPABlocks());
+            LocationHandler.getInstance().updateLocationBlocks(pArea.getBlocks());
         }
     }
 
@@ -232,7 +232,7 @@ public class ModelController{
             active = ((BlockAction) state).getBlock();
             if(active != null) pArea.removePABlock(active);
             releaseHelp(((BlockAction) state).getRelease());
-            LocationHandler.getInstance().updateLocationBlocks(pArea.getPABlocks());
+            LocationHandler.getInstance().updateLocationBlocks(pArea.getBlocks());
         }
         else if (state instanceof ProgramState) {
             programRunner.setState((ProgramState) state);
@@ -278,7 +278,7 @@ public class ModelController{
      * @return all the blocks that are currently in the palette
      */
     public ArrayList<ModelBlock> getPaletteBlocks(){
-        return palette.getPaletteBlocks();
+        return palette.getBlocks();
     }
 
     /**
@@ -286,7 +286,7 @@ public class ModelController{
      * @return all the blocks that are currently in the program area
      */
     public ArrayList<ModelBlock> getProgramAreaBlocks(){
-        return pArea.getPABlocks();
+        return pArea.getBlocks();
     }
 
     /**
@@ -313,10 +313,14 @@ public class ModelController{
      *
      * @return an Arraylist of contents that the controller controls.
      */
-    public ArrayList<Content> getContent(){
-        ArrayList<Content> contents = new ArrayList<Content>();
-        contents.add(palette);
-        contents.add(pArea);
-        return contents;
+    public ArrayList<WindowContent> getContent(){
+        ArrayList<WindowContent> windowContents = new ArrayList<WindowContent>();
+        windowContents.add(palette);
+        windowContents.add(pArea);
+        ArrayList<Object> gameWorldDrawables = new ArrayList<>();
+        gameWorldDrawables.add(gameWorld);
+        SimpleContent gameWorldContent = new SimpleContent(gameWorld.getHeight(), gameWorldDrawables);
+        windowContents.add(gameWorldContent);
+        return windowContents;
     }
 }

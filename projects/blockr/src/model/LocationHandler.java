@@ -4,6 +4,7 @@ import main.MyCanvasWindow;
 import model.blocks.*;
 import ui.UIBlock;
 import ui.UIController;
+import ui.window.VerticalScrollbarDecorator;
 import utilities.*;
 import java.util.ArrayList;
 
@@ -28,7 +29,7 @@ public class LocationHandler {
      * @param location the location to be set
      */
     public void setLocationBlock(ModelBlock block, ProgramLocation location){
-        block.setPos(location);
+        block.setPos(moveToInBounds(location));
         if (block instanceof ModelCavityBlock){
             updateCavityBlocksLocations((ModelCavityBlock) block);
         }

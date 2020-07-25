@@ -3,30 +3,30 @@ package ui;
 import java.awt.*;
 import java.util.ArrayList;
 
-import main.MyCanvasWindow;
-import model.blocks.ModelBlock;
-import ui.window.Content;
+import ui.window.WindowContent;
 import ui.window.SimpleWindow;
 import ui.window.VerticalScrollbarDecorator;
-import model.*;
 
 /**
  * Class controlling the UI elements.
  */
 public class UIController {
 
-    private VerticalScrollbarDecorator palette;
-    private VerticalScrollbarDecorator programArea;
+    private VerticalScrollbarDecorator leftWindow;
+    private VerticalScrollbarDecorator middleWindow;
+    private VerticalScrollbarDecorator rightWindow;
 
     public final static int PALETTEWIDTH = 300;
     public final static int PROGRAMAREAWIDTH = 500;
+    public final static int GAMEWORLDWIDTH = 250;
     public final static int WINDOWHEIGHT = 900;
 
 
     // Constructor
-    public UIController(ArrayList<Content> content){
-        this.palette = new VerticalScrollbarDecorator(new SimpleWindow(0,0, PALETTEWIDTH - VerticalScrollbarDecorator.SCROLLBARWIDTH, WINDOWHEIGHT, content.get(0)));
-        this.programArea = new VerticalScrollbarDecorator(new SimpleWindow(PALETTEWIDTH, 0, PROGRAMAREAWIDTH - VerticalScrollbarDecorator.SCROLLBARWIDTH, WINDOWHEIGHT, content.get(1)));
+    public UIController(ArrayList<WindowContent> windowContent){
+        this.leftWindow = new VerticalScrollbarDecorator(new SimpleWindow(0,0, PALETTEWIDTH, WINDOWHEIGHT, windowContent.get(0)));
+        this.middleWindow = new VerticalScrollbarDecorator(new SimpleWindow(PALETTEWIDTH + VerticalScrollbarDecorator.SCROLLBARWIDTH, 0, PROGRAMAREAWIDTH, WINDOWHEIGHT, windowContent.get(1)));
+        this.rightWindow = new VerticalScrollbarDecorator(new SimpleWindow(PALETTEWIDTH + PROGRAMAREAWIDTH + 2*VerticalScrollbarDecorator.SCROLLBARWIDTH, 0, GAMEWORLDWIDTH, WINDOWHEIGHT, windowContent.get(2)));
     }
 
     /**
@@ -35,8 +35,9 @@ public class UIController {
      * @author Oberon Swings
      */
     public void render(Graphics g){
-        palette.render(g);
-        programArea.render(g);
+        leftWindow.render(g);
+        middleWindow.render(g);
+        rightWindow.render(g);
     }
 
     /**
@@ -47,12 +48,19 @@ public class UIController {
      */
     public void handleMouseEvent(int id, int x, int y){
         if (x < PALETTEWIDTH + VerticalScrollbarDecorator.SCROLLBARWIDTH) {
-            palette.handleMouseEvent(id, x, y);
-            programArea.deactivateScroll();
+            leftWindow.handleMouseEvent(id, x, y);
+            middleWindow.deactivateScroll();
+            rightWindow.deactivateScroll();
+        }
+        else if (x < PALETTEWIDTH + PROGRAMAREAWIDTH + 2*VerticalScrollbarDecorator.SCROLLBARWIDTH){
+            middleWindow.handleMouseEvent(id, x, y);
+            leftWindow.deactivateScroll();
+            rightWindow.deactivateScroll();
         }
         else {
-            programArea.handleMouseEvent(id, x, y);
-            palette.deactivateScroll();
+            rightWindow.handleMouseEvent(id, x, y);
+            middleWindow.deactivateScroll();
+            leftWindow.deactivateScroll();
         }
     }
 }

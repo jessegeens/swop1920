@@ -3,8 +3,6 @@ package main;
 import java.awt.*;
 
 import ui.*;
-import ui.window.VerticalScrollbarDecorator;
-import utilities.*;
 import model.*;
 import gameworldapi.*;
 
@@ -89,8 +87,6 @@ public class GlobalController {
      * @param g the graphics object which the rendering uses
      */
     public void render(Graphics g){
-        ProgramLocation gridLocation = new ProgramLocation(UIController.PALETTEWIDTH + UIController.PROGRAMAREAWIDTH, 0);
-        modelController.getGameWorld().render(g, gridLocation.getX(), gridLocation.getY());
         uiController.render(g);
     }
 }

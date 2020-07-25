@@ -71,11 +71,14 @@ public class RobotGameWorld implements GameWorld {
     /**
      * @author Jesse Geens
      * @param graphics Graphics object to draw on
-     * @param x x-coordinate of top-left corner position (in px) of the grid on the CanvasWindow
-     * @param y y-coordinate of top-left corner position (in px) of the grid on the CanvasWindow
      */
     @Override
-    public void render(Graphics graphics, int x, int y) {
-        uiController.render(graphics, ActionExecutor.getInstance().getState(), new GridLocation(x, y));
+    public void render(Graphics graphics) {
+        uiController.render(graphics, ActionExecutor.getInstance().getState(), new GridLocation(0, 0));
+    }
+
+    @Override
+    public int getHeight() {
+        return ActionExecutor.GRID_HEIGHT * UIController.CELL_SIZE;
     }
 }

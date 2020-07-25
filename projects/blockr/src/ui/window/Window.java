@@ -33,7 +33,7 @@ public interface Window {
     /**
      * @return the content
      */
-    Content getContent();
+    WindowContent getWindowContent();
 
     /**
      * Handle the mouse event in the window

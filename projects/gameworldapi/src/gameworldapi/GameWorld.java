@@ -68,15 +68,16 @@ public interface GameWorld {
     /**
      * This function triggers painting the
      * gameworld on the canvas window, using
-     * the given Graphics object. x and y
-     * denote the pixel location of the top
-     * left corner in the canvas window where
-     * the drawing should begin.
+     * the given Graphics object.
      * @param g the graphic
-     * @param x the x coordinate
-     * @param y the y coordinate
      * @author Jesse Geens
      */
-    void render(Graphics g, int x, int y);
+    void render(Graphics g);
+
+    /**
+     *
+     * @return the height which the gameworld takes up on the screen.
+     */
+    int getHeight();
 
 }

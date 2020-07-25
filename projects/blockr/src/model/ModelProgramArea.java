@@ -5,14 +5,14 @@ import java.util.ArrayList;
 
 import ui.BlockState;
 import ui.UIBlock;
-import ui.window.Content;
+import ui.window.WindowContent;
 import utilities.*;
 import model.blocks.*;
 
 /**
  * Class representing the Program Window where the blocks will be set.
  */
-public class ModelProgramArea implements Content {
+public class ModelProgramArea implements WindowContent {
 
     private final ModelController modelController;
 
@@ -29,7 +29,7 @@ public class ModelProgramArea implements Content {
      * 
      * @return a list of blocks in the window.
      */
-    public ArrayList<ModelBlock> getPABlocks() {
+    protected ArrayList<ModelBlock> getBlocks() {
         return this.blocks;
     }
 
@@ -110,7 +110,7 @@ public class ModelProgramArea implements Content {
      * @param closest the closest block to check
      */
     public void addAndConnectBlock(ModelBlock active, ModelBlock closest) {
-        if (!(this.getPABlocks().contains(active))) {
+        if (!(this.getBlocks().contains(active))) {
             this.addPABlock(active);
         }
         if (closest != null){
@@ -128,7 +128,7 @@ public class ModelProgramArea implements Content {
      * @author Oberon Swings
      */
     public void dragBlock(ModelBlock block, ProgramLocation location){
-        LocationHandler.getInstance().setLocationBlock(block, location);
+        LocationHandler.getInstance().setLocationBlock(block, LocationHandler.getInstance().moveToInBounds(location));
     }
 
     /**
@@ -203,7 +203,7 @@ public class ModelProgramArea implements Content {
     @Override
     public int getHeight() {
         int minY = 0;
-        int maxY = Integer.MIN_VALUE;
+        int maxY = 0;
         for (ModelBlock block : blocks){
             if (block.getPos().getY() < minY) minY = block.getPos().getY();
             if (block.getPos().getY() + block.getHeight() > maxY) maxY = block.getPos().getY() + block.getHeight();
@@ -242,14 +242,16 @@ public class ModelProgramArea implements Content {
      * {@inheritDoc}
      */
     @Override
-    public void render(Graphics g) {
+    public ArrayList<Object> getDrawables() {
+        ArrayList<Object> drawables = new ArrayList<>();
         if (modelController.getActiveBlock() != null && LocationHandler.isInProgramArea(modelController.getActiveBlock().getPos())){
             BlockState blockState = new BlockState(modelController.getActiveBlock());
-            UIBlock.render(g, blockState);
+            drawables.add(blockState);
         }
         for (ModelBlock block : blocks){
             BlockState blockState = new BlockState(block);
-            UIBlock.render(g, blockState);
+            drawables.add(blockState);
         }
+        return drawables;
     }
 }

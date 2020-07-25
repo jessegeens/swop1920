@@ -1,5 +1,8 @@
 package ui.window;
 
+import gameworldapi.GameWorld;
+import ui.UIController;
+
 import java.awt.*;
 
 public class VerticalScrollbarDecorator implements Window {
@@ -62,7 +65,7 @@ public class VerticalScrollbarDecorator implements Window {
      * @return true if the content height is smaller than the window height, false otherwise
      */
     public boolean contentFitsWindow(){
-        return windowToDecorate.getContent().getHeight() + MARGE < windowToDecorate.getHeight();
+        return windowToDecorate.getWindowContent().getHeight() + MARGE < windowToDecorate.getHeight();
     }
 
     /**
@@ -70,7 +73,7 @@ public class VerticalScrollbarDecorator implements Window {
      */
     public float getRelativeFraction(){
         if (contentFitsWindow()) return 1;
-        return ((float)windowToDecorate.getHeight()/(windowToDecorate.getContent().getHeight() + MARGE));
+        return ((float)windowToDecorate.getHeight()/(windowToDecorate.getWindowContent().getHeight() + MARGE));
     }
 
     /**
@@ -82,9 +85,14 @@ public class VerticalScrollbarDecorator implements Window {
         g.fillRect(getLeftEdgeScrollBar(), getY(), SCROLLBARWIDTH, getHeight());
         g.setColor(Color.DARK_GRAY);
         g.fillRect(getLeftEdgeScrollBar(), (int)(verticaleOffset * getRelativeFraction()), SCROLLBARWIDTH, getScrollbarHeight());
-        g.translate(0, -verticaleOffset); //I hope this makes the windowToDecorate render it's content according to the scrolled distance.
+        int horizontalOffset = 0;
+        if (!windowToDecorate.getWindowContent().getDrawables().isEmpty()
+                && windowToDecorate.getWindowContent().getDrawables().get(0) instanceof GameWorld) {
+            horizontalOffset = UIController.PALETTEWIDTH + UIController.PROGRAMAREAWIDTH + 2*SCROLLBARWIDTH;
+        }
+        g.translate(horizontalOffset, -verticaleOffset); //I hope this makes the windowToDecorate render it's content according to the scrolled distance.
         windowToDecorate.render(g);
-        g.translate(0 , verticaleOffset); //This resets the graphics translation to normal, again I hope so.
+        g.translate(horizontalOffset , verticaleOffset); //This resets the graphics translation to normal, again I hope so.
     }
 
     /**
@@ -137,8 +145,8 @@ public class VerticalScrollbarDecorator implements Window {
      * {@inheritDoc}
      */
     @Override
-    public Content getContent() {
-        return windowToDecorate.getContent();
+    public WindowContent getWindowContent() {
+        return windowToDecorate.getWindowContent();
     }
 
     /**
@@ -169,7 +177,8 @@ public class VerticalScrollbarDecorator implements Window {
                 default:
                     break;
             }
-            verticaleOffset = Math.max(0, Math.min(getContent().getHeight() - getHeight() + MARGE,verticaleOffset));
+            verticaleOffset = Math.max(0, Math.min(getWindowContent().getHeight() - getHeight() + MARGE,verticaleOffset));
+            if (getWindowContent().getHeight() == 0) verticaleOffset = 0;
         }
         else{
             windowToDecorate.handleMouseEvent(id, x, y + verticaleOffset); //The event is translated according to the scrolled distance.

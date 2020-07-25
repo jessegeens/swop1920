@@ -1,8 +1,9 @@
 package ui.window;
 
-import java.awt.*;
 
-public interface Content {
+import java.util.ArrayList;
+
+public interface WindowContent {
 
     /**
      *
@@ -32,9 +33,9 @@ public interface Content {
     void onRelease(int x, int y);
 
     /**
-     * renders the content
-     * @param g Graphics object
+     * Enables the content to communicate it's drawables to the window
+     * @return an arraylist of objects which should be able to be drawn by the window.
      */
-    void render(Graphics g);
+    ArrayList<Object> getDrawables();
 
 }

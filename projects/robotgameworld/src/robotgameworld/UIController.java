@@ -10,7 +10,7 @@ import robotgameworld.RobotGameWorldState;
 public class UIController {
 
     //Width and height of a cell in px
-    private final int CELL_SIZE = 50;
+    static final int CELL_SIZE = 50;
     
     // Constructor
     public UIController(){}

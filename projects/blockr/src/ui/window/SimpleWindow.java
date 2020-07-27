@@ -3,8 +3,6 @@ package ui.window;
 import gameworldapi.GameWorld;
 import ui.BlockState;
 import ui.UIBlock;
-import ui.UIController;
-import utilities.ProgramLocation;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -95,15 +93,16 @@ public class SimpleWindow implements Window {
      */
     @Override
     public void handleMouseEvent(int id, int x, int y) {
+        if (!(windowContent instanceof InteractableWindowContent)) return;
         switch(id){
             case 501: //MOUSE_PRESSED
-                windowContent.onClick(x, y);
+                ((InteractableWindowContent)windowContent).onClick(x, y);
                 break;
             case 502: //MOUSE_RELEASED
-                windowContent.onRelease(x, y);
+                ((InteractableWindowContent)windowContent).onRelease(x, y);
                 break;
             case 506: //MOUSE_DRAGGED
-                windowContent.onDrag(x, y);
+                ((InteractableWindowContent)windowContent).onDrag(x, y);
                 break;
             default:
                 break;

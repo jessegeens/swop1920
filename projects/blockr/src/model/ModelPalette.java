@@ -9,13 +9,13 @@ import gameworldapi.PredicateType;
 import model.blocks.*;
 import ui.BlockState;
 import ui.UIBlock;
-import ui.window.WindowContent;
+import ui.window.InteractableWindowContent;
 import utilities.ProgramLocation;
 
 /**
  * Class representing the palette. Blocks will be dragged from the palette int the program area.
  */
-public class ModelPalette implements WindowContent {
+public class ModelPalette implements InteractableWindowContent {
 
     private final ModelController modelController;
 

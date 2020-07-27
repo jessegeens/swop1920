@@ -1,18 +1,17 @@
 package model;
 
-import java.awt.*;
+
 import java.util.ArrayList;
 
 import ui.BlockState;
-import ui.UIBlock;
-import ui.window.WindowContent;
+import ui.window.InteractableWindowContent;
 import utilities.*;
 import model.blocks.*;
 
 /**
  * Class representing the Program Window where the blocks will be set.
  */
-public class ModelProgramArea implements WindowContent {
+public class ModelProgramArea implements InteractableWindowContent {
 
     private final ModelController modelController;
 

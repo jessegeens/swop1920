@@ -18,18 +18,6 @@ public class SimpleContent implements WindowContent {
     }
 
     @Override
-    public void onClick(int x, int y) {
-    }
-
-    @Override
-    public void onDrag(int x, int y) {
-    }
-
-    @Override
-    public void onRelease(int x, int y) {
-    }
-
-    @Override
     public ArrayList<Object> getDrawables() {
         return drawables;
     }

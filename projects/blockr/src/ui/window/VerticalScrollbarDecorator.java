@@ -89,6 +89,7 @@ public class VerticalScrollbarDecorator implements Window {
         if (!windowToDecorate.getWindowContent().getDrawables().isEmpty()
                 && windowToDecorate.getWindowContent().getDrawables().get(0) instanceof GameWorld) {
             horizontalOffset = UIController.PALETTEWIDTH + UIController.PROGRAMAREAWIDTH + 2*SCROLLBARWIDTH;
+            //We check the content drawables of the decorated window for their type. A gameworld is able to render itself, blockstates are rendered using the UIBlock.
         }
         g.translate(horizontalOffset, -verticaleOffset); //I hope this makes the windowToDecorate render it's content according to the scrolled distance.
         windowToDecorate.render(g);

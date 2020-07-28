@@ -19,7 +19,7 @@ public class UIController {
     public final static int PALETTEWIDTH = 300;
     public final static int PROGRAMAREAWIDTH = 500;
     public final static int GAMEWORLDWIDTH = 250;
-    public final static int WINDOWHEIGHT = 900;
+    public final static int WINDOWHEIGHT = 700;
 
 
     // Constructor

@@ -1,8 +1,5 @@
 package ui.window;
 
-import gameworldapi.GameWorld;
-import ui.UIController;
-
 import java.awt.*;
 
 public class VerticalScrollbarDecorator implements Window {
@@ -16,8 +13,11 @@ public class VerticalScrollbarDecorator implements Window {
     private boolean scrollActive;
     private int prevY;
 
-    public VerticalScrollbarDecorator(Window windowToDecorate) {
+    private int height;
+
+    public VerticalScrollbarDecorator(Window windowToDecorate, int height) {
         this.windowToDecorate = windowToDecorate;
+        this.height = height;
         this.verticaleOffset = 0;
     }
 
@@ -49,7 +49,7 @@ public class VerticalScrollbarDecorator implements Window {
      */
     private boolean underScrollBar(int x, int y){
         if (leftOfScrollBar(x, y)) return false;
-        return y > (verticaleOffset + getHeight()) * getRelativeFraction();
+        return y > (verticaleOffset + height * getRelativeFraction());
     }
 
     /**
@@ -65,7 +65,7 @@ public class VerticalScrollbarDecorator implements Window {
      * @return true if the content height is smaller than the window height, false otherwise
      */
     public boolean contentFitsWindow(){
-        return windowToDecorate.getWindowContent().getHeight() + MARGE < windowToDecorate.getHeight();
+        return (windowToDecorate.getHeight() + MARGE < height);
     }
 
     /**
@@ -73,7 +73,7 @@ public class VerticalScrollbarDecorator implements Window {
      */
     public float getRelativeFraction(){
         if (contentFitsWindow()) return 1;
-        return ((float)windowToDecorate.getHeight()/(windowToDecorate.getWindowContent().getHeight() + MARGE));
+        return ((float)height/(windowToDecorate.getHeight() + MARGE));
     }
 
     /**
@@ -85,15 +85,9 @@ public class VerticalScrollbarDecorator implements Window {
         g.fillRect(getLeftEdgeScrollBar(), getY(), SCROLLBARWIDTH, getHeight());
         g.setColor(Color.DARK_GRAY);
         g.fillRect(getLeftEdgeScrollBar(), (int)(verticaleOffset * getRelativeFraction()), SCROLLBARWIDTH, getScrollbarHeight());
-        int horizontalOffset = 0;
-        if (!windowToDecorate.getWindowContent().getDrawables().isEmpty()
-                && windowToDecorate.getWindowContent().getDrawables().get(0) instanceof GameWorld) {
-            horizontalOffset = UIController.PALETTEWIDTH + UIController.PROGRAMAREAWIDTH + 2*SCROLLBARWIDTH;
-            //We check the content drawables of the decorated window for their type. A gameworld is able to render itself, blockstates are rendered using the UIBlock.
-        }
-        g.translate(horizontalOffset, -verticaleOffset); //I hope this makes the windowToDecorate render it's content according to the scrolled distance.
+        g.translate(0, -verticaleOffset); //I hope this makes the windowToDecorate render it's content according to the scrolled distance.
         windowToDecorate.render(g);
-        g.translate(horizontalOffset , verticaleOffset); //This resets the graphics translation to normal, again I hope so.
+        g.translate(0, verticaleOffset); //This resets the graphics translation to normal, again I hope so.
     }
 
     /**
@@ -107,7 +101,7 @@ public class VerticalScrollbarDecorator implements Window {
      * @return height of scrollbar
      */
     private int getScrollbarHeight(){
-        return (int)(getHeight() * getRelativeFraction());
+        return (int)(height * getRelativeFraction());
     }
 
     /**
@@ -131,7 +125,7 @@ public class VerticalScrollbarDecorator implements Window {
      */
     @Override
     public int getHeight() {
-        return windowToDecorate.getHeight();
+        return height;
     }
 
     /**
@@ -140,14 +134,6 @@ public class VerticalScrollbarDecorator implements Window {
     @Override
     public int getWidth() {
         return windowToDecorate.getWidth() + SCROLLBARWIDTH;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public WindowContent getWindowContent() {
-        return windowToDecorate.getWindowContent();
     }
 
     /**
@@ -178,8 +164,8 @@ public class VerticalScrollbarDecorator implements Window {
                 default:
                     break;
             }
-            verticaleOffset = Math.max(0, Math.min(getWindowContent().getHeight() - getHeight() + MARGE,verticaleOffset));
-            if (getWindowContent().getHeight() == 0) verticaleOffset = 0;
+            verticaleOffset = Math.max(0, Math.min(windowToDecorate.getHeight() - height + MARGE,verticaleOffset));
+            if (windowToDecorate.getHeight() == 0) verticaleOffset = 0;
         }
         else{
             windowToDecorate.handleMouseEvent(id, x, y + verticaleOffset); //The event is translated according to the scrolled distance.

@@ -6,8 +6,7 @@ import gameworldapi.GameWorldType;
 import model.blocks.ModelBlock;
 import model.blocks.ModelFunctionDefinitionBlock;
 import ui.BlockState;
-import ui.window.SimpleContent;
-import ui.window.WindowContent;
+import ui.window.*;
 import utilities.*;
 
 
@@ -313,14 +312,14 @@ public class ModelController{
      *
      * @return an Arraylist of contents that the controller controls.
      */
-    public ArrayList<WindowContent> getContent(){
-        ArrayList<WindowContent> windowContents = new ArrayList<WindowContent>();
+    public ArrayList<WindowMediator> getContent(){
+        ArrayList<WindowMediator> windowContents = new ArrayList<WindowMediator>();
+        WindowMediator palette = new ModelWindowMediator(this.palette);
+        WindowMediator pArea = new ModelWindowMediator(this.pArea);
+        WindowMediator gameWorld = new GameWorldWindowMediator(getGameWorld());
         windowContents.add(palette);
         windowContents.add(pArea);
-        ArrayList<Object> gameWorldDrawables = new ArrayList<>();
-        gameWorldDrawables.add(gameWorld);
-        SimpleContent gameWorldContent = new SimpleContent(gameWorld.getHeight(), gameWorldDrawables);
-        windowContents.add(gameWorldContent);
+        windowContents.add(gameWorld);
         return windowContents;
     }
 }

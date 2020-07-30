@@ -4,14 +4,15 @@ package model;
 import java.util.ArrayList;
 
 import ui.BlockState;
-import ui.window.InteractableWindowContent;
+
+import ui.window.ModelListener;
 import utilities.*;
 import model.blocks.*;
 
 /**
  * Class representing the Program Window where the blocks will be set.
  */
-public class ModelProgramArea implements InteractableWindowContent {
+public class ModelProgramArea implements ModelListener {
 
     private final ModelController modelController;
 
@@ -241,8 +242,8 @@ public class ModelProgramArea implements InteractableWindowContent {
      * {@inheritDoc}
      */
     @Override
-    public ArrayList<Object> getDrawables() {
-        ArrayList<Object> drawables = new ArrayList<>();
+    public ArrayList<BlockState> getDrawables() {
+        ArrayList<BlockState> drawables = new ArrayList<>();
         if (modelController.getActiveBlock() != null && LocationHandler.isInProgramArea(modelController.getActiveBlock().getPos())){
             BlockState blockState = new BlockState(modelController.getActiveBlock());
             drawables.add(blockState);

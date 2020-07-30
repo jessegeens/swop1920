@@ -3,9 +3,9 @@ package ui;
 import java.awt.*;
 import java.util.ArrayList;
 
-import ui.window.WindowContent;
 import ui.window.SimpleWindow;
 import ui.window.VerticalScrollbarDecorator;
+import ui.window.WindowMediator;
 
 /**
  * Class controlling the UI elements.
@@ -23,10 +23,10 @@ public class UIController {
 
 
     // Constructor
-    public UIController(ArrayList<WindowContent> windowContent){
-        this.leftWindow = new VerticalScrollbarDecorator(new SimpleWindow(0,0, PALETTEWIDTH, WINDOWHEIGHT, windowContent.get(0)));
-        this.middleWindow = new VerticalScrollbarDecorator(new SimpleWindow(PALETTEWIDTH + VerticalScrollbarDecorator.SCROLLBARWIDTH, 0, PROGRAMAREAWIDTH, WINDOWHEIGHT, windowContent.get(1)));
-        this.rightWindow = new VerticalScrollbarDecorator(new SimpleWindow(PALETTEWIDTH + PROGRAMAREAWIDTH + 2*VerticalScrollbarDecorator.SCROLLBARWIDTH, 0, GAMEWORLDWIDTH, WINDOWHEIGHT, windowContent.get(2)));
+    public UIController(ArrayList<WindowMediator> windowContent){
+        this.leftWindow = new VerticalScrollbarDecorator(new SimpleWindow(0,0, PALETTEWIDTH, windowContent.get(0)), WINDOWHEIGHT);
+        this.middleWindow = new VerticalScrollbarDecorator(new SimpleWindow(PALETTEWIDTH + VerticalScrollbarDecorator.SCROLLBARWIDTH, 0, PROGRAMAREAWIDTH, windowContent.get(1)), WINDOWHEIGHT);
+        this.rightWindow = new VerticalScrollbarDecorator(new SimpleWindow(PALETTEWIDTH + PROGRAMAREAWIDTH + 2*VerticalScrollbarDecorator.SCROLLBARWIDTH, 0, GAMEWORLDWIDTH, windowContent.get(2)), WINDOWHEIGHT);
     }
 
     /**

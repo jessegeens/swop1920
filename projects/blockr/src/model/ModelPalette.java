@@ -9,13 +9,13 @@ import gameworldapi.PredicateType;
 import model.blocks.*;
 import ui.BlockState;
 import ui.UIBlock;
-import ui.window.InteractableWindowContent;
+import ui.window.ModelListener;
 import utilities.ProgramLocation;
 
 /**
  * Class representing the palette. Blocks will be dragged from the palette int the program area.
  */
-public class ModelPalette implements InteractableWindowContent {
+public class ModelPalette implements ModelListener {
 
     private final ModelController modelController;
 
@@ -175,8 +175,8 @@ public class ModelPalette implements InteractableWindowContent {
      * {@inheritDoc}
      */
     @Override
-    public ArrayList<Object> getDrawables() {
-        ArrayList<Object> drawables = new ArrayList<>();
+    public ArrayList<BlockState> getDrawables() {
+        ArrayList<BlockState> drawables = new ArrayList<>();
         if (modelController.getActiveBlock() != null && LocationHandler.isInPalette(modelController.getActiveBlock().getPos())){
             BlockState blockState = new BlockState(modelController.getActiveBlock());
             drawables.add(blockState);

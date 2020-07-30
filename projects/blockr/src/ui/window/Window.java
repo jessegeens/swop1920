@@ -31,11 +31,6 @@ public interface Window {
     int getWidth();
 
     /**
-     * @return the content
-     */
-    WindowContent getWindowContent();
-
-    /**
      * Handle the mouse event in the window
      * @param id of the event
      * @param x coordinate of the event

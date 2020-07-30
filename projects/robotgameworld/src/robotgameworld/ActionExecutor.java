@@ -17,7 +17,7 @@ public class ActionExecutor {
     private final GridLocation GOAL_CELL = new GridLocation(4, 4);
     private final ArrayList<GridLocation> WALLS = new ArrayList<GridLocation>(Arrays.asList(new GridLocation(0, 2), new GridLocation(1, 2), new GridLocation(4, 3)));
     public static final int GRID_WIDTH = 5;
-    public static final int GRID_HEIGHT = 10;
+    public static final int GRID_HEIGHT = 25;
 
     private RobotGameWorldState current;
     private GameWorldStateFactory gameWorldStateFactory = GameWorldStateFactory.getInstance();

@@ -3,12 +3,13 @@ package main;
 
 import gameworldapi.*;
 import ui.UIController;
+import ui.window.VerticalScrollbarDecorator;
 
 import java.awt.Graphics;
 
 public class MyCanvasWindow extends CanvasWindow {
 
-    public static final int WIDTH = UIController.PALETTEWIDTH + UIController.PROGRAMAREAWIDTH + 250;
+    public static final int WIDTH = UIController.PALETTEWIDTH + UIController.PROGRAMAREAWIDTH + UIController.GAMEWORLDWIDTH + 3* VerticalScrollbarDecorator.SCROLLBARWIDTH;
     public static final int HEIGHT = UIController.WINDOWHEIGHT;
 
     private GlobalController globalController;

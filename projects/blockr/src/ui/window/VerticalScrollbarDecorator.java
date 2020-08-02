@@ -9,7 +9,7 @@ public class VerticalScrollbarDecorator implements Window {
     public static final int MARGE = 50;
 
     private Window windowToDecorate;
-    private int verticaleOffset; //The amount of vertical pixels of the content that are above the top edge of the window.
+    private int verticalOffset; //The amount of vertical pixels of the content that are above the top edge of the window.
     private boolean scrollActive;
     private int prevY;
 
@@ -18,7 +18,7 @@ public class VerticalScrollbarDecorator implements Window {
     public VerticalScrollbarDecorator(Window windowToDecorate, int height) {
         this.windowToDecorate = windowToDecorate;
         this.height = height;
-        this.verticaleOffset = 0;
+        this.verticalOffset = 0;
     }
 
     /**
@@ -39,7 +39,7 @@ public class VerticalScrollbarDecorator implements Window {
      */
     private boolean aboveScrollBar(int x, int y){
         if (leftOfScrollBar(x, y)) return false;
-        return y < verticaleOffset * getRelativeFraction();
+        return y < verticalOffset * getRelativeFraction();
     }
 
     /**
@@ -49,7 +49,7 @@ public class VerticalScrollbarDecorator implements Window {
      */
     private boolean underScrollBar(int x, int y){
         if (leftOfScrollBar(x, y)) return false;
-        return y > (verticaleOffset + height * getRelativeFraction());
+        return y > (verticalOffset + height * getRelativeFraction());
     }
 
     /**
@@ -84,10 +84,10 @@ public class VerticalScrollbarDecorator implements Window {
         g.setColor(Color.LIGHT_GRAY);
         g.fillRect(getLeftEdgeScrollBar(), getY(), SCROLLBARWIDTH, getHeight());
         g.setColor(Color.DARK_GRAY);
-        g.fillRect(getLeftEdgeScrollBar(), (int)(verticaleOffset * getRelativeFraction()), SCROLLBARWIDTH, getScrollbarHeight());
-        g.translate(0, -verticaleOffset); //I hope this makes the windowToDecorate render it's content according to the scrolled distance.
+        g.fillRect(getLeftEdgeScrollBar(), (int)(verticalOffset * getRelativeFraction()), SCROLLBARWIDTH, getScrollbarHeight());
+        g.translate(0, -verticalOffset); //I hope this makes the windowToDecorate render it's content according to the scrolled distance.
         windowToDecorate.render(g);
-        g.translate(0, verticaleOffset); //This resets the graphics translation to normal, again I hope so.
+        g.translate(0, verticalOffset); //This resets the graphics translation to normal, again I hope so.
     }
 
     /**
@@ -148,8 +148,8 @@ public class VerticalScrollbarDecorator implements Window {
                         scrollActive = true;
                         prevY = y;
                     }
-                    if (aboveScrollBar(x, y)) verticaleOffset -= PAGESIZE;
-                    if (underScrollBar(x, y)) verticaleOffset += PAGESIZE;
+                    if (aboveScrollBar(x, y)) verticalOffset -= PAGESIZE;
+                    if (underScrollBar(x, y)) verticalOffset += PAGESIZE;
                     break;
                 case 502: //MOUSE_RELEASED
                     scrollActive = false;
@@ -157,18 +157,18 @@ public class VerticalScrollbarDecorator implements Window {
                     break;
                 case 506: //MOUSE_DRAGGED
                     if(scrollActive){
-                        verticaleOffset += (y - prevY)/getRelativeFraction();
+                        verticalOffset += (y - prevY)/getRelativeFraction();
                         prevY = y;
                     }
                     break;
                 default:
                     break;
             }
-            verticaleOffset = Math.max(0, Math.min(windowToDecorate.getHeight() - height + MARGE,verticaleOffset));
-            if (windowToDecorate.getHeight() == 0) verticaleOffset = 0;
+            verticalOffset = Math.max(0, Math.min(windowToDecorate.getHeight() - height + MARGE, verticalOffset));
+            if (windowToDecorate.getHeight() == 0) verticalOffset = 0;
         }
         else{
-            windowToDecorate.handleMouseEvent(id, x, y + verticaleOffset); //The event is translated according to the scrolled distance.
+            windowToDecorate.handleMouseEvent(id, x, y + verticalOffset); //The event is translated according to the scrolled distance.
         }
     }
 

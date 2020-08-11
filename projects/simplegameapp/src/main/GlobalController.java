@@ -36,10 +36,10 @@ public class GlobalController {
     }
 
     public void handleMouseEvent(int id, int x, int y, int clickCount) {
-        if (id != 501) {
-            return;
-        }
         if (x < CONTROLS_WIDTH) {
+            if (id != 501) {
+                return;
+            }
             for (Button button : buttons) {
                 if (button.inBounds(x, y)) {
                     gameWorld.perform(button.getAction());

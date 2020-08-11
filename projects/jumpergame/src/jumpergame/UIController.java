@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class UIController {
 
     //Width and height of a cell in px
-    private final int CELL_SIZE = 40;
+    static final int CELL_SIZE = 40;
 
     public void render(Graphics graphics, GridLocation gridLocation) {
         this.renderGrid(graphics, ActionExecutor.getInstance().getGridWidth(), ActionExecutor.getInstance().getGridHeight(), gridLocation);

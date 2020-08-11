@@ -33,7 +33,12 @@ public class JumperGameWorld implements GameWorld {
     }
 
     @Override
-    public void render(Graphics graphics, int x, int y) {
-        uiController.render(graphics, new GridLocation(x, y));
+    public void render(Graphics graphics) {
+        uiController.render(graphics, new GridLocation(0, 0));
+    }
+
+    @Override
+    public int getHeight() {
+        return ActionExecutor.GRID_HEIGHT * UIController.CELL_SIZE;
     }
 }

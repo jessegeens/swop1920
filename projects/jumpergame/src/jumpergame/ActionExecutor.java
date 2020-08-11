@@ -14,8 +14,8 @@ public class ActionExecutor {
     static ActionExecutor instance;
 
     //Parameters, TODO check whether these are at the correct location
-    private int GRID_WIDTH = 6;
-    private int GRID_HEIGHT = 11;
+    static int GRID_WIDTH = 6;
+    static int GRID_HEIGHT = 11;
     private final GridLocation PRINCESS = new GridLocation(GRID_WIDTH - 3, 0);
     private final ArrayList<GridLocation> BLOCKS = new ArrayList<GridLocation>(Arrays.asList(
             new GridLocation(4, 1),
